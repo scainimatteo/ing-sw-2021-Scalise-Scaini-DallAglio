@@ -1,0 +1,21 @@
+@startuml
+interface Card
+
+class DevelopmentCard {
+	- Production production
+	- Resources[] cost
+	- int level
+	- Colour colour
+	- int victory_points
+	+ Resources[] useCard(Resources[] resources_input)
+}
+
+class Deck {
+	- Queue<Card> cards
+	+ Card getTopCard()
+	+ Card peekTopCard()
+	+ void addCardToTop(Card new_card)
+}
+
+Card <|.. DevelopmentCard
+@enduml
