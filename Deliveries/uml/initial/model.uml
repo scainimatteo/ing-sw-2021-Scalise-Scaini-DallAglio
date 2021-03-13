@@ -1,21 +1,170 @@
 @startuml
-interface Card
-
-class DevelopmentCard {
-	- Production production
-	- Resources[] cost
-	- int level
-	- Colour colour
+interface Card {
 	- int victory_points
-	+ Resources[] useCard(Resources[] resources_input)
 }
 
 class Deck {
+	- int max_dimension
 	- Queue<Card> cards
 	+ Card getTopCard()
 	+ Card peekTopCard()
 	+ void addCardToTop(Card new_card)
 }
 
+class DevelopmentCard {
+	- Production production
+	- Resource[] cost
+	- CardLevel level
+	+ Resource[] useCard(Resource[] resources_input)
+	+ boolean meetRequirements(CardLevel level_to_test)
+}
+
+class CardLevel {
+	- int level
+	- Colour colour
+}
+
+class DevelopmentCardsOnTable {
+	- Deck[][] development_card_decks
+	+ DevelopmentCard[][] getTopCards()
+	+ void getFromDeck(DevelopmentCard chosen_card)
+}
+
+class Production {
+	- Resource[] required_resources
+	- Resource[] produced_resources
+	+ Resource[] activateProduction(Resources[] cost)
+	+ Resource[] getNeededResources()
+}
+
+class ProductionBase {
+	+ void setRequirements(Resource[] new_requirements)
+	+ void setProducts(Resource new_product)
+}
+
+class LeaderCard {
+	- LeaderAbility ability
+	- CardLevel[] requirements
+	- boolean activated
+	+ boolean isActive()
+	+ void activateLeaderCard()
+} 
+
+interface LeaderAbility
+
+class ProductionAbility {
+	+ void setProducts(Resource new_product)
+}
+
+class DiscountAbility {
+	- Resource discounted_resource
+}
+
+class ExtraSpaceAbility {
+	- Resource resource_type
+	- Resource[] store_resources
+	+ void putResource(Resource new_resource)
+	+ Resource[] peekResources()
+	+ Resource getResource()
+}
+
+class WhiteMarblesAbility {
+	- Resource resource_type
+}
+
+interface Resource {
+	ResourceColor color
+}
+
+class Coin {}
+class Stone {}
+class Servant {}
+class Shield {}
+class Faith {}
+
+enum ResourceColor {
+	YELLOW
+	GREY
+	PURPLE
+	BLUE
+	RED
+}
+
+class Market {
+	- Market instance
+	- Resource[][] market_board
+	- Resource free_marble
+	- void shiftRow(int index)
+	- void shiftColumn(int index)
+	- void randomizeMarket()
+	+ Market getIstance()
+	+ void drawMarket()
+	+ Resource[] getColumn(int index)
+	+ Resource[] getRow(int index)
+}
+
+enum VaticanReports {
+	REPORT1
+	REPORT2
+	REPORT3
+}
+
+class Cell {
+	- int position
+	- int victory_points
+	- VaticanReports report
+	- boolean pope_space
+}
+
+class Tile {
+	- VaticanReports report
+	- int victory_points
+	- boolean isActive
+	+ void activateVaticanReport
+}
+
+class FaithTrack {
+	- Cell[] track
+	- Tile[] vatican_report_tiles
+	- Cell faith_marker
+	+ void moveForward(int number_of_times)
+}
+
+class Warehouse {
+	- Resource top_resource
+	- Resource[] middle_resources
+	- Resource[] bottom_resources
+	- boolean isPossibleToInsert(Resource[] new_resources)
+	- void rearrangeWarehouse(Resource[] new_resources)
+	+ void drawWarehouse()
+	+ void tryToInsert(Resource[] new_resources)
+	+ Resource[] getFromWarehouse(Resource resource_type, int quantity)
+}
+
+class StrongBox {
+	- HashMap<Resource, int> storage
+	+ void insertResources(Resource[] new_resources)
+	+ Resource[] removeResources(Resource resource_type, int quantity)
+}
+
+class DevelopmentCardsSlots {
+	- DevelopmentCard[] slots
+	+ boolean[] isBuyable(DevelopmentCard card)
+	+ void buyCard(DevelopmentCard card, int position)
+	+ void drawSlots()
+}
+
 Card <|.. DevelopmentCard
+Card <|.. LeaderCard
+Production <|.. ProductionBase
+Production <|.. ProductionAbility
+LeaderAbility <|.. ProductionAbility
+LeaderAbility <|.. DiscountAbility
+LeaderAbility <|.. ExtraSpaceAbility
+LeaderAbility <|.. WhiteMarblesAbility
+Resource <|.. Coin
+Resource <|.. Stone
+Resource <|.. Servant
+Resource <|.. Shield
+Resource <|.. Faith
 @enduml
