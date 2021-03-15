@@ -32,6 +32,7 @@ class DevelopmentCardsOnTable {
 	+ void getFromDeck(DevelopmentCard chosen_card)
 }
 
+
 class Production {
 	- Resource[] required_resources
 	- Resource[] produced_resources
@@ -43,6 +44,7 @@ class ProductionBase {
 	+ void setRequirements(Resource[] new_requirements)
 	+ void setProducts(Resource new_product)
 }
+
 
 class LeaderCard {
 	- LeaderAbility ability
@@ -74,6 +76,7 @@ class WhiteMarblesAbility {
 	- Resource resource_type
 }
 
+
 interface Resource {
 	ResourceColor color
 }
@@ -92,6 +95,7 @@ enum ResourceColor {
 	RED
 }
 
+
 class Market {
 	- Market instance
 	- Resource[][] market_board
@@ -104,6 +108,7 @@ class Market {
 	+ Resource[] getColumn(int index)
 	+ Resource[] getRow(int index)
 }
+
 
 enum VaticanReports {
 	REPORT1
@@ -122,7 +127,7 @@ class Tile {
 	- VaticanReports report
 	- int victory_points
 	- boolean isActive
-	+ void activateVaticanReport
+	+ void activateVaticanReport()
 }
 
 class FaithTrack {
@@ -131,6 +136,7 @@ class FaithTrack {
 	- Cell faith_marker
 	+ void moveForward(int number_of_times)
 }
+
 
 class Warehouse {
 	- Resource top_resource
@@ -149,12 +155,15 @@ class StrongBox {
 	+ Resource[] removeResources(Resource resource_type, int quantity)
 }
 
+
 class DevelopmentCardsSlots {
 	- DevelopmentCard[] slots
 	+ boolean[] isBuyable(DevelopmentCard card)
 	+ void buyCard(DevelopmentCard card, int position)
 	+ void drawSlots()
 }
+
+
 
 /' RELATIONS DEFINITION '/
 
@@ -186,4 +195,13 @@ Resource <|.. Faith
 
 /' Market relations '/
 Market -- Resource
+
+/' FaithTrack relations '/
+FaithTrack -- Cell
+FaithTrack -- Tile
+
+/' Personal board relations '/
+Warehouse -- Resource
+StrongBox -- Resource
+DevelopmentCardsSlots -- DevelopmentCard
 @enduml
