@@ -172,6 +172,7 @@ Card <|.. DevelopmentCard
 Card <|.. LeaderCard
 Deck -- Card
 DevelopmentCard -- CardLevel
+DevelopmentCard -- Production
 DevelopmentCardsOnTable -- Deck
 
 /' Production relations '/
@@ -185,6 +186,9 @@ LeaderAbility <|.. ProductionAbility
 LeaderAbility <|.. DiscountAbility
 LeaderAbility <|.. ExtraSpaceAbility
 LeaderAbility <|.. WhiteMarblesAbility
+DiscountAbility -- Resource
+ExtraSpaceAbility -- Resource
+WhiteMarblesAbility -- Resource
 
 /' Resource relations '/
 Resource <|.. Coin
