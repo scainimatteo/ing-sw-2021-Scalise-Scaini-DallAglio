@@ -1,4 +1,6 @@
 @startuml
+/' CLASSES DEFINITION '/
+
 interface Card {
 	- int victory_points
 }
@@ -154,17 +156,34 @@ class DevelopmentCardsSlots {
 	+ void drawSlots()
 }
 
+/' RELATIONS DEFINITION '/
+
+/' Cards relations '/
 Card <|.. DevelopmentCard
 Card <|.. LeaderCard
+Deck -- Card
+DevelopmentCard -- CardLevel
+DevelopmentCardsOnTable -- Deck
+
+/' Production relations '/
 Production <|.. ProductionBase
 Production <|.. ProductionAbility
+
+/' LeaderCard relations '/
+LeaderCard -- LeaderAbility
+LeaderCard -- CardLevel
 LeaderAbility <|.. ProductionAbility
 LeaderAbility <|.. DiscountAbility
 LeaderAbility <|.. ExtraSpaceAbility
 LeaderAbility <|.. WhiteMarblesAbility
+
+/' Resource relations '/
 Resource <|.. Coin
 Resource <|.. Stone
 Resource <|.. Servant
 Resource <|.. Shield
 Resource <|.. Faith
+
+/' Market relations '/
+Market -- Resource
 @enduml
