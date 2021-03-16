@@ -23,7 +23,7 @@ class DevelopmentCard {
 
 class CardLevel {
 	- int level
-	- Colour colour
+	- DevelopmentCardsColor color
 }
 
 class DevelopmentCardsOnTable {
@@ -32,19 +32,16 @@ class DevelopmentCardsOnTable {
 	+ void getFromDeck(DevelopmentCard chosen_card)
 }
 
-
 class Production {
 	- Resource[] required_resources
 	- Resource[] produced_resources
 	+ Resource[] activateProduction(Resources[] cost)
-	+ Resource[] getNeededResources()
 }
 
 class ProductionBase {
 	+ void setRequirements(Resource[] new_requirements)
 	+ void setProducts(Resource new_product)
 }
-
 
 class LeaderCard {
 	- LeaderAbility ability
@@ -76,7 +73,6 @@ class WhiteMarblesAbility {
 	- Resource resource_type
 }
 
-
 interface Resource {
 	ResourceColor color
 }
@@ -95,6 +91,12 @@ enum ResourceColor {
 	RED
 }
 
+enum DevelopmentCardsColor {
+	YELLOW
+	GREEN
+	PURPLE
+	BLUE
+}
 
 class Market {
 	- Market instance
@@ -104,11 +106,9 @@ class Market {
 	- void shiftColumn(int index)
 	- void randomizeMarket()
 	+ Market getIstance()
-	+ void drawMarket()
 	+ Resource[] getColumn(int index)
 	+ Resource[] getRow(int index)
 }
-
 
 enum VaticanReports {
 	REPORT1
@@ -121,12 +121,13 @@ class Cell {
 	- int victory_points
 	- VaticanReports report
 	- boolean pope_space
+	- boolean is_last_cell
 }
 
 class Tile {
 	- VaticanReports report
 	- int victory_points
-	- boolean isActive
+	- boolean is_active
 	+ void activateVaticanReport()
 }
 
@@ -137,6 +138,10 @@ class FaithTrack {
 	+ void moveForward(int number_of_times)
 }
 
+class FaithTrackSinglePlayer {
+	- Cell black_marker
+	+ void moveForwardBlackMarker(int number_of_times)
+}
 
 class Warehouse {
 	- Resource top_resource
@@ -144,7 +149,6 @@ class Warehouse {
 	- Resource[] bottom_resources
 	- boolean isPossibleToInsert(Resource[] new_resources)
 	- void rearrangeWarehouse(Resource[] new_resources)
-	+ void drawWarehouse()
 	+ void tryToInsert(Resource[] new_resources)
 	+ Resource[] getFromWarehouse(Resource resource_type, int quantity)
 }
@@ -155,14 +159,53 @@ class StrongBox {
 	+ Resource[] removeResources(Resource resource_type, int quantity)
 }
 
-
 class DevelopmentCardsSlots {
 	- DevelopmentCard[] slots
 	+ boolean[] isBuyable(DevelopmentCard card)
 	+ void buyCard(DevelopmentCard card, int position)
-	+ void drawSlots()
 }
 
+class Player {
+	- String nickname
+	- FaithTrack track
+	- Warehouse warehouse
+	- StrongBox strongbox
+	- DevelopmentCardsSlots development_card_slots
+	- ProductionBase base_production
+	- Deck leader_cards_deck
+}
+
+class Game {
+	- Player[] players
+	- Market market
+	- DevelopmentCardsOnTable development_cards_on_table
+}
+
+interface SoloActionTokenAbility {
+	- void useAbility()
+}
+
+class DiscardDevelopmentCards {
+	- DevelopmentCardsColor color
+	- void useAbility()
+}
+
+class MoveBlackCrossTwoSpaces {
+	- void useAbility()
+}
+
+class MoveBlackCrossOneSpace {
+	- void useAbility()
+}
+
+class SoloActionToken {
+	- SoloActionTokenAbility ability
+}
+
+class SingleGame {
+	- SoloActionToken[] solo_action_tokens
+	+ void shuffleSoloActionTokens()
+}
 
 
 /' RELATIONS DEFINITION '/
@@ -171,13 +214,16 @@ class DevelopmentCardsSlots {
 Card <|.. DevelopmentCard
 Card <|.. LeaderCard
 Deck -- Card
+DevelopmentCard -- Resource
 DevelopmentCard -- CardLevel
 DevelopmentCard -- Production
 DevelopmentCardsOnTable -- Deck
+CardLevel -- DevelopmentCardsColor
 
 /' Production relations '/
 Production <|.. ProductionBase
 Production <|.. ProductionAbility
+Production -- Resource
 
 /' LeaderCard relations '/
 LeaderCard -- LeaderAbility
@@ -196,16 +242,42 @@ Resource <|.. Stone
 Resource <|.. Servant
 Resource <|.. Shield
 Resource <|.. Faith
+Resource -- ResourceColor
 
 /' Market relations '/
 Market -- Resource
 
 /' FaithTrack relations '/
+Cell -- VaticanReports
+Tile -- VaticanReports
 FaithTrack -- Cell
 FaithTrack -- Tile
+FaithTrack <|-- FaithTrackSinglePlayer
 
 /' Personal board relations '/
 Warehouse -- Resource
 StrongBox -- Resource
 DevelopmentCardsSlots -- DevelopmentCard
+
+/' Player '/
+Player -- FaithTrack 
+Player -- Warehouse
+Player -- StrongBox
+Player -- DevelopmentCardsSlots
+Player -- ProductionBase
+Player -- Deck
+
+/' Game '/
+Game -- Player
+Game -- Market
+Game -- DevelopmentCardsOnTable
+
+/' Solo game '/
+Game <|-- SingleGame
+SingleGame -- SoloActionToken
+SoloActionToken -- SoloActionTokenAbility
+SoloActionTokenAbility <|.. DiscardDevelopmentCards
+SoloActionTokenAbility <|.. MoveBlackCrossTwoSpaces
+SoloActionTokenAbility <|.. MoveBlackCrossOneSpace
+DiscardDevelopmentCards -- DevelopmentCardsColor
 @enduml
