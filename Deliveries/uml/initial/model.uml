@@ -1,7 +1,7 @@
 @startuml
 /' CLASSES DEFINITION '/
 
-interface Card {
+abstract class Card {
 	- int victory_points
 }
 
@@ -73,8 +73,8 @@ class WhiteMarblesAbility {
 	- Resource resource_type
 }
 
-interface Resource {
-	ResourceColor color
+abstract class Resource {
+	- ResourceColor color
 }
 
 class Coin {}
@@ -138,7 +138,7 @@ class FaithTrack {
 	+ void moveForward(int number_of_times)
 }
 
-class FaithTrackSinglePlayer {
+class FaithTrackSoloPlayer {
 	- Cell black_marker
 	+ void moveForwardBlackMarker(int number_of_times)
 }
@@ -202,7 +202,7 @@ class SoloActionToken {
 	- SoloActionTokenAbility ability
 }
 
-class SingleGame {
+class SoloGame {
 	- SoloActionToken[] solo_action_tokens
 	+ void shuffleSoloActionTokens()
 }
@@ -211,8 +211,8 @@ class SingleGame {
 /' RELATIONS DEFINITION '/
 
 /' Cards relations '/
-Card <|.. DevelopmentCard
-Card <|.. LeaderCard
+Card <|-- DevelopmentCard
+Card <|-- LeaderCard
 Deck -- Card
 DevelopmentCard -- Resource
 DevelopmentCard -- CardLevel
@@ -237,11 +237,11 @@ ExtraSpaceAbility -- Resource
 WhiteMarblesAbility -- Resource
 
 /' Resource relations '/
-Resource <|.. Coin
-Resource <|.. Stone
-Resource <|.. Servant
-Resource <|.. Shield
-Resource <|.. Faith
+Resource <|-- Coin
+Resource <|-- Stone
+Resource <|-- Servant
+Resource <|-- Shield
+Resource <|-- Faith
 Resource -- ResourceColor
 
 /' Market relations '/
@@ -252,7 +252,7 @@ Cell -- VaticanReports
 Tile -- VaticanReports
 FaithTrack -- Cell
 FaithTrack -- Tile
-FaithTrack <|-- FaithTrackSinglePlayer
+FaithTrack <|-- FaithTrackSoloPlayer
 
 /' Personal board relations '/
 Warehouse -- Resource
@@ -273,8 +273,8 @@ Game -- Market
 Game -- DevelopmentCardsOnTable
 
 /' Solo game '/
-Game <|-- SingleGame
-SingleGame -- SoloActionToken
+Game <|-- SoloGame
+SoloGame -- SoloActionToken
 SoloActionToken -- SoloActionTokenAbility
 SoloActionTokenAbility <|.. DiscardDevelopmentCards
 SoloActionTokenAbility <|.. MoveBlackCrossTwoSpaces
