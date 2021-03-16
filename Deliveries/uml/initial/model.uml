@@ -35,7 +35,7 @@ class DevelopmentCardsOnTable {
 class Production {
 	- Resource[] required_resources
 	- Resource[] produced_resources
-	+ Resource[] activateProduction(Resources[] cost)
+	+ Resource[] activateProduction(Resource[] cost)
 }
 
 class ProductionBase {
@@ -154,7 +154,7 @@ class Warehouse {
 }
 
 class StrongBox {
-	- HashMap<Resource, int> storage
+	- HashMap<Resource, Integer> storage
 	+ void insertResources(Resource[] new_resources)
 	+ Resource[] removeResources(Resource resource_type, int quantity)
 }
@@ -182,20 +182,20 @@ class Game {
 }
 
 interface SoloActionTokenAbility {
-	- void useAbility()
+	+ void useAbility()
 }
 
 class DiscardDevelopmentCards {
 	- DevelopmentCardsColor color
-	- void useAbility()
+	+ void useAbility()
 }
 
 class MoveBlackCrossTwoSpaces {
-	- void useAbility()
+	+ void useAbility()
 }
 
 class MoveBlackCrossOneSpace {
-	- void useAbility()
+	+ void useAbility()
 }
 
 class SoloActionToken {
