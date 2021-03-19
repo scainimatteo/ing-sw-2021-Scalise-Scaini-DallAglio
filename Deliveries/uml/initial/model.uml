@@ -7,10 +7,8 @@ abstract class Card {
 
 class Deck {
 	- int max_dimension
-	- List<Card> cards
 	+ Card getTopCard()
 	+ Card peekTopCard()
-	+ void addCardToTop(Card new_card)
 }
 
 class DevelopmentCard {
@@ -80,22 +78,12 @@ class WhiteMarblesAbility {
 	- Resource resource_type
 }
 
-abstract class Resource {
-	- ResourceColor color
-}
-
-class Coin {}
-class Stone {}
-class Servant {}
-class Shield {}
-class Faith {}
-
-enum ResourceColor {
-	YELLOW
-	GREY
-	PURPLE
-	BLUE
-	RED
+enum Resource {
+	COIN
+	STONE
+	SERVANT
+	SHIELD
+	FAITH
 }
 
 enum DevelopmentCardsColor {
@@ -179,7 +167,7 @@ class Player {
 	- StrongBox strongbox
 	- DevelopmentCardsSlots development_card_slots
 	- ProductionBase base_production
-	- Deck leader_cards_deck
+	- LeaderCard[] leader_cards_deck
 }
 
 class Game {
@@ -243,14 +231,6 @@ DiscountAbility -- Resource
 ExtraSpaceAbility -- Resource
 WhiteMarblesAbility -- Resource
 
-/' Resource relations '/
-Resource <|-- Coin
-Resource <|-- Stone
-Resource <|-- Servant
-Resource <|-- Shield
-Resource <|-- Faith
-Resource -- ResourceColor
-
 /' Market relations '/
 Market -- Resource
 
@@ -289,4 +269,5 @@ SoloActionTokenAbility <|.. MoveBlackCrossOneSpace
 DiscardDevelopmentCards -- DevelopmentCardsColor
 LeaderCard <|-- LeaderCardLevelCost
 LeaderCard <|-- LeaderCardResourcesCost
+java.util.Collection <|.. Deck
 @enduml

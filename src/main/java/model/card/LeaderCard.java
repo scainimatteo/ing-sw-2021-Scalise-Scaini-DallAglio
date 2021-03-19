@@ -4,9 +4,8 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.LeaderAbility;
 
-public class LeaderCard extends Card {
+public abstract class LeaderCard extends Card {
 	private LeaderAbility ability;
-	private CardLevel[] requirements;
 	private boolean activated;
 
 	public boolean isActive() {
