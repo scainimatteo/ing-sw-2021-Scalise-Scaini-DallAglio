@@ -1,8 +1,8 @@
-package model.card;
+package it.polimi.ingsw.model.card;
 
-import model.card.LeaderCard;
-import model.card.CardLevel;
+import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.card.CardLevel;
 
-class LeaderCardLevelCost extends LeaderCard {
-	- CardLevel[] requirements
+public class LeaderCardLevelCost extends LeaderCard {
+	private CardLevel[] requirements;
 }
