@@ -7,7 +7,7 @@ abstract class Card {
 
 class Deck {
 	- int max_dimension
-	- Queue<Card> cards
+	- List<Card> cards
 	+ Card getTopCard()
 	+ Card peekTopCard()
 	+ void addCardToTop(Card new_card)
@@ -43,13 +43,20 @@ class ProductionBase {
 	+ void setProducts(Resource new_product)
 }
 
-class LeaderCard {
+abstract class LeaderCard {
 	- LeaderAbility ability
-	- CardLevel[] requirements
 	- boolean activated
 	+ boolean isActive()
 	+ void activateLeaderCard()
-} 
+}
+
+class LeaderCardLevelCost {
+	- CardLevel[] requirements
+}
+
+class LeaderCardResourcesCost {
+	- Resource[] requirements
+}
 
 interface LeaderAbility
 
@@ -160,7 +167,7 @@ class StrongBox {
 }
 
 class DevelopmentCardsSlots {
-	- DevelopmentCard[] slots
+	- Deck[] slots
 	+ boolean[] isBuyable(DevelopmentCard card)
 	+ void buyCard(DevelopmentCard card, int position)
 }
@@ -280,4 +287,6 @@ SoloActionTokenAbility <|.. DiscardDevelopmentCards
 SoloActionTokenAbility <|.. MoveBlackCrossTwoSpaces
 SoloActionTokenAbility <|.. MoveBlackCrossOneSpace
 DiscardDevelopmentCards -- DevelopmentCardsColor
+LeaderCard <|-- LeaderCardLevelCost
+LeaderCard <|-- LeaderCardResourcesCost
 @enduml
