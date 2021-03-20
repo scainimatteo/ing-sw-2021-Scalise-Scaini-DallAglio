@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.game;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -15,7 +16,7 @@ public class DevelopmentCardsOnTableTest {
 	Deck[][] test_development_card_decks;
 
 	/**
-	 *
+	 * Create an istance of DevelopmentCardsOnTable
 	 */
 	@BeforeEach
 	public void createDevelopmentCardsOnTable() {
@@ -27,7 +28,7 @@ public class DevelopmentCardsOnTableTest {
 				DevelopmentCard c = new DevelopmentCard(4 * i + j);
 				a.add(c);
 			}
-			test_development_card_decks[i / 4][i % 4] = new Deck(4, a, i);
+			this.test_development_card_decks[i / 4][i % 4] = new Deck(4, a, i);
 		}
 		this.dct = new DevelopmentCardsOnTable(test_development_card_decks);
 	}
@@ -68,21 +69,49 @@ public class DevelopmentCardsOnTableTest {
 	public void getFromDeckTest() {
 		Random random = new Random();
 		DevelopmentCard[][] top_cards_before = dct.getTopCards();
+
 		int row = random.nextInt(3);
 		int column = random.nextInt(4);
-		System.out.printf("Random: %d %d\n", row, column);
+		//System.out.printf("Random: %d %d\n", row, column);
 		dct.getFromDeck(top_cards_before[row][column]);
 		DevelopmentCard[][] top_cards_after = dct.getTopCards();
+
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
 				if (i == row && j == column) {
 					assertNotEquals(top_cards_before[row][column], top_cards_after[row][column]);
-					System.out.printf("Diversa: %d %d\n", top_cards_before[row][column].getId(), top_cards_after[row][column].getId());
+					//System.out.printf("Different: %d %d\n", top_cards_before[row][column].getId(), top_cards_after[row][column].getId());
 				} else {
 					assertEquals(top_cards_before[i][j], top_cards_after[i][j]);
-					System.out.printf("Uguale: %d %d\n", top_cards_before[i][j].getId(), top_cards_after[i][j].getId());
+					//System.out.printf("Equal: %d %d\n", top_cards_before[i][j].getId(), top_cards_after[i][j].getId());
 				}
 			}
 		}
+	}
+
+	/**
+	 * Check if a NoSuchElementException is thrown when a card that's not in the deck is passed
+	 */
+	@Test
+	public void getCardNotInDeckTest() {
+		DevelopmentCard new_card = new DevelopmentCard(0);
+		assertThrows(NoSuchElementException.class, () -> dct.getFromDeck(new_card));
+	}
+
+	@RepeatedTest(value = 3)
+	public void emptyDeck() {
+		Random random = new Random();
+		DevelopmentCard[][] top_cards = dct.getTopCards();
+
+		int row = random.nextInt(3);
+		int column = random.nextInt(4);
+		//System.out.printf("Random: %d %d\n", row, column);
+
+		for (int i = 0; i < 4; i++) {
+			dct.getFromDeck(top_cards[row][column]);
+			top_cards = dct.getTopCards();
+		}
+
+		assertNull(top_cards[row][column]);
 	}
 }
