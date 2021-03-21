@@ -15,9 +15,9 @@ public class ResourceTest{
 		Resource test_resource = Resource.COIN;
 
 		if(test_resource.name().equals("COIN")){
-			assertFalse(true);
+			assertTrue(true);
 		}else{
-			assertFalse(false);
+			assertTrue(false);
 		}
 	}
 }
