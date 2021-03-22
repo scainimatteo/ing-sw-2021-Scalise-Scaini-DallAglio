@@ -21,6 +21,10 @@ public class Production {
 		return this.produced_resources;
 	}
 
+	/**
+	 * @param cost requires an array of resources to compare it with required_resources
+	 * @return the requested resources if compareArrays returns true, null if compareArrays returns false
+	 */
 	public Resource[] activateProduction (Resource[] cost) {
 		if (this.compareArrays(cost)) {
 			return produced_resources;
@@ -30,6 +34,8 @@ public class Production {
 	}
 
 	/**
+	 * @param array_in_input is an array of Resources that must to be compared with this.required_resources
+	 * @return true if the two arrays have the same elements (even if they are not in the same position)
 	 * TODO: change public to private
 	 */
 	public boolean compareArrays (Resource[] array_in_input) {

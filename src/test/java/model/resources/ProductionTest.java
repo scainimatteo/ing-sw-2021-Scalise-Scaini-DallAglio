@@ -39,6 +39,9 @@ public class ProductionTest {
 		}
 	}
 
+	/**
+	 * Test for the method activateProduction
+	 */
 	@Test
 	public void activateProductionTest () {
 		Resource test_resource_1 = Resource.COIN;
