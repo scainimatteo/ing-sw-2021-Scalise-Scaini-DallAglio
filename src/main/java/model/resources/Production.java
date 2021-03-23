@@ -3,8 +3,8 @@ package it.polimi.ingsw.model.resources;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class Production {
-	private Resource[] required_resources;
-	private Resource[] produced_resources;
+	protected Resource[] required_resources;
+	protected Resource[] produced_resources;
 
 	public Production (Resource[] required, Resource[] produced){
 		this.required_resources = required;
