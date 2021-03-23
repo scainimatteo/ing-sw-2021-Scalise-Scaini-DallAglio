@@ -2,15 +2,18 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import java.io.*;
+
 public class Warehouse {
-	private Resource top_resource;
-	private Resource[] middle_resources;
-	private Resource[] bottom_resources;
+	private Resource top_resource = null;
+	private Resource[] middle_resources = {null, null};
+	private Resource[] bottom_resources = {null, null, null};
 
 	public Warehouse () {
-		Resource top_resource = null;
-		Resource[] middle_resources = {null, null};
-		Resource[] bottom_resources = {null, null, null};
+		// Resource null_resource = null;
+		// Resource top_resource = null;
+		// Resource[] middle_resources = {null_resource, null_resource};
+		// Resource[] bottom_resources = {null_resource, null_resource, null_resource};
 	}
 
 	/**
@@ -198,10 +201,6 @@ public class Warehouse {
 		}
 	}
 
-	private boolean rearrangeWarehouse(Resource new_resource) {
-		return false;
-	}
-
 	public void tryToInsert(Resource[] new_resources) {
 		for (Resource resource : new_resources) {
 			if (!isPossibleToInsert(resource)) {
@@ -216,9 +215,43 @@ public class Warehouse {
 
 	public String toString () {
 		String to_print;
-		to_print = "1: " + top_resource.name() +"\n";
-		to_print = to_print + "2: " + middle_resources[0].name() + " | " + middle_resources[1].name() +"\n";
-		to_print = to_print + "3: " + bottom_resources[0].name() + " | " + bottom_resources[0].name() + " | " + bottom_resources[0].name();
+
+		to_print = "1: ";
+		if (top_resource != null) {
+			to_print = to_print + top_resource.name();
+		}else {
+			to_print = to_print + "null";
+		}
+
+		to_print = to_print + "\n2: ";
+		if (middle_resources[0] != null) {
+			to_print = to_print + middle_resources[0].name() + " | ";
+		}else {
+			to_print = to_print + "null | ";
+		}
+		if (middle_resources[1] != null) {
+			to_print = to_print + middle_resources[1].name();
+		}else {
+			to_print = to_print + "null";
+		}
+
+		to_print = to_print + "\n3: ";
+		if (bottom_resources[0] != null) {
+			to_print = to_print + bottom_resources[0].name() + " | ";
+		}else {
+			to_print = to_print + "null | ";
+		}
+		if (bottom_resources[1] != null) {
+			to_print = to_print + bottom_resources[1].name() + " | ";
+		}else {
+			to_print = to_print + "null | ";
+		}
+		if (bottom_resources[2] != null) {
+			to_print = to_print + bottom_resources[2].name();
+		}else {
+			to_print = to_print + "null\n";
+		}
+
 		return to_print;
 	}
 }
