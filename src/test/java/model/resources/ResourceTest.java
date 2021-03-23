@@ -20,4 +20,19 @@ public class ResourceTest{
 			assertTrue(false);
 		}
 	}
+
+	/**
+	 * Test the method equals for the resources
+	 */
+	@Test
+	public void testEqual () {
+		Resource resource1 = Resource.COIN;
+		Resource resource2 = Resource.COIN;
+
+		if (resource1.equals(resource2)) {
+			assertTrue(true);
+		}else {
+			assertTrue(false);
+		}
+	}
 }
