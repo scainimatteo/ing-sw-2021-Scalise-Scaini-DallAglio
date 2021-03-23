@@ -74,7 +74,7 @@ public class Warehouse {
 			bottom_resources[0] = this.top_resource;
 			top_resource = null;
 			return true;
-		}else if (middle_resources[1] = null) {
+		}else if (middle_resources[1] == null) {
 			middle_resources[1] = top_resource;
 			top_resource = middle_resources[0];
 			middle_resources[0] = new_resource;
@@ -212,5 +212,13 @@ public class Warehouse {
 
 	public Resource[] getFromWarehouse(Resource resource_type, int quantity) {
 		return null;
+	}
+
+	public String toString () {
+		String to_print;
+		to_print = "1: " + top_resource.name() +"\n";
+		to_print = to_print + "2: " + middle_resources[0].name() + " | " + middle_resources[1].name() +"\n";
+		to_print = to_print + "3: " + bottom_resources[0].name() + " | " + bottom_resources[0].name() + " | " + bottom_resources[0].name();
+		return to_print;
 	}
 }
