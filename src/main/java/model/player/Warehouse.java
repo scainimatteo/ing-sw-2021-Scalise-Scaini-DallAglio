@@ -227,17 +227,125 @@ public class Warehouse {
 
 	/**
 	 * TODO: complete this method
+	 * gFW chiama getFromTop che checka il tipo e il numero richiesto
 	 */
 	public Resource[] getFromWarehouse(Resource resource_type, int quantity) {
-		int[] availability = checkResourceAvailability(resource_type);
+		Resource[] to_return = getFromTop(resource_type, quantity);
 
-		if (quantity <= availability[0]) {
-			for (int i = 0; i < quantity; i++) {
-				to_return[i] = resource_type;
+		// int[] availability = checkResourceAvailability(resource_type);
+
+		// if (quantity <= availability[0]) {
+		// 	for (int i = 0; i < quantity; i++) {
+		// 		to_return[i] = resource_type;
+		// 	}
+
+		// 	clearWarehouse(availability[1], quantity);
+		// }
+
+		return to_return;
+	}
+
+	private Resource[] getFromTop(Resource resource_type, int quantity) {
+		if (this.top_resource != null && resource_type.equals(top_resource)) {
+			if (quantity == 1) {
+				Resource[] to_return = {top_resource};
+				this.top_resource = null;
+				return to_return;
+			}else {
+				//TODO: lancia eccezione
+				return null;
 			}
+		}else {
+			return getFromMiddle(resource_type, quantity);
 		}
+	}
 
-		return null;
+	private Resource[] getFromMiddle(Resource resource_type, int quantity) {
+		if (this.middle_resources[0] != null && resource_type.equals(middle_resources[0])) {
+			if (this.middle_resources[1] != null) {
+				if (quantity == 2) {
+					Resource[] to_return = {middle_resource[0], middle_resource[1]};
+					this.middle_resource[1] = null;
+					this.middle_resource[0] = null;
+					return to_return;
+				}else if (quantity == 1) {
+					Resource[] to_return = {middle_resource[1]};
+					this.middle_resource[1] = null;
+					return to_return;
+				}else {
+					//TODO: lancia eccezione
+					return null;
+				}
+			}else {
+				if (quantity == 1) {
+					Resource[] to_return = {middle_resource[0]};
+					this.middle_resource[0] = null;
+					return to_return;
+				}else {
+					//TODO: lancia eccezione
+					return null;
+				}
+			}
+		}else {
+			return getFromBottom(resource_type, quantity);
+		}
+	}
+
+	private Resource[] getFromBottom(Resource resource_type, int quantity) {
+		if (this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])) {
+			if (bottom_resources[1] != null) {
+				if (bottom_resources[2] != null) {
+					if (quantity == 3) {
+						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
+						this.bottom_resources[2] = null;
+						this.bottom_resources[1] = null;
+						this.bottom_resources[0] = null;
+						return to_return;
+					}else if (quantity == 2) {
+						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
+						this.bottom_resources[2] = null;
+						this.bottom_resources[1] = null;
+						this.bottom_resources[0] = null;
+						return to_return;
+					}else if (quantity == 1) {
+						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
+						this.bottom_resources[2] = null;
+						this.bottom_resources[1] = null;
+						this.bottom_resources[0] = null;
+						return to_return;
+					}else {
+						//TODO: lancia eccezione
+						return null;
+					}
+				}else {
+					if (quantity == 2) {
+						Resource[] to_return = {bottom_resources[0], bottom_resources[1]};
+						this.bottom_resources[1] = null;
+						this.bottom_resources[0] = null;
+						return to_return;
+					}else if (quantity == 1) {
+						Resource[] to_return = {bottom_resources[1]};
+						this.bottom_resources[1] = null;
+						return to_return;
+					}else {
+						//TODO: lancia eccezione
+						return null;
+					}
+				}
+			}else {
+				if (quantity == 1) {
+					Resource[] to_return = {bottom_resources[0]};
+					this.bottom_resources[0] = null;
+					return to_return;
+				}else {
+					//TODO: lancia eccezione
+					return null;
+				}
+			}
+		}else {
+			//TODO: lancia eccezione
+			return null;
+		}
 	}
 
 	private int[] checkResourceAvailability(Resource resource_type) {
@@ -270,6 +378,23 @@ public class Warehouse {
 		}
 
 		return availability;
+	}
+
+	private void clearWarehouse(int warehouse_level, int quantity) {
+		switch (warehouse_level) {
+			case 1: this.top_resource = null;
+					break;
+			case 2: for (int i = 1; i >= (2 - quantity); i --) {
+						this.middle_resources[i] = null;
+					}
+					break;
+			case 3: for (int i = 2; i >= (3 - quantity); i --) {
+						this.bottom_resources[i] = null;
+					}
+					break;
+			default:
+					break;
+		}
 	}
 
 	public String toString () {
