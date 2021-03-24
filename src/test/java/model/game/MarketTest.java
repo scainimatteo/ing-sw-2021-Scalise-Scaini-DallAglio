@@ -9,6 +9,13 @@ import java.util.Random;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class MarketTest {
+	Market market;
+
+	@BeforeEach
+	public void createMarket() {
+		this.market = new Market();
+	}
+
 	/**
 	 * Add a resource to a HashMap while updating its index
 	 *
@@ -28,8 +35,6 @@ public class MarketTest {
 	 */
 	@Test
 	public void checkEverythingTest() {
-		Market market = Market.getIstance();
-
 		HashMap<Resource, Integer> number_of_resources = new HashMap<Resource, Integer>();
 
 		Resource[][] market_board = market.peekMarket();
@@ -63,8 +68,6 @@ public class MarketTest {
 	 */
 	@Test
 	public void shiftAllRowsTest() {
-		Market market = Market.getIstance();
-
 		for (int i = 0; i < 3; i++) {
 			Resource[] initial_row = market.getRow(i);
 			Resource[] final_row = market.getRow(i);
@@ -77,7 +80,6 @@ public class MarketTest {
 	 */
 	@RepeatedTest(value = 3)
 	public void shiftRowFourTimesTest() {
-		Market market = Market.getIstance();
 		Random random = new Random();
 		int row = random.nextInt(3);
 
@@ -105,8 +107,6 @@ public class MarketTest {
 	 */
 	@Test
 	public void shiftAllColumnsTest() {
-		Market market = Market.getIstance();
-
 		for (int i = 0; i < 3; i++) {
 			Resource[] initial_column = market.getColumn(i);
 			Resource[] final_column = market.getColumn(i);
@@ -119,7 +119,6 @@ public class MarketTest {
 	 */
 	@RepeatedTest(value = 3)
 	public void shiftColumnFourTimesTest() {
-		Market market = Market.getIstance();
 		Random random = new Random();
 		int column = random.nextInt(4);
 

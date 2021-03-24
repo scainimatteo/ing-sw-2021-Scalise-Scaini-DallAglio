@@ -5,16 +5,14 @@ import java.util.Random;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-/* Singleton */
 public class Market {
-	private static Market instance;
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 	private Resource[][] market_board;
 	private Resource free_marble;
 	private ArrayList<Resource> all_resources;
 
-	private Market() {
+	public Market() {
 		this.market_board = new Resource[dim_cols][dim_rows];
 		this.all_resources = new ArrayList<Resource>();
 		all_resources.add(null);
@@ -45,13 +43,6 @@ public class Market {
 			}
 		}
 		this.free_marble = all_resources.get(0);
-	}
-
-	public static Market getIstance() {
-		if (instance == null) {
-			instance = new Market();
-		}
-		return instance;
 	}
 
 	/**
@@ -116,6 +107,7 @@ public class Market {
 	 * @return an array of the resources taken by the player
 	 */
 	public Resource[] getRow(int index) {
+		//TODO: try con OutOfBounds
 		Resource[] row = market_board[index];
 		this.shiftRow(index);
 		return row;
