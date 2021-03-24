@@ -16,6 +16,18 @@ public class Warehouse {
 		// Resource[] bottom_resources = {null_resource, null_resource, null_resource};
 	}
 
+	public Resource getTopResource() {
+		 return top_resource;
+	}
+
+	public Resource[] getMiddleResources() {
+		return middle_resources;
+	}
+
+	public Resource[] getBottomResources() {
+		return bottom_resources;
+	}
+
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
@@ -55,11 +67,7 @@ public class Warehouse {
 		// if top_resource is full, insert and return true
 		}else {
 			if (new_resource.equals(this.top_resource)) {
-				if (rearrangeWarehouseTop(new_resource)) {
-					return true;
-				}else {
-					return false;
-				}
+				return rearrangeWarehouseTop(new_resource);
 			}else {
 				return false;
 			}
@@ -201,16 +209,67 @@ public class Warehouse {
 		}
 	}
 
-	public void tryToInsert(Resource[] new_resources) {
+	/**
+	 * @param new_resources is an array of resources obtained from the market that need to be inserted in the warehouse
+	 * @return the number of resources that cannot be inserted
+	 */
+	public int tryToInsert(Resource[] new_resources) {
+		int resources_not_inserted = 0;
+
 		for (Resource resource : new_resources) {
 			if (!isPossibleToInsert(resource)) {
-				System.out.println ("Impossibile inserire risorsa");
+				resources_not_inserted += 1;
 			}
 		}
+
+		return resources_not_inserted;
 	}
 
+	/**
+	 * TODO: complete this method
+	 */
 	public Resource[] getFromWarehouse(Resource resource_type, int quantity) {
+		int[] availability = checkResourceAvailability(resource_type);
+
+		if (quantity <= availability[0]) {
+			for (int i = 0; i < quantity; i++) {
+				to_return[i] = resource_type;
+			}
+		}
+
 		return null;
+	}
+
+	private int[] checkResourceAvailability(Resource resource_type) {
+		int[] availability = new int[2];
+
+		if (this.top_resource != null && resource_type.equals(this.top_resource)) {
+			availability[0] = 1;
+			availability[1] = 1;
+		}else if (this.middle_resources[0] != null && resource_type.equals(this.middle_resources[0])) {
+			availability[1] = 2;
+			if (this.middle_resources[1] != null) {
+				availability[0] = 1;
+			}else {
+				availability[0] = 2;
+			}
+		}else if (this.bottom_resources[0] != null && resource_type.equals(this.bottom_resources[0])) {
+			availability[1] = 3;
+			if (this.bottom_resources[1] != null) {
+				if (this.bottom_resources[2] != null) {
+					availability[0] = 3;
+				}else {
+					availability[0] = 2;
+				}
+			}else {
+				availability[0] = 1;
+			}
+		}else {
+			availability[0] = 0;
+			availability[1] = 0;
+		}
+
+		return availability;
 	}
 
 	public String toString () {

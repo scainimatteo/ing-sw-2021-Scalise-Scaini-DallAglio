@@ -10,7 +10,7 @@ public class ProductionBase extends Production {
 	}
 
 	// public void setRequirements(Resource[] new_requirements) {
-	// 	super.required_resource = new_requirements;
+	// 	this.required_resource = new_requirements;
 	// }
 
 	// public void setProducts(Resource new_product) {

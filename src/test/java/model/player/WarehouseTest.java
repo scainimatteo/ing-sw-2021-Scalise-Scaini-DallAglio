@@ -10,26 +10,30 @@ import java.io.*;
 
 public class WarehouseTest {
 	/**
-	 * first test
+	 * first test for the class Warehouse
 	 */
 	@Test
 	public void firstWarehouseTest () {
 		Warehouse test_warehouse = new Warehouse();
+		int test_return = 0;
 
-		// System.out.println(test_warehouse.toString());
-		
 		Resource resource1 = Resource.COIN;
 		Resource resource2 = Resource.STONE;
 		Resource resource3 = Resource.SHIELD;
 		Resource resource4 = Resource.STONE;
 		Resource resource5 = Resource.STONE;
-		Resource resource6 = Resource.SERVANT;
+		Resource resource6 = Resource.SHIELD;
 		Resource[] test_resources1 = {resource1, resource2, resource3, resource4, resource5, resource6};
 
-		test_warehouse.tryToInsert(test_resources1);
+		test_return = test_warehouse.tryToInsert(test_resources1);
 
-		System.out.println(test_warehouse.toString());
-	
-		assertTrue(true);
+		Resource expected_top = resource1;
+		Resource[] expected_middle = {resource3, resource6};
+		Resource[] expected_bottom = {resource2, resource4, resource5};
+
+		assertEquals(test_return, 0);
+		assertEquals(expected_top, test_warehouse.getTopResource());
+		assertArrayEquals(expected_middle, test_warehouse.getMiddleResources());
+		assertArrayEquals(expected_bottom, test_warehouse.getBottomResources());
 	}
 }
