@@ -7,6 +7,9 @@ import java.util.NoSuchElementException;
 import java.util.HashMap;
 
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+import it.polimi.ingsw.model.game.Factory;
+
+import it.polimi.ingsw.model.player.Player;
 
 public class SoloGameTest {
 	SoloGame game;
@@ -30,7 +33,8 @@ public class SoloGameTest {
 	 */
 	@BeforeEach
 	public void createSoloGame() {
-		this.game = new SoloGame();
+		Player[] players = {new Player()};
+		this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
 	}
 
 	/**

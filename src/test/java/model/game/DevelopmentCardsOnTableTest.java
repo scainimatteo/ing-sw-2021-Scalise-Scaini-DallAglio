@@ -11,40 +11,17 @@ import java.util.Random;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.Deck;
 
+import it.polimi.ingsw.model.game.Factory;
+
 public class DevelopmentCardsOnTableTest {
 	DevelopmentCardsOnTable dct;
-	Deck[][] test_development_card_decks;
 
 	/**
 	 * Create an istance of DevelopmentCardsOnTable
 	 */
 	@BeforeEach
 	public void createDevelopmentCardsOnTable() {
-		//TODO: Functional?
-		this.test_development_card_decks = new Deck[3][4];
-		for (int i = 0; i < 12; i++) {
-			ArrayList<DevelopmentCard> a = new ArrayList<DevelopmentCard>();
-			for (int j = 0; j < 4; j++) {
-				DevelopmentCard c = new DevelopmentCard(4 * i + j);
-				a.add(c);
-			}
-			this.test_development_card_decks[i / 4][i % 4] = new Deck(4, a, i);
-		}
-		this.dct = new DevelopmentCardsOnTable(test_development_card_decks);
-	}
-
-	/**
-	 * Check if the top cards returned are the same as the one used to create the table
-	 */
-	@Test
-	public void getTopCardsTest() {
-		DevelopmentCard[][] top_cards = dct.getTopCards();
-		assertFalse(top_cards == null);
-		for (int i = 0; i < top_cards.length; i++) {
-			for (int j = 0; j < top_cards[i].length; j++) {
-				assertEquals(top_cards[i][j], test_development_card_decks[i][j].getTopCard());
-			}
-		}
+		this.dct = new DevelopmentCardsOnTable(Factory.getIstance().getAllDevelopmentCards());
 	}
 
 	/**
@@ -94,7 +71,7 @@ public class DevelopmentCardsOnTableTest {
 	 */
 	@Test
 	public void getCardNotInDeckTest() {
-		DevelopmentCard new_card = new DevelopmentCard(0);
+		DevelopmentCard new_card = new DevelopmentCard(null, null, null, 0);
 		assertThrows(NoSuchElementException.class, () -> dct.getFromDeck(new_card));
 	}
 

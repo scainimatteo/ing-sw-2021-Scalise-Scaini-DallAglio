@@ -5,15 +5,19 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.List;
 
+import it.polimi.ingsw.model.card.DevelopmentCard;
+
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.Game;
+
+import it.polimi.ingsw.model.player.Player;
 
 public class SoloGame extends Game {
 	private SoloActionToken[] solo_action_tokens;
 	private ArrayDeque<SoloActionToken> active_tokens;
 
-	public SoloGame() {
-		super(1);
+	public SoloGame(Player[] player, DevelopmentCard[] all_development_cards) {
+		super(player, all_development_cards);
 		this.solo_action_tokens = new SoloActionToken[7];
 		this.solo_action_tokens[0] = SoloActionToken.MOVE_BLACK_CROSS_TWO_SPACES;
 		this.solo_action_tokens[1] = SoloActionToken.MOVE_BLACK_CROSS_TWO_SPACES;

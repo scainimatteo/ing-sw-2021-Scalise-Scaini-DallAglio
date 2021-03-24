@@ -1,15 +1,33 @@
 package it.polimi.ingsw.model.game;
 
 import java.util.NoSuchElementException;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.Deck;
 
 public class DevelopmentCardsOnTable {
 	private Deck[][] development_card_decks;
+	private final int dim_rows = 4;
+	private final int dim_cols = 3;
 
-	public DevelopmentCardsOnTable(Deck[][] development_card_decks) {
-		this.development_card_decks = development_card_decks;
+	public DevelopmentCardsOnTable(DevelopmentCard[] all_development_cards) {
+		this.development_card_decks = createDecks(all_development_cards);
+	}
+
+	private Deck[][] createDecks(DevelopmentCard[] all_development_cards) {
+		Deck[][] decks = new Deck[dim_cols][dim_rows];
+		for (int i = 0; i < dim_cols; i++) {
+			for (int j = 0; j < dim_rows; j++) {
+				decks[i][j] = new Deck(4, new ArrayList<DevelopmentCard>(), 4 * i + j);
+			}
+		}
+		for (DevelopmentCard card : all_development_cards) {
+			CardLevel level = card.getCardLevel();
+			decks[level.getLevel() - 1][level.getColor().getRepresentation()].addElement(card);
+		}
+		return decks;
 	}
 
 	/**
