@@ -1,0 +1,25 @@
+{
+    "leader_cards": [
+		{
+			"id" : 1,
+			"victory_points": 2,
+			"ability": {
+				"type": "DISCOUNT",
+				"resource": "SERVANT"
+			},
+			"cost": {
+				"type": "cardlevel",
+				"cardlevel": [
+					{
+						"color": "YELLOW",
+						"level": 1
+					},
+					{
+						"color": "GREEN",
+						"level": 1
+					}
+				]
+			}
+		}
+	]
+}

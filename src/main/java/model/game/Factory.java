@@ -12,7 +12,12 @@ import org.json.simple.parser.*;
 import org.json.simple.*;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
+import it.polimi.ingsw.model.card.WhiteMarblesAbility;
+import it.polimi.ingsw.model.card.ProductionAbility;
+import it.polimi.ingsw.model.card.ExtraSpaceAbility;
+import it.polimi.ingsw.model.card.DiscountAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
@@ -26,8 +31,13 @@ public class Factory {
 	private DevelopmentCard[] all_development_cards;
 	private LeaderCard[] all_leader_cards;
 	private Cell[] all_cells;
+	private JSONParser jsonParser;
+	private final int development_cards_number = 48;
+	private final int leader_cards_number = 1;
+	private final int cell_number = 0;
 
 	private Factory() {
+		this.jsonParser = new JSONParser();
 		this.all_development_cards = readAllDevelopmentCards();
 		this.all_leader_cards = readAllLeaderCards();
 		this.all_cells = readAllCells();
@@ -59,17 +69,15 @@ public class Factory {
 	}
 
 	private DevelopmentCard[] readAllDevelopmentCards() {
-		int development_cards_number = 48;
 		DevelopmentCard[] development_cards = new DevelopmentCard[development_cards_number];
 
-		JSONParser jsonParser = new JSONParser();
 		try {
 			InputStream is = getClass().getClassLoader().getResourceAsStream("json/developmentcards.json");
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(new InputStreamReader(is));
+			JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
 
 			JSONArray development_cards_obj = (JSONArray) jsonObject.get("development_cards");
 			for (int i = 0; i < development_cards_number; i++) {
-				JSONObject card = (JSONObject) jsonParser.parse(development_cards_obj.get(i).toString());
+				JSONObject card = (JSONObject) this.jsonParser.parse(development_cards_obj.get(i).toString());
 
 				// ID
 				int id = (int)(long) card.get("id");
@@ -89,6 +97,10 @@ public class Factory {
 				DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
 				CardLevel cardlevel = new CardLevel(level, color);
 
+				// VICTORYPOINTS
+				int victory_points = (int)(long) card.get("victory_points");
+
+				//TODO: aggiungere victory_points
 				development_cards[i] = new DevelopmentCard(new_production, cost, cardlevel, id);
 			}
 		} catch (IOException e) {
@@ -99,8 +111,45 @@ public class Factory {
 		return development_cards;
 	}
 
+	private LeaderAbility createAbility(JSONObject ability_obj) {
+		String ability_str = ability_obj.get("type").toString();
+		switch (ability_str) {
+			case "DISCOUNT":
+				Resource discounted_resource = Resource.valueOf(ability_obj.get("resource").toString());
+				return new DiscountAbility(discounted_resource);
+			default:
+				// TODO: Exception
+				return null;
+		}
+	}
+
 	private LeaderCard[] readAllLeaderCards() {
-		return null;
+		LeaderCard[] leader_cards = new LeaderCard[leader_cards_number];
+
+		try {
+			InputStream is = getClass().getClassLoader().getResourceAsStream("json/leadercards.json");
+			JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+			JSONArray leader_cards_obj = (JSONArray) jsonObject.get("leader_cards");
+			for (int i = 0; i < leader_cards_number; i++) {
+				JSONObject card = (JSONObject) this.jsonParser.parse(leader_cards_obj.get(i).toString());
+
+				// ID
+				int id = (int)(long) card.get("id");
+
+				// ABILITY
+				JSONObject ability_obj = (JSONObject) card.get("ability");
+				LeaderAbility ability = createAbility(ability_obj);
+
+				// VICTORYPOINTS
+				int victory_points = (int)(long) card.get("victory_points");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return leader_cards;
 	}
 
 	private Cell[] readAllCells() {
