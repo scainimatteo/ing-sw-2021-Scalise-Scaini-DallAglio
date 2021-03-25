@@ -14,11 +14,7 @@ public class ResourceTest{
 	public void firstResourceTest(){
 		Resource test_resource = Resource.COIN;
 
-		if(test_resource.name().equals("COIN")){
-			assertTrue(true);
-		}else{
-			assertTrue(false);
-		}
+		assertTrue(test_resource.name().equals("COIN"));
 	}
 
 	/**
@@ -29,10 +25,6 @@ public class ResourceTest{
 		Resource resource1 = Resource.COIN;
 		Resource resource2 = Resource.COIN;
 
-		if (resource1.equals(resource2)) {
-			assertTrue(true);
-		}else {
-			assertTrue(false);
-		}
+		assertTrue(resource1.equals(resource2));
 	}
 }

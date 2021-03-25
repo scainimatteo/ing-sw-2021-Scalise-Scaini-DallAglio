@@ -25,18 +25,11 @@ public class ProductionTest {
 
 		Production test_production = new Production (required_resource, produced_resource);
 
-		// Resource[] to_print = test_production.getRequiredResources();
-		// to_print = test_production.getProducedResources();
-
 		Resource test_resource_5 = Resource.COIN;
 		Resource test_resource_6 = Resource.SHIELD;
 		Resource[] input_resource = {test_resource_6, test_resource_5};
 		
-		if (test_production.compareArrays(input_resource)) {
-			assertTrue(true);
-		}else {
-			assertTrue(false);
-		}
+		assertTrue(test_production.compareArrays(input_resource));
 	}
 
 	/**
@@ -56,10 +49,6 @@ public class ProductionTest {
 
 		Resource[] output_resources = test_production.activateProduction(required_resource);
 
-		if (output_resources[0].equals(produced_resource[0]) && output_resources[1].equals(produced_resource[1])) {
-			assertTrue(true);
-		}else {
-			assertTrue(false);
-		}
+		assertTrue(output_resources[0].equals(produced_resource[0]) && output_resources[1].equals(produced_resource[1]));
 	}
 }

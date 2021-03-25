@@ -9,7 +9,7 @@ public enum Resource {
 
 	private String color;
 
-	private Resource (String color) {
+	private Resource(String color){
 		this.color = color;
 	}
 

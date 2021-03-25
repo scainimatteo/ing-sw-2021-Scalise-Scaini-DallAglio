@@ -9,22 +9,18 @@ public class Warehouse {
 	private Resource[] middle_resources = {null, null};
 	private Resource[] bottom_resources = {null, null, null};
 
-	public Warehouse () {
-		// Resource null_resource = null;
-		// Resource top_resource = null;
-		// Resource[] middle_resources = {null_resource, null_resource};
-		// Resource[] bottom_resources = {null_resource, null_resource, null_resource};
+	public Warehouse(){
 	}
 
-	public Resource getTopResource() {
+	public Resource getTopResource(){
 		 return top_resource;
 	}
 
-	public Resource[] getMiddleResources() {
+	public Resource[] getMiddleResources(){
 		return middle_resources;
 	}
 
-	public Resource[] getBottomResources() {
+	public Resource[] getBottomResources(){
 		return bottom_resources;
 	}
 
@@ -32,10 +28,11 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibleToInsert(Resource new_resource) {
-		if (!isPossibileToInsertTop(new_resource)) {
-			if (!isPossibileToInsertMiddle(new_resource)) {
-				if (!isPossibileToInsertBottom(new_resource)) {
+	private boolean isPossibleToInsert(Resource new_resource){
+		if(!isPossibileToInsertTop(new_resource)){
+			if(!isPossibileToInsertMiddle(new_resource)){
+				if(!isPossibileToInsertBottom(new_resource)){
+					//TODO: lancia eccezione
 					// if is not possible to insert in any space, return false
 					return false;
 				}
@@ -49,53 +46,53 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibileToInsertTop(Resource new_resource) {
+	private boolean isPossibileToInsertTop(Resource new_resource){
 		// if middle_resources have at least one space occupied and new_resource is the same resource, return false
-		if (this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])) {
+		if(this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
 			return false;
 		}
 
 		// if bottom_resources have at least one space occupied and new_resource is the same resource, return false
-		if (this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])) {
+		if(this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])){
 			return false;
 		}
 
 		// if top_resource is free, insert and return true
-		if (this.top_resource == null) {
+		if(this.top_resource == null){
 			this.top_resource = new_resource;
 			return true;
 		// if top_resource is full, insert and return true
-		}else {
-			if (new_resource.equals(this.top_resource)) {
+		}else{
+			if(new_resource.equals(this.top_resource)){
 				return rearrangeWarehouseTop(new_resource);
-			}else {
+			}else{
 				return false;
 			}
 		}
 	}
 
-	private boolean rearrangeWarehouseTop(Resource new_resource) {
-		if (middle_resources[0] == null) {
+	private boolean rearrangeWarehouseTop(Resource new_resource){
+		if(middle_resources[0] == null){
 			middle_resources[0] = new_resource;
 			middle_resources[1] = this.top_resource;
 			top_resource = null;
 			return true;
-		}else if (bottom_resources[0] == null) {
+		}else if(bottom_resources[0] == null){
 			bottom_resources[0] = new_resource;
 			bottom_resources[0] = this.top_resource;
 			top_resource = null;
 			return true;
-		}else if (middle_resources[1] == null) {
+		}else if(middle_resources[1] == null){
 			middle_resources[1] = top_resource;
 			top_resource = middle_resources[0];
 			middle_resources[0] = new_resource;
 			return true;
-		}else if (bottom_resources[1] == null) {
+		}else if(bottom_resources[1] == null){
 			bottom_resources[1] = top_resource;
 			top_resource = bottom_resources[0];
 			bottom_resources[0] = new_resource;
 			return true;
-		}else {
+		}else{
 			return false;
 		}
 	}
@@ -104,65 +101,65 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibileToInsertMiddle(Resource new_resource) {
+	private boolean isPossibileToInsertMiddle(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
-		if (new_resource.equals(this.top_resource)) {
+		if(new_resource.equals(this.top_resource)){
 			return false;
 		}
 
 		// if middle_resources has at least one space occupied and new resource isn't the same resource, return false
-		if (this.middle_resources[0] != null && !(new_resource.equals(this.middle_resources[0]))) {
+		if(this.middle_resources[0] != null && !(new_resource.equals(this.middle_resources[0]))){
 			return false;
 		}
 
 		// if bottom_resources have at least one space occupied and new_resource is the same resource, return false
-		if (this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])) {
+		if(this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])){
 			return false;
 		}
 
-		if (this.middle_resources[1] == null) {
+		if(this.middle_resources[1] == null){
 			// if middle_resources is empty, insert and return true
-			if (this.middle_resources[0] == null) {
+			if(this.middle_resources[0] == null){
 				this.middle_resources[0] = new_resource;
 				return true;
 			// if 1st space is occupied, insert in 2nd position and return true
-			}else {
+			}else{
 				this.middle_resources[1] = new_resource;
 				return true;
 			}
 		// if middle_resources is full, return false
-		}else {
-			if (rearrangeWarehouseMiddle(new_resource)) {
+		}else{
+			if(rearrangeWarehouseMiddle(new_resource)){
 				return true;
-			}else {
+			}else{
 				return false;
 			}
 		}
 	}
 
-	private boolean rearrangeWarehouseMiddle (Resource new_resource) {
-		if (this.bottom_resources[0] == null) {
+	private boolean rearrangeWarehouseMiddle(Resource new_resource){
+		if(this.bottom_resources[0] == null){
 			this.bottom_resources[0] = new_resource;
 			this.bottom_resources[1] = middle_resources[0];
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = null;
 			this.middle_resources[1] = null;
 			return true;
-		}else if (this.bottom_resources[1] == null) {
+		}else if(this.bottom_resources[1] == null){
 			this.bottom_resources[1] = middle_resources[0];
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = this.bottom_resources[0];
 			this.bottom_resources[0] = new_resource;
 			this.middle_resources[1] = null;
 			return true;
-		}else if (this.bottom_resources[2] == null) {
+		}else if(this.bottom_resources[2] == null){
 			this.bottom_resources[1] = middle_resources[0];
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = this.bottom_resources[0];
 			this.middle_resources[1] = this.bottom_resources[1];
 			this.bottom_resources[0] = new_resource;
 			return true;
-		}else {
+		}else{
 			return false;
 		}
 	}
@@ -171,40 +168,40 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibileToInsertBottom(Resource new_resource) {
+	private boolean isPossibileToInsertBottom(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
-		if (new_resource.equals(this.top_resource)) {
+		if(new_resource.equals(this.top_resource)){
 			return false;
 		}
 
 		// if middle_resources have at least one space occupied and new_resource is the same resource, return false
-		if (this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])) {
+		if(this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
 			return false;
 		}
 
 		// if bottom_resources has at least one space occupied and new resource isn't the same resource, return false
-		if (this.bottom_resources[0] != null && !(new_resource.equals(this.bottom_resources[0]))) {
+		if(this.bottom_resources[0] != null && !(new_resource.equals(this.bottom_resources[0]))){
 			return false;
 		}
 
-		if (this.bottom_resources[2] == null) {
-			if (this.bottom_resources[1] == null) {
+		if(this.bottom_resources[2] == null){
+			if(this.bottom_resources[1] == null){
 				// if bottom_resources is empty, insert and return true
-				if (this.bottom_resources[0] == null) {
+				if(this.bottom_resources[0] == null){
 					this.bottom_resources[0] = new_resource;
 					return true;
 				// if the 1st space is occupied, insert in the 2nd position and return true
-				}else {
+				}else{
 					this.bottom_resources[1] = new_resource;
 					return true;
 				}
 			// if the 2nd space is occupied, insert in the 3rd position and return true
-			}else {
+			}else{
 				this.bottom_resources[2] = new_resource;
 				return true;
 			}
 		// if bottom_resources is full, return false
-		}else {
+		}else{
 			return false;
 		}
 	}
@@ -213,11 +210,11 @@ public class Warehouse {
 	 * @param new_resources is an array of resources obtained from the market that need to be inserted in the warehouse
 	 * @return the number of resources that cannot be inserted
 	 */
-	public int tryToInsert(Resource[] new_resources) {
+	public int tryToInsert(Resource[] new_resources){
 		int resources_not_inserted = 0;
 
-		for (Resource resource : new_resources) {
-			if (!isPossibleToInsert(resource)) {
+		for(Resource resource : new_resources){
+			if(!isPossibleToInsert(resource)){
 				resources_not_inserted += 1;
 			}
 		}
@@ -226,213 +223,171 @@ public class Warehouse {
 	}
 
 	/**
-	 * TODO: complete this method
-	 * gFW chiama getFromTop che checka il tipo e il numero richiesto
+	 * TODO: add exceptions and test
+	 * @param resource_type is the type of resource requested from the player
+	 * @param quantity is the number of resource requested
+	 * @return an array of the resources requested
 	 */
-	public Resource[] getFromWarehouse(Resource resource_type, int quantity) {
+	public Resource[] getFromWarehouse(Resource resource_type, int quantity){
 		Resource[] to_return = getFromTop(resource_type, quantity);
-
-		// int[] availability = checkResourceAvailability(resource_type);
-
-		// if (quantity <= availability[0]) {
-		// 	for (int i = 0; i < quantity; i++) {
-		// 		to_return[i] = resource_type;
-		// 	}
-
-		// 	clearWarehouse(availability[1], quantity);
-		// }
 
 		return to_return;
 	}
 
-	private Resource[] getFromTop(Resource resource_type, int quantity) {
-		if (this.top_resource != null && resource_type.equals(top_resource)) {
-			if (quantity == 1) {
+	/**
+	 * @param resource_type is the type of resource requested from the player
+	 * @param quantity is the number of resource requested
+	 * @return the array of the resources requested if is of the same type as top_resource and the quantity requested is available . Returns an exception if the quantity requested is not available. Calls the next method if top_resource is empty or resource_type and top_resource are not the same.
+	 */
+	private Resource[] getFromTop(Resource resource_type, int quantity){
+		if(this.top_resource != null && resource_type.equals(top_resource)){
+			if(quantity == 1){
 				Resource[] to_return = {top_resource};
 				this.top_resource = null;
 				return to_return;
-			}else {
+			}else{
 				//TODO: lancia eccezione
 				return null;
 			}
-		}else {
+		}else{
 			return getFromMiddle(resource_type, quantity);
 		}
 	}
 
-	private Resource[] getFromMiddle(Resource resource_type, int quantity) {
-		if (this.middle_resources[0] != null && resource_type.equals(middle_resources[0])) {
-			if (this.middle_resources[1] != null) {
-				if (quantity == 2) {
-					Resource[] to_return = {middle_resource[0], middle_resource[1]};
-					this.middle_resource[1] = null;
-					this.middle_resource[0] = null;
+	/**
+	 * @param resource_type is the type of resource requested from the player
+	 * @param quantity is the number of resource requested
+	 * @return the array of the resources requested if is of the same type as middle_resource and the quantity requested is available . Returns an exception if the quantity requested is not available. Calls the next method if middle_resources is empty or resource_type and middle_resources are not the same.
+	 */
+	private Resource[] getFromMiddle(Resource resource_type, int quantity){
+		if(this.middle_resources[0] != null && resource_type.equals(middle_resources[0])){
+			if(this.middle_resources[1] != null){
+				if(quantity == 2){
+					Resource[] to_return = {middle_resources[0], middle_resources[1]};
+					this.middle_resources[1] = null;
+					this.middle_resources[0] = null;
 					return to_return;
-				}else if (quantity == 1) {
-					Resource[] to_return = {middle_resource[1]};
-					this.middle_resource[1] = null;
+				}else if(quantity == 1){
+					Resource[] to_return = {middle_resources[1]};
+					this.middle_resources[1] = null;
 					return to_return;
-				}else {
+				}else{
 					//TODO: lancia eccezione
 					return null;
 				}
-			}else {
-				if (quantity == 1) {
-					Resource[] to_return = {middle_resource[0]};
-					this.middle_resource[0] = null;
+			}else{
+				if(quantity == 1){
+					Resource[] to_return = {middle_resources[0]};
+					this.middle_resources[0] = null;
 					return to_return;
-				}else {
+				}else{
 					//TODO: lancia eccezione
 					return null;
 				}
 			}
-		}else {
+		}else{
 			return getFromBottom(resource_type, quantity);
 		}
 	}
 
-	private Resource[] getFromBottom(Resource resource_type, int quantity) {
-		if (this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])) {
-			if (bottom_resources[1] != null) {
-				if (bottom_resources[2] != null) {
-					if (quantity == 3) {
+	/**
+	 * @param resource_type is the type of resource requested from the player
+	 * @param quantity is the number of resource requested
+	 * @return the array of the resources requested if is of the same type as bottom_resource and the quantity requested is available . Returns an exception if the condition specified first are not satisfied
+	 */
+	private Resource[] getFromBottom(Resource resource_type, int quantity){
+		if(this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])){
+			if(bottom_resources[1] != null){
+				if(bottom_resources[2] != null){
+					if(quantity == 3){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
 						this.bottom_resources[2] = null;
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else if (quantity == 2) {
+					}else if(quantity == 2){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
 						this.bottom_resources[2] = null;
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else if (quantity == 1) {
+					}else if(quantity == 1){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
 						this.bottom_resources[2] = null;
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else {
+					}else{
 						//TODO: lancia eccezione
 						return null;
 					}
-				}else {
-					if (quantity == 2) {
+				}else{
+					if(quantity == 2){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1]};
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else if (quantity == 1) {
+					}else if(quantity == 1){
 						Resource[] to_return = {bottom_resources[1]};
 						this.bottom_resources[1] = null;
 						return to_return;
-					}else {
+					}else{
 						//TODO: lancia eccezione
 						return null;
 					}
 				}
-			}else {
-				if (quantity == 1) {
+			}else{
+				if(quantity == 1){
 					Resource[] to_return = {bottom_resources[0]};
 					this.bottom_resources[0] = null;
 					return to_return;
-				}else {
+				}else{
 					//TODO: lancia eccezione
 					return null;
 				}
 			}
-		}else {
+		}else{
 			//TODO: lancia eccezione
 			return null;
 		}
 	}
 
-	private int[] checkResourceAvailability(Resource resource_type) {
-		int[] availability = new int[2];
-
-		if (this.top_resource != null && resource_type.equals(this.top_resource)) {
-			availability[0] = 1;
-			availability[1] = 1;
-		}else if (this.middle_resources[0] != null && resource_type.equals(this.middle_resources[0])) {
-			availability[1] = 2;
-			if (this.middle_resources[1] != null) {
-				availability[0] = 1;
-			}else {
-				availability[0] = 2;
-			}
-		}else if (this.bottom_resources[0] != null && resource_type.equals(this.bottom_resources[0])) {
-			availability[1] = 3;
-			if (this.bottom_resources[1] != null) {
-				if (this.bottom_resources[2] != null) {
-					availability[0] = 3;
-				}else {
-					availability[0] = 2;
-				}
-			}else {
-				availability[0] = 1;
-			}
-		}else {
-			availability[0] = 0;
-			availability[1] = 0;
-		}
-
-		return availability;
-	}
-
-	private void clearWarehouse(int warehouse_level, int quantity) {
-		switch (warehouse_level) {
-			case 1: this.top_resource = null;
-					break;
-			case 2: for (int i = 1; i >= (2 - quantity); i --) {
-						this.middle_resources[i] = null;
-					}
-					break;
-			case 3: for (int i = 2; i >= (3 - quantity); i --) {
-						this.bottom_resources[i] = null;
-					}
-					break;
-			default:
-					break;
-		}
-	}
-
-	public String toString () {
+	public String toString(){
 		String to_print;
 
 		to_print = "1: ";
-		if (top_resource != null) {
+		if(top_resource != null){
 			to_print = to_print + top_resource.name();
-		}else {
+		}else{
 			to_print = to_print + "null";
 		}
 
 		to_print = to_print + "\n2: ";
-		if (middle_resources[0] != null) {
+		if(middle_resources[0] != null){
 			to_print = to_print + middle_resources[0].name() + " | ";
-		}else {
+		}else{
 			to_print = to_print + "null | ";
 		}
-		if (middle_resources[1] != null) {
+		if(middle_resources[1] != null){
 			to_print = to_print + middle_resources[1].name();
-		}else {
+		}else{
 			to_print = to_print + "null";
 		}
 
 		to_print = to_print + "\n3: ";
-		if (bottom_resources[0] != null) {
+		if(bottom_resources[0] != null){
 			to_print = to_print + bottom_resources[0].name() + " | ";
-		}else {
+		}else{
 			to_print = to_print + "null | ";
 		}
-		if (bottom_resources[1] != null) {
+		if(bottom_resources[1] != null){
 			to_print = to_print + bottom_resources[1].name() + " | ";
-		}else {
+		}else{
 			to_print = to_print + "null | ";
 		}
-		if (bottom_resources[2] != null) {
+		if(bottom_resources[2] != null){
 			to_print = to_print + bottom_resources[2].name();
-		}else {
+		}else{
 			to_print = to_print + "null\n";
 		}
 

@@ -5,19 +5,19 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class ProductionBase extends Production {
 
-	public ProductionBase (Resource[] required, Resource[] produced) {
+	public ProductionBase(Resource[] required, Resource[] produced){
 		super(required, produced);
 	}
 
-	// public void setRequirements(Resource[] new_requirements) {
+	// public void setRequirements(Resource[] new_requirements){
 	// 	this.required_resource = new_requirements;
 	// }
 
-	// public void setProducts(Resource new_product) {
+	// public void setProducts(Resource new_product){
 	// 	super.produced_resource = new_product;
 	// }
 	
-	public Resource activateProduction (Resource produced) {
+	public Resource activateProduction(Resource produced){
 		return produced;
 	}
 }
