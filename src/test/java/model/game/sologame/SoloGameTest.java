@@ -18,9 +18,9 @@ public class SoloGameTest {
 	 * Add a SoloActionToken to a HashMap while updating its index
 	 *
 	 * @param map HashMap containing the number of times a SoloActionToken is found
-	 * @param s SoloActionToken to insert to the HashMap
+	 * @param s String representing a SoloActionToken to insert to the HashMap
 	 */
-	private void addToMap(HashMap<SoloActionToken, Integer> map, SoloActionToken s) {
+	private void addToMap(HashMap<String, Integer> map, String s) {
 		if (map.containsKey(s)) {
 			map.put(s, map.get(s) + 1);
 		} else {
@@ -50,18 +50,16 @@ public class SoloGameTest {
 	 */
 	@Test
 	public void checkAllTokens() {
-		HashMap<SoloActionToken, Integer> number_of_tokens = new HashMap<SoloActionToken, Integer>();
+		HashMap<String, Integer> number_of_tokens = new HashMap<String, Integer>();
 
 		for (int i = 0; i < 7; i++) {
-			addToMap(number_of_tokens, this.game.getTopToken());
+			addToMap(number_of_tokens, this.game.getTopToken().getClass().getName());
 		}
 
-		assertEquals(2, number_of_tokens.get(SoloActionToken.MOVE_BLACK_CROSS_TWO_SPACES));
-		assertEquals(1, number_of_tokens.get(SoloActionToken.MOVE_BLACK_CROSS_ONE_SPACE));
-		assertEquals(1, number_of_tokens.get(SoloActionToken.DISCARD_YELLOW_DEVELOPMENT_CARD));
-		assertEquals(1, number_of_tokens.get(SoloActionToken.DISCARD_GREEN_DEVELOPMENT_CARD));
-		assertEquals(1, number_of_tokens.get(SoloActionToken.DISCARD_PURPLE_DEVELOPMENT_CARD));
-		assertEquals(1, number_of_tokens.get(SoloActionToken.DISCARD_BLUE_DEVELOPMENT_CARD));
+		//TODO: non mi piace
+		assertEquals(2, number_of_tokens.get("it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces"));
+		assertEquals(1, number_of_tokens.get("it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace"));
+		assertEquals(4, number_of_tokens.get("it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards"));
 
 		assertThrows(NoSuchElementException.class, () -> this.game.getTopToken());
 	}
