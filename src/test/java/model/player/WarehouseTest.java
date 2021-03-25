@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.resources.Resource;
 
-import java.io.*;
-
 public class WarehouseTest {
 	/**
 	 * first test for the class Warehouse
