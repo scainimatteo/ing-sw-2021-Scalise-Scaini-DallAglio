@@ -57,6 +57,7 @@ public class WarehouseTest {
 		Resource[] test_return_getfromwarehouse = test_warehouse.getFromWarehouse(resource1, 1);
 		Resource[] test_resource_top = {resource1};
 		assertEquals(test_return_getfromwarehouse[0].name(), test_resource_top[0].name());
+		assertArrayEquals(test_return_getfromwarehouse, test_resource_top);
 
 		test_return_getfromwarehouse = test_warehouse.getFromWarehouse(resource3, 1);
 		Resource[] test_resource_mid = {resource3};
