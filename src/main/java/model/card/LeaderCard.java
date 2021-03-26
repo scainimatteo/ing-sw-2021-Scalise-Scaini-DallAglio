@@ -7,19 +7,15 @@ public abstract class LeaderCard extends Card {
 	private LeaderAbility ability;
 	private boolean activated;
 
-	public LeaderCard (LeaderAbility new_ability){
-		this.ability = new_ability;
-	}	
-
-	public LeaderCard public boolean isActive() {
+	public boolean isActive() {
 		return this.activated;
 	}
 
 	public void activateLeaderCard() {
-		this.activated = TRUE;
+		this.activated = true;
 		return;	
 	}
-//chiama toString dell'interfaccia affinché possa fare overriding
+//chiama metodo dell'interfaccia affinché possa fare overriding e printare il tipo di abilità
 	public String cardType(){
 		return ability.toString();
 	}
