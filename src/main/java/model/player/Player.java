@@ -7,8 +7,6 @@ import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.player.StrongBox;
 
-import it.polimi.ingsw.model.resources.ProductionBase;
-
 public class Player {
 	private String nickname;
 	private FaithTrack track;
