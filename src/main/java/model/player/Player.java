@@ -15,6 +15,5 @@ public class Player {
 	private Warehouse warehouse;
 	private StrongBox strongbox;
 	private DevelopmentCardsSlots development_card_slots;
-	private ProductionBase base_production;
 	private LeaderCard[] leader_cards_deck;
 }
