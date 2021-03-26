@@ -1,25 +1,336 @@
 {
     "leader_cards": [
-		{
-			"id" : 1,
-			"victory_points": 2,
-			"ability": {
-				"type": "DISCOUNT",
-				"resource": "SERVANT"
-			},
-			"cost": {
-				"type": "cardlevel",
-				"cardlevel": [
-					{
-						"color": "YELLOW",
-						"level": 1
-					},
-					{
-						"color": "GREEN",
-						"level": 1
-					}
-				]
-			}
-		}
-	]
+        {
+            "ability": {
+                "resource": "SERVANT",
+                "type": "DISCOUNT"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "YELLOW",
+                        "level": 1
+                    },
+                    {
+                        "color": "GREEN",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 1,
+            "victory_points": 2
+        },
+        {
+            "ability": {
+                "resource": "SHIELD",
+                "type": "DISCOUNT"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    },
+                    {
+                        "color": "PURPLE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 2,
+            "victory_points": 2
+        },
+        {
+            "ability": {
+                "resource": "STONE",
+                "type": "DISCOUNT"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "GREEN",
+                        "level": 1
+                    },
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 3,
+            "victory_points": 2
+        },
+        {
+            "ability": {
+                "resource": "COIN",
+                "type": "DISCOUNT"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "YELLOW",
+                        "level": 1
+                    },
+                    {
+                        "color": "PURPLE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 4,
+            "victory_points": 2
+        },
+        {
+            "ability": {
+                "resource": "STONE",
+                "type": "EXTRA_SPACE"
+            },
+            "requirements": {
+                "resources": [
+					"COIN",
+					"COIN",
+					"COIN",
+					"COIN",
+					"COIN"
+                ],
+                "type": "RESOURCES"
+            },
+            "id": 5,
+            "victory_points": 3
+        },
+        {
+            "ability": {
+                "resource": "SERVANT",
+                "type": "EXTRA_SPACE"
+            },
+            "requirements": {
+                "resources": [
+					"STONE",
+					"STONE",
+					"STONE",
+					"STONE",
+					"STONE"
+                ],
+                "type": "RESOURCES"
+            },
+            "id": 6,
+            "victory_points": 3
+        },
+        {
+            "ability": {
+                "resource": "SHIELD",
+                "type": "EXTRA_SPACE"
+            },
+            "requirements": {
+                "resources": [
+					"SERVANT",
+					"SERVANT",
+					"SERVANT",
+					"SERVANT",
+					"SERVANT"
+                ],
+                "type": "RESOURCES"
+            },
+            "id": 7,
+            "victory_points": 3
+        },
+        {
+            "ability": {
+                "resource": "COIN",
+                "type": "EXTRA_SPACE"
+            },
+            "requirements": {
+                "resources": [
+					"SHIELD",
+					"SHIELD",
+					"SHIELD",
+					"SHIELD",
+					"SHIELD"
+                ],
+                "type": "RESOURCES"
+            },
+            "id": 8,
+            "victory_points": 3
+        },
+        {
+            "ability": {
+                "resource": "SERVANT",
+                "type": "WHITE_MARBLES"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "YELLOW",
+                        "level": 1
+                    },
+                    {
+                        "color": "YELLOW",
+                        "level": 1
+                    },
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 9,
+            "victory_points": 5
+        },
+        {
+            "ability": {
+                "resource": "SHIELD",
+                "type": "WHITE_MARBLES"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "GREEN",
+                        "level": 1
+                    },
+                    {
+                        "color": "GREEN",
+                        "level": 1
+                    },
+                    {
+                        "color": "PURPLE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 10,
+            "victory_points": 5
+        },
+        {
+            "ability": {
+                "resource": "STONE",
+                "type": "WHITE_MARBLES"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    },
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    },
+                    {
+                        "color": "YELLOW",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 11,
+            "victory_points": 5
+        },
+        {
+            "ability": {
+                "resource": "COIN",
+                "type": "WHITE_MARBLES"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "PURPLE",
+                        "level": 1
+                    },
+                    {
+                        "color": "PURPLE",
+                        "level": 1
+                    },
+                    {
+                        "color": "GREEN",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 12,
+            "victory_points": 5
+        },
+        {
+            "ability": {
+				"required_resources": [
+					"SHIELD"
+				],
+                "type": "PRODUCTION"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "YELLOW",
+                        "level": 2
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 13,
+            "victory_points": 4
+        },
+        {
+            "ability": {
+				"required_resources": [
+					"SERVANT"
+				],
+                "type": "PRODUCTION"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "BLUE",
+                        "level": 2
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 14,
+            "victory_points": 4
+        },
+        {
+            "ability": {
+				"required_resources": [
+					"STONE"
+				],
+                "type": "PRODUCTION"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "PURPLE",
+                        "level": 2
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 15,
+            "victory_points": 4
+        },
+        {
+            "ability": {
+				"required_resources": [
+					"COIN"
+				],
+                "type": "PRODUCTION"
+            },
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "GREEN",
+                        "level": 2
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
+            "id": 16,
+            "victory_points": 4
+        }
+    ]
 }

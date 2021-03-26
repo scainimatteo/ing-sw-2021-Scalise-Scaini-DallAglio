@@ -11,7 +11,9 @@ import java.io.IOException;
 import org.json.simple.parser.*;
 import org.json.simple.*;
 
+import it.polimi.ingsw.model.card.LeaderCardResourcesCost;
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
+import it.polimi.ingsw.model.card.LeaderCardLevelCost;
 import it.polimi.ingsw.model.card.WhiteMarblesAbility;
 import it.polimi.ingsw.model.card.ProductionAbility;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
@@ -33,7 +35,7 @@ public class Factory {
 	private Cell[] all_cells;
 	private JSONParser jsonParser;
 	private final int development_cards_number = 48;
-	private final int leader_cards_number = 1;
+	private final int leader_cards_number = 16;
 	private final int cell_number = 0;
 
 	private Factory() {
@@ -117,6 +119,39 @@ public class Factory {
 			case "DISCOUNT":
 				Resource discounted_resource = Resource.valueOf(ability_obj.get("resource").toString());
 				return new DiscountAbility(discounted_resource);
+			case "WHITE_MARBLES":
+				Resource white_marble_resource = Resource.valueOf(ability_obj.get("resource").toString());
+				return new WhiteMarblesAbility(white_marble_resource);
+			case "EXTRA_SPACE":
+				Resource extra_space_resource = Resource.valueOf(ability_obj.get("resource").toString());
+				return new ExtraSpaceAbility(extra_space_resource);
+			case "PRODUCTION":
+				JSONArray required_resources_arr = (JSONArray) ability_obj.get("required_resources");
+				Resource[] requirements_resources = convertJsonArrayToResourceArray(required_resources_arr);
+				return new ProductionAbility(requirements_resources);
+			default:
+				// TODO: Exception
+				return null;
+		}
+	}
+
+	private LeaderCard createLeaderCard(int id, LeaderAbility ability, int victory_points, JSONObject requirements_obj) throws ParseException {
+		String requirements_type = requirements_obj.get("type").toString();
+		switch (requirements_type) {
+			case "CARDLEVEL":
+				JSONArray cardlevel_arr = (JSONArray) requirements_obj.get("cardlevel");
+				CardLevel requirements_cardlevels[] = new CardLevel[cardlevel_arr.size()];
+				for (int i = 0; i < cardlevel_arr.size(); i++) {
+					JSONObject cardlevel_obj = (JSONObject) this.jsonParser.parse(cardlevel_arr.get(i).toString());
+					int level = (int)(long) cardlevel_obj.get("level");
+					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
+					requirements_cardlevels[i] = new CardLevel(level, color);
+				}
+				return new LeaderCardLevelCost(ability, id, victory_points, requirements_cardlevels);
+			case "RESOURCES":
+				JSONArray resources_arr = (JSONArray) requirements_obj.get("resources");
+				Resource[] requirements_resources = convertJsonArrayToResourceArray(resources_arr);
+				return new LeaderCardResourcesCost(ability, id, victory_points, requirements_resources);
 			default:
 				// TODO: Exception
 				return null;
@@ -143,6 +178,11 @@ public class Factory {
 
 				// VICTORYPOINTS
 				int victory_points = (int)(long) card.get("victory_points");
+
+				// REQUIREMENTS
+				JSONObject requirements_obj = (JSONObject) card.get("requirements");
+
+				leader_cards[i] = createLeaderCard(id, ability, victory_points, requirements_obj);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
