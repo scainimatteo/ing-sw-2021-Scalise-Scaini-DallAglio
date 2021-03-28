@@ -2,7 +2,7 @@ package it.polimi.ingsw.model.resources;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-import java.io.*;
+import java.lang.IllegalArgumentException;
 
 public class Production {
 	protected Resource[] required_resources;
@@ -24,12 +24,13 @@ public class Production {
 	/**
 	 * @param cost requires an array of resources to compare it with required_resources
 	 * @return the requested resources if compareArrays returns true, null if compareArrays returns false
+	 * @exception IllegalArgumentException is thrown if the cost is not equal to this.required_resources
 	 */
 	public Resource[] activateProduction(Resource[] cost){
 		if(this.compareArrays(cost)){
 			return produced_resources;
 		}else{
-			return null;
+			throw new IllegalArgumentException();
 		}
 	}
 

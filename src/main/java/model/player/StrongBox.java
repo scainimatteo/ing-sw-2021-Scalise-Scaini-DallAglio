@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import java.lang.IndexOutOfBoundsException;
+import java.lang.IllegalArgumentException;
+
 public class StrongBox {
 	private HashMap<Resource, Integer> storage;
 
@@ -21,14 +24,16 @@ public class StrongBox {
 		this.storage.put(servant_resource, 0);
 	}
 
+	/**
+	 * @param new_resources is the array of resources get from the market
+	 * @exception IllegalArgumentException is thrown if a resource is not present
+	 */
 	public void insertResources(Resource[] new_resources) {
 		for (Resource resource : new_resources){
-			storage.containsKey(resource);
-			if(storage.containsKey(resource)){
+			if(this.storage.containsKey(resource)){
 				this.storage.put(resource, storage.get(resource) + 1);
 			}else{
-				//TODO: lancia eccezione
-				break;
+				throw new IllegalArgumentException();
 			}
 		}
 	}
@@ -39,9 +44,18 @@ public class StrongBox {
 
 	/**
 	 * TBT
+	 * @param resource_type is the resource to be removed
+	 * @param quantity is the number of resources requested
+	 * @return the array of resources requested
+	 * @exception IllegalArgumentException is thrown if the resource_type is not contained
+	 * @exception IndexOutOfBoundsException is thrown if the quantity is greater than the resources stored
 	 */
 	public Resource[] removeResources(Resource resource_type, int quantity) {
 		Integer numof_resource = this.storage.get(resource_type);
+
+		if(!(this.storage.containsKey(resource_type))){
+			throw new IllegalArgumentException();
+		}
 
 		if(quantity <= numof_resource){
 			ArrayList<Resource> temp_array = new ArrayList<Resource>();
@@ -56,8 +70,7 @@ public class StrongBox {
 
 			return to_return;
 		}else{
-			// TODO: lancia l'eccezione
-			return null;
+			throw new IndexOutOfBoundsException();
 		}
 	}
 }

@@ -2,7 +2,8 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-import java.io.*;
+import java.lang.IndexOutOfBoundsException;
+import java.lang.IllegalArgumentException;
 
 public class Warehouse {
 	private Resource top_resource = null;
@@ -26,19 +27,17 @@ public class Warehouse {
 
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
-	 * @return values are specified in the method
+	 * @return true if new_resource has been added
+	 * @exception IllegalArgumentException is thrown if new_resource cannot be inserted
 	 */
 	private boolean isPossibleToInsert(Resource new_resource){
 		if(!isPossibileToInsertTop(new_resource)){
 			if(!isPossibileToInsertMiddle(new_resource)){
 				if(!isPossibileToInsertBottom(new_resource)){
-					//TODO: lancia eccezione
-					// if is not possible to insert in any space, return false
-					return false;
+					throw new IllegalArgumentException();
 				}
 			}
 		}
-		// if new_resource has been added, return true;
 		return true;
 	}
 
@@ -214,7 +213,9 @@ public class Warehouse {
 		int resources_not_inserted = 0;
 
 		for(Resource resource : new_resources){
-			if(!isPossibleToInsert(resource)){
+			try{
+				isPossibleToInsert(resource);
+			}catch(IllegalArgumentException e){
 				resources_not_inserted += 1;
 			}
 		}
@@ -223,21 +224,27 @@ public class Warehouse {
 	}
 
 	/**
-	 * TODO: add exceptions and test
+	 * TODO: test
 	 * @param resource_type is the type of resource requested from the player
 	 * @param quantity is the number of resource requested
 	 * @return an array of the resources requested
 	 */
 	public Resource[] getFromWarehouse(Resource resource_type, int quantity){
-		Resource[] to_return = getFromTop(resource_type, quantity);
-
-		return to_return;
+		try{
+			Resource[] to_return = getFromTop(resource_type, quantity);
+			return to_return;
+		}catch(IllegalArgumentException e1){
+			throw new IllegalArgumentException();
+		}catch(IndexOutOfBoundsException e2){
+			throw new IndexOutOfBoundsException();
+		}
 	}
 
 	/**
 	 * @param resource_type is the type of resource requested from the player
 	 * @param quantity is the number of resource requested
 	 * @return the array of the resources requested if is of the same type as top_resource and the quantity requested is available . Returns an exception if the quantity requested is not available. Calls the next method if top_resource is empty or resource_type and top_resource are not the same.
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 */
 	private Resource[] getFromTop(Resource resource_type, int quantity){
 		if(this.top_resource != null && resource_type.equals(top_resource)){
@@ -246,8 +253,7 @@ public class Warehouse {
 				this.top_resource = null;
 				return to_return;
 			}else{
-				//TODO: lancia eccezione
-				return null;
+				throw new IndexOutOfBoundsException();
 			}
 		}else{
 			return getFromMiddle(resource_type, quantity);
@@ -258,6 +264,7 @@ public class Warehouse {
 	 * @param resource_type is the type of resource requested from the player
 	 * @param quantity is the number of resource requested
 	 * @return the array of the resources requested if is of the same type as middle_resource and the quantity requested is available . Returns an exception if the quantity requested is not available. Calls the next method if middle_resources is empty or resource_type and middle_resources are not the same.
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 */
 	private Resource[] getFromMiddle(Resource resource_type, int quantity){
 		if(this.middle_resources[0] != null && resource_type.equals(middle_resources[0])){
@@ -272,8 +279,7 @@ public class Warehouse {
 					this.middle_resources[1] = null;
 					return to_return;
 				}else{
-					//TODO: lancia eccezione
-					return null;
+					throw new IndexOutOfBoundsException();
 				}
 			}else{
 				if(quantity == 1){
@@ -281,8 +287,7 @@ public class Warehouse {
 					this.middle_resources[0] = null;
 					return to_return;
 				}else{
-					//TODO: lancia eccezione
-					return null;
+					throw new IndexOutOfBoundsException();
 				}
 			}
 		}else{
@@ -293,7 +298,9 @@ public class Warehouse {
 	/**
 	 * @param resource_type is the type of resource requested from the player
 	 * @param quantity is the number of resource requested
-	 * @return the array of the resources requested if is of the same type as bottom_resource and the quantity requested is available . Returns an exception if the condition specified first are not satisfied
+	 * @return the array of the resources requested if is of the same type as bottom_resource and the quantity requested is available
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
+	 * @exception IllegalArgumentException is thrown if the resource_type is not contained
 	 */
 	private Resource[] getFromBottom(Resource resource_type, int quantity){
 		if(this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])){
@@ -318,8 +325,7 @@ public class Warehouse {
 						this.bottom_resources[0] = null;
 						return to_return;
 					}else{
-						//TODO: lancia eccezione
-						return null;
+						throw new IndexOutOfBoundsException();
 					}
 				}else{
 					if(quantity == 2){
@@ -332,8 +338,7 @@ public class Warehouse {
 						this.bottom_resources[1] = null;
 						return to_return;
 					}else{
-						//TODO: lancia eccezione
-						return null;
+						throw new IndexOutOfBoundsException();
 					}
 				}
 			}else{
@@ -342,13 +347,11 @@ public class Warehouse {
 					this.bottom_resources[0] = null;
 					return to_return;
 				}else{
-					//TODO: lancia eccezione
-					return null;
+					throw new IndexOutOfBoundsException();
 				}
 			}
 		}else{
-			//TODO: lancia eccezione
-			return null;
+			throw new IllegalArgumentException();
 		}
 	}
 
