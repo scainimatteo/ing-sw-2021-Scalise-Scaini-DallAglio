@@ -10,10 +10,10 @@ import java.util.HashMap;
 
 public class StrongBoxTest {
 	/**
-	 * first test for the class StrongBox
+	 * test for the method insertResources
 	 */
 	@Test
-	public void firstStrongBoxTest(){
+	public void insertInStrongBoxTest(){
 		StrongBox test_sb = new StrongBox();
 
 		Resource test_coin = Resource.COIN;
@@ -45,5 +45,46 @@ public class StrongBoxTest {
 		
 		Resource[] test_return = test_sb.removeResources(test_coin, 2);
 		assertArrayEquals(test_return, new_resources_1);
+	}
+
+	/**
+	 * test for requesting not contained resource
+	 */
+	@Test
+	public void removeNotContainedResourceTest(){
+		StrongBox test_sb = new StrongBox();
+
+		Resource coin_resource = Resource.COIN;
+		Resource stone_resource = Resource.STONE;
+		Resource shield_resource = Resource.SHIELD;
+		Resource servant_resource = Resource.SERVANT;
+		Resource faith_resource = Resource.FAITH;
+
+		Resource[] new_resources_1 = {coin_resource, coin_resource};
+		Resource[] new_resources_2 = {stone_resource, stone_resource, stone_resource, stone_resource};
+		test_sb.insertResources(new_resources_1);
+		test_sb.insertResources(new_resources_2);
+		
+		assertThrows(IllegalArgumentException.class, () -> {Resource[] test_return = test_sb.removeResources(faith_resource, 2);});
+	}
+
+	/**
+	 * test for requesting not contained resource
+	 */
+	@Test
+	public void removeGreaterQuantityTest(){
+		StrongBox test_sb = new StrongBox();
+
+		Resource coin_resource = Resource.COIN;
+		Resource stone_resource = Resource.STONE;
+		Resource shield_resource = Resource.SHIELD;
+		Resource servant_resource = Resource.SERVANT;
+
+		Resource[] new_resources_1 = {coin_resource, coin_resource};
+		Resource[] new_resources_2 = {stone_resource, stone_resource, stone_resource, stone_resource};
+		test_sb.insertResources(new_resources_1);
+		test_sb.insertResources(new_resources_2);
+		
+		assertThrows(IndexOutOfBoundsException.class, () -> {Resource[] test_return = test_sb.removeResources(coin_resource, 4);});
 	}
 }

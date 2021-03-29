@@ -43,7 +43,6 @@ public class StrongBox {
 	}
 
 	/**
-	 * TBT
 	 * @param resource_type is the resource to be removed
 	 * @param quantity is the number of resources requested
 	 * @return the array of resources requested
