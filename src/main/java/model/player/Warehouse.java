@@ -78,7 +78,7 @@ public class Warehouse {
 			return true;
 		}else if(bottom_resources[0] == null){
 			bottom_resources[0] = new_resource;
-			bottom_resources[0] = this.top_resource;
+			bottom_resources[1] = this.top_resource;
 			top_resource = null;
 			return true;
 		}else if(middle_resources[1] == null){
@@ -152,11 +152,11 @@ public class Warehouse {
 			this.middle_resources[1] = null;
 			return true;
 		}else if(this.bottom_resources[2] == null){
-			this.bottom_resources[1] = middle_resources[0];
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = this.bottom_resources[0];
 			this.middle_resources[1] = this.bottom_resources[1];
 			this.bottom_resources[0] = new_resource;
+			this.bottom_resources[1] = new_resource;
 			return true;
 		}else{
 			return false;
@@ -224,7 +224,6 @@ public class Warehouse {
 	}
 
 	/**
-	 * TODO: test
 	 * @param resource_type is the type of resource requested from the player
 	 * @param quantity is the number of resource requested
 	 * @return an array of the resources requested
@@ -353,6 +352,15 @@ public class Warehouse {
 		}else{
 			throw new IllegalArgumentException();
 		}
+	}
+
+	public void clearWarehouse(){
+		this.top_resource = null;
+		this.middle_resources[0] = null;
+		this.middle_resources[1] = null;
+		this.bottom_resources[0] = null;
+		this.bottom_resources[1] = null;
+		this.bottom_resources[2] = null;
 	}
 
 	public String toString(){
