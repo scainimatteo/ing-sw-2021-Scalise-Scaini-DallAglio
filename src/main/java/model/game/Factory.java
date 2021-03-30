@@ -23,6 +23,8 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
+import it.polimi.ingsw.model.player.track.VaticanReports;
+import it.polimi.ingsw.model.player.track.Tile;
 import it.polimi.ingsw.model.player.track.Cell;
 
 import it.polimi.ingsw.model.resources.Production;
@@ -33,16 +35,19 @@ public class Factory {
 	private DevelopmentCard[] all_development_cards;
 	private LeaderCard[] all_leader_cards;
 	private Cell[] all_cells;
+	private Tile[] all_tiles;
 	private JSONParser jsonParser;
 	private final int development_cards_number = 48;
 	private final int leader_cards_number = 16;
-	private final int cell_number = 0;
+	private final int cells_number = 24;
+	private final int tiles_number = 0;
 
 	private Factory() {
 		this.jsonParser = new JSONParser();
 		this.all_development_cards = readAllDevelopmentCards();
 		this.all_leader_cards = readAllLeaderCards();
 		this.all_cells = readAllCells();
+		this.all_tiles = readAllTiles();
 	}
 
 	public static Factory getIstance() {
@@ -62,6 +67,10 @@ public class Factory {
 
 	public Cell[] getAllCells() {
 		return this.all_cells;
+	}
+
+	public Tile[] getAllTiles() {
+		return this.all_tiles;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -102,7 +111,6 @@ public class Factory {
 				// VICTORYPOINTS
 				int victory_points = (int)(long) card.get("victory_points");
 
-				//TODO: aggiungere victory_points
 				development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id);
 			}
 		} catch (IOException e) {
@@ -194,6 +202,46 @@ public class Factory {
 	}
 
 	private Cell[] readAllCells() {
+		Cell[] cells = new Cell[cells_number];
+
+		try {
+			InputStream is = getClass().getClassLoader().getResourceAsStream("json/cells.json");
+			JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+			JSONArray cells_obj = (JSONArray) jsonObject.get("cells");
+			for (int i = 0; i < cells_number; i++) {
+				JSONObject cell = (JSONObject) this.jsonParser.parse(cells_obj.get(i).toString());
+
+				// POSITION
+				int position = (int)(long) cell.get("position");
+
+				// VICTORYPOINTS
+				int victory_points = (int)(long) cell.get("victory_points");
+
+				// REPORT
+				VaticanReports report = null;
+				String report_str = cell.get("report").toString();
+				if (!report_str.equals("null")) {
+					report = VaticanReports.valueOf(report_str);
+				}
+
+				// POPE SPACE
+				boolean pope_space = Boolean.parseBoolean(cell.get("pope_space").toString());
+
+				// LAST CELL
+				boolean last_cell = Boolean.parseBoolean(cell.get("last_cell").toString());
+
+				cells[i] = new Cell(position, victory_points, report, pope_space, last_cell);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return cells;
+	}
+
+	private Tile[] readAllTiles() {
 		return null;
 	}
 }
