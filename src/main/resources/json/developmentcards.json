@@ -1,0 +1,1236 @@
+{
+    "development_cards": [
+        {
+            "id": 1,
+            "cost": [
+                "SHIELD",
+                "SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN"
+                ],
+                "produced_resources": [
+                    "FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 1
+            },
+            "victory_points": 1
+        },
+        {
+            "id": 2,
+            "cost": [
+                "SERVANT",
+                "SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE"
+                ],
+                "produced_resources": [
+                    "FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 1
+            },
+            "victory_points": 1
+        },
+        {
+            "id": 3,
+            "cost": [
+                "COIN",
+                "COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD"
+                ],
+                "produced_resources": [
+                    "FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 1
+            },
+            "victory_points": 1
+        },
+        {
+            "id": 4,
+            "cost": [
+                "STONE",
+                "STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT"
+                ],
+                "produced_resources": [
+                    "FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 1
+            },
+            "victory_points": 1
+        },
+        {
+            "id": 5,
+            "cost": [
+                "SHIELD",
+				"SERVANT",
+                "STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE"
+                ],
+                "produced_resources": [
+                    "SERVANT"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 1
+            },
+            "victory_points": 2
+        },
+        {
+            "id": 6,
+            "cost": [
+                "SHIELD",
+				"SERVANT",
+                "COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN"
+                ],
+                "produced_resources": [
+                    "SHIELD"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 1
+            },
+            "victory_points": 2
+        },
+        {
+            "id": 7,
+            "cost": [
+                "COIN",
+				"SERVANT",
+                "STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT"
+                ],
+                "produced_resources": [
+                    "STONE"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 1
+            },
+            "victory_points": 2
+        },
+        {
+            "id": 8,
+            "cost": [
+                "SHIELD",
+				"STONE",
+                "COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD"
+                ],
+                "produced_resources": [
+                    "COIN"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 1
+            },
+            "victory_points": 2
+        },
+        {
+            "id": 9,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+                "SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT",
+					"SERVANT"
+                ],
+                "produced_resources": [
+                    "COIN",
+					"SHIELD",
+					"STONE"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 1
+            },
+            "victory_points": 3
+        },
+        {
+            "id": 10,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+                "SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+					"COIN"
+                ],
+                "produced_resources": [
+                    "SERVANT",
+					"SHIELD",
+					"STONE"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 1
+            },
+            "victory_points": 3
+        },
+        {
+            "id": 11,
+            "cost": [
+                "COIN",
+				"COIN",
+                "COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+					"STONE"
+                ],
+                "produced_resources": [
+                    "COIN",
+					"SERVANT",
+					"SHIELD"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 1
+            },
+            "victory_points": 3
+        },
+        {
+            "id": 12,
+            "cost": [
+                "STONE",
+				"STONE",
+                "STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD",
+					"SHIELD"
+                ],
+                "produced_resources": [
+                    "COIN",
+					"SERVANT",
+					"STONE"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 1
+            },
+            "victory_points": 3
+        },
+        {
+            "id": 13,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+                "COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+					"SERVANT"
+                ],
+                "produced_resources": [
+                    "COIN",
+					"COIN",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 1
+            },
+            "victory_points": 4
+        },
+        {
+            "id": 14,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+                "STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+					"SHIELD"
+                ],
+                "produced_resources": [
+                    "STONE",
+					"STONE",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 1
+            },
+            "victory_points": 4
+        },
+        {
+            "id": 15,
+            "cost": [
+                "COIN",
+				"COIN",
+                "SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+					"SHIELD",
+                    "STONE"
+                ],
+                "produced_resources": [
+                    "SERVANT",
+					"SERVANT",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 1
+            },
+            "victory_points": 4
+        },
+        {
+            "id": 16,
+            "cost": [
+                "STONE",
+				"STONE",
+                "SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+					"SERVANT"
+                ],
+                "produced_resources": [
+                    "SHIELD",
+					"SHIELD",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 1
+            },
+            "victory_points": 4
+        },
+        {
+            "id": 17,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE"
+                ],
+                "produced_resources": [
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 2
+            },
+            "victory_points": 5
+        },
+        {
+            "id": 18,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN"
+                ],
+                "produced_resources": [
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 2
+            },
+            "victory_points": 5
+        },
+        {
+            "id": 19,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 2
+            },
+            "victory_points": 5
+        },
+        {
+            "id": 20,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 2
+            },
+            "victory_points": 5
+        },
+        {
+            "id": 21,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD",
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"STONE",
+					"STONE",
+					"STONE"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 2
+            },
+            "victory_points": 6
+        },
+        {
+            "id": 22,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"SHIELD",
+					"SHIELD"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 2
+            },
+            "victory_points": 6
+        },
+        {
+            "id": 23,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+                    "STONE"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"SERVANT",
+					"SERVANT"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 2
+            },
+            "victory_points": 6
+        },
+        {
+            "id": 24,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"COIN"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 2
+            },
+            "victory_points": 6
+        },
+        {
+            "id": 25,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+                    "COIN"
+                ],
+                "produced_resources": [
+					"STONE",
+					"STONE",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 2
+            },
+            "victory_points": 7
+        },
+        {
+            "id": 26,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+                    "STONE"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 2
+            },
+            "victory_points": 7
+        },
+        {
+            "id": 27,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT",
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"SHIELD",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 2
+            },
+            "victory_points": 7
+        },
+        {
+            "id": 28,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD",
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"SERVANT",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 2
+            },
+            "victory_points": 7
+        },
+        {
+            "id": 29,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"COIN",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"SHIELD",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 2
+            },
+            "victory_points": 8
+        },
+        {
+            "id": 30,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"SERVANT",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 2
+            },
+            "victory_points": 8
+        },
+        {
+            "id": 31,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+				"STONE",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"STONE",
+					"STONE",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 2
+            },
+            "victory_points": 8
+        },
+        {
+            "id": 32,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 2
+            },
+            "victory_points": 8
+        },
+        {
+            "id": 33,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+                "SHIELD",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+                    "COIN"
+                ],
+                "produced_resources": [
+					"STONE",
+					"STONE",
+					"STONE",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 3
+            },
+            "victory_points": 9
+        },
+        {
+            "id": 34,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+                "SERVANT",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+                    "STONE"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"COIN",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 3
+            },
+            "victory_points": 9
+        },
+        {
+            "id": 35,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+                "COIN",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT",
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"SHIELD",
+					"SHIELD",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 3
+            },
+            "victory_points": 9
+        },
+        {
+            "id": 36,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+                "STONE",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD",
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"SERVANT",
+					"SERVANT",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 3
+            },
+            "victory_points": 9
+        },
+        {
+            "id": 37,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+                "SHIELD",
+				"SHIELD",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"SHIELD",
+					"STONE",
+					"STONE",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 3
+            },
+            "victory_points": 10
+        },
+        {
+            "id": 38,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+                "SERVANT",
+				"SERVANT",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"SERVANT",
+					"SERVANT",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 3
+            },
+            "victory_points": 10
+        },
+        {
+            "id": 39,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+                "COIN",
+				"COIN",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN",
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"SERVANT",
+					"STONE",
+					"STONE",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 3
+            },
+            "victory_points": 10
+        },
+        {
+            "id": 40,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+                "STONE",
+				"STONE",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE",
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"SHIELD",
+					"SHIELD",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 3
+            },
+            "victory_points": 10
+        },
+        {
+            "id": 41,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"COIN",
+					"FAITH",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 3
+            },
+            "victory_points": 11
+        },
+        {
+            "id": 42,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN"
+                ],
+                "produced_resources": [
+					"STONE",
+					"FAITH",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 3
+            },
+            "victory_points": 11
+        },
+        {
+            "id": 43,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+                "COIN",
+				"COIN",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"FAITH",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 3
+            },
+            "victory_points": 11
+        },
+        {
+            "id": 44,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+                "STONE",
+				"STONE",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"FAITH",
+					"FAITH",
+					"FAITH"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 3
+            },
+            "victory_points": 11
+        },
+        {
+            "id": 45,
+            "cost": [
+                "SHIELD",
+				"SHIELD",
+				"SHIELD",
+                "SHIELD",
+				"COIN",
+				"COIN",
+				"COIN",
+				"COIN"
+            ],
+            "production": {
+                "required_resources": [
+                    "STONE"
+                ],
+                "produced_resources": [
+					"COIN",
+					"COIN",
+					"COIN",
+					"SHIELD"
+                ]
+            },
+            "cardlevel": {
+                "color": "GREEN",
+                "level": 3
+            },
+            "victory_points": 12
+        },
+        {
+            "id": 46,
+            "cost": [
+                "SERVANT",
+				"SERVANT",
+				"SERVANT",
+                "SERVANT",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD",
+				"SHIELD"
+            ],
+            "production": {
+                "required_resources": [
+                    "COIN"
+                ],
+                "produced_resources": [
+					"STONE",
+					"STONE",
+					"STONE",
+					"SERVANT"
+                ]
+            },
+            "cardlevel": {
+                "color": "PURPLE",
+                "level": 3
+            },
+            "victory_points": 12
+        },
+        {
+            "id": 47,
+            "cost": [
+                "COIN",
+				"COIN",
+				"COIN",
+                "COIN",
+				"STONE",
+				"STONE",
+				"STONE",
+				"STONE"
+            ],
+            "production": {
+                "required_resources": [
+                    "SERVANT"
+                ],
+                "produced_resources": [
+					"SHIELD",
+					"SHIELD",
+					"SHIELD",
+					"COIN"
+                ]
+            },
+            "cardlevel": {
+                "color": "BLUE",
+                "level": 3
+            },
+            "victory_points": 12
+        },
+        {
+            "id": 48,
+            "cost": [
+                "STONE",
+				"STONE",
+				"STONE",
+                "STONE",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT",
+				"SERVANT"
+            ],
+            "production": {
+                "required_resources": [
+                    "SHIELD"
+                ],
+                "produced_resources": [
+					"SERVANT",
+					"SERVANT",
+					"SERVANT",
+					"STONE"
+                ]
+            },
+            "cardlevel": {
+                "color": "YELLOW",
+                "level": 3
+            },
+            "victory_points": 12
+        }
+    ]
+}

@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.game.sologame;
 
-import it.polimi.ingsw.model.game.sologame.SoloActionTokenAbility;
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 
-public class MoveBlackCrossTwoSpaces implements SoloActionTokenAbility {
-	public void useAbility() {
-		return;
-	}
+public class MoveBlackCrossTwoSpaces implements SoloActionToken {
 }
