@@ -12,6 +12,11 @@ public class ExtraSpaceAbility implements LeaderAbility {
 	private Resource resource_type;
 	private Resource[] store_resources;
 
+	public ExtraSpaceAbility(Resource resource_type){
+		this.resource_type = resource_type;
+		this.store_resources = new Resource [2];
+}
+	
 	public void putResource(Resource new_resource) throws IllegalArgumentException, IndexOutOfBoundsException {
 		if (!new_resource.getColor().equals(resource_type.getColor())){
 			throw new IllegalArgumentException();	

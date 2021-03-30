@@ -11,11 +11,15 @@ public class DevelopmentCard extends Card {
 	private Resource[] cost;
 	private CardLevel level;
 
-	public Resource[] useCard(Resource[] resources_input) {
-		return null;
-	}
+	public DevelopmentCard (int points, Production production, Resource [] cost, CardLevel level) {
+		this.victory_points = points;
+		this.cost = cost;
+		this.production = production;
+		this.level = level;
+	}	
 
-	public boolean meetRequirements(CardLevel level_to_test) {
-		return false;
+	public Resource[] useCard(Resource[] resources_input) {
+		return production.activateProduction(resources_input);
 	}
 }
+
