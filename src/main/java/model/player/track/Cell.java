@@ -9,13 +9,12 @@ public class Cell {
 	private boolean pope_space;
 	private boolean last_cell;
 
-	public Cell(int position, int victory_points, VaticanReports report){
+	public Cell(int position, int victory_points, VaticanReports report, boolean pope_space, boolean last_cell){
 		this.position = position;
 		this.victory_points = victory_points;
 		this.report = report;
-
-		this.pope_space = (position == 8 || position == 16 || position == 24);
-		this.last_cell = (position == 24);
+		this.pope_space = pope_space;
+		this.last_cell = last_cell;
 	}
 
 	public boolean isPopeSpace(){
