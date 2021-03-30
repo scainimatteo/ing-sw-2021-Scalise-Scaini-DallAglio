@@ -8,13 +8,13 @@ import it.polimi.ingsw.model.player.track.VaticanReports;
 
 public class CellTest {
 	/**
-	 * first test for the class Cell
+	 * First test for the class Cell
 	 */
 	@Test
 	public void fristCellTest(){
 		VaticanReports test_vat_rep = VaticanReports.REPORT1;
 
-		Cell test_cell = new Cell(8, 3, test_vat_rep);
+		Cell test_cell = new Cell(8, 3, test_vat_rep, true, false);
 
 		assertTrue(test_cell.isPopeSpace());
 	}

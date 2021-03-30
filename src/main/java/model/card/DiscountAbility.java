@@ -1,4 +1,4 @@
-
+package it.polimi.ingsw.model.card;
 
 import java.lang.IllegalArgumentException;
 
