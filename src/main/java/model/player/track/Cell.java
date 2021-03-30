@@ -26,7 +26,7 @@ public class Cell {
 		return last_cell;
 	}
 
-	public VaticanReports isVaticanReport(){
+	public VaticanReports whichVaticanReport(){
 		return this.report;
 	}
 
