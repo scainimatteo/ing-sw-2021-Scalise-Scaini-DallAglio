@@ -5,4 +5,15 @@ import it.polimi.ingsw.model.card.CardLevel;
 
 public class LeaderCardLevelCost extends LeaderCard {
 	private CardLevel[] requirements;
+	
+	public LeaderCardLevelCost (int points, LeaderAbility ability, CardLevel[] requirements) {
+		this.victory_points = points;
+		this.ability = ability;
+		this.activated = false;
+		this.requirements = requirements;
+	}
+
+	public CardLevel[] getRequirements() {
+		return requirements;
+	}
 }

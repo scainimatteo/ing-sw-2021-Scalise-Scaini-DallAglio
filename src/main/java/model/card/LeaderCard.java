@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.LeaderAbility;
 
 public abstract class LeaderCard extends Card {
-	private LeaderAbility ability;
-	private boolean activated;
+	protected LeaderAbility ability;
+	protected boolean activated;
 
 	public boolean isActive() {
 		return this.activated;

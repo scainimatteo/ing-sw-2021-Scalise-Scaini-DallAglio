@@ -5,4 +5,15 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class LeaderCardResourcesCost extends LeaderCard {
 	private Resource[] requirements;
+
+	public LeaderCardResourcesCost (int points, LeaderAbility ability, Resource[] requirements) {
+		this.victory_points = points;
+		this.ability = ability;
+		this.activated = false;
+		this.requirements = requirements;
+	}
+
+	public Resource[] getRequirements() {
+		return requirements;
+	}
 }
