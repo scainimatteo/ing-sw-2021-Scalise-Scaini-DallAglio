@@ -1,4 +1,6 @@
-package it.polimi.ingsw.model.card;
+
+
+import java.lang.IllegalArgumentException;
 
 import it.polimi.ingsw.model.card.LeaderAbility;
 
@@ -11,7 +13,7 @@ public class DiscountAbility implements LeaderAbility {
 		if (discount != Resource.FAITH){
 		discounted_resource = discount;
 		}
-		//TODO: decidere cosa fare in caso di argomento invalido
+		else {throw new IllegalArgumentException();}
 	}
 
 	public Resource getDiscountedResource(){
