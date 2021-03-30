@@ -11,7 +11,18 @@ public class FaithTrackSinglePlayer extends FaithTrack {
 		this.black_marker = track[0];
 	}
 
-	public void moveForwardBlackMarker(int number_of_times) {
-		return;
+	public VaticanReports moveForwardBlackMarker(int number_of_times) {
+		int new_position = number_of_times + black_marker.getPosition();
+		this.black_marker = track[new_position];
+
+		for (int i = 0; i > (new_position - number_of_times); i --){
+			if(track[i].isPopeSpace()){
+				if(super.checkCell(i)){
+					return track[i].whichVaticanReport();
+				}
+			}
+		}
+
+		return null;
 	}
 }
