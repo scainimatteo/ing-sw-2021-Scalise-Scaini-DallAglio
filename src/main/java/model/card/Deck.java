@@ -36,7 +36,7 @@ public class Deck<E> extends AbstractCollection <E> {
 	}
 
 	public E peekTopCard() {
-		return structure.get(structure.size() - 1);
+		return structure.size() > 0 ? structure.get(structure.size() - 1) : null;
 	}
 	
 	public E draw() {
