@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.Deck;
 
 public class DevelopmentCardsOnTable {
-	private Deck[][] development_card_decks;
+	private Deck<DevelopmentCard>[][] development_card_decks;
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 
@@ -20,12 +20,12 @@ public class DevelopmentCardsOnTable {
 		Deck[][] decks = new Deck[dim_cols][dim_rows];
 		for (int i = 0; i < dim_cols; i++) {
 			for (int j = 0; j < dim_rows; j++) {
-				decks[i][j] = new Deck(4, new ArrayList<DevelopmentCard>(), 4 * i + j);
+				decks[i][j] = new Deck<DevelopmentCard>(4);
 			}
 		}
 		for (DevelopmentCard card : all_development_cards) {
 			CardLevel level = card.getCardLevel();
-			decks[level.getLevel() - 1][level.getColor().getRepresentation()].addElement(card);
+			decks[level.getLevel() - 1][level.getColor().getOrder()].add(card);
 		}
 		return decks;
 	}
@@ -37,7 +37,7 @@ public class DevelopmentCardsOnTable {
 		DevelopmentCard[][] development_card_on_top = new DevelopmentCard[3][4];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				development_card_on_top[i][j] = development_card_decks[i][j].getTopCard();
+				development_card_on_top[i][j] = development_card_decks[i][j].peekTopCard();
 			}
 		}
 		return development_card_on_top;
@@ -53,8 +53,8 @@ public class DevelopmentCardsOnTable {
 		boolean done = false;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (development_card_decks[i][j].getTopCard().equals(chosen_card)) {
-					development_card_decks[i][j].removeTopCard();
+				if (development_card_decks[i][j].peekTopCard().equals(chosen_card)) {
+					development_card_decks[i][j].draw();
 					done = true;
 					break;
 				}

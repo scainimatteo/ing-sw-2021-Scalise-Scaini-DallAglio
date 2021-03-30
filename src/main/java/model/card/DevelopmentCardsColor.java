@@ -1,8 +1,18 @@
 package it.polimi.ingsw.model.card;
 
 public enum DevelopmentCardsColor {
-	YELLOW,
-	GREEN,
-	PURPLE,
-	BLUE;
+	GREEN(0),
+	BLUE(1),
+	YELLOW(2),
+	PURPLE(3);
+
+	private int order;
+
+	private DevelopmentCardsColor(int order) {
+		this.order = order;
+	}
+
+	public int getOrder() {
+		return this.order;
+	}
 }

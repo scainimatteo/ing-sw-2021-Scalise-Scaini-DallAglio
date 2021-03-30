@@ -103,7 +103,7 @@ public class Factory {
 				int victory_points = (int)(long) card.get("victory_points");
 
 				//TODO: aggiungere victory_points
-				development_cards[i] = new DevelopmentCard(new_production, cost, cardlevel, id);
+				development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -128,7 +128,8 @@ public class Factory {
 			case "PRODUCTION":
 				JSONArray required_resources_arr = (JSONArray) ability_obj.get("required_resources");
 				Resource[] requirements_resources = convertJsonArrayToResourceArray(required_resources_arr);
-				return new ProductionAbility(requirements_resources);
+				Resource[] produced_resources = {null, Resource.FAITH};
+				return new ProductionAbility(requirements_resources, produced_resources);
 			default:
 				// TODO: Exception
 				return null;
@@ -147,11 +148,11 @@ public class Factory {
 					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
 					requirements_cardlevels[i] = new CardLevel(level, color);
 				}
-				return new LeaderCardLevelCost(ability, id, victory_points, requirements_cardlevels);
+				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id);
 			case "RESOURCES":
 				JSONArray resources_arr = (JSONArray) requirements_obj.get("resources");
 				Resource[] requirements_resources = convertJsonArrayToResourceArray(resources_arr);
-				return new LeaderCardResourcesCost(ability, id, victory_points, requirements_resources);
+				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id);
 			default:
 				// TODO: Exception
 				return null;
