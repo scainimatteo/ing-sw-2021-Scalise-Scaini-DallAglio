@@ -21,12 +21,21 @@ public class FaithTrack {
 
 		for (int i = new_position; i < (new_position - number_of_times); i --){
 			if(track[i].isPopeSpace()){
-				if(!(vatican_report_tiles[track[i].whichVaticanReport().getIndex()].isActive())){
+				if(checkCell(i)){
+					this.activateVaticanReport(track[i].whichVaticanReport());
 					return track[i].whichVaticanReport();
 				}
 			}
 		}
 
 		return null;
+	}
+
+	private boolean checkCell(int i){
+		return vatican_report_tiles[track[i].whichVaticanReport().getIndex()] != null && !(vatican_report_tiles[track[i].whichVaticanReport().getIndex()].isActive());
+	}
+
+	private void activateVaticanReport(VaticanReports vr_param){
+		vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
 	}
 }

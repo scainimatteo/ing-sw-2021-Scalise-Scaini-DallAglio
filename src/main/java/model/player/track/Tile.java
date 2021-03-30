@@ -13,8 +13,8 @@ public class Tile {
 		this.active = false;
 	}
 
-	public void activateVaticanReport() {
-		return;
+	public void activateVaticanReport(){
+		this.active = true;
 	}
 
 	public boolean isActive(){
