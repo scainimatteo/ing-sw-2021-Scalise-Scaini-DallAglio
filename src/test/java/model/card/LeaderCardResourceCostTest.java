@@ -12,21 +12,21 @@ import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
 
-import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.LeaderCard;
-import it.polimi.ingsw.model.card.CardLevel;
 
 import it.polimi.ingsw.model.game.Factory;
 
-public class LeaderCardLevelCostTest {
-	LeaderCardLevelCost[] cards;
-	CardLevel[] cardlevels;
+import it.polimi.ingsw.model.resources.Resource;
+
+public class LeaderCardResourceCostTest {
+	LeaderCardResourcesCost[] cards;
+	Resource[] requirements_of_a_card;
+	int chosen_card_index;
 
 	@BeforeEach
 	public void createCards() {
 		try {
-			this.cards = new LeaderCardLevelCost[4];
-			this.cardlevels = new CardLevel[4];
+			this.cards = new LeaderCardResourcesCost[4];
 			LeaderCard[] all_leader_cards = Factory.getIstance().getAllLeaderCards();
 			List<LeaderCard> list = Arrays.asList(all_leader_cards);
 			Collections.shuffle(list);
@@ -34,14 +34,15 @@ public class LeaderCardLevelCostTest {
 
 			int i = 0;
 			for (LeaderCard card : all_leader_cards) {
-				if (i < 4 && card instanceof LeaderCardLevelCost) {
-					this.cards[i] = (LeaderCardLevelCost) card;
-					int level = this.cards[i].getRequirements()[0].getLevel() - 1;
-					DevelopmentCardsColor color = this.cards[i].getRequirements()[0].getColor();
-					this.cardlevels[i] = new CardLevel(level, color);
+				if (i < 4 && card instanceof LeaderCardResourcesCost) {
+					this.cards[i] = (LeaderCardResourcesCost) card;
 					i++;
 				}
 			}
+
+			Random random = new Random();
+			this.chosen_card_index = random.nextInt(4);
+			this.requirements_of_a_card = cards[chosen_card_index].getRequirements();
 		} catch (ParseException e){
 			e.printStackTrace();
 		} catch (IOException e){
@@ -51,7 +52,7 @@ public class LeaderCardLevelCostTest {
 
 	@Test
 	public void activateLeaderCardTest() {
-		for (LeaderCardLevelCost card : this.cards) {
+		for (LeaderCardResourcesCost card : this.cards) {
 			card.activateLeaderCard();
 			assertTrue(card.isActive());
 		}
@@ -60,7 +61,11 @@ public class LeaderCardLevelCostTest {
 	@Test
 	public void checkRequirements() {
 		for (int i = 0; i < 4; i++) {
-			assertEquals(1, cards[i].getRequirements()[0].compareLevel(this.cardlevels[i]));
+			if (i == this.chosen_card_index) {
+				assertArrayEquals(requirements_of_a_card, cards[i].getRequirements());
+			} else {
+				assertFalse(Arrays.equals(requirements_of_a_card, cards[i].getRequirements()));
+			}
 		}
 	}
 }
