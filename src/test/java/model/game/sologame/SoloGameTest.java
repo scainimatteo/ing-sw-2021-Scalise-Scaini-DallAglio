@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.NoSuchElementException;
 import java.util.HashMap;
 
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.Factory;
 
@@ -34,7 +38,13 @@ public class SoloGameTest {
 	@BeforeEach
 	public void createSoloGame() {
 		Player[] players = {new Player()};
-		this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
+		try {
+			this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
+		} catch (ParseException e){
+			e.printStackTrace();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 
 	/**
