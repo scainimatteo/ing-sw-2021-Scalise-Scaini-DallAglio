@@ -4,7 +4,7 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Iterator; 
 import java.lang.IndexOutOfBoundsException;
-import it.polimi.ingsw.model.card.Card;
+import java.util.NoSuchElementException;
 
 public class Deck<E> extends AbstractCollection <E> {
 	private int max_size;
@@ -26,10 +26,14 @@ public class Deck<E> extends AbstractCollection <E> {
 	public int size (){
 		return structure.size();
 	}
+	
+	public int get_max(){
+		return this.max_size;
+	}
 
 	@Override
 	public boolean add(E elem) {
-		if (structure.size() <= max_size){
+		if (structure.size() < max_size){
 			return structure.add(elem);
 		}
 		else {throw new IndexOutOfBoundsException();}
@@ -39,10 +43,13 @@ public class Deck<E> extends AbstractCollection <E> {
 		return structure.size() > 0 ? structure.get(structure.size() - 1) : null;
 	}
 	
-	public E draw() {
+	public E draw() throws NoSuchElementException {
 		E elem = peekTopCard();
-		structure.remove(structure.size() -1);
-		return elem;
+		if (elem == null) {throw new NoSuchElementException();}
+		else{		
+			structure.remove(structure.size() -1);
+			return elem;
+		}
 	}
 		
 }
