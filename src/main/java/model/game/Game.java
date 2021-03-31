@@ -12,7 +12,6 @@ public class Game {
 	private Market market;
 	private DevelopmentCardsOnTable development_cards_on_table;
 
-	//TODO: Il gioco potrebbe crearsi le carte con la Factory
 	public Game(Player[] players, DevelopmentCard[] all_development_cards) {
 		this.players = players;
 		this.market = new Market();
