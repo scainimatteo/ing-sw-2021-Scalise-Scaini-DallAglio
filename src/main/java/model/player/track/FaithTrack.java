@@ -42,4 +42,8 @@ public class FaithTrack {
 	public int getMarkerPosition(){
 		return this.faith_marker.getPosition();
 	}
+
+	public boolean checkIfTileIsActive(int index){
+		return this.vatican_report_tiles[index].isActive();
+	}
 }
