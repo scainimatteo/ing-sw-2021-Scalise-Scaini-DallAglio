@@ -38,4 +38,8 @@ public class FaithTrack {
 	private void activateVaticanReport(VaticanReports vr_param){
 		this.vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
 	}
+
+	public int getMarkerPosition(){
+		return this.faith_marker.getPosition();
+	}
 }
