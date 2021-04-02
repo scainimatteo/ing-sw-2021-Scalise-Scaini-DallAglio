@@ -93,8 +93,12 @@ public class Market {
 	 */
 	public Resource[] getColumn(int index) {
 		Resource[] column = new Resource[dim_cols];
-		for (int i = 0; i < dim_cols; i++) {
-			column[i] = market_board[i][index];
+		try {
+			for (int i = 0; i < dim_cols; i++) {
+				column[i] = market_board[i][index];
+			}
+		} catch (IndexOutOfBoundsException e) {
+			throw new IllegalArgumentException();
 		}
 		this.shiftColumn(index);
 		return column;
@@ -107,8 +111,12 @@ public class Market {
 	 * @return an array of the resources taken by the player
 	 */
 	public Resource[] getRow(int index) {
-		//TODO: try con OutOfBounds
-		Resource[] row = market_board[index];
+		Resource[] row = null;
+		try {
+			row = market_board[index];
+		} catch (IndexOutOfBoundsException e) {
+			throw new IllegalArgumentException();
+		}
 		this.shiftRow(index);
 		return row;
 	}

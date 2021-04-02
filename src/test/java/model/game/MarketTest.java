@@ -11,6 +11,9 @@ import it.polimi.ingsw.model.resources.Resource;
 public class MarketTest {
 	Market market;
 
+	/**
+	 * Create an istance of Market
+	 */
 	@BeforeEach
 	public void createMarket() {
 		this.market = new Market();

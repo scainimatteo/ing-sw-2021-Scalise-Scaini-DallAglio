@@ -10,42 +10,47 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class ExtraSpaceAbility implements LeaderAbility {
 	private Resource resource_type;
-	private Resource[] store_resources;
+	private int index;
 
 	public ExtraSpaceAbility(Resource resource_type){
 		this.resource_type = resource_type;
-		this.store_resources = new Resource [2];
-}
+		this.index = 0;
+	}
 	
 	public void putResource(Resource new_resource) throws IllegalArgumentException, IndexOutOfBoundsException {
 		if (!new_resource.getColor().equals(resource_type.getColor())){
 			throw new IllegalArgumentException();	
 		}
 		else {
-			if (store_resources[0] == null){
-				store_resources [0] = new_resource;
-			}	
-			else if(store_resources[1] == null){
-				store_resources [1] = new_resource;
-			}	
-			else {throw new IndexOutOfBoundsException();}
-		}
-	} 
+			if (index >= 2) {throw new IndexOutOfBoundsException();}
+			else {index++;}
+		} 
+	}
 
-	public Resource[] peekResources() {
-		return store_resources;
+	public int peekResources() {
+		return index;
 	}
 
 	public Resource getResourceType() {
 		return resource_type;
 	}
 
-//restituisce la prima risorsa trovata o non restituisce nulla
-	public Resource[] getResource() {
-		Resource[] moved_resources = this.peekResources();
-		for (Resource x : store_resources) {
-			x = null;
+	public Resource[] getResource(int quantity) throws IllegalArgumentException {
+		if (quantity > index || quantity == 0){
+			throw new IllegalArgumentException();
 		}
-		return moved_resources;
+		else {
+			Resource[] moved_resources = new Resource[1];
+			if (quantity == 1){
+				moved_resources[0] = resource_type;
+			}
+			else if (quantity == 2){
+				moved_resources = new Resource[2];
+				moved_resources[0] = resource_type;
+				moved_resources[1] = resource_type;
+			}
+			index = index - quantity;
+			return moved_resources;
+		} 
 	}
 }
