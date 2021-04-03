@@ -22,8 +22,8 @@ public class FaithTrack {
 		for (int i = new_position; i > (new_position - number_of_times); i --){
 			if(track[i].isPopeSpace()){
 				if(checkCell(i)){
-					this.activateVaticanReport(track[i].whichVaticanReport());
-					return track[i].whichVaticanReport();
+					this.activateVaticanReport(this.track[i].whichVaticanReport());
+					return this.track[i].whichVaticanReport();
 				}
 			}
 		}
@@ -35,7 +35,7 @@ public class FaithTrack {
 		return this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()] != null && !(this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].isActive());
 	}
 
-	private void activateVaticanReport(VaticanReports vr_param){
+	protected void activateVaticanReport(VaticanReports vr_param){
 		this.vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
 	}
 
@@ -45,5 +45,11 @@ public class FaithTrack {
 
 	public boolean checkIfTileIsActive(int index){
 		return this.vatican_report_tiles[index].isActive();
+	}
+
+	protected void deactivateAllTiles(){
+		for (Tile t : vatican_report_tiles){
+			t.deactivateTile();
+		}
 	}
 }

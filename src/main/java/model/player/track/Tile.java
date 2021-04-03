@@ -20,4 +20,8 @@ public class Tile {
 	public boolean isActive(){
 		return this.active;
 	}
+
+	public void deactivateTile(){
+		this.active = false;
+	}
 }
