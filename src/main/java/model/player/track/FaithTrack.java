@@ -1,9 +1,5 @@
 package it.polimi.ingsw.model.player.track;
 
-import it.polimi.ingsw.model.player.track.Cell;
-import it.polimi.ingsw.model.player.track.Tile;
-import it.polimi.ingsw.model.player.track.VaticanReports;
-
 public class FaithTrack {
 	protected Cell[] track;
 	protected Tile[] vatican_report_tiles;

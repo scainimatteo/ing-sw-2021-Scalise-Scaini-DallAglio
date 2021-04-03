@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.player;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.HashMap;

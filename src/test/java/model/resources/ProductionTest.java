@@ -3,17 +3,12 @@ package it.polimi.ingsw.model.resources;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.*;
-
-import it.polimi.ingsw.model.resources.Production;
-import it.polimi.ingsw.model.resources.Resource;
-
 public class ProductionTest {
 	/**
 	 * Test for the method activateProduction
 	 */
 	@Test
-	public void activateProductionTest () {
+	public void activateProductionTest(){
 		Resource test_resource_1 = Resource.COIN;
 		Resource test_resource_2 = Resource.SHIELD;
 		Resource test_resource_3 = Resource.STONE;

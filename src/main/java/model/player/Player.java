@@ -2,10 +2,7 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.card.LeaderCard;
 
-import it.polimi.ingsw.model.player.DevelopmentCardsSlots;
 import it.polimi.ingsw.model.player.track.FaithTrack;
-import it.polimi.ingsw.model.player.Warehouse;
-import it.polimi.ingsw.model.player.StrongBox;
 
 public class Player {
 	private String nickname;

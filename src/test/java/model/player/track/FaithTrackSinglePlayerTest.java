@@ -3,8 +3,6 @@ package it.polimi.ingsw.model.player.track;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.player.track.Cell;
-import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.game.Factory;
 
 import org.json.simple.parser.ParseException;

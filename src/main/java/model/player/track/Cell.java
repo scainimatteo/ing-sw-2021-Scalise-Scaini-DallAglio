@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.player.track;
 
-import it.polimi.ingsw.model.player.track.VaticanReports;
-
 public class Cell {
 	private int position;
 	private int victory_points;

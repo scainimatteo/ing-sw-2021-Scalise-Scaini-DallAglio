@@ -3,7 +3,6 @@ package it.polimi.ingsw.model.player;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class WarehouseTest {
