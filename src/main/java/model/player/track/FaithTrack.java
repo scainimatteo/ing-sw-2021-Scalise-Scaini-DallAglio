@@ -1,9 +1,5 @@
 package it.polimi.ingsw.model.player.track;
 
-import it.polimi.ingsw.model.player.track.Cell;
-import it.polimi.ingsw.model.player.track.Tile;
-import it.polimi.ingsw.model.player.track.VaticanReports;
-
 public class FaithTrack {
 	protected Cell[] track;
 	protected Tile[] vatican_report_tiles;
@@ -17,16 +13,39 @@ public class FaithTrack {
 
 	public VaticanReports moveForward(int number_of_times) {
 		int new_position = number_of_times + faith_marker.getPosition();
-		faith_marker = track[new_position];
+		this.faith_marker = track[new_position];
 
-		for (int i = new_position; i < (new_position - number_of_times); i --){
+		for (int i = new_position; i > (new_position - number_of_times); i --){
 			if(track[i].isPopeSpace()){
-				if(!(vatican_report_tiles[track[i].whichVaticanReport().getIndex()].isActive())){
-					return track[i].whichVaticanReport();
+				if(checkCell(i)){
+					this.activateVaticanReport(this.track[i].whichVaticanReport());
+					return this.track[i].whichVaticanReport();
 				}
 			}
 		}
 
 		return null;
+	}
+
+	protected boolean checkCell(int i){
+		return this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()] != null && !(this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].isActive());
+	}
+
+	protected void activateVaticanReport(VaticanReports vr_param){
+		this.vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
+	}
+
+	public int getMarkerPosition(){
+		return this.faith_marker.getPosition();
+	}
+
+	public boolean checkIfTileIsActive(int index){
+		return this.vatican_report_tiles[index].isActive();
+	}
+
+	protected void deactivateAllTiles(){
+		for (Tile t : vatican_report_tiles){
+			t.deactivateTile();
+		}
 	}
 }

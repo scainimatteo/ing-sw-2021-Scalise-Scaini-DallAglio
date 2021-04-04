@@ -5,8 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
+
+import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.Deck;
@@ -20,7 +23,7 @@ public class DevelopmentCardsOnTableTest {
 	 * Create an istance of DevelopmentCardsOnTable
 	 */
 	@BeforeEach
-	public void createDevelopmentCardsOnTable() {
+	public void createDevelopmentCardsOnTable() throws IOException, ParseException{
 		this.dct = new DevelopmentCardsOnTable(Factory.getIstance().getAllDevelopmentCards());
 	}
 

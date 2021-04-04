@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.player.track;
 
-import it.polimi.ingsw.model.player.track.VaticanReports;
-
 public class Tile {
 	private VaticanReports report;
 	private int victory_points;
@@ -13,11 +11,15 @@ public class Tile {
 		this.active = false;
 	}
 
-	public void activateVaticanReport() {
-		return;
+	public void activateVaticanReport(){
+		this.active = true;
 	}
 
 	public boolean isActive(){
 		return this.active;
+	}
+
+	public void deactivateTile(){
+		this.active = false;
 	}
 }

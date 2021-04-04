@@ -3,15 +3,12 @@ package it.polimi.ingsw.model.resources;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.*;
-
 public class ResourceTest{
-	
 	/**
-	 * First enum test
+	 * Test the creation of the resources
 	 */
 	@Test
-	public void firstResourceTest(){
+	public void createResourceTest(){
 		Resource test_resource = Resource.COIN;
 
 		assertTrue(test_resource.name().equals("COIN"));
@@ -21,7 +18,7 @@ public class ResourceTest{
 	 * Test the method equals for the resources
 	 */
 	@Test
-	public void testEqual () {
+	public void testEqual(){
 		Resource resource1 = Resource.COIN;
 		Resource resource2 = Resource.COIN;
 

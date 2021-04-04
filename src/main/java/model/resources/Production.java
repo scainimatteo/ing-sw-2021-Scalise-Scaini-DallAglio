@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.resources;
 
-import it.polimi.ingsw.model.resources.Resource;
-
 import java.lang.IllegalArgumentException;
 
 public class Production {
