@@ -29,14 +29,8 @@ public class FactoryTest {
 	 * Save the istance of Factory
 	 */
 	@BeforeEach
-	public void createFactory() {
-		try {
-			this.factory = Factory.getIstance();
-		} catch (ParseException e){
-			e.printStackTrace();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+	public void createFactory() throws IOException, ParseException {
+		this.factory = Factory.getIstance();
 	}
 
 	@Test

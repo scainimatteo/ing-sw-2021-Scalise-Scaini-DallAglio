@@ -36,15 +36,9 @@ public class SoloGameTest {
 	 * Create an istance of SoloGame
 	 */
 	@BeforeEach
-	public void createSoloGame() {
+	public void createSoloGame() throws IOException, ParseException {
 		Player[] players = {new Player()};
-		try {
-			this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
-		} catch (ParseException e){
-			e.printStackTrace();
-		} catch (IOException e){
-			e.printStackTrace();
-		}
+		this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
 	}
 
 	/**
