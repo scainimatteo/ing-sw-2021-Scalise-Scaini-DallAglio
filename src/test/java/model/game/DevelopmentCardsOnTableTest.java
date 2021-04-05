@@ -5,19 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 
+import java.io.IOException;
+
 import org.json.simple.parser.ParseException;
 
+import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.DevelopmentCard;
-import it.polimi.ingsw.model.card.Deck;
+import it.polimi.ingsw.model.card.CardLevel;
 
 import it.polimi.ingsw.model.game.Factory;
 
 public class DevelopmentCardsOnTableTest {
-	DevelopmentCardsOnTable dct;
+	private DevelopmentCardsOnTable dct;
 
 	/**
 	 * Create an istance of DevelopmentCardsOnTable
@@ -93,5 +95,26 @@ public class DevelopmentCardsOnTableTest {
 		}
 
 		assertNull(top_cards[row][column]);
+	}
+
+	/**
+	 * Check that all the cards in a deck are of the right level and color
+	 */
+	@RepeatedTest(value = 3)
+	public void cardsInRightDeckTest() {
+		Random random = new Random();
+		DevelopmentCard[][] top_cards = dct.getTopCards();
+
+		int row = random.nextInt(3);
+		int column = random.nextInt(4);
+		//System.out.printf("Random: %d %d\n", row, column);
+
+		for (int i = 0; i < 4; i++) {
+			CardLevel cardlevel = top_cards[row][column].getCardLevel();
+			assertEquals(cardlevel.getLevel(), row + 1);
+			assertEquals(cardlevel.getColor(), DevelopmentCardsColor.values()[column]);
+			dct.getFromDeck(top_cards[row][column]);
+			top_cards = dct.getTopCards();
+		}
 	}
 }

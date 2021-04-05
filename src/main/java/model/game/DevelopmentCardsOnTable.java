@@ -5,29 +5,31 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.CardLevel;
+import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
 public class DevelopmentCardsOnTable {
-	private Deck<DevelopmentCard>[][] development_card_decks;
+	private Table<DevelopmentCard> development_cards_table;
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 
 	public DevelopmentCardsOnTable(DevelopmentCard[] all_development_cards) {
-		this.development_card_decks = createDecks(all_development_cards);
+		this.development_cards_table = createDecks(all_development_cards);
 	}
 
-	private Deck[][] createDecks(DevelopmentCard[] all_development_cards) {
-		Deck[][] decks = new Deck[dim_cols][dim_rows];
+	private Table<DevelopmentCard> createDecks(DevelopmentCard[] all_development_cards) {
+		Table<DevelopmentCard> table = new Table<DevelopmentCard>(dim_rows, dim_cols);
 		for (int i = 0; i < dim_cols; i++) {
 			for (int j = 0; j < dim_rows; j++) {
-				decks[i][j] = new Deck<DevelopmentCard>(4);
+				table.addDeck(new Deck<DevelopmentCard>(4), i, j);
 			}
 		}
 		for (DevelopmentCard card : all_development_cards) {
 			CardLevel level = card.getCardLevel();
-			decks[level.getLevel() - 1][level.getColor().getOrder()].add(card);
+			table.addElement(card, level.getLevel() - 1, level.getColor().getOrder());
 		}
-		return decks;
+		//TODO: shuffle the decks
+		return table;
 	}
 
 	/**
@@ -37,7 +39,7 @@ public class DevelopmentCardsOnTable {
 		DevelopmentCard[][] development_card_on_top = new DevelopmentCard[3][4];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				development_card_on_top[i][j] = development_card_decks[i][j].peekTopCard();
+				development_card_on_top[i][j] = this.development_cards_table.peekTop(i, j);
 			}
 		}
 		return development_card_on_top;
@@ -53,8 +55,8 @@ public class DevelopmentCardsOnTable {
 		boolean done = false;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (development_card_decks[i][j].peekTopCard().equals(chosen_card)) {
-					development_card_decks[i][j].draw();
+				if (development_cards_table.peekTop(i, j).equals(chosen_card)) {
+					development_cards_table.draw(i, j);
 					done = true;
 					break;
 				}
