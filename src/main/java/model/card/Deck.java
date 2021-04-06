@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.card;
 
 import java.util.AbstractCollection;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Iterator; 
 import java.lang.IndexOutOfBoundsException;
@@ -79,5 +80,18 @@ public class Deck<E> extends AbstractCollection <E> {
 			return elem;
 		}
 	}
-		
+	
+	/**
+	* Shuffles the elements of the deck
+	*
+	* @return the shuffled deck
+	*/
+	public Deck shuffle() {
+		//per garantire una distribuzione più casuale degli elementi che permetta
+		//anche la prima configurazione senza favorirla
+		for (int i = 0; i < 5; i++){
+			Collections.shuffle (structure);
+		}
+		return this;
+	}				
 }

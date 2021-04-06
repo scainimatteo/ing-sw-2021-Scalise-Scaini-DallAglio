@@ -17,6 +17,12 @@ public class ExtraSpaceAbility implements LeaderAbility {
 		this.index = 0;
 	}
 	
+
+	/**
+	* @param new_resource is the resource to be added to the space
+	* @throws IllegalArgumentException if resource type isn't compatible with required type
+	*@throws IndexOutOfBoundsException if space is full
+	*/
 	public void putResource(Resource new_resource) throws IllegalArgumentException, IndexOutOfBoundsException {
 		if (!new_resource.getColor().equals(resource_type.getColor())){
 			throw new IllegalArgumentException();	
@@ -27,14 +33,25 @@ public class ExtraSpaceAbility implements LeaderAbility {
 		} 
 	}
 
+	/**
+	* @return the number of resources available
+	*/
 	public int peekResources() {
 		return index;
 	}
 
+	/**
+	* @return the type of resources available
+	*/
 	public Resource getResourceType() {
 		return resource_type;
 	}
 
+	/**
+	* @param quantity is the number of resources to be taken
+	* @return array of requested resources
+	* @throws IllegalArgumentException if requested quantity exceed present quantity
+	*/
 	public Resource[] getResource(int quantity) throws IllegalArgumentException {
 		if (quantity > index || quantity == 0){
 			throw new IllegalArgumentException();

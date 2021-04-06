@@ -23,6 +23,12 @@ public class DevelopmentCard extends Card {
 		return this.level;
 	}
 
+	/**
+	* activates the card's production
+	*	
+	* @param resources_input is the input required for the production
+	* @return the output of the production
+	*/	
 	public Resource[] useCard(Resource[] resources_input) {
 		return production.activateProduction(resources_input);
 	}

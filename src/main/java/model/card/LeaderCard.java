@@ -15,8 +15,4 @@ public abstract class LeaderCard extends Card {
 		this.activated = true;
 		return;	
 	}
-//chiama metodo dell'interfaccia affinché possa fare overriding e printare il tipo di abilità
-	public String cardType(){
-		return ability.toString();
-	}
 }

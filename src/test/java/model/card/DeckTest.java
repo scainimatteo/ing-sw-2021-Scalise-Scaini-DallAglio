@@ -7,12 +7,12 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.HashMap;
 import java.lang.IndexOutOfBoundsException;
 import java.util.NoSuchElementException;
 
 public class DeckTest { 
-	int max = 4;
-	int index = 1;
+	int max = 20;
 	Deck <Random> deck;
 	Random random;
 
@@ -65,5 +65,30 @@ public class DeckTest {
 			assertEquals(random_deck[deck.size()-1], deck.draw() );
 		}
 		assertThrows (NoSuchElementException.class, () -> {deck.draw();});
+	}
+	
+	/**
+	* tests shuffling
+	*/
+	@RepeatedTest(value = 10)
+	public void testShuffle(){
+		Random[] random_deck = new Random[max];
+		Random[] copy = new Random[max];
+		HashMap <Random, Integer> check = new HashMap<Random, Integer>();
+		for (int i = 0; i<max; i++){
+			random_deck[i] = random;
+			deck.add(random);
+			check.put(random, 1);
+			random = new Random();
+		}
+		Iterator <Random> iterator = deck.shuffle().iterator();
+		for (int i = 0; i<max; i++){
+			copy[i] = iterator.next();
+			check.put(copy[i], check.get(copy[i]) + 1);
+		}
+		for (Integer x : check.values()){
+			assertEquals (x, 2);
+		}
+		assertFalse (random_deck.equals(copy));
 	}
 }
