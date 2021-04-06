@@ -354,6 +354,30 @@ public class Warehouse {
 		}
 	}
 
+	public boolean areContainedInWarehouse(Resource[] to_check){
+		int top = 0;
+		int mid = 0;
+		int bot = 0;
+
+		for (Resource res : to_check){
+			if (res.equals(top_resource)){
+				top += 1;
+			} else if (res.equals(middle_resources[mid])){
+				mid += 1;
+			} else if(res.equals(bottom_resources[bot])){
+				bot += 1;
+			} else {
+				return false;
+			}
+
+			if(top >= 2 || mid >= 3 || bot >= 4){
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public void clearWarehouse(){
 		this.top_resource = null;
 		this.middle_resources[0] = null;
