@@ -15,34 +15,62 @@ public class Deck<E> extends AbstractCollection <E> {
 		this.structure = new ArrayList<E>();
 	}
 
+
+	/**
+	* @return is the structure empty?
+	*/
 	public boolean isEmpty(){
 		return structure.isEmpty();
 	}
 
+
+	/**
+	* @return collection iterator
+	*/
 	public Iterator <E> iterator(){
 		return structure.iterator();
 	}
 	
+	/**
+	* @return collection size 
+	*/
 	public int size (){
 		return structure.size();
 	}
 	
+	/**
+	* @return maximum allowed collection size 
+	*/
 	public int get_max(){
 		return this.max_size;
 	}
 
+	/**
+	* @param elem element to be added to the collection
+	* @return true if the element has been added? 
+	* @throws IndexOutOfBoundsException if the deck already is at max size
+	*/
 	@Override
-	public boolean add(E elem) {
+	public boolean add(E elem) throws IndexOutOfBoundsException {
 		if (structure.size() < max_size){
 			return structure.add(elem);
 		}
 		else {throw new IndexOutOfBoundsException();}
 	}
 
+	/**
+	* @return the top element of the deck
+	*/
 	public E peekTopCard() {
 		return structure.size() > 0 ? structure.get(structure.size() - 1) : null;
 	}
 	
+	/**
+	* Removes the top element of the deck and returns it
+	*
+	* @return the top element of the deck
+	* @throws NoSuchElementException if the deck is empty
+	*/
 	public E draw() throws NoSuchElementException {
 		E elem = peekTopCard();
 		if (elem == null) {throw new NoSuchElementException();}
