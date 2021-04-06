@@ -1,0 +1,68 @@
+@startuml
+
+class Match {
+	- Game game
+	- void distributeLeaderCards()
+	- boolean checkLastTurn()
+	- Turn chooseTurnType()
+	+ void play()
+}
+
+class FaithController {
+	+ final int faith_gained
+	+ final int faith_to_redistribute
+}
+
+class FaithTrackController {
+	+ static VaticanReport movePlayer(Player player, FaithController faith)
+	+ static VaticanReport redistributeFaith(Player discarder, FaithController faith)
+	+ static void activateVaticanReport(VaticanReport report, Player[] players)
+}
+
+abstract class Turn {
+	- Player player
+	- FaithController playAction()
+	+ void playTurn()
+}
+
+class MarketTurn {
+	- Market market
+	- Resource checkWhiteMarble()
+	- int chooseColumn()
+	- int chooseRow()
+	- Resource[] getFromMarket(int index)
+	- int storeInWarehouse(Resource[] resources_from_market)
+	- FaithController playAction()
+}
+
+class BuyCardTurn {
+	- DevelopmentCardsOnTable development_cards_on_table
+	- Resource checkDiscount()
+	- DevelopmentCard chooseCardFromTable()
+	- boolean checkRequirements()
+	- FaithController playAction()
+}
+
+class ProductionTurn {
+	- Resource[] activateProduction()
+	- Resource[] activateProduction(DevelopmentCard card)
+	- FaithController playAction()
+}
+
+class LeaderCardController {
+	- boolean askToPlayLeaderCard()
+	- void useLeaderCard(ProductionAbility ability)
+	- void useLeaderCard(ExtraSpaceAbility ability)
+	+ void playLeaderCard()
+}
+
+class SoloMatch {
+	- SoloGame game
+	- boolean checkLastTurn()
+	- void playSoloActionToken(MoveBlackCrossTwoSpaces token)
+	- void playSoloActionToken(MoveBlackCrossOneSpace token)
+	- void playSoloActionToken(DiscardDevelopmentCards token)
+	+ void play()
+}
+
+@enduml
