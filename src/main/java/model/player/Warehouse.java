@@ -300,6 +300,7 @@ public class Warehouse {
 	 * @return the array of the resources requested if is of the same type as bottom_resource and the quantity requested is available
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 * @exception IllegalArgumentException is thrown if the resource_type is not contained
+	 *
 	 */
 	private Resource[] getFromBottom(Resource resource_type, int quantity){
 		if(this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])){

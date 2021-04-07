@@ -72,4 +72,13 @@ public class StrongBox {
 			throw new IndexOutOfBoundsException();
 		}
 	}
+
+	/**
+	 * TODO: create the method
+	 * @param to_check are the resources that need to be checked
+	 * @return true if the resources are contained
+	 */
+	public boolean areContainedInStrongbox(Resource[] to_check){
+		return false;
+	}
 }

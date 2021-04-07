@@ -1,10 +1,16 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.model.resources.Resource;
+
+import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
+
+import java.util.HashMap;
 
 public class Player {
 	private String nickname;
@@ -22,4 +28,87 @@ public class Player {
 		this.development_card_slots = new DevelopmentCardsSlots();
 		this.leader_cards_deck = new LeaderCard[4];
 	}
+
+	/**
+	 * TODO: create the method
+	 * check in warehouse using the method warehouse.areContainedInWarehouse(Resource[])
+	 * check in strongbox with new method
+	 */
+	public boolean isBuyable(DevelopmentCard card){
+		return false;
+	}
+
+	/**
+	 * WAREHOUSE METHODS
+	 */
+	public Resource getTopResource(){
+		return this.warehouse.getTopResource();
+	}
+
+	public Resource[] getMiddleResources(){
+		return this.warehouse.getMiddleResources();
+	}
+
+	public Resource[] getBottomResources(){
+		return this.warehouse.getBottomResources();
+	}
+
+	public int tryToInsert(Resource[] new_resources){
+		return this.warehouse.tryToInsert(new_resources);
+	}
+
+	public Resource[] getFromWarehouse(Resource resource_type, int quantity){
+		return this.warehouse.getFromWarehouse(resource_type, quantity);
+	}
+
+	public void clearWarehouse(){
+		this.warehouse.clearWarehouse();
+	}
+
+	/**
+	 * STRONGBOX METHODS
+	 */
+	public void insertResources(Resource[] new_resources){
+		this.strongbox.insertResources(new_resources);
+	}
+
+	public HashMap<Resource, Integer> getStrongBox(){
+		return this.strongbox.getStrongBox();
+	}
+
+	public Resource[] removeResources(Resource resource_type, int quantity){
+		return this.strongbox.removeResources(resource_type, quantity);
+	}
+
+	/**
+	 * DEVCARDSSLOTS METHODS
+	 */
+	public void buyCard(DevelopmentCard card, int position){
+		this.development_card_slots.buyCard(card, position);
+	}
+
+	public DevelopmentCard[] getTopCards(){
+		return this.development_card_slots.getTopCards();
+	}
+
+	public DevelopmentCard[] getCard(int position){
+		return this.development_card_slots.getCard(position);
+	}
+
+	/**
+	 * FAITHTRACK METHODS
+	 */
+	public VaticanReports moveForward(int number_of_times){
+		return this.track.moveForward(number_of_times);
+	}
+
+	public int getMarkerPosition(){
+		return this.track.getMarkerPosition();
+	}
+
+	/**
+	 * FAITHTRACKSINGLEPLAYER
+	 * moveForwardBlackMarker
+	 * getBlackMarkerPosition
+	 */
 }
