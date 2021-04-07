@@ -106,4 +106,28 @@ public class FactoryTest {
 			assertTrue(set.add(tile));
 		}
 	}
+
+	@Test
+	/**
+	 * Check that the LeaderCards arrays are cloned
+	 */
+	public void clonedLeaderCardsTest() {
+		LeaderCard[] first = factory.getAllLeaderCards();
+		LeaderCard[] second = factory.getAllLeaderCards();
+		for (int i = 0; i < leader_cards_number; i++) {
+			assertNotEquals(first[i], second[i]);
+		}
+	}
+
+	@Test
+	/**
+	 * Check that the Tiles arrays are cloned
+	 */
+	public void clonedTilesTest() {
+		Tile[] first = factory.getAllTiles();
+		Tile[] second = factory.getAllTiles();
+		for (int i = 0; i < tiles_number; i++) {
+			assertNotEquals(first[i], second[i]);
+		}
+	}
 }

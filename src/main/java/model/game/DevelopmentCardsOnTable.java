@@ -28,7 +28,7 @@ public class DevelopmentCardsOnTable {
 			CardLevel level = card.getCardLevel();
 			table.addElement(card, level.getLevel() - 1, level.getColor().getOrder());
 		}
-		//TODO: shuffle the decks
+		table.shuffleAllDecks();
 		return table;
 	}
 
