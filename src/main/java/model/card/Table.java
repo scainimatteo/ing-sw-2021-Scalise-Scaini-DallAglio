@@ -79,6 +79,15 @@ public class Table<E> extends AbstractCollection<E> {
 	}
 
 	/**
+	 * Shuffle all the decks on the table
+	 */
+	public void shuffleAllDecks() {
+		for (Deck<E> deck: structure) {
+			deck.shuffle();
+		}
+	}
+
+	/**
 	 * Iterator of the class
 	 *
 	 * Iterates between the cards on top of the decks
