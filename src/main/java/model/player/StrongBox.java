@@ -79,6 +79,36 @@ public class StrongBox {
 	 * @return true if the resources are contained
 	 */
 	public boolean areContainedInStrongbox(Resource[] to_check){
-		return false;
+		int coin = 0;
+		int stone = 0;
+		int shield = 0;
+		int servant = 0;
+
+		for (int i = 0; i < to_check.length; i ++){
+			if(this.storage.containsKey(to_check[i])){
+				if(to_check[i].equals(Resource.COIN)){
+					coin += 1;
+				}else if(to_check[i].equals(Resource.STONE)){
+					stone += 1;
+				}else if(to_check[i].equals(Resource.SHIELD)){
+					shield += 1;
+				}else if(to_check[i].equals(Resource.SERVANT)){
+					servant += 1;
+				}
+			}else{
+				if(to_check[i] == null){
+				}else{
+					return false;
+				}
+			}
+
+			if(coin > this.storage.get(Resource.COIN) || stone > this.storage.get(Resource.STONE) || shield > this.storage.get(Resource.SHIELD) || servant > this.storage.get(Resource.SERVANT)){
+				return false;
+			}
+
+			to_check[i] = null;
+		}
+
+		return true;
 	}
 }

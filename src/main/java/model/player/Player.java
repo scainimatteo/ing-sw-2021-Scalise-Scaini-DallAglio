@@ -30,11 +30,20 @@ public class Player {
 	}
 
 	/**
-	 * TODO: create the method
-	 * check in warehouse using the method warehouse.areContainedInWarehouse(Resource[])
-	 * check in strongbox with new method
+	 * @param card is the DevelopmentCard to be checked
+	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
 	 */
 	public boolean isBuyable(DevelopmentCard card){
+		Resource[] tmp = card.getCost();
+
+		if(!(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp))){
+			for (Resource res : tmp){
+				if(res != null){
+					return false;
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -82,6 +91,7 @@ public class Player {
 
 	/**
 	 * DEVCARDSSLOTS METHODS
+	 * TODO: in buyCard after the call of the method remove the resources from the wh then from the sb
 	 */
 	public void buyCard(DevelopmentCard card, int position){
 		this.development_card_slots.buyCard(card, position);

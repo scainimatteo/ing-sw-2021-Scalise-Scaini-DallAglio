@@ -360,13 +360,14 @@ public class Warehouse {
 		int mid = 0;
 		int bot = 0;
 
-		for (Resource res : to_check){
-			if (res.equals(top_resource)){
+		for (int i = 0; i < to_check.length; i ++){
+			if (to_check[i].equals(this.top_resource)){
 				top += 1;
-			} else if (res.equals(middle_resources[mid])){
+			} else if (to_check[i].equals(this.middle_resources[mid])){
 				mid += 1;
-			} else if(res.equals(bottom_resources[bot])){
+			} else if(to_check[i].equals(this.bottom_resources[bot])){
 				bot += 1;
+			} else if (to_check[i] == null){
 			} else {
 				return false;
 			}
@@ -374,6 +375,8 @@ public class Warehouse {
 			if(top >= 2 || mid >= 3 || bot >= 4){
 				return false;
 			}
+
+			to_check[i] = null;
 		}
 
 		return true;

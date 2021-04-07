@@ -32,5 +32,9 @@ public class DevelopmentCard extends Card {
 	public Resource[] useCard(Resource[] resources_input) {
 		return production.activateProduction(resources_input);
 	}
+
+	public Resource[] getCost(){
+		return this.cost;
+	}
 }
 
