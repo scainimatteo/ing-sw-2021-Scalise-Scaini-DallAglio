@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.card;
 import it.polimi.ingsw.model.card.Card;
 import it.polimi.ingsw.model.card.LeaderAbility;
 
-public abstract class LeaderCard extends Card {
+public abstract class LeaderCard extends Card implements Cloneable {
 	protected LeaderAbility ability;
 	protected boolean activated;
 
@@ -15,4 +15,14 @@ public abstract class LeaderCard extends Card {
 		this.activated = true;
 		return;	
 	}
+
+	public Object clone() {
+		Object clone = null;
+		try {
+			clone = super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return clone;
+    }
 }

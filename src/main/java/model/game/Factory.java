@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.game;
 
 import java.util.stream.Collectors;
+import java.util.Arrays;
 import java.util.List;
 
 import java.io.FileNotFoundException;
@@ -78,7 +79,9 @@ public class Factory {
 	 * @return an array containing all the LeaderCards specified in the json file
 	 */
 	public LeaderCard[] getAllLeaderCards() {
-		return this.all_leader_cards;
+		// return a clone of the array since the LeaderCards are mutable
+		List<LeaderCard> leader_cards_list = Arrays.stream(this.all_leader_cards).map(x -> (LeaderCard)x.clone()).collect(Collectors.toList());
+		return leader_cards_list.toArray(new LeaderCard[leader_cards_number]);
 	}
 
 	/**
@@ -92,7 +95,9 @@ public class Factory {
 	 * @return an array containing all the Tiles specified in the json file
 	 */
 	public Tile[] getAllTiles() {
-		return this.all_tiles;
+		// return a clone of the array since the Tiles are mutable
+		List<Tile> tiles_list = Arrays.stream(this.all_tiles).map(x -> (Tile)x.clone()).collect(Collectors.toList());
+		return tiles_list.toArray(new Tile[tiles_number]);
 	}
 
 	@SuppressWarnings("unchecked")
