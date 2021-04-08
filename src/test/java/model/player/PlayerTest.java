@@ -85,7 +85,7 @@ public class PlayerTest {
 	 * Test the method buyCard() with warehouse_first = true
 	 * ID: 2 - cost: 2 servant level: 1
 	 */
-	// @Test
+	@Test
 	public void buyCardTest(){
 		this.player.buyCard(dev_card[1], 0, true);
 
