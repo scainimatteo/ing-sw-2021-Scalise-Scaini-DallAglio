@@ -47,7 +47,8 @@ public class PlayerTest {
 	 */
 	@Test
 	public void resourcesInWarehouseTest(){
-		assertTrue(this.player.isBuyable(dev_card[0]));
+		boolean[] returned = this.player.isBuyable(dev_card[0]);
+		assertTrue(returned[0] || returned[1] || returned[2]);
 	}
 
 	/**
@@ -56,7 +57,8 @@ public class PlayerTest {
 	 */
 	@Test
 	public void resourcesInStrongboxTest(){
-		assertTrue(this.player.isBuyable(dev_card[1]));
+		boolean[] returned = this.player.isBuyable(dev_card[1]);
+		assertTrue(returned[0] || returned[1] || returned[2]);
 	}
 
 	/**
@@ -65,7 +67,8 @@ public class PlayerTest {
 	 */
 	@Test
 	public void resourcesInBothTest(){
-		assertTrue(this.player.isBuyable(dev_card[4]));
+		boolean[] returned = this.player.isBuyable(dev_card[4]);
+		assertTrue(returned[0] || returned[1] || returned[2]);
 	}
 
 	/**
@@ -74,7 +77,19 @@ public class PlayerTest {
 	 */
 	@Test
 	public void resourcesNotPresentTest(){
-		assertFalse(this.player.isBuyable(dev_card[10]));
+		boolean[] returned = this.player.isBuyable(dev_card[10]);
+		assertFalse(returned[0] && returned[1] && returned[2]);
 	}
 
+	/**
+	 * Test the method buyCard() with warehouse_first = true
+	 * ID: 2 - cost: 2 servant level: 1
+	 */
+	// @Test
+	public void buyCardTest(){
+		this.player.buyCard(dev_card[1], 0, true);
+
+		DevelopmentCard[] expected = {dev_card[1], null, null};
+		assertArrayEquals(expected, this.player.getTopCards());
+	}
 }
