@@ -19,10 +19,6 @@ public class Tile implements Cloneable {
 		return this.active;
 	}
 
-	public void deactivateTile(){
-		this.active = false;
-	}
-
 	public Object clone() {
 		Object clone = null;
 		try {

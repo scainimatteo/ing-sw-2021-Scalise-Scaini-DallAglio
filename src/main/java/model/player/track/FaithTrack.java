@@ -42,10 +42,4 @@ public class FaithTrack {
 	public boolean checkIfTileIsActive(int index){
 		return this.vatican_report_tiles[index].isActive();
 	}
-
-	protected void deactivateAllTiles(){
-		for (Tile t : vatican_report_tiles){
-			t.deactivateTile();
-		}
-	}
 }

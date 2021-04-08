@@ -21,12 +21,10 @@ public class FaithTrackSinglePlayerTest {
 		Tile[] vatican_report_tiles = gen_factory.getAllTiles();
 
 		FaithTrackSinglePlayer faith_track = new FaithTrackSinglePlayer(track, vatican_report_tiles);
-		faith_track.deactivateAllTiles();
 
 		VaticanReports res_ret = faith_track.moveForwardBlackMarker(3);
 		assertEquals(3, faith_track.getBlackMarkerPosition());
 		assertEquals(res_ret, null);
-		faith_track.deactivateAllTiles();
 	}
 	
 	/**
@@ -43,7 +41,6 @@ public class FaithTrackSinglePlayerTest {
 		Tile[] vatican_report_tiles = gen_factory.getAllTiles();
 
 		FaithTrackSinglePlayer faith_track = new FaithTrackSinglePlayer(track, vatican_report_tiles);
-		faith_track.deactivateAllTiles();
 
 		VaticanReports res_ret = null;
 		res_ret = faith_track.moveForwardBlackMarker(9);
@@ -56,7 +53,5 @@ public class FaithTrackSinglePlayerTest {
 		assertEquals(0, faith_track.getMarkerPosition());
 		assertEquals(res_ret, VaticanReports.REPORT2);
 		assertTrue(faith_track.checkIfTileIsActive(1));
-
-		faith_track.deactivateAllTiles();
 	}
 }
