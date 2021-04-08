@@ -208,6 +208,7 @@ class SoloGame {
 /' Cards relations '/
 Card <|-- DevelopmentCard
 Card <|-- LeaderCard
+java.util.Collection <|.. Deck
 Deck -- Card
 DevelopmentCard -- Resource
 DevelopmentCard -- CardLevel
@@ -223,6 +224,8 @@ Production -- Resource
 /' LeaderCard relations '/
 LeaderCard -- LeaderAbility
 LeaderCard -- CardLevel
+LeaderCard <|-- LeaderCardLevelCost
+LeaderCard <|-- LeaderCardResourcesCost
 LeaderAbility <|.. ProductionAbility
 LeaderAbility <|.. DiscountAbility
 LeaderAbility <|.. ExtraSpaceAbility
@@ -267,7 +270,4 @@ SoloActionTokenAbility <|.. DiscardDevelopmentCards
 SoloActionTokenAbility <|.. MoveBlackCrossTwoSpaces
 SoloActionTokenAbility <|.. MoveBlackCrossOneSpace
 DiscardDevelopmentCards -- DevelopmentCardsColor
-LeaderCard <|-- LeaderCardLevelCost
-LeaderCard <|-- LeaderCardResourcesCost
-java.util.Collection <|.. Deck
 @enduml

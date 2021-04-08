@@ -57,6 +57,21 @@ public class Market {
 	}
 
 	/**
+	 * Shift a row one to the left, the free_marble becomes the last element of the row
+	 *
+	 * @param index the index of the row to shift
+	 */
+	private void shiftRow(int index) {
+		Resource[] new_row = new Resource[4];
+		new_row[dim_rows - 1] = this.free_marble;
+		this.free_marble = this.market_board[index][0];
+		for (int i = 0; i < dim_rows - 1; i++) {
+			new_row[i] = this.market_board[index][i + 1];
+		}
+		this.market_board[index] = new_row;
+	}
+
+	/**
 	 * Shift a column one to the left, the free_marble becomes the last element of the column
 	 *
 	 * @param index the index of the column to shift
@@ -71,18 +86,20 @@ public class Market {
 	}
 
 	/**
-	 * Shift a row one to the left, the free_marble becomes the last element of the row
+	 * Get the resources stores in a row and shift it
 	 *
 	 * @param index the index of the row to shift
+	 * @return an array of the resources taken by the player
 	 */
-	private void shiftRow(int index) {
-		Resource[] new_row = new Resource[4];
-		new_row[dim_rows - 1] = this.free_marble;
-		this.free_marble = this.market_board[index][0];
-		for (int i = 0; i < dim_rows - 1; i++) {
-			new_row[i] = this.market_board[index][i + 1];
+	public Resource[] getRow(int index) {
+		Resource[] row = null;
+		try {
+			row = market_board[index];
+		} catch (IndexOutOfBoundsException e) {
+			throw new IllegalArgumentException();
 		}
-		this.market_board[index] = new_row;
+		this.shiftRow(index);
+		return row;
 	}
 
 	/**
@@ -102,22 +119,5 @@ public class Market {
 		}
 		this.shiftColumn(index);
 		return column;
-	}
-
-	/**
-	 * Get the resources stores in a row and shift it
-	 *
-	 * @param index the index of the row to shift
-	 * @return an array of the resources taken by the player
-	 */
-	public Resource[] getRow(int index) {
-		Resource[] row = null;
-		try {
-			row = market_board[index];
-		} catch (IndexOutOfBoundsException e) {
-			throw new IllegalArgumentException();
-		}
-		this.shiftRow(index);
-		return row;
 	}
 }
