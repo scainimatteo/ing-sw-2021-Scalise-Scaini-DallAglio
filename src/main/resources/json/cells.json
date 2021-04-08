@@ -1,179 +1,180 @@
 {
-	"cells": [
-		{
-			"position": 0,
-			"victory_points": 0,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 1,
-			"victory_points": 0,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 2,
-			"victory_points": 0,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 3,
-			"victory_points": 1,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 4,
-			"victory_points": 1,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 5,
-			"victory_points": 1,
-			"report": "REPORT1",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 6,
-			"victory_points": 2,
-			"report": "REPORT1",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 7,
-			"victory_points": 2,
-			"report": "REPORT1",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 8,
-			"victory_points": 2,
-			"report": "REPORT1",
-			"pope_space": true,
-			"last_cell": false
-		},
-		{
-			"position": 9,
-			"victory_points": 4,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 10,
-			"victory_points": 4,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 11,
-			"victory_points": 4,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 12,
-			"victory_points": 6,
-			"report": "REPORT2",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 13,
-			"victory_points": 6,
-			"report": "REPORT2",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 14,
-			"victory_points": 6,
-			"report": "REPORT2",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 15,
-			"victory_points": 9,
-			"report": "REPORT2",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 16,
-			"victory_points": 9,
-			"report": "REPORT2",
-			"pope_space": true,
-			"last_cell": false
-		},
-		{
-			"position": 17,
-			"victory_points": 9,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 18,
-			"victory_points": 12,
-			"report": "null",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 19,
-			"victory_points": 12,
-			"report": "REPORT3",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 20,
-			"victory_points": 12,
-			"report": "REPORT3",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 21,
-			"victory_points": 16,
-			"report": "REPORT3",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 22,
-			"victory_points": 16,
-			"report": "REPORT3",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 23,
-			"victory_points": 16,
-			"report": "REPORT3",
-			"pope_space": false,
-			"last_cell": false
-		},
-		{
-			"position": 24,
-			"victory_points": 20,
-			"report": "REPORT3",
-			"pope_space": true,
-			"last_cell": true
-		}
-	]
+	"cells_number": 24,
+    "cells": [
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 0,
+            "report": "null",
+            "victory_points": 0
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 1,
+            "report": "null",
+            "victory_points": 0
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 2,
+            "report": "null",
+            "victory_points": 0
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 3,
+            "report": "null",
+            "victory_points": 1
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 4,
+            "report": "null",
+            "victory_points": 1
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 5,
+            "report": "REPORT1",
+            "victory_points": 1
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 6,
+            "report": "REPORT1",
+            "victory_points": 2
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 7,
+            "report": "REPORT1",
+            "victory_points": 2
+        },
+        {
+            "last_cell": false,
+            "pope_space": true,
+            "position": 8,
+            "report": "REPORT1",
+            "victory_points": 2
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 9,
+            "report": "null",
+            "victory_points": 4
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 10,
+            "report": "null",
+            "victory_points": 4
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 11,
+            "report": "null",
+            "victory_points": 4
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 12,
+            "report": "REPORT2",
+            "victory_points": 6
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 13,
+            "report": "REPORT2",
+            "victory_points": 6
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 14,
+            "report": "REPORT2",
+            "victory_points": 6
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 15,
+            "report": "REPORT2",
+            "victory_points": 9
+        },
+        {
+            "last_cell": false,
+            "pope_space": true,
+            "position": 16,
+            "report": "REPORT2",
+            "victory_points": 9
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 17,
+            "report": "null",
+            "victory_points": 9
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 18,
+            "report": "null",
+            "victory_points": 12
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 19,
+            "report": "REPORT3",
+            "victory_points": 12
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 20,
+            "report": "REPORT3",
+            "victory_points": 12
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 21,
+            "report": "REPORT3",
+            "victory_points": 16
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 22,
+            "report": "REPORT3",
+            "victory_points": 16
+        },
+        {
+            "last_cell": false,
+            "pope_space": false,
+            "position": 23,
+            "report": "REPORT3",
+            "victory_points": 16
+        },
+        {
+            "last_cell": true,
+            "pope_space": true,
+            "position": 24,
+            "report": "REPORT3",
+            "victory_points": 20
+        }
+    ]
 }

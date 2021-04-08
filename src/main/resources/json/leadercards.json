@@ -1,10 +1,12 @@
 {
+	"leader_cards_number": 16,
     "leader_cards": [
         {
             "ability": {
                 "resource": "SERVANT",
                 "type": "DISCOUNT"
             },
+            "id": 1,
             "requirements": {
                 "cardlevel": [
                     {
@@ -18,49 +20,48 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 1,
             "victory_points": 2
         },
         {
             "ability": {
                 "resource": "SHIELD",
                 "type": "DISCOUNT"
-            },
-            "requirements": {
-                "cardlevel": [
-                    {
-                        "color": "BLUE",
-                        "level": 1
-                    },
-                    {
-                        "color": "PURPLE",
-                        "level": 1
-                    }
-                ],
-                "type": "CARDLEVEL"
             },
             "id": 2,
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    },
+                    {
+                        "color": "PURPLE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
             "victory_points": 2
         },
         {
             "ability": {
                 "resource": "STONE",
                 "type": "DISCOUNT"
-            },
-            "requirements": {
-                "cardlevel": [
-                    {
-                        "color": "GREEN",
-                        "level": 1
-                    },
-                    {
-                        "color": "BLUE",
-                        "level": 1
-                    }
-                ],
-                "type": "CARDLEVEL"
             },
             "id": 3,
+            "requirements": {
+                "cardlevel": [
+                    {
+                        "color": "GREEN",
+                        "level": 1
+                    },
+                    {
+                        "color": "BLUE",
+                        "level": 1
+                    }
+                ],
+                "type": "CARDLEVEL"
+            },
             "victory_points": 2
         },
         {
@@ -68,6 +69,7 @@
                 "resource": "COIN",
                 "type": "DISCOUNT"
             },
+            "id": 4,
             "requirements": {
                 "cardlevel": [
                     {
@@ -81,7 +83,6 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 4,
             "victory_points": 2
         },
         {
@@ -89,17 +90,17 @@
                 "resource": "STONE",
                 "type": "EXTRA_SPACE"
             },
+            "id": 5,
             "requirements": {
                 "resources": [
-					"COIN",
-					"COIN",
-					"COIN",
-					"COIN",
-					"COIN"
+                    "COIN",
+                    "COIN",
+                    "COIN",
+                    "COIN",
+                    "COIN"
                 ],
                 "type": "RESOURCES"
             },
-            "id": 5,
             "victory_points": 3
         },
         {
@@ -107,17 +108,17 @@
                 "resource": "SERVANT",
                 "type": "EXTRA_SPACE"
             },
+            "id": 6,
             "requirements": {
                 "resources": [
-					"STONE",
-					"STONE",
-					"STONE",
-					"STONE",
-					"STONE"
+                    "STONE",
+                    "STONE",
+                    "STONE",
+                    "STONE",
+                    "STONE"
                 ],
                 "type": "RESOURCES"
             },
-            "id": 6,
             "victory_points": 3
         },
         {
@@ -125,17 +126,17 @@
                 "resource": "SHIELD",
                 "type": "EXTRA_SPACE"
             },
+            "id": 7,
             "requirements": {
                 "resources": [
-					"SERVANT",
-					"SERVANT",
-					"SERVANT",
-					"SERVANT",
-					"SERVANT"
+                    "SERVANT",
+                    "SERVANT",
+                    "SERVANT",
+                    "SERVANT",
+                    "SERVANT"
                 ],
                 "type": "RESOURCES"
             },
-            "id": 7,
             "victory_points": 3
         },
         {
@@ -143,17 +144,17 @@
                 "resource": "COIN",
                 "type": "EXTRA_SPACE"
             },
+            "id": 8,
             "requirements": {
                 "resources": [
-					"SHIELD",
-					"SHIELD",
-					"SHIELD",
-					"SHIELD",
-					"SHIELD"
+                    "SHIELD",
+                    "SHIELD",
+                    "SHIELD",
+                    "SHIELD",
+                    "SHIELD"
                 ],
                 "type": "RESOURCES"
             },
-            "id": 8,
             "victory_points": 3
         },
         {
@@ -161,6 +162,7 @@
                 "resource": "SERVANT",
                 "type": "WHITE_MARBLES"
             },
+            "id": 9,
             "requirements": {
                 "cardlevel": [
                     {
@@ -178,7 +180,6 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 9,
             "victory_points": 5
         },
         {
@@ -186,6 +187,7 @@
                 "resource": "SHIELD",
                 "type": "WHITE_MARBLES"
             },
+            "id": 10,
             "requirements": {
                 "cardlevel": [
                     {
@@ -203,7 +205,6 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 10,
             "victory_points": 5
         },
         {
@@ -211,6 +212,7 @@
                 "resource": "STONE",
                 "type": "WHITE_MARBLES"
             },
+            "id": 11,
             "requirements": {
                 "cardlevel": [
                     {
@@ -228,7 +230,6 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 11,
             "victory_points": 5
         },
         {
@@ -236,6 +237,7 @@
                 "resource": "COIN",
                 "type": "WHITE_MARBLES"
             },
+            "id": 12,
             "requirements": {
                 "cardlevel": [
                     {
@@ -253,16 +255,16 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 12,
             "victory_points": 5
         },
         {
             "ability": {
-				"required_resources": [
-					"SHIELD"
-				],
+                "required_resources": [
+                    "SHIELD"
+                ],
                 "type": "PRODUCTION"
             },
+            "id": 13,
             "requirements": {
                 "cardlevel": [
                     {
@@ -272,16 +274,16 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 13,
             "victory_points": 4
         },
         {
             "ability": {
-				"required_resources": [
-					"SERVANT"
-				],
+                "required_resources": [
+                    "SERVANT"
+                ],
                 "type": "PRODUCTION"
             },
+            "id": 14,
             "requirements": {
                 "cardlevel": [
                     {
@@ -291,16 +293,16 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 14,
             "victory_points": 4
         },
         {
             "ability": {
-				"required_resources": [
-					"STONE"
-				],
+                "required_resources": [
+                    "STONE"
+                ],
                 "type": "PRODUCTION"
             },
+            "id": 15,
             "requirements": {
                 "cardlevel": [
                     {
@@ -310,16 +312,16 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 15,
             "victory_points": 4
         },
         {
             "ability": {
-				"required_resources": [
-					"COIN"
-				],
+                "required_resources": [
+                    "COIN"
+                ],
                 "type": "PRODUCTION"
             },
+            "id": 16,
             "requirements": {
                 "cardlevel": [
                     {
@@ -329,7 +331,6 @@
                 ],
                 "type": "CARDLEVEL"
             },
-            "id": 16,
             "victory_points": 4
         }
     ]

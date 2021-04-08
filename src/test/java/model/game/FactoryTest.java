@@ -19,11 +19,10 @@ import it.polimi.ingsw.model.player.track.Tile;
 public class FactoryTest {
 	private Factory factory;
 
-	//TODO: vanno bene queste costanti? Andrebbero messe da qualche altra parte?
-	private final int development_cards_number = 48;
-	private final int leader_cards_number = 16;
-	private final int cells_number = 24;
-	private final int tiles_number = 3;
+	private int development_cards_number;
+	private int leader_cards_number;
+	private int cells_number;
+	private int tiles_number;
 
 	/**
 	 * Save the istance of Factory
@@ -38,15 +37,19 @@ public class FactoryTest {
 	 * Check if all the json files are parsed correctly
 	 */
 	public void jsonTest() {
+		this.development_cards_number = this.factory.getDevelopmentCardsNumber();
 		DevelopmentCard[] all_development_cards = this.factory.getAllDevelopmentCards();
 		assertEquals(development_cards_number, all_development_cards.length);
 
+		this.leader_cards_number = this.factory.getLeaderCardsNumber();
 		LeaderCard[] all_leader_cards = this.factory.getAllLeaderCards();
 		assertEquals(leader_cards_number, all_leader_cards.length);
 
+		this.cells_number = this.factory.getCellsNumber();
 		Cell[] all_cells = this.factory.getAllCells();
 		assertEquals(cells_number, all_cells.length);
 
+		this.tiles_number = this.factory.getTilesNumber();
 		Tile[] all_tiles = this.factory.getAllTiles();
 		assertEquals(tiles_number, all_tiles.length);
 	}

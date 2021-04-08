@@ -1,16 +1,17 @@
 {
+	"tiles_number": 3,
     "tiles": [
         {
-			"report": "REPORT1",
-			"victory_points": 2
+            "report": "REPORT1",
+            "victory_points": 2
         },
         {
-			"report": "REPORT2",
-			"victory_points": 3
+            "report": "REPORT2",
+            "victory_points": 3
         },
         {
-			"report": "REPORT3",
-			"victory_points": 4
+            "report": "REPORT3",
+            "victory_points": 4
         }
     ]
 }

@@ -43,12 +43,10 @@ public class Factory {
 	private Tile[] all_tiles;
 	private JSONParser jsonParser;
 
-
-	//TODO: vanno bene queste costanti? Andrebbero messe da qualche altra parte?
-	private final int development_cards_number = 48;
-	private final int leader_cards_number = 16;
-	private final int cells_number = 24;
-	private final int tiles_number = 3;
+	private int development_cards_number;
+	private int leader_cards_number;
+	private int cells_number;
+	private int tiles_number;
 
 	private Factory() throws ParseException, IOException {
 		this.jsonParser = new JSONParser();
@@ -100,6 +98,34 @@ public class Factory {
 		return tiles_list.toArray(new Tile[tiles_number]);
 	}
 
+	/**
+	 * @return the number of DevelopmentCards
+	 */
+	public int getDevelopmentCardsNumber() {
+		return this.development_cards_number;
+	}
+
+	/**
+	 * @return the number of LeaderCards
+	 */
+	public int getLeaderCardsNumber() {
+		return this.leader_cards_number;
+	}
+
+	/**
+	 * @return the number of Cells
+	 */
+	public int getCellsNumber() {
+		return this.cells_number;
+	}
+
+	/**
+	 * @return the number of Tiles
+	 */
+	public int getTilesNumber() {
+		return this.tiles_number;
+	}
+
 	@SuppressWarnings("unchecked")
 	/**
 	 * @param json_array the JSONArray to convert
@@ -117,10 +143,11 @@ public class Factory {
 	 * @return an array containing all the DevelopmentCards specified in the json file
 	 */
 	private DevelopmentCard[] readAllDevelopmentCards() throws ParseException, IOException {
-		DevelopmentCard[] development_cards = new DevelopmentCard[development_cards_number];
-
 		InputStream is = getClass().getClassLoader().getResourceAsStream("json/developmentcards.json");
 		JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+		this.development_cards_number = (int)(long) jsonObject.get("development_cards_number");
+		DevelopmentCard[] development_cards = new DevelopmentCard[development_cards_number];
 
 		JSONArray development_cards_obj = (JSONArray) jsonObject.get("development_cards");
 		for (int i = 0; i < development_cards_number; i++) {
@@ -218,10 +245,11 @@ public class Factory {
 	 * @return an array containing all the LeaderCards specified in the json file
 	 */
 	private LeaderCard[] readAllLeaderCards() throws ParseException, IOException {
-		LeaderCard[] leader_cards = new LeaderCard[leader_cards_number];
-
 		InputStream is = getClass().getClassLoader().getResourceAsStream("json/leadercards.json");
 		JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+		this.leader_cards_number = (int)(long) jsonObject.get("leader_cards_number");
+		LeaderCard[] leader_cards = new LeaderCard[leader_cards_number];
 
 		JSONArray leader_cards_obj = (JSONArray) jsonObject.get("leader_cards");
 		for (int i = 0; i < leader_cards_number; i++) {
@@ -251,10 +279,11 @@ public class Factory {
 	 * @return an array containing all the Cells specified in the json file
 	 */
 	private Cell[] readAllCells() throws ParseException, IOException {
-		Cell[] cells = new Cell[cells_number];
-
 		InputStream is = getClass().getClassLoader().getResourceAsStream("json/cells.json");
 		JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+		this.cells_number = (int)(long) jsonObject.get("cells_number");
+		Cell[] cells = new Cell[cells_number];
 
 		JSONArray cells_obj = (JSONArray) jsonObject.get("cells");
 		for (int i = 0; i < cells_number; i++) {
@@ -290,10 +319,11 @@ public class Factory {
 	 * @return an array containing all the Tiles specified in the json file
 	 */
 	private Tile[] readAllTiles() throws ParseException, IOException {
-		Tile[] tiles = new Tile[tiles_number];
-
 		InputStream is = getClass().getClassLoader().getResourceAsStream("json/tiles.json");
 		JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+		this.tiles_number = (int)(long) jsonObject.get("tiles_number");
+		Tile[] tiles = new Tile[tiles_number];
 
 		JSONArray tiles_obj = (JSONArray) jsonObject.get("tiles");
 		for (int i = 0; i < tiles_number; i++) {
