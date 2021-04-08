@@ -15,6 +15,9 @@ import it.polimi.ingsw.model.game.Factory;
 
 import it.polimi.ingsw.model.player.Player;
 
+import it.polimi.ingsw.model.player.track.Cell;
+import it.polimi.ingsw.model.player.track.Tile;
+
 public class SoloGameTest {
 	SoloGame game;
 
@@ -37,7 +40,9 @@ public class SoloGameTest {
 	 */
 	@BeforeEach
 	public void createSoloGame() throws IOException, ParseException {
-		Player[] players = {new Player()};
+		Factory factory = Factory.getIstance();
+
+		Player[] players = {new Player("Paperino", factory.getAllCells(), factory.getAllTiles())};
 		this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
 	}
 
