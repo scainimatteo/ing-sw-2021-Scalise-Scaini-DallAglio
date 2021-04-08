@@ -81,7 +81,8 @@ public class DeckTest {
 			check.put(random, 1);
 			random = new Random();
 		}
-		Iterator <Random> iterator = deck.shuffle().iterator();
+		deck.shuffle();
+		Iterator <Random> iterator = deck.iterator();
 		for (int i = 0; i<max; i++){
 			copy[i] = iterator.next();
 			check.put(copy[i], check.get(copy[i]) + 1);

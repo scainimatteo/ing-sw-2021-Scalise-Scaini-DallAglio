@@ -86,12 +86,12 @@ public class Deck<E> extends AbstractCollection <E> {
 	*
 	* @return the shuffled deck
 	*/
-	public Deck shuffle() {
-		//per garantire una distribuzione più casuale degli elementi che permetta
-		//anche la prima configurazione senza favorirla
+	public void shuffle() {
+		//allows for more equal probability of each possible output
+		//due to the shuffle method never keeping the same order, less cycles would make the initial configuration either impossible
+		//or to likely after the shuffling function
 		for (int i = 0; i < 5; i++){
 			Collections.shuffle (structure);
 		}
-		return this;
 	}				
 }

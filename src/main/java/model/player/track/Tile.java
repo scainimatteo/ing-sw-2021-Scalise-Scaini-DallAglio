@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.player.track;
 
-public class Tile {
+public class Tile implements Cloneable {
 	private VaticanReports report;
 	private int victory_points;
 	private boolean active;
@@ -22,4 +22,14 @@ public class Tile {
 	public void deactivateTile(){
 		this.active = false;
 	}
+
+	public Object clone() {
+		Object clone = null;
+		try {
+			clone = super.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return clone;
+    }
 }
