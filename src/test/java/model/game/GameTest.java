@@ -45,7 +45,7 @@ public class GameTest {
 
 		assertEquals(before[this.number_of_players - 1], after[0]);
 		for (int i = 1; i < this.number_of_players; i++) {
-			assertEquals(before[i], after[i - 1]);
+			assertEquals(before[i - 1], after[i]);
 		}
 	}
 }
