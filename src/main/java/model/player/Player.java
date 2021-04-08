@@ -13,12 +13,12 @@ import it.polimi.ingsw.model.player.track.Tile;
 import java.util.HashMap;
 
 public class Player {
-	private String nickname;
-	private FaithTrack track;
-	private Warehouse warehouse;
-	private StrongBox strongbox;
-	private DevelopmentCardsSlots development_card_slots;
-	private LeaderCard[] leader_cards_deck;
+	protected String nickname;
+	protected FaithTrack track;
+	protected Warehouse warehouse;
+	protected StrongBox strongbox;
+	protected DevelopmentCardsSlots development_card_slots;
+	protected LeaderCard[] leader_cards_deck;
 
 	public Player(String nickname, Cell[] cell_track, Tile[] v_r_tiles){
 		this.nickname = nickname;
@@ -126,7 +126,6 @@ public class Player {
 
 	/**
 	 * DEVCARDSSLOTS METHODS
-	 * TODO: cambia isBuyable
 	 */
 	public void buyCard(DevelopmentCard card, int position, boolean warehouse_first){
 		boolean[] returned = this.isBuyable(card);
