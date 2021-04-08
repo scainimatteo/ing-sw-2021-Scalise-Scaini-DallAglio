@@ -1,4 +1,5 @@
 @startuml
+/' CLASSES DEFINITION '/
 
 class Match {
 	- Game game
@@ -14,9 +15,9 @@ class FaithController {
 }
 
 class FaithTrackController {
-	+ static VaticanReport movePlayer(Player player, FaithController faith)
-	+ static VaticanReport redistributeFaith(Player discarder, FaithController faith)
-	+ static void activateVaticanReport(VaticanReport report, Player[] players)
+	+ {static} VaticanReport movePlayer(Player player, FaithController faith)
+	+ {static} VaticanReport redistributeFaith(Player discarder, FaithController faith)
+	+ {static} void activateVaticanReport(VaticanReport report, Player[] players)
 }
 
 abstract class Turn {
@@ -65,4 +66,14 @@ class SoloMatch {
 	+ void play()
 }
 
+
+/' RELATIONS DEFINITION '/
+Match -- Turn
+Match -left- FaithTrackController
+Match -right- LeaderCardController
+Turn -left- FaithController
+Turn <|-- MarketTurn
+Turn <|-- BuyCardTurn
+Turn <|-- ProductionTurn
+Match <|-- SoloMatch
 @enduml
