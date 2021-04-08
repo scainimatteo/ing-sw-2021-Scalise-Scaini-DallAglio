@@ -31,9 +31,9 @@ public class Warehouse {
 	 * @exception IllegalArgumentException is thrown if new_resource cannot be inserted
 	 */
 	private boolean isPossibleToInsert(Resource new_resource){
-		if(!isPossibileToInsertTop(new_resource)){
-			if(!isPossibileToInsertMiddle(new_resource)){
-				if(!isPossibileToInsertBottom(new_resource)){
+		if(!isPossibleToInsertTop(new_resource)){
+			if(!isPossibleToInsertMiddle(new_resource)){
+				if(!isPossibleToInsertBottom(new_resource)){
 					throw new IllegalArgumentException();
 				}
 			}
@@ -45,7 +45,7 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibileToInsertTop(Resource new_resource){
+	private boolean isPossibleToInsertTop(Resource new_resource){
 		// if middle_resources have at least one space occupied and new_resource is the same resource, return false
 		if(this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
 			return false;
@@ -100,7 +100,7 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibileToInsertMiddle(Resource new_resource){
+	private boolean isPossibleToInsertMiddle(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
 		if(new_resource.equals(this.top_resource)){
 			return false;
@@ -167,7 +167,7 @@ public class Warehouse {
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
 	 */
-	private boolean isPossibileToInsertBottom(Resource new_resource){
+	private boolean isPossibleToInsertBottom(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
 		if(new_resource.equals(this.top_resource)){
 			return false;
