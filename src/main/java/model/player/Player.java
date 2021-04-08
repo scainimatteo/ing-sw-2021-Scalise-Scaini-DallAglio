@@ -30,22 +30,52 @@ public class Player {
 	}
 
 	/**
-	 * TODO: check the level
 	 * @param card is the DevelopmentCard to be checked
 	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
 	 */
-	public boolean isBuyable(DevelopmentCard card){
+	public boolean[] isBuyable(DevelopmentCard card){
 		Resource[] tmp = card.getCost();
+		boolean tmp_boolean = true;
+		boolean[] to_return = {false, false, false};
+		int card_level = card.getCardLevel().getLevel();
 
 		if(!(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp))){
 			for (Resource res : tmp){
 				if(res != null){
-					return false;
+					tmp_boolean = false;
 				}
 			}
 		}
 
-		return true;
+		if(tmp_boolean){
+			DevelopmentCard[] devcard = this.development_card_slots.getTopCards();
+
+			if(devcard[0] != null){
+				if(card_level - devcard[0].getCardLevel().getLevel() == 1){
+					to_return[0] = true;
+				}
+			} else if(card_level == 1){ 
+				to_return[0] = true;
+			}
+
+			if(devcard[1] != null){
+				if(card_level - devcard[1].getCardLevel().getLevel() == 1){
+					to_return[1] = true;
+				}
+			} else if(card_level == 1){
+				to_return[1] = true;
+			} 
+
+			if(devcard[2] != null){
+				if(card_level - devcard[2].getCardLevel().getLevel() == 1){
+					to_return[2] = true;
+				}
+			} else if(card_level == 1){
+				to_return[2] = true;
+			}
+		}
+
+		return to_return;
 	}
 
 	public String getNickname(){
@@ -96,9 +126,11 @@ public class Player {
 
 	/**
 	 * DEVCARDSSLOTS METHODS
+	 * TODO: cambia isBuyable
 	 */
 	public void buyCard(DevelopmentCard card, int position, boolean warehouse_first){
-		if(this.isBuyable(card)){
+		boolean[] returned = this.isBuyable(card);
+		if(returned[position]){
 			this.development_card_slots.buyCard(card, position);
 
 			Resource[] tmp = card.getCost();

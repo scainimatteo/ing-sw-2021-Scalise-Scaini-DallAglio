@@ -34,7 +34,8 @@ public class DevelopmentCard extends Card {
 	}
 
 	public Resource[] getCost(){
-		return this.cost;
+		Resource[] to_return = this.cost.clone();
+		return to_return;
 	}
 }
 
