@@ -65,7 +65,6 @@ public class SoloGameTest {
 			addToMap(number_of_tokens, this.game.getTopToken().getClass().getName());
 		}
 
-		//TODO: non mi piace
 		assertEquals(2, number_of_tokens.get("it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces"));
 		assertEquals(1, number_of_tokens.get("it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace"));
 		assertEquals(4, number_of_tokens.get("it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards"));

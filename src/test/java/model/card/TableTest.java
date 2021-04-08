@@ -50,16 +50,19 @@ public class TableTest {
 	}
 
 	/**
-	 * Check that the iterator returns the cards at the top of the decks
+	 * Check that the iterator returns all the elements in the decks
 	 */
 	@RepeatedTest(value = 3)
 	public void IteratorTest() {
 		Iterator<Object> iterator = this.table.iterator();
 		for (int i = 0; iterator.hasNext(); i++) {
-			assertEquals(iterator.next(), this.objects.get((this.deck_size * (i + 1)) - 1));
+			assertEquals(iterator.next(), this.objects.get(i));
 		}
 	}
 
+	/**
+	 * Check that the method returns the elements on top of the decks
+	 */
 	@RepeatedTest(value = 3)
 	public void peekTopTest() {
 		Random random = new Random();
@@ -70,6 +73,9 @@ public class TableTest {
 		assertEquals(object, this.objects.get(deck_size * (row_size * row + column + 1) - 1));
 	}
 
+	/**
+	 * Check that the method returns the elements on top of the decks while removing them
+	 */
 	@RepeatedTest(value = 3)
 	public void drawTest() {
 		Random random = new Random();
