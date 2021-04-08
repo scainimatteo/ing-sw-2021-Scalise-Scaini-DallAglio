@@ -44,7 +44,11 @@ public class Player {
 			}
 		}
 
-		return false;
+		return true;
+	}
+
+	public String getNickname(){
+		return this.nickname;
 	}
 
 	/**
@@ -115,10 +119,4 @@ public class Player {
 	public int getMarkerPosition(){
 		return this.track.getMarkerPosition();
 	}
-
-	/**
-	 * FAITHTRACKSINGLEPLAYER
-	 * moveForwardBlackMarker
-	 * getBlackMarkerPosition
-	 */
 }
