@@ -25,9 +25,10 @@ public class GameTest {
 		Random random = new Random();
 		this.number_of_players = random.nextInt(4) + 1;
 
+		Factory factory = Factory.getIstance();
 		Player[] players = new Player[this.number_of_players];
 		for (int i = 0; i < this.number_of_players; i++) {
-			players[i] = new Player();
+			players[i] = new Player(Integer.toString(i), factory.getAllCells(), factory.getAllTiles());
 		}
 
 		this.game = new Game(players, Factory.getIstance().getAllDevelopmentCards());
