@@ -90,26 +90,28 @@ public class Table<E> extends AbstractCollection<E> {
 	/**
 	 * Iterator of the class
 	 *
-	 * Iterates between the cards on top of the decks
+	 * Iterates between all the elements in the decks
 	 */
 	private class TableIterator implements Iterator<E> {
-		ArrayList<E> elements_on_top;
+		ArrayList<E> elements_on_table;
 		int index = 0;
 
 		public TableIterator(Table<E> table) {
-			this.elements_on_top = new ArrayList<E>(max_size);
+			this.elements_on_table = new ArrayList<E>();
 			for (int i = 0; i < max_size; i++) {
-				this.elements_on_top.add(structure.get(i).peekTopCard());
+				for (E element: structure.get(i)) {
+					this.elements_on_table.add(element);
+				}
 			}
 		}
 
 		public boolean hasNext() {
-			return index < elements_on_top.size();
+			return index < elements_on_table.size();
 		}
 
 		public E next() {
 			index++;
-			return elements_on_top.get(index - 1);
+			return elements_on_table.get(index - 1);
 		}
 	}
 }
