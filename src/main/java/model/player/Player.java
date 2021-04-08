@@ -30,6 +30,7 @@ public class Player {
 	}
 
 	/**
+	 * TODO: check the level
 	 * @param card is the DevelopmentCard to be checked
 	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
 	 */
@@ -95,10 +96,34 @@ public class Player {
 
 	/**
 	 * DEVCARDSSLOTS METHODS
-	 * TODO: in buyCard after the call of the method remove the resources from the wh then from the sb
 	 */
-	public void buyCard(DevelopmentCard card, int position){
-		this.development_card_slots.buyCard(card, position);
+	public void buyCard(DevelopmentCard card, int position, boolean warehouse_first){
+		if(this.isBuyable(card)){
+			this.development_card_slots.buyCard(card, position);
+
+			Resource[] tmp = card.getCost();
+			if(warehouse_first){
+				for (Resource res : tmp){
+					try{
+						this.warehouse.getFromWarehouse(res, 1);
+					}catch (IllegalArgumentException | IndexOutOfBoundsException e){
+						try{
+							this.strongbox.removeResources(res, 1);
+						} catch (IllegalArgumentException | IndexOutOfBoundsException x){}
+					}
+				}
+			}else{
+				for (Resource res : tmp){
+					try{
+						this.strongbox.removeResources(res, 1);
+					}catch (IllegalArgumentException | IndexOutOfBoundsException e){
+						try{
+							this.warehouse.getFromWarehouse(res, 1);
+						} catch (IllegalArgumentException | IndexOutOfBoundsException x){}
+					}
+				}
+			}
+		}
 	}
 
 	public DevelopmentCard[] getTopCards(){

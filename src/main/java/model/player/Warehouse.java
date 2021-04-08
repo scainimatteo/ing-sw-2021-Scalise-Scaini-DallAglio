@@ -228,15 +228,9 @@ public class Warehouse {
 	 * @param quantity is the number of resource requested
 	 * @return an array of the resources requested
 	 */
-	public Resource[] getFromWarehouse(Resource resource_type, int quantity){
-		try{
-			Resource[] to_return = getFromTop(resource_type, quantity);
-			return to_return;
-		}catch(IllegalArgumentException e1){
-			throw new IllegalArgumentException();
-		}catch(IndexOutOfBoundsException e2){
-			throw new IndexOutOfBoundsException();
-		}
+	public Resource[] getFromWarehouse(Resource resource_type, int quantity) throws IllegalArgumentException, IndexOutOfBoundsException{
+		Resource[] to_return = getFromTop(resource_type, quantity);
+		return to_return;
 	}
 
 	/**
