@@ -30,9 +30,9 @@ public class StrongBox {
 	 */
 	public void insertResources(Resource[] new_resources) {
 		for (Resource resource : new_resources){
-			if(this.storage.containsKey(resource)){
+			if (this.storage.containsKey(resource)){
 				this.storage.put(resource, storage.get(resource) + 1);
-			}else{
+			} else {
 				throw new IllegalArgumentException();
 			}
 		}
@@ -52,11 +52,11 @@ public class StrongBox {
 	public Resource[] removeResources(Resource resource_type, int quantity) {
 		Integer numof_resource = this.storage.get(resource_type);
 
-		if(!(this.storage.containsKey(resource_type))){
+		if ( !(this.storage.containsKey(resource_type)) ){
 			throw new IllegalArgumentException();
 		}
 
-		if(quantity <= numof_resource){
+		if (quantity <= numof_resource){
 			ArrayList<Resource> temp_array = new ArrayList<Resource>();
 
 			for (int i = 0; i < quantity; i ++){
@@ -68,13 +68,12 @@ public class StrongBox {
 			this.storage.put(resource_type, (numof_resource - quantity));
 
 			return to_return;
-		}else{
+		} else {
 			throw new IndexOutOfBoundsException();
 		}
 	}
 
 	/**
-	 * TODO: create the method
 	 * @param to_check are the resources that need to be checked
 	 * @return true if the resources are contained
 	 */
@@ -85,24 +84,24 @@ public class StrongBox {
 		int servant = 0;
 
 		for (int i = 0; i < to_check.length; i ++){
-			if(this.storage.containsKey(to_check[i])){
-				if(to_check[i].equals(Resource.COIN)){
+			if (this.storage.containsKey(to_check[i])){
+				if (to_check[i].equals(Resource.COIN)){
 					coin += 1;
-				}else if(to_check[i].equals(Resource.STONE)){
+				} else if (to_check[i].equals(Resource.STONE)){
 					stone += 1;
-				}else if(to_check[i].equals(Resource.SHIELD)){
+				} else if (to_check[i].equals(Resource.SHIELD)){
 					shield += 1;
-				}else if(to_check[i].equals(Resource.SERVANT)){
+				} else if (to_check[i].equals(Resource.SERVANT)){
 					servant += 1;
 				}
-			}else{
-				if(to_check[i] == null){
-				}else{
+			} else {
+				if (to_check[i] == null){
+				} else {
 					return false;
 				}
 			}
 
-			if(coin > this.storage.get(Resource.COIN) || stone > this.storage.get(Resource.STONE) || shield > this.storage.get(Resource.SHIELD) || servant > this.storage.get(Resource.SERVANT)){
+			if (coin > this.storage.get(Resource.COIN) || stone > this.storage.get(Resource.STONE) || shield > this.storage.get(Resource.SHIELD) || servant > this.storage.get(Resource.SERVANT)){
 				return false;
 			}
 

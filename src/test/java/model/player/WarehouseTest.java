@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class WarehouseTest {
 	/**
-	 * test for the methods tryToInsert, rearrangeWarehouse and the getters
+	 * Test for the methods tryToInsert, rearrangeWarehouse and the getters
 	 * rearranged 2 middle and 2 bottom inserting 1 middle
 	 */
 	@Test
@@ -38,7 +38,7 @@ public class WarehouseTest {
 	}
 
 	/**
-	 * test rearrange inserting 1 top in a warehouse containing 1 top and 1 middle
+	 * Test rearrange inserting 1 top in a warehouse containing 1 top and 1 middle
 	 */
 	@Test
 	public void rearrangeTopAndMiddleTest(){
@@ -68,7 +68,7 @@ public class WarehouseTest {
 	}
 
 	/**
-	 * test insert in a full warehouse
+	 * Test insert in a full warehouse
 	 */
 	@Test
 	public void fullWarehouseTest(){
@@ -98,7 +98,7 @@ public class WarehouseTest {
 	}
 
 	/**
-	 * test insertion of 4 different resources
+	 * Test insertion of 4 different resources
 	 */
 	@Test
 	public void allDifferentResourcesTest(){
@@ -124,7 +124,7 @@ public class WarehouseTest {
 	}
 
 	/**
-	 * test for the method getFromWarehouse
+	 * Test for the method getFromWarehouse
 	 */
 	@Test
 	public void getFromWarehouseTest(){
@@ -152,7 +152,7 @@ public class WarehouseTest {
 	}
 
 	/**
-	 * test requesting not contained resource
+	 * Test requesting not contained resource
 	 */
 	@Test
 	public void notContainedResourceTest(){
@@ -169,11 +169,11 @@ public class WarehouseTest {
 		test_return = test_warehouse.tryToInsert(test_resources1);
 		assertEquals(test_return, 0);
 
-		assertThrows(IllegalArgumentException.class, ()->{Resource[] test_return_getfromwarehouse = test_warehouse.getFromWarehouse(servant_resource, 1);});
+		assertThrows(IllegalArgumentException.class, ()->{ Resource[] test_return_getfromwarehouse = test_warehouse.getFromWarehouse(servant_resource, 1); });
 	}
 
 	/**
-	 * test requesting greater quantity of resources
+	 * Test requesting greater quantity of resources
 	 */
 	@Test
 	public void greaterQuantityTest(){
@@ -190,6 +190,6 @@ public class WarehouseTest {
 		test_return = test_warehouse.tryToInsert(test_resources1);
 		assertEquals(test_return, 0);
 
-		assertThrows(IndexOutOfBoundsException.class, ()->{Resource[] test_return_getfromwarehouse = test_warehouse.getFromWarehouse(coin_resource, 2);});
+		assertThrows(IndexOutOfBoundsException.class, ()->{ Resource[] test_return_getfromwarehouse = test_warehouse.getFromWarehouse(coin_resource, 2); });
 	}
 }

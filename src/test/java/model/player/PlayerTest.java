@@ -118,7 +118,7 @@ public class PlayerTest {
 		Resource[] sb_resources = {Resource.SERVANT};
 		this.player.insertResources(sb_resources);
 
-		assertThrows(IllegalArgumentException.class, ()->{this.player.buyCard(dev_card[4], 0, true);});
+		assertThrows(IllegalArgumentException.class, ()->{ this.player.buyCard(dev_card[4], 0, true); });
 
 		DevelopmentCard[] expected2 = {dev_card[1], null, null};
 		assertArrayEquals(expected2, this.player.getTopCards());
@@ -136,7 +136,7 @@ public class PlayerTest {
 		Resource[] sb_resources = {Resource.STONE, Resource.STONE};
 		this.player.insertResources(sb_resources);
 
-		assertThrows(IllegalArgumentException.class, ()->{this.player.buyCard(dev_card[19], 0, true);});
+		assertThrows(IllegalArgumentException.class, ()->{ this.player.buyCard(dev_card[19], 0, true); });
 
 		DevelopmentCard[] expected = {null, null, null};
 		assertArrayEquals(expected, this.player.getTopCards());
@@ -157,6 +157,6 @@ public class PlayerTest {
 		Resource[] sb_resources = {Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN, Resource.COIN};
 		this.player.insertResources(sb_resources);
 
-		assertThrows(IllegalArgumentException.class, ()->{this.player.buyCard(dev_card[29], 0, true);});
+		assertThrows(IllegalArgumentException.class, ()->{ this.player.buyCard(dev_card[29], 0, true) ;});
 	}
 }

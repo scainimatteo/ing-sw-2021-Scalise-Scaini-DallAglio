@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class StrongBoxTest {
 	/**
-	 * test for the method insertResources
+	 * Test for the method insertResources
 	 */
 	@Test
 	public void insertInStrongBoxTest(){
@@ -28,7 +28,7 @@ public class StrongBoxTest {
 	}
 
 	/**
-	 * test for the method removeResources
+	 * Test for the method removeResources
 	 */
 	@Test
 	public void removeResourceTest(){
@@ -47,7 +47,7 @@ public class StrongBoxTest {
 	}
 
 	/**
-	 * test for requesting not contained resource
+	 * Test for requesting not contained resource
 	 */
 	@Test
 	public void removeNotContainedResourceTest(){
@@ -68,7 +68,7 @@ public class StrongBoxTest {
 	}
 
 	/**
-	 * test for requesting not contained resource
+	 * Test for requesting not contained resource
 	 */
 	@Test
 	public void removeGreaterQuantityTest(){

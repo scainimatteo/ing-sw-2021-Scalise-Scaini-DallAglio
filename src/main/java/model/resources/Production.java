@@ -25,9 +25,9 @@ public class Production {
 	 * @exception IllegalArgumentException is thrown if the cost is not equal to this.required_resources
 	 */
 	public Resource[] activateProduction(Resource[] cost){
-		if(this.compareArrays(cost)){
+		if (this.compareArrays(cost)){
 			return produced_resources;
-		}else{
+		} else {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -37,13 +37,13 @@ public class Production {
 	 * @return true if the two arrays have the same elements (even if they are not in the same position)
 	 */
 	private boolean compareArrays(Resource[] array_in_input){
-		if(array_in_input[0].equals(this.required_resources[0]) || array_in_input[1].equals(this.required_resources[0])){
-			if(array_in_input[0].equals(this.required_resources[0])){
+		if (array_in_input[0].equals(this.required_resources[0]) || array_in_input[1].equals(this.required_resources[0])){
+			if (array_in_input[0].equals(this.required_resources[0])){
 				return(array_in_input[1].equals(this.required_resources[1]));
-			}else{
+			} else {
 				return(array_in_input[0].equals(this.required_resources[1]));
 			}
-		}else{
+		} else {
 			return false;
 		}
 	}

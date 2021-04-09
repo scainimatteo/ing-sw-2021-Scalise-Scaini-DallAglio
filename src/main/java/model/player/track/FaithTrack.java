@@ -16,8 +16,8 @@ public class FaithTrack {
 		this.faith_marker = track[new_position];
 
 		for (int i = new_position; i > (new_position - number_of_times); i --){
-			if(track[i].isPopeSpace()){
-				if(checkCell(i)){
+			if (track[i].isPopeSpace()){
+				if (checkCell(i)){
 					this.activateVaticanReport(this.track[i].whichVaticanReport());
 					return this.track[i].whichVaticanReport();
 				}

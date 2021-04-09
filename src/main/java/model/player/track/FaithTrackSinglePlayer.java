@@ -13,8 +13,8 @@ public class FaithTrackSinglePlayer extends FaithTrack {
 		this.black_marker = super.track[new_position];
 
 		for (int i = new_position; i > (new_position - number_of_times); i --){
-			if(super.track[i].isPopeSpace()){
-				if(super.checkCell(i)){
+			if (super.track[i].isPopeSpace()){
+				if (super.checkCell(i)){
 					super.activateVaticanReport(super.track[i].whichVaticanReport());
 					return super.track[i].whichVaticanReport();
 				}

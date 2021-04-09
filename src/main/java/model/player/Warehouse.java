@@ -31,9 +31,9 @@ public class Warehouse {
 	 * @exception IllegalArgumentException is thrown if new_resource cannot be inserted
 	 */
 	private boolean isPossibleToInsert(Resource new_resource){
-		if(!isPossibleToInsertTop(new_resource)){
-			if(!isPossibleToInsertMiddle(new_resource)){
-				if(!isPossibleToInsertBottom(new_resource)){
+		if ( !isPossibleToInsertTop(new_resource) ){
+			if ( !isPossibleToInsertMiddle(new_resource) ){
+				if ( !isPossibleToInsertBottom(new_resource) ){
 					throw new IllegalArgumentException();
 				}
 			}
@@ -47,51 +47,51 @@ public class Warehouse {
 	 */
 	private boolean isPossibleToInsertTop(Resource new_resource){
 		// if middle_resources have at least one space occupied and new_resource is the same resource, return false
-		if(this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
+		if (this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
 			return false;
 		}
 
 		// if bottom_resources have at least one space occupied and new_resource is the same resource, return false
-		if(this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])){
+		if (this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])){
 			return false;
 		}
 
 		// if top_resource is free, insert and return true
-		if(this.top_resource == null){
+		if (this.top_resource == null){
 			this.top_resource = new_resource;
 			return true;
 		// if top_resource is full, insert and return true
-		}else{
-			if(new_resource.equals(this.top_resource)){
+		} else {
+			if (new_resource.equals(this.top_resource)){
 				return rearrangeWarehouseTop(new_resource);
-			}else{
+			} else {
 				return false;
 			}
 		}
 	}
 
 	private boolean rearrangeWarehouseTop(Resource new_resource){
-		if(middle_resources[0] == null){
+		if (middle_resources[0] == null){
 			middle_resources[0] = new_resource;
 			middle_resources[1] = this.top_resource;
 			top_resource = null;
 			return true;
-		}else if(bottom_resources[0] == null){
+		} else if (bottom_resources[0] == null){
 			bottom_resources[0] = new_resource;
 			bottom_resources[1] = this.top_resource;
 			top_resource = null;
 			return true;
-		}else if(middle_resources[1] == null){
+		} else if (middle_resources[1] == null){
 			middle_resources[1] = top_resource;
 			top_resource = middle_resources[0];
 			middle_resources[0] = new_resource;
 			return true;
-		}else if(bottom_resources[1] == null){
+		} else if (bottom_resources[1] == null){
 			bottom_resources[1] = top_resource;
 			top_resource = bottom_resources[0];
 			bottom_resources[0] = new_resource;
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -102,63 +102,63 @@ public class Warehouse {
 	 */
 	private boolean isPossibleToInsertMiddle(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
-		if(new_resource.equals(this.top_resource)){
+		if (new_resource.equals(this.top_resource)){
 			return false;
 		}
 
 		// if middle_resources has at least one space occupied and new resource isn't the same resource, return false
-		if(this.middle_resources[0] != null && !(new_resource.equals(this.middle_resources[0]))){
+		if (this.middle_resources[0] != null && !(new_resource.equals(this.middle_resources[0]))){
 			return false;
 		}
 
 		// if bottom_resources have at least one space occupied and new_resource is the same resource, return false
-		if(this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])){
+		if (this.bottom_resources[0] != null && new_resource.equals(this.bottom_resources[0])){
 			return false;
 		}
 
-		if(this.middle_resources[1] == null){
+		if (this.middle_resources[1] == null){
 			// if middle_resources is empty, insert and return true
-			if(this.middle_resources[0] == null){
+			if (this.middle_resources[0] == null){
 				this.middle_resources[0] = new_resource;
 				return true;
 			// if 1st space is occupied, insert in 2nd position and return true
-			}else{
+			} else {
 				this.middle_resources[1] = new_resource;
 				return true;
 			}
 		// if middle_resources is full, return false
-		}else{
-			if(rearrangeWarehouseMiddle(new_resource)){
+		} else {
+			if (rearrangeWarehouseMiddle(new_resource)){
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 		}
 	}
 
 	private boolean rearrangeWarehouseMiddle(Resource new_resource){
-		if(this.bottom_resources[0] == null){
+		if (this.bottom_resources[0] == null){
 			this.bottom_resources[0] = new_resource;
 			this.bottom_resources[1] = middle_resources[0];
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = null;
 			this.middle_resources[1] = null;
 			return true;
-		}else if(this.bottom_resources[1] == null){
+		} else if (this.bottom_resources[1] == null){
 			this.bottom_resources[1] = middle_resources[0];
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = this.bottom_resources[0];
 			this.bottom_resources[0] = new_resource;
 			this.middle_resources[1] = null;
 			return true;
-		}else if(this.bottom_resources[2] == null){
+		} else if (this.bottom_resources[2] == null){
 			this.bottom_resources[2] = middle_resources[1];
 			this.middle_resources[0] = this.bottom_resources[0];
 			this.middle_resources[1] = this.bottom_resources[1];
 			this.bottom_resources[0] = new_resource;
 			this.bottom_resources[1] = new_resource;
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -169,38 +169,38 @@ public class Warehouse {
 	 */
 	private boolean isPossibleToInsertBottom(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
-		if(new_resource.equals(this.top_resource)){
+		if (new_resource.equals(this.top_resource)){
 			return false;
 		}
 
 		// if middle_resources have at least one space occupied and new_resource is the same resource, return false
-		if(this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
+		if (this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
 			return false;
 		}
 
 		// if bottom_resources has at least one space occupied and new resource isn't the same resource, return false
-		if(this.bottom_resources[0] != null && !(new_resource.equals(this.bottom_resources[0]))){
+		if (this.bottom_resources[0] != null && !(new_resource.equals(this.bottom_resources[0]))){
 			return false;
 		}
 
-		if(this.bottom_resources[2] == null){
-			if(this.bottom_resources[1] == null){
+		if (this.bottom_resources[2] == null){
+			if (this.bottom_resources[1] == null){
 				// if bottom_resources is empty, insert and return true
-				if(this.bottom_resources[0] == null){
+				if (this.bottom_resources[0] == null){
 					this.bottom_resources[0] = new_resource;
 					return true;
 				// if the 1st space is occupied, insert in the 2nd position and return true
-				}else{
+				} else {
 					this.bottom_resources[1] = new_resource;
 					return true;
 				}
 			// if the 2nd space is occupied, insert in the 3rd position and return true
-			}else{
+			} else {
 				this.bottom_resources[2] = new_resource;
 				return true;
 			}
 		// if bottom_resources is full, return false
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -213,9 +213,9 @@ public class Warehouse {
 		int resources_not_inserted = 0;
 
 		for(Resource resource : new_resources){
-			try{
+			try {
 				isPossibleToInsert(resource);
-			}catch(IllegalArgumentException e){
+			} catch(IllegalArgumentException e) {
 				resources_not_inserted += 1;
 			}
 		}
@@ -240,15 +240,15 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 */
 	private Resource[] getFromTop(Resource resource_type, int quantity){
-		if(this.top_resource != null && resource_type.equals(top_resource)){
-			if(quantity == 1){
+		if (this.top_resource != null && resource_type.equals(top_resource)){
+			if (quantity == 1){
 				Resource[] to_return = {top_resource};
 				this.top_resource = null;
 				return to_return;
-			}else{
+			} else {
 				throw new IndexOutOfBoundsException();
 			}
-		}else{
+		} else {
 			return getFromMiddle(resource_type, quantity);
 		}
 	}
@@ -260,30 +260,30 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 */
 	private Resource[] getFromMiddle(Resource resource_type, int quantity){
-		if(this.middle_resources[0] != null && resource_type.equals(middle_resources[0])){
-			if(this.middle_resources[1] != null){
-				if(quantity == 2){
+		if (this.middle_resources[0] != null && resource_type.equals(middle_resources[0])){
+			if (this.middle_resources[1] != null){
+				if (quantity == 2){
 					Resource[] to_return = {middle_resources[0], middle_resources[1]};
 					this.middle_resources[1] = null;
 					this.middle_resources[0] = null;
 					return to_return;
-				}else if(quantity == 1){
+				} else if (quantity == 1){
 					Resource[] to_return = {middle_resources[1]};
 					this.middle_resources[1] = null;
 					return to_return;
-				}else{
+				} else {
 					throw new IndexOutOfBoundsException();
 				}
-			}else{
-				if(quantity == 1){
+			} else {
+				if (quantity == 1){
 					Resource[] to_return = {middle_resources[0]};
 					this.middle_resources[0] = null;
 					return to_return;
-				}else{
+				} else {
 					throw new IndexOutOfBoundsException();
 				}
 			}
-		}else{
+		} else {
 			return getFromBottom(resource_type, quantity);
 		}
 	}
@@ -297,54 +297,54 @@ public class Warehouse {
 	 *
 	 */
 	private Resource[] getFromBottom(Resource resource_type, int quantity){
-		if(this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])){
-			if(bottom_resources[1] != null){
-				if(bottom_resources[2] != null){
-					if(quantity == 3){
+		if (this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])){
+			if (bottom_resources[1] != null){
+				if (bottom_resources[2] != null){
+					if (quantity == 3){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
 						this.bottom_resources[2] = null;
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else if(quantity == 2){
+					} else if (quantity == 2){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
 						this.bottom_resources[2] = null;
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else if(quantity == 1){
+					} else if (quantity == 1){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
 						this.bottom_resources[2] = null;
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else{
+					} else {
 						throw new IndexOutOfBoundsException();
 					}
-				}else{
-					if(quantity == 2){
+				} else {
+					if (quantity == 2){
 						Resource[] to_return = {bottom_resources[0], bottom_resources[1]};
 						this.bottom_resources[1] = null;
 						this.bottom_resources[0] = null;
 						return to_return;
-					}else if(quantity == 1){
+					} else if (quantity == 1){
 						Resource[] to_return = {bottom_resources[1]};
 						this.bottom_resources[1] = null;
 						return to_return;
-					}else{
+					} else {
 						throw new IndexOutOfBoundsException();
 					}
 				}
-			}else{
-				if(quantity == 1){
+			} else {
+				if (quantity == 1){
 					Resource[] to_return = {bottom_resources[0]};
 					this.bottom_resources[0] = null;
 					return to_return;
-				}else{
+				} else {
 					throw new IndexOutOfBoundsException();
 				}
 			}
-		}else{
+		} else {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -359,14 +359,14 @@ public class Warehouse {
 				top += 1;
 			} else if (to_check[i].equals(this.middle_resources[mid])){
 				mid += 1;
-			} else if(to_check[i].equals(this.bottom_resources[bot])){
+			} else if (to_check[i].equals(this.bottom_resources[bot])){
 				bot += 1;
 			} else if (to_check[i] == null){
 			} else {
 				return false;
 			}
 
-			if(top >= 2 || mid >= 3 || bot >= 4){
+			if (top >= 2 || mid >= 3 || bot >= 4){
 				return false;
 			}
 
@@ -389,38 +389,38 @@ public class Warehouse {
 		String to_print;
 
 		to_print = "1: ";
-		if(top_resource != null){
+		if (top_resource != null){
 			to_print = to_print + top_resource.name();
-		}else{
+		} else {
 			to_print = to_print + "null";
 		}
 
 		to_print = to_print + "\n2: ";
-		if(middle_resources[0] != null){
+		if (middle_resources[0] != null){
 			to_print = to_print + middle_resources[0].name() + " | ";
-		}else{
+		} else {
 			to_print = to_print + "null | ";
 		}
-		if(middle_resources[1] != null){
+		if (middle_resources[1] != null){
 			to_print = to_print + middle_resources[1].name();
-		}else{
+		} else {
 			to_print = to_print + "null";
 		}
 
 		to_print = to_print + "\n3: ";
-		if(bottom_resources[0] != null){
+		if (bottom_resources[0] != null){
 			to_print = to_print + bottom_resources[0].name() + " | ";
-		}else{
+		} else {
 			to_print = to_print + "null | ";
 		}
-		if(bottom_resources[1] != null){
+		if (bottom_resources[1] != null){
 			to_print = to_print + bottom_resources[1].name() + " | ";
-		}else{
+		} else {
 			to_print = to_print + "null | ";
 		}
-		if(bottom_resources[2] != null){
+		if (bottom_resources[2] != null){
 			to_print = to_print + bottom_resources[2].name();
-		}else{
+		} else {
 			to_print = to_print + "null\n";
 		}
 
