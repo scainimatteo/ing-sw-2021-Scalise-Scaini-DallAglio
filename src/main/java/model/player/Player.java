@@ -12,6 +12,8 @@ import it.polimi.ingsw.model.player.track.Tile;
 
 import java.util.HashMap;
 
+import java.lang.IllegalArgumentException;
+
 public class Player {
 	protected String nickname;
 	protected FaithTrack track;
@@ -154,6 +156,8 @@ public class Player {
 					}
 				}
 			}
+		} else{
+			throw new IllegalArgumentException();
 		}
 	}
 
