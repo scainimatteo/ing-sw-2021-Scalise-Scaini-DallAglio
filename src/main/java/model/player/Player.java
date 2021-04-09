@@ -31,6 +31,14 @@ public class Player {
 		this.leader_cards_deck = new LeaderCard[4];
 	}
 
+	public String getNickname(){
+		return this.nickname;
+	}
+	
+	public LeaderCard[] getDeck(){
+		return this.leader_cards_deck;
+	}
+
 	/**
 	 * @param card is the DevelopmentCard to be checked
 	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
@@ -78,10 +86,6 @@ public class Player {
 		}
 
 		return to_return;
-	}
-
-	public String getNickname(){
-		return this.nickname;
 	}
 
 	/**

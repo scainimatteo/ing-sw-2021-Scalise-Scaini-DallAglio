@@ -19,12 +19,4 @@ public class WhiteMarblesAbility implements LeaderAbility {
 	public Resource getResourceType(){
 		return resource_type;
 	}
-
-	public void setResourceType(Resource bonus) throws IllegalArgumentException{
-		if (bonus != Resource.FAITH){
-			resource_type = bonus;
-		} else {
-		throw new IllegalArgumentException();
-		}
-	}
 }
