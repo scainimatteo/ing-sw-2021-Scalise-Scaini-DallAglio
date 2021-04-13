@@ -1,4 +1,4 @@
-package it.polimi.ingsw.controller.faithtrack;
+package it.polimi.ingsw.controller.util;
 
 public class FaithController {
 	public final int faith_gained;
