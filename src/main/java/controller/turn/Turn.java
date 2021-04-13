@@ -1,20 +1,22 @@
 package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.card.LeaderAbility;
 
 import it.polimi.ingsw.controller.faithtrack.FaithController;
 
 public abstract class Turn {
 	protected Player player;
 
-	public Turn(Player player){
-		this.player = player;
-	}
-
 	protected FaithController playAction(){
 		return null;
 	}
 	
-	public void PlayTurn(){
+	public void playTurn(){
+		return;
+	}
+	
+	public LeaderAbility checkAbility(LeaderAbility ability){
+		return null;
 	}
 }

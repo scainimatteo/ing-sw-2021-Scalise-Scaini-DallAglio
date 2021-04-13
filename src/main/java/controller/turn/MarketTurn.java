@@ -15,7 +15,7 @@ public class MarketTurn extends Turn {
 	private Market market;
 
 	public MarketTurn (Player player, Market market){
-		super(player);
+		this.player = player;	
 		this.market = market;
 	}
 
