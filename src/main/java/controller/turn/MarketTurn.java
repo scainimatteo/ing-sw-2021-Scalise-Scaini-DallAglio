@@ -1,15 +1,21 @@
 package it.polimi.ingsw.controller.turn;
 
-import it.polimi.ingsw.controller.turn.Turn;
+import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Game;
 
-import java.lang.NoSuchElementException;
+import it.polimi.ingsw.model.card.LeaderCard;
+
+import it.polimi.ingsw.model.player.Player;
+
+import it.polimi.ingsw.model.resources.Resource;
+
+import java.util.NoSuchElementException;
 
 public class MarketTurn extends Turn {
-	private Market market
+	private Market market;
 
 	public MarketTurn (Player player, Market market){
-		this.player = player;
+		super(player);
 		this.market = market;
 	}
 
@@ -17,7 +23,7 @@ public class MarketTurn extends Turn {
 	* @return the index of the column choosen by the player
 	*/
 	public int ChooseColumn(){
-		int clientreturn;
+		int clientreturn = 0;
 		//TODO: insert client communication function
 		return clientreturn;
 	}
@@ -26,7 +32,7 @@ public class MarketTurn extends Turn {
 	* @return the index of the row choosen by the player
 	*/
 	public int ChooseRow(){
-		int clientreturn;
+		int clientreturn = 0;
 		//TODO: insert client communication function
 		return clientreturn;
 	}
@@ -36,12 +42,16 @@ public class MarketTurn extends Turn {
 	*
 	* @return resource type of the selected card
 	* @throws NoSuchElementException if no card is present/accepted by the player
+	*
+	* TODO: insent client communication function for confirmation of card selecton
+	* TODO: ho commentato la seconda parte del primo if e ho aggiunto true al secondo
 	*/
 	public Resource checkWhiteMarble() throws NoSuchElementException {
 		for (LeaderCard card: player.getDeck()){
-			if (card.isActive() && card.getType() == "WhiteMarble"){
-				if (/*TODO: insent client communication function for confirmation of card selecton*/){
-					return card.resource_type;
+			if (card.isActive() /*&& card.getType() == "WhiteMarble"*/){
+				if (true/*TODO: insent client communication function for confirmation of card selecton*/){
+					return null;
+					// return card.resource_type;
 				}
 			}
 		}
@@ -52,10 +62,12 @@ public class MarketTurn extends Turn {
 	* Gets the resources corresponding either to the row or the column the player selected
 	* 
 	* @return resource array of gained resources
+	* TODO: insert client communication function for choosing column or row
+	* TODO: ho aggiunto true all'if
 	*/
 	public Resource[] getFromMarket(){
 		/*TODO: insert client communication function for choosing column or row*/
-		if (/*chosen column*/)	{
+		if (true/*chosen column*/)	{
 			return market.getColumn(ChooseColumn());
 		}
 		else {
