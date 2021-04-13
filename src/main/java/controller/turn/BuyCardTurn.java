@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.controller.turn.Turn;
-import it.polimi.ingsw.controller.faithtrack.FaithController;
+import it.polimi.ingsw.controller.util.FaithController;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Game;
