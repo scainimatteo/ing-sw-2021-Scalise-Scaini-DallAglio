@@ -2,7 +2,7 @@ package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.model.player.Player;
 
-import it.polimi.ingsw.controller.faithtrack.FaithController;
+import it.polimi.ingsw.controller.util.FaithController;
 
 public abstract class Turn {
 	protected Player player;
