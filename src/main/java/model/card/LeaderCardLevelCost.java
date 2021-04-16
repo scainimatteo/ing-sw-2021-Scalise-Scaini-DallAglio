@@ -15,6 +15,7 @@ public class LeaderCardLevelCost extends LeaderCard {
 	}
 
 	public CardLevel[] getRequirements() {
-		return requirements;
+		CardLevel[] to_return = this.requirements.clone();
+		return to_return;
 	}
 }

@@ -15,6 +15,7 @@ public class LeaderCardResourcesCost extends LeaderCard {
 	}
 
 	public Resource[] getRequirements() {
-		return requirements;
+		Resource[] to_return = this.requirements.clone();
+		return to_return;
 	}
 }

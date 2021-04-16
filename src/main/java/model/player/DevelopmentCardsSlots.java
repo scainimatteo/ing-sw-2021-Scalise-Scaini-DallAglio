@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
+import java.util.Iterator;
+
 public class DevelopmentCardsSlots {
 	private Table<DevelopmentCard> slots;
 
@@ -37,5 +39,9 @@ public class DevelopmentCardsSlots {
 	public DevelopmentCard[] getCard(int position){
 		DevelopmentCard[] to_return = {slots.peekTop(0, position)};
 		return to_return;
+	}
+
+	public Iterator<DevelopmentCard> getIterator(){
+		return slots.iterator();
 	}
 }

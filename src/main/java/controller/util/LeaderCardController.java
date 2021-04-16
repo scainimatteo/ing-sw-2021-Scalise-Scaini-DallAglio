@@ -1,5 +1,7 @@
 package it.polimi.ingsw.controller.util;
 
+import it.polimi.ingsw.model.player.Player;
+
 import it.polimi.ingsw.model.card.LeaderCard;
 
 public class LeaderCardController {
@@ -20,12 +22,14 @@ public class LeaderCardController {
 	}
 
 	/**
+	 * TODO: check with isActivable
 	 * @param leader_cards is the array containing the two personal leader cards
 	 * @return an array of two booleans where each position is true if the corresponding card is to be discarded
 	 */
-	public boolean[] playLeaderCard(LeaderCard[] leader_cards){
+	public boolean[] playLeaderCard(Player player){
 		boolean[] to_return = {false, false};
 		boolean[] returned;
+		LeaderCard[] leader_cards = player.getDeck();
 
 		for (int i = 0; i < 2; i ++){
 			if(leader_cards[i] != null){
