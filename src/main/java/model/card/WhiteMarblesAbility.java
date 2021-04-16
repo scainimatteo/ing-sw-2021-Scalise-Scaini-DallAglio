@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-public class WhiteMarblesAbility implements LeaderAbility {
+public class WhiteMarblesAbility extends LeaderAbility {
 	private Resource resource_type;
 	
 	public WhiteMarblesAbility (Resource bonus){
@@ -18,5 +18,15 @@ public class WhiteMarblesAbility implements LeaderAbility {
 	
 	public Resource getResourceType(){
 		return resource_type;
+	}
+
+	/**
+	* Checks if the target ability is WhiteMarblesAbility type through overloading of the original method
+	*
+	* @param target allows the ability to run the overloaded method if the type is correct, else the inherited superclass method is run
+	* @return true, as it highlights that target ability is a WhiteMarblesAbility type else the inherited superclass method would be run
+	*/ 
+	public boolean checkAbility (WhiteMarblesAbility target){
+		return true;
 	}
 }
