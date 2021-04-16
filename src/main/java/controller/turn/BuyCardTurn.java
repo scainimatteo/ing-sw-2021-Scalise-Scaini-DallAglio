@@ -15,40 +15,44 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class BuyCardTurn extends Turn{
-	DevelopmentCardsOnTable dev_cards_on_table;
+	public DevelopmentCardsOnTable dev_cards_on_table;
+	public Resource[] discounts;
 	
 	public BuyCardTurn (Player player, DevelopmentCardsOnTable cards){
 		this.player = player;
+		this.discounts = new Resource[2]; 
 		this.dev_cards_on_table = cards;
 	}
-	
+
+	/**
+	* adds all discounted resources from the player's LeaderAbility deck to the turn's discounts
+	**/
+	private void checkDiscounts(){
+		DiscountAbility test = new DiscountAbility(null);
+		DiscountAbility cast;
+		int index = 0;
+		for (LeaderCard card : player.getDeck()){
+			if (card.isActive() && card.getAbility().checkAbility(test)){
+				cast = (DiscountAbility) card.getAbility();
+				discounts[index] = cast.getDiscountedResource();
+				index++;
+			}
+		}
+	}
+
 	/**
 	* Checks if the given card satisfies the requirements for buying it, considering the discount too.
 	* 
 	* @param chosen_card is the card the player wants to buy
-	* @param discount is the discounted resource to be kept in consideration
 	* @return true if the card does satisfy requirements
 	*/
-	//TODO: find a way to account for the discount before checking the requirements
-	private boolean checkRequirements(DevelopmentCard chosen_card, Resource discount) { 
-		/*for (boolean bool : player.isBuyable(chosen_card){
+	private boolean checkRequirements(DevelopmentCard chosen_card) { 
+		DevelopmentCard temp_card = chosen_card.applyDiscount(discounts);
+		for (boolean bool : player.isBuyable(temp_card)){
 			if (bool == true) {
 				return true;
 			}
 		}
-		if (discount != null){
-			Resource[] applied_discount = chosen_card.getCost();
-			for (int i = 0; int < applied_discount.lenght(); i++{
-				if (applied_discount[i].equals(discount)){
-					applied_discount[i] = null;
-					break;
-				}
-			for (boolean bool : player.isBuyable(applied_discount){
-				if (bool == true) {
-					return true;
-				}
-			}
-		}*/
 		return false;
 	}
 	
@@ -71,13 +75,10 @@ public class BuyCardTurn extends Turn{
 	*/
 	@Override
 	protected FaithController playAction(){
-		DiscountAbility ability = (DiscountAbility) checkAbility (new DiscountAbility(null));
-		Resource discount = null;
-		if (ability != null){
-			discount = ability.getDiscountedResource();
-		}	
+		int gained_faith = 0;
+		checkDiscounts();
 		DevelopmentCard chosen_card = chooseCardFromTable();
-		while (!checkRequirements(chosen_card, discount)){
+		while (!checkRequirements(chosen_card)){
 			chosen_card = chooseCardFromTable();
 		} 
 		//TODO: choose which slot to fit it in
@@ -87,6 +88,6 @@ public class BuyCardTurn extends Turn{
 		boolean method = false;
 		dev_cards_on_table.getFromDeck(chosen_card);
 		player.buyCard(chosen_card, pos, method);
-		return new FaithController(0,0);
+		return new FaithController(this.player, gained_faith,0);
 	}	
 }
