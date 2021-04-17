@@ -92,6 +92,19 @@ public class Player {
 		return to_return;
 	}
 
+	public boolean isActivable(LeaderCard card){
+		if (card instanceof LeaderCardLevelCost){
+			return this.isActivable((LeaderCardLevelCost) card);
+		} else if (card instanceof LeaderCardResourcesCost){
+			return this.isActivable((LeaderCardResourcesCost) card);
+		}
+		return false;
+	}
+
+	/**
+	 * @param card is the LeaderCard to be checked
+	 * @return true if the card can be activated
+	 */
 	public boolean isActivable(LeaderCardLevelCost card){
 		CardLevel[] req = card.getRequirements();
 		Iterator<DevelopmentCard> iterator = this.development_card_slots.getIterator();
@@ -116,7 +129,7 @@ public class Player {
 			} 
 		}
 
-		return false;
+		return to_return;
 	}
 
 	/**
@@ -165,6 +178,10 @@ public class Player {
 		this.warehouse.clearWarehouse();
 	}
 
+	public Warehouse getPlayerWarehouse(){
+		return this.warehouse;
+	}
+
 	/**
 	 * STRONGBOX METHODS
 	 */
@@ -178,6 +195,10 @@ public class Player {
 
 	public Resource[] removeResources(Resource resource_type, int quantity){
 		return this.strongbox.removeResources(resource_type, quantity);
+	}
+
+	public StrongBox getPlayerStrongbox(){
+		return this.strongbox;
 	}
 
 	/**
@@ -221,6 +242,10 @@ public class Player {
 
 	public DevelopmentCard[] getCard(int position){
 		return this.development_card_slots.getCard(position);
+	}
+
+	public Iterator<DevelopmentCard> getDevCardIterator(){
+		return this.development_card_slots.getIterator();
 	}
 
 	/**

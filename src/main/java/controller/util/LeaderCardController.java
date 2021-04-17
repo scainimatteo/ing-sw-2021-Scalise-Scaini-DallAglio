@@ -2,6 +2,8 @@ package it.polimi.ingsw.controller.util;
 
 import it.polimi.ingsw.model.player.Player;
 
+import it.polimi.ingsw.model.card.LeaderCardResourcesCost;
+import it.polimi.ingsw.model.card.LeaderCardLevelCost;
 import it.polimi.ingsw.model.card.LeaderCard;
 
 public class LeaderCardController {
@@ -37,7 +39,9 @@ public class LeaderCardController {
 
 				if (returned[0] || returned[1]){
 					if (returned[0]){
-						activateLeader(leader_cards[i]);
+						if (player.isActivable(leader_cards[i])){
+							activateLeader(leader_cards[i]);
+						}
 					} else if (returned[1]){
 						to_return[i] = true;
 					}

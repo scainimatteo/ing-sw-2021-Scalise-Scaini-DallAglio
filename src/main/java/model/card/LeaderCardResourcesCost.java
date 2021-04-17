@@ -1,7 +1,11 @@
 package it.polimi.ingsw.model.card;
 
-import it.polimi.ingsw.model.card.LeaderCard;
+// import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.resources.Resource;
+
+import it.polimi.ingsw.model.player.Warehouse;
+import it.polimi.ingsw.model.player.StrongBox;
+import it.polimi.ingsw.model.player.Player;
 
 public class LeaderCardResourcesCost extends LeaderCard {
 	private Resource[] requirements;
@@ -17,5 +21,23 @@ public class LeaderCardResourcesCost extends LeaderCard {
 	public Resource[] getRequirements() {
 		Resource[] to_return = this.requirements.clone();
 		return to_return;
+	}
+
+	public boolean isActivable(Player player){
+		Warehouse warehouse = player.getPlayerWarehouse();
+		StrongBox strongbox = player.getPlayerStrongbox();
+		Resource[] tmp = this.getRequirements();
+		boolean to_return = true;
+
+		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
+			for (Resource res : tmp){
+				if (res != null){
+					to_return = false;
+				}
+			}
+		}
+
+		return to_return;
+		
 	}
 }
