@@ -2,14 +2,18 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import it.polimi.ingsw.model.card.LeaderCardResourcesCost;
+import it.polimi.ingsw.model.card.LeaderCardLevelCost;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.card.CardLevel;
 
 import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
+import java.util.Iterator;
 import java.util.HashMap;
 
 import java.lang.IllegalArgumentException;
@@ -28,7 +32,7 @@ public class Player {
 		this.warehouse = new Warehouse();
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();
-		this.leader_cards_deck = new LeaderCard[4];
+		this.leader_cards_deck = new LeaderCard[2];
 	}
 
 	public String getNickname(){
@@ -88,6 +92,65 @@ public class Player {
 		return to_return;
 	}
 
+	public boolean isActivable(LeaderCard card){
+		if (card instanceof LeaderCardLevelCost){
+			return this.isActivable((LeaderCardLevelCost) card);
+		} else if (card instanceof LeaderCardResourcesCost){
+			return this.isActivable((LeaderCardResourcesCost) card);
+		}
+		return false;
+	}
+
+	/**
+	 * @param card is the LeaderCard to be checked
+	 * @return true if the card can be activated
+	 */
+	public boolean isActivable(LeaderCardLevelCost card){
+		CardLevel[] req = card.getRequirements();
+		Iterator<DevelopmentCard> iterator = this.development_card_slots.getIterator();
+		boolean to_return = true;
+		CardLevel tmp;
+
+		while (iterator.hasNext()){
+			tmp = iterator.next().getCardLevel();
+
+			for (int i = 0; i < req.length; i ++){
+				if (req[i].equals(tmp)){
+					req[i] = null;
+					break;
+				} 
+			}
+		}
+
+		for (int j = 0; j < req.length; j ++){
+			if (req[j] != null){
+				to_return = false;
+				break;
+			} 
+		}
+
+		return to_return;
+	}
+
+	/**
+	 * @param card is the LeaderCard to be checked
+	 * @return true if the card can be activated
+	 */
+	public boolean isActivable(LeaderCardResourcesCost card){
+		Resource[] tmp = card.getRequirements();
+		boolean to_return = true;
+
+		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
+			for (Resource res : tmp){
+				if (res != null){
+					to_return = false;
+				}
+			}
+		}
+
+		return to_return;
+	}
+
 	/**
 	 * WAREHOUSE METHODS
 	 */
@@ -115,6 +178,10 @@ public class Player {
 		this.warehouse.clearWarehouse();
 	}
 
+	public Warehouse getPlayerWarehouse(){
+		return this.warehouse;
+	}
+
 	/**
 	 * STRONGBOX METHODS
 	 */
@@ -128,6 +195,10 @@ public class Player {
 
 	public Resource[] removeResources(Resource resource_type, int quantity){
 		return this.strongbox.removeResources(resource_type, quantity);
+	}
+
+	public StrongBox getPlayerStrongbox(){
+		return this.strongbox;
 	}
 
 	/**
@@ -171,6 +242,10 @@ public class Player {
 
 	public DevelopmentCard[] getCard(int position){
 		return this.development_card_slots.getCard(position);
+	}
+
+	public Iterator<DevelopmentCard> getDevCardIterator(){
+		return this.development_card_slots.getIterator();
 	}
 
 	/**

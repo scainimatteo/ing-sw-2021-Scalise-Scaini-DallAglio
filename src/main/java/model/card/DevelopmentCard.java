@@ -17,7 +17,7 @@ public class DevelopmentCard extends Card {
 		this.production = production;
 		this.level = level;
 		this.id = id;
-	}	
+	}
 
 	public CardLevel getCardLevel() {
 		return this.level;
