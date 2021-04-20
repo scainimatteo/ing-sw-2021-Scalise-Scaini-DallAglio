@@ -12,7 +12,7 @@ public class LeaderCardController {
 	}
 
 	/**
-	 * @return an array of two boolean where the 1st position represent if the card has to be activated and the 2nd position represent has to be discarded
+	 * @return an array of two boolean where the 1st position represent if the card has to be activated and the 2nd position represent if has to be discarded
 	 */
 	private boolean[] askToPlayLeaderCard(){
 		boolean[] to_return = {false, false};
