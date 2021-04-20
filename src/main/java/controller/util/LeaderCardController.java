@@ -24,9 +24,8 @@ public class LeaderCardController {
 	}
 
 	/**
-	 * TODO: check with isActivable
 	 * @param leader_cards is the array containing the two personal leader cards
-	 * @return an array of two booleans where each position is true if the corresponding card is to be discarded
+	 * @return an array of two booleans where each position is true if the corresponding card have to be discarded
 	 */
 	public boolean[] playLeaderCard(Player player){
 		boolean[] to_return = {false, false};
