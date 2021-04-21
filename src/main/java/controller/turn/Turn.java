@@ -21,4 +21,8 @@ public abstract class Turn {
 	public LeaderAbility checkAbility(LeaderAbility ability){
 		return null;
 	}
+
+	protected FaithController discardLeaderCard(boolean[] whichLeaderCard){
+		return this.player.discardLeaderCard(whichLeaderCard);
+	}
 }

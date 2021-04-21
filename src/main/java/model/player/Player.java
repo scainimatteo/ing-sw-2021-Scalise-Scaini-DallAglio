@@ -13,6 +13,8 @@ import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
+import it.polimi.ingsw.controller.util.FaithController;
+
 import java.util.Iterator;
 import java.util.HashMap;
 
@@ -149,6 +151,19 @@ public class Player {
 		}
 
 		return to_return;
+	}
+
+	public FaithController discardLeaderCard(boolean[] whichLeaderCard){
+		int to_return = 0;
+
+		for (int i = 0; i < 2; i ++){
+			if (whichLeaderCard[i]){
+				this.leader_cards_deck[i] = null;
+				to_return ++;
+			} 
+		}
+
+		return new FaithController(this, to_return, 0);
 	}
 
 	/**
