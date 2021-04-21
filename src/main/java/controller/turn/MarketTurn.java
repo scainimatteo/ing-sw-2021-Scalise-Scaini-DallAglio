@@ -13,65 +13,113 @@ import java.util.NoSuchElementException;
 
 public class MarketTurn extends Turn {
 	private Market market;
+	private Resource[] whiteMarble;
+	//private ExtraSpaceAbility[] extra_space;
 
 	public MarketTurn (Player player, Market market){
 		this.player = player;	
 		this.market = market;
+		this.whiteMarble = new Resource[2];
 	}
 
 	/**
 	* @return the index of the column choosen by the player
 	*/
-	public int ChooseColumn(){
+	private int ChooseColumn(){
 		int clientreturn = 0;
-		//TODO: insert client communication function
+		int[] options = {0, 1, 2, 3};
+		clientreturn = handler.pickBetween(options);
 		return clientreturn;
 	}
 	
 	/**
 	* @return the index of the row choosen by the player
 	*/
-	public int ChooseRow(){
+	private int ChooseRow(){
 		int clientreturn = 0;
-		//TODO: insert client communication function
+		int[] options = {0, 1, 2};
+		clientreturn = handler.pickBetween(options);
 		return clientreturn;
 	}
 	
 	/**
-	* Checks for the presence of active WhiteMarblesAbility cards for the given player, shows each one by one to the player to ask for confirmation, returns the resource_type of the selected card.
-	*
-	* @return resource type of the selected card
-	* @throws NoSuchElementException if no card is present/accepted by the player
-	*
-	* TODO: insent client communication function for confirmation of card selecton
-	* TODO: ho commentato la seconda parte del primo if e ho aggiunto true al secondo
+	* Adds all bonus resources from the player's LeaderCard deck to the turn's bonuses 
 	*/
-	public Resource checkWhiteMarble() throws NoSuchElementException {
+	private Resource checkWhiteMarbles(){
+		WhiteMarblesAbility test = new WhiteMarbleAbility (null);
+		WhiteMarblesAbility cast;
+		int index = 0;
 		for (LeaderCard card: player.getDeck()){
-			if (card.isActive() /*&& card.getType() == "WhiteMarble"*/){
-				if (true/*TODO: insent client communication function for confirmation of card selecton*/){
-					return null;
-					// return card.resource_type;
-				}
+			if (card.isActive() && card.getAbility().checkAbility(test)){
+				cast = (WhiteMarblesAbility) card.getAbility();
+				discount[index] = cast.getResourceType();
+				index++;
 			}
 		}
-		throw new NoSuchElementException();
 	}
 	
 	/**
-	* Gets the resources corresponding either to the row or the column the player selected
+	* Applies given bonuses to the argument string by turning null pointers into resources according to the player's request 
 	* 
-	* @return resource array of gained resources
-	* TODO: insert client communication function for choosing column or row
-	* TODO: ho aggiunto true all'if
-	*/
-	public Resource[] getFromMarket(){
-		/*TODO: insert client communication function for choosing column or row*/
-		if (true/*chosen column*/)	{
-			return market.getColumn(ChooseColumn());
+	* @param starting_resources is the ResourceVector to apply the bonuses on
+	*/	
+	private void applyBonus(Resource[] starting_resources){		
+		if (whiteMarble[0] == null && whiteMarble[1] == null){
+			return;
 		}
 		else {
-			return market.getRow(ChooseRow());
+			for (int i = 0; i < starting_resources.lenght(); i++) {
+				if (starting_resource[i] == null && handler.pickFlow ("Do you want to use marble bonus?")) { 
+					starting_resource[i] = handler.pickBetween (whiteMarble);
+				}
+			}
+		}
+	}	
+	
+	/**
+	* Allows the player to choose if they want to pick a row, a column, and which one, then applies desired LeaderAbility bonuses
+	*
+	* @return the resources extracted from the market
+	*/ 
+	private Resource[] getFromMarket(){
+		Resource[] bought;
+		int picked;
+		if (handler.pickFlow(null)){
+			picked = ChooseColumn();
+			bought = market.getColumn(picked);
+			market.shiftColumn(picked);	
+		}
+		else {
+			picked = ChooseRow();
+			bought = market.getRow(picked);
+			market.shiftRow(picked);
 		}
 	}
+	
+	/**
+	* Counts the amount of Faith type resources in a given resource vector
+	*
+	* @param resources is the resource in which to count 
+	* @return the amount
+	*/
+	
+	private int countFaith(Resource[] resources){
+		int count;
+		for (Resource x : resources){
+			if (x.equals(Resource.FAITH)){
+				count++
+			}
+		}
+		return count;
+	}
+
+	public FaithController playAction(){
+		checkWhiteMarbles();
+		// TODO: view market before choice
+		Resource[] gained_resources = getFromMarket();
+		applyBonus(gained_resources);
+		int gained_faith = countFaith (gained_resources);	
+		// TODO: gestire l'inserimento nel Warehouse	
+	}
+	
 }
