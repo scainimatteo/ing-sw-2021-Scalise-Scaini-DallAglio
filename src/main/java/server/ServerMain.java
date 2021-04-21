@@ -13,8 +13,13 @@ public class ServerMain {
 		startServer();
 	}
 
-	//TODO: We can do better that this
+	/**
+	 * Parse the arguments coming from command line
+	 *
+	 * @param args the arguments
+	 */
 	public static void parseArguments(String[] args) {
+		//TODO: We can do better that this
 		port = default_port;
 
 		if (args.length < 2) {
