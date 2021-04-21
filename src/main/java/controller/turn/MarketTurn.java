@@ -70,8 +70,8 @@ public class MarketTurn extends Turn {
 		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
 		int index = 0;
 		for (LeaderCard card: player.getDeck()){
-			if (card.isActive && card.getAbility().checkAbility(test)){
- 				extra_space[index] = (ExtraSpaceAbility) card.getAbility;
+			if (card.isActive() && card.getAbility().checkAbility(test)){
+ 				extra_space[index] = (ExtraSpaceAbility) card.getAbility();
 ;
 				index ++;
 			}
@@ -137,7 +137,7 @@ public class MarketTurn extends Turn {
 	private void arrangeResources(Resource[] resources){
 		boolean has_decided;
 		//TODO: print Warehouse
-		for (int i; i < resources.length; i++){
+		for (int i = 0; i < resources.length; i++){
 			has_decided = false;
 			if (resources[i] != null) {
 				while (!has_decided){
