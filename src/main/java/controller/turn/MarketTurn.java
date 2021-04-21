@@ -4,12 +4,16 @@ import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Game;
 
 import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.card.WhiteMarblesAbility;
 
 import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import it.polimi.ingsw.controller.util.FaithController;
+
 import java.util.NoSuchElementException;
+import java.util.Arrays;
 
 public class MarketTurn extends Turn {
 	private Market market;
@@ -25,34 +29,34 @@ public class MarketTurn extends Turn {
 	/**
 	* @return the index of the column choosen by the player
 	*/
-	private int ChooseColumn(){
-		int clientreturn = 0;
-		int[] options = {0, 1, 2, 3};
-		clientreturn = handler.pickBetween(options);
+	private int chooseColumn(){
+		Integer clientreturn = 0;
+		Integer[] options = new Integer[] {0, 1, 2, 3};
+		clientreturn = (Integer) handler.pickBetween(Arrays.copyOf(options, options.length, Object[].class));
 		return clientreturn;
 	}
 	
 	/**
 	* @return the index of the row choosen by the player
 	*/
-	private int ChooseRow(){
-		int clientreturn = 0;
-		int[] options = {0, 1, 2};
-		clientreturn = handler.pickBetween(options);
+	private int chooseRow(){
+		Integer clientreturn = 0;
+		Integer [] options = new Integer [] {0, 1, 2};
+		clientreturn = (Integer) handler.pickBetween(Arrays.copyOf(options, options.length, Object[].class));
 		return clientreturn;
 	}
 	
 	/**
 	* Adds all bonus resources from the player's LeaderCard deck to the turn's bonuses 
 	*/
-	private Resource checkWhiteMarbles(){
-		WhiteMarblesAbility test = new WhiteMarbleAbility (null);
+	private void checkWhiteMarbles(){
+		WhiteMarblesAbility test = new WhiteMarblesAbility (null);
 		WhiteMarblesAbility cast;
 		int index = 0;
 		for (LeaderCard card: player.getDeck()){
 			if (card.isActive() && card.getAbility().checkAbility(test)){
 				cast = (WhiteMarblesAbility) card.getAbility();
-				discount[index] = cast.getResourceType();
+				whiteMarble[index] = cast.getResourceType();
 				index++;
 			}
 		}
@@ -68,11 +72,12 @@ public class MarketTurn extends Turn {
 			return;
 		}
 		else {
-			for (int i = 0; i < starting_resources.lenght(); i++) {
-				if (starting_resource[i] == null && handler.pickFlow ("Do you want to use marble bonus?")) { 
-					starting_resource[i] = handler.pickBetween (whiteMarble);
+			for (int i = 0; i < starting_resources.length; i++) {
+				if (starting_resources[i] == null && handler.pickFlow ("Do you want to use marble bonus?")) { 
+					starting_resources[i] = (Resource) handler.pickBetween (Arrays.copyOf(whiteMarble, whiteMarble.length, Object[].class));
 				}
 			}
+			return;
 		}
 	}	
 	
@@ -85,15 +90,12 @@ public class MarketTurn extends Turn {
 		Resource[] bought;
 		int picked;
 		if (handler.pickFlow(null)){
-			picked = ChooseColumn();
-			bought = market.getColumn(picked);
-			market.shiftColumn(picked);	
+			bought = market.getColumn(chooseColumn());
 		}
 		else {
-			picked = ChooseRow();
-			bought = market.getRow(picked);
-			market.shiftRow(picked);
+			bought = market.getRow(chooseRow());
 		}
+		return bought;
 	}
 	
 	/**
@@ -104,10 +106,10 @@ public class MarketTurn extends Turn {
 	*/
 	
 	private int countFaith(Resource[] resources){
-		int count;
+		int count = 0;
 		for (Resource x : resources){
 			if (x.equals(Resource.FAITH)){
-				count++
+				count++;
 			}
 		}
 		return count;
@@ -120,6 +122,7 @@ public class MarketTurn extends Turn {
 		applyBonus(gained_resources);
 		int gained_faith = countFaith (gained_resources);	
 		// TODO: gestire l'inserimento nel Warehouse	
+		return new FaithController(player, 0, 0);
 	}
 	
 }
