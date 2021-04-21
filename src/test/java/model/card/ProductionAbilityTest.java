@@ -22,8 +22,8 @@ public class ProductionAbilityTest {
 	*/
 	@Test
 	public void ConstructorTest () {
-		assertTrue (test_required.equals(test_prod_ability.getRequiredResources()));
-		assertTrue (test_produced.equals(test_prod_ability.getProducedResources()));
+		assertTrue (test_required.equals(test_prod_ability.getProduction().getRequiredResources()));
+		assertTrue (test_produced.equals(test_prod_ability.getProduction().getProducedResources()));
 	}	
 
 	/*
@@ -33,7 +33,7 @@ public class ProductionAbilityTest {
 	public void SetterTest(){
 		Resource test_resource_5 = Resource.STONE;
 		test_prod_ability.setProducts(test_resource_5);
-		Resource[] token_prod = test_prod_ability.getProducedResources();
+		Resource[] token_prod = test_prod_ability.getProduction().getProducedResources();
 		assertEquals (token_prod[0], test_resource_5);
 	}
 }

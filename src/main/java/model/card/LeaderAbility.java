@@ -1,4 +1,7 @@
 package it.polimi.ingsw.model.card;
 
-public interface LeaderAbility {
+public abstract class LeaderAbility {
+	public boolean checkAbility (LeaderAbility target){
+		return false;
+	}
 }

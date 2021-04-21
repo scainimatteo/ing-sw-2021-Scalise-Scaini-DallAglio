@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.card;
 
-import it.polimi.ingsw.model.card.Card;
-import it.polimi.ingsw.model.card.LeaderAbility;
+import it.polimi.ingsw.model.player.Player;
 
 public abstract class LeaderCard extends Card implements Cloneable {
 	protected LeaderAbility ability;
@@ -9,6 +8,10 @@ public abstract class LeaderCard extends Card implements Cloneable {
 
 	public boolean isActive() {
 		return this.activated;
+	}
+	
+	public LeaderAbility getAbility(){
+		return this.ability;
 	}
 
 	public void activateLeaderCard() {
@@ -24,5 +27,5 @@ public abstract class LeaderCard extends Card implements Cloneable {
 			e.printStackTrace();
 		}
 		return clone;
-    }
+	}
 }

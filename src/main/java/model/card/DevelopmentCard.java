@@ -17,7 +17,7 @@ public class DevelopmentCard extends Card {
 		this.production = production;
 		this.level = level;
 		this.id = id;
-	}	
+	}
 
 	public CardLevel getCardLevel() {
 		return this.level;
@@ -36,6 +36,25 @@ public class DevelopmentCard extends Card {
 	public Resource[] getCost(){
 		Resource[] to_return = this.cost.clone();
 		return to_return;
+	}
+	
+	/**
+	* applies a discount to the given card 
+	*
+	* @param discount is the discount to be applied
+	* @return a new card with discount applied
+	*/ 
+	public DevelopmentCard applyDiscount (Resource[] discount){
+		Resource[] temp = cost.clone();
+		for (int i = 0; i < temp.length; i++){
+			for(int j = 0; j < discount.length; j++){
+				if (temp[i].equals(discount[j])) {
+					temp[i] = null;
+					discount[j] = null;
+				}
+			}
+		}
+		return new DevelopmentCard (victory_points, production, temp, level, id);
 	}
 }
 
