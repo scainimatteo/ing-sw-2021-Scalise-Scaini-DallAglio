@@ -25,7 +25,7 @@ public class BuyCardTurn extends Turn{
 	}
 
 	/**
-	* adds all discounted resources from the player's LeaderAbility deck to the turn's discounts
+	* Adds all discounted resources from the player's LeaderCard deck to the turn's discounts
 	**/
 	private void checkDiscounts(){
 		DiscountAbility test = new DiscountAbility(null);

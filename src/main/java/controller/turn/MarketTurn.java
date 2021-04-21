@@ -165,7 +165,6 @@ public class MarketTurn extends Turn {
 		applyBonus(gained_resources);
 		int gained_faith = countFaith (gained_resources);	
 		// TODO: gestire l'inserimento nel Warehouse	
-		
 		return new FaithController(player, 0, 0);
 	}
 	
