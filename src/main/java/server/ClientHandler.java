@@ -48,7 +48,7 @@ public class ClientHandler implements Runnable {
 	/**
 	 * @return the object received from the client
 	 */
-	public synchronized Object receiveFromClient() {
+	private synchronized Object receiveFromClient() {
 		Object message = null;
 		// TODO: better exception handling
 		try {
