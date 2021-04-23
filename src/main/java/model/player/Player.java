@@ -156,6 +156,10 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 		return to_return;
 	}
 
+	/**
+	 * @param whichLeaderCard is an array of two boolean that represent which leader card has to be discarded
+	 * @return a faithcontroller that contains the number of discarded leader cards in the faith gained
+	 */
 	public FaithController discardLeaderCard(boolean[] whichLeaderCard){
 		int to_return = 0;
 

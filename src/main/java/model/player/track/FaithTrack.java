@@ -11,6 +11,10 @@ public class FaithTrack {
 		this.faith_marker = this.track[0];
 	}
 
+	/**
+	 * @param number_of_times represent how many cells the marker has to move
+	 * @return the vatican report activated if the marker reaches or overcomes a pope space
+	 */
 	public VaticanReports moveForward(int number_of_times) {
 		int new_position = number_of_times + faith_marker.getPosition();
 		this.faith_marker = track[new_position];
@@ -27,10 +31,17 @@ public class FaithTrack {
 		return null;
 	}
 
+	/**
+	 * @param i is the index in the array of tiles
+	 * @return true if the tile at the given index is not null and has not been activated yet
+	 */
 	protected boolean checkCell(int i){
 		return this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()] != null && !(this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].isActive());
 	}
 
+	/**
+	 * @param vr_param is the vatican report to be activated
+	 */
 	public void activateVaticanReport(VaticanReports vr_param){
 		if (this.checkCell(vr_param.getIndex())){
 			if (faith_marker.whichVaticanReport() != null && faith_marker.whichVaticanReport().equals(vr_param)){
