@@ -6,7 +6,9 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.controller.util.FaithController;
 import it.polimi.ingsw.controller.util.ChoiceHandler;
 
-public abstract class Turn {
+import it.polimi.ingsw.util.Observable;
+
+public abstract class Turn extends Observable<FaithController> {
 	protected Player player;
 	protected ChoiceHandler handler;
 

@@ -15,12 +15,15 @@ import it.polimi.ingsw.model.player.track.Tile;
 
 import it.polimi.ingsw.controller.util.FaithController;
 
+import it.polimi.ingsw.util.PlayerObserver;
+import it.polimi.ingsw.util.Observable;
+
 import java.util.Iterator;
 import java.util.HashMap;
 
 import java.lang.IllegalArgumentException;
 
-public class Player {
+public class Player extends Observable<VaticanReports> implements PlayerObserver {
 	protected String nickname;
 	protected FaithTrack track;
 	protected Warehouse warehouse;
@@ -266,11 +269,28 @@ public class Player {
 	/**
 	 * FAITHTRACK METHODS
 	 */
-	public VaticanReports moveForward(int number_of_times){
-		return this.track.moveForward(number_of_times);
-	}
-
 	public int getMarkerPosition(){
 		return this.track.getMarkerPosition();
+	}
+
+	/**
+	 * OBSERVER METHODS
+	 */
+	public void update(FaithController faith_controller){
+		VaticanReports returned = null;
+
+		if (faith_controller.isSamePlayer(this)){
+			returned = this.track.moveForward(faith_controller.getGainedFaith());
+		} else {
+			returned = this.track.moveForward(faith_controller.getToRedistributeFaith());
+		}
+
+		if (returned != null){
+			notify(returned);
+		} 
+	}
+
+	public void update(VaticanReports vatican_rep){
+		this.track.activateVaticanReport(vatican_rep);
 	}
 }

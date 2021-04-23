@@ -31,8 +31,13 @@ public class FaithTrack {
 		return this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()] != null && !(this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].isActive());
 	}
 
-	protected void activateVaticanReport(VaticanReports vr_param){
-		this.vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
+	public void activateVaticanReport(VaticanReports vr_param){
+		if (this.checkCell(vr_param.getIndex())){
+			if (faith_marker.whichVaticanReport() != null && faith_marker.whichVaticanReport().equals(vr_param)){
+				this.vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
+			} 
+		} 
+
 	}
 
 	public int getMarkerPosition(){
