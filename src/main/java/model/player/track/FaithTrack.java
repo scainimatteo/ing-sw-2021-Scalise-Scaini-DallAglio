@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.player.track;
 
+import java.io.*;
+
 public class FaithTrack {
 	protected Cell[] track;
 	protected Tile[] vatican_report_tiles;
@@ -21,7 +23,8 @@ public class FaithTrack {
 
 		for (int i = new_position; i > (new_position - number_of_times); i --){
 			if (track[i].isPopeSpace()){
-				if (checkCell(i)){
+				if (checkCell(this.track[i].whichVaticanReport().getIndex())){
+					this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
 					this.activateVaticanReport(this.track[i].whichVaticanReport());
 					return this.track[i].whichVaticanReport();
 				}
@@ -36,11 +39,13 @@ public class FaithTrack {
 	 * @return true if the tile at the given index is not null and has not been activated yet
 	 */
 	protected boolean checkCell(int i){
-		return this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()] != null && !(this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].isActive());
+		return this.vatican_report_tiles[i] != null && !(this.vatican_report_tiles[i].isActive());
 	}
 
 	/**
 	 * @param vr_param is the vatican report to be activated
+	 *
+	 * TODO: alla riga 51 il faith_marker si è spostato quindi il player attualmente non si trova su un vatican report, ma si può trovare oltre e quindi non venire considerato nell'attivazione
 	 */
 	public void activateVaticanReport(VaticanReports vr_param){
 		if (this.checkCell(vr_param.getIndex())){

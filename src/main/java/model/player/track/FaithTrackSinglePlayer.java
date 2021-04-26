@@ -14,7 +14,8 @@ public class FaithTrackSinglePlayer extends FaithTrack {
 
 		for (int i = new_position; i > (new_position - number_of_times); i --){
 			if (super.track[i].isPopeSpace()){
-				if (super.checkCell(i)){
+				if (super.checkCell(super.track[i].whichVaticanReport().getIndex())){
+					super.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
 					super.activateVaticanReport(super.track[i].whichVaticanReport());
 					return super.track[i].whichVaticanReport();
 				}
