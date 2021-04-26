@@ -83,6 +83,10 @@ public class Server {
 	 */
 	private synchronized String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
+		client.asyncSendToClient("Nickname? ");
+		String nickname = (String) client.asyncReceiveFromClient();
+		client.setNickname(nickname);
+
 		client.asyncSendToClient("Match name? ");
 		String match_name = (String) client.asyncReceiveFromClient();
 
