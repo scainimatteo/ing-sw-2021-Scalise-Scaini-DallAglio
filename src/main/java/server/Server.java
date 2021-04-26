@@ -11,6 +11,8 @@ import java.net.*;
 
 import java.io.*;
 
+import it.polimi.ingsw.controller.match.Match;
+
 import it.polimi.ingsw.server.ClientHandler;
 
 public class Server {
@@ -74,6 +76,9 @@ public class Server {
 			for (ClientHandler ch : this.lobby.get(match_name)) {
 				ch.asyncSendToClient("Start Match");
 			}
+			//TODO: if only one player, new_match = new SoloMatch
+			Runnable new_match = new Match(this.lobby.get(match_name));
+			this.executor.execute(new_match);
 		}
 	}
 
