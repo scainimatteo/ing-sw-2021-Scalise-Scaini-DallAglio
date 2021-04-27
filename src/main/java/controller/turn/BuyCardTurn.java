@@ -68,6 +68,41 @@ public class BuyCardTurn extends Turn{
 		return curr_cards[i][j];
 	}
 
+	/** 
+	 * Removes resources equal to the cost from the player and allows them to choose where to get them out of
+	 */
+
+	private void payCost(DevelopmentCard card) {
+		DevelopmentCard temp_card = card.applyDiscount(discounts);
+		boolean has_decided;
+		for (Resource x: temp_card.getCost()){
+			has_decided = false;
+			while (!has_decided){
+				if (handler.pickFlow("Do you want pay this cost from your warehouse?")){
+					try {
+						player.getFromWarehouse(x, 1);
+						has_decided = true;
+					} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+						//communicate failure to the player
+					}
+				}
+				else if (handler.pickFlow("Do you want to pay this cost from your leader card?")){
+					//try getfromExtraSpace
+					//TODO: implement getfromExtraSpace
+				}
+				else if (handler.pickFlow("Do you want to pay this cost from your strongbox?")){
+					
+					try {
+						player.removeResources(x, 1);
+						has_decided = true;
+					} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+						//communicate failure to the player
+					}
+				}
+			}
+		}
+	}
+
 	/**
 	* Checks for the presence of abilities, asks the player to choose a card until a fitting card is chosen, then draws it from the table and pays the resources
 	* 
@@ -80,14 +115,16 @@ public class BuyCardTurn extends Turn{
 		DevelopmentCard chosen_card = chooseCardFromTable();
 		while (!checkRequirements(chosen_card)){
 			chosen_card = chooseCardFromTable();
+			//what if there is no buyable card?
 		} 
-		//TODO: choose which slot to fit it in
-		//int pos = pickPOS();	
-		//bool method = question(warehouse ability?)
-		int pos = 0;
-		boolean method = false;
 		dev_cards_on_table.getFromDeck(chosen_card);
-		player.buyCard(chosen_card, pos, method);
+		payCost(chosen_card);
+		Integer pos = (Integer) handler.pickBetween( new Integer[] {1,2,3});
+		boolean[] fitting_slots = player.isBuyable(chosen_card);
+		while (!fitting_slots[pos]){
+			pos = (Integer) handler.pickBetween ( new Integer[] {1,2,3});
+		}
+		player.buyCard(chosen_card, pos);
 		return new FaithController(this.player, gained_faith,0);
 	}	
 }

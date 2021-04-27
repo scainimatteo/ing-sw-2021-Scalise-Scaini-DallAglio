@@ -226,6 +226,13 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 	/**
 	 * DEVCARDSSLOTS METHODS
 	 */
+	
+	public void buyCard(DevelopmentCard card, int position){
+		this.development_card_slots.buyCard(card, position);
+	}
+	/*
+	 * TODO: translate this fully into the controller
+	 *
 	public void buyCard(DevelopmentCard card, int position, boolean warehouse_first){
 		boolean[] returned = this.isBuyable(card);
 		if (returned[position]){
@@ -257,7 +264,7 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 			throw new IllegalArgumentException();
 		}
 	}
-
+*/
 	public DevelopmentCard[] getTopCards(){
 		return this.development_card_slots.getTopCards();
 	}
