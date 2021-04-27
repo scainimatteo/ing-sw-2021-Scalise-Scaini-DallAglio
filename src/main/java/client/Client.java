@@ -6,6 +6,8 @@ import java.net.*;
 
 import java.io.*;
 
+import it.polimi.ingsw.controller.util.Choice;
+
 public class Client {
 	private int port;
 	private String address;
@@ -13,6 +15,8 @@ public class Client {
 	private ObjectInputStream din;
 	private ObjectOutputStream dout;
 	private Scanner stdin;
+	private boolean choice = false;
+
 
 	public Client(String address, int port) throws IOException {
 		this.port = port;
@@ -70,17 +74,11 @@ public class Client {
 	 */
 	public Thread asyncWriteToSocket(){
 		Thread t = new Thread(() -> {
-			try {
-				while (true) {
-					// TODO: Change how the client gives the input
-					String inputLine = this.stdin.nextLine();
-					Object to_send = parseSend(inputLine);
-					this.dout.reset();
-					this.dout.writeObject(to_send);
-					this.dout.flush();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			while (true) {
+				// TODO: Change how the client gives the input
+				String inputLine = this.stdin.nextLine();
+				Object to_send = parseSend(inputLine);
+				write(to_send);
 			}
 		});
 		t.start();
@@ -88,9 +86,24 @@ public class Client {
 	}
 
 	/**
-	 * Handle the object received from the Server
+	 * Write to the server
 	 *
-	 * @param object the object received
+	 * @param to_send the Object to send
+	 */
+	private synchronized void write(Object to_send) {
+		try {
+			this.dout.reset();
+			this.dout.writeObject(to_send);
+			this.dout.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Handle the Object received from the Server
+	 *
+	 * @param object the Object received
 	 */
 	private void handleObject(Object object) {
 		if (object instanceof String) {
@@ -102,6 +115,9 @@ public class Client {
 			for (Object o: (Object[]) object) {
 				handleObject(o);
 			}
+		} else if (object instanceof Choice) {
+			// CHOICE
+			handleChoice((Choice) object);
 		} else {
 			// FALLBACK
 			System.out.println("Received unknown object");
@@ -110,12 +126,22 @@ public class Client {
 	}
 
 	/**
-	 * Print the string received
+	 * Print the String received
 	 *
-	 * @param s the string received
+	 * @param s the String received
 	 */
 	private void handleString(String s) {
 		System.out.println(s);
+	}
+
+	/**
+	 * Print the message of the Choice received and parse the next line as a Choice
+	 *
+	 * @param c the Choice received
+	 */
+	private synchronized void handleChoice(Choice c) {
+		System.out.println(c.getMessage() + " [y/n] ");
+		this.choice = true;
 	}
 
 	// TODO: This function is temporary and will be made better after the view
@@ -133,8 +159,18 @@ public class Client {
 			// ARRAYS
 			if (input.contains(",")) {
 				return input.split(",");
+			// CHOICE
+			} else if (this.choice) {
+				Choice c = new Choice("");
+				if (input.equals("y")) {
+					c.setResponse(true);
+				} else {
+					c.setResponse(false);
+				}
+				this.choice = false;
+				return c;
 			}
-			
+
 			// FALLBACK
 			return input;
 		}
