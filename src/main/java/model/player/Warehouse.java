@@ -24,27 +24,128 @@ public class Warehouse {
 	public Resource[] getBottomResources(){
 		return bottom_resources;
 	}
-
+	
+	/**
+	* Swaps two rows if possible
+	*
+	* @param i,j indicate which rows to swap
+	* @throws IllegalArgumentException if the parameters are invalid or the swap between the rows cannot be made
+	*/
+	public void swapRows (int i, int j) throws IllegalArgumentException {
+		if (i>j){
+			int temp = j;
+			j = i;
+			i = temp;
+		}
+		if (i<1 || j>3){
+			throw new IllegalArgumentException();
+		}
+		else {
+			if (i == 1){
+				if (j == 2){
+					if (middle_resources[1] == null){
+						Resource temp = top_resource;
+						top_resource = middle_resources[0];
+						middle_resources[0] = temp;
+					}
+					else {throw new IllegalArgumentException();}
+				}
+				else if (j == 3){
+					if (bottom_resources[1] == null && bottom_resources[2] == null){
+						Resource temp = top_resource;
+						top_resource = bottom_resources[0];
+						bottom_resources[0] = temp;
+					}
+					else {throw new IllegalArgumentException();}
+				}
+			} 
+			else if (i ==2){
+				if (j == 3){
+					if (bottom_resources[2] == null){
+						Resource temp = middle_resources[0];
+						middle_resources[0] = bottom_resources[0];
+						bottom_resources[0] = temp;
+						temp = middle_resources[1];
+						middle_resources[1] = bottom_resources[1];
+						bottom_resources[1] = temp;
+					}
+					else {throw new IllegalArgumentException();}
+				}
+			}
+		}
+	}
+				
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
-	 * @return true if new_resource has been added
-	 * @exception IllegalArgumentException is thrown if new_resource cannot be inserted
-	 */
+	 * @return true if new_resource can be added
+	 * TODO: delete this
 	private boolean isPossibleToInsert(Resource new_resource){
 		if ( !isPossibleToInsertTop(new_resource) ){
 			if ( !isPossibleToInsertMiddle(new_resource) ){
 				if ( !isPossibleToInsertBottom(new_resource) ){
-					throw new IllegalArgumentException();
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	*/
+
+	private boolean isPresent (Resource resource){
+		if (!top_resource.equals(resource)){
+			if (!middle_resources[0].equals(resource)){
+				if (!bottom_resources[0].equals(resource)){
+					return false;
 				}
 			}
 		}
 		return true;
 	}
 
+
+	 /**	
+	 * tries to insert the given resource into the warehouse
+	 *
+	 * @param new_resources is the resource to be inserted
+	 * @throws IllegalArgumentException if the resource cannot be inserted
+	 */
+	public void insert(Resource new_resource) throws IllegalArgumentException{
+		if (isPresent(new_resource)){	
+			if(middle_resources[0].equals(new_resource) && middle_resources[1] == null){
+				middle_resources[1] = new_resource;
+				return;
+			}
+			else if (bottom_resources[0].equals(new_resource)){
+				if(bottom_resources[1] == null){
+					bottom_resources[1] = new_resource;
+					return;
+				}
+				else if (bottom_resources[2] == null){
+					bottom_resources[2] = new_resource;
+					return;
+				}
+			}
+		} else {
+			if (top_resource == null) {
+				top_resource = new_resource;
+				return;
+			}
+			else if(middle_resources[0] == null){
+				middle_resources[0] = new_resource;
+				return;
+			}
+			else if (bottom_resources[0] == null){
+				bottom_resources[0] = new_resource;
+				return;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
+
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
-	 */
+	 * TODO: delete this
 	private boolean isPossibleToInsertTop(Resource new_resource){
 		// if middle_resources have at least one space occupied and new_resource is the same resource, return false
 		if (this.middle_resources[0] != null && new_resource.equals(this.middle_resources[0])){
@@ -95,11 +196,12 @@ public class Warehouse {
 			return false;
 		}
 	}
+	*/
 
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
-	 */
+	 * TODO: delete this
 	private boolean isPossibleToInsertMiddle(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
 		if (new_resource.equals(this.top_resource)){
@@ -162,11 +264,12 @@ public class Warehouse {
 			return false;
 		}
 	}
+	*/
 
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return values are specified in the method
-	 */
+	 * TODO: delete this
 	private boolean isPossibleToInsertBottom(Resource new_resource){
 		// if new_resource is the same resource stored in top_resource, return false
 		if (new_resource.equals(this.top_resource)){
@@ -204,6 +307,7 @@ public class Warehouse {
 			return false;
 		}
 	}
+	*/
 
 	/**
 	 * @param new_resources is an array of resources obtained from the market that need to be inserted in the warehouse
@@ -214,7 +318,7 @@ public class Warehouse {
 
 		for(Resource resource : new_resources){
 			try {
-				isPossibleToInsert(resource);
+				insert(resource);
 			} catch(IllegalArgumentException e) {
 				resources_not_inserted += 1;
 			}

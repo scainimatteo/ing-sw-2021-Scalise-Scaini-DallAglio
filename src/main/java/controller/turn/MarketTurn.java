@@ -78,6 +78,15 @@ public class MarketTurn extends Turn {
 		}
 	}
 	
+	private boolean hasExtraSpace(Resource res){
+		for (ExtraSpaceAbility x : extra_space){
+			if (x.getResourceType().equals(res) && x.peekResources() < 2){ 
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	* Applies given bonuses to the argument string by turning null pointers into resources according to the player's request 
 	* 
@@ -133,9 +142,12 @@ public class MarketTurn extends Turn {
 
 	/**
 	* Allows the player to position the gained resources however they want in their Warehouses
+	* 
+	* @return the number of discarded resources
 	*/
-	private void arrangeResources(Resource[] resources){
+	private int arrangeResources(Resource[] resources){
 		boolean has_decided;
+		int discarded_resources = 0;
 		//TODO: print Warehouse
 		for (int i = 0; i < resources.length; i++){
 			has_decided = false;
@@ -144,21 +156,27 @@ public class MarketTurn extends Turn {
 					while (handler.pickFlow("Do you want to rearrange the warehouse?")){
 						//TODO: add swapping lines method and print
 					}
-					if (handler.pickFlow("Do you want to use your extra_space LeaderCard?")){
-					//do something
+					if (this.hasExtraSpace(resources[i])) {
+						if(handler.pickFlow("Do you want to use your extra_space LeaderCard?")){
 						has_decided = true;
+						//operations
+						}
 					}
 					else {
 					//operations on warehouse
 						has_decided = true;
 					}
-					//TODO: implement an efficient method for discarding
+					if (has_decided == false && handler.pickFlow ("Do you want to discard the resource?")){
+						discarded_resources++;
+						has_decided = true;
+					}
 				}
 			}
 		}
+		return discarded_resources;
 	}
 
-	public FaithController playAction(){
+	public FaithController playAction (){
 		checkWhiteMarbles();
 		// TODO: view market before choice
 		Resource[] gained_resources = getFromMarket();
