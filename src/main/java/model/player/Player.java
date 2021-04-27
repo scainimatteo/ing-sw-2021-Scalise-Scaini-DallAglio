@@ -48,6 +48,10 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 		return this.leader_cards_deck;
 	}
 
+	public void setLeaderCards(LeaderCard[] leader_cards) {
+		this.leader_cards_deck = leader_cards;
+	}
+
 	/**
 	 * @param card is the DevelopmentCard to be checked
 	 * @return true if the warehouse or the strongbox contains the resources requested for the buy

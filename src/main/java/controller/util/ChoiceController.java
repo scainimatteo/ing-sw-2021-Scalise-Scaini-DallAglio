@@ -22,10 +22,10 @@ public class ChoiceController {
 	 * @param selection the array of Objects to choose from
 	 * @return the chosen Object
 	 */
-	public Object pickBetween(Player player, String message, Object[] selection, int to_choose){
+	public Object[] pickBetween(Player player, String message, Object[] selection, int to_choose){
 		selection = Arrays.stream(selection).filter(x -> x != null).toArray();
 		if (selection.length == 1){
-			return selection[0];
+			return selection;
 		} else { 
 			ArrayChooser array_chooser = new ArrayChooser(message, selection, to_choose);
 			this.comm_controller.sendToPlayer(player, array_chooser);

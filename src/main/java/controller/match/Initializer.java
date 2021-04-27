@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.controller.util.CommunicationController;
+import it.polimi.ingsw.controller.util.ChoiceController;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
@@ -23,10 +24,12 @@ import it.polimi.ingsw.server.ClientHandler;
 
 public class Initializer {
 	private CommunicationController comm_controller;
+	private ChoiceController choice_controller;
 	private Player[] players;
 
-	public Initializer(CommunicationController comm_controller) {
+	public Initializer(CommunicationController comm_controller, ChoiceController choice_controller) {
 		this.comm_controller = comm_controller;
+		this.choice_controller = choice_controller;
 	}
 
 	/**
@@ -77,7 +80,18 @@ public class Initializer {
 	 */
 	private void distributeLeaderCards() throws ParseException, IOException {
 		Deck<LeaderCard> all_leader_cards = getLeaderCardDeck();
-		//TODO: send the 4 cards to the players, get their response using the ChoiceController
+		for (Player p: this.players) {
+			LeaderCard[] leader_cards = new LeaderCard[4];
+			for (int i = 0; i < 4; i++) {
+				leader_cards[i] = all_leader_cards.draw();
+			}
+			Object[] chosen = this.choice_controller.pickBetween(p, "Choose two leader cards", leader_cards, 2);
+			LeaderCard[] chosen_leader_cards = new LeaderCard[2];
+			for (int i = 0; i < chosen.length; i++) {
+				chosen_leader_cards[i] = (LeaderCard) chosen[i];
+			}
+			p.setLeaderCards(chosen_leader_cards);
+		}
 	}
 
 	/**

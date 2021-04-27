@@ -2,7 +2,10 @@ package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 
-public class CardLevel {
+import java.io.Serializable;
+
+public class CardLevel implements Serializable {
+	private static final long serialVersionUID = 8L;
 	private int lv;
 	private DevelopmentCardsColor color;
 

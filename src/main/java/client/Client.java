@@ -150,7 +150,7 @@ public class Client {
 		System.out.println(array_chooser.getMessage());
 		Object[] array = array_chooser.getArray();
 		for (int i = 1; i < array.length + 1; i++) {
-			System.out.printf("%d. %s\n", i, array[i]);
+			System.out.printf("%d. %s\n", i, array[i - 1]);
 		}
 		System.out.printf("Put the index of the element chosen: ");
 		this.array = true;
