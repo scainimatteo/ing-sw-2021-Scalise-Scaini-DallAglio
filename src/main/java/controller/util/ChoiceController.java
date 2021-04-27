@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller.util;
 import java.util.Arrays;
 
 import it.polimi.ingsw.controller.util.CommunicationController;
+import it.polimi.ingsw.controller.util.ArrayChooser;
 import it.polimi.ingsw.controller.util.Choice;
 
 import it.polimi.ingsw.model.player.Player;
@@ -21,13 +22,15 @@ public class ChoiceController {
 	 * @param selection the array of Objects to choose from
 	 * @return the chosen Object
 	 */
-	public Object pickBetween(Player player, Object[] selection){
+	public Object pickBetween(Player player, String message, Object[] selection, int to_choose){
 		selection = Arrays.stream(selection).filter(x -> x != null).toArray();
 		if (selection.length == 1){
 			return selection[0];
 		} else { 
-			this.comm_controller.sendToPlayer(player, selection);
-			return this.comm_controller.receiveFromPlayer(player);
+			ArrayChooser array_chooser = new ArrayChooser(message, selection, to_choose);
+			this.comm_controller.sendToPlayer(player, array_chooser);
+			ArrayChooser response = (ArrayChooser) this.comm_controller.receiveFromPlayer(player);
+			return response.getChosenArray();
 		}
 	}
 
