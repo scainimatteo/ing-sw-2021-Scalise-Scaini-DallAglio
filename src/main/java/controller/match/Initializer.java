@@ -44,7 +44,7 @@ public class Initializer {
 	public Game initializeGame(ArrayList<ClientHandler> clients) throws InstantiationException {
 		try {
 			createPlayers(clients);
-			distributeLeaderCards();
+			asyncDistributeLeaderCards();
 			chooseMatchOrder();
 			distributeRandomResources();
 			return createGame();
@@ -75,23 +75,47 @@ public class Initializer {
 		}
 	}
 
+	//TODO: Test a lot
 	/**
-	 * Distribute the starting LeaderCards to each Player
+	 * Distribute the starting LeaderCards to each Player asynchronously
 	 */
-	private void distributeLeaderCards() throws ParseException, IOException {
+	private void asyncDistributeLeaderCards() throws ParseException, IOException, InterruptedException {
 		Deck<LeaderCard> all_leader_cards = getLeaderCardDeck();
+
+		// start a thread for each player
+		Thread[] threads = new Thread[this.players.length];
+		int i = 0;
 		for (Player p: this.players) {
+			// pick 4 LeaderCards from the Deck
 			LeaderCard[] leader_cards = new LeaderCard[4];
-			for (int i = 0; i < 4; i++) {
-				leader_cards[i] = all_leader_cards.draw();
+			for (int j = 0; j < 4; j++) {
+				leader_cards[j] = all_leader_cards.draw();
 			}
-			Object[] chosen = this.choice_controller.pickBetween(p, "Choose two leader cards", leader_cards, 2);
-			LeaderCard[] chosen_leader_cards = new LeaderCard[2];
-			for (int i = 0; i < chosen.length; i++) {
-				chosen_leader_cards[i] = (LeaderCard) chosen[i];
-			}
-			p.setLeaderCards(chosen_leader_cards);
+
+			threads[i] = new Thread(() -> distributeLeaderCards(p, leader_cards));
+			threads[i].start();
+			i++;
 		}
+
+		// join all the threads
+		for (Thread t: threads) {
+			t.join();
+		}
+	}
+
+	/**
+	 * Distribute the starting LeaderCards to a Player
+	 *
+	 * @param p the Player to distribute the LeaderCards to
+	 * @param leader_cards an array containg the 4 random LeaderCards
+	 */
+	private void distributeLeaderCards(Player p, LeaderCard[] leader_cards) {
+		Object[] chosen = this.choice_controller.pickBetween(p, "Choose two leader cards", leader_cards, 2);
+		LeaderCard[] chosen_leader_cards = new LeaderCard[2];
+		for (int i = 0; i < chosen.length; i++) {
+			chosen_leader_cards[i] = (LeaderCard) chosen[i];
+		}
+		p.setLeaderCards(chosen_leader_cards);
 	}
 
 	/**
