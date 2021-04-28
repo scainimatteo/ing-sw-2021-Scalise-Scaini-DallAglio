@@ -91,11 +91,13 @@ public class ClientHandler implements Runnable {
 	/**
 	 * Safely close the connection with the client
 	 */
-	public void close() {
+	public void close(String message) {
 		try {
+			sendToClient(message);
+			this.server.removeNickname(this.nickname);
 			this.client.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Connection closed");
 		}
 	}
 
