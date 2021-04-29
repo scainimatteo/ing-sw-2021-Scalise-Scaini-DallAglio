@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller.turn;
 
-import it.polimi.ingsw.controller.turn.Turn;
 import it.polimi.ingsw.controller.util.FaithController;
+import it.polimi.ingsw.controller.util.ChoiceHandler;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Game;
@@ -20,8 +20,9 @@ public class BuyCardTurn extends Turn{
 	
 	public BuyCardTurn (Player player, DevelopmentCardsOnTable cards){
 		this.player = player;
-		this.discounts = new Resource[2]; 
 		this.dev_cards_on_table = cards;
+		this.discounts = new Resource[2]; 
+		this.handler = new ChoiceHandler();
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class BuyCardTurn extends Turn{
 		while (!fitting_slots[pos]){
 			pos = (Integer) handler.pickBetween ( new Integer[] {1,2,3});
 		}
-		player.buyCard(chosen_card, pos);
+		player.buyCard(chosen_card, pos.intValue());
 		return new FaithController(this.player, gained_faith,0);
 	}	
 }

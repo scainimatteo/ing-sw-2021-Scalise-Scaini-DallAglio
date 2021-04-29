@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.util.FaithController;
+import it.polimi.ingsw.controller.util.ChoiceHandler;
 
 import java.util.NoSuchElementException;
 import java.util.Arrays;
@@ -25,6 +26,8 @@ public class MarketTurn extends Turn {
 		this.player = player;	
 		this.market = market;
 		this.whiteMarble = new Resource[2];
+		this.extra_space = new ExtraSpaceAbility[2];
+		this.handler = new ChoiceHandler();
 	}
 
 	/**
