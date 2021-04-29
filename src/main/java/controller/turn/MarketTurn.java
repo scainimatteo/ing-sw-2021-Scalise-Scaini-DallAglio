@@ -31,8 +31,8 @@ public class MarketTurn extends Turn {
 	}
 
 	/**
-	* @return the index of the column choosen by the player
-	*/
+	 * @return the index of the column choosen by the player
+	 */
 	private int chooseColumn(){
 		Integer clientreturn = 0;
 		Integer[] options = new Integer[] {0, 1, 2, 3};
@@ -41,8 +41,8 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* @return the index of the row choosen by the player
-	*/
+	 * @return the index of the row choosen by the player
+	 */
 	private int chooseRow(){
 		Integer clientreturn = 0;
 		Integer [] options = new Integer [] {0, 1, 2};
@@ -51,8 +51,8 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* Adds all bonus resources from the player's LeaderCard deck to the turn's bonuses 
-	*/
+	 * Adds all bonus resources from the player's LeaderCard deck to the turn's bonuses 
+	 */
 	private void checkWhiteMarbles(){
 		WhiteMarblesAbility test = new WhiteMarblesAbility (null);
 		WhiteMarblesAbility cast;
@@ -67,15 +67,14 @@ public class MarketTurn extends Turn {
 	}
 
 	/**
-	* Adds all extra space from the player's LeaderCard deck to the turn's available extra space
-	*/
+	 * Adds all extra space from the player's LeaderCard deck to the turn's available extra space
+	 */
 	private void checkExtraSpace(){
 		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
 		int index = 0;
 		for (LeaderCard card: player.getDeck()){
 			if (card.isActive() && card.getAbility().checkAbility(test)){
  				extra_space[index] = (ExtraSpaceAbility) card.getAbility();
-;
 				index ++;
 			}
 		}
@@ -91,11 +90,11 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* Applies given bonuses to the argument string by turning null pointers into resources according to the player's request 
-	* 
-	* @param starting_resources is the ResourceVector to apply the bonuses on
-	*/	
-	private void applyBonus(Resource[] starting_resources){		
+  	 * Applies given bonuses to the argument string by turning null pointers into resources according to the player's request 
+	 * 
+	 * @param starting_resources is the ResourceVector to apply the bonuses on
+	 */	
+	private void applyBonus(Resource[] starting_resources){
 		if (whiteMarble[0] == null && whiteMarble[1] == null){
 			return;
 		}
@@ -107,13 +106,13 @@ public class MarketTurn extends Turn {
 			}
 			return;
 		}
-	}	
-	
+	}
+
 	/**
-	* Allows the player to choose if they want to pick a row, a column, and which one, then applies desired LeaderAbility bonuses
-	*
-	* @return the resources extracted from the market
-	*/ 
+	 * Allows the player to choose if they want to pick a row, a column, and which one, then applies desired LeaderAbility bonuses
+	 *
+	 * @return the resources extracted from the market
+	 */ 
 	private Resource[] getFromMarket(){
 		Resource[] bought;
 		int picked;
@@ -127,12 +126,11 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* Counts the amount of Faith type resources in a given resource vector
-	*
-	* @param resources is the resource in which to count 
-	* @return the amount
-	*/
-	
+	 * Counts the amount of Faith type resources in a given resource vector
+	 *
+	 * @param resources is the resource in which to count 
+	 * @return the amount
+	 */
 	private int countFaith(Resource[] resources){
 		int count = 0;
 		for (Resource x : resources){
@@ -144,10 +142,10 @@ public class MarketTurn extends Turn {
 	}
 
 	/**
-	* Allows the player to position the gained resources however they want in their Warehouses
-	* 
-	* @return the number of discarded resources
-	*/
+ 	 * Allows the player to position the gained resources however they want in their Warehouses
+	 * 
+	 * @return the number of discarded resources
+	 */
 	private int arrangeResources(Resource[] resources){
 		boolean has_decided;
 		int discarded_resources = 0;

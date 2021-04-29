@@ -15,8 +15,8 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class BuyCardTurn extends Turn{
-	public DevelopmentCardsOnTable dev_cards_on_table;
-	public Resource[] discounts;
+	private DevelopmentCardsOnTable dev_cards_on_table;
+	private Resource[] discounts;
 	
 	public BuyCardTurn (Player player, DevelopmentCardsOnTable cards){
 		this.player = player;
