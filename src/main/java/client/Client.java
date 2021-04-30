@@ -7,6 +7,7 @@ import java.net.*;
 import java.io.*;
 
 import it.polimi.ingsw.controller.util.ArrayChooser;
+import it.polimi.ingsw.controller.util.TurnSelector;
 import it.polimi.ingsw.controller.util.Choice;
 
 public class Client {
@@ -18,6 +19,7 @@ public class Client {
 	private Scanner stdin;
 	private boolean choice = false;
 	private boolean array = false;
+	private boolean turn = false;
 	private Object parsing_object;
 
 
@@ -125,6 +127,9 @@ public class Client {
 		} else if (object instanceof Choice) {
 			// CHOICE
 			handleChoice((Choice) object);
+		} else if (object instanceof TurnSelector) {
+			// TURN
+			handleTurn((TurnSelector) object);
 		} else {
 			// FALLBACK
 			System.out.println("Received unknown object");
@@ -167,6 +172,13 @@ public class Client {
 		this.choice = true;
 	}
 
+	private void handleTurn(TurnSelector t) {
+		System.out.println(t.getMessage());
+		System.out.printf("Put the index of the turn chosen: ");
+		this.turn = true;
+		this.parsing_object = t;
+	}
+
 	/**
 	 * Parse the string to send so that you can send objects
 	 *
@@ -180,6 +192,8 @@ public class Client {
 		// CHOICE
 		} else if (this.choice) {
 			return sendChoice(input);
+		} else if (this.turn) {
+			return sendTurn(input);
 		}
 
 		try {
@@ -216,7 +230,7 @@ public class Client {
 	}
 
 	/**
-	 * Parse the input as a choice and send the Choice
+	 * Parse the input as a Choice and send the Choice
 	 *
 	 * @param input the String rapresenting the choice made
 	 * @return the Choice representing the choice made
@@ -230,5 +244,27 @@ public class Client {
 		}
 		this.choice = false;
 		return c;
+	}
+
+	/**
+	 * Parse the input as a TurnSelector and send the TurnSelector
+	 *
+	 * @param input the String rapresenting the turn chosen
+	 * @return the TurnSelector representing the turn chosen
+	 */
+	private TurnSelector sendTurn(String input) {
+		try {
+			int chosen = Integer.parseInt(input);
+			TurnSelector turn = (TurnSelector) this.parsing_object;
+
+			if (turn.setChosen(chosen)) {
+				this.turn = false;
+				return turn;
+			}
+		} catch (NumberFormatException e) {
+			//TODO: print an error
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
