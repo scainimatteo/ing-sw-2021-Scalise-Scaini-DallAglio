@@ -2,7 +2,10 @@ package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.player.Player;
 
-public abstract class LeaderCard extends Card implements Cloneable {
+import java.io.Serializable;
+
+public abstract class LeaderCard extends Card implements Cloneable, Serializable {
+	private static final long serialVersionUID = 4L;
 	protected LeaderAbility ability;
 	protected boolean activated;
 
