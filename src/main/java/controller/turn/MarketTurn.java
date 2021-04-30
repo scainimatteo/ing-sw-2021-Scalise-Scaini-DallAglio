@@ -12,7 +12,7 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.util.FaithController;
-import it.polimi.ingsw.controller.util.ChoiceHandler;
+import it.polimi.ingsw.controller.util.ChoiceController;
 
 import java.util.NoSuchElementException;
 import java.util.Arrays;
@@ -21,12 +21,12 @@ public class MarketTurn extends Turn {
 	private Market market;
 	private Resource[] whiteMarble;
 
-	public MarketTurn (Player player, Market market){
+	public MarketTurn (Player player, ChoiceController handler, Market market){
 		this.player = player;	
 		this.market = market;
 		this.whiteMarble = new Resource[2];
 		this.extra_space = new ExtraSpaceAbility[2];
-		this.handler = new ChoiceHandler();
+		this.handler = handler;
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class MarketTurn extends Turn {
 	private int chooseColumn(){
 		Integer clientreturn = 0;
 		Integer[] options = new Integer[] {0, 1, 2, 3};
-		clientreturn = (Integer) handler.pickBetween(Arrays.copyOf(options, options.length, Object[].class));
+		clientreturn = (Integer) handler.pickBetween(player, "Da quale colonna vuoi prendere le risorse?", options, 1)[0];
 		return clientreturn;
 	}
 	
@@ -45,7 +45,7 @@ public class MarketTurn extends Turn {
 	private int chooseRow(){
 		Integer clientreturn = 0;
 		Integer [] options = new Integer [] {0, 1, 2};
-		clientreturn = (Integer) handler.pickBetween(Arrays.copyOf(options, options.length, Object[].class));
+		clientreturn = (Integer) handler.pickBetween(player, "Da quale riga vuoi prendere le risorse?", options, 1)[0];
 		return clientreturn;
 	}
 	
@@ -76,8 +76,8 @@ public class MarketTurn extends Turn {
 		}
 		else {
 			for (int i = 0; i < starting_resources.length; i++) {
-				if (starting_resources[i] == null && handler.pickFlow ("Do you want to use marble bonus?")) { 
-					starting_resources[i] = (Resource) handler.pickBetween (Arrays.copyOf(whiteMarble, whiteMarble.length, Object[].class));
+				if (starting_resources[i] == null && handler.pickFlow(player, "Do you want to use marble bonus?")) { 
+					starting_resources[i] = (Resource) handler.pickBetween(player, "Which resource would you like to get?", whiteMarble, 1)[0];
 				}
 			}
 			return;
@@ -92,7 +92,7 @@ public class MarketTurn extends Turn {
 	private Resource[] getFromMarket(){
 		Resource[] bought;
 		int picked;
-		if (handler.pickFlow(null)){
+		if (handler.pickFlow(player, "Do you want to get resources from a column or a row?")){
 			bought = market.getColumn(chooseColumn());
 		}
 		else {
@@ -146,15 +146,14 @@ public class MarketTurn extends Turn {
 			has_decided = false;
 			if (x != null) {
 				while (!has_decided){
-					while (handler.pickFlow("Do you want to rearrange the warehouse?")){
-						//da cambiare in un array di due!
-						int arg = (Integer)handler.pickBetween (new Integer[] {1, 2, 3});
-						player.swapRows(arg, arg);
+					while (handler.pickFlow(player, "Do you want to rearrange the warehouse?")){
+						Object[] arg = handler.pickBetween (player, "Choose two rows to swap", new Integer[] {1, 2, 3}, 2);
+						player.swapRows((Integer) arg[0], (Integer) arg[1]);
 						//TODO: print
 						
 					}
 					if (this.hasExtraSpace(x)) {
-						if(handler.pickFlow("Do you want to use your extra_space LeaderCard?")){
+						if(handler.pickFlow(player, "Do you want to use your extra_space LeaderCard?")){
 							try {
 								this.extra_space[0].putResource(x);
 							} catch (IllegalArgumentException e) {
@@ -167,7 +166,7 @@ public class MarketTurn extends Turn {
 						//TODO: view informs the player that they cannot use extra space abilities
 						//TODO: change warehouse method arguments to take single resources
 						if (player.isPossibleToInsert(x)){
-							if (handler.pickFlow("Do you want to use your warehouse?")){
+							if (handler.pickFlow(player, "Do you want to use your warehouse?")){
 								single_resource[0] = x;
 								player.tryToInsert(single_resource);
 								has_decided = true;
@@ -176,7 +175,7 @@ public class MarketTurn extends Turn {
 							//TODO: view informs the player that they cannot put the resource in the warehouse
 						}
 					}
-					if (!has_decided && handler.pickFlow ("Do you want to discard the resource?")){
+					if (!has_decided && handler.pickFlow (player, "Do you want to discard the resource?")){
 							discarded_resources++;
 							has_decided = true;
 					}

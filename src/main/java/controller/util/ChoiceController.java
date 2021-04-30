@@ -75,13 +75,13 @@ public class ChoiceController {
 		Turn to_return;
 		switch(response.getChosen()) {
 			case 1:
-				to_return = new BuyCardTurn(player, development_cards_on_table);
+				to_return = new BuyCardTurn(player, this, development_cards_on_table);
 				break;
 			case 2:
-				to_return = new MarketTurn(player, market);
+				to_return = new MarketTurn(player, this, market);
 				break;
 			case 3:
-				to_return =  new ProductionTurn(player);
+				to_return =  new ProductionTurn(player, this);
 				break;
 			default:
 				to_return = null;

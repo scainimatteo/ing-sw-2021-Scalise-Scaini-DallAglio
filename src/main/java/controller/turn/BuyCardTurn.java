@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.controller.util.FaithController;
-import it.polimi.ingsw.controller.util.ChoiceHandler;
+import it.polimi.ingsw.controller.util.ChoiceController;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Game;
@@ -18,11 +18,11 @@ public class BuyCardTurn extends Turn{
 	private DevelopmentCardsOnTable dev_cards_on_table;
 	private Resource[] discounts;
 	
-	public BuyCardTurn (Player player, DevelopmentCardsOnTable cards){
+	public BuyCardTurn (Player player, ChoiceController handler, DevelopmentCardsOnTable cards){
 		this.player = player;
 		this.dev_cards_on_table = cards;
 		this.discounts = new Resource[2]; 
-		this.handler = new ChoiceHandler();
+		this.handler = handler;
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class BuyCardTurn extends Turn{
 		for (Resource x: temp_card.getCost()){
 			has_decided = false;
 			while (!has_decided){
-				if (handler.pickFlow("Do you want pay this cost from your warehouse?")){
+				if (handler.pickFlow(player, "Do you want pay this cost from your warehouse?")){
 					try {
 						player.getFromWarehouse(x, 1);
 						has_decided = true;
@@ -138,11 +138,11 @@ public class BuyCardTurn extends Turn{
 						//communicate failure to the player
 					}
 				}
-				else if (handler.pickFlow("Do you want to pay this cost from your leader card?")){
+				else if (handler.pickFlow(player, "Do you want to pay this cost from your leader card?")){
 					//try getfromExtraSpace
 					//TODO: implement getfromExtraSpace
 				}
-				else if (handler.pickFlow("Do you want to pay this cost from your strongbox?")){
+				else if (handler.pickFlow(player, "Do you want to pay this cost from your strongbox?")){
 					
 					try {
 						player.removeResources(x, 1);
@@ -171,10 +171,10 @@ public class BuyCardTurn extends Turn{
 		} 
 		dev_cards_on_table.getFromDeck(chosen_card);
 		payCost(chosen_card);
-		Integer pos = (Integer) handler.pickBetween( new Integer[] {1,2,3});
+		Integer pos = (Integer) handler.pickBetween(player, "In which slot do you want to put it?", new Integer[] {1,2,3}, 1)[0];
 		boolean[] fitting_slots = null;//player.isBuyable(chosen_card);
 		while (!fitting_slots[pos]){
-			pos = (Integer) handler.pickBetween ( new Integer[] {1,2,3});
+			pos = (Integer) handler.pickBetween(player, "In which slot do you want to put it?", new Integer[] {1,2,3}, 1)[0];
 		}
 		player.buyCard(chosen_card, pos.intValue());
 		return new FaithController(this.player, gained_faith,0);
