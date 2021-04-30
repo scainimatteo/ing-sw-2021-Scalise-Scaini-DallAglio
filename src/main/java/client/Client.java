@@ -208,7 +208,6 @@ public class Client {
 					return array_chooser;
 				}
 			}
-
 		} catch (NumberFormatException e) {
 			//TODO: print an error
 			e.printStackTrace();

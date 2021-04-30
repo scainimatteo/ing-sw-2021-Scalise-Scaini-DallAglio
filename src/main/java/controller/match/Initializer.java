@@ -1,6 +1,12 @@
 package it.polimi.ingsw.controller.match;
 
+import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.List;
+
+import java.lang.IndexOutOfBoundsException;
 
 import java.io.IOException;
 
@@ -8,6 +14,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.controller.util.CommunicationController;
 import it.polimi.ingsw.controller.util.ChoiceController;
+import it.polimi.ingsw.controller.util.FaithController;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
@@ -16,13 +23,17 @@ import it.polimi.ingsw.model.card.Deck;
 import it.polimi.ingsw.model.game.Factory;
 import it.polimi.ingsw.model.game.Game;
 
-import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
+import it.polimi.ingsw.model.player.Player;
+
+import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-public class Initializer {
+import it.polimi.ingsw.util.Observable;
+
+public class Initializer extends Observable<FaithController> {
 	private CommunicationController comm_controller;
 	private ChoiceController choice_controller;
 	private Player[] players;
@@ -134,11 +145,36 @@ public class Initializer {
 	}
 
 	private void chooseMatchOrder() {
-		return;
+		List<Player> players_list = Arrays.asList(this.players);
+		Collections.shuffle(players_list);
+		this.players = players_list.toArray(new Player[this.players.length]);
 	}
 
 	private void distributeRandomResources() {
-		return;
+		try {
+			this.players[1].tryToInsert(getRandomResources(1));
+
+			addObservers(this.players[2]);
+			this.players[2].tryToInsert(getRandomResources(2));
+			notify(new FaithController(this.players[2], 1, 0));
+
+			addObservers(this.players[3]);
+			this.players[3].tryToInsert(getRandomResources(2));
+			notify(new FaithController(this.players[3], 1, 0));
+		} catch (IndexOutOfBoundsException e) {
+		}
+	}
+
+	private Resource[] getRandomResources(int num) {
+		Random random = new Random();
+		Resource[] all_resources = Resource.values();
+
+		Resource[] resources = new Resource[num];
+		for (int i = 0; i < num; i++) {
+			int randint = random.nextInt(4);
+			resources[i] = all_resources[randint];
+		}
+		return resources;
 	}
 
 	/**
