@@ -2,9 +2,18 @@ package it.polimi.ingsw.controller.util;
 
 import java.util.Arrays;
 
+import it.polimi.ingsw.controller.turn.ProductionTurn;
+import it.polimi.ingsw.controller.turn.BuyCardTurn;
+import it.polimi.ingsw.controller.turn.MarketTurn;
+import it.polimi.ingsw.controller.turn.Turn;
+
 import it.polimi.ingsw.controller.util.CommunicationController;
 import it.polimi.ingsw.controller.util.ArrayChooser;
+import it.polimi.ingsw.controller.util.TurnSelector;
 import it.polimi.ingsw.controller.util.Choice;
+
+import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
+import it.polimi.ingsw.model.game.Market;
 
 import it.polimi.ingsw.model.player.Player;
 
@@ -56,5 +65,28 @@ public class ChoiceController {
 	 */
 	public void sendMessage(Player player, String message) {
 		this.comm_controller.sendToPlayer(player, message);
+	}
+
+	public Turn pickTurn(Player player, DevelopmentCardsOnTable development_cards_on_table, Market market) {
+		TurnSelector turn_selector = new TurnSelector();
+		this.comm_controller.sendToPlayer(player, turn_selector);
+		TurnSelector response = (TurnSelector) this.comm_controller.receiveFromPlayer(player);
+
+		Turn to_return;
+		switch(response.getChosen()) {
+			case 1:
+				to_return = new BuyCardTurn(player, development_cards_on_table);
+				break;
+			case 2:
+				to_return = new MarketTurn(player, market);
+				break;
+			case 3:
+				to_return =  new ProductionTurn(player);
+				break;
+			default:
+				to_return = null;
+		}
+
+		return to_return;
 	}
 }

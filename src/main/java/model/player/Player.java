@@ -15,7 +15,7 @@ import it.polimi.ingsw.model.player.track.Tile;
 
 import it.polimi.ingsw.controller.util.FaithController;
 
-import it.polimi.ingsw.util.PlayerObserver;
+import it.polimi.ingsw.util.Observer;
 import it.polimi.ingsw.util.Observable;
 
 import java.util.Iterator;
@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import java.lang.IllegalArgumentException;
 
-public class Player extends Observable<VaticanReports> implements PlayerObserver {
+public class Player extends Observable<VaticanReports> implements Observer<FaithController> {
 	protected String nickname;
 	protected FaithTrack track;
 	protected Warehouse warehouse;
