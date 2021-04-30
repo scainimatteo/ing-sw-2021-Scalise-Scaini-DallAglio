@@ -48,55 +48,6 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 		return this.leader_cards_deck;
 	}
 
-	/**
-	 * @param card is the DevelopmentCard to be checked
-	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
-	 */
-	public boolean[] isBuyable(DevelopmentCard card){
-		Resource[] tmp = card.getCost();
-		boolean tmp_boolean = true;
-		boolean[] to_return = {false, false, false};
-		int card_level = card.getCardLevel().getLevel();
-
-		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
-			for (Resource res : tmp){
-				if (res != null){
-					tmp_boolean = false;
-				}
-			}
-		}
-
-		if (tmp_boolean){
-			DevelopmentCard[] devcard = this.development_card_slots.getTopCards();
-
-			if (devcard[0] != null){
-				if (card_level - devcard[0].getCardLevel().getLevel() == 1){
-					to_return[0] = true;
-				}
-			} else if (card_level == 1){ 
-				to_return[0] = true;
-			}
-
-			if (devcard[1] != null){
-				if (card_level - devcard[1].getCardLevel().getLevel() == 1){
-					to_return[1] = true;
-				}
-			} else if (card_level == 1){
-				to_return[1] = true;
-			} 
-
-			if (devcard[2] != null){
-				if (card_level - devcard[2].getCardLevel().getLevel() == 1){
-					to_return[2] = true;
-				}
-			} else if (card_level == 1){
-				to_return[2] = true;
-			}
-		}
-
-		return to_return;
-	}
-
 	public boolean isActivable(LeaderCard card){
 		if (card instanceof LeaderCardLevelCost){
 			return this.isActivable((LeaderCardLevelCost) card);
@@ -180,6 +131,10 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 		return this.warehouse.getTopResource();
 	}
 
+	public void swapRows (int i, int j) {
+		this.warehouse.swapRows(i, j);
+	}
+
 	public Resource[] getMiddleResources(){
 		return this.warehouse.getMiddleResources();
 	}
@@ -198,6 +153,10 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 
 	public void clearWarehouse(){
 		this.warehouse.clearWarehouse();
+	}
+
+	public boolean isPossibleToInsert (Resource new_resource){
+		return this.warehouse.isPossibleToInsert(new_resource);
 	}
 
 	public Warehouse getPlayerWarehouse(){

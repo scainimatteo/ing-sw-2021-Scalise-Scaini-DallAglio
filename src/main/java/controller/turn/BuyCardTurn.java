@@ -42,18 +42,69 @@ public class BuyCardTurn extends Turn{
 	}
 
 	/**
+	 * @param card is the DevelopmentCard to be checked
+	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
+	 * TODO: fix this
+	public boolean[] isBuyable(DevelopmentCard card){
+		Resource[] tmp = card.getCost();
+		boolean tmp_boolean = true;
+		boolean[] to_return = {false, false, false};
+		int card_level = card.getCardLevel().getLevel();
+
+		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
+			for (Resource res : tmp){
+				if (res != null){
+					tmp_boolean = false;
+				}
+			}
+		}
+
+		if (tmp_boolean){
+			DevelopmentCard[] devcard = this.development_card_slots.getTopCards();
+
+			if (devcard[0] != null){
+				if (card_level - devcard[0].getCardLevel().getLevel() == 1){
+					to_return[0] = true;
+				}
+			} else if (card_level == 1){ 
+				to_return[0] = true;
+			}
+
+			if (devcard[1] != null){
+				if (card_level - devcard[1].getCardLevel().getLevel() == 1){
+					to_return[1] = true;
+				}
+			} else if (card_level == 1){
+				to_return[1] = true;
+			} 
+
+			if (devcard[2] != null){
+				if (card_level - devcard[2].getCardLevel().getLevel() == 1){
+					to_return[2] = true;
+				}
+			} else if (card_level == 1){
+				to_return[2] = true;
+			}
+		}
+
+		return to_return;
+	}
+	*/
+
+
+	/**
 	* Checks if the given card satisfies the requirements for buying it, considering the discount too.
 	* 
 	* @param chosen_card is the card the player wants to buy
 	* @return true if the card does satisfy requirements
 	*/
 	private boolean checkRequirements(DevelopmentCard chosen_card) { 
-		DevelopmentCard temp_card = chosen_card.applyDiscount(discounts);
-		for (boolean bool : player.isBuyable(temp_card)){
-			if (bool == true) {
-				return true;
-			}
-		}
+		//DevelopmentCard temp_card = chosen_card.applyDiscount(discounts);
+		//for (boolean bool : player.isBuyable(temp_card)){
+		//	if (bool == true) {
+		//		return true;
+		//	}
+		//}
 		return false;
 	}
 	
@@ -121,7 +172,7 @@ public class BuyCardTurn extends Turn{
 		dev_cards_on_table.getFromDeck(chosen_card);
 		payCost(chosen_card);
 		Integer pos = (Integer) handler.pickBetween( new Integer[] {1,2,3});
-		boolean[] fitting_slots = player.isBuyable(chosen_card);
+		boolean[] fitting_slots = null;//player.isBuyable(chosen_card);
 		while (!fitting_slots[pos]){
 			pos = (Integer) handler.pickBetween ( new Integer[] {1,2,3});
 		}

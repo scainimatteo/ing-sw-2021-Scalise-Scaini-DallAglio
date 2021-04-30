@@ -78,18 +78,17 @@ public class Warehouse {
 	/**
 	 * @param new_resource is the resource to be included in the Warehouse
 	 * @return true if new_resource can be added
-	 * TODO: delete this
-	private boolean isPossibleToInsert(Resource new_resource){
-		if ( !isPossibleToInsertTop(new_resource) ){
-			if ( !isPossibleToInsertMiddle(new_resource) ){
-				if ( !isPossibleToInsertBottom(new_resource) ){
+	 */
+	public boolean isPossibleToInsert(Resource new_resource){
+		if (top_resource != null){
+			if (!middle_resources[0].equals(new_resource) || middle_resources[1] != null){
+				if (!bottom_resources[0].equals(new_resource) || (bottom_resources[1] != null && bottom_resources[2] != null)){
 					return false;
 				}
 			}
 		}
 		return true;
 	}
-	*/
 
 	private boolean isPresent (Resource resource){
 		if (!top_resource.equals(resource)){
