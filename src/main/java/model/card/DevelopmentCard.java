@@ -37,6 +37,10 @@ public class DevelopmentCard extends Card {
 		Resource[] to_return = this.cost.clone();
 		return to_return;
 	}
+
+	public Production getProduction(){
+		return this.production;
+	}
 	
 	/**
 	* applies a discount to the given card 
