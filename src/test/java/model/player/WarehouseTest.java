@@ -9,7 +9,7 @@ public class WarehouseTest {
 	/**
 	 * Test for the methods tryToInsert, rearrangeWarehouse and the getters
 	 * rearranged 2 middle and 2 bottom inserting 1 middle
-	 */
+	 * TODO: delete this
 	@Test
 	public void insertAndRearrangeTest(){
 		Warehouse test_warehouse = new Warehouse();
@@ -36,10 +36,11 @@ public class WarehouseTest {
 		assertArrayEquals(expected_middle, test_warehouse.getMiddleResources());
 		assertArrayEquals(expected_bottom, test_warehouse.getBottomResources());
 	}
+	*/
 
 	/**
 	 * Test rearrange inserting 1 top in a warehouse containing 1 top and 1 middle
-	 */
+	 * TODO: delete this
 	@Test
 	public void rearrangeTopAndMiddleTest(){
 		Warehouse test_warehouse = new Warehouse();
@@ -66,6 +67,7 @@ public class WarehouseTest {
 		assertArrayEquals(expected_middle, test_warehouse.getMiddleResources());
 		assertArrayEquals(expected_bottom, test_warehouse.getBottomResources());
 	}
+	*/
 
 	/**
 	 * Test insert in a full warehouse

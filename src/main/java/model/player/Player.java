@@ -17,13 +17,15 @@ import it.polimi.ingsw.controller.util.FaithController;
 
 import it.polimi.ingsw.util.PlayerObserver;
 import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.Observer;
 
 import java.util.Iterator;
 import java.util.HashMap;
 
 import java.lang.IllegalArgumentException;
 
-public class Player extends Observable<VaticanReports> implements PlayerObserver {
+// public class Player extends Observable<VaticanReports> implements Observer<FaithController>, Observer<VaticanReports> {
+public class Player extends Observable<VaticanReports> {
 	protected String nickname;
 	protected FaithTrack track;
 	protected Warehouse warehouse;
@@ -226,6 +228,13 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 	/**
 	 * DEVCARDSSLOTS METHODS
 	 */
+	
+	public void buyCard(DevelopmentCard card, int position){
+		this.development_card_slots.buyCard(card, position);
+	}
+	/*
+	 * TODO: translate this fully into the controller
+	 *
 	public void buyCard(DevelopmentCard card, int position, boolean warehouse_first){
 		boolean[] returned = this.isBuyable(card);
 		if (returned[position]){
@@ -257,7 +266,7 @@ public class Player extends Observable<VaticanReports> implements PlayerObserver
 			throw new IllegalArgumentException();
 		}
 	}
-
+*/
 	public DevelopmentCard[] getTopCards(){
 		return this.development_card_slots.getTopCards();
 	}

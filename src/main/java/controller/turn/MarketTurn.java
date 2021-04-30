@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.util.FaithController;
+import it.polimi.ingsw.controller.util.ChoiceHandler;
 
 import java.util.NoSuchElementException;
 import java.util.Arrays;
@@ -25,11 +26,13 @@ public class MarketTurn extends Turn {
 		this.player = player;	
 		this.market = market;
 		this.whiteMarble = new Resource[2];
+		this.extra_space = new ExtraSpaceAbility[2];
+		this.handler = new ChoiceHandler();
 	}
 
 	/**
-	* @return the index of the column choosen by the player
-	*/
+	 * @return the index of the column choosen by the player
+	 */
 	private int chooseColumn(){
 		Integer clientreturn = 0;
 		Integer[] options = new Integer[] {0, 1, 2, 3};
@@ -38,8 +41,8 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* @return the index of the row choosen by the player
-	*/
+	 * @return the index of the row choosen by the player
+	 */
 	private int chooseRow(){
 		Integer clientreturn = 0;
 		Integer [] options = new Integer [] {0, 1, 2};
@@ -48,8 +51,8 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* Adds all bonus resources from the player's LeaderCard deck to the turn's bonuses 
-	*/
+	 * Adds all bonus resources from the player's LeaderCard deck to the turn's bonuses 
+	 */
 	private void checkWhiteMarbles(){
 		WhiteMarblesAbility test = new WhiteMarblesAbility (null);
 		WhiteMarblesAbility cast;
@@ -64,26 +67,34 @@ public class MarketTurn extends Turn {
 	}
 
 	/**
-	* Adds all extra space from the player's LeaderCard deck to the turn's available extra space
-	*/
+	 * Adds all extra space from the player's LeaderCard deck to the turn's available extra space
+	 */
 	private void checkExtraSpace(){
 		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
 		int index = 0;
 		for (LeaderCard card: player.getDeck()){
 			if (card.isActive() && card.getAbility().checkAbility(test)){
  				extra_space[index] = (ExtraSpaceAbility) card.getAbility();
-;
 				index ++;
 			}
 		}
 	}
 	
+	private boolean hasExtraSpace(Resource res){
+		for (ExtraSpaceAbility x : extra_space){
+			if (x.getResourceType().equals(res) && x.peekResources() < 2){ 
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
-	* Applies given bonuses to the argument string by turning null pointers into resources according to the player's request 
-	* 
-	* @param starting_resources is the ResourceVector to apply the bonuses on
-	*/	
-	private void applyBonus(Resource[] starting_resources){		
+  	 * Applies given bonuses to the argument string by turning null pointers into resources according to the player's request 
+	 * 
+	 * @param starting_resources is the ResourceVector to apply the bonuses on
+	 */	
+	private void applyBonus(Resource[] starting_resources){
 		if (whiteMarble[0] == null && whiteMarble[1] == null){
 			return;
 		}
@@ -95,13 +106,13 @@ public class MarketTurn extends Turn {
 			}
 			return;
 		}
-	}	
-	
+	}
+
 	/**
-	* Allows the player to choose if they want to pick a row, a column, and which one, then applies desired LeaderAbility bonuses
-	*
-	* @return the resources extracted from the market
-	*/ 
+	 * Allows the player to choose if they want to pick a row, a column, and which one, then applies desired LeaderAbility bonuses
+	 *
+	 * @return the resources extracted from the market
+	 */ 
 	private Resource[] getFromMarket(){
 		Resource[] bought;
 		int picked;
@@ -115,12 +126,11 @@ public class MarketTurn extends Turn {
 	}
 	
 	/**
-	* Counts the amount of Faith type resources in a given resource vector
-	*
-	* @param resources is the resource in which to count 
-	* @return the amount
-	*/
-	
+	 * Counts the amount of Faith type resources in a given resource vector
+	 *
+	 * @param resources is the resource in which to count 
+	 * @return the amount
+	 */
 	private int countFaith(Resource[] resources){
 		int count = 0;
 		for (Resource x : resources){
@@ -132,10 +142,13 @@ public class MarketTurn extends Turn {
 	}
 
 	/**
-	* Allows the player to position the gained resources however they want in their Warehouses
-	*/
-	private void arrangeResources(Resource[] resources){
+ 	 * Allows the player to position the gained resources however they want in their Warehouses
+	 * 
+	 * @return the number of discarded resources
+	 */
+	private int arrangeResources(Resource[] resources){
 		boolean has_decided;
+		int discarded_resources = 0;
 		//TODO: print Warehouse
 		for (int i = 0; i < resources.length; i++){
 			has_decided = false;
@@ -144,21 +157,27 @@ public class MarketTurn extends Turn {
 					while (handler.pickFlow("Do you want to rearrange the warehouse?")){
 						//TODO: add swapping lines method and print
 					}
-					if (handler.pickFlow("Do you want to use your extra_space LeaderCard?")){
-					//do something
+					if (this.hasExtraSpace(resources[i])) {
+						if(handler.pickFlow("Do you want to use your extra_space LeaderCard?")){
 						has_decided = true;
+						//operations
+						}
 					}
 					else {
 					//operations on warehouse
 						has_decided = true;
 					}
-					//TODO: implement an efficient method for discarding
+					if (has_decided == false && handler.pickFlow ("Do you want to discard the resource?")){
+						discarded_resources++;
+						has_decided = true;
+					}
 				}
 			}
 		}
+		return discarded_resources;
 	}
 
-	public FaithController playAction(){
+	public FaithController playAction (){
 		checkWhiteMarbles();
 		// TODO: view market before choice
 		Resource[] gained_resources = getFromMarket();
