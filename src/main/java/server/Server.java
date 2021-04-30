@@ -2,6 +2,7 @@ package it.polimi.ingsw.server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 
 import java.util.concurrent.ExecutorService;
@@ -22,6 +23,8 @@ public class Server {
 	private HashMap<String, ArrayList<ClientHandler>> lobby;
 	// contains for all the matches the number of players
 	private HashMap<String, Integer> num_players;
+	// contains all the nicknames - there cannot be two that are the same
+	private HashSet<String> nicknames;
 	private ExecutorService executor;
 	private final int match_name_len = 7;
 
@@ -31,6 +34,7 @@ public class Server {
 		this.lobby = new HashMap<String, ArrayList<ClientHandler>>();
 		this.num_players = new HashMap<String, Integer>();
 		this.executor = Executors.newCachedThreadPool();
+		this.nicknames = new HashSet<String>();
 	}
 
 	/**
@@ -53,14 +57,13 @@ public class Server {
 						insertIntoLobby(new_client_handler);
 					} catch (InterruptedException e) {
 						System.out.println("Miscomunication with the client");
-						new_client_handler.close();
+						new_client_handler.close("Miscomunication with the server");
+					} catch (IllegalAccessError e) {
+						System.out.println("Client failed to put right match name or tried to use an already existing nickname");
 					}
 				}).start();
-
 			} catch (IOException e) {
 				System.out.println("Error while connecting to client");
-			} catch (IllegalAccessError e) {
-				System.out.println("Client failed to put right match name");
 			}
 		}
 	}
@@ -68,11 +71,11 @@ public class Server {
 	/**
 	 * @param client the client that has to be inserted in the lobby
 	 */
-	private synchronized void insertIntoLobby(ClientHandler client) throws IllegalAccessError, InterruptedException {
+	private void insertIntoLobby(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		String match_name = manageClient(client);
+		// TODO: check for racing conditions
 		if (checkIfAllPlayersPresent(match_name)) {
 			// the right amount of clients are connected, start the match
-			//TODO: start match
 			for (ClientHandler ch : this.lobby.get(match_name)) {
 				ch.asyncSendToClient("Start Match");
 			}
@@ -86,10 +89,18 @@ public class Server {
 	 * @param client the client that just connected
 	 * @return the name of match the client just connected to
 	 */
-	private synchronized String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
+	private String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
 		client.asyncSendToClient("Nickname? ");
 		String nickname = (String) client.asyncReceiveFromClient();
+
+		synchronized (this.nicknames) {
+			// try to put the username, throw exception if it's already in the Set
+			if (!this.nicknames.add(nickname)) {
+				client.close("Sorry but the nickname " + nickname + " is already taken");
+				throw new IllegalAccessError();
+			}
+		}
 		client.setNickname(nickname);
 
 		client.asyncSendToClient("Match name? ");
@@ -108,7 +119,7 @@ public class Server {
 	 * @param first_client the first client of a match
 	 * @return the name of the newly created match
 	 */
-	private synchronized String manageFirstClient(ClientHandler first_client) throws InterruptedException {
+	private String manageFirstClient(ClientHandler first_client) throws InterruptedException {
 		Integer num;
 
 		//TODO: put all strings in a separate class
@@ -123,8 +134,10 @@ public class Server {
 		ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
 		clients.add(first_client);
 
-		this.lobby.put(match_name, clients);
-		this.num_players.put(match_name, num);
+		synchronized(this.lobby) {
+			this.lobby.put(match_name, clients);
+			this.num_players.put(match_name, num);
+		}
 		return match_name;
 	}
 
@@ -132,13 +145,14 @@ public class Server {
 	 * @param client the client that wants to enter an existing match
 	 * @param match_name the match to connect to
 	 */
-	private synchronized void manageOtherClient(ClientHandler client, String match_name) throws IllegalAccessError {
-		if (this.lobby.containsKey(match_name)) {
-			this.lobby.get(match_name).add(client);
-		} else {
-			client.asyncSendToClient("Sorry but there is no current match named " + match_name);
-			client.close();
-			throw new IllegalAccessError();
+	private void manageOtherClient(ClientHandler client, String match_name) throws IllegalAccessError {
+		synchronized(this.lobby) {
+			if (this.lobby.containsKey(match_name)) {
+				this.lobby.get(match_name).add(client);
+			} else {
+				client.close("Sorry but there is no current match named " + match_name);
+				throw new IllegalAccessError();
+			}
 		}
 	}
 
@@ -164,5 +178,16 @@ public class Server {
 	 */
 	private synchronized boolean checkIfAllPlayersPresent(String match_name) {
 		return this.lobby.get(match_name).size() == this.num_players.get(match_name);
+	}
+
+	/**
+	 * Remove a nickname from the HashSet
+	 *
+	 * @param nickname the nickname to remove
+	 */
+	public void removeNickname(String nickname) {
+		synchronized(this.nicknames) {
+			this.nicknames.remove(nickname);
+		}
 	}
 }
