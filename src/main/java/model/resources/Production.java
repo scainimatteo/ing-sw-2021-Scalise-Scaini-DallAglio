@@ -2,7 +2,10 @@ package it.polimi.ingsw.model.resources;
 
 import java.lang.IllegalArgumentException;
 
-public class Production {
+import java.io.Serializable;
+
+public class Production implements Serializable {
+	private static final long serialVersionUID = 6L;
 	protected Resource[] required_resources;
 	protected Resource[] produced_resources;
 

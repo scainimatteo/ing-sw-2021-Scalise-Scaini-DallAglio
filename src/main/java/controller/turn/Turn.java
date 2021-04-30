@@ -6,15 +6,15 @@ import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.util.LeaderCardController;
+import it.polimi.ingsw.controller.util.ChoiceController;
 import it.polimi.ingsw.controller.util.FaithController;
-import it.polimi.ingsw.controller.util.ChoiceHandler;
 
 import it.polimi.ingsw.util.Observable;
 
 public abstract class Turn extends Observable<FaithController> {
 	protected Player player;
-	protected ChoiceHandler handler;
 	protected ExtraSpaceAbility[] extra_space;
+	protected ChoiceController handler;
 
 	protected FaithController playAction(){
 		return null;

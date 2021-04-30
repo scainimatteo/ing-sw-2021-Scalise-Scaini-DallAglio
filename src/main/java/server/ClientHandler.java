@@ -15,6 +15,7 @@ public class ClientHandler implements Runnable {
 	private ObjectOutputStream dout;
 	// queue that keeps the messages coming from the client
 	private ArrayBlockingQueue<Object> messages;
+	private String nickname;
 
 	public ClientHandler(Server server, Socket client) throws IOException {
 		this.server = server;
@@ -22,6 +23,14 @@ public class ClientHandler implements Runnable {
 		this.dout = new ObjectOutputStream(client.getOutputStream()); 
 		this.din = new ObjectInputStream(client.getInputStream()); 
 		this.messages = new ArrayBlockingQueue<Object>(1);
+	}
+
+	public String getNickname() {
+		return this.nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	/**
@@ -82,11 +91,13 @@ public class ClientHandler implements Runnable {
 	/**
 	 * Safely close the connection with the client
 	 */
-	public void close() {
+	public void close(String message) {
 		try {
+			sendToClient(message);
+			this.server.removeNickname(this.nickname);
 			this.client.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Connection closed");
 		}
 	}
 
