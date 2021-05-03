@@ -1,7 +1,7 @@
 package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.controller.util.FaithController;
-import it.polimi.ingsw.controller.util.ChoiceHandler;
+import it.polimi.ingsw.controller.util.ChoiceController;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Game;
@@ -18,11 +18,11 @@ public class BuyCardTurn extends Turn{
 	private DevelopmentCardsOnTable dev_cards_on_table;
 	private Resource[] discounts;
 	
-	public BuyCardTurn (Player player, DevelopmentCardsOnTable cards){
+	public BuyCardTurn (Player player, ChoiceController handler, DevelopmentCardsOnTable cards){
 		this.player = player;
 		this.dev_cards_on_table = cards;
 		this.discounts = new Resource[2]; 
-		this.handler = new ChoiceHandler();
+		this.handler = handler;
 	}
 
 	/**
@@ -41,17 +41,22 @@ public class BuyCardTurn extends Turn{
 		}
 	}
 
+	private boolean hasResourceInExtraSpace (Resource res){
+		return true;
+	}
+
 	/**
 	 * @param card is the DevelopmentCard to be checked
 	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
 	 * TODO: fix this
+	 *
 	public boolean[] isBuyable(DevelopmentCard card){
 		Resource[] tmp = card.getCost();
 		boolean tmp_boolean = true;
 		boolean[] to_return = {false, false, false};
 		int card_level = card.getCardLevel().getLevel();
 
-		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
+		if ( !(player.areContainedInWarehouse(tmp) || player.areContainedInStrongbox(tmp)) ){
 			for (Resource res : tmp){
 				if (res != null){
 					tmp_boolean = false;
@@ -88,8 +93,7 @@ public class BuyCardTurn extends Turn{
 		}
 
 		return to_return;
-	}
-	*/
+	} */
 
 
 	/**
@@ -123,32 +127,39 @@ public class BuyCardTurn extends Turn{
 	/** 
 	 * Removes resources equal to the cost from the player and allows them to choose where to get them out of
 	 */
-
-	private void payCost(DevelopmentCard card) {
-		DevelopmentCard temp_card = card.applyDiscount(discounts);
+	//TODO: implement with pickBetween and implicit representation
+	@Override
+	protected void payResources(Resource[] resources) {
 		boolean has_decided;
-		for (Resource x: temp_card.getCost()){
+		for (Resource x: resources) {
 			has_decided = false;
 			while (!has_decided){
-				if (handler.pickFlow("Do you want pay this cost from your warehouse?")){
-					try {
+				if (player.getPlayerWarehouse().areContainedInWarehouse(new Resource[] {x})){
+					if (handler.pickFlow(player, "Do you want pay this cost from your warehouse?")){
 						player.getFromWarehouse(x, 1);
 						has_decided = true;
-					} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-						//communicate failure to the player
 					}
-				}
-				else if (handler.pickFlow("Do you want to pay this cost from your leader card?")){
-					//try getfromExtraSpace
-					//TODO: implement getfromExtraSpace
-				}
-				else if (handler.pickFlow("Do you want to pay this cost from your strongbox?")){
-					
-					try {
-						player.removeResources(x, 1);
-						has_decided = true;
-					} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+				} else {
+				//warn the player of impossibility
+					if (hasResourceInExtraSpace(x)){
+						if (handler.pickFlow(player, "Do you want to pay this cost from your leader card?")){
+							if (extra_space[0].getResourceType().equals(x)){
+								extra_space[0].getResource(1);
+							} else {
+								extra_space[1].getResource(1);
+							}
+						}
+					} else {
+					//TODO: warn the player of impossibility
+						if (player.getPlayerStrongbox().areContainedInStrongbox(new Resource[] {x})){
+							if (handler.pickFlow(player, "Do you want to pay this cost from your strongbox?")){
+						
+								player.removeResources(x, 1);
+								has_decided = true;
+							}
+						} else {
 						//communicate failure to the player
+						}
 					}
 				}
 			}
@@ -170,11 +181,11 @@ public class BuyCardTurn extends Turn{
 			//what if there is no buyable card?
 		} 
 		dev_cards_on_table.getFromDeck(chosen_card);
-		payCost(chosen_card);
-		Integer pos = (Integer) handler.pickBetween( new Integer[] {1,2,3});
+		payResources(chosen_card.applyDiscount(discounts).getCost());
+		Integer pos = (Integer) handler.pickBetween(player, "In which slot do you want to put it?", new Integer[] {1,2,3}, 1)[0];
 		boolean[] fitting_slots = null;//player.isBuyable(chosen_card);
 		while (!fitting_slots[pos]){
-			pos = (Integer) handler.pickBetween ( new Integer[] {1,2,3});
+			pos = (Integer) handler.pickBetween(player, "In which slot do you want to put it?", new Integer[] {1,2,3}, 1)[0];
 		}
 		player.buyCard(chosen_card, pos.intValue());
 		return new FaithController(this.player, gained_faith,0);

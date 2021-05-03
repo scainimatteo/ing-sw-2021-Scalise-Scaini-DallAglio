@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller.turn;
 import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.controller.util.FaithController;
-import it.polimi.ingsw.controller.util.ChoiceHandler;
+import it.polimi.ingsw.controller.util.ChoiceController;
 
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.DevelopmentCard;
@@ -18,9 +18,9 @@ import java.util.Arrays;
 public class ProductionTurn extends Turn{
 	private Production[] prod_ability;
 	
-	public ProductionTurn(Player player){
+	public ProductionTurn(Player player, ChoiceController handler){
 		this.player = player;
-		this.handler = new ChoiceHandler();
+		this.handler = handler;
 		this.prod_ability = new Production[2];
 	}
 
@@ -47,7 +47,7 @@ public class ProductionTurn extends Turn{
 
 		choice = player_prods.toArray(new Production[player_prods.size()]);
 
-		to_return = (Production) handler.pickBetween(choice);
+		to_return = (Production) handler.pickBetween(player, "Which production do you want to use?", choice, 1)[0];
 
 		return to_return;
 	}
