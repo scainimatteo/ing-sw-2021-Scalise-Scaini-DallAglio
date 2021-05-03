@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model.player.track;
 
+import it.polimi.ingsw.util.Observer;
+
 import java.io.*;
 
-public class FaithTrack {
+public class FaithTrack implements Observer<VaticanReports> {
 	protected Cell[] track;
 	protected Tile[] vatican_report_tiles;
 	protected Cell faith_marker;
@@ -62,5 +64,9 @@ public class FaithTrack {
 
 	public boolean checkIfTileIsActive(int index){
 		return this.vatican_report_tiles[index].isActive();
+	}
+
+	public void update(VaticanReports vr_param){
+		this.activateVaticanReport(vr_param);
 	}
 }

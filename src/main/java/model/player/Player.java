@@ -288,8 +288,4 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 			notify(returned);
 		} 
 	}
-
-	public void update(VaticanReports vatican_rep){
-		this.track.activateVaticanReport(vatican_rep);
-	}
 }
