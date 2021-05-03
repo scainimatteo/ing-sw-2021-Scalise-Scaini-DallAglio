@@ -24,6 +24,10 @@ public class StrongBox {
 		this.storage.put(servant_resource, 0);
 	}
 
+	public int get(Resource res){
+		return storage.get(res);
+	}
+
 	/**
 	 * @param new_resources is the array of resources get from the market
 	 * @exception IllegalArgumentException is thrown if a resource is not present
