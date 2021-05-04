@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.player.Storage;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 
-public class Warehouse {
+public class Warehouse implements Storage {
 	private Resource top_resource = null;
 	private Resource[] middle_resources = {null, null};
 	private Resource[] bottom_resources = {null, null, null};
@@ -158,6 +159,11 @@ public class Warehouse {
 		}
 
 		return resources_not_inserted;
+	}
+
+	@Override
+	public void getResource(Resource res){
+		return;
 	}
 
 	/**

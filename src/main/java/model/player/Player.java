@@ -218,41 +218,7 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 	public void buyCard(DevelopmentCard card, int position){
 		this.development_card_slots.buyCard(card, position);
 	}
-	/*
-	 * TODO: translate this fully into the controller
-	 *
-	public void buyCard(DevelopmentCard card, int position, boolean warehouse_first){
-		boolean[] returned = this.isBuyable(card);
-		if (returned[position]){
-			this.development_card_slots.buyCard(card, position);
 
-			Resource[] tmp = card.getCost();
-			if (warehouse_first){
-				for (Resource res : tmp){
-					try {
-						this.warehouse.getFromWarehouse(res, 1);
-					} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-						try {
-							this.strongbox.removeResources(res, 1);
-						} catch (IllegalArgumentException | IndexOutOfBoundsException x) {}
-					}
-				}
-			} else {
-				for (Resource res : tmp){
-					try {
-						this.strongbox.removeResources(res, 1);
-					} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-						try {
-							this.warehouse.getFromWarehouse(res, 1);
-						} catch (IllegalArgumentException | IndexOutOfBoundsException x) {}
-					}
-				}
-			}
-		} else {
-			throw new IllegalArgumentException();
-		}
-	}
-*/
 	public DevelopmentCard[] getTopCards(){
 		return this.development_card_slots.getTopCards();
 	}

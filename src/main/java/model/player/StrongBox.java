@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.player.Storage;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 
-public class StrongBox {
+public class StrongBox implements Storage{
 	private HashMap<Resource, Integer> storage;
 
 	public StrongBox(){
@@ -26,6 +27,11 @@ public class StrongBox {
 
 	public int get(Resource res){
 		return storage.get(res);
+	}
+	
+	@Override
+	public void getResource(Resource res){
+		return;
 	}
 
 	/**
