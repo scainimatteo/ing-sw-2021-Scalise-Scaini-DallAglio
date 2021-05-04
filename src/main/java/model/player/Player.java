@@ -44,16 +44,18 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 	public String getNickname(){
 		return this.nickname;
 	}
+
+	public FaithTrack getFaithTrack() {
+		return this.track;
+	}
 	
 	public LeaderCard[] getDeck(){
 		return this.leader_cards_deck;
 	}
 
-
 	public void setLeaderCards(LeaderCard[] leader_cards) {
 		this.leader_cards_deck = leader_cards;
 	}
-
 
 	public boolean isActivable(LeaderCard card){
 		if (card instanceof LeaderCardLevelCost){
@@ -287,9 +289,5 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		if (returned != null){
 			notify(returned);
 		} 
-	}
-
-	public void update(VaticanReports vatican_rep){
-		this.track.activateVaticanReport(vatican_rep);
 	}
 }
