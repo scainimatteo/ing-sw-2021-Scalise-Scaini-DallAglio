@@ -75,12 +75,12 @@ public class ChoiceController {
 	}
 
 	/**
-	 * Choose between one of the three turns
+	 * Pick a Turn between the three possible Turns
 	 *
 	 * @param player the Player that has to choose
-	 * @param development_cards_on_table the DevelopmentCardsOnTable for BuyCardTurn
-	 * @param market the Market for MarketTurn
-	 * @return the new Turn choosen
+	 * @param development_cards_on_table the cards for BuyCardTurn
+	 * @param market the market for MarketTurn
+	 * @return the Turn chosen by the Player
 	 */
 	public Turn pickTurn(Player player, DevelopmentCardsOnTable development_cards_on_table, Market market) {
 		TurnSelector turn_selector = new TurnSelector();
@@ -101,6 +101,7 @@ public class ChoiceController {
 				to_return =  new ProductionTurn(player, this);
 				break;
 			default:
+				//TODO: better error handling
 				to_return = null;
 		}
 

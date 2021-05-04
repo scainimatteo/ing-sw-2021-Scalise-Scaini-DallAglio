@@ -170,6 +170,28 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return this.warehouse;
 	}
 
+	public HashMap <Resource, Integer> totalResources() {
+		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
+		total.put(Resource.COIN, strongbox.get(Resource.COIN));
+		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));
+		total.put(Resource.SHIELD, strongbox.get(Resource.SHIELD));
+		total.put(Resource.STONE, strongbox.get(Resource.STONE));
+		if (getTopResource() != null){
+			total.put(getTopResource(), total.get(getTopResource())+1);
+		}
+		for (Resource x : getMiddleResources()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+		for (Resource x : getBottomResources()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+		return total;
+	}
+		
 	/**
 	 * STRONGBOX METHODS
 	 */
@@ -265,9 +287,5 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		if (returned != null){
 			notify(returned);
 		} 
-	}
-
-	public void update(VaticanReports vatican_rep){
-		this.track.activateVaticanReport(vatican_rep);
 	}
 }

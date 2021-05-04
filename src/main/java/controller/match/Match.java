@@ -38,13 +38,14 @@ public class Match implements Runnable {
 		Player[] players = this.game.getPlayers();
 		boolean last_round = false;
 
-		while (last_round) {
+		while (!last_round) {
 			for (Player p: players) {
 				Turn turn = choice_controller.pickTurn(p, this.game.getDevelopmentCardsOnTable(), this.game.getMarket());
 				turn.playTurn();
 
 				last_round = checkLastRound();
 			}
+			this.game.shiftPlayers();
 		}
 		//TODO: last round stuff
 	}
