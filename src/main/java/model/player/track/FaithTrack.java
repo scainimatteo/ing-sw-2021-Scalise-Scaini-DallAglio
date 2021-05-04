@@ -27,7 +27,6 @@ public class FaithTrack implements Observer<VaticanReports> {
 			if (track[i].isPopeSpace()){
 				if (checkCell(this.track[i].whichVaticanReport().getIndex())){
 					this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
-					this.activateVaticanReport(this.track[i].whichVaticanReport());
 					return this.track[i].whichVaticanReport();
 				}
 			}
