@@ -10,6 +10,8 @@ import it.polimi.ingsw.controller.turn.Turn;
 import it.polimi.ingsw.controller.util.CommunicationController;
 import it.polimi.ingsw.controller.util.ArrayChooser;
 import it.polimi.ingsw.controller.util.TurnSelector;
+import it.polimi.ingsw.controller.util.MessageType;
+import it.polimi.ingsw.controller.util.Message;
 import it.polimi.ingsw.controller.util.Choice;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
@@ -31,14 +33,16 @@ public class ChoiceController {
 	 * @param selection the array of Objects to choose from
 	 * @return the chosen Object
 	 */
-	public Object[] pickBetween(Player player, String message, Object[] selection, int to_choose){
+	public Object[] pickBetween(Player player, String message_string, Object[] selection, int to_choose){
 		selection = Arrays.stream(selection).filter(x -> x != null).toArray();
 		if (selection.length == 1){
 			return selection;
 		} else { 
-			ArrayChooser array_chooser = new ArrayChooser(message, selection, to_choose);
-			this.comm_controller.sendToPlayer(player, array_chooser);
-			ArrayChooser response = (ArrayChooser) this.comm_controller.receiveFromPlayer(player);
+			ArrayChooser array_chooser = new ArrayChooser(message_string, selection, to_choose);
+			Message message = new Message(MessageType.ARRAYCHOOSER, array_chooser);
+			this.comm_controller.sendToPlayer(player, message);
+			Message message_response = (Message) this.comm_controller.receiveFromPlayer(player);
+			ArrayChooser response = (ArrayChooser) message_response.getMessage();
 			return response.getChosenArray();
 		}
 	}
@@ -50,10 +54,12 @@ public class ChoiceController {
 	 * @param message a String describing what to choose from
 	 * @return a boolean rappresenting the chosen option
 	 */
-	public boolean pickFlow(Player player, String message){
-		Choice choice = new Choice(message);
-		this.comm_controller.sendToPlayer(player, choice);
-		Choice response = (Choice) this.comm_controller.receiveFromPlayer(player);
+	public boolean pickFlow(Player player, String message_string){
+		Choice choice = new Choice(message_string);
+		Message message = new Message(MessageType.CHOICE, choice);
+		this.comm_controller.sendToPlayer(player, message);
+		Message message_response = (Message) this.comm_controller.receiveFromPlayer(player);
+		Choice response = (Choice) message_response.getMessage();
 		return response.getResponse();
 	}
 
@@ -63,14 +69,25 @@ public class ChoiceController {
 	 * @param player the Player to send the message to
 	 * @param message the message to send
 	 */
-	public void sendMessage(Player player, String message) {
+	public void sendMessage(Player player, String message_string) {
+		Message message = new Message(MessageType.STRING, message_string);
 		this.comm_controller.sendToPlayer(player, message);
 	}
 
+	/**
+	 * Choose between one of the three turns
+	 *
+	 * @param player the Player that has to choose
+	 * @param development_cards_on_table the DevelopmentCardsOnTable for BuyCardTurn
+	 * @param market the Market for MarketTurn
+	 * @return the new Turn choosen
+	 */
 	public Turn pickTurn(Player player, DevelopmentCardsOnTable development_cards_on_table, Market market) {
 		TurnSelector turn_selector = new TurnSelector();
-		this.comm_controller.sendToPlayer(player, turn_selector);
-		TurnSelector response = (TurnSelector) this.comm_controller.receiveFromPlayer(player);
+		Message message = new Message(MessageType.TURNSELECTOR, turn_selector);
+		this.comm_controller.sendToPlayer(player, message);
+		Message message_response = (Message) this.comm_controller.receiveFromPlayer(player);
+		TurnSelector response = (TurnSelector) message_response.getMessage();
 
 		Turn to_return;
 		switch(response.getChosen()) {
