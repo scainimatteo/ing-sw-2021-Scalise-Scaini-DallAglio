@@ -1,8 +1,11 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.Client;
+import java.util.Arrays;
+import java.util.List;
 
 import java.io.IOException;
+
+import it.polimi.ingsw.client.Client;
 
 public class ClientMain {
 	private static int port;
@@ -21,16 +24,23 @@ public class ClientMain {
 	 * @param args the arguments
 	 */
 	public static void parseArguments(String[] args) {
-		//TODO: We can do better that this
 		port = default_port;
 		address = default_address;
 
 		if (args.length < 2) {
 			return;
 		}
+		
+		List<String> arglist = Arrays.asList(args);
 
-		if (args[0].equals("-p")) {
-			port = Integer.parseInt(args[1]);
+		// PORT
+		if (arglist.contains("-p") || arglist.contains("--port")) {
+			port = parsePort(arglist);
+		}
+
+		// ADDRESS
+		if (arglist.contains("-a") || arglist.contains("--address")) {
+			address = parseAddress(arglist);
 		}
 	}
 
@@ -40,5 +50,31 @@ public class ClientMain {
 		} catch (IOException e) {
 			System.out.printf("Can't run client on address %s and port %d\n", address, port);
 		}
+	}
+
+	/**
+	 * @param arglist a List with all the command line arguments
+	 * @return the port specified by command line
+	 */
+	private static int parsePort(List<String> arglist) {
+		int index = arglist.indexOf("-p");
+		if (index == -1) {
+			index = arglist.indexOf("--port");
+		}
+
+		return Integer.parseInt(arglist.get(index + 1));
+	}
+
+	/**
+	 * @param arglist a List with all the command line arguments
+	 * @return the addres specified by command line
+	 */
+	private static String parseAddress(List<String> arglist) {
+		int index = arglist.indexOf("-a");
+		if (index == -1) {
+			index = arglist.indexOf("--address");
+		}
+
+		return arglist.get(index + 1);
 	}
 }
