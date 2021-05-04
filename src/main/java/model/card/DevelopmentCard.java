@@ -5,8 +5,10 @@ import it.polimi.ingsw.model.card.CardLevel;
 
 import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.resources.Production;
+import it.polimi.ingsw.model.resources.ProductionInterface;
 
-public class DevelopmentCard extends Card {
+public class DevelopmentCard extends Card implements ProductionInterface {
+	private static final long serialVersionUID = 8L;
 	private Production production;
 	private Resource[] cost;
 	private CardLevel level;
@@ -60,5 +62,8 @@ public class DevelopmentCard extends Card {
 		}
 		return new DevelopmentCard (victory_points, production, temp, level, id);
 	}
-}
 
+	public Resource[] activateProduction(Resource[] cost){
+		return this.production.activateProduction(cost);
+	}
+}

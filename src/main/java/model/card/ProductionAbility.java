@@ -2,11 +2,13 @@ package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.card.LeaderAbility;
 
-import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.resources.Production;
+import it.polimi.ingsw.model.resources.ProductionInterface;
 
-public class ProductionAbility extends LeaderAbility {
-	public Production production;
+public class ProductionAbility extends LeaderAbility implements ProductionInterface {
+	protected static final long serialVersionUID = 7L;
+	protected Production production;
 	
 	public ProductionAbility (Resource[] required, Resource[] produced){
 		this.production = new Production(required, produced);
@@ -30,5 +32,9 @@ public class ProductionAbility extends LeaderAbility {
 	*/ 
 	public boolean checkAbility (ProductionAbility target){
 		return true;
+	}
+
+	public Resource[] activateProduction(Resource[] cost){
+		return this.production.activateProduction(cost);
 	}
 }

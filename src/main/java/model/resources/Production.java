@@ -4,7 +4,7 @@ import java.lang.IllegalArgumentException;
 
 import java.io.Serializable;
 
-public class Production implements Serializable {
+public class Production implements ProductionInterface, Serializable {
 	private static final long serialVersionUID = 6L;
 	protected Resource[] required_resources;
 	protected Resource[] produced_resources;
