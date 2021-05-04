@@ -23,6 +23,7 @@ import it.polimi.ingsw.model.card.Deck;
 import it.polimi.ingsw.model.game.Factory;
 import it.polimi.ingsw.model.game.Game;
 
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 import it.polimi.ingsw.model.player.Player;
@@ -32,6 +33,7 @@ import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.server.ClientHandler;
 
 import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.Observer;
 
 public class Initializer extends Observable<FaithController> {
 	private CommunicationController comm_controller;
@@ -83,6 +85,14 @@ public class Initializer extends Observable<FaithController> {
 			this.comm_controller.insertPlayer(player, ch);
 			this.players[i] = player;
 			i++;
+		}
+
+		for (i = 0; i < this.players.length; i++) {
+			for (int j = 0; j < this.players.length; j++) {
+				if (i != j) {
+					this.players[i].addObservers(this.players[j].getFaithTrack());
+				}
+			}
 		}
 	}
 

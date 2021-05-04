@@ -181,13 +181,6 @@ public class Client {
 		System.out.printf("Put the index of the turn chosen: ");
 	}
 
-	private void handleTurn(TurnSelector t) {
-		System.out.println(t.getMessage());
-		System.out.printf("Put the index of the turn chosen: ");
-		this.turn = true;
-		this.parsing_object = t;
-	}
-
 	/**
 	 * Parse the string to send so that you can send objects
 	 *
