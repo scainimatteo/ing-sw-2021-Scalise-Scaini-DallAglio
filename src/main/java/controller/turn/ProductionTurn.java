@@ -9,36 +9,40 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.ProductionAbility;
 
-import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.resources.Production;
+import it.polimi.ingsw.model.resources.ProductionInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ProductionTurn extends Turn{
-	private Production[] prod_ability;
+	/**
+	 * TODO: cambia da production[] a productioninterface[]
+	 */
+	private ProductionAbility[] prod_ability;
 	
 	public ProductionTurn(Player player, ChoiceController handler){
 		this.player = player;
 		this.handler = handler;
-		this.prod_ability = new Production[2];
+		this.prod_ability = new ProductionInterface[2];
 	}
 
 	/**
 	 * @return the production chosen by the player
 	 */
-	private Production chooseProduction(){
+	private ProductionInterface chooseProduction(){
 		Production prod_base = new Production(null, null);
-		ArrayList<Production> player_prods = new ArrayList<Production>();
-		Production[] choice;
-		Production to_return;
+		ArrayList<ProductionInterface> player_prods = new ArrayList<ProductionInterface>();
+		ProductionInterface[] choice;
+		ProductionInterface to_return;
 
 		player_prods.add(prod_base);
 
 		DevelopmentCard[] tmp = player.getTopCards();
 		for (DevelopmentCard card : tmp){
 			if (card != null){
-				player_prods.add(card.getProduction());
+				player_prods.add(card);
 			} 
 		}
 
@@ -64,7 +68,7 @@ public class ProductionTurn extends Turn{
 		for (LeaderCard card : player.getDeck()){
 			if (card != null && card.isActive() && card.getAbility().checkAbility(test)){
 				tmp = (ProductionAbility) card.getAbility();
-				this.prod_ability[index] = tmp.getProduction();
+				this.prod_ability[index] = tmp;
 				index ++;
 			} 
 		}
@@ -104,7 +108,7 @@ public class ProductionTurn extends Turn{
 	 */
 	@Override
 	protected FaithController playAction(){
-		Production choice = chooseProduction();
+		ProductionInterface choice = chooseProduction();
 		boolean containsNullPosition = false;
 
 		return new FaithController(this.player, 0, 0);
