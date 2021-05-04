@@ -8,6 +8,8 @@ import java.io.*;
 
 import it.polimi.ingsw.controller.util.ArrayChooser;
 import it.polimi.ingsw.controller.util.TurnSelector;
+import it.polimi.ingsw.controller.util.MessageType;
+import it.polimi.ingsw.controller.util.Message;
 import it.polimi.ingsw.controller.util.Choice;
 
 public class Client {
@@ -17,10 +19,7 @@ public class Client {
 	private ObjectInputStream din;
 	private ObjectOutputStream dout;
 	private Scanner stdin;
-	private boolean choice = false;
-	private boolean array = false;
-	private boolean turn = false;
-	private Object parsing_object;
+	private Message message_to_parse;
 
 
 	public Client(String address, int port) throws IOException {
@@ -61,8 +60,8 @@ public class Client {
 		Thread t = new Thread(() -> {
 			try {
 				while (true) {
-					Object inputObject = this.din.readObject();
-					handleObject(inputObject);
+					Message inputMessage = (Message) this.din.readObject();
+					handleMessage(inputMessage);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -82,12 +81,13 @@ public class Client {
 			while (true) {
 				// TODO: Change how the client gives the input
 				String inputLine = this.stdin.nextLine();
-				Object to_send = parseSend(inputLine);
-				if (to_send != null) {
+				Message to_send = parseSend(inputLine);
+				if (this.message_to_parse.isParsed()) {
 					write(to_send);
+					this.message_to_parse = null;
 				} else {
 					// continue parsing the object we were parsing before
-					handleObject(this.parsing_object);
+					handleMessage(this.message_to_parse);
 				}
 			}
 		});
@@ -113,27 +113,29 @@ public class Client {
 	// TODO: These functions are temporary and will be made better in the view
 
 	/**
-	 * Handle the Object received from the Server
+	 * Handle the Message received from the Server
 	 *
-	 * @param object the Object received
+	 * @param message the Message received
 	 */
-	private void handleObject(Object object) {
-		if (object instanceof String) {
-			// STRING
-			handleString((String) object);
-		} else if (object instanceof ArrayChooser) {
-			// ARRAY
-			handleArray((ArrayChooser) object);
-		} else if (object instanceof Choice) {
-			// CHOICE
-			handleChoice((Choice) object);
-		} else if (object instanceof TurnSelector) {
-			// TURN
-			handleTurn((TurnSelector) object);
-		} else {
-			// FALLBACK
-			System.out.println("Received unknown object");
-			throw new IllegalArgumentException();
+	private void handleMessage(Message message) {
+		this.message_to_parse = message;
+		switch(message.getMessageType()) {
+			case STRING:
+				handleString((String) message.getMessage());
+				message.setParsed();
+				break;
+			case ARRAYCHOOSER:
+				handleArray((ArrayChooser) message.getMessage());
+				break;
+			case CHOICE:
+				handleChoice((Choice) message.getMessage());
+				break;
+			case TURNSELECTOR:
+				handleTurn((TurnSelector) message.getMessage());
+				break;
+			default:
+				System.out.println("Received unknown object");
+				throw new IllegalArgumentException();
 		}
 	}
 
@@ -158,8 +160,6 @@ public class Client {
 			System.out.printf("%d. %s\n", i, array[i - 1]);
 		}
 		System.out.printf("Put the index of the element chosen: ");
-		this.array = true;
-		this.parsing_object = array_chooser;
 	}
 
 	/**
@@ -169,40 +169,50 @@ public class Client {
 	 */
 	private void handleChoice(Choice c) {
 		System.out.println(c.getMessage() + " [y/n] ");
-		this.choice = true;
 	}
 
+	/**
+	 * Print the message of the TurnSelector received and parse the next line as a Turn
+	 *
+	 * @param t the TurnSelector received
+	 */
 	private void handleTurn(TurnSelector t) {
 		System.out.println(t.getMessage());
 		System.out.printf("Put the index of the turn chosen: ");
-		this.turn = true;
-		this.parsing_object = t;
 	}
 
 	/**
 	 * Parse the string to send so that you can send objects
 	 *
 	 * @param input the string written on the console
-	 * @return the object that the string represents
+	 * @return the Message that the string represents
 	 */
-	private Object parseSend(String input) {
-		// ARRAYS
-		if (this.array) {
-			return sendArray(input);
-		// CHOICE
-		} else if (this.choice) {
-			return sendChoice(input);
-		} else if (this.turn) {
-			return sendTurn(input);
+	private Message parseSend(String input) {
+		Message message = null;
+
+		switch(this.message_to_parse.getMessageType()) {
+			case ARRAYCHOOSER:
+				message = new Message(MessageType.ARRAYCHOOSER, sendArray(input));
+				break;
+			case CHOICE:
+				message = new Message(MessageType.CHOICE, sendChoice(input));
+				break;
+			case TURNSELECTOR:
+				message = new Message(MessageType.TURNSELECTOR, sendTurn(input));
+				break;
 		}
 
-		try {
-			// INTEGER
-			return Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			// FALLBACK
-			return input;
+		if (message == null) {
+			try {
+				// INTEGER
+				message = new Message(MessageType.INTEGER, Integer.parseInt(input));
+			} catch (NumberFormatException e) {
+				// FALLBACK
+				message = new Message(MessageType.STRING, input);
+			}
 		}
+
+		return message;
 	}
 
 	/**
@@ -214,11 +224,11 @@ public class Client {
 	private ArrayChooser sendArray(String input) {
 		try {
 			int chosen = Integer.parseInt(input);
-			ArrayChooser array_chooser = (ArrayChooser) this.parsing_object;
+			ArrayChooser array_chooser = (ArrayChooser) this.message_to_parse.getMessage();
 
 			if (array_chooser.setChosen(chosen)) {
 				if (array_chooser.isComplete()) {
-					this.array = false;
+					this.message_to_parse.setParsed();
 					return array_chooser;
 				}
 			}
@@ -242,7 +252,7 @@ public class Client {
 		} else {
 			c.setResponse(false);
 		}
-		this.choice = false;
+		this.message_to_parse.setParsed();
 		return c;
 	}
 
@@ -255,10 +265,10 @@ public class Client {
 	private TurnSelector sendTurn(String input) {
 		try {
 			int chosen = Integer.parseInt(input);
-			TurnSelector turn = (TurnSelector) this.parsing_object;
+			TurnSelector turn = (TurnSelector) this.message_to_parse.getMessage();
 
 			if (turn.setChosen(chosen)) {
-				this.turn = false;
+				this.message_to_parse.setParsed();
 				return turn;
 			}
 		} catch (NumberFormatException e) {

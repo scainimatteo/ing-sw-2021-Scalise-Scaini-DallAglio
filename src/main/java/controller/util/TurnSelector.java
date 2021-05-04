@@ -1,12 +1,10 @@
 package it.polimi.ingsw.controller.util;
 
-import it.polimi.ingsw.model.player.Player;
-
 import java.io.Serializable;
 
 public class TurnSelector implements Serializable {
 	private static final long serialVersionUID = 10L;
-	private final String message = "Pick a turn:\n 1. BuyCardTurn\n2. MarketTurn\n3. ProductionTurn\n";
+	private final String message = "Pick a turn:\n1. BuyCardTurn\n2. MarketTurn\n3. ProductionTurn\n";
 	private int chosen;
 
 	public String getMessage() {

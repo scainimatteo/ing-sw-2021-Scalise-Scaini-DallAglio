@@ -1,12 +1,27 @@
 @startuml
-/' CLASSES DEFINITION '/
 
+/' CLASSES DEFINITION '/
 class Match {
 	- Game game
 	- void distributeLeaderCards()
 	- boolean checkLastTurn()
 	- Turn chooseTurnType()
 	+ void play()
+}
+
+class Initializer {
+	- Player[] players
+	+ Game initializeGame()
+	- void distributeLeaderCards()
+	- Player[] createPlayers()
+	- void chooseMatchOrder()
+	- void distributeRandomResources()
+}
+
+class Nome {
+	- HashMap<Player, ClientHandler> robe
+	+ void talkToPlayer(Player player)
+	+ void receiveFromPlayer(Player player)
 }
 
 class FaithController {
