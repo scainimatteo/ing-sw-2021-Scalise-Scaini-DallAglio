@@ -105,7 +105,7 @@ public class ProductionTurn extends Turn{
 			return false;
 		} 
 
-		if (res_controller.howManyResources(this.player) < 2){
+		if (res_controller.howManyResources() < 2){
 			throw new NotExecutableException();
 		} 
 

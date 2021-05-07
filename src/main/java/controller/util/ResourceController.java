@@ -153,7 +153,7 @@ public class ResourceController {
 	/**
 	 * @return the number of the resources stored
 	 */
-	public int howManyResources(Player player){
+	public int howManyResources(){
 		HashMap <Resource, Integer> total = player.totalResources();	
 		ArrayList<Integer> storage_values = new ArrayList<Integer>(total.values());
 		int to_return = 0;
