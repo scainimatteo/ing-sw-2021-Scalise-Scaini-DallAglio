@@ -82,9 +82,14 @@ public class Server {
 			for (ClientHandler ch : this.lobby.get(match_name)) {
 				sendStringToClient(ch, "Start Match");
 			}
-			//TODO: if only one player, new_match = new SoloMatch
-			Runnable new_match = new Match(this.lobby.get(match_name));
-			this.executor.execute(new_match);
+
+			try {
+				//TODO: if only one player, new_match = new SoloMatch
+				Runnable new_match = new Match(this.lobby.get(match_name));
+				this.executor.execute(new_match);
+			} catch (InstantiationException e) {
+				// TODO
+			}
 		}
 	}
 
