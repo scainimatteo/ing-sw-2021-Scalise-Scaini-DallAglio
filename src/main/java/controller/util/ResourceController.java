@@ -1,15 +1,19 @@
 package it.polimi.ingsw.controller.util;
 
-import java.util.HashMap;
-import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.lang.IllegalArgumentException;
 
 import it.polimi.ingsw.controller.util.ChoiceController;
 
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Storage;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.LeaderCard;
+
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Storage;
+
 import it.polimi.ingsw.model.resources.Resource;
 
 public class ResourceController {
@@ -49,7 +53,7 @@ public class ResourceController {
 	/**
 	 * Adds all extra space from the player's LeaderCard deck to the turn's available extra space
 	 */
-	protected void checkExtraSpace(){
+	private void checkExtraSpace(){
 		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
 		int index = 0;
 		for (LeaderCard card: player.getDeck()){
@@ -144,6 +148,21 @@ public class ResourceController {
 			}
 		}
 		return discarded_resources;
+	}
+
+	/**
+	 * @return the number of the resources stored
+	 */
+	public int howManyResources(Player player){
+		HashMap <Resource, Integer> total = player.totalResources();	
+		ArrayList<Integer> storage_values = new ArrayList<Integer>(total.values());
+		int to_return = 0;
+
+		for (Integer num : storage_values){
+			to_return += num;
+		}
+
+		return to_return;
 	}
 
 }
