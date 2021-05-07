@@ -147,23 +147,20 @@ public class Warehouse implements Storage {
 	 * @param new_resources is an array of resources obtained from the market that need to be inserted in the warehouse
 	 * @return the number of resources that cannot be inserted
 	 */
-	public int tryToInsert(Resource[] new_resources){
-		int resources_not_inserted = 0;
-
+	public void tryToInsert(Resource[] new_resources){
 		for(Resource resource : new_resources){
-			try {
-				insert(resource);
-			} catch(IllegalArgumentException e) {
-				resources_not_inserted += 1;
-			}
+			insert(resource);
 		}
-
-		return resources_not_inserted;
 	}
 
 	@Override
 	public void getResource(Resource res){
-		return;
+		getFromWarehouse(res,1);
+	}
+
+	@Override
+	public void storeResource(Resource res){
+		tryToInsert(new Resource[] {res});
 	}
 
 	/**

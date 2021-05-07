@@ -29,42 +29,19 @@ public class BuyCardTurn extends Turn{
 	}
 
 	/**
-	* Adds all discounted resources from the player's LeaderCard deck to the turn's discounts
-	**/
-	private void checkDiscounts(){
-		DiscountAbility test = new DiscountAbility(null);
-		DiscountAbility cast;
-		int index = 0;
-		for (LeaderCard card : player.getDeck()){
-			if (card.isActive() && card.getAbility().checkAbility(test)){
-				cast = (DiscountAbility) card.getAbility();
-				discounts[index] = cast.getDiscountedResource();
-				index++;
-			}
-		}
-	}
-
-	/**
-	 * Checks if the player has the proper resources
-	 *
-	 * @param card is the DevelopmentCard to be checked
-	 * @return true if storage has enough resources to pay for the entirety of the cost 
+	 * Adds all discounts from the leader cards to the turn's array 
 	 */
-	private boolean hasResources(DevelopmentCard card){
-		boolean enough_resources = true;
-		HashMap <Resource, Integer> total = player.totalResources();	
-		for (ExtraSpaceAbility x : extra_space){
-			if (x != null){
-				total.put(x.getResourceType(), total.get(x.getResourceType()) + x.peekResources());
+	protected void checkDiscounts(){
+		DiscountAbility test = new DiscountAbility(null);
+		DiscountAbility found;
+		int index = 0;
+		for (LeaderCard card: player.getDeck()){
+			if (card.isActive() && card.getAbility().checkAbility(test)){
+				found = (DiscountAbility) card.getAbility();
+ 				discounts[index] = found.getDiscountedResource();
+				index ++;
 			}
 		}
-		for (Resource r: card.getCost()){
-			total.put(r, total.get(r) - 1);
-			if (total.get(r) < 0) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	/**
@@ -98,7 +75,7 @@ public class BuyCardTurn extends Turn{
 	*/
 	private boolean checkRequirements(DevelopmentCard chosen_card) { 
 		DevelopmentCard discounted_card = chosen_card.applyDiscount(discounts);
-		return hasSlots(discounted_card) && hasResources(discounted_card);
+		return hasSlots(discounted_card) && res_controller.hasResources(discounted_card.getCost());
 	}
 	
 	/**
@@ -113,25 +90,6 @@ public class BuyCardTurn extends Turn{
 		return curr_cards[i][j];
 	}
 
-	/** 
-	 * Removes resources equal to the cost from the player and allows them to choose where to get them out of
-	 */
-	//TODO: implement with pickBetween and implicit representation
-	@Override
-	protected void payResources(Resource[] resources) {
-		boolean has_decided;
-		Storage storage;
-		for (Resource x: resources) {
-			has_decided = false;
-			while (!has_decided){
-				storage = (Storage) handler.pickBetween(player, "where do you want to get your resources?", new Storage[] {player.getPlayerWarehouse(), player.getPlayerStrongbox(), extra_space[0], extra_space[1]}, 1)[0];
-				try {
-					storage.getResource(x);
-					has_decided = true;
-				} catch (IllegalArgumentException e){}
-			}
-		}
-	}
 	
 	private void placeInSlot(DevelopmentCard chosen_card){	
 		boolean has_decided = false;
@@ -154,14 +112,13 @@ public class BuyCardTurn extends Turn{
 	@Override
 	protected FaithController playAction(){
 		checkDiscounts();
-		checkExtraSpace();
 		DevelopmentCard chosen_card = chooseCardFromTable();
 		while (!checkRequirements(chosen_card)){
 			chosen_card = chooseCardFromTable();
 			//what if there is no buyable card?
 		} 
 		dev_cards_on_table.getFromDeck(chosen_card);
-		payResources(chosen_card.applyDiscount(discounts).getCost());
+		res_controller.payResources(chosen_card.applyDiscount(discounts).getCost());
 		placeInSlot(chosen_card);
 		return new FaithController(this.player, 0, 0);
 	}	

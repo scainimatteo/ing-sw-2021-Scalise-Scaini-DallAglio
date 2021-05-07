@@ -6,6 +6,6 @@ import java.util.NoSuchElementException;
  
 
 public interface Storage{
-//		public void putResource (Resource res) throws IllegalArgumentException;
+		public void storeResource (Resource res) throws IllegalArgumentException;
 		public void getResource (Resource res) throws NoSuchElementException;
 }

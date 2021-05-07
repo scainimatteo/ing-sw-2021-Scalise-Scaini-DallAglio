@@ -152,8 +152,8 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return this.warehouse.getBottomResources();
 	}
 
-	public int tryToInsert(Resource[] new_resources){
-		return this.warehouse.tryToInsert(new_resources);
+	public void tryToInsert(Resource[] new_resources){
+		this.warehouse.tryToInsert(new_resources);
 	}
 
 	public Resource[] getFromWarehouse(Resource resource_type, int quantity){
