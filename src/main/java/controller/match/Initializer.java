@@ -154,12 +154,18 @@ public class Initializer extends Observable<FaithController> {
 		return deck;
 	}
 
+	/**
+	 * Shuffle the array of player to choose a random order
+	 */
 	private void chooseMatchOrder() {
 		List<Player> players_list = Arrays.asList(this.players);
 		Collections.shuffle(players_list);
 		this.players = players_list.toArray(new Player[this.players.length]);
 	}
 
+	/**
+	 * Distribute random resources to the players based on their order
+	 */
 	private void distributeRandomResources() {
 		try {
 			this.players[1].tryToInsert(getRandomResources(1));
@@ -172,9 +178,14 @@ public class Initializer extends Observable<FaithController> {
 			this.players[3].tryToInsert(getRandomResources(2));
 			notify(new FaithController(this.players[3], 1, 0));
 		} catch (IndexOutOfBoundsException e) {
+			// if the number of players is less than 4 the exception will be thrown
 		}
 	}
 
+	/**
+	 * @param num the number of resources to get
+	 * @return an array containing the random resources
+	 */
 	private Resource[] getRandomResources(int num) {
 		Random random = new Random();
 		Resource[] all_resources = Resource.values();
