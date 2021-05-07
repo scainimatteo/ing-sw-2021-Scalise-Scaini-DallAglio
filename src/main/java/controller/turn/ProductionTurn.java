@@ -9,36 +9,40 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.ProductionAbility;
 
-import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.resources.Production;
+import it.polimi.ingsw.model.resources.ProductionInterface;
+
+import it.polimi.ingsw.util.NotExecutableException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Arrays;
 
 public class ProductionTurn extends Turn{
-	private Production[] prod_ability;
+	private ProductionAbility[] prod_ability;
 	
 	public ProductionTurn(Player player, ChoiceController handler){
 		this.player = player;
 		this.handler = handler;
-		this.prod_ability = new Production[2];
+		this.prod_ability = new ProductionAbility[2];
 	}
 
 	/**
 	 * @return the production chosen by the player
 	 */
-	private Production chooseProduction(){
+	private ProductionInterface chooseProduction() throws NotExecutableException{
+		ArrayList<ProductionInterface> player_prods = new ArrayList<ProductionInterface>();
 		Production prod_base = new Production(null, null);
-		ArrayList<Production> player_prods = new ArrayList<Production>();
-		Production[] choice;
-		Production to_return;
+		ProductionInterface to_return = null;
+		ProductionInterface[] choice;
 
 		player_prods.add(prod_base);
 
 		DevelopmentCard[] tmp = player.getTopCards();
 		for (DevelopmentCard card : tmp){
 			if (card != null){
-				player_prods.add(card.getProduction());
+				player_prods.add(card);
 			} 
 		}
 
@@ -47,11 +51,12 @@ public class ProductionTurn extends Turn{
 
 		choice = player_prods.toArray(new Production[player_prods.size()]);
 
-		to_return = (Production) handler.pickBetween(player, "Which production do you want to use?", choice, 1)[0];
-
+		while( !canBeActivated(to_return) ){
+			to_return = (ProductionInterface) handler.pickBetween(player, "Which production do you want to use?", choice, 1)[0];
+		}
+		 
 		return to_return;
 	}
-
 
 	/**
 	 * Adds all production ability from the player's LeaderCard deck to the turn's available production
@@ -64,7 +69,7 @@ public class ProductionTurn extends Turn{
 		for (LeaderCard card : player.getDeck()){
 			if (card != null && card.isActive() && card.getAbility().checkAbility(test)){
 				tmp = (ProductionAbility) card.getAbility();
-				this.prod_ability[index] = tmp.getProduction();
+				this.prod_ability[index] = tmp;
 				index ++;
 			} 
 		}
@@ -87,26 +92,109 @@ public class ProductionTurn extends Turn{
 	}
 
 	/**
+	 * @param prod is the production choosen by the player
+	 * @return true if the player has the resources requested by the production
+	 * @throws NotExecutableException if the player has 1 or 0 resources
+	 */
+	protected boolean canBeActivated(ProductionInterface prod) throws NotExecutableException {
+		int	num_of_resources = 0;
+
+		if (prod == null){
+			return false;
+		} 
+
+		if (howManyResources() < 2){
+			throw new NotExecutableException();
+		} 
+
+		/**
+		 * check the presence of the resources requested from the production
+		 */
+
+		return true;
+	}
+
+	/**
+	 * @return the number of the resources stored
+	 */
+	protected int howManyResources(){
+		HashMap <Resource, Integer> total = player.totalResources();	
+		ArrayList<Integer> storage_values = new ArrayList<Integer>(total.values());
+		int to_return = 0;
+
+		for (Integer num : storage_values){
+			to_return += num;
+		}
+
+		return to_return;
+	}
+
+	/**
+	 * @param prod is the production choosen by the player
+	 * @return true if the production requires the unset after the activation
+	 */
+	private boolean setResources(ProductionInterface choice){
+		Resource[] all_resources_array = {Resource.COIN, Resource.STONE, Resource.SERVANT, Resource.SHIELD};
+		Resource[] set_required_array = new Resource[2];
+		Resource[] set_produced_array = new Resource[1];
+		Resource returned;
+		boolean to_return = false;
+
+		if (choice.getRequiredResources() == null){
+			for (int i = 0; i < 2; i ++){
+				returned = (Resource) handler.pickBetween(this.player, "Choose a resource to insert as a request", all_resources_array, 1)[0];
+				set_required_array[i] = returned;
+			}
+
+			choice.setRequiredResources(set_required_array);
+			to_return = true;
+		} 
+
+		if (choice.getProducedResources() == null){
+			set_produced_array[0] = (Resource) handler.pickBetween(this.player, "Choose a resource to insert as a request", all_resources_array, 1)[0];
+			choice.setProducedResources(set_produced_array);
+			to_return = true;
+		} 
+
+		if (choice.getProducedResources()[0] == null){
+			set_produced_array[0] = (Resource) handler.pickBetween(this.player, "Choose a resource to insert as a request", all_resources_array, 1)[0];
+			choice.setProducedResources(set_produced_array);
+			to_return = true;
+		} 
+
+		return to_return;
+	}
+
+	/**
+	 * @param choice is the production choosen by the player
+	 */
+	private void unsetResources(ProductionInterface choice){
+		Resource[] unset_array = {null};
+		choice.setProducedResources(unset_array);
+	}
+
+	/**
 	 * @return the faithcontroller that contains the quantity of faith gained
-	 * TODO: sceglie produzione
-	 *		 controlla che qualche array/posizione non sia null
-	 *		 se si, chiama metodo nullProd
-	 *		 se no, chiama i metodi della production
-	 *
-	 *		 nullProd:
-	 *		 controlla quali sono le posizioni nulle:
-	 *		 se tutti e due gli array, chiede due input e un output e li genera
-	 *		 se solo una posizione nell'output, chiede cosa mettere, lo inserisce in un array e controlla l'input
-	 *
-	 *		 devCardProd:
-	 *		 chiede dove prendere i materiali e li mette in un array
-	 *		 chiama activateProd
 	 */
 	@Override
-	protected FaithController playAction(){
-		Production choice = chooseProduction();
+	protected FaithController playAction() throws NotExecutableException{
 		boolean containsNullPosition = false;
+		int gained_faith = 0;
 
-		return new FaithController(this.player, 0, 0);
+		ProductionInterface choice = chooseProduction();
+
+		containsNullPosition = setResources(choice);
+
+		// pay
+
+		choice.activateProduction();
+
+		if (containsNullPosition){
+			unsetResources(choice);
+		} 
+
+		// store
+
+		return new FaithController(this.player, gained_faith, 0);
 	}
 }

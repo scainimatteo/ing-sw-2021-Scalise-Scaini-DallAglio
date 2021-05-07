@@ -15,6 +15,8 @@ import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.server.ClientHandler;
 
+import it.polimi.ingsw.util.NotExecutableException;
+
 public class Match implements Runnable {
 	private CommunicationController comm_controller;
 	private ChoiceController choice_controller;
@@ -37,11 +39,17 @@ public class Match implements Runnable {
 		//TODO: if not used, move into the for
 		Player[] players = this.game.getPlayers();
 		boolean last_round = false;
+		boolean turn_flag = false;
 
 		while (!last_round) {
 			for (Player p: players) {
 				Turn turn = choice_controller.pickTurn(p, this.game.getDevelopmentCardsOnTable(), this.game.getMarket());
-				turn.playTurn();
+
+				try{
+					turn.playTurn();
+				} catch (NotExecutableException e){
+					//code
+				}
 
 				last_round = checkLastRound();
 			}

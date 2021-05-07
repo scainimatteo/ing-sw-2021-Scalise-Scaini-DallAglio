@@ -4,7 +4,7 @@ import java.lang.IllegalArgumentException;
 
 import java.io.Serializable;
 
-public class Production implements Serializable {
+public class Production implements ProductionInterface, Serializable {
 	private static final long serialVersionUID = 6L;
 	protected Resource[] required_resources;
 	protected Resource[] produced_resources;
@@ -22,17 +22,19 @@ public class Production implements Serializable {
 		return this.produced_resources;
 	}
 
+	public void setRequiredResources(Resource[] cost){
+		this.required_resources = cost;
+	}
+
+	public void setProducedResources(Resource[] output){
+		this.produced_resources = output;
+	}
+
 	/**
-	 * @param cost requires an array of resources to compare it with required_resources
 	 * @return the requested resources if compareArrays returns true, null if compareArrays returns false
-	 * @exception IllegalArgumentException is thrown if the cost is not equal to this.required_resources
 	 */
-	public Resource[] activateProduction(Resource[] cost){
-		if (this.compareArrays(cost)){
-			return produced_resources;
-		} else {
-			throw new IllegalArgumentException();
-		}
+	public Resource[] activateProduction(){
+		return produced_resources;
 	}
 
 	/**

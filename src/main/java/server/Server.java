@@ -14,6 +14,9 @@ import java.io.*;
 
 import it.polimi.ingsw.controller.match.Match;
 
+import it.polimi.ingsw.controller.util.MessageType;
+import it.polimi.ingsw.controller.util.Message;
+
 import it.polimi.ingsw.server.ClientHandler;
 
 public class Server {
@@ -77,7 +80,7 @@ public class Server {
 		if (checkIfAllPlayersPresent(match_name)) {
 			// the right amount of clients are connected, start the match
 			for (ClientHandler ch : this.lobby.get(match_name)) {
-				ch.asyncSendToClient("Start Match");
+				sendStringToClient(ch, "Start Match");
 			}
 			//TODO: if only one player, new_match = new SoloMatch
 			Runnable new_match = new Match(this.lobby.get(match_name));
@@ -91,8 +94,8 @@ public class Server {
 	 */
 	private String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
-		client.asyncSendToClient("Nickname? ");
-		String nickname = (String) client.asyncReceiveFromClient();
+		sendStringToClient(client, "Nickname? ");
+		String nickname = receiveStringFromClient(client);
 
 		synchronized (this.nicknames) {
 			// try to put the username, throw exception if it's already in the Set
@@ -103,12 +106,12 @@ public class Server {
 		}
 		client.setNickname(nickname);
 
-		client.asyncSendToClient("Match name? ");
-		String match_name = (String) client.asyncReceiveFromClient();
+		sendStringToClient(client, "Match name? ");
+		String match_name = receiveStringFromClient(client);
 
 		if (match_name.equals("")) {
 			match_name = manageFirstClient(client);
-			client.asyncSendToClient("Started match with match name " + match_name);
+			sendStringToClient(client, "Started match with match name " + match_name);
 		} else {
 			manageOtherClient(client, match_name);
 		}
@@ -123,10 +126,11 @@ public class Server {
 		Integer num;
 
 		//TODO: put all strings in a separate class
-		first_client.asyncSendToClient("How many player in match? ");
-		try {
-			num = (Integer) first_client.asyncReceiveFromClient();
-		} catch (ClassCastException e) {
+		sendStringToClient(first_client, "How many player in match? ");
+		Message message = (Message) first_client.asyncReceiveFromClient();
+		if (message.getMessageType() == MessageType.INTEGER) {
+			num = (Integer) message.getMessage();
+		} else {
 			throw new IllegalArgumentException();
 		}
 		String match_name = newMatchName();
@@ -188,6 +192,28 @@ public class Server {
 	public void removeNickname(String nickname) {
 		synchronized(this.nicknames) {
 			this.nicknames.remove(nickname);
+		}
+	}
+
+	/**
+	 * @param client the ClientHandler of the client
+	 * @param string the message to send
+	 */
+	public void sendStringToClient(ClientHandler client, String string) {
+		Message message = new Message(MessageType.STRING, string);
+		client.asyncSendToClient(message);
+	}
+
+	/**
+	 * @param client the ClientHandler of the client
+	 * @return a message received
+	 */
+	public String receiveStringFromClient(ClientHandler client) throws InterruptedException {
+		Message message = (Message) client.asyncReceiveFromClient();
+		if (message.getMessageType() == MessageType.STRING) {
+			return (String) message.getMessage();
+		} else {
+			throw new InterruptedException();
 		}
 	}
 }

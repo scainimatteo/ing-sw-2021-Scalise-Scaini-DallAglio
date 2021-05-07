@@ -8,11 +8,14 @@ import it.polimi.ingsw.model.game.Game;
 
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.DiscountAbility;
+import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Storage;
 
 import it.polimi.ingsw.model.resources.Resource;
+import java.util.HashMap;
 
 public class BuyCardTurn extends Turn{
 	private DevelopmentCardsOnTable dev_cards_on_table;
@@ -41,59 +44,50 @@ public class BuyCardTurn extends Turn{
 		}
 	}
 
-	private boolean hasResourceInExtraSpace (Resource res){
+	/**
+	 * Checks if the player has the proper resources
+	 *
+	 * @param card is the DevelopmentCard to be checked
+	 * @return true if storage has enough resources to pay for the entirety of the cost 
+	 */
+	private boolean hasResources(DevelopmentCard card){
+		boolean enough_resources = true;
+		HashMap <Resource, Integer> total = player.totalResources();	
+		for (ExtraSpaceAbility x : extra_space){
+			if (x != null){
+				total.put(x.getResourceType(), total.get(x.getResourceType()) + x.peekResources());
+			}
+		}
+		for (Resource r: card.getCost()){
+			total.put(r, total.get(r) - 1);
+			if (total.get(r) < 0) {
+				return false;
+			}
+		}
 		return true;
 	}
 
 	/**
-	 * @param card is the DevelopmentCard to be checked
-	 * @return true if the warehouse or the strongbox contains the resources requested for the buy
-	 * TODO: fix this
+	 * Checks if the player's slots satisfy requirements
 	 *
-	public boolean[] isBuyable(DevelopmentCard card){
-		Resource[] tmp = card.getCost();
-		boolean tmp_boolean = true;
-		boolean[] to_return = {false, false, false};
+	 * @param card is the DevelopmentCard to be checked
+	 * @return true if the card can be fit in any of the player slots 
+	 */
+
+	private boolean hasSlots(DevelopmentCard card){
 		int card_level = card.getCardLevel().getLevel();
-
-		if ( !(player.areContainedInWarehouse(tmp) || player.areContainedInStrongbox(tmp)) ){
-			for (Resource res : tmp){
-				if (res != null){
-					tmp_boolean = false;
-				}
-			}
-		}
-
-		if (tmp_boolean){
-			DevelopmentCard[] devcard = this.development_card_slots.getTopCards();
-
-			if (devcard[0] != null){
-				if (card_level - devcard[0].getCardLevel().getLevel() == 1){
-					to_return[0] = true;
-				}
-			} else if (card_level == 1){ 
-				to_return[0] = true;
-			}
-
-			if (devcard[1] != null){
-				if (card_level - devcard[1].getCardLevel().getLevel() == 1){
-					to_return[1] = true;
+		DevelopmentCard[] slots = player.getTopCards();
+		for (DevelopmentCard x : slots){
+			if (x!= null) {	
+				if (card_level - x.getCardLevel().getLevel() == 1){
+					return true;
 				}
 			} else if (card_level == 1){
-				to_return[1] = true;
-			} 
-
-			if (devcard[2] != null){
-				if (card_level - devcard[2].getCardLevel().getLevel() == 1){
-					to_return[2] = true;
-				}
-			} else if (card_level == 1){
-				to_return[2] = true;
+				return true;
 			}
 		}
-
-		return to_return;
-	} */
+		return false;
+	}
 
 
 	/**
@@ -103,13 +97,8 @@ public class BuyCardTurn extends Turn{
 	* @return true if the card does satisfy requirements
 	*/
 	private boolean checkRequirements(DevelopmentCard chosen_card) { 
-		//DevelopmentCard temp_card = chosen_card.applyDiscount(discounts);
-		//for (boolean bool : player.isBuyable(temp_card)){
-		//	if (bool == true) {
-		//		return true;
-		//	}
-		//}
-		return false;
+		DevelopmentCard discounted_card = chosen_card.applyDiscount(discounts);
+		return hasSlots(discounted_card) && hasResources(discounted_card);
 	}
 	
 	/**
@@ -131,37 +120,28 @@ public class BuyCardTurn extends Turn{
 	@Override
 	protected void payResources(Resource[] resources) {
 		boolean has_decided;
+		Storage storage;
 		for (Resource x: resources) {
 			has_decided = false;
 			while (!has_decided){
-				if (player.getPlayerWarehouse().areContainedInWarehouse(new Resource[] {x})){
-					if (handler.pickFlow(player, "Do you want pay this cost from your warehouse?")){
-						player.getFromWarehouse(x, 1);
-						has_decided = true;
-					}
-				} else {
-				//warn the player of impossibility
-					if (hasResourceInExtraSpace(x)){
-						if (handler.pickFlow(player, "Do you want to pay this cost from your leader card?")){
-							if (extra_space[0].getResourceType().equals(x)){
-								extra_space[0].getResource(1);
-							} else {
-								extra_space[1].getResource(1);
-							}
-						}
-					} else {
-					//TODO: warn the player of impossibility
-						if (player.getPlayerStrongbox().areContainedInStrongbox(new Resource[] {x})){
-							if (handler.pickFlow(player, "Do you want to pay this cost from your strongbox?")){
-						
-								player.removeResources(x, 1);
-								has_decided = true;
-							}
-						} else {
-						//communicate failure to the player
-						}
-					}
-				}
+				storage = (Storage) handler.pickBetween(player, "where do you want to get your resources?", new Storage[] {player.getPlayerWarehouse(), player.getPlayerStrongbox(), extra_space[0], extra_space[1]}, 1)[0];
+				try {
+					storage.getResource(x);
+					has_decided = true;
+				} catch (IllegalArgumentException e){}
+			}
+		}
+	}
+	
+	private void placeInSlot(DevelopmentCard chosen_card){	
+		boolean has_decided = false;
+		while (!has_decided){
+			Integer pos = (Integer) handler.pickBetween(player, "On top of which slot do you want to position the card", player.getTopCards(), 1)[0];
+			try {
+				player.buyCard(chosen_card, pos.intValue());
+				has_decided = true;
+				//notify player of correct execution
+			} catch (IllegalArgumentException e){
 			}
 		}
 	}
@@ -173,8 +153,8 @@ public class BuyCardTurn extends Turn{
 	*/
 	@Override
 	protected FaithController playAction(){
-		int gained_faith = 0;
 		checkDiscounts();
+		checkExtraSpace();
 		DevelopmentCard chosen_card = chooseCardFromTable();
 		while (!checkRequirements(chosen_card)){
 			chosen_card = chooseCardFromTable();
@@ -182,12 +162,7 @@ public class BuyCardTurn extends Turn{
 		} 
 		dev_cards_on_table.getFromDeck(chosen_card);
 		payResources(chosen_card.applyDiscount(discounts).getCost());
-		Integer pos = (Integer) handler.pickBetween(player, "In which slot do you want to put it?", new Integer[] {1,2,3}, 1)[0];
-		boolean[] fitting_slots = null;//player.isBuyable(chosen_card);
-		while (!fitting_slots[pos]){
-			pos = (Integer) handler.pickBetween(player, "In which slot do you want to put it?", new Integer[] {1,2,3}, 1)[0];
-		}
-		player.buyCard(chosen_card, pos.intValue());
-		return new FaithController(this.player, gained_faith,0);
+		placeInSlot(chosen_card);
+		return new FaithController(this.player, 0, 0);
 	}	
 }

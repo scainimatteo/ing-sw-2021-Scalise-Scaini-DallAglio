@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
 import java.util.Iterator;
+import java.lang.IllegalArgumentException;
 
 public class DevelopmentCardsSlots {
 	private Table<DevelopmentCard> slots;
@@ -20,8 +21,12 @@ public class DevelopmentCardsSlots {
 	 * @param card is the card that needs to be added to the slots
 	 * @param position is the deck where will be added the card
 	 */
-	public void buyCard(DevelopmentCard card, int position) {
-		this.slots.addElement(card, 0, position);
+	public void buyCard(DevelopmentCard card, int pos) throws IllegalArgumentException {
+		if (pos > 3 || pos < 0 ||(card.getCardLevel().getLevel() - slots.peekTop(0, pos).getCardLevel().getLevel() != 1)){
+			throw new IllegalArgumentException();
+		} else {
+			this.slots.addElement(card, 0, pos);
+		}
 	}
 
 	/**

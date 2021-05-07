@@ -3,12 +3,13 @@ package it.polimi.ingsw.model.card;
 import java.lang.IllegalArgumentException; 
 import java.lang.IndexOutOfBoundsException;
 
+import it.polimi.ingsw.model.player.Storage;
 
 import it.polimi.ingsw.model.card.LeaderAbility;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-public class ExtraSpaceAbility extends LeaderAbility {
+public class ExtraSpaceAbility extends LeaderAbility implements Storage{
 	private Resource resource_type;
 	private int index;
 
@@ -17,6 +18,10 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		this.index = 0;
 	}
 	
+	@Override
+	public void getResource(Resource res){
+		return;
+	}
 
 	/**
 	* @param new_resource is the resource to be added to the space
