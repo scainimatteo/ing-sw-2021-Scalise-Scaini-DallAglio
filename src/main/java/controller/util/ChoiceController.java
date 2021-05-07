@@ -64,13 +64,23 @@ public class ChoiceController {
 	}
 
 	/**
-	 * Send a message to a player
+	 * Send a String to a player
 	 *
 	 * @param player the Player to send the message to
-	 * @param message the message to send
+	 * @param string the String to send
 	 */
-	public void sendMessage(Player player, String message_string) {
-		Message message = new Message(MessageType.STRING, message_string);
+	public void sendMessage(Player player, String string) {
+		Message message = new Message(MessageType.STRING, string);
+		this.comm_controller.sendToPlayer(player, message);
+	}
+
+	/**
+	 * Send a Message to a player
+	 *
+	 * @param player the Player to send the message to
+	 * @param message the Message to send
+	 */
+	public void sendMessage(Player player, Message message) {
 		this.comm_controller.sendToPlayer(player, message);
 	}
 

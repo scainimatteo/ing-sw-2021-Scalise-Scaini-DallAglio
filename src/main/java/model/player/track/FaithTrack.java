@@ -61,8 +61,31 @@ public class FaithTrack implements Observer<VaticanReports> {
 		return this.faith_marker.getPosition();
 	}
 
+	public int getMarkerVictoryPoints() {
+		return this.faith_marker.getVictoryPoints();
+	}
+
+	public int getLastPosition() {
+		return this.track[this.track.length - 1].getPosition();
+	}
+
 	public boolean checkIfTileIsActive(int index){
 		return this.vatican_report_tiles[index].isActive();
+	}
+
+	/**
+	 * @return the total points made from the VaticanReports
+	 */
+	public int getVaticanReportsPoints() {
+		int i = 0;
+
+		for (Tile t: this.vatican_report_tiles) {
+			if (t.isActive()) {
+				i += t.getVictoryPoints();
+			}
+		}
+
+		return i;
 	}
 
 	public void update(VaticanReports vr_param){
