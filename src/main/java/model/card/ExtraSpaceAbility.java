@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.card;
 
-import java.lang.IllegalArgumentException; 
-import java.lang.IndexOutOfBoundsException;
+import java.util.NoSuchElementException; 
 
 import it.polimi.ingsw.model.player.Storage;
 
@@ -20,21 +19,26 @@ public class ExtraSpaceAbility extends LeaderAbility implements Storage{
 	
 	@Override
 	public void getResource(Resource res){
+		getResources(1);	
+		return;
+	}
+	
+	@Override
+	public void storeResource(Resource res){
+		putResource(res);
 		return;
 	}
 
 	/**
 	* @param new_resource is the resource to be added to the space
-	* @throws IllegalArgumentException if resource type isn't compatible with required type
-	*@throws IndexOutOfBoundsException if space is full
+	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
 	public void putResource(Resource new_resource) throws IllegalArgumentException, IndexOutOfBoundsException {
-		if (!new_resource.getColor().equals(resource_type.getColor())){
+		if (!new_resource.getColor().equals(resource_type.getColor()) || index >= 2){
 			throw new IllegalArgumentException();	
 		}
 		else {
-			if (index >= 2) {throw new IndexOutOfBoundsException();}
-			else {index++;}
+			index++;
 		} 
 	}
 
@@ -55,11 +59,11 @@ public class ExtraSpaceAbility extends LeaderAbility implements Storage{
 	/**
 	* @param quantity is the number of resources to be taken
 	* @return array of requested resources
-	* @throws IllegalArgumentException if requested quantity exceed present quantity
+	* @throws NoSuchElementException if requested quantity exceed present quantity
 	*/
-	public Resource[] getResource(int quantity) throws IllegalArgumentException {
+	public Resource[] getResources(int quantity) throws NoSuchElementException {
 		if (quantity > index || quantity == 0){
-			throw new IllegalArgumentException();
+			throw new NoSuchElementException();
 		}
 		else {
 			Resource[] moved_resources = new Resource[1];

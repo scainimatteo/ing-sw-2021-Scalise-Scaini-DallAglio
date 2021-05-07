@@ -31,7 +31,13 @@ public class StrongBox implements Storage{
 	
 	@Override
 	public void getResource(Resource res){
+		removeResources(res, 1);
 		return;
+	}
+
+	@Override
+	public void storeResource (Resource res){
+		insertResources(new Resource[] {res});
 	}
 
 	/**
