@@ -1,6 +1,9 @@
 package it.polimi.ingsw.client;
 
+import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 
 import java.net.*;
 
@@ -11,6 +14,8 @@ import it.polimi.ingsw.controller.util.TurnSelector;
 import it.polimi.ingsw.controller.util.MessageType;
 import it.polimi.ingsw.controller.util.Message;
 import it.polimi.ingsw.controller.util.Choice;
+
+import it.polimi.ingsw.model.player.Player;
 
 public class Client {
 	private int port;
@@ -133,6 +138,10 @@ public class Client {
 			case TURNSELECTOR:
 				handleTurn((TurnSelector) message.getMessage());
 				break;
+			case RANKING:
+				handleRank((HashMap<String, Integer>) message.getMessage());
+				message.setParsed();
+				break;
 			default:
 				System.out.println("Received unknown object");
 				throw new IllegalArgumentException();
@@ -179,6 +188,40 @@ public class Client {
 	private void handleTurn(TurnSelector t) {
 		System.out.println(t.getMessage());
 		System.out.printf("Put the index of the turn chosen: ");
+	}
+
+	/**
+	 * Print the ranking of the Players
+	 *
+	 * @param rank the HashMap representing the rank received
+	 */
+	private void handleRank(HashMap<String, Integer> rank) {
+		String[] sorted_players = sortPlayers(rank);
+
+		String rank_string = "Final scores:\n\n";
+		for (int i = 0; i < sorted_players.length; i++) {
+			rank_string += (i + 1) + ". " + sorted_players[i] + ": " + rank.get(sorted_players[i]) + " points\n";
+		}
+
+		System.out.println(rank);
+	}
+
+	/**
+	 * Sort players based on the number of victory points they got
+	 *
+	 * @return an array with the nicknames representing the Players in ascending order
+	 */
+	private String[] sortPlayers(HashMap<String, Integer> rank) {
+		String[] order = new String[rank.keySet().size()];
+		ArrayList<Integer> values = new ArrayList<Integer>(rank.values());
+		Collections.sort(values);
+
+		for (String s: rank.keySet()) {
+			int index = values.indexOf(rank.get(s));
+			order[index] = s;
+			values.set(index, values.get(index) + 1);
+		}
+		return order;
 	}
 
 	/**

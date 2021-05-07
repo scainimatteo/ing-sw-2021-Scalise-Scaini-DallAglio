@@ -19,6 +19,10 @@ public class Tile implements Cloneable {
 		return this.active;
 	}
 
+	public int getVictoryPoints() {
+		return this.victory_points;
+	}
+
 	public Object clone() {
 		Object clone = null;
 
@@ -29,5 +33,5 @@ public class Tile implements Cloneable {
 		}
 
 		return clone;
-    }
+	}
 }

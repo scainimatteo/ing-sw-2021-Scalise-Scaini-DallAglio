@@ -48,4 +48,12 @@ public class CommunicationController {
 		}
 		return null;
 	}
+
+	/**
+	 * @param player the player to disconnect
+	 * @param message the String with the message to send
+	 */
+	public void disconnectPlayer(Player player, String message) {
+		this.players.get(player).close(message);
+	}
 }
