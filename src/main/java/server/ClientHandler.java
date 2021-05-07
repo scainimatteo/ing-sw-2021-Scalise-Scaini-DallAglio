@@ -91,7 +91,7 @@ public class ClientHandler implements Runnable {
 	/**
 	 * Safely close the connection with the client
 	 */
-	public void close(String message) {
+	public void close(Object message) {
 		try {
 			sendToClient(message);
 			this.server.removeNickname(this.nickname);
