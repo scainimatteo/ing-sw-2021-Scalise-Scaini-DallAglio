@@ -2,16 +2,17 @@ package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.model.player.Player;
 
-import it.polimi.ingsw.controller.util.FaithController;
+import it.polimi.ingsw.controller.util.ResourceController;
 import it.polimi.ingsw.controller.util.ChoiceController;
+import it.polimi.ingsw.controller.util.FaithController;
 
-import it.polimi.ingsw.model.card.LeaderCard;
-import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.ProductionAbility;
+import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.LeaderCard;
 
-import it.polimi.ingsw.model.resources.Resource;
-import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.ProductionInterface;
+import it.polimi.ingsw.model.resources.Production;
+import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.util.NotExecutableException;
 
@@ -25,6 +26,7 @@ public class ProductionTurn extends Turn{
 	public ProductionTurn(Player player, ChoiceController handler){
 		this.player = player;
 		this.handler = handler;
+		this.res_controller = new ResourceController(player, handler);
 		this.prod_ability = new ProductionAbility[2];
 	}
 
@@ -103,30 +105,15 @@ public class ProductionTurn extends Turn{
 			return false;
 		} 
 
-		if (howManyResources() < 2){
+		if (res_controller.howManyResources() < 2){
 			throw new NotExecutableException();
 		} 
 
 		/**
-		 * check the presence of the resources requested from the production
+		 * TODO: check the presence of the resources requested from the production
 		 */
 
 		return true;
-	}
-
-	/**
-	 * @return the number of the resources stored
-	 */
-	protected int howManyResources(){
-		HashMap <Resource, Integer> total = player.totalResources();	
-		ArrayList<Integer> storage_values = new ArrayList<Integer>(total.values());
-		int to_return = 0;
-
-		for (Integer num : storage_values){
-			to_return += num;
-		}
-
-		return to_return;
 	}
 
 	/**
@@ -186,14 +173,16 @@ public class ProductionTurn extends Turn{
 		containsNullPosition = setResources(choice);
 
 		// pay
+		res_controller.payResources(choice.getRequiredResources());
 
-		choice.activateProduction();
+		Resource[] produced = choice.activateProduction();
 
 		if (containsNullPosition){
 			unsetResources(choice);
 		} 
 
 		// store
+		res_controller.storeFromProduction(produced);
 
 		return new FaithController(this.player, gained_faith, 0);
 	}

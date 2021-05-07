@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.util.FaithController;
 import it.polimi.ingsw.controller.util.ChoiceController;
+import it.polimi.ingsw.controller.util.ResourceController;
 
 import java.util.NoSuchElementException;
 import java.util.Arrays;
@@ -25,8 +26,8 @@ public class MarketTurn extends Turn {
 		this.player = player;	
 		this.market = market;
 		this.whiteMarble = new Resource[2];
-		this.extra_space = new ExtraSpaceAbility[2];
 		this.handler = handler;
+		this.res_controller = new ResourceController(player, handler);
 	}
 
 	/**
@@ -117,73 +118,7 @@ public class MarketTurn extends Turn {
 		return count;
 	}
 
-	/**
-	 * @param is the resource to be put away
-	 * @return if the given resource can be put in extra space
-	 */
-	private boolean hasExtraSpace(Resource res){
-		for (ExtraSpaceAbility x : extra_space){
-			if (x.getResourceType().equals(res) && x.peekResources() < 2){ 
-				return true;
-			}
-		}
-		return false;
-	}
 	
-	/**
- 	 * Allows the player to position the gained resources however they want in their Warehouses and Strongboxes
-	 * 
-	 * @param resources are the resources to be inserted
-	 * @param must_discard flags wether resources have to be discarded or can be put into the strongbox
-	 * @return the number of discarded resources
-	 */
-	protected int storeResources(Resource[] resources){
-		boolean has_decided;
-		int discarded_resources = 0;
-		Resource[] single_resource = new Resource[1];
-		//TODO: print Warehouse
-		for (Resource x : resources){
-			has_decided = false;
-			if (x != null) {
-				while (!has_decided){
-					while (handler.pickFlow(player, "Do you want to rearrange the warehouse?")){
-						Object[] arg = handler.pickBetween (player, "Choose two rows to swap", new Integer[] {1, 2, 3}, 2);
-						player.swapRows((Integer) arg[0], (Integer) arg[1]);
-						//TODO: print
-						
-					}
-					if (this.hasExtraSpace(x)) {
-						if(handler.pickFlow(player, "Do you want to use your extra_space LeaderCard?")){
-							try {
-								this.extra_space[0].putResource(x);
-							} catch (IllegalArgumentException e) {
-
-								this.extra_space[1].putResource(x);
-							}
-							has_decided = true;
-						}
-					} else {
-						//TODO: view informs the player that they cannot use extra space abilities
-						//TODO: change warehouse method arguments to take single resources
-						if (player.isPossibleToInsert(x)){
-							if (handler.pickFlow(player, "Do you want to use your warehouse?")){
-								single_resource[0] = x;
-								player.tryToInsert(single_resource);
-								has_decided = true;
-							}
-						} else {
-							//TODO: view informs the player that they cannot put the resource in the warehouse
-						}
-					}
-					if (!has_decided && handler.pickFlow (player, "Do you want to discard the resource?")){
-							discarded_resources++;
-							has_decided = true;
-					}
-				}
-			}
-		}
-		return discarded_resources;
-	}
 
 
 	public FaithController playAction (){
@@ -192,8 +127,9 @@ public class MarketTurn extends Turn {
 		Resource[] gained_resources = getFromMarket();
 		applyBonus(gained_resources);
 		int gained_faith = countFaith (gained_resources);	
-		int lost_faith = storeResources(gained_resources);
+		int lost_faith = res_controller.storeFromMarket(gained_resources);
 		return new FaithController(player, gained_faith, lost_faith);
 	}
 	
 }
+

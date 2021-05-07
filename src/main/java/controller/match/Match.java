@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.Iterator; 
 import java.util.HashMap;
 
+import java.lang.Math;
+
 import it.polimi.ingsw.controller.turn.Turn;
 
 import it.polimi.ingsw.controller.match.Initializer;
 
 import it.polimi.ingsw.controller.util.CommunicationController;
+import it.polimi.ingsw.controller.util.ResourceController;
 import it.polimi.ingsw.controller.util.ChoiceController;
 import it.polimi.ingsw.controller.util.MessageType;
 import it.polimi.ingsw.controller.util.Message;
@@ -131,7 +134,10 @@ public class Match implements Runnable {
 				addPoints(p, c.getPoints());
 			}
 
-			// TODO: RESOURCES
+			// RESOURCES
+			ResourceController res_controller = new ResourceController(p, null);
+			int number_of_resources = res_controller.howManyResources();
+			addPoints(p, Math.floorDiv(number_of_resources, 5));
 		}
 	}
 
