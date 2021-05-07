@@ -52,13 +52,18 @@ public class Match implements Runnable {
 		boolean turn_flag = false;
 
 		while (!last_round) {
-			for (Player p: players) {
-				Turn turn = choice_controller.pickTurn(p, this.game.getDevelopmentCardsOnTable(), this.game.getMarket());
+			turn_flag = false;
 
-				try{
-					turn.playTurn();
-				} catch (NotExecutableException e){
-					//code
+			for (Player p: players) {
+				while (!turn_flag) {
+					Turn turn = this.choice_controller.pickTurn(p, this.game.getDevelopmentCardsOnTable(), this.game.getMarket());
+
+					try{
+						turn.playTurn();
+						turn_flag = true;
+					} catch (NotExecutableException e){
+						this.choice_controller.sendMessage(p, "This turn cannot be performed right now, please choose another one");
+					}
 				}
 
 				last_round = checkLastRound(players);
