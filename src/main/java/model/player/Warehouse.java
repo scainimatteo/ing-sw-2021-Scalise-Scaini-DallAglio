@@ -92,9 +92,9 @@ public class Warehouse implements Storage {
 	}
 
 	private boolean isPresent (Resource resource){
-		if (!top_resource.equals(resource)){
-			if (!middle_resources[0].equals(resource)){
-				if (!bottom_resources[0].equals(resource)){
+		if (top_resource == null || !top_resource.equals(resource)){
+			if (middle_resources[0] == null || !middle_resources[0].equals(resource)){
+				if (bottom_resources[0] == null || !bottom_resources[0].equals(resource)){
 					return false;
 				}
 			}
