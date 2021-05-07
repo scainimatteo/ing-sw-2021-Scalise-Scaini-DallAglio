@@ -60,7 +60,7 @@ public class Server {
 						insertIntoLobby(new_client_handler);
 					} catch (InterruptedException e) {
 						System.out.println("Miscomunication with the client");
-						new_client_handler.close("Miscomunication with the server");
+						new_client_handler.close(new Message(MessageType.STRING, "Miscomunication with the server"));
 					} catch (IllegalAccessError e) {
 						System.out.println("Client failed to put right match name or tried to use an already existing nickname");
 					}
@@ -100,7 +100,7 @@ public class Server {
 		synchronized (this.nicknames) {
 			// try to put the username, throw exception if it's already in the Set
 			if (!this.nicknames.add(nickname)) {
-				client.close("Sorry but the nickname " + nickname + " is already taken");
+				client.close(new Message(MessageType.STRING, "Sorry but the nickname " + nickname + " is already taken"));
 				throw new IllegalAccessError();
 			}
 		}
@@ -154,7 +154,7 @@ public class Server {
 			if (this.lobby.containsKey(match_name)) {
 				this.lobby.get(match_name).add(client);
 			} else {
-				client.close("Sorry but there is no current match named " + match_name);
+				client.close(new Message(MessageType.STRING, "Sorry but there is no current match named " + match_name));
 				throw new IllegalAccessError();
 			}
 		}
