@@ -17,10 +17,22 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 	public Production getProduction(){
 		return this.production;
 	}
+
+	public Resource[] getRequiredResources(){
+		return this.production.getRequiredResources();
+	}
+
+	public Resource[] getProducedResources(){
+		return this.production.getProducedResources();
+	}
+
+	public void setRequiredResources(Resource[] cost){
+		return;
+	}
 	
-	public void setProducts(Resource new_resource) {
+	public void setProducedResources(Resource[] new_resource) {
 		Resource[] new_product = this.production.getProducedResources();
-		new_product[0] = new_resource;
+		new_product[0] = new_resource[0];
 		this.production = new Production(this.production.getRequiredResources(), new_product);
 	}
 
@@ -34,7 +46,7 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		return true;
 	}
 
-	public Resource[] activateProduction(Resource[] cost){
-		return this.production.activateProduction(cost);
+	public Resource[] activateProduction(){
+		return this.production.activateProduction();
 	}
 }

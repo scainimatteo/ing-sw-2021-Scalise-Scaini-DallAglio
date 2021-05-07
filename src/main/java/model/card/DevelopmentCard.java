@@ -25,16 +25,6 @@ public class DevelopmentCard extends Card implements ProductionInterface {
 		return this.level;
 	}
 
-	/**
-	* activates the card's production
-	*	
-	* @param resources_input is the input required for the production
-	* @return the output of the production
-	*/	
-	public Resource[] useCard(Resource[] resources_input) {
-		return production.activateProduction(resources_input);
-	}
-
 	public Resource[] getCost(){
 		Resource[] to_return = this.cost.clone();
 		return to_return;
@@ -44,6 +34,22 @@ public class DevelopmentCard extends Card implements ProductionInterface {
 		return this.production;
 	}
 	
+	public Resource[] getRequiredResources(){
+		return this.production.getRequiredResources();
+	}
+
+	public Resource[] getProducedResources(){
+		return this.production.getProducedResources();
+	}
+
+	public void setRequiredResources(Resource[] cost){
+		return;
+	}
+	
+	public void setProducedResources(Resource[] new_resource) {
+		return;
+	}
+
 	/**
 	* applies a discount to the given card 
 	*
@@ -63,7 +69,7 @@ public class DevelopmentCard extends Card implements ProductionInterface {
 		return new DevelopmentCard (victory_points, production, temp, level, id);
 	}
 
-	public Resource[] activateProduction(Resource[] cost){
-		return this.production.activateProduction(cost);
+	public Resource[] activateProduction(){
+		return this.production.activateProduction();
 	}
 }

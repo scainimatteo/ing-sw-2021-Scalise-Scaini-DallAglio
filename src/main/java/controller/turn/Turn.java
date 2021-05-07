@@ -10,6 +10,7 @@ import it.polimi.ingsw.controller.util.LeaderCardController;
 import it.polimi.ingsw.controller.util.ChoiceController;
 import it.polimi.ingsw.controller.util.FaithController;
 
+import it.polimi.ingsw.util.NotExecutableException;
 import it.polimi.ingsw.util.Observable;
 
 public abstract class Turn extends Observable<FaithController> {
@@ -17,7 +18,7 @@ public abstract class Turn extends Observable<FaithController> {
 	protected ExtraSpaceAbility[] extra_space;
 	protected ChoiceController handler;
 
-	protected FaithController playAction(){
+	protected FaithController playAction() throws NotExecutableException {
 		return null;
 	}
 
@@ -41,7 +42,7 @@ public abstract class Turn extends Observable<FaithController> {
 		return 0;
 	}
 	
-	public void playTurn(){
+	public void playTurn() throws NotExecutableException {
 		LeaderCardController leader_card_controller = new LeaderCardController();
 		FaithController returned_faith_controller = null;
 		boolean[] returned_booleans;
