@@ -14,7 +14,8 @@ public class ClientHandler implements Runnable {
 	private ObjectInputStream din;
 	private ObjectOutputStream dout;
 	// queue that keeps the messages coming from the client
-	private ArrayBlockingQueue<Object> messages;
+	private ArrayBlockingQueue<Object> messages_received;
+	private ArrayBlockingQueue<Object> messages_to_send;
 	private String nickname;
 
 	public ClientHandler(Server server, Socket client) throws IOException {
@@ -22,7 +23,8 @@ public class ClientHandler implements Runnable {
 		this.client = client;
 		this.dout = new ObjectOutputStream(client.getOutputStream()); 
 		this.din = new ObjectInputStream(client.getInputStream()); 
-		this.messages = new ArrayBlockingQueue<Object>(1);
+		this.messages_received = new ArrayBlockingQueue<Object>(10);
+		this.messages_to_send = new ArrayBlockingQueue<Object>(10);
 	}
 
 	public String getNickname() {
@@ -34,58 +36,73 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
-	 * @param message the object to send to the client
+	 * Send messages from the messages_to_send queue
+	 *
+	 * @return Thread the thread used to send
 	 */
-	private synchronized void sendToClient(Object message) {
-		try {
-			dout.reset();
-			dout.writeObject(message);
-			dout.flush();
-		} catch (IOException e) {
-			// TODO: better exception handling
-			e.printStackTrace();
-		}
+	private Thread sendToClient() {
+		Thread t = new Thread(() -> {
+			try {
+				while (true) {
+					Object o = this.messages_to_send.take();
+					dout.reset();
+					dout.writeObject(o);
+					dout.flush();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		t.start();
+		return t;
 	}
 
 	/**
-	 * @param message the object to send to the client
+	 * Put the messages in the messages_to_send queue
+	 *
+	 * @param message the message to send
 	 */
 	public void asyncSendToClient(Object message) {
-		new Thread(() -> sendToClient(message)).start();
+		try {
+			this.messages_to_send.put(message);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * @return the object received from the client
+	 * Put the messages received from the client in the messages_received queue
+	 *
+	 * @return Thread the thread used to receive
 	 */
-	private synchronized Object receiveFromClient() {
-		Object message = null;
-		// TODO: better exception handling
-		try {
-			message = din.readObject();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return message;
+	private Thread receiveFromClient() {
+		Thread t = new Thread(() -> {
+			try {
+				while (true) {
+					// TODO: better exception handling
+					try {
+						Object message = din.readObject();
+						this.messages_received.put(message);
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		t.start();
+		return t;
 	}
 
 	/**
 	 * @return the object received from the client
 	 */
 	public Object asyncReceiveFromClient() throws InterruptedException {
-		new Thread(() -> {
-			try {
-				// put the message in the queue
-				messages.put(receiveFromClient());
-			} catch (InterruptedException e) {
-				//TODO: better exception handling
-				e.printStackTrace();
-			}
-		}).start();
-
-		// take the message from the queue
-		return this.messages.take();
+		// take the message from the messages_received queue
+		return this.messages_received.take();
 	}
 
 	/**
@@ -93,7 +110,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void close(Object message) {
 		try {
-			sendToClient(message);
+			asyncSendToClient(message);
 			this.server.removeNickname(this.nickname);
 			this.client.close();
 		} catch (IOException e) {
@@ -101,8 +118,14 @@ public class ClientHandler implements Runnable {
 		}
 	}
 
-	// TODO: Not sure what to do with this method
 	public void run() {
-		return;
+		try{
+			Thread t0 = sendToClient();
+			Thread t1 = receiveFromClient();
+			t0.join();
+			t1.join();
+		} catch(InterruptedException e){
+			System.out.println("Connection closed from the client side");
+		}
 	}
 }
