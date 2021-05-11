@@ -71,7 +71,6 @@ public class Client {
 			try {
 				while (true) {
 					Message input_message = (Message) this.din.readObject();
-					System.out.println(input_message.getMessageType());
 					this.messages.put(input_message);
 				}
 			} catch (Exception e) {
