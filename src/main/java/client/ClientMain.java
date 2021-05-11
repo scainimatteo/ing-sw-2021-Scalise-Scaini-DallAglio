@@ -7,6 +7,9 @@ import java.io.IOException;
 
 import it.polimi.ingsw.client.Client;
 
+import it.polimi.ingsw.view.cli.NetworkManagerCLI;
+import it.polimi.ingsw.view.View;
+
 public class ClientMain {
 	private static int port;
 	private static String address;
@@ -46,7 +49,8 @@ public class ClientMain {
 
 	public static void startClient() {
 		try {
-			new Client(address, port).run();
+			View view = new NetworkManagerCLI();
+			new Client(address, port, view).run();
 		} catch (IOException e) {
 			System.out.printf("Can't run client on address %s and port %d\n", address, port);
 		}

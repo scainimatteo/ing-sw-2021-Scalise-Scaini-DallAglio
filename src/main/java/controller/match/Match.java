@@ -34,7 +34,7 @@ public class Match implements Runnable {
 	private HashMap<Player, Integer> victory_points;
 	private Game game;
 
-	public Match(ArrayList<ClientHandler> clients) {
+	public Match(ArrayList<ClientHandler> clients) throws InstantiationException {
 		this.comm_controller = new CommunicationController();
 		this.choice_controller = new ChoiceController(this.comm_controller);
 		this.victory_points = new HashMap<Player, Integer>();
@@ -43,6 +43,7 @@ public class Match implements Runnable {
 			this.game = new Initializer(this.comm_controller, this.choice_controller).initializeGame(clients);
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
+			throw new InstantiationException();
 		}
 	}
 
