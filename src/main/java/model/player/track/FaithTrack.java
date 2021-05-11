@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.player.track;
 
 import it.polimi.ingsw.util.Observer;
+import it.polimi.ingsw.util.ANSI;
 
 import java.io.*;
 
@@ -90,5 +91,56 @@ public class FaithTrack implements Observer<VaticanReports> {
 
 	public void update(VaticanReports vr_param){
 		this.activateVaticanReport(vr_param);
+	}
+
+	public String printText(){
+		int last_position = this.getLastPosition();
+		boolean flag = false;
+		String top = "";
+		String mid = "";
+		String bot = "";
+
+		for (int i = 0; i <= last_position; i++){
+			top = top + "|---";
+		}
+		top = top + "|\n";
+
+		for (int i = 0; i <= last_position; i ++){
+			mid = mid + "| ";
+
+			if (faith_marker.getPosition() == i){
+				mid = mid + ANSI.blue("M");
+			} else if (track[i].isPopeSpace()){
+				mid = mid + ANSI.red("P");
+			} else {
+				mid = mid + " ";
+			}
+
+			mid = mid + " ";
+		}
+		mid = mid + "|\n";
+
+		for (int i = 0; i <= last_position; i ++){
+			if ( !flag ){
+				if (track[i].whichVaticanReport() == null){
+					bot = bot + "    ";
+					flag = false;
+				} else {
+					bot = bot + "=====";
+					flag = true;
+				}
+			} else {
+				if (track[i].whichVaticanReport() == null){
+					bot = bot + "   ";
+					flag = false;
+				} else {
+					bot = bot + "====";
+					flag = true;
+				}
+			}
+		}
+		bot = bot + "\n";
+		
+		return top + mid + top + "\n\n" + ANSI.red(bot);
 	}
 }
