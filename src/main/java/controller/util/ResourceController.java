@@ -165,4 +165,19 @@ public class ResourceController {
 		return to_return;
 	}
 
+	/**
+	 * Counts the amount of Faith type resources in a given resource vector
+	 *
+	 * @param resources is the resource in which to count 
+	 * @return the amount
+	 */
+	public int countFaith(Resource[] resources){
+		int count = 0;
+		for (Resource x : resources){
+			if (x.equals(Resource.FAITH)){
+				count++;
+			}
+		}
+		return count;
+	}
 }
