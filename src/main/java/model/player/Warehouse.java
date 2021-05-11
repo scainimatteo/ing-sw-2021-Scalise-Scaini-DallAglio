@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.player.Storage;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
+import java.util.NoSuchElementException;
 
 public class Warehouse implements Storage {
 	private Resource top_resource = null;
@@ -154,12 +155,12 @@ public class Warehouse implements Storage {
 	}
 
 	@Override
-	public void getResource(Resource res){
+	public void getResource(Resource res) throws NoSuchElementException {
 		getFromWarehouse(res,1);
 	}
 
 	@Override
-	public void storeResource(Resource res){
+	public void storeResource(Resource res) throws IllegalArgumentException {
 		tryToInsert(new Resource[] {res});
 	}
 
@@ -168,7 +169,7 @@ public class Warehouse implements Storage {
 	 * @param quantity is the number of resource requested
 	 * @return an array of the resources requested
 	 */
-	public Resource[] getFromWarehouse(Resource resource_type, int quantity) throws IllegalArgumentException, IndexOutOfBoundsException{
+	public Resource[] getFromWarehouse(Resource resource_type, int quantity) throws NoSuchElementException {
 		Resource[] to_return = getFromTop(resource_type, quantity);
 		return to_return;
 	}
@@ -186,7 +187,7 @@ public class Warehouse implements Storage {
 				this.top_resource = null;
 				return to_return;
 			} else {
-				throw new IndexOutOfBoundsException();
+				throw new NoSuchElementException();
 			}
 		} else {
 			return getFromMiddle(resource_type, quantity);
@@ -212,7 +213,7 @@ public class Warehouse implements Storage {
 					this.middle_resources[1] = null;
 					return to_return;
 				} else {
-					throw new IndexOutOfBoundsException();
+					throw new NoSuchElementException();
 				}
 			} else {
 				if (quantity == 1){
@@ -220,7 +221,7 @@ public class Warehouse implements Storage {
 					this.middle_resources[0] = null;
 					return to_return;
 				} else {
-					throw new IndexOutOfBoundsException();
+					throw new NoSuchElementException();
 				}
 			}
 		} else {
@@ -259,7 +260,7 @@ public class Warehouse implements Storage {
 						this.bottom_resources[0] = null;
 						return to_return;
 					} else {
-						throw new IndexOutOfBoundsException();
+						throw new NoSuchElementException();
 					}
 				} else {
 					if (quantity == 2){
@@ -272,7 +273,7 @@ public class Warehouse implements Storage {
 						this.bottom_resources[1] = null;
 						return to_return;
 					} else {
-						throw new IndexOutOfBoundsException();
+						throw new NoSuchElementException();
 					}
 				}
 			} else {
@@ -281,11 +282,11 @@ public class Warehouse implements Storage {
 					this.bottom_resources[0] = null;
 					return to_return;
 				} else {
-					throw new IndexOutOfBoundsException();
+					throw new NoSuchElementException();
 				}
 			}
 		} else {
-			throw new IllegalArgumentException();
+			throw new NoSuchElementException();	
 		}
 	}
 
