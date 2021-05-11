@@ -3,7 +3,6 @@ package it.polimi.ingsw.client;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.Collections;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.HashMap;
 
 import java.net.*;
@@ -26,7 +25,6 @@ public class Client {
 	private Socket server;
 	private ObjectInputStream din;
 	private ObjectOutputStream dout;
-	private Scanner stdin;
 	private Message message_to_parse;
 	private View view;
 	private boolean parsed = true;
@@ -39,7 +37,6 @@ public class Client {
 		this.server = new Socket(address, port);
 		this.dout = new ObjectOutputStream(server.getOutputStream()); 
 		this.din = new ObjectInputStream(server.getInputStream()); 
-		this.stdin = new Scanner(System.in);
 		this.view = view;
 		this.messages = new ArrayBlockingQueue<Message>(10);
 	}
@@ -58,7 +55,6 @@ public class Client {
 		} catch(InterruptedException e){
 			System.out.println("Connection closed from the client side");
 		} finally {
-			this.stdin.close();
 			this.din.close();
 			this.dout.close();
 			this.server.close();
