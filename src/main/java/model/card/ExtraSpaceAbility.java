@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.card;
 
 import java.util.NoSuchElementException; 
+import java.lang.IllegalArgumentException;
 
 import it.polimi.ingsw.model.player.Storage;
 
@@ -8,7 +9,7 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-public class ExtraSpaceAbility extends LeaderAbility implements Storage{
+public class ExtraSpaceAbility extends LeaderAbility implements Storage {
 	private Resource resource_type;
 	private int index;
 
@@ -18,13 +19,13 @@ public class ExtraSpaceAbility extends LeaderAbility implements Storage{
 	}
 	
 	@Override
-	public void getResource(Resource res){
+	public void getResource(Resource res) throws NoSuchElementException {
 		getResources(1);	
 		return;
 	}
 	
 	@Override
-	public void storeResource(Resource res){
+	public void storeResource(Resource res) throws IllegalArgumentException {
 		putResource(res);
 		return;
 	}
@@ -33,7 +34,7 @@ public class ExtraSpaceAbility extends LeaderAbility implements Storage{
 	* @param new_resource is the resource to be added to the space
 	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
-	public void putResource(Resource new_resource) throws IllegalArgumentException, IndexOutOfBoundsException {
+	public void putResource(Resource new_resource) throws IllegalArgumentException {
 		if (!new_resource.getColor().equals(resource_type.getColor()) || index >= 2){
 			throw new IllegalArgumentException();	
 		}

@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.player.Storage;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
+import java.util.NoSuchElementException;
 
 public class StrongBox implements Storage{
 	private HashMap<Resource, Integer> storage;
@@ -30,13 +31,13 @@ public class StrongBox implements Storage{
 	}
 	
 	@Override
-	public void getResource(Resource res){
+	public void getResource(Resource res) throws NoSuchElementException {
 		removeResources(res, 1);
 		return;
 	}
 
 	@Override
-	public void storeResource (Resource res){
+	public void storeResource (Resource res) throws IllegalArgumentException {
 		insertResources(new Resource[] {res});
 	}
 
@@ -62,14 +63,13 @@ public class StrongBox implements Storage{
 	 * @param resource_type is the resource to be removed
 	 * @param quantity is the number of resources requested
 	 * @return the array of resources requested
-	 * @exception IllegalArgumentException is thrown if the resource_type is not contained
-	 * @exception IndexOutOfBoundsException is thrown if the quantity is greater than the resources stored
+	 * @exception NoSuchElementException is thrown if the quantity is greater than the resources stored
 	 */
-	public Resource[] removeResources(Resource resource_type, int quantity) {
+	public Resource[] removeResources(Resource resource_type, int quantity) throws NoSuchElementException {
 		Integer numof_resource = this.storage.get(resource_type);
 
 		if ( !(this.storage.containsKey(resource_type)) ){
-			throw new IllegalArgumentException();
+			throw new NoSuchElementException();
 		}
 
 		if (quantity <= numof_resource){
@@ -85,7 +85,7 @@ public class StrongBox implements Storage{
 
 			return to_return;
 		} else {
-			throw new IndexOutOfBoundsException();
+			throw new NoSuchElementException();
 		}
 	}
 
