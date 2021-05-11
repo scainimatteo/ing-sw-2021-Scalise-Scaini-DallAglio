@@ -101,32 +101,13 @@ public class MarketTurn extends Turn {
 		}
 		return bought;
 	}
-	
-	/**
-	 * Counts the amount of Faith type resources in a given resource vector
-	 *
-	 * @param resources is the resource in which to count 
-	 * @return the amount
-	 */
-	private int countFaith(Resource[] resources){
-		int count = 0;
-		for (Resource x : resources){
-			if (x.equals(Resource.FAITH)){
-				count++;
-			}
-		}
-		return count;
-	}
-
-	
-
 
 	public FaithController playAction (){
 		checkWhiteMarbles();
 		// TODO: view market before choice
 		Resource[] gained_resources = getFromMarket();
 		applyBonus(gained_resources);
-		int gained_faith = countFaith (gained_resources);	
+		int gained_faith = res_controller.countFaith (gained_resources);	
 		int lost_faith = res_controller.storeFromMarket(gained_resources);
 		return new FaithController(player, gained_faith, lost_faith);
 	}

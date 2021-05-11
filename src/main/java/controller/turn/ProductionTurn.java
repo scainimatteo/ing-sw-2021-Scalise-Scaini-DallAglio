@@ -99,8 +99,6 @@ public class ProductionTurn extends Turn{
 	 * @throws NotExecutableException if the player has 1 or 0 resources
 	 */
 	protected boolean canBeActivated(ProductionInterface prod) throws NotExecutableException {
-		int	num_of_resources = 0;
-
 		if (prod == null){
 			return false;
 		} 
@@ -109,16 +107,16 @@ public class ProductionTurn extends Turn{
 			throw new NotExecutableException();
 		} 
 
-		/**
-		 * TODO: check the presence of the resources requested from the production
-		 */
+		if (res_controller.hasResources(prod.getProducedResources())){
+			return true;
+		} 
 
-		return true;
+		return false;
 	}
 
 	/**
 	 * @param prod is the production choosen by the player
-	 * @return true if the production requires the unset after the activation
+	 * @return true if the production is a LeaderCard
 	 */
 	private boolean setResources(ProductionInterface choice){
 		Resource[] all_resources_array = {Resource.COIN, Resource.STONE, Resource.SERVANT, Resource.SHIELD};
@@ -134,13 +132,11 @@ public class ProductionTurn extends Turn{
 			}
 
 			choice.setRequiredResources(set_required_array);
-			to_return = true;
 		} 
 
 		if (choice.getProducedResources() == null){
 			set_produced_array[0] = (Resource) handler.pickBetween(this.player, "Choose a resource to insert as a request", all_resources_array, 1)[0];
 			choice.setProducedResources(set_produced_array);
-			to_return = true;
 		} 
 
 		if (choice.getProducedResources()[0] == null){
@@ -180,6 +176,8 @@ public class ProductionTurn extends Turn{
 		if (containsNullPosition){
 			unsetResources(choice);
 		} 
+
+		gained_faith = res_controller.countFaith(produced);
 
 		// store
 		res_controller.storeFromProduction(produced);

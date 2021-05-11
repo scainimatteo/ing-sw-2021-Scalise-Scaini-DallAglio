@@ -2,6 +2,7 @@ package it.polimi.ingsw.controller.turn;
 
 import it.polimi.ingsw.controller.util.FaithController;
 import it.polimi.ingsw.controller.util.ChoiceController;
+import it.polimi.ingsw.util.NotExecutableException;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Game;
@@ -26,6 +27,20 @@ public class BuyCardTurn extends Turn{
 		this.dev_cards_on_table = cards;
 		this.discounts = new Resource[2]; 
 		this.handler = handler;
+	}
+	
+	/**
+	 * Checks if the player can buy a card
+	 */
+	private boolean checkAnyBuyable() {
+		for(DevelopmentCard[] row : dev_cards_on_table.getTopCards()) {
+			for(DevelopmentCard card : row){
+				if (checkRequirements(card)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -110,8 +125,11 @@ public class BuyCardTurn extends Turn{
 	* @return a faith controller set to zero
 	*/
 	@Override
-	protected FaithController playAction(){
+	protected FaithController playAction() throws NotExecutableException {
 		checkDiscounts();
+		if (!checkAnyBuyable()){
+			throw new NotExecutableException();
+		}
 		DevelopmentCard chosen_card = chooseCardFromTable();
 		while (!checkRequirements(chosen_card)){
 			chosen_card = chooseCardFromTable();
