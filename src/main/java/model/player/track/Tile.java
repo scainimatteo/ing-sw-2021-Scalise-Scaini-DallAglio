@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model.player.track;
 
-public class Tile implements Cloneable {
+import java.io.Serializable;
+
+public class Tile implements Cloneable, Serializable {
+	private static final long serialVersionUID = 786L;
 	private VaticanReports report;
 	private int victory_points;
 	private boolean active;

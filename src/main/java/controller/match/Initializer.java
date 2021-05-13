@@ -15,6 +15,7 @@ import org.json.simple.parser.ParseException;
 import it.polimi.ingsw.controller.util.CommunicationController;
 import it.polimi.ingsw.controller.util.ChoiceController;
 import it.polimi.ingsw.controller.util.FaithController;
+import it.polimi.ingsw.controller.util.ViewController;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
@@ -60,7 +61,9 @@ public class Initializer extends Observable<FaithController> {
 			asyncDistributeLeaderCards();
 			chooseMatchOrder();
 			distributeRandomResources();
-			return createGame();
+			Game game = createGame();
+			createViewControllers(clients, game);
+			return game;
 		} catch (Exception e) {
 			//TODO: too generic?
 			throw new InstantiationException();
@@ -171,7 +174,7 @@ public class Initializer extends Observable<FaithController> {
 			this.players[1].tryToInsert(getRandomResources(1));
 
 			addObservers(this.players[2]);
-			this.players[2].tryToInsert(getRandomResources(2));
+			this.players[2].tryToInsert(getRandomResources(1));
 			notify(new FaithController(this.players[2], 1, 0));
 
 			addObservers(this.players[3]);
@@ -205,5 +208,16 @@ public class Initializer extends Observable<FaithController> {
 		Factory factory = Factory.getIstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		return new Game(this.players, all_development_cards);
+	}
+
+	/**
+	 * @param clients the ClientHandlers of the Players
+	 * @param game the Game just created
+	 */
+	private void createViewControllers(ArrayList<ClientHandler> clients, Game game) {
+		for (ClientHandler c: clients) {
+			ViewController view_controller = new ViewController(c, game);
+			c.setViewController(view_controller);
+		}
 	}
 }

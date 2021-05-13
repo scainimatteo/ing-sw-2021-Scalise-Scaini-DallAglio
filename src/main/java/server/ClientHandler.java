@@ -6,6 +6,11 @@ import java.io.*;
 
 import java.net.*;
 
+import it.polimi.ingsw.controller.util.ViewController;
+import it.polimi.ingsw.controller.util.ViewMessage;
+import it.polimi.ingsw.controller.util.MessageType;
+import it.polimi.ingsw.controller.util.Message;
+
 import it.polimi.ingsw.server.Server;
 
 public class ClientHandler implements Runnable {
@@ -14,15 +19,18 @@ public class ClientHandler implements Runnable {
 	private ObjectInputStream din;
 	private ObjectOutputStream dout;
 	// queue that keeps the messages coming from the client
+	private ArrayBlockingQueue<Object> view_messages_received;
 	private ArrayBlockingQueue<Object> messages_received;
 	private ArrayBlockingQueue<Object> messages_to_send;
 	private String nickname;
+	private ViewController view_controller;
 
 	public ClientHandler(Server server, Socket client) throws IOException {
 		this.server = server;
 		this.client = client;
 		this.dout = new ObjectOutputStream(client.getOutputStream()); 
 		this.din = new ObjectInputStream(client.getInputStream()); 
+		this.view_messages_received = new ArrayBlockingQueue<Object>(10);
 		this.messages_received = new ArrayBlockingQueue<Object>(10);
 		this.messages_to_send = new ArrayBlockingQueue<Object>(10);
 	}
@@ -33,6 +41,10 @@ public class ClientHandler implements Runnable {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public void setViewController(ViewController view_controller) {
+		this.view_controller = view_controller;
 	}
 
 	/**
@@ -81,8 +93,12 @@ public class ClientHandler implements Runnable {
 				while (true) {
 					// TODO: better exception handling
 					try {
-						Object message = din.readObject();
-						this.messages_received.put(message);
+						Message message = (Message) din.readObject();
+						if (message.getMessageType() == MessageType.VIEWREQUEST) {
+							this.view_messages_received.put(message);
+						} else {
+							this.messages_received.put(message);
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (ClassNotFoundException e) {
@@ -106,6 +122,39 @@ public class ClientHandler implements Runnable {
 	}
 
 	/**
+	 * Take ViewRequests from the view_messages_received queue and handle them
+	 *
+	 * @return Thread the thread used to handle them
+	 */
+	private Thread receiveViewRequestFromClient() {
+		Thread t = new Thread(() -> {
+			try {
+				while (true) {
+					Message message = (Message) this.view_messages_received.take();
+					this.view_controller.handleViewRequest((ViewMessage) message.getMessage());
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+		t.start();
+		return t;
+	}
+
+	/**
+	 * Add a ViewReply to the messages_to_send queue
+	 *
+	 * @param message the ViewReply to send
+	 */
+	public void addViewReply(Message message) {
+		try {
+			this.messages_to_send.put(message);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Safely close the connection with the client
 	 */
 	public void close(Object message) {
@@ -122,8 +171,10 @@ public class ClientHandler implements Runnable {
 		try{
 			Thread t0 = sendToClient();
 			Thread t1 = receiveFromClient();
+			Thread t2 = receiveViewRequestFromClient();
 			t0.join();
 			t1.join();
+			t2.join();
 		} catch(InterruptedException e){
 			System.out.println("Connection closed from the client side");
 		}

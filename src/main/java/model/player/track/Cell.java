@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model.player.track;
 
-public class Cell {
+import java.io.Serializable;
+
+public class Cell implements Serializable {
+	private static final long serialVersionUID = 2326L;
 	private int position;
 	private int victory_points;
 	private VaticanReports report;

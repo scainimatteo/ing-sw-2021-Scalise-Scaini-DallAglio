@@ -7,10 +7,15 @@ import java.util.Scanner;
 
 import it.polimi.ingsw.controller.util.ArrayChooser;
 import it.polimi.ingsw.controller.util.TurnSelector;
+import it.polimi.ingsw.controller.util.ViewMessage;
 import it.polimi.ingsw.controller.util.MessageType;
 import it.polimi.ingsw.controller.util.Message;
 import it.polimi.ingsw.controller.util.Choice;
 
+import it.polimi.ingsw.util.ANSI;
+
+import it.polimi.ingsw.view.Viewable;
+import it.polimi.ingsw.view.ViewType;
 import it.polimi.ingsw.view.View;
 
 public class NetworkManagerCLI implements View {
@@ -35,7 +40,7 @@ public class NetworkManagerCLI implements View {
 	 * @param s the String received
 	 */
 	public void handleString(String s) {
-		System.out.println(s);
+		System.out.print(s);
 	}
 
 	/**
@@ -105,6 +110,20 @@ public class NetworkManagerCLI implements View {
 		return order;
 	}
 
+	/**
+	 * Print the Viewable requested
+	 *
+	 * @param view_message the ViewMessage received
+	 */
+	public void handleViewReply(ViewMessage view_message) {
+		Viewable viewable = view_message.getReply();
+		String nickname = view_message.getNickname();
+		if (nickname != null) {
+			System.out.println(ANSI.underline(nickname) + "\n\n");
+		}
+		System.out.println(viewable.printText() + "\n");
+	}
+
 
 	// SEND
 	
@@ -129,16 +148,22 @@ public class NetworkManagerCLI implements View {
 	private Message parseSend(String input) {
 		Message message = null;
 
-		switch(this.message_to_parse.getMessageType()) {
-			case ARRAYCHOOSER:
-				message = new Message(MessageType.ARRAYCHOOSER, sendArray(input));
-				break;
-			case CHOICE:
-				message = new Message(MessageType.CHOICE, sendChoice(input));
-				break;
-			case TURNSELECTOR:
-				message = new Message(MessageType.TURNSELECTOR, sendTurn(input));
-				break;
+		if (this.message_to_parse == null) {
+			message = new Message(MessageType.VIEWREQUEST, sendViewRequest(input));
+			this.message_to_parse = message;
+			message.setParsed();
+		} else {
+			switch(this.message_to_parse.getMessageType()) {
+				case ARRAYCHOOSER:
+					message = new Message(MessageType.ARRAYCHOOSER, sendArray(input));
+					break;
+				case CHOICE:
+					message = new Message(MessageType.CHOICE, sendChoice(input));
+					break;
+				case TURNSELECTOR:
+					message = new Message(MessageType.TURNSELECTOR, sendTurn(input));
+					break;
+			}
 		}
 
 		if (message == null) {
@@ -217,5 +242,28 @@ public class NetworkManagerCLI implements View {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * Parse the input as a ViewMessage
+	 *
+	 * @param input the String rapresenting the Viewable chosen
+	 * @return the ViewMessage representing the Viewable chosen
+	 */
+	private ViewMessage sendViewRequest(String input) {
+		ViewMessage request = null;
+		String[] inputs = input.split(" ");
+		switch(inputs[0].toUpperCase()) {
+			case "FAITHTRACK":
+			case "TRACK":
+				if (inputs.length == 1) {
+					// the user requested his own track
+					request = new ViewMessage(ViewType.FAITHTRACK);
+				} else {
+					request = new ViewMessage(ViewType.FAITHTRACK, inputs[1]);
+				}
+		}
+
+		return request;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.controller.util.ArrayChooser;
 import it.polimi.ingsw.controller.util.TurnSelector;
+import it.polimi.ingsw.controller.util.ViewMessage;
 import it.polimi.ingsw.controller.util.Message;
 import it.polimi.ingsw.controller.util.Choice;
 
@@ -18,6 +19,7 @@ public interface View {
 	public void handleChoice(Choice c);
 	public void handleTurn(TurnSelector t);
 	public void handleRank(HashMap<String, Integer> rank);
+	public void handleViewReply(ViewMessage view_message);
 
 
 	// SEND

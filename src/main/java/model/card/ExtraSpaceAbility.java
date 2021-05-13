@@ -35,7 +35,7 @@ public class ExtraSpaceAbility extends LeaderAbility implements Storage {
 	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
 	public void putResource(Resource new_resource) throws IllegalArgumentException {
-		if (!new_resource.getColor().equals(resource_type.getColor()) || index >= 2){
+		if (!new_resource.equals(resource_type) || index >= 2){
 			throw new IllegalArgumentException();	
 		}
 		else {

@@ -30,4 +30,9 @@ public enum Resource {
 			default: return ANSI.white(Character.toString(circle));
 		}
 	}
+
+	public String printNullMarble(){
+		char circle = '\u25EF';
+		return ANSI.white(Character.toString(circle));
+	}
 }
