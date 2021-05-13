@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.view.Viewable;
 
-public class Market {
+public class Market implements Viewable {
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 	private Resource[][] market_board;
@@ -120,4 +121,44 @@ public class Market {
 		this.shiftColumn(index);
 		return column;
 	}
+
+	/**
+	 * Get the resources stores in a column and shift it
+	 *
+	 * @param index the index of the column to shift
+	 * @return an array of the resources taken by the player
+	 */
+	@Override
+	public String printText() { 
+		String string = "\n·--------------------·--\n|                     " + free_marble.printMarble() + " )\n|  ·--^---^---^---^--·--\n";
+		for (Resource[] array : market_board){
+			string = string + "|  |                 |\n| <";
+			for (Resource x : array) {
+				if (x == null){
+					x = Resource.FAITH;
+					string = string + " " + x.printNullMarble() + " ";
+				} else {
+					string = string + " " + x.printMarble() + " ";
+				}
+			}
+			string = "·--·-----------------·\n";
+		}
+		return string;
+	}
+
 }
+
+/*
+·--------------------·--
+|                     O )
+|  ·--^---^---^---^--·--
+|  |                 |
+|  <  O   O   O   O  |
+|  |                 |
+|  <  O   O   O   O  |
+|  |                 |
+|  <  O   O   O   O  |
+|  |                 |
+·--·-----------------·
+*/
+
