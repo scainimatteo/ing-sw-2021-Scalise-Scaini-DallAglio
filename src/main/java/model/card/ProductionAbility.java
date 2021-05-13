@@ -49,4 +49,9 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 	public Resource[] activateProduction(){
 		return this.production.activateProduction();
 	}
+
+	@Override
+	public String printText(){
+		return production.printText();
+	}
 }

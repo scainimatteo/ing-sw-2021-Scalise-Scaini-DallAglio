@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class DiscountAbility extends LeaderAbility {
 	private Resource discounted_resource;	
+	private static final long serialVersionUID = 65L;
 
 	public DiscountAbility (Resource discount){
 		if (discount != Resource.FAITH){
@@ -28,5 +29,9 @@ public class DiscountAbility extends LeaderAbility {
 	*/ 
 	public boolean checkAbility (DiscountAbility target){
 		return true;
+	}
+
+	public String printText(){
+		return "|                 |\n|                 |\n|                 |\n" + "|     -1 " + discounted_resource.getAbbreviation() + "       |\n|                 |\n|                 |\n|                 |\n";
 	}
 }

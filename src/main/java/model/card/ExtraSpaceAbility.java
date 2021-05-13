@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class ExtraSpaceAbility extends LeaderAbility implements Storage {
+	private static final long serialVersionUID = 78L;
 	private Resource resource_type;
 	private int index;
 
@@ -90,4 +91,26 @@ public class ExtraSpaceAbility extends LeaderAbility implements Storage {
 	public boolean checkAbility (ExtraSpaceAbility target){
 		return true;
 	}
+
+	@Override
+	public String printText(){
+		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |";
+		if (index == 0){
+			string +="|  |   |   |   |  |\n";
+		} else if (index ==1){
+			string +="|  | " + resource_type.getAbbreviation() + " |   |   |  |\n";
+		} else if (index == 2){
+			string +="|  | " + resource_type.getAbbreviation() + " |   | " + resource_type.getAbbreviation() + " |  |\n";
+		}
+		return string + "|  ·----· ·----·  |\n|                 |\n";
+	}
 }
+/*
+| XX |            |
+|----·            |
+|                 |
+|  ·----· ·----·  |
+|  |    | |    |  |
+|  ·----· ·----·  |
+|                 |
+*/

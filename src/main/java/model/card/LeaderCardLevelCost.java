@@ -46,5 +46,23 @@ public class LeaderCardLevelCost extends LeaderCard {
 
 		return to_return;
 	}
-
+	
 }
+
+/*
+/-----------------\
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+|-------(X)-------|
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+\-----------------/
+*/

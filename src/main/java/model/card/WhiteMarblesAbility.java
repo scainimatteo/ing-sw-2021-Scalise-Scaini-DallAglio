@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class WhiteMarblesAbility extends LeaderAbility {
 	private Resource resource_type;
+	private static final long serialVersionUID = 97L;
 	
 	public WhiteMarblesAbility (Resource bonus){
 		if (bonus != Resource.FAITH){
@@ -28,5 +29,10 @@ public class WhiteMarblesAbility extends LeaderAbility {
 	*/ 
 	public boolean checkAbility (WhiteMarblesAbility target){
 		return true;
+	}
+
+	@Override
+	public String printText(){
+		return "|                 |\n|                 |\n|                 |\n" + "|     " + resource_type.printNullMarble() + " ==> " + resource_type.printMarble() + "     |\n|                 |\n|                 |\n|                 |\n";
 	}
 }

@@ -1,10 +1,11 @@
 package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.view.Viewable;
 
 import java.io.Serializable;
 
-public abstract class LeaderCard extends Card implements Cloneable, Serializable {
+public abstract class LeaderCard extends Card implements Cloneable, Viewable, Serializable {
 	private static final long serialVersionUID = 4L;
 	protected LeaderAbility ability;
 	protected boolean activated;
@@ -31,4 +32,37 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 		}
 		return clone;
 	}
+
+	protected String printTop(){
+		return "\n qualcosa è andato storto\n";
+	}
+
+	protected String printBottom(){
+		return ability.printText();
+	}
+
+	public String printText(){
+		return "/-----------------\\\n" + printTop() + "|-------(" + String.valueOf(victory_points) + ")-------|" + printBottom() + "\\-----------------/\n";
+	}
 }
+
+
+/*
+
+/-----------------\
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+|-------(X)-------|
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+|                 |
+\-----------------/
+
+*/
