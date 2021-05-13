@@ -11,6 +11,7 @@ import java.io.*;
 
 import it.polimi.ingsw.controller.util.ArrayChooser;
 import it.polimi.ingsw.controller.util.TurnSelector;
+import it.polimi.ingsw.controller.util.ViewMessage;
 import it.polimi.ingsw.controller.util.MessageType;
 import it.polimi.ingsw.controller.util.Message;
 import it.polimi.ingsw.controller.util.Choice;
@@ -163,6 +164,11 @@ public class Client {
 				break;
 			case RANKING:
 				this.view.handleRank((HashMap<String, Integer>) message.getMessage());
+				break;
+			case VIEWREPLY:
+				this.message_to_parse = null;
+				this.view.setMessageToParse(null);
+				this.view.handleViewReply((ViewMessage) message.getMessage());
 				break;
 			default:
 				System.out.println("Received unknown object");
