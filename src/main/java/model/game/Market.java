@@ -3,10 +3,13 @@ package it.polimi.ingsw.model.game;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.view.Viewable;
 
-public class Market implements Viewable {
+public class Market implements Viewable, Serializable {
+	private static final long serialVersionUID = 97753L;
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 	private Resource[][] market_board;
@@ -130,20 +133,26 @@ public class Market implements Viewable {
 	 */
 	@Override
 	public String printText() { 
-		String string = "\n·--------------------·--\n|                     " + free_marble.printMarble() + " )\n|  ·--^---^---^---^--·--\n";
+		Resource null_marble = Resource.FAITH;
+		String string = "\n·--------------------·--\n|                     ";
+		if (free_marble == null) {
+			string += null_marble.printNullMarble();
+		} else {
+			string += free_marble.printMarble();
+		}
+		string += " )\n|  ·--^---^---^---^--·--\n";
 		for (Resource[] array : market_board){
-			string = string + "|  |                 |\n| <";
+			string += "|  |                 |\n|  <";
 			for (Resource x : array) {
 				if (x == null){
-					x = Resource.FAITH;
-					string = string + " " + x.printNullMarble() + " ";
+					string += "  " + null_marble.printNullMarble() + " ";
 				} else {
-					string = string + " " + x.printMarble() + " ";
+					string += "  " + x.printMarble() + " ";
 				}
 			}
-			string = "·--·-----------------·\n";
+			string += " |\n";
 		}
-		return string;
+		return string + "|  |                 |\n·--·-----------------·\n";
 	}
 
 }

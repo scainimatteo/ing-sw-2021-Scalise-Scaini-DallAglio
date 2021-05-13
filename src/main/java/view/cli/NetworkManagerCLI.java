@@ -262,6 +262,9 @@ public class NetworkManagerCLI implements View {
 				} else {
 					request = new ViewMessage(ViewType.FAITHTRACK, inputs[1]);
 				}
+				break;
+			case "MARKET":
+				request = new ViewMessage(ViewType.MARKET);
 		}
 
 		return request;

@@ -6,6 +6,7 @@ import it.polimi.ingsw.controller.util.ViewMessage;
 import it.polimi.ingsw.controller.util.MessageType;
 import it.polimi.ingsw.controller.util.Message;
 
+import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Game;
 
 import it.polimi.ingsw.model.player.track.FaithTrack;
@@ -37,6 +38,9 @@ public class ViewController {
 		switch(message.getViewType()) {
 			case FAITHTRACK:
 				reply = handleFaithTrack(message.getNickname());
+				break;
+			case MARKET:
+				reply = handleMarket();
 				break;
 			default:
 				System.out.println("An error occurred");
@@ -78,6 +82,10 @@ public class ViewController {
 		} else {
 			return getPlayerFromNickname(nickname).getFaithTrack();
 		}
+	}
+
+	private Market handleMarket() {
+		return this.game.getMarket();
 	}
 
 	/**
