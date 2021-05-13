@@ -7,7 +7,10 @@ import java.util.Iterator;
 import java.lang.IndexOutOfBoundsException;
 import java.util.NoSuchElementException;
 
-public class Deck<E> extends AbstractCollection <E> {
+import java.io.Serializable;
+
+public class Deck<E> extends AbstractCollection <E> implements Serializable {
+	private static final long serialVersionUID = 9824L;
 	private int max_size;
 	private ArrayList <E> structure;
 

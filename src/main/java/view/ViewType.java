@@ -2,5 +2,6 @@ package it.polimi.ingsw.view;
 
 public enum ViewType {
 	FAITHTRACK,
-	MARKET
+	MARKET,
+	DEVELOPMENTCARDSONTABLE
 }

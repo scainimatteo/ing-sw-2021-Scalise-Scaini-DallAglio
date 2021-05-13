@@ -3,12 +3,18 @@ package it.polimi.ingsw.model.game;
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
-public class DevelopmentCardsOnTable {
+import it.polimi.ingsw.view.cli.Printer;
+import it.polimi.ingsw.view.Viewable;
+
+public class DevelopmentCardsOnTable implements Viewable, Serializable {
+	private static final long serialVersionUID = 87689L;
 	private Table<DevelopmentCard> development_cards_table;
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
@@ -36,13 +42,13 @@ public class DevelopmentCardsOnTable {
 	 * @return a matrix of cards at the top of the development cards deck
 	 */
 	public DevelopmentCard[][] getTopCards() {
-		DevelopmentCard[][] development_card_on_top = new DevelopmentCard[3][4];
+		DevelopmentCard[][] development_cards_on_top = new DevelopmentCard[3][4];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				development_card_on_top[i][j] = this.development_cards_table.peekTop(i, j);
+				development_cards_on_top[i][j] = this.development_cards_table.peekTop(i, j);
 			}
 		}
-		return development_card_on_top;
+		return development_cards_on_top;
 	}
 
 	/**
@@ -66,5 +72,10 @@ public class DevelopmentCardsOnTable {
 		if (!done) {
 			throw new NoSuchElementException();
 		}
+	}
+
+	public String printText() {
+		DevelopmentCard[][] development_cards_on_top = this.getTopCards();
+		return Printer.printMatrix(development_cards_on_top);
 	}
 }

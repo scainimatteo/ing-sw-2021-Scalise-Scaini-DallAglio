@@ -5,11 +5,14 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Iterator; 
 
+import java.io.Serializable;
+
 import java.lang.IndexOutOfBoundsException;
 
 import it.polimi.ingsw.model.card.Deck;
 
-public class Table<E> extends AbstractCollection<E> {
+public class Table<E> extends AbstractCollection<E> implements Serializable {
+	private static final long serialVersionUID = 765L;
 	private int max_size;
 	private int row_size;
 	private ArrayList<Deck<E>> structure;

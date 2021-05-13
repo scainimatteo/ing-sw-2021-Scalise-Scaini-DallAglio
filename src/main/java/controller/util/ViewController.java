@@ -6,6 +6,7 @@ import it.polimi.ingsw.controller.util.ViewMessage;
 import it.polimi.ingsw.controller.util.MessageType;
 import it.polimi.ingsw.controller.util.Message;
 
+import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Game;
 
@@ -41,6 +42,9 @@ public class ViewController {
 				break;
 			case MARKET:
 				reply = handleMarket();
+				break;
+			case DEVELOPMENTCARDSONTABLE:
+				reply = handleDevelopmentCardsOnTable();
 				break;
 			default:
 				System.out.println("An error occurred");
@@ -86,6 +90,10 @@ public class ViewController {
 
 	private Market handleMarket() {
 		return this.game.getMarket();
+	}
+
+	private DevelopmentCardsOnTable handleDevelopmentCardsOnTable() {
+		return this.game.getDevelopmentCardsOnTable();
 	}
 
 	/**
