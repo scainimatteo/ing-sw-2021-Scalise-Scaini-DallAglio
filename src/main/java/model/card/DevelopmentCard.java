@@ -124,17 +124,17 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		} else {
 			cost_string += "          ";
 		}
-		cost_string += " |\n";
+		cost_string += "  |\n";
 
 		/**
 		 * production
 		 */
 		String[] production_string = this.production.productionToText();
-		String prod1 = "| " + production_string[0] + " |\n";
-		String prod2 = "| " + production_string[1] + " |\n";
-		String prod3 = "| " + production_string[2] + " |\n";
-		String prod4 = "| " + production_string[3] + " |\n";
-		String prod5 = "| " + production_string[4] + " |\n";
+		String prod1 = "| " + production_string[0] + "  |\n";
+		String prod2 = "| " + production_string[1] + "  |\n";
+		String prod3 = "| " + production_string[2] + "  |\n";
+		String prod4 = "| " + production_string[3] + "  |\n";
+		String prod5 = "| " + production_string[4] + "  |\n";
 
 		String to_return = top + level + top + mid + cost_string + mid + top + mid + prod1 + prod2 +prod3 + prod4 + prod5 + mid + top;
 
