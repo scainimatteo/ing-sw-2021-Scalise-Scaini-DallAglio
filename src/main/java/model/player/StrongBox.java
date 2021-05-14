@@ -144,6 +144,10 @@ public class StrongBox implements Storage, Viewable, Serializable {
 		//}
 		return null;
 	}
+
+	public String printText(int index){
+		return null;
+	}
 }
 
 

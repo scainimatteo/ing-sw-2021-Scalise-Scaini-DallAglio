@@ -40,4 +40,12 @@ public class LeaderCardResourcesCost extends LeaderCard {
 		return to_return;
 		
 	}
+
+	public String printText(){
+		return null;
+	}
+
+	public String printText(int index){
+		return null;
+	}
 }

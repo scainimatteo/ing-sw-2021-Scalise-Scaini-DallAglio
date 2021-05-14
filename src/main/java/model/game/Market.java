@@ -155,6 +155,9 @@ public class Market implements Viewable, Serializable {
 		return string + "|  |                 |\n·--·-----------------·\n";
 	}
 
+	public String printText(int index){
+		return null;
+	}
 }
 
 /*

@@ -151,6 +151,10 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 
 		return to_return;
 	}
+
+	public String printText(int index){
+		return null;
+	}
 }
 
 /**

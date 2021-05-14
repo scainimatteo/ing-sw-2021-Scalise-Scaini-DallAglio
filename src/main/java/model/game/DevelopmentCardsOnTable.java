@@ -78,4 +78,8 @@ public class DevelopmentCardsOnTable implements Viewable, Serializable {
 		DevelopmentCard[][] development_cards_on_top = this.getTopCards();
 		return Printer.printMatrix(development_cards_on_top);
 	}
+
+	public String printText(int index){
+		return null;
+	}
 }

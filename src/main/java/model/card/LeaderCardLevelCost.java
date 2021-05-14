@@ -47,6 +47,9 @@ public class LeaderCardLevelCost extends LeaderCard {
 		return to_return;
 	}
 	
+	public String printText(int index){
+		return null;
+	}
 }
 
 /*
