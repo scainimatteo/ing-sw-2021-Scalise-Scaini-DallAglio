@@ -16,7 +16,14 @@ public enum Resource {
 	}
 
 	public String getAbbreviation(){
-		return this.abbreviation;
+		switch (this){
+			case COIN: return ANSI.yellow(this.abbreviation);
+			case STONE: return ANSI.green(this.abbreviation);
+			case SERVANT: return ANSI.magenta(this.abbreviation);
+			case SHIELD: return ANSI.cyan(this.abbreviation);
+			case FAITH: return ANSI.red(this.abbreviation);
+			default: return ANSI.white(this.abbreviation);
+		}
 	}
 
 	public String printMarble(){

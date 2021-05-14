@@ -279,6 +279,15 @@ public class NetworkManagerCLI implements View {
 					request = new ViewMessage(ViewType.STRONGBOX, inputs[1]);
 				}
 				break;
+			case "WAREHOUSE":
+			case "WH":
+				if (inputs.length == 1) {
+					// the user requested his own Warehouse
+					request = new ViewMessage(ViewType.WAREHOUSE);
+				} else {
+					request = new ViewMessage(ViewType.WAREHOUSE, inputs[1]);
+				}
+				break;
 		}
 
 		return request;

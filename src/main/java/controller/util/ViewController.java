@@ -51,6 +51,9 @@ public class ViewController {
 			case STRONGBOX:
 				reply = handleStrongBox(message.getNickname());
 				break;
+			case WAREHOUSE:
+				reply = handleWarehouse(message.getNickname());
+				break;
 			default:
 				System.out.println("An error occurred");
 				throw new IllegalArgumentException();
@@ -107,6 +110,15 @@ public class ViewController {
 			return getPlayerFromNickname(this.client.getNickname()).getPlayerStrongBox();
 		} else {
 			return getPlayerFromNickname(nickname).getPlayerStrongBox();
+		}
+	}
+
+	private Warehouse handleWarehouse(String nickname) {
+		if (nickname == null) {
+			// the client it's asking for his own Warehouse
+			return getPlayerFromNickname(this.client.getNickname()).getWarehouse();
+		} else {
+			return getPlayerFromNickname(nickname).getWarehouse();
 		}
 	}
 
