@@ -96,7 +96,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 
 	public String printText(){
 		String top = "-------------------\n";
-		String mid = "|               |\n";
+		String mid = "|                 |\n";
 
 		/**
 		 * level
@@ -116,13 +116,13 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		String cost_string = "| " + String.valueOf(cost_to_print.get(cost_array[0])) + " " + cost_array[0].getAbbreviation();
 		if (cost_array.length >= 2){
 			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[1])) + " " + cost_array[1].getAbbreviation();
+			if (cost_array.length >= 3){
+				cost_string += " " + String.valueOf(cost_to_print.get(cost_array[2])) + " " + cost_array[2].getAbbreviation();
+			} else {
+				cost_string += "     ";
+			}
 		} else {
 			cost_string += "          ";
-		}
-		if (cost_array.length >= 3){
-			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[2])) + " " + cost_array[2].getAbbreviation();
-		} else {
-			cost_string += "     ";
 		}
 		cost_string += " |\n";
 
