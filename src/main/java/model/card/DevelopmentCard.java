@@ -95,7 +95,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 	}
 
 	public String printText(){
-		String top = "-------------------\n";
+		String top = "|-----------------|\n";
 		String mid = "|                 |\n";
 
 		/**
@@ -127,6 +127,17 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		cost_string += "  |\n";
 
 		/**
+		 * pv
+		 */
+		String pv_string = "";
+		if (getPoints() < 10){
+			pv_string = "|-------(" + String.valueOf(this.getPoints()) + ")-------|\n";
+		} else {
+			String vp = String.valueOf(this.getPoints());
+			pv_string = "|------(" + vp.substring(0,1) + " " + vp.substring(1) + ")------|\n";
+		}
+
+		/**
 		 * production
 		 */
 		String[] production_string = this.production.productionToText();
@@ -136,7 +147,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		String prod4 = "| " + production_string[3] + "  |\n";
 		String prod5 = "| " + production_string[4] + "  |\n";
 
-		String to_return = top + level + top + mid + cost_string + mid + top + mid + prod1 + prod2 +prod3 + prod4 + prod5 + mid + top;
+		String to_return = top + level + top + mid + cost_string + mid + pv_string + mid + prod1 + prod2 + prod3 + prod4 + prod5 + mid + top;
 
 		return to_return;
 	}
