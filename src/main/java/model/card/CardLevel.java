@@ -45,4 +45,14 @@ public class CardLevel implements Serializable {
 	public boolean compareColor(CardLevel target){
 		return this.color.equals(target.color);
 	}
+
+	public String toText(){
+		String lvl;
+		char ball = '\u25EF';
+		for (int i=0; i<3; i++){
+			lvl += Character.toString(ball);
+		}
+		return color.colorString(color.toString() + " " + lvl);
+	}
 }
+

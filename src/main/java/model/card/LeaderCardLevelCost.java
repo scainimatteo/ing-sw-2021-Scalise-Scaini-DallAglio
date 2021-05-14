@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.card;
 
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 
 import java.util.Iterator;
 
@@ -45,6 +46,57 @@ public class LeaderCardLevelCost extends LeaderCard {
 		}
 
 		return to_return;
+	}
+
+	protected String printTop() {
+		int i = 2;
+		String top = "|                 |\n";
+		String padding = "                 ";
+		String temp;
+		int green = 0, blue = 0, yellow = 0, purple = 0;	
+		String greenstring;
+		String bluestring;
+		String yellowstring;
+		String purplestring;
+		for (CardLevel x : requirements){
+			if (x.getColor() == DevelopmentCardsColor.GREEN){
+				green++;
+				greenstring = x.toText();
+			}else if(x.getColor() == DevelopmentCardsColor.BLUE){
+				blue++;
+				bluestring = x.toText();
+			}else if(x.getColor() == DevelopmentCardsColor.YELLOW){
+				yellow++;
+				yellowstring = x.toText();
+			}else {
+				purple++;
+				purplestring = x.toText();
+			}
+		}
+		if (green >0){
+			temp = " "  + String.valueOf(green) + " " + greenstring ; 
+			top += "|" + temp + padding.substring(temp.length()) + "|\n|                 |\n";
+			i--;	
+		}
+		if (blue >0){
+			temp = " "  + String.valueOf(blue) + " " + bluestring ; 
+			top += "|" + temp + padding.substring(temp.length()) + "|\n|                 |\n";
+			i--;	
+		}
+		if (yellow >0){
+			temp = " "  + String.valueOf(yellow) + " " + yellowstring ; 
+			top += "|" + temp + padding.substring(temp.length()) + "|\n|                 |\n";
+			i--;	
+		}
+		if (purple >0){
+			temp = " "  + String.valueOf(purple) + " " + purplestring ; 
+			top += "|" + temp + padding.substring(temp.length()) + "|\n|                 |\n";
+			i--;	
+		}
+		if (i == 1){ 
+			top += "|                 |\n|                 |\n";
+		}
+		return top + "|                 |\n";
 	}
 	
 }
