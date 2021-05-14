@@ -168,7 +168,7 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return this.warehouse.isPossibleToInsert(new_resource);
 	}
 
-	public Warehouse getPlayerWarehouse(){
+	public Warehouse getWarehouse(){
 		return this.warehouse;
 	}
 
@@ -209,7 +209,7 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return this.strongbox.removeResources(resource_type, quantity);
 	}
 
-	public StrongBox getPlayerStrongbox(){
+	public StrongBox getPlayerStrongBox(){
 		return this.strongbox;
 	}
 

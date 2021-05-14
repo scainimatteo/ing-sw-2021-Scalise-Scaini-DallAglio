@@ -32,7 +32,7 @@ public class DevelopmentCardsOnTable implements Viewable, Serializable {
 		}
 		for (DevelopmentCard card : all_development_cards) {
 			CardLevel level = card.getCardLevel();
-			table.addElement(card, level.getLevel() - 1, level.getColor().getOrder());
+			table.addElement(card, 3 - level.getLevel(), level.getColor().getOrder());
 		}
 		table.shuffleAllDecks();
 		return table;
@@ -77,5 +77,9 @@ public class DevelopmentCardsOnTable implements Viewable, Serializable {
 	public String printText() {
 		DevelopmentCard[][] development_cards_on_top = this.getTopCards();
 		return Printer.printMatrix(development_cards_on_top);
+	}
+
+	public String printText(int index){
+		return null;
 	}
 }

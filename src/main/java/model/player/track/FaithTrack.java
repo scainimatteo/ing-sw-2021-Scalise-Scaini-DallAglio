@@ -146,4 +146,8 @@ public class FaithTrack implements Observer<VaticanReports>, Viewable, Serializa
 		
 		return top + mid + top + "\n\n" + ANSI.red(bot);
 	}
+
+	public String printText(int index){
+		return null;
+	}
 }

@@ -3,11 +3,16 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.player.Storage;
 
+import it.polimi.ingsw.view.Viewable;
+
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
 
-public class Warehouse implements Storage {
+import java.io.Serializable;
+
+public class Warehouse implements Storage, Viewable, Serializable {
+	private static final long serialVersionUID = 8847L;
 	private Resource top_resource = null;
 	private Resource[] middle_resources = {null, null};
 	private Resource[] bottom_resources = {null, null, null};
@@ -326,45 +331,32 @@ public class Warehouse implements Storage {
 		this.bottom_resources[2] = null;
 	}
 
-	public String toString(){
-		String to_print;
+	public String printResource(Resource res) {
+		if (res == null) {
+			return "  ";
+		} else {
+			return res.getAbbreviation();
+		}
+	}
 
-		to_print = "1: ";
-		if (top_resource != null){
-			to_print = to_print + top_resource.name();
-		} else {
-			to_print = to_print + "null";
-		}
+	public String printText(){
+		String total = "        /\\\n       /  \\\n      / ";
+		total += printResource(this.top_resource) + " \\\n     /------\\\n";
+		total += "    / " + printResource(this.middle_resources[0]) + "  " + printResource(this.middle_resources[1]) + " \\\n   /----------\\\n";
+		total += "  / " + printResource(this.bottom_resources[0]) + "  " + printResource(this.bottom_resources[1]) + "  " + printResource(this.bottom_resources[2]) + " \\\n";
+		return total + " /--------------\\";
+	}
 
-		to_print = to_print + "\n2: ";
-		if (middle_resources[0] != null){
-			to_print = to_print + middle_resources[0].name() + " | ";
-		} else {
-			to_print = to_print + "null | ";
-		}
-		if (middle_resources[1] != null){
-			to_print = to_print + middle_resources[1].name();
-		} else {
-			to_print = to_print + "null";
-		}
-
-		to_print = to_print + "\n3: ";
-		if (bottom_resources[0] != null){
-			to_print = to_print + bottom_resources[0].name() + " | ";
-		} else {
-			to_print = to_print + "null | ";
-		}
-		if (bottom_resources[1] != null){
-			to_print = to_print + bottom_resources[1].name() + " | ";
-		} else {
-			to_print = to_print + "null | ";
-		}
-		if (bottom_resources[2] != null){
-			to_print = to_print + bottom_resources[2].name();
-		} else {
-			to_print = to_print + "null\n";
-		}
-
-		return to_print;
+	public String printText(int index){
+		return null;
 	}
 }
+
+//           /\
+//          /  \
+//         / sp \
+//        /------\
+//       / sp  sp \
+//      /----------\
+//     / sp  sp  sp \
+//    /--------------\

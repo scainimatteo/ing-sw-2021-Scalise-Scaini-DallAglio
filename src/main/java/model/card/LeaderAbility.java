@@ -4,7 +4,7 @@ import it.polimi.ingsw.view.Viewable;
 
 import java.io.Serializable;
 
-public abstract class LeaderAbility implements Viewable, Serializable {
+public abstract class LeaderAbility implements Serializable {
 	private static final long serialVersionUID = 5L;
 
 	public boolean checkAbility (LeaderAbility target){
