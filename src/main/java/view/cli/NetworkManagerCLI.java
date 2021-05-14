@@ -257,7 +257,7 @@ public class NetworkManagerCLI implements View {
 			case "FAITHTRACK":
 			case "TRACK":
 				if (inputs.length == 1) {
-					// the user requested his own track
+					// the user requested his own FaithTrack
 					request = new ViewMessage(ViewType.FAITHTRACK);
 				} else {
 					request = new ViewMessage(ViewType.FAITHTRACK, inputs[1]);
@@ -269,6 +269,15 @@ public class NetworkManagerCLI implements View {
 			case "DEVELOPMENTCARDSONTABLE":
 			case "DCOT":
 				request = new ViewMessage(ViewType.DEVELOPMENTCARDSONTABLE);
+				break;
+			case "STRONGBOX":
+			case "SB":
+				if (inputs.length == 1) {
+					// the user requested his own StrongBox
+					request = new ViewMessage(ViewType.STRONGBOX);
+				} else {
+					request = new ViewMessage(ViewType.STRONGBOX, inputs[1]);
+				}
 				break;
 		}
 

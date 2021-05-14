@@ -11,6 +11,8 @@ import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Game;
 
 import it.polimi.ingsw.model.player.track.FaithTrack;
+import it.polimi.ingsw.model.player.StrongBox;
+import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.server.ClientHandler;
@@ -45,6 +47,9 @@ public class ViewController {
 				break;
 			case DEVELOPMENTCARDSONTABLE:
 				reply = handleDevelopmentCardsOnTable();
+				break;
+			case STRONGBOX:
+				reply = handleStrongBox(message.getNickname());
 				break;
 			default:
 				System.out.println("An error occurred");
@@ -94,6 +99,15 @@ public class ViewController {
 
 	private DevelopmentCardsOnTable handleDevelopmentCardsOnTable() {
 		return this.game.getDevelopmentCardsOnTable();
+	}
+
+	private StrongBox handleStrongBox(String nickname) {
+		if (nickname == null) {
+			// the client it's asking for his own StrongBox
+			return getPlayerFromNickname(this.client.getNickname()).getPlayerStrongBox();
+		} else {
+			return getPlayerFromNickname(nickname).getPlayerStrongBox();
+		}
 	}
 
 	/**
