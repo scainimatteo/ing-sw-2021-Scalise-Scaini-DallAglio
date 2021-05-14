@@ -11,7 +11,7 @@ public enum Resource {
 
 	private String abbreviation;
 
-	private Resource(String color){
+	private Resource(String abbreviation){
 		this.abbreviation = abbreviation;
 	}
 

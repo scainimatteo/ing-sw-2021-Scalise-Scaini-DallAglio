@@ -113,13 +113,17 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		Set<Resource> cost_set = cost_to_print.keySet();
 		Resource[] cost_array = cost_set.toArray(new Resource[cost_set.size()]);
 
-		String cost_string = "| " + String.valueOf(cost_to_print.get(cost_array[0])) + cost_array[0].getAbbreviation();
+		String cost_string = "| " + String.valueOf(cost_to_print.get(cost_array[0])) + " " + cost_array[0].getAbbreviation();
 		if (cost_array.length >= 2){
-			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[1])) + cost_array[1].getAbbreviation();
-		} 
+			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[1])) + " " + cost_array[1].getAbbreviation();
+		} else {
+			cost_string += "          ";
+		}
 		if (cost_array.length >= 3){
-			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[2])) + cost_array[2].getAbbreviation();
-		} 
+			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[2])) + " " + cost_array[2].getAbbreviation();
+		} else {
+			cost_string += "     ";
+		}
 		cost_string += " |\n";
 
 		/**
