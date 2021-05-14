@@ -24,8 +24,8 @@ public class LeaderCardResourcesCost extends LeaderCard {
 	}
 
 	public boolean isActivable(Player player){
-		Warehouse warehouse = player.getPlayerWarehouse();
-		StrongBox strongbox = player.getPlayerStrongbox();
+		Warehouse warehouse = player.getWarehouse();
+		StrongBox strongbox = player.getPlayerStrongBox();
 		Resource[] tmp = this.getRequirements();
 		boolean to_return = true;
 

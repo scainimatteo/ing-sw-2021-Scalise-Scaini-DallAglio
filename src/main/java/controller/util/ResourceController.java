@@ -73,7 +73,7 @@ public class ResourceController {
 		for (Resource x: resources) {
 			has_decided = false;
 			while (!has_decided){
-				storage = (Storage) handler.pickBetween(player, "where do you want to get your resources?", new Storage[] {player.getPlayerWarehouse(), player.getPlayerStrongbox(), extra_space[0], extra_space[1]}, 1)[0];
+				storage = (Storage) handler.pickBetween(player, "where do you want to get your resources?", new Storage[] {player.getWarehouse(), player.getPlayerStrongBox(), extra_space[0], extra_space[1]}, 1)[0];
 				try {
 					storage.getResource(x);
 					has_decided = true;
@@ -98,7 +98,7 @@ public class ResourceController {
 			has_decided = false;
 			if (x != null) {
 				while (!has_decided){
-					storage = (Storage) handler.pickBetween(player, "where do you want to store your resource?", new Storage[] {player.getPlayerWarehouse(), player.getPlayerStrongbox(), extra_space[0], extra_space[1]}, 1)[0];
+					storage = (Storage) handler.pickBetween(player, "where do you want to store your resource?", new Storage[] {player.getWarehouse(), player.getPlayerStrongBox(), extra_space[0], extra_space[1]}, 1)[0];
 					try {
 						storage.storeResource(x);
 						has_decided = true;
@@ -132,7 +132,7 @@ public class ResourceController {
 						//TODO: print
 					}
 					if (handler.pickFlow(player, "Do you want to store this resource?")){
-						storage = (Storage) handler.pickBetween(player, "where do you want to store your resource?", new Storage[] {player.getPlayerWarehouse(), extra_space[0], extra_space[1]}, 1)[0];
+						storage = (Storage) handler.pickBetween(player, "where do you want to store your resource?", new Storage[] {player.getWarehouse(), extra_space[0], extra_space[1]}, 1)[0];
 						try {
 							storage.storeResource(x);
 							has_decided = true;
