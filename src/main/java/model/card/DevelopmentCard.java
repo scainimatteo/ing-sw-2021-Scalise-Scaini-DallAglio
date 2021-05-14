@@ -95,8 +95,8 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 	}
 
 	public String printText(){
-		String top = "-------------------";
-		String mid = "|               |";
+		String top = "-------------------\n";
+		String mid = "|               |\n";
 
 		/**
 		 * level
@@ -104,7 +104,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		String spaces = "                 ";
 		String tmp = "|  " + String.valueOf(level.getLevel()) + "  " + level.getColor().toString();
 		String level = tmp + spaces.substring(tmp.length());
-		level += " |";
+		level += " |\n";
 
 		/**
 		 * cost
@@ -120,16 +120,17 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		if (cost_array.length >= 3){
 			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[2])) + cost_array[2].getAbbreviation();
 		} 
+		cost_string += " |\n";
 
 		/**
 		 * production
 		 */
 		String[] production_string = this.production.productionToText();
-		String prod1 = "| " + production_string[0] + " |";
-		String prod2 = "| " + production_string[1] + " |";
-		String prod3 = "| " + production_string[2] + " |";
-		String prod4 = "| " + production_string[3] + " |";
-		String prod5 = "| " + production_string[4] + " |";
+		String prod1 = "| " + production_string[0] + " |\n";
+		String prod2 = "| " + production_string[1] + " |\n";
+		String prod3 = "| " + production_string[2] + " |\n";
+		String prod4 = "| " + production_string[3] + " |\n";
+		String prod5 = "| " + production_string[4] + " |\n";
 
 		String to_return = top + level + top + mid + cost_string + mid + top + mid + prod1 + prod2 +prod3 + prod4 + prod5 + mid + top;
 
