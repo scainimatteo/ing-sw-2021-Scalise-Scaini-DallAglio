@@ -1,94 +1,107 @@
 @startuml
 
 /' CLASSES DEFINITION '/
-class Match {
-	- Game game
-	- void distributeLeaderCards()
-	- boolean checkLastTurn()
-	- Turn chooseTurnType()
-	+ void play()
-}
-
 class Initializer {
 	- Player[] players
-	+ Game initializeGame()
-	- void distributeLeaderCards()
-	- Player[] createPlayers()
+	+ Game initializeGame(ArrayList<ClientHandler> clients)
+	- void createPlayers(ArrayList<ClientHandler> clients)
+	- void createRemoteViews(ArrayList<ClientHandler> clients)
 	- void chooseMatchOrder()
-	- void distributeRandomResources()
+	- Game createGame()
 }
 
-class Nome {
-	- HashMap<Player, ClientHandler> robe
-	+ void talkToPlayer(Player player)
-	+ void receiveFromPlayer(Player player)
+class GameController {
+	- ArrayList<ClientHandler> clients
+	- Game game
+	- Player[] players
+	- ArrayBlockingQueue<Message> messages
+	- Game initializeGame(ArrayList<ClientHandler> clients)
+	+ void handleMessage(Message message);
 }
 
-class FaithController {
-	+ final int faith_gained
-	+ final int faith_to_redistribute
+class TurnController {
+	- Game game
+	+ void handleBuyCard(Player player, int row, int column, int slot);
+	+ void handleMarket(Player player, int row, int column, boolean row_or_column)
+	+ void handleProduction(Player player, ProductionInterface production)
+	+ void handleEndTurn(Player player)
 }
 
-class FaithTrackController {
-	+ {static} VaticanReport movePlayer(Player player, FaithController faith)
-	+ {static} VaticanReport redistributeFaith(Player discarder, FaithController faith)
-	+ {static} void activateVaticanReport(VaticanReport report, Player[] players)
-}
-
-abstract class Turn {
-	- Player player
-	- FaithController playAction()
-	+ void playTurn()
-}
-
-class MarketTurn {
-	- Market market
-	- Resource checkWhiteMarble()
-	- int chooseColumn()
-	- int chooseRow()
-	- Resource[] getFromMarket(int index)
-	- int storeInWarehouse(Resource[] resources_from_market)
-	- FaithController playAction()
-}
-
-class BuyCardTurn {
-	- DevelopmentCardsOnTable development_cards_on_table
-	- Resource checkDiscount()
-	- DevelopmentCard chooseCardFromTable()
-	- boolean checkRequirements()
-	- FaithController playAction()
-}
-
-class ProductionTurn {
-	- Resource[] activateProduction()
-	- Resource[] activateProduction(DevelopmentCard card)
-	- FaithController playAction()
+class ResourceController {
+	- Game game
+	+ void handlePay(Player player, ArrayList<Resource> warehouse, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace);
+	+ void handleStore(Player player, ArrayList<Resource> warehouse, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace);
+	+ void handleDiscardResources(Player player);
 }
 
 class LeaderCardController {
-	- boolean askToPlayLeaderCard()
-	- void useLeaderCard(ProductionAbility ability)
-	- void useLeaderCard(ExtraSpaceAbility ability)
-	+ void playLeaderCard()
+	- Game game
+	+ void handleActivateLeader(Player player, LeaderCard leader_card),
+	+ void handleDiscardLeader(Player player, LeaderCard leader_card)
 }
 
-class SoloMatch {
-	- SoloGame game
-	- boolean checkLastTurn()
-	- void playSoloActionToken(MoveBlackCrossTwoSpaces token)
-	- void playSoloActionToken(MoveBlackCrossOneSpace token)
-	- void playSoloActionToken(DiscardDevelopmentCards token)
-	+ void play()
+enum MessageType {
+	BUYCARD,
+	MARKET,
+	PRODUCTION,
+	PAY,
+	STORE,
+	ACTIVATELEADER,
+	DISCARDLEADER,
+	DISCARDRESOURCES,
+	ENDTURN
+	' MOVE
 }
 
+class Message {
+	+ Player player;
+	+ MessageType type;
+	+ ArrayList<Resource> warehouse;
+	+ ArrayList<Resource> strongbox;
+	+ ArrayList<Resource> extraspace;
+	+ boolean row_or_column;
+	+ int row;
+	+ int column;
+	+ int slot;
+	+ ProductionInterface production;
+	+ LeaderCard leader_card;
+}
+
+interface ServerMessage {
+	- boolean error
+}
+
+class ErrorMessage {
+	+ Player player;
+	+ String error;
+}
+
+class ViewUpdate {
+	+ SimpleGame simple_game;
+	+ SimplePlayer simple_player;
+	+ Turn turn
+}
+
+class RemoteView {
+	- Player player
+	- ClientHandler client_handler
+}
 
 /' RELATIONS DEFINITION '/
-Match -- Turn
-Match -left- FaithTrackController
-Match -right- LeaderCardController
-Turn -left- FaithController
-Turn <|-- MarketTurn
-Turn <|-- BuyCardTurn
-Turn <|-- ProductionTurn
-Match <|-- SoloMatch
+Message -- MessageType
+Message -- GameController
+
+GameController -- TurnController
+GameController -- ResourceController
+GameController -- LeaderCardController
+
+ServerMessage <.. ErrorMessage
+ServerMessage <.. ViewUpdate
+
+Initializer -- GameController
+Initializer -- RemoteView
+RemoteView <-up- Observer
+
+GameController <.. Runnable
+
 @enduml

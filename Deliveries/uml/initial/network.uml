@@ -1,0 +1,79 @@
+@startuml
+
+/' CLASSES DEFINITION '/
+class Server {
+	- int port
+	- ServerSocket server_socket
+	- HashMap<String, ArrayList<ClientHandler>> lobby
+	- HashMap<String, Integer> num_players
+	- HashSet<String> nicknames
+	- ExecutorService executor
+	+ void startServer()
+	- void insertIntoLobby(ClientHandler client)
+	- void manageClient(ClientHandler client)
+	- void manageFirstClient(ClientHandler client)
+	- void manageOtherClient(ClientHandler client)
+	- String newMatchName()
+	- boolean checkIfAllPlayersPresent(String match_name)
+}
+
+class ClientHandler {
+	- Server server
+	- Socket client
+	- ObjectInputStream in
+	- ObjectOutputStream out
+	- ArrayBlockingQueue<Message> messages_received
+	- ArrayBlockingQueue<Message> messages_to_send
+	- String nickname
+	+ void setMessagesQueue(ArrayBlockingQueue<Message> messages)
+	- Thread sendToClient()
+	+ void asyncSendToClient(Message message)
+	- Thread receiveFromClient()
+	+ void close()
+}
+
+class Client {
+	- int port
+	- String address
+	- Socket server
+	- ObjectInputStream in
+	- ObjectOutputStream out
+	- View view
+	- ArrayBlockingQueue<Message> messages_to_send
+	- ArrayBlockingQueue<ServerMessage> messages_received
+	+ void startClient()
+	- Thread sendMessages()
+	- Thread receiveMessages()
+	- Thread processReceivedMessages()
+	- void updateView(ViewUpdate view_update)
+	- void handleError(ErrorMessage error_message)
+}
+
+class ServerMain {
+	- {static} int port
+	- {static} void main()
+	- {static} void parseArguments(String[] args)
+	- {static} int parsePort(List<String> arglist)
+	- {static} void startServer()
+}
+
+class ClientMain {
+	- {static} int port
+	- {static} String address
+	- {static} View view
+	- {static} void main()
+	- {static} void parseArguments(String[] args)
+	- {static} int parsePort(List<String> arglist)
+	- {static} String parseAddress(List<String> arglist)
+	- {static} String parseView(List<String> arglist)
+	- {static} void startClient()
+}
+
+/' RELATIONS DEFINITION '/
+ClientHandler <.up. Runnable
+Server -- ClientHandler
+
+ClientMain -- Client
+ServerMain -- Server
+
+@enduml
