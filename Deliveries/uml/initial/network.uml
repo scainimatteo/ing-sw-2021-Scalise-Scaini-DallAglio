@@ -23,12 +23,12 @@ class ClientHandler {
 	- ObjectInputStream in
 	- ObjectOutputStream out
 	- ArrayBlockingQueue<Message> messages_received
-	- ArrayBlockingQueue<Message> messages_to_send
+	- ArrayBlockingQueue<ServerMessage> messages_to_send
 	- String nickname
 	+ void setMessagesQueue(ArrayBlockingQueue<Message> messages)
 	- Thread sendToClient()
-	+ void asyncSendToClient(Message message)
-	- Thread receiveFromClient()
+	+ void asyncSendToClient(ServerMessage message)
+'	- Thread receiveFromClient()
 	+ void close()
 }
 
@@ -44,7 +44,6 @@ class Client {
 	+ void startClient()
 	- Thread sendMessages()
 	- Thread receiveMessages()
-	- Thread processReceivedMessages()
 	- void updateView(ViewUpdate view_update)
 	- void handleError(ErrorMessage error_message)
 }

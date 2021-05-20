@@ -261,6 +261,7 @@ class Game {
 	+ void shiftPlayers()
 	+ void getFromMarket(int index, boolean row_or_column)
 	+ void getFromDeck(DevelopmentCard chosen_card)
+	+ void createError(String error_message, Player player)
 	+ SimpleGame simplify()
 }
 
@@ -354,5 +355,9 @@ SoloActionToken <|.. DiscardDevelopmentCards
 DiscardDevelopmentCards -- DevelopmentCardsColor
 Game <|-- SoloGame
 SoloGame -- SoloActionToken
+
+Game -- Turn
+Game <.. Observable
+Player <.. Observable
 
 @enduml

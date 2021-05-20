@@ -2,16 +2,18 @@
 
 /' CLASSES DEFINITION '/
 abstract class View {
-	# SimpleGame simple_game;
-	# SimplePlayer[] simple_players;
+	# SimpleGame simple_game
+	# SimplePlayer[] simple_players
 	# Turn turn
+	# ArrayBlockingQueue<Message> messages
 	+ void startView(ArrayBlockingQueue<Message> messages)
+	+ void updateView(SimpleGame simple_game, SimplePlayer simple_player, Turn turn)
 } 
 
 class CLI {
-	+ String printMarket();
+	+ String printMarket()
 	+ String printDevelopmentCardsOnTable()
-	+ String printTrack(String player_nickname);
+	+ String printTrack(String player_nickname)
 	+ String printWarehouse(String player_nickname)
 	+ String printStrongBox(String player_nickname)
 	+ String printLeaderCards(String player_nickname)
@@ -22,9 +24,9 @@ class GUI {
 }
 
 class SimpleGame {
-	- Resource[][] market;
-	- Resource free_marble;
-	- DevelopmentCard[][] development_cards_on_table;
+	- Resource[][] market
+	- Resource free_marble
+	- DevelopmentCard[][] development_cards_on_table
 }
 
 class SimplePlayer {
@@ -39,7 +41,7 @@ class SimplePlayer {
 }
 
 class SimpleWarehouse {
-	- Resource top_resource;
+	- Resource top_resource
 	- Resource[] middle_resources
 	- Resource[] bottom_resources
 }
@@ -56,8 +58,6 @@ View <-- GUI
 View -- SimpleGame
 View -- SimplePlayer
 
-SimpleGame <.up. Observable
-SimplePlayer <.up. Observable
 SimplePlayer -- SimpleWarehouse
 SimplePlayer -- SimpleDevelopmentCardSlots
 

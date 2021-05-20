@@ -16,12 +16,12 @@ class GameController {
 	- Player[] players
 	- ArrayBlockingQueue<Message> messages
 	- Game initializeGame(ArrayList<ClientHandler> clients)
-	+ void handleMessage(Message message);
+	+ void handleMessage(Message message)
 }
 
 class TurnController {
 	- Game game
-	+ void handleBuyCard(Player player, int row, int column, int slot);
+	+ void handleBuyCard(Player player, int row, int column, int slot)
 	+ void handleMarket(Player player, int row, int column, boolean row_or_column)
 	+ void handleProduction(Player player, ProductionInterface production)
 	+ void handleEndTurn(Player player)
@@ -29,9 +29,9 @@ class TurnController {
 
 class ResourceController {
 	- Game game
-	+ void handlePay(Player player, ArrayList<Resource> warehouse, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace);
-	+ void handleStore(Player player, ArrayList<Resource> warehouse, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace);
-	+ void handleDiscardResources(Player player);
+	+ void handlePay(Player player, ArrayList<Resource> warehouse, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace)
+	+ void handleStore(Player player, ArrayList<Resource> warehouse, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace)
+	+ void handleDiscardResources(Player player)
 }
 
 class LeaderCardController {
@@ -54,17 +54,17 @@ enum MessageType {
 }
 
 class Message {
-	+ Player player;
-	+ MessageType type;
-	+ ArrayList<Resource> warehouse;
-	+ ArrayList<Resource> strongbox;
-	+ ArrayList<Resource> extraspace;
-	+ boolean row_or_column;
-	+ int row;
-	+ int column;
-	+ int slot;
-	+ ProductionInterface production;
-	+ LeaderCard leader_card;
+	+ Player player
+	+ MessageType type
+	+ ArrayList<Resource> warehouse
+	+ ArrayList<Resource> strongbox
+	+ ArrayList<Resource> extraspace
+	+ boolean row_or_column
+	+ int row
+	+ int column
+	+ int slot
+	+ ProductionInterface production
+	+ LeaderCard leader_card
 }
 
 interface ServerMessage {
@@ -72,13 +72,13 @@ interface ServerMessage {
 }
 
 class ErrorMessage {
-	+ Player player;
-	+ String error;
+	+ Player player
+	+ String error
 }
 
 class ViewUpdate {
-	+ SimpleGame simple_game;
-	+ SimplePlayer simple_player;
+	+ SimpleGame simple_game
+	+ SimplePlayer simple_player
 	+ Turn turn
 }
 
