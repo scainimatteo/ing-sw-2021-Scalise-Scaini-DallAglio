@@ -233,6 +233,10 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return this.development_card_slots.getIterator();
 	}
 
+	public DevelopmentCardsSlots getDevelopmentCardsSlots() {
+		return this.development_card_slots;
+	}
+
 	/**
 	 * FAITHTRACK METHODS
 	 */

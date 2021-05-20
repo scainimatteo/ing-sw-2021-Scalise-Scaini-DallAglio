@@ -288,6 +288,15 @@ public class NetworkManagerCLI implements View {
 					request = new ViewMessage(ViewType.WAREHOUSE, inputs[1]);
 				}
 				break;
+			case "DEVELOPMENTCARDSSLOTS":
+			case "DSC":
+				if (inputs.length == 1) {
+					// the user requested his own DevelopmentCardsSlots
+					request = new ViewMessage(ViewType.DEVELOPMENTCARDSSLOTS);
+				} else {
+					request = new ViewMessage(ViewType.DEVELOPMENTCARDSSLOTS, inputs[1]);
+				}
+				break;
 		}
 
 		return request;

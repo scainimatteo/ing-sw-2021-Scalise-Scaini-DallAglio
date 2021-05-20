@@ -4,10 +4,16 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
-import java.util.Iterator;
-import java.lang.IllegalArgumentException;
+import it.polimi.ingsw.view.cli.Printer;
+import it.polimi.ingsw.view.Viewable;
 
-public class DevelopmentCardsSlots {
+import java.lang.IllegalArgumentException;
+import java.util.Iterator;
+
+import java.io.Serializable;
+
+public class DevelopmentCardsSlots implements Viewable, Serializable {
+	private static final long serialVersionUID = 77367L;
 	private Table<DevelopmentCard> slots;
 
 	public DevelopmentCardsSlots(){
@@ -48,5 +54,20 @@ public class DevelopmentCardsSlots {
 
 	public Iterator<DevelopmentCard> getIterator(){
 		return slots.iterator();
+	}
+
+	public String printText() {
+		DevelopmentCard[] development_cards_on_top = this.getTopCards();
+		return Printer.printArray(development_cards_on_top);
+	}
+
+	public String printText(int index) {
+		Deck<DevelopmentCard> deck = this.slots.getDeck(0, index);
+		DevelopmentCard[] development_cards_in_deck = new DevelopmentCard[deck.size()];
+		Iterator<DevelopmentCard> iterator = deck.iterator();
+		for (int i = 0; iterator.hasNext(); i++) {
+			development_cards_in_deck[i] = iterator.next();
+		}
+		return Printer.printArray(development_cards_in_deck);
 	}
 }

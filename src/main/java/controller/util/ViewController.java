@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Game;
 
+import it.polimi.ingsw.model.player.DevelopmentCardsSlots;
 import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Warehouse;
@@ -53,6 +54,9 @@ public class ViewController {
 				break;
 			case WAREHOUSE:
 				reply = handleWarehouse(message.getNickname());
+				break;
+			case DEVELOPMENTCARDSSLOTS:
+				reply = handleDevelopmentCardsSlots(message.getNickname());
 				break;
 			default:
 				System.out.println("An error occurred");
@@ -119,6 +123,15 @@ public class ViewController {
 			return getPlayerFromNickname(this.client.getNickname()).getWarehouse();
 		} else {
 			return getPlayerFromNickname(nickname).getWarehouse();
+		}
+	}
+
+	private DevelopmentCardsSlots handleDevelopmentCardsSlots(String nickname) {
+		if (nickname == null) {
+			// the client it's asking for his own DevelopmentCardsSlots
+			return getPlayerFromNickname(this.client.getNickname()).getDevelopmentCardsSlots();
+		} else {
+			return getPlayerFromNickname(nickname).getDevelopmentCardsSlots();
 		}
 	}
 

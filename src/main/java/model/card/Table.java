@@ -36,6 +36,10 @@ public class Table<E> extends AbstractCollection<E> implements Serializable {
 	public int size(){
 		return structure.size();
 	}
+
+	public Deck<E> getDeck(int row, int column) {
+		return structure.get(row_size * row + column);
+	}
 	
 	/**
 	 * @param deck the deck to add to the table

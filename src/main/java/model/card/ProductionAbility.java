@@ -50,8 +50,8 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		return this.production.activateProduction();
 	}
 
-	@Override
 	public String printText(){
-		return production.printText();
+		return "";
+		//return production.productionToText();
 	}
 }
