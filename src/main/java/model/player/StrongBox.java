@@ -6,15 +6,12 @@ import java.util.HashMap;
 import java.io.Serializable;
 
 import it.polimi.ingsw.model.resources.Resource;
-import it.polimi.ingsw.model.player.Storage;
-
-import it.polimi.ingsw.view.Viewable;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
 
-public class StrongBox implements Storage, Viewable, Serializable {
+public class StrongBox implements Serializable {
 	private static final long serialVersionUID = 98638L;
 	private HashMap<Resource, Integer> storage;
 
@@ -35,22 +32,15 @@ public class StrongBox implements Storage, Viewable, Serializable {
 		return storage.get(res);
 	}
 	
-	@Override
-	public void getResource(Resource res) throws NoSuchElementException {
-		removeResources(res, 1);
-		return;
-	}
-
-	@Override
-	public void storeResource (Resource res) throws IllegalArgumentException {
-		insertResources(new Resource[] {res});
+	public HashMap<Resource, Integer> getStorage(){
+		return this.storage;
 	}
 
 	/**
-	 * @param new_resources is the array of resources get from the market
+	 * @param new_resources is the list of resources to insert
 	 * @exception IllegalArgumentException is thrown if a resource is not present
 	 */
-	public void insertResources(Resource[] new_resources) {
+	public void insertResources(ArrayList<Resource> new_resources) {
 		for (Resource resource : new_resources){
 			if (this.storage.containsKey(resource)){
 				this.storage.put(resource, storage.get(resource) + 1);
@@ -60,78 +50,33 @@ public class StrongBox implements Storage, Viewable, Serializable {
 		}
 	}
 
-	public HashMap<Resource, Integer> getStrongBox(){
-		return this.storage;
-	}
-
 	/**
-	 * @param resource_type is the resource to be removed
-	 * @param quantity is the number of resources requested
-	 * @return the array of resources requested
-	 * @exception NoSuchElementException is thrown if the quantity is greater than the resources stored
+	 * @param to_remove is the list containing the resource to be removed
 	 */
-	public Resource[] removeResources(Resource resource_type, int quantity) throws NoSuchElementException {
-		Integer numof_resource = this.storage.get(resource_type);
-
-		if ( !(this.storage.containsKey(resource_type)) ){
-			throw new NoSuchElementException();
+	public void removeResources (ArrayList<Resource> to_remove) {
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			this.storage.put(res, this.storage.get(res) -  (int) to_remove.stream().filter(x->x.equals(res)).count());
 		}
-
-		if (quantity <= numof_resource){
-			ArrayList<Resource> temp_array = new ArrayList<Resource>();
-
-			for (int i = 0; i < quantity; i ++){
-				temp_array.add(resource_type);
-			}
-
-			Resource[] to_return = temp_array.toArray(new Resource[quantity]);
-
-			this.storage.put(resource_type, (numof_resource - quantity));
-
-			return to_return;
-		} else {
-			throw new NoSuchElementException();
-		}
+		return;
 	}
 
 	/**
 	 * @param to_check are the resources that need to be checked
 	 * @return true if the resources are contained
 	 */
-	public boolean areContainedInStrongbox(Resource[] to_check){
-		int coin = 0;
-		int stone = 0;
-		int shield = 0;
-		int servant = 0;
-
-		for (int i = 0; i < to_check.length; i ++){
-			if (this.storage.containsKey(to_check[i])){
-				if (to_check[i].equals(Resource.COIN)){
-					coin += 1;
-				} else if (to_check[i].equals(Resource.STONE)){
-					stone += 1;
-				} else if (to_check[i].equals(Resource.SHIELD)){
-					shield += 1;
-				} else if (to_check[i].equals(Resource.SERVANT)){
-					servant += 1;
-				}
-			} else {
-				if (to_check[i] == null){
-				} else {
-					return false;
-				}
-			}
-
-			if (coin > this.storage.get(Resource.COIN) || stone > this.storage.get(Resource.STONE) || shield > this.storage.get(Resource.SHIELD) || servant > this.storage.get(Resource.SERVANT)){
+	public boolean areContainedInStrongbox(ArrayList<Resource> to_check){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			if(storage.get(res) < (int) to_check.stream().filter(x->x.equals(res)).count()){
 				return false;
 			}
-
-			to_check[i] = null;
 		}
-
 		return true;
 	}
 
+
+/* TODO: move in view
 	public String printText() {
 		String string = "·--------------·\n|              |\n";
 		for (Resource r: storage.keySet()) {
@@ -148,15 +93,7 @@ public class StrongBox implements Storage, Viewable, Serializable {
 	public String printText(int index){
 		return null;
 	}
+	*/ 
+
 }
 
-
-
-//    ·--------------·
-//    |              |
-//    |    1 x sp    |
-//    |   10 x sp    |
-//    |   [] x sp    |
-//    |   [] x sp    |
-//    |              |
-//    |--------------|

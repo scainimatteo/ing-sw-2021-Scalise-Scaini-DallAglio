@@ -131,10 +131,10 @@ public class Factory {
 	 * @param json_array the JSONArray to convert
 	 * @return a Resource array with all the elements of json_array
 	 */
-	private Resource[] convertJsonArrayToResourceArray(JSONArray json_array) {
+	private ArrayList<Resource> convertJsonArrayToResourceArray(JSONArray json_array) {
 		// map all the Objects in json_array to Resources using toString() and valueOf()
-		List<Resource> resource_list = (List<Resource>)json_array.stream().map(x -> Resource.valueOf(x.toString())).collect(Collectors.toList());
-		return resource_list.toArray(new Resource[resource_list.size()]);
+		ArrayList<Resource> resource_list = new ArrayList(json_array.stream().map(x -> Resource.valueOf(x.toString())).collect(Collectors.toList()));
+		return resource_list;
 	}
 
 	/**
@@ -157,12 +157,12 @@ public class Factory {
 			int id = (int)(long) card.get("id");
 
 			// COST
-			Resource[] cost = convertJsonArrayToResourceArray((JSONArray) card.get("cost"));
+			ArrayList<Resource> cost = convertJsonArrayToResourceArray((JSONArray) card.get("cost"));
 
 			// PRODUCTION
 			JSONObject production_obj = (JSONObject) card.get("production");
-			Resource[] required_resources = convertJsonArrayToResourceArray((JSONArray) production_obj.get("required_resources"));
-			Resource[] produced_resources = convertJsonArrayToResourceArray((JSONArray) production_obj.get("produced_resources"));
+			ArrayList<Resource> required_resources = convertJsonArrayToResourceArray((JSONArray) production_obj.get("required_resources"));
+			ArrayList<Resource> produced_resources = convertJsonArrayToResourceArray((JSONArray) production_obj.get("produced_resources"));
 			Production new_production = new Production(required_resources, produced_resources);
 
 			// CARDLEVEL
@@ -197,8 +197,10 @@ public class Factory {
 				return new ExtraSpaceAbility(extra_space_resource);
 			case "PRODUCTION":
 				JSONArray required_resources_arr = (JSONArray) ability_obj.get("required_resources");
-				Resource[] requirements_resources = convertJsonArrayToResourceArray(required_resources_arr);
-				Resource[] produced_resources = {null, Resource.FAITH};
+				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(required_resources_arr);
+				ArrayList<Resource> produced_resources = new ArrayList();
+				produced_resources.add(null);
+				produced_resources.add(Resource.FAITH);
 				return new ProductionAbility(requirements_resources, produced_resources);
 			default:
 				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
@@ -231,7 +233,7 @@ public class Factory {
 			// to activate the LeaderCard the correct resources are needed
 			case "RESOURCES":
 				JSONArray resources_arr = (JSONArray) requirements_obj.get("resources");
-				Resource[] requirements_resources = convertJsonArrayToResourceArray(resources_arr);
+				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(resources_arr);
 				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id);
 
 			default:

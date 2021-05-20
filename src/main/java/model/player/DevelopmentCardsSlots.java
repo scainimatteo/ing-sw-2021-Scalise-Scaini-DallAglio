@@ -56,6 +56,8 @@ public class DevelopmentCardsSlots implements Viewable, Serializable {
 		return slots.iterator();
 	}
 
+/*TODO: move to view
+
 	public String printText() {
 		DevelopmentCard[] development_cards_on_top = this.getTopCards();
 		return Printer.printArray(development_cards_on_top);
@@ -70,4 +72,5 @@ public class DevelopmentCardsSlots implements Viewable, Serializable {
 		}
 		return Printer.printArray(development_cards_in_deck);
 	}
+	*/
 }

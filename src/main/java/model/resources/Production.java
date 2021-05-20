@@ -5,56 +5,43 @@ import java.lang.IllegalArgumentException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 
 public class Production implements ProductionInterface, Serializable {
 	private static final long serialVersionUID = 6L;
-	protected Resource[] required_resources;
-	protected Resource[] produced_resources;
+	protected ArrayList<Resource> required_resources;
+	protected ArrayList<Resource> produced_resources;
 
-	public Production (Resource[] required, Resource[] produced){
+	public Production (ArrayList<Resource> required, ArrayList<Resource> produced){
 		this.required_resources = required;
 		this.produced_resources = produced;
 	}
 
-	public Resource[] getRequiredResources(){
+	public ArrayList<Resource> getRequiredResources(){
 		return this.required_resources;
 	}
 
-	public Resource[] getProducedResources(){
+	public ArrayList<Resource> getProducedResources(){
 		return this.produced_resources;
 	}
 
-	public void setRequiredResources(Resource[] cost){
+	public void setRequiredResources(ArrayList<Resource> cost){
 		this.required_resources = cost;
 	}
 
-	public void setProducedResources(Resource[] output){
+	public void setProducedResources(ArrayList<Resource> output){
 		this.produced_resources = output;
 	}
 
 	/**
 	 * @return the requested resources if compareArrays returns true, null if compareArrays returns false
 	 */
-	public Resource[] activateProduction(){
+	public ArrayList<Resource> activateProduction(){
 		return produced_resources;
 	}
 
-	/**
-	 * @param array_in_input is an array of Resources that must to be compared with this.required_resources
-	 * @return true if the two arrays have the same elements (even if they are not in the same position)
-	 */
-	private boolean compareArrays(Resource[] array_in_input){
-		if (array_in_input[0].equals(this.required_resources[0]) || array_in_input[1].equals(this.required_resources[0])){
-			if (array_in_input[0].equals(this.required_resources[0])){
-				return(array_in_input[1].equals(this.required_resources[1]));
-			} else {
-				return(array_in_input[0].equals(this.required_resources[1]));
-			}
-		} else {
-			return false;
-		}
-	}
-
+	
+/* TODO: move in simpleModel
 	public HashMap<Resource, Integer> numOfRequired(){
 		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
 
@@ -88,11 +75,11 @@ public class Production implements ProductionInterface, Serializable {
 
 		HashMap<Resource, Integer> required = this.numOfRequired();
 		Set<Resource> req_set = required.keySet();
-		Resource[] req_array = req_set.toArray(new Resource[req_set.size()]);
+		ArrayList<Resource> req_array = req_set.toArray(new Resource[req_set.size()]);
 
 		HashMap<Resource, Integer> produced = this.numOfProduced();
 		Set<Resource> prod_set = produced.keySet();
-		Resource[] prod_array = prod_set.toArray(new Resource[prod_set.size()]);
+		ArrayList<Resource> prod_array = prod_set.toArray(new Resource[prod_set.size()]);
 
 		int req_size = required.size();
 		int prod_size = produced.size();
@@ -166,4 +153,5 @@ public class Production implements ProductionInterface, Serializable {
 
 		return to_return;
 	}
+	*/
 }

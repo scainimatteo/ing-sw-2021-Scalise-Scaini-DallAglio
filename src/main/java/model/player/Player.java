@@ -21,6 +21,7 @@ import it.polimi.ingsw.util.Observer;
 
 import java.util.Iterator;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 import java.lang.IllegalArgumentException;
 
@@ -136,40 +137,52 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 	/**
 	 * WAREHOUSE METHODS
 	 */
-	public Resource getTopResource(){
+	public Warehouse getWarehouse(){
+		return this.warehouse;
+	}
+
+	public ArrayList<Resource> getTopResource(){
 		return this.warehouse.getTopResource();
+	}
+
+	public ArrayList<Resource> getMiddleResources(){
+		return this.warehouse.getMiddleResources();
+	}
+
+	public ArrayList<Resource> getBottomResources(){
+		return this.warehouse.getBottomResources();
 	}
 
 	public void swapRows (int i, int j) {
 		this.warehouse.swapRows(i, j);
 	}
 
-	public Resource[] getMiddleResources(){
-		return this.warehouse.getMiddleResources();
+	public void storeTop(ArrayList<Resource> res){
+		this.warehouse.storeTop(res);
 	}
 
-	public Resource[] getBottomResources(){
-		return this.warehouse.getBottomResources();
+	public void storeMiddle(ArrayList<Resource> res){
+		this.warehouse.storeMiddle(res);
 	}
 
-	public void tryToInsert(Resource[] new_resources){
-		this.warehouse.tryToInsert(new_resources);
+	public void storeBottom(ArrayList<Resource> res){
+		this.warehouse.storeBottom(res);
 	}
 
-	public Resource[] getFromWarehouse(Resource resource_type, int quantity){
-		return this.warehouse.getFromWarehouse(resource_type, quantity);
+	public void getFromTop(ArrayList<Resource> res){
+		this.warehouse.getFromTop(res);
+	}
+
+	public void getFromMiddle(ArrayList<Resource> res){
+		this.warehouse.getFromMiddle(res);
+	}
+
+	public void getFromBottom(ArrayList<Resource> res){
+		this.warehouse.getFromBottom(res);
 	}
 
 	public void clearWarehouse(){
 		this.warehouse.clearWarehouse();
-	}
-
-	public boolean isPossibleToInsert (Resource new_resource){
-		return this.warehouse.isPossibleToInsert(new_resource);
-	}
-
-	public Warehouse getWarehouse(){
-		return this.warehouse;
 	}
 
 	public HashMap <Resource, Integer> totalResources() {
@@ -197,16 +210,16 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 	/**
 	 * STRONGBOX METHODS
 	 */
-	public void insertResources(Resource[] new_resources){
+	public void insertResources(ArrayList<Resource> new_resources){
 		this.strongbox.insertResources(new_resources);
 	}
 
-	public HashMap<Resource, Integer> getStrongBox(){
-		return this.strongbox.getStrongBox();
+	public HashMap<Resource, Integer> getStorage(){
+		return this.strongbox.getStorage();
 	}
 
-	public Resource[] removeResources(Resource resource_type, int quantity){
-		return this.strongbox.removeResources(resource_type, quantity);
+	public ArrayList<Resource> removeResources(ArrayList<Resource> res){
+		return this.strongbox.removeResources(res);
 	}
 
 	public StrongBox getPlayerStrongBox(){

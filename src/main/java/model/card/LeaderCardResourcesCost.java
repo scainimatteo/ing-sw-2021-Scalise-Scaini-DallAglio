@@ -6,11 +6,12 @@ import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Player;
+import java.util.ArrayList;
 
 public class LeaderCardResourcesCost extends LeaderCard {
-	private Resource[] requirements;
+	private ArrayList<Resource> requirements;
 
-	public LeaderCardResourcesCost (int points, LeaderAbility ability, Resource[] requirements, int id) {
+	public LeaderCardResourcesCost (int points, LeaderAbility ability, ArrayList<Resource> requirements, int id) {
 		this.victory_points = points;
 		this.ability = ability;
 		this.activated = false;
@@ -18,15 +19,15 @@ public class LeaderCardResourcesCost extends LeaderCard {
 		this.id = id;
 	}
 
-	public Resource[] getRequirements() {
-		Resource[] to_return = this.requirements.clone();
+	public ArrayList<Resource> getRequirements() {
+		ArrayList<Resource> to_return = this.requirements.clone();
 		return to_return;
 	}
 
 	public boolean isActivable(Player player){
 		Warehouse warehouse = player.getWarehouse();
 		StrongBox strongbox = player.getPlayerStrongBox();
-		Resource[] tmp = this.getRequirements();
+		ArrayList<Resource> tmp = this.getRequirements();
 		boolean to_return = true;
 
 		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.card;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.model.card.LeaderAbility;
 
 import it.polimi.ingsw.model.resources.Resource;
@@ -10,7 +12,7 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 	protected static final long serialVersionUID = 7L;
 	protected Production production;
 	
-	public ProductionAbility (Resource[] required, Resource[] produced){
+	public ProductionAbility (ArrayList<Resource> required, ArrayList<Resource> produced){
 		this.production = new Production(required, produced);
 	}
 
@@ -18,20 +20,20 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		return this.production;
 	}
 
-	public Resource[] getRequiredResources(){
+	public ArrayList<Resource> getRequiredResources(){
 		return this.production.getRequiredResources();
 	}
 
-	public Resource[] getProducedResources(){
+	public ArrayList<Resource> getProducedResources(){
 		return this.production.getProducedResources();
 	}
 
-	public void setRequiredResources(Resource[] cost){
+	public void setRequiredResources(ArrayList<Resource> cost){
 		return;
 	}
 	
-	public void setProducedResources(Resource[] new_resource) {
-		Resource[] new_product = this.production.getProducedResources();
+	public void setProducedResources(ArrayList<Resource> new_resource) {
+		ArrayList<Resource> new_product = this.production.getProducedResources();
 		new_product[0] = new_resource[0];
 		this.production = new Production(this.production.getRequiredResources(), new_product);
 	}
@@ -46,7 +48,7 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		return true;
 	}
 
-	public Resource[] activateProduction(){
+	public ArrayList<Resource> activateProduction(){
 		return this.production.activateProduction();
 	}
 
