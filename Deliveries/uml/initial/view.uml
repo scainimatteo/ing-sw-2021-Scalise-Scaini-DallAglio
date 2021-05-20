@@ -5,8 +5,7 @@ abstract class View {
 	# SimpleGame simple_game
 	# SimplePlayer[] simple_players
 	# Turn turn
-	# ArrayBlockingQueue<Message> messages
-	+ void startView(ArrayBlockingQueue<Message> messages)
+	+ void startView()
 	+ void updateView(SimpleGame simple_game, SimplePlayer simple_player, Turn turn)
 } 
 
