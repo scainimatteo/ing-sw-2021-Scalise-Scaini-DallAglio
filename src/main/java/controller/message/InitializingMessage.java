@@ -12,7 +12,6 @@ public class InitializingMessage implements Message {
 
 	public void useMessage(Controller controller) {
 		InitialController initial_controller = (InitialController) controller;
-		//TODO: call a method of the controller
-		//controller.
+		initial_controller.setReceivedMessage(this.message);
 	}
 }
