@@ -72,7 +72,7 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		return true;
 	}
 
-	@Override
+	/* TODO: move in view
 	public String printText(){
 		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |";
 		if (index == 0){
@@ -84,6 +84,7 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		}
 		return string + "|  ·----· ·----·  |\n|                 |\n";
 	}
+	*/
 }
 /*
 | XX |            |
