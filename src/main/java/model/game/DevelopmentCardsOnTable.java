@@ -3,18 +3,14 @@ package it.polimi.ingsw.model.game;
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
 
-import java.io.Serializable;
-
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
 import it.polimi.ingsw.view.cli.Printer;
-import it.polimi.ingsw.view.Viewable;
 
-public class DevelopmentCardsOnTable implements Viewable, Serializable {
-	private static final long serialVersionUID = 87689L;
+public class DevelopmentCardsOnTable {
 	private Table<DevelopmentCard> development_cards_table;
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;

@@ -2,16 +2,18 @@ package it.polimi.ingsw.util;
 
 import java.util.ArrayList;
 
-public class Observable<T> {
+import it.polimi.ingsw.controller.servermessage.ServerMessage;
 
-    private ArrayList<Observer<T>> observers = new ArrayList<>();
+public class Observable {
 
-    public void addObservers(Observer<T> observer){
+    private ArrayList<Observer> observers = new ArrayList<>();
+
+    public void addObserver(Observer observer){
         observers.add(observer);
     }
 
-    public void notify(T message){
-        for(Observer<T> observer: observers){
+    public void notify(ServerMessage message){
+        for(Observer observer: observers){
             observer.update(message);
         }
     }
