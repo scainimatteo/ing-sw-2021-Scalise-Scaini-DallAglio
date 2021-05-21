@@ -1,12 +1,6 @@
 package it.polimi.ingsw.model.card;
 
-import it.polimi.ingsw.view.Viewable;
-
-import java.io.Serializable;
-
-public abstract class LeaderAbility implements Serializable {
-	private static final long serialVersionUID = 5L;
-
+public abstract class LeaderAbility {
 	public boolean checkAbility (LeaderAbility target){
 		return false;
 	}

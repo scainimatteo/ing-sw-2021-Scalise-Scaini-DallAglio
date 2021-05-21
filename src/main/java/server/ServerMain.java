@@ -38,7 +38,7 @@ public class ServerMain {
 
 	public static void startServer() {
 		try {
-			new Server(port).run();
+			new Server(port).startServer();
 		} catch (IOException e) {
 			System.out.printf("Can't run server. Try checking if the port %d is already in use\n", port);
 		}

@@ -3,13 +3,9 @@ package it.polimi.ingsw.model.game;
 import java.util.ArrayList;
 import java.util.Random;
 
-import java.io.Serializable;
-
 import it.polimi.ingsw.model.resources.Resource;
-import it.polimi.ingsw.view.Viewable;
 
-public class Market implements Viewable, Serializable {
-	private static final long serialVersionUID = 97753L;
+public class Market {
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 	private Resource[][] market_board;
@@ -131,33 +127,33 @@ public class Market implements Viewable, Serializable {
 	 * @param index the index of the column to shift
 	 * @return an array of the resources taken by the player
 	 */
-	@Override
-	public String printText() { 
-		Resource null_marble = Resource.FAITH;
-		String string = "\n·--------------------·--\n|                     ";
-		if (free_marble == null) {
-			string += null_marble.printNullMarble();
-		} else {
-			string += free_marble.printMarble();
-		}
-		string += " )\n|  ·--^---^---^---^--·--\n";
-		for (Resource[] array : market_board){
-			string += "|  |                 |\n|  <";
-			for (Resource x : array) {
-				if (x == null){
-					string += "  " + null_marble.printNullMarble() + " ";
-				} else {
-					string += "  " + x.printMarble() + " ";
-				}
-			}
-			string += " |\n";
-		}
-		return string + "|  |                 |\n·--·-----------------·\n";
-	}
+	//@Override
+	//public String printText() { 
+	//	Resource null_marble = Resource.FAITH;
+	//	String string = "\n·--------------------·--\n|                     ";
+	//	if (free_marble == null) {
+	//		string += null_marble.printNullMarble();
+	//	} else {
+	//		string += free_marble.printMarble();
+	//	}
+	//	string += " )\n|  ·--^---^---^---^--·--\n";
+	//	for (Resource[] array : market_board){
+	//		string += "|  |                 |\n|  <";
+	//		for (Resource x : array) {
+	//			if (x == null){
+	//				string += "  " + null_marble.printNullMarble() + " ";
+	//			} else {
+	//				string += "  " + x.printMarble() + " ";
+	//			}
+	//		}
+	//		string += " |\n";
+	//	}
+	//	return string + "|  |                 |\n·--·-----------------·\n";
+	//}
 
-	public String printText(int index){
-		return null;
-	}
+	//public String printText(int index){
+	//	return null;
+	//}
 }
 
 /*

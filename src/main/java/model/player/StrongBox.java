@@ -3,19 +3,14 @@ package it.polimi.ingsw.model.player;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.Serializable;
-
 import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.player.Storage;
-
-import it.polimi.ingsw.view.Viewable;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
 
-public class StrongBox implements Storage, Viewable, Serializable {
-	private static final long serialVersionUID = 98638L;
+public class StrongBox implements Storage {
 	private HashMap<Resource, Integer> storage;
 
 	public StrongBox(){

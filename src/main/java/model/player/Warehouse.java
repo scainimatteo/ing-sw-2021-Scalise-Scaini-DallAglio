@@ -3,16 +3,11 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.player.Storage;
 
-import it.polimi.ingsw.view.Viewable;
-
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
 
-import java.io.Serializable;
-
-public class Warehouse implements Storage, Viewable, Serializable {
-	private static final long serialVersionUID = 8847L;
+public class Warehouse implements Storage {
 	private Resource top_resource = null;
 	private Resource[] middle_resources = {null, null};
 	private Resource[] bottom_resources = {null, null, null};

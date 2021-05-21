@@ -5,15 +5,11 @@ import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
 import it.polimi.ingsw.view.cli.Printer;
-import it.polimi.ingsw.view.Viewable;
 
 import java.lang.IllegalArgumentException;
 import java.util.Iterator;
 
-import java.io.Serializable;
-
-public class DevelopmentCardsSlots implements Viewable, Serializable {
-	private static final long serialVersionUID = 77367L;
+public class DevelopmentCardsSlots {
 	private Table<DevelopmentCard> slots;
 
 	public DevelopmentCardsSlots(){
