@@ -16,7 +16,11 @@ import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.view.View;
 
 public class CLI implements View {
+	private boolean initializing = true;
 
+	/**
+	 * Start a thread parsing the strings passed from the command line
+	 */
 	public void startView(Client client) {
 		Scanner stdin = new Scanner(System.in);
 		new Thread(() -> {
@@ -35,19 +39,47 @@ public class CLI implements View {
 		}).start();
 	}
 
+	/**
+	 * Update the simple model after a ViewUpdate
+	 */
 	public void updateView() {
 		return;
 	}
 
+	/**
+	 * Print the error message
+	 *
+	 * @param error_message the ErrorMessage received from the Server
+	 */
 	public void handleError(ErrorMessage error_message) {
 		return;
 	}
 
+	/**
+	 * Print the message during the initalization phase
+	 *
+	 * @param error_message the ErrorMessage received from the Server
+	 */
 	public void handleInitializing(InitializingServerMessage initializing_message) {
-		return;
+		//TODO: temporary?
+		System.out.print(initializing_message.message);
+		if (initializing_message.message.equals("Start Match")) {
+			this.initializing = false;
+		}
 	}
 
+	/**
+	 * Parse the input from the command line
+	 *
+	 * @param input the String form the CLI
+	 * @return the Message created to send to the client
+	 * @throws IllegalArgumentException if the input cannot be parsed
+	 */
 	private Message parseInput(String input) throws IllegalArgumentException {
+		if (this.initializing) {
+			return new InitializingMessage(input);
+		}
+
 		//TODO: Oh ma qui nessuno ha il player
 		String[] inputs = input.split(" ");
 		switch(inputs[0].toUpperCase()) {
