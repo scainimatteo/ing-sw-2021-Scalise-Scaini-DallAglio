@@ -23,7 +23,7 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
 	public void putResource(Resource new_resource) throws IllegalArgumentException {
-		if (!new_resource.equals(resource_type) || storage.size >= 2){
+		if (!new_resource.equals(resource_type) || storage.size() >= 2){
 			throw new IllegalArgumentException();	
 		}
 		else {
@@ -53,7 +53,7 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	public void getResources(ArrayList<Resource> res) throws NoSuchElementException {
 		if (res.size() > storage.size() || res.size() == 0){
 			throw new NoSuchElementException();
-		} else if (res.stream().allMatch(x->x.equals(resource.type))) {
+		} else if (res.stream().allMatch(x->x.equals(resource_type))) {
 			throw new IllegalArgumentException();
 		} else {
 			for (Resource x : res){
