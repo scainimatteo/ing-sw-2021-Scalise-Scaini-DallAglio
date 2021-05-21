@@ -34,6 +34,10 @@ public class ClientHandler implements Runnable {
 		this.nickname = nickname;
 	}
 
+	public Controller getController() {
+		return this.controller;
+	}
+
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
