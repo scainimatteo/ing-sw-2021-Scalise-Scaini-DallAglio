@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.card.LeaderCardLevelCost;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
+import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 
 import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.track.FaithTrack;
@@ -65,6 +66,44 @@ public class Player extends Observable {
 	}
 
 	/**
+	 * Return the total sum of resources available to the player
+	 * 
+	 * @return an hashmap with the sum of all the resources in the three available storages
+	 */
+
+	public HashMap <Resource, Integer> totalResources() {
+		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
+		total.put(Resource.COIN, strongbox.get(Resource.COIN));
+		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));
+		total.put(Resource.SHIELD, strongbox.get(Resource.SHIELD));
+		total.put(Resource.STONE, strongbox.get(Resource.STONE));
+		for (Resource x : getTopResource()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+		for (Resource x : getMiddleResources()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+		for (Resource x : getBottomResources()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+        ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		ExtraSpaceAbility ability;
+		for (LeaderCard x : leader_cards_deck){
+			if (x.isActive() && x.getAbility().checkAbility(test)){
+				ability = (ExtraSpaceAbility) x.getAbility();
+				total.put(ability.getResourceType(), total.get(ability.getResourceType()) + ability.peekResources());
+			}
+		}
+		return total;
+	}
+
+	/**
 	 * @param card is the LeaderCard to be checked
 	 * @return true if the card can be activated
 	 */
@@ -100,18 +139,15 @@ public class Player extends Observable {
 	 * @return true if the card can be activated
 	 */
 	public boolean isActivable(LeaderCardResourcesCost card){
-		Resource[] tmp = card.getRequirements();
-		boolean to_return = true;
-
-		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
-			for (Resource res : tmp){
-				if (res != null){
-					to_return = false;
-				}
+		ArrayList<Resource> to_check = card.getRequirements();
+		Resource[] all_resources = {Resource.STONE, Resource.COIN, Resource.SERVANT, Resource.SHIELD};
+		HashMap <Resource, Integer> total = totalResources();
+		for (Resource x : all_resources){
+			if (total.get(x) < (int) to_check.stream().filter(y->y.equals(x)).count()) {
+				return false;
 			}
 		}
-
-		return to_return;
+		return true;
 	}
 
 	// TODO: this method will change
@@ -183,27 +219,6 @@ public class Player extends Observable {
 		this.warehouse.clearWarehouse();
 	}
 
-	public HashMap <Resource, Integer> totalResources() {
-		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
-		total.put(Resource.COIN, strongbox.get(Resource.COIN));
-		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));
-		total.put(Resource.SHIELD, strongbox.get(Resource.SHIELD));
-		total.put(Resource.STONE, strongbox.get(Resource.STONE));
-		if (getTopResource() != null){
-			total.put(getTopResource(), total.get(getTopResource())+1);
-		}
-		for (Resource x : getMiddleResources()){
-			if (x != null) {
-				total.put(x, total.get(x) + 1);
-			}
-		}
-		for (Resource x : getBottomResources()){
-			if (x != null) {
-				total.put(x, total.get(x) + 1);
-			}
-		}
-		return total;
-	}
 		
 	/**
 	 * STRONGBOX METHODS
@@ -216,8 +231,8 @@ public class Player extends Observable {
 		return this.strongbox.getStorage();
 	}
 
-	public ArrayList<Resource> removeResources(ArrayList<Resource> res){
-		return this.strongbox.removeResources(res);
+	public void removeResources(ArrayList<Resource> res){
+		this.strongbox.removeResources(res);
 	}
 
 	public StrongBox getPlayerStrongBox(){

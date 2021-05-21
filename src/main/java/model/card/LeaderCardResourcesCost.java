@@ -23,26 +23,7 @@ public class LeaderCardResourcesCost extends LeaderCard {
 	}
 
 	public ArrayList<Resource> getRequirements() {
-		ArrayList<Resource> to_return = this.requirements.clone();
-		return to_return;
-	}
-
-	public boolean isActivable(Player player){
-		Warehouse warehouse = player.getWarehouse();
-		StrongBox strongbox = player.getPlayerStrongBox();
-		ArrayList<Resource> tmp = this.getRequirements();
-		boolean to_return = true;
-
-		if ( !(warehouse.areContainedInWarehouse(tmp) || strongbox.areContainedInStrongbox(tmp)) ){
-			for (Resource res : tmp){
-				if (res != null){
-					to_return = false;
-				}
-			}
-		}
-
-		return to_return;
-		
+		return requirements;
 	}
 
 	private HashMap<Resource, Integer> numOfCost(){
