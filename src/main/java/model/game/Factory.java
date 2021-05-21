@@ -134,8 +134,8 @@ public class Factory {
 	 */
 	private ArrayList<Resource> convertJsonArrayToResourceArray(JSONArray json_array) {
 		// map all the Objects in json_array to Resources using toString() and valueOf()
-		ArrayList<Resource> resource_list = new ArrayList(json_array.stream().map(x -> Resource.valueOf(x.toString())).collect(Collectors.toList()));
-		return resource_list;
+		List<Resource> resource_list = (List<Resource>) json_array.stream().map(x -> Resource.valueOf(x.toString())).collect(Collectors.toList());
+		return new ArrayList<Resource>(resource_list);
 	}
 
 	/**
