@@ -34,7 +34,8 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 	
 	public void setProducedResources(ArrayList<Resource> new_resource) {
 		ArrayList<Resource> new_product = this.production.getProducedResources();
-		new_product[0] = new_resource[0];
+		new_product.remove(0);
+		new_product.add(0, new_resource.get(0));
 		this.production = new Production(this.production.getRequiredResources(), new_product);
 	}
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.game;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -93,12 +94,12 @@ public class Market {
 	 */
 	public ArrayList<Resource> getRow(int index) {
 		try {
-		ArrayList<Resource> row = new ArrayList<Resource>(market_board[index].asList);
+			ArrayList<Resource> row = new ArrayList<Resource>(Arrays.asList(market_board[index]));
+			this.shiftRow(index);
+			return row;
 		} catch (IndexOutOfBoundsException e) {
 			throw new IllegalArgumentException();
 		}
-		this.shiftRow(index);
-		return row;
 	}
 
 	/**
