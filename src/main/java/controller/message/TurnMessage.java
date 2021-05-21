@@ -1,6 +1,6 @@
 package it.polimi.ingsw.controller.message;
 
-public interface TurnMessage extends Message {
-	public int row = 0;
-	public int column = 0;
+public abstract class TurnMessage implements Message {
+	public int row;
+	public int column;
 }

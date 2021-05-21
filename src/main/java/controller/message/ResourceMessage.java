@@ -4,8 +4,10 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public interface ResourceMessage extends Message {
-	public ArrayList<Resource> warehouse = new ArrayList<Resource>();
-	public ArrayList<Resource> strongbox = new ArrayList<Resource>();
-	public ArrayList<Resource> extraspace = new ArrayList<Resource>();
+public abstract class ResourceMessage implements Message {
+	public ArrayList<Resource> warehouse_top;
+	public ArrayList<Resource> warehouse_mid;
+	public ArrayList<Resource> warehouse_bot;
+	public ArrayList<Resource> stbotrongbox;
+	public ArrayList<Resource> extraspace;
 }
