@@ -54,10 +54,10 @@ public class LeaderCardLevelCost extends LeaderCard {
 		String padding = "                 ";
 		String temp;
 		int green = 0, blue = 0, yellow = 0, purple = 0;	
-		String greenstring;
-		String bluestring;
-		String yellowstring;
-		String purplestring;
+		String greenstring = "";
+		String bluestring = "";
+		String yellowstring = "";
+		String purplestring = "";
 		for (CardLevel x : requirements){
 			if (x.getColor() == DevelopmentCardsColor.GREEN){
 				green++;

@@ -7,14 +7,13 @@ import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.ProductionInterface;
 
-import it.polimi.ingsw.view.Viewable;
-
 import java.io.Serializable;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.ArrayList;
 
-public class DevelopmentCard extends Card implements ProductionInterface, Viewable, Serializable {
+public class DevelopmentCard extends Card implements ProductionInterface, Serializable {
 	private static final long serialVersionUID = 8L;
 	private Production production;
 	private Resource[] cost;
@@ -80,7 +79,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Viewab
 		return this.production.activateProduction();
 	}
 
-	public HashMap<Resource, Integer> numOfCost(){
+	private HashMap<Resource, Integer> numOfCost(){
 		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
 
 		for (Resource res : cost){

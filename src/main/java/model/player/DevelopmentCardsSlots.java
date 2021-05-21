@@ -4,8 +4,10 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
-import java.util.Iterator;
+import it.polimi.ingsw.view.cli.Printer;
+
 import java.lang.IllegalArgumentException;
+import java.util.Iterator;
 
 public class DevelopmentCardsSlots {
 	private Table<DevelopmentCard> slots;
@@ -49,4 +51,22 @@ public class DevelopmentCardsSlots {
 	public Iterator<DevelopmentCard> getIterator(){
 		return slots.iterator();
 	}
+
+/*TODO: move to view
+
+	public String printText() {
+		DevelopmentCard[] development_cards_on_top = this.getTopCards();
+		return Printer.printArray(development_cards_on_top);
+	}
+
+	public String printText(int index) {
+		Deck<DevelopmentCard> deck = this.slots.getDeck(0, index);
+		DevelopmentCard[] development_cards_in_deck = new DevelopmentCard[deck.size()];
+		Iterator<DevelopmentCard> iterator = deck.iterator();
+		for (int i = 0; iterator.hasNext(); i++) {
+			development_cards_in_deck[i] = iterator.next();
+		}
+		return Printer.printArray(development_cards_in_deck);
+	}
+	*/
 }

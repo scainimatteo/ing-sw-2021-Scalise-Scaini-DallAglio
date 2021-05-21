@@ -1,0 +1,7 @@
+package it.polimi.ingsw.controller.message;
+
+import it.polimi.ingsw.model.card.LeaderCard;
+
+public interface LeaderCardMessage extends Message {
+	public LeaderCard leader_card = null;
+}

@@ -47,9 +47,9 @@ public class CardLevel implements Serializable {
 	}
 
 	public String toText(){
-		String lvl;
+		String lvl = "";
 		char ball = '\u25EF';
-		for (int i=0; i<3; i++){
+		for (int i = 0; i < 3; i++){
 			lvl += Character.toString(ball);
 		}
 		return color.colorString(color.toString() + " " + lvl);

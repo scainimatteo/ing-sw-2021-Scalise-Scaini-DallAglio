@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model.resources;
 
+import java.util.ArrayList;
+
 public interface ProductionInterface {
-	public Resource[] activateProduction();
-	public Resource[] getRequiredResources();
-	public Resource[] getProducedResources();
-	public void setRequiredResources(Resource[] cost);
-	public void setProducedResources(Resource[] cost);
+	public ArrayList<Resource> activateProduction();
+	public ArrayList<Resource> getRequiredResources();
+	public ArrayList<Resource> getProducedResources();
+	public void setRequiredResources(ArrayList<Resource> cost);
+	public void setProducedResources(ArrayList<Resource> cost);
 }

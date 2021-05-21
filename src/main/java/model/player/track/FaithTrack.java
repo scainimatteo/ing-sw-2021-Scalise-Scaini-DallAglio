@@ -1,14 +1,8 @@
 package it.polimi.ingsw.model.player.track;
 
-import it.polimi.ingsw.util.Observer;
 import it.polimi.ingsw.util.ANSI;
 
-import it.polimi.ingsw.view.Viewable;
-
-import java.io.*;
-
-public class FaithTrack implements Observer<VaticanReports>, Viewable, Serializable {
-	private static final long serialVersionUID = 2321L;
+public class FaithTrack {
 	protected Cell[] track;
 	protected Tile[] vatican_report_tiles;
 	protected Cell faith_marker;
@@ -90,10 +84,6 @@ public class FaithTrack implements Observer<VaticanReports>, Viewable, Serializa
 		}
 
 		return i;
-	}
-
-	public void update(VaticanReports vr_param){
-		this.activateVaticanReport(vr_param);
 	}
 
 	public String printText(){

@@ -22,14 +22,11 @@ class ClientHandler {
 	- Socket client
 	- ObjectInputStream in
 	- ObjectOutputStream out
-	- ArrayBlockingQueue<Message> messages_received
-	- ArrayBlockingQueue<Message> messages_to_send
 	- String nickname
-	+ void setMessagesQueue(ArrayBlockingQueue<Message> messages)
-	- Thread sendToClient()
-	+ void asyncSendToClient(Message message)
-	- Thread receiveFromClient()
+	- GameController controller
+	+ void sendToClient(ServerMessage message)
 	+ void close()
+	+ void handleReceivedMessage(Message message)
 }
 
 class Client {
@@ -39,12 +36,10 @@ class Client {
 	- ObjectInputStream in
 	- ObjectOutputStream out
 	- View view
-	- ArrayBlockingQueue<Message> messages_to_send
-	- ArrayBlockingQueue<ServerMessage> messages_received
+' 	- ArrayBlockingQueue<Message> messages_to_send
+' 	- ArrayBlockingQueue<ServerMessage> messages_received
 	+ void startClient()
-	- Thread sendMessages()
-	- Thread receiveMessages()
-	- Thread processReceivedMessages()
+	- void sendMessage(Message message)
 	- void updateView(ViewUpdate view_update)
 	- void handleError(ErrorMessage error_message)
 }

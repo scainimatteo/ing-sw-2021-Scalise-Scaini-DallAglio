@@ -1,37 +1,35 @@
 package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.resources.Resource;
-import it.polimi.ingsw.model.player.Storage;
-
-import it.polimi.ingsw.view.Viewable;
 
 import java.lang.IndexOutOfBoundsException;
 import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
+import java.util.ArrayList;
 
-import java.io.Serializable;
-
-public class Warehouse implements Storage, Viewable, Serializable {
-	private static final long serialVersionUID = 8847L;
-	private Resource top_resource = null;
-	private Resource[] middle_resources = {null, null};
-	private Resource[] bottom_resources = {null, null, null};
+public class Warehouse {
+	private ArrayList<Resource> top_resource;
+	private ArrayList<Resource> middle_resources;
+	private ArrayList<Resource>bottom_resources;
 
 	public Warehouse(){
+		top_resource = new ArrayList<Resource>();
+		middle_resources = new ArrayList<Resource>();
+		bottom_resources = new ArrayList<Resource>();
 	}
 
-	public Resource getTopResource(){
+	public ArrayList<Resource>  getTopResource(){
 		 return top_resource;
 	}
 
-	public Resource[] getMiddleResources(){
+	public ArrayList<Resource> getMiddleResources(){
 		return middle_resources;
 	}
 
-	public Resource[] getBottomResources(){
+	public ArrayList<Resource> getBottomResources(){
 		return bottom_resources;
 	}
-	
+
 	/**
 	* Swaps two rows if possible
 	*
@@ -39,6 +37,7 @@ public class Warehouse implements Storage, Viewable, Serializable {
 	* @throws IllegalArgumentException if the parameters are invalid or the swap between the rows cannot be made
 	*/
 	public void swapRows (int i, int j) throws IllegalArgumentException {
+		ArrayList<Resource> swap;
 		if (i>j){
 			int temp = j;
 			j = i;
@@ -46,291 +45,191 @@ public class Warehouse implements Storage, Viewable, Serializable {
 		}
 		if (i<1 || j>3){
 			throw new IllegalArgumentException();
-		}
-		else {
-			if (i == 1){
-				if (j == 2){
-					if (middle_resources[1] == null){
-						Resource temp = top_resource;
-						top_resource = middle_resources[0];
-						middle_resources[0] = temp;
+		} else {
+			if (i == 1) {
+				if (j == 2) {
+					if (middle_resources.size() < 2){
+						swap = middle_resources;
+						middle_resources = top_resource;
+						top_resource = swap;
+					}
+					else {throw new IllegalArgumentException();}
+				} else if (j == 3) {
+					if (bottom_resources.size() < 2){
+						swap = bottom_resources;
+						bottom_resources = top_resource;
+						top_resource = swap;
 					}
 					else {throw new IllegalArgumentException();}
 				}
-				else if (j == 3){
-					if (bottom_resources[1] == null && bottom_resources[2] == null){
-						Resource temp = top_resource;
-						top_resource = bottom_resources[0];
-						bottom_resources[0] = temp;
-					}
-					else {throw new IllegalArgumentException();}
-				}
-			} 
-			else if (i ==2){
-				if (j == 3){
-					if (bottom_resources[2] == null){
-						Resource temp = middle_resources[0];
-						middle_resources[0] = bottom_resources[0];
-						bottom_resources[0] = temp;
-						temp = middle_resources[1];
-						middle_resources[1] = bottom_resources[1];
-						bottom_resources[1] = temp;
+			} else if ( i == 2) {
+				if (j == 3) {
+					if (bottom_resources.size() < 3){
+						swap = bottom_resources;
+						bottom_resources = middle_resources;
+						middle_resources = swap;
 					}
 					else {throw new IllegalArgumentException();}
 				}
 			}
 		}
-	}
-				
-	/**
-	 * @param new_resource is the resource to be included in the Warehouse
-	 * @return true if new_resource can be added
-	 */
-	public boolean isPossibleToInsert(Resource new_resource){
-		if (top_resource != null){
-			if (!middle_resources[0].equals(new_resource) || middle_resources[1] != null){
-				if (!bottom_resources[0].equals(new_resource) || (bottom_resources[1] != null && bottom_resources[2] != null)){
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 
 	private boolean isPresent (Resource resource){
-		if (top_resource == null || !top_resource.equals(resource)){
-			if (middle_resources[0] == null || !middle_resources[0].equals(resource)){
-				if (bottom_resources[0] == null || !bottom_resources[0].equals(resource)){
-					return false;
-				}
+		return top_resource.contains(resource) || middle_resources.contains(resource) || bottom_resources.contains(resource);
+	}
+
+	private boolean isAllTheSame (ArrayList<Resource> res){
+		Resource check = res.get(0);
+		for (Resource x : res){
+			if (!x.equals(check)){
+				return false;
 			}
 		}
 		return true;
 	}
 
-
-	 /**	
-	 * tries to insert the given resource into the warehouse
+	/**
+	 * Stores resources in the middle shelf
 	 *
-	 * @param new_resources is the resource to be inserted
-	 * @throws IllegalArgumentException if the resource cannot be inserted
-	 */
-	public void insert(Resource new_resource) throws IllegalArgumentException{
-		if (isPresent(new_resource)){	
-			if(middle_resources[0].equals(new_resource) && middle_resources[1] == null){
-				middle_resources[1] = new_resource;
-				return;
-			}
-			else if (bottom_resources[0].equals(new_resource)){
-				if(bottom_resources[1] == null){
-					bottom_resources[1] = new_resource;
-					return;
-				}
-				else if (bottom_resources[2] == null){
-					bottom_resources[2] = new_resource;
-					return;
-				}
-			}
+	 * @param res is the array list of resources
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
+	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
+	 **/
+	public void storeTop (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.size() > 1 - top_resource.size()){
+			throw new IndexOutOfBoundsException();
+		} else if (!isAllTheSame(res)) {
+			throw new IllegalArgumentException();
 		} else {
-			if (top_resource == null) {
-				top_resource = new_resource;
-				return;
-			}
-			else if(middle_resources[0] == null){
-				middle_resources[0] = new_resource;
-				return;
-			}
-			else if (bottom_resources[0] == null){
-				bottom_resources[0] = new_resource;
-				return;
-			}
-		}
-		throw new IllegalArgumentException();
-	}
-
-
-	/**
-	 * @param new_resources is an array of resources obtained from the market that need to be inserted in the warehouse
-	 * @return the number of resources that cannot be inserted
-	 */
-	public void tryToInsert(Resource[] new_resources){
-		for(Resource resource : new_resources){
-			insert(resource);
+			if (top_resource.isEmpty() && !isPresent(res.get(0))){
+				top_resource.addAll(res);
+			} else {throw new IllegalArgumentException();}
 		}
 	}
-
-	@Override
-	public void getResource(Resource res) throws NoSuchElementException {
-		getFromWarehouse(res,1);
-	}
-
-	@Override
-	public void storeResource(Resource res) throws IllegalArgumentException {
-		tryToInsert(new Resource[] {res});
-	}
-
+	
 	/**
-	 * @param resource_type is the type of resource requested from the player
-	 * @param quantity is the number of resource requested
-	 * @return an array of the resources requested
-	 */
-	public Resource[] getFromWarehouse(Resource resource_type, int quantity) throws NoSuchElementException {
-		Resource[] to_return = getFromTop(resource_type, quantity);
-		return to_return;
-	}
-
-	/**
-	 * @param resource_type is the type of resource requested from the player
-	 * @param quantity is the number of resource requested
-	 * @return the array of the resources requested if is of the same type as top_resource and the quantity requested is available . Returns an exception if the quantity requested is not available. Calls the next method if top_resource is empty or resource_type and top_resource are not the same.
-	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
-	 */
-	private Resource[] getFromTop(Resource resource_type, int quantity){
-		if (this.top_resource != null && resource_type.equals(top_resource)){
-			if (quantity == 1){
-				Resource[] to_return = {top_resource};
-				this.top_resource = null;
-				return to_return;
-			} else {
-				throw new NoSuchElementException();
-			}
-		} else {
-			return getFromMiddle(resource_type, quantity);
-		}
-	}
-
-	/**
-	 * @param resource_type is the type of resource requested from the player
-	 * @param quantity is the number of resource requested
-	 * @return the array of the resources requested if is of the same type as middle_resource and the quantity requested is available . Returns an exception if the quantity requested is not available. Calls the next method if middle_resources is empty or resource_type and middle_resources are not the same.
-	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
-	 */
-	private Resource[] getFromMiddle(Resource resource_type, int quantity){
-		if (this.middle_resources[0] != null && resource_type.equals(middle_resources[0])){
-			if (this.middle_resources[1] != null){
-				if (quantity == 2){
-					Resource[] to_return = {middle_resources[0], middle_resources[1]};
-					this.middle_resources[1] = null;
-					this.middle_resources[0] = null;
-					return to_return;
-				} else if (quantity == 1){
-					Resource[] to_return = {middle_resources[1]};
-					this.middle_resources[1] = null;
-					return to_return;
-				} else {
-					throw new NoSuchElementException();
-				}
-			} else {
-				if (quantity == 1){
-					Resource[] to_return = {middle_resources[0]};
-					this.middle_resources[0] = null;
-					return to_return;
-				} else {
-					throw new NoSuchElementException();
-				}
-			}
-		} else {
-			return getFromBottom(resource_type, quantity);
-		}
-	}
-
-	/**
-	 * @param resource_type is the type of resource requested from the player
-	 * @param quantity is the number of resource requested
-	 * @return the array of the resources requested if is of the same type as bottom_resource and the quantity requested is available
-	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
-	 * @exception IllegalArgumentException is thrown if the resource_type is not contained
+	 * Stores resources in the middle shelf
 	 *
-	 */
-	private Resource[] getFromBottom(Resource resource_type, int quantity){
-		if (this.bottom_resources[0] != null && resource_type.equals(bottom_resources[0])){
-			if (bottom_resources[1] != null){
-				if (bottom_resources[2] != null){
-					if (quantity == 3){
-						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
-						this.bottom_resources[2] = null;
-						this.bottom_resources[1] = null;
-						this.bottom_resources[0] = null;
-						return to_return;
-					} else if (quantity == 2){
-						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
-						this.bottom_resources[2] = null;
-						this.bottom_resources[1] = null;
-						this.bottom_resources[0] = null;
-						return to_return;
-					} else if (quantity == 1){
-						Resource[] to_return = {bottom_resources[0], bottom_resources[1], bottom_resources[2]};
-						this.bottom_resources[2] = null;
-						this.bottom_resources[1] = null;
-						this.bottom_resources[0] = null;
-						return to_return;
-					} else {
-						throw new NoSuchElementException();
-					}
-				} else {
-					if (quantity == 2){
-						Resource[] to_return = {bottom_resources[0], bottom_resources[1]};
-						this.bottom_resources[1] = null;
-						this.bottom_resources[0] = null;
-						return to_return;
-					} else if (quantity == 1){
-						Resource[] to_return = {bottom_resources[1]};
-						this.bottom_resources[1] = null;
-						return to_return;
-					} else {
-						throw new NoSuchElementException();
-					}
-				}
-			} else {
-				if (quantity == 1){
-					Resource[] to_return = {bottom_resources[0]};
-					this.bottom_resources[0] = null;
-					return to_return;
-				} else {
-					throw new NoSuchElementException();
-				}
-			}
+	 * @param res is the array list of resources
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
+	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
+	 **/
+	public void storeMiddle (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.size() > 2 - middle_resources.size()){
+			throw new IndexOutOfBoundsException();
+		} else if (!isAllTheSame(res)) {
+			throw new IllegalArgumentException();
 		} else {
-			throw new NoSuchElementException();	
+			if (!isPresent(res.get(0))){
+				if (middle_resources.isEmpty()){
+					middle_resources.addAll(res);
+				} else {throw new IllegalArgumentException();}
+			} else { 
+				if (res.get(0).equals(middle_resources.get(0))){
+					middle_resources.addAll(res);
+				} else {throw new IllegalArgumentException();}
+			}		
 		}
 	}
 
-	public boolean areContainedInWarehouse(Resource[] to_check){
-		int top = 0;
-		int mid = 0;
-		int bot = 0;
-
-		for (int i = 0; i < to_check.length; i ++){
-			if (to_check[i].equals(this.top_resource)){
-				top += 1;
-			} else if (to_check[i].equals(this.middle_resources[mid])){
-				mid += 1;
-			} else if (to_check[i].equals(this.bottom_resources[bot])){
-				bot += 1;
-			} else if (to_check[i] == null){
-			} else {
-				return false;
-			}
-
-			if (top >= 2 || mid >= 3 || bot >= 4){
-				return false;
-			}
-
-			to_check[i] = null;
+	/**
+	 * Stores resources in the bottom shelf
+	 *
+	 * @param res is the array list of resources
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
+	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
+	 **/
+	public void storeBottom (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.size() > 3 - bottom_resources.size()){
+			throw new IndexOutOfBoundsException();
+		} else if (!isAllTheSame(res)) {
+			throw new IllegalArgumentException();
+		} else {
+			if (!isPresent(res.get(0))){
+				if (bottom_resources.isEmpty()){
+					bottom_resources.addAll(res);
+				} else {throw new IllegalArgumentException();}
+			} else { 
+				if (res.get(0).equals(bottom_resources.get(0))){
+					bottom_resources.addAll(res);
+				} else {throw new IllegalArgumentException();}
+			}		
 		}
-
-		return true;
 	}
+	
+	
+	/**
+	 * Removes resource from the top shelf
+	 *
+	 * @param res is the array list of resources
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
+	 * @exception IllegalArgumentException is thrown if the list contains a type of resources not contained in the row
+	 **/
+	public void getFromTop(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.size() > top_resource.size()){
+			throw new IndexOutOfBoundsException();
+		} else {
+			if (!res.isEmpty()) {
+				if (isAllTheSame(res) || res.get(0).equals(top_resource.get(0))){
+					for (Resource x :res) {
+						top_resource.remove(x);
+					}
+				} else {throw new IllegalArgumentException();}
+			}
+		}
+	}
+
+	/**
+	 * Removes resource from the middle shelf
+	 *
+	 * @param res is the array list of resources
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
+	 * @exception IllegalArgumentException is thrown if the list contains a type of resources not contained in the row
+	 **/
+	public void getFromMiddle(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.size() > middle_resources.size()){
+			throw new IndexOutOfBoundsException();
+		} else {
+			if (!res.isEmpty()) {
+				if (isAllTheSame(res) || res.get(0).equals(middle_resources.get(0))){
+					for (Resource x :res) {
+						middle_resources.remove(x);
+					}
+				} else {throw new IllegalArgumentException();}
+			}
+		}
+	}
+
+	/**
+	 * Removes resource from the bottom shelf
+	 *
+	 * @param res is the array list of resources
+	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
+	 * @exception IllegalArgumentException is thrown if the list contains a type of resources not contained in the row
+	 **/
+	public void getFromBottom(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.size() > bottom_resources.size()){
+			throw new IndexOutOfBoundsException();
+		} else {
+			if (!res.isEmpty()) {
+				if (isAllTheSame(res) || res.get(0).equals(bottom_resources.get(0))){
+					for (Resource x :res) {
+						bottom_resources.remove(x);
+					}
+				} else {throw new IllegalArgumentException();}
+			}
+		}
+	}
+
 
 	public void clearWarehouse(){
-		this.top_resource = null;
-		this.middle_resources[0] = null;
-		this.middle_resources[1] = null;
-		this.bottom_resources[0] = null;
-		this.bottom_resources[1] = null;
-		this.bottom_resources[2] = null;
+		this.top_resource.clear();
+		this.middle_resources.clear();
+		this.bottom_resources.clear();
 	}
 
+	/* TODO:
 	public String printResource(Resource res) {
 		if (res == null) {
 			return "  ";
@@ -350,13 +249,5 @@ public class Warehouse implements Storage, Viewable, Serializable {
 	public String printText(int index){
 		return null;
 	}
+	*/
 }
-
-//           /\
-//          /  \
-//         / sp \
-//        /------\
-//       / sp  sp \
-//      /----------\
-//     / sp  sp  sp \
-//    /--------------\

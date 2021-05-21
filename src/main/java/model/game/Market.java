@@ -3,13 +3,9 @@ package it.polimi.ingsw.model.game;
 import java.util.ArrayList;
 import java.util.Random;
 
-import java.io.Serializable;
-
 import it.polimi.ingsw.model.resources.Resource;
-import it.polimi.ingsw.view.Viewable;
 
-public class Market implements Viewable, Serializable {
-	private static final long serialVersionUID = 97753L;
+public class Market {
 	private final int dim_rows = 4;
 	private final int dim_cols = 3;
 	private Resource[][] market_board;
@@ -95,10 +91,9 @@ public class Market implements Viewable, Serializable {
 	 * @param index the index of the row to shift
 	 * @return an array of the resources taken by the player
 	 */
-	public Resource[] getRow(int index) {
-		Resource[] row = null;
+	public ArrayList<Resource> getRow(int index) {
 		try {
-			row = market_board[index];
+		ArrayList<Resource> row = new ArrayList<Resource>(market_board[index].asList);
 		} catch (IndexOutOfBoundsException e) {
 			throw new IllegalArgumentException();
 		}
@@ -112,11 +107,11 @@ public class Market implements Viewable, Serializable {
 	 * @param index the index of the column to shift
 	 * @return an array of the resources taken by the player
 	 */
-	public Resource[] getColumn(int index) {
-		Resource[] column = new Resource[dim_cols];
+	public ArrayList<Resource> getColumn(int index) {
+		ArrayList<Resource> column = new ArrayList<Resource>();
 		try {
 			for (int i = 0; i < dim_cols; i++) {
-				column[i] = market_board[i][index];
+				column.add(market_board[i][index]);
 			}
 		} catch (IndexOutOfBoundsException e) {
 			throw new IllegalArgumentException();
@@ -125,13 +120,7 @@ public class Market implements Viewable, Serializable {
 		return column;
 	}
 
-	/**
-	 * Get the resources stores in a column and shift it
-	 *
-	 * @param index the index of the column to shift
-	 * @return an array of the resources taken by the player
-	 */
-	@Override
+	/* TODO: 
 	public String printText() { 
 		Resource null_marble = Resource.FAITH;
 		String string = "\n·--------------------·--\n|                     ";
@@ -153,11 +142,7 @@ public class Market implements Viewable, Serializable {
 			string += " |\n";
 		}
 		return string + "|  |                 |\n·--·-----------------·\n";
-	}
-
-	public String printText(int index){
-		return null;
-	}
+	}*/
 }
 
 /*
@@ -173,4 +158,3 @@ public class Market implements Viewable, Serializable {
 |  |                 |
 ·--·-----------------·
 */
-

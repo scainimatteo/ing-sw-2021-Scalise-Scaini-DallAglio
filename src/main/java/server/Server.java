@@ -12,10 +12,12 @@ import java.net.*;
 
 import java.io.*;
 
-import it.polimi.ingsw.controller.match.Match;
-
-import it.polimi.ingsw.controller.util.MessageType;
-import it.polimi.ingsw.controller.util.Message;
+import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.ServerMessage;
+import it.polimi.ingsw.controller.message.InitializingMessage;
+import it.polimi.ingsw.controller.InitialController;
+import it.polimi.ingsw.controller.message.Message;
+import it.polimi.ingsw.controller.GameController;
 
 import it.polimi.ingsw.server.ClientHandler;
 
@@ -43,7 +45,7 @@ public class Server {
 	/**
 	 * Loops forever - accepts new players and inserts them in the lobby
 	 */
-	public void run() {
+	public void startServer() {
 		// print the port in green -> TODO: make a static class with all the ANSI codes
 		System.out.printf("Server starting on port \u001B[32m%d\u001B[0m\n\n", this.port);
 		while (true) {
@@ -57,10 +59,11 @@ public class Server {
 				// insert the clients in the lobby
 				new Thread(() -> {
 					try {
+						new_client_handler.setController(new InitialController());
 						insertIntoLobby(new_client_handler);
 					} catch (InterruptedException e) {
 						System.out.println("Miscomunication with the client");
-						new_client_handler.close(new Message(MessageType.STRING, "Miscomunication with the server"));
+						new_client_handler.close("Miscomunication with the server");
 					} catch (IllegalAccessError e) {
 						System.out.println("Client failed to put right match name or tried to use an already existing nickname");
 					}
@@ -85,7 +88,10 @@ public class Server {
 
 			try {
 				//TODO: if only one player, new_match = new SoloMatch
-				Runnable new_match = new Match(this.lobby.get(match_name));
+				GameController new_match = new GameController(this.lobby.get(match_name));
+				for (ClientHandler c: this.lobby.get(match_name)) {
+					c.setController(new_match);
+				}
 				this.executor.execute(new_match);
 			} catch (InstantiationException e) {
 				// TODO
@@ -105,7 +111,7 @@ public class Server {
 		synchronized (this.nicknames) {
 			// try to put the username, throw exception if it's already in the Set
 			if (!this.nicknames.add(nickname)) {
-				client.close(new Message(MessageType.STRING, "Sorry but the nickname " + nickname + " is already taken"));
+				client.close("Sorry but the nickname " + nickname + " is already taken");
 				throw new IllegalAccessError();
 			}
 		}
@@ -132,11 +138,10 @@ public class Server {
 
 		//TODO: put all strings in a separate class
 		sendStringToClient(first_client, "How many player in match? ");
-		Message message = (Message) first_client.asyncReceiveFromClient();
-		if (message.getMessageType() == MessageType.INTEGER) {
-			num = (Integer) message.getMessage();
-		} else {
-			throw new IllegalArgumentException();
+		try {
+			int num = Integer.parseInt(receiveStringFromClient(first_client));
+		} catch (NumberFormatException e) {
+			throw new InterruptedException();
 		}
 		String match_name = newMatchName();
 
@@ -159,7 +164,7 @@ public class Server {
 			if (this.lobby.containsKey(match_name)) {
 				this.lobby.get(match_name).add(client);
 			} else {
-				client.close(new Message(MessageType.STRING, "Sorry but there is no current match named " + match_name));
+				client.close("Sorry but there is no current match named " + match_name);
 				throw new IllegalAccessError();
 			}
 		}
@@ -205,8 +210,8 @@ public class Server {
 	 * @param string the message to send
 	 */
 	public void sendStringToClient(ClientHandler client, String string) {
-		Message message = new Message(MessageType.STRING, string);
-		client.asyncSendToClient(message);
+		ServerMessage message = new InitializingServerMessage(string);
+		client.sendToClient(message);
 	}
 
 	/**
@@ -214,11 +219,13 @@ public class Server {
 	 * @return a message received
 	 */
 	public String receiveStringFromClient(ClientHandler client) throws InterruptedException {
-		Message message = (Message) client.asyncReceiveFromClient();
-		if (message.getMessageType() == MessageType.STRING) {
-			return (String) message.getMessage();
-		} else {
-			throw new InterruptedException();
+		InitialController controller = (InitialController) client.getController();
+		while (true) {
+			try {
+				return controller.receiveMessage();
+			} catch (InterruptedException e) {
+				continue;
+			}
 		}
 	}
 }

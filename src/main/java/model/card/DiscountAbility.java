@@ -31,6 +31,7 @@ public class DiscountAbility extends LeaderAbility {
 		return true;
 	}
 
+	//TODO: move in view
 	public String printText(){
 		return "|                 |\n|                 |\n|                 |\n" + "|     -1 " + discounted_resource.getAbbreviation() + "       |\n|                 |\n|                 |\n|                 |\n";
 	}

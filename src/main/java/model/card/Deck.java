@@ -19,7 +19,6 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 		this.structure = new ArrayList<E>();
 	}
 
-
 	/**
 	* @return is the structure empty?
 	*/
@@ -38,7 +37,7 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 	/**
 	* @return collection size 
 	*/
-	public int size (){
+	public int size(){
 		return structure.size();
 	}
 	
@@ -96,5 +95,5 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 		for (int i = 0; i < 5; i++){
 			Collections.shuffle (structure);
 		}
-	}				
+	}
 }
