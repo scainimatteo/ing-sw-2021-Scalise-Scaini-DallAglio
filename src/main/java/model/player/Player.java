@@ -13,25 +13,22 @@ import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
-import it.polimi.ingsw.controller.util.FaithController;
-
-import it.polimi.ingsw.util.Observer;
 import it.polimi.ingsw.util.Observable;
-import it.polimi.ingsw.util.Observer;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.ArrayList;
 
 import java.lang.IllegalArgumentException;
 
-public class Player extends Observable<VaticanReports> implements Observer<FaithController> {
+public class Player extends Observable {
 	protected String nickname;
 	protected FaithTrack track;
 	protected Warehouse warehouse;
 	protected StrongBox strongbox;
 	protected DevelopmentCardsSlots development_card_slots;
-	protected LeaderCard[] leader_cards_deck;
+	protected ArrayList<LeaderCard> leader_cards_deck;
 
 	public Player(String nickname, Cell[] cell_track, Tile[] v_r_tiles){
 		this.nickname = nickname;
@@ -39,7 +36,7 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		this.warehouse = new Warehouse();
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();
-		this.leader_cards_deck = new LeaderCard[2];
+		this.leader_cards_deck = new ArrayList<LeaderCard>();
 	}
 
 	public String getNickname(){
@@ -50,11 +47,11 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return this.track;
 	}
 	
-	public LeaderCard[] getDeck(){
+	public ArrayList<LeaderCard> getDeck(){
 		return this.leader_cards_deck;
 	}
 
-	public void setLeaderCards(LeaderCard[] leader_cards) {
+	public void setLeaderCards(ArrayList<LeaderCard> leader_cards) {
 		this.leader_cards_deck = leader_cards;
 	}
 
@@ -117,22 +114,23 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 		return to_return;
 	}
 
+	// TODO: this method will change
 	/**
 	 * @param whichLeaderCard is an array of two boolean that represent which leader card has to be discarded
 	 * @return a faithcontroller that contains the number of discarded leader cards in the faith gained
 	 */
-	public FaithController discardLeaderCard(boolean[] whichLeaderCard){
-		int to_return = 0;
+	//public FaithController discardLeaderCard(boolean[] whichLeaderCard){
+	//	int to_return = 0;
 
-		for (int i = 0; i < 2; i ++){
-			if (whichLeaderCard[i]){
-				this.leader_cards_deck[i] = null;
-				to_return ++;
-			} 
-		}
+	//	for (int i = 0; i < 2; i ++){
+	//		if (whichLeaderCard[i]){
+	//			this.leader_cards_deck[i] = null;
+	//			to_return ++;
+	//		} 
+	//	}
 
-		return new FaithController(this, to_return, 0);
-	}
+	//	return new FaithController(this, to_return, 0);
+	//}
 
 	/**
 	 * WAREHOUSE METHODS
@@ -255,22 +253,5 @@ public class Player extends Observable<VaticanReports> implements Observer<Faith
 	 */
 	public int getMarkerPosition(){
 		return this.track.getMarkerPosition();
-	}
-
-	/**
-	 * OBSERVER METHODS
-	 */
-	public void update(FaithController faith_controller){
-		VaticanReports returned = null;
-
-		if (faith_controller.isSamePlayer(this)){
-			returned = this.track.moveForward(faith_controller.getGainedFaith());
-		} else {
-			returned = this.track.moveForward(faith_controller.getToRedistributeFaith());
-		}
-
-		if (returned != null){
-			notify(returned);
-		} 
 	}
 }

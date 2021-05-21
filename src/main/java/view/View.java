@@ -1,28 +1,16 @@
 package it.polimi.ingsw.view;
 
-import java.util.HashMap;
+import it.polimi.ingsw.client.Client;
 
-import it.polimi.ingsw.controller.util.ArrayChooser;
-import it.polimi.ingsw.controller.util.TurnSelector;
-import it.polimi.ingsw.controller.util.ViewMessage;
-import it.polimi.ingsw.controller.util.Message;
-import it.polimi.ingsw.controller.util.Choice;
+import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 
 public interface View {
-	public boolean isMessageParsed();
-	public void setMessageToParse(Message message);
+	public void startView(Client client);
 
-	// RECEIVE
+	public void updateView();
 
-	public void handleString(String s);
-	public void handleArray(ArrayChooser array_chooser);
-	public void handleChoice(Choice c);
-	public void handleTurn(TurnSelector t);
-	public void handleRank(HashMap<String, Integer> rank);
-	public void handleViewReply(ViewMessage view_message);
+	public void handleError(ErrorMessage error_message);
 
-
-	// SEND
-
-	public Message getInput(Message message);
+	public void handleInitializing(InitializingServerMessage initializing_message);
 }

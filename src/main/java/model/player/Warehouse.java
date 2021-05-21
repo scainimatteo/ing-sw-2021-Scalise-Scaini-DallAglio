@@ -7,10 +7,7 @@ import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
 
-import java.io.Serializable;
-
-public class Warehouse implements Serializable {
-	private static final long serialVersionUID = 8847L;
+public class Warehouse {
 	private ArrayList<Resource> top_resource;
 	private ArrayList<Resource> middle_resources;
 	private ArrayList<Resource>bottom_resources;

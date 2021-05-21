@@ -11,7 +11,9 @@ import it.polimi.ingsw.model.game.Market;
 
 import it.polimi.ingsw.model.player.Player;
 
-public class Game {
+import it.polimi.ingsw.util.Observable;
+
+public class Game extends Observable {
 	private Player[] players;
 	private Market market;
 	private DevelopmentCardsOnTable development_cards_on_table;
