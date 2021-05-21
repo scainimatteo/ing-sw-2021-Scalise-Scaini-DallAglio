@@ -83,7 +83,7 @@ public class Server {
 		if (checkIfAllPlayersPresent(match_name)) {
 			// the right amount of clients are connected, start the match
 			for (ClientHandler ch : this.lobby.get(match_name)) {
-				//sendStringToClient(ch, "Start Match");
+				sendStringToClient(ch, "Start Match");
 			}
 
 			try {
@@ -105,9 +105,8 @@ public class Server {
 	 */
 	private String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
-		//sendStringToClient(client, "Nickname? ");
-		//String nickname = receiveStringFromClient(client);
-		String nickname = "";
+		sendStringToClient(client, "Nickname? ");
+		String nickname = receiveStringFromClient(client);
 
 		synchronized (this.nicknames) {
 			// try to put the username, throw exception if it's already in the Set
@@ -118,13 +117,12 @@ public class Server {
 		}
 		client.setNickname(nickname);
 
-		//sendStringToClient(client, "Match name? ");
-		//String match_name = receiveStringFromClient(client);
-		String match_name = "";
+		sendStringToClient(client, "Match name? ");
+		String match_name = receiveStringFromClient(client);
 
 		if (match_name.equals("")) {
 			match_name = manageFirstClient(client);
-			//sendStringToClient(client, "Started match with match name " + match_name);
+			sendStringToClient(client, "Started match with match name " + match_name);
 		} else {
 			manageOtherClient(client, match_name);
 		}
@@ -139,14 +137,12 @@ public class Server {
 		Integer num;
 
 		//TODO: put all strings in a separate class
-		//sendStringToClient(first_client, "How many player in match? ");
-		//Message message = (Message) first_client.asyncReceiveFromClient();
-		//if (message.getMessageType() == MessageType.INTEGER) {
-		//	num = (Integer) message.getMessage();
-		//} else {
-		//	throw new IllegalArgumentException();
-		//}
-		num = 4;
+		sendStringToClient(first_client, "How many player in match? ");
+		try {
+			int num = Integer.parseInt(receiveStringFromClient(first_client));
+		} catch (NumberFormatException e) {
+			throw new InterruptedException();
+		}
 		String match_name = newMatchName();
 
 		ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
@@ -223,7 +219,13 @@ public class Server {
 	 * @return a message received
 	 */
 	public String receiveStringFromClient(ClientHandler client) throws InterruptedException {
-		//InitializingMessage message = (InitializingMessage) client.asyncReceiveFromClient();
-		return "";
+		InitialController controller = (InitialController) client.getController();
+		while (true) {
+			try {
+				return controller.receiveMessage();
+			} catch (InterruptedException e) {
+				continue;
+			}
+		}
 	}
 }
