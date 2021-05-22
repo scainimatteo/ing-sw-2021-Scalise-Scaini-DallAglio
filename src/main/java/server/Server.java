@@ -139,7 +139,7 @@ public class Server {
 		//TODO: put all strings in a separate class
 		sendStringToClient(first_client, "How many player in match? ");
 		try {
-			int num = Integer.parseInt(receiveStringFromClient(first_client));
+			num = Integer.parseInt(receiveStringFromClient(first_client));
 		} catch (NumberFormatException e) {
 			throw new InterruptedException();
 		}

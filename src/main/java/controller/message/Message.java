@@ -11,5 +11,5 @@ public abstract class Message {
 		this.player = player;
 	}
 
-	public void useMessage(Controller controller);
+	public abstract void useMessage(Controller controller);
 }
