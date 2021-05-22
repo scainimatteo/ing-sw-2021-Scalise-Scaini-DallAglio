@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public class PayMessage implements ResourceMessage {
+public class PayMessage extends ResourceMessage {
 	public PayMessage(){
 		this.warehouse_top = new ArrayList<Resource>();
 		this.warehouse_mid = new ArrayList<Resource>();
@@ -16,6 +16,6 @@ public class PayMessage implements ResourceMessage {
 	}
 
 	public void useMessage(Controller controller){
-		controller.handleStore(this.player, this.warehouse_top, this.warehouse_mid, this.warehouse_bot, this.strongbox, this.extraspace);
+		controller.handlePay(this.player, this.warehouse_top, this.warehouse_mid, this.warehouse_bot, this.strongbox, this.extraspace);
 	}
 }

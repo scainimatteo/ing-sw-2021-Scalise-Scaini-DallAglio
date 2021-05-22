@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.Controller;
 
 import it.polimi.ingsw.model.card.LeaderCard;
 
-public class ActivateLeaderMessage implements LeaderCardMessage {
+public class ActivateLeaderMessage extends LeaderCardMessage {
 	public ActivateLeaderMessage(LeaderCard leader_card){
 		this.leader_card = leader_card;
 	}

@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.Controller;
 
 import it.polimi.ingsw.model.player.Player;
 
-public class RearrangeMessage implements Message {
+public class RearrangeMessage extends Message {
 	public int swap1 = 0;
 	public int swap2 = 0;
 

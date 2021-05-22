@@ -3,7 +3,7 @@ package it.polimi.ingsw.controller.message;
 import it.polimi.ingsw.controller.InitialController;
 import it.polimi.ingsw.controller.Controller;
 
-public class InitializingMessage implements Message {
+public class InitializingMessage extends Message {
 	public String message;
 
 	public InitializingMessage(String message) {

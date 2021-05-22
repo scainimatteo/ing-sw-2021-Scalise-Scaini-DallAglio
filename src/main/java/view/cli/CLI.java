@@ -71,7 +71,7 @@ public class CLI implements View {
 			i++;
 			int slot = Integer.parseInt(inputs[i]);
 			// TODO: discountability
-			return new BuyCardMessage();
+			return new BuyCardMessage(level, color, slot);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("buy level color slot");
 		}
