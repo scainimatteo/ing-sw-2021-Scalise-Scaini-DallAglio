@@ -2,7 +2,7 @@ package it.polimi.ingsw.controller.message;
 
 import it.polimi.ingsw.controller.Controller;
 
-public class BuyCardMessage implements TurnMessage {
+public class BuyCardMessage extends TurnMessage {
 	public int slot;
 
 	public BuyCardMessage(int row, int column, int slot){

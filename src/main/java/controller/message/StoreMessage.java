@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public class StoreMessage implements ResourceMessage {
+public class StoreMessage extends ResourceMessage {
 	public int shelf;
 
 	public StoreMessage(int shelf){

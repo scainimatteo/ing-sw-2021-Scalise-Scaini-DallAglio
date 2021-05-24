@@ -6,7 +6,7 @@ import it.polimi.ingsw.controller.Controller;
 
 import it.polimi.ingsw.model.player.Player;
 
-public class ProductionMessage implements TurnMessage {
+public class ProductionMessage extends TurnMessage {
 	public ProductionInterface production;
 
 	public ProductionMessage(ProductionInterface production){

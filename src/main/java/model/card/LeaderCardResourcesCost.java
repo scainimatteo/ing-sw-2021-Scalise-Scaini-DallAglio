@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Player;
 import java.util.ArrayList;
 
+import java.util.HashMap;
+import java.util.Set;
+
 public class LeaderCardResourcesCost extends LeaderCard {
 	private ArrayList<Resource> requirements;
 
@@ -23,8 +26,42 @@ public class LeaderCardResourcesCost extends LeaderCard {
 		return requirements;
 	}
 
-	public String printText(){
-		return null;
+	private HashMap<Resource, Integer> numOfCost(){
+		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
+
+		for (Resource res : requirements){
+			if (to_return.containsKey(res)){
+				to_return.put(res, to_return.get(res) + 1);
+			} else {
+				to_return.put(res, 1);
+			}
+		}
+
+		return to_return;
+	}
+
+	@Override
+	public String printTop(){
+		//ported from another object
+		String top = "|                 |\n|                  |\n";
+		HashMap<Resource, Integer> cost_to_print = this.numOfCost();
+		Set<Resource> cost_set = cost_to_print.keySet();
+		Resource[] cost_array = cost_set.toArray(new Resource[cost_set.size()]);
+
+		String cost_string = "| " + String.valueOf(cost_to_print.get(cost_array[0])) + " " + cost_array[0].getAbbreviation();
+		if (cost_array.length >= 2){
+			cost_string += " " + String.valueOf(cost_to_print.get(cost_array[1])) + " " + cost_array[1].getAbbreviation();
+			if (cost_array.length >= 3){
+				cost_string += " " + String.valueOf(cost_to_print.get(cost_array[2])) + " " + cost_array[2].getAbbreviation();
+			} else {
+				cost_string += "     ";
+			}
+		} else {
+			cost_string += "          ";
+		}
+		cost_string += "  |\n";
+
+		return top + cost_string + "|                 |\n|                  |\n";
 	}
 
 	public String printText(int index){

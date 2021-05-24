@@ -54,7 +54,7 @@ public class GameController implements Runnable, Controller {
 	public void handlePay(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace) {
 	}
 
-	public void handleStore(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace) {
+	public void handleStore(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace, int shelf) {
 	}
 
 	public void handleDiscardResources(Player player) {
@@ -67,8 +67,5 @@ public class GameController implements Runnable, Controller {
 	}
 
 	public void handleDiscardLeader(Player player, LeaderCard leader_card) {
-	}
-
-	public void handleRearrange(Player player, int swap1, int swap2){
 	}
 }
