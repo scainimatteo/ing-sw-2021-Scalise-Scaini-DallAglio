@@ -62,7 +62,7 @@ public class Market {
 	 *
 	 * @param index the index of the row to shift
 	 */
-	private void shiftRow(int index) {
+	public void shiftRow(int index) {
 		Resource[] new_row = new Resource[4];
 		new_row[dim_rows - 1] = this.free_marble;
 		this.free_marble = this.market_board[index][0];
@@ -77,7 +77,7 @@ public class Market {
 	 *
 	 * @param index the index of the column to shift
 	 */
-	private void shiftColumn(int index) {
+	public void shiftColumn(int index) {
 		Resource old_free_marble = this.free_marble;
 		this.free_marble = this.market_board[0][index];
 		for (int i = 0; i < dim_cols - 1; i++) {
@@ -95,7 +95,6 @@ public class Market {
 	public ArrayList<Resource> getRow(int index) {
 		try {
 			ArrayList<Resource> row = new ArrayList<Resource>(Arrays.asList(market_board[index]));
-			this.shiftRow(index);
 			return row;
 		} catch (IndexOutOfBoundsException e) {
 			throw new IllegalArgumentException();
@@ -117,7 +116,6 @@ public class Market {
 		} catch (IndexOutOfBoundsException e) {
 			throw new IllegalArgumentException();
 		}
-		this.shiftColumn(index);
 		return column;
 	}
 
