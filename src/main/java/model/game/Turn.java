@@ -30,23 +30,47 @@ public class Turn implements Serializable {
 		return this.active_player;
 	}
 
+	public void setPlayer(Player player){
+		this.active_player = player;
+	}
+
 	public ArrayList<Resource> getRequiredResources() {
 		return this.required_resources;
+	}
+
+	public void setRequiredResources(ArrayList<Resource> required) {
+		this.required_resources = required;
 	}
 
 	public ArrayList<Resource> getProducedResources() {
 		return this.produced_resources;
 	}
 
+	public void setProducedResources(ArrayList<Resource> produced) {
+		this.produced_resources = produced;
+	}
+
 	public boolean hasDoneAction() {
 		return this.action_done;
+	}
+
+	public void setDoneAction(boolean value) {
+		this.action_done = value;
 	}
 	
 	public boolean mustDiscard() {
 		return this.must_discard;
 	}
 
+	public void setDiscard(boolean value) {
+		this.action_done = value;
+	}
+
 	public boolean isFinal() {
 		return this.final_turn;
+	}
+
+	public void setFinal(boolean value) {
+		this.final_turn = value;
 	}
 }
