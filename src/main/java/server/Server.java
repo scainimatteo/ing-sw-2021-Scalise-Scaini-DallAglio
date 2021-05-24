@@ -83,7 +83,7 @@ public class Server {
 		if (checkIfAllPlayersPresent(match_name)) {
 			// the right amount of clients are connected, start the match
 			for (ClientHandler ch : this.lobby.get(match_name)) {
-				sendStringToClient(ch, "Start Match");
+				sendStringToClient(ch, "Start Match\n\n");
 			}
 
 			try {
@@ -122,7 +122,7 @@ public class Server {
 
 		if (match_name.equals("")) {
 			match_name = manageFirstClient(client);
-			sendStringToClient(client, "Started match with match name " + match_name);
+			sendStringToClient(client, "Started match with match name " + match_name + "\n\n");
 		} else {
 			manageOtherClient(client, match_name);
 		}
@@ -134,12 +134,12 @@ public class Server {
 	 * @return the name of the newly created match
 	 */
 	private String manageFirstClient(ClientHandler first_client) throws InterruptedException {
-		Integer num;
+		int num;
 
 		//TODO: put all strings in a separate class
 		sendStringToClient(first_client, "How many player in match? ");
 		try {
-			int num = Integer.parseInt(receiveStringFromClient(first_client));
+			num = Integer.parseInt(receiveStringFromClient(first_client));
 		} catch (NumberFormatException e) {
 			throw new InterruptedException();
 		}

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.List;
@@ -8,11 +9,12 @@ import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
-import it.polimi.ingsw.controller.message.BuyCardMessage;
 import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
+import it.polimi.ingsw.model.resources.Resource;
 
+import it.polimi.ingsw.view.cli.Parser;
 import it.polimi.ingsw.view.View;
 
 public class CLI implements View {
@@ -25,13 +27,14 @@ public class CLI implements View {
 		Scanner stdin = new Scanner(System.in);
 		new Thread(() -> {
 			while (true) {
+				System.out.print("> ");
 				String inputLine = stdin.nextLine();
 				try {
-					Message parsed_message = parseInput(inputLine);
+					Message parsed_message = Parser.parseInput(inputLine, this.initializing);
 					client.sendMessage(parsed_message);
 				} catch (IllegalArgumentException e) {
 					System.out.println("Sorry, the command was malformed");
-					if (!e.getMessage().equals("")) {
+					if (e.getMessage() != null) {
 						System.out.println("The command should be: " + e.getMessage());
 					}
 				}
@@ -63,49 +66,9 @@ public class CLI implements View {
 	public void handleInitializing(InitializingServerMessage initializing_message) {
 		//TODO: temporary?
 		System.out.print(initializing_message.message);
-		if (initializing_message.message.equals("Start Match")) {
+		if (initializing_message.message.equals("Start Match\n\n")) {
+			System.out.print("> ");
 			this.initializing = false;
-		}
-	}
-
-	/**
-	 * Parse the input from the command line
-	 *
-	 * @param input the String form the CLI
-	 * @return the Message created to send to the client
-	 * @throws IllegalArgumentException if the input cannot be parsed
-	 */
-	private Message parseInput(String input) throws IllegalArgumentException {
-		if (this.initializing) {
-			return new InitializingMessage(input);
-		}
-
-		//TODO: Oh ma qui nessuno ha il player
-		String[] inputs = input.split(" ");
-		switch(inputs[0].toUpperCase()) {
-			case "BUYCARD":
-			case "BUY":
-			case "B":
-				return parseBuyCardMessage(inputs);
-			default:
-				throw new IllegalArgumentException();
-		}
-	}
-
-	private Message parseBuyCardMessage(String[] inputs) throws IllegalArgumentException {
-		//TODO: test this
-		int i = inputs[1].equals("CARD") ? 2 : 1;
-
-		try {
-			int level = Integer.parseInt(inputs[i]);
-			i++;
-			int color = DevelopmentCardsColor.valueOf(inputs[i]).getOrder();
-			i++;
-			int slot = Integer.parseInt(inputs[i]);
-			// TODO: discountability
-			return new BuyCardMessage();
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("buy level color slot");
 		}
 	}
 }

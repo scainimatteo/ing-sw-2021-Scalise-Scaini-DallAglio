@@ -14,7 +14,7 @@ public class InitialController implements Controller {
 	 *
 	 * @param message the message to set
 	 */
-	public void setReceivedMessage(String message) {
+	public synchronized void setReceivedMessage(String message) {
 		this.message = message;
 		notify();
 	}
@@ -24,7 +24,7 @@ public class InitialController implements Controller {
 	 *
 	 * @return the message received from the client
 	 */
-	public String receiveMessage() throws InterruptedException {
+	public synchronized String receiveMessage() throws InterruptedException {
 		while (this.message == null) {
 			wait();
 		}

@@ -53,11 +53,9 @@ public class ClientHandler implements Runnable {
 	 */
 	public void sendToClient(ServerMessage message) {
 		try {
-			while (true) {
-				out.reset();
-				out.writeObject(message);
-				out.flush();
-			}
+			out.reset();
+			out.writeObject(message);
+			out.flush();
 		} catch (Exception e) {
 			// TODO: better exception handling
 			e.printStackTrace();
@@ -86,7 +84,7 @@ public class ClientHandler implements Runnable {
 			// TODO: better exception handling
 			try {
 				Message message = (Message) in.readObject();
-				message.setPlayer(this.player);
+				//message.setPlayer(this.player);
 				this.controller.handleMessage(message);
 			} catch (IOException e) {
 				e.printStackTrace();

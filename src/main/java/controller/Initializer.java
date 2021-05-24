@@ -36,9 +36,9 @@ public class Initializer {
 
 	/**
 	 * Starting procedure for the match:
-	 *   - creating the Players from the ClientHandlers
-	 *   - distribute 4 LeaderCards to each player, make them choose 2
-	 *   - choose randomly the first player and assigning in order the starting resources
+	 *   - create the Players and the RemoteViews from the ClientHandlers
+	 *   - distribute 4 LeaderCards to each player
+	 *   - choose randomly the first player
 	 *
 	 * @param clients the ClientHandlers of the Players
 	 * @return the new Game
@@ -53,6 +53,7 @@ public class Initializer {
 			return createGame();
 		} catch (Exception e) {
 			//TODO: too generic?
+			e.printStackTrace();
 			throw new InstantiationException();
 		}
 	}
@@ -68,19 +69,18 @@ public class Initializer {
 		Tile[] all_tiles = factory.getAllTiles();
 
 		this.players = new Player[clients.size()];
+		this.remote_views = new RemoteView[clients.size()];
 
 		for (int i = 0; i < clients.size(); i++) {
 			this.players[i] = new Player(clients.get(i).getNickname(), all_cells, all_tiles);
 			this.remote_views[i] = new RemoteView(this.players[i], clients.get(i));
 			this.players[i].addObserver(this.remote_views[i]);
+			clients.get(i).setPlayer(this.players[i]);
 		}
 	}
 
 	/**
-	 * Distribute the starting LeaderCards to a Player
-	 *
-	 * @param p the Player to distribute the LeaderCards to
-	 * @param leader_cards an array containg the 4 random LeaderCards
+	 * Distribute the starting LeaderCards to the Players
 	 */
 	private void distributeLeaderCards() throws ParseException, IOException {
 		Deck<LeaderCard> all_leader_cards = getLeaderCardDeck();
@@ -119,6 +119,9 @@ public class Initializer {
 		this.players = players_list.toArray(new Player[this.players.length]);
 	}
 
+	/**
+	 * Add the RemoteViews as Observer of Game
+	 */
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
 			game.addObserver(r);
