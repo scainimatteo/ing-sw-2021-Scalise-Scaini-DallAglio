@@ -1,8 +1,14 @@
 package it.polimi.ingsw.view.cli;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.controller.message.InitializingMessage;
 import it.polimi.ingsw.controller.message.BuyCardMessage;
 import it.polimi.ingsw.controller.message.MarketMessage;
+import it.polimi.ingsw.controller.message.Message;
+
+import it.polimi.ingsw.model.card.DevelopmentCardsColor;
+import it.polimi.ingsw.model.resources.Resource;
 
 public class Parser {
 	/**

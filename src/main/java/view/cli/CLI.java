@@ -11,9 +11,6 @@ import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.message.Message;
 
-import it.polimi.ingsw.model.card.DevelopmentCardsColor;
-import it.polimi.ingsw.model.resources.Resource;
-
 import it.polimi.ingsw.view.cli.Parser;
 import it.polimi.ingsw.view.View;
 

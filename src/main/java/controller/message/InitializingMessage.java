@@ -5,7 +5,7 @@ import it.polimi.ingsw.controller.Controller;
 
 import java.io.Serializable;
 
-public class InitializingMessage implements Message, Serializable {
+public class InitializingMessage extends Message implements Serializable {
 	protected static final long serialVersionUID = 976756L;
 	public String message;
 
