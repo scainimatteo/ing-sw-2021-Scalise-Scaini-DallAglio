@@ -21,6 +21,8 @@ import it.polimi.ingsw.controller.GameController;
 
 import it.polimi.ingsw.server.ClientHandler;
 
+import it.polimi.ingsw.util.ANSI;
+
 public class Server {
 	private int port;
 	private ServerSocket server_socket;
@@ -46,8 +48,7 @@ public class Server {
 	 * Loops forever - accepts new players and inserts them in the lobby
 	 */
 	public void startServer() {
-		// print the port in green -> TODO: make a static class with all the ANSI codes
-		System.out.printf("Server starting on port \u001B[32m%d\u001B[0m\n\n", this.port);
+		System.out.printf("Server starting on port " + ANSI.green(String.valueOf(this.port)));
 		while (true) {
 			try {
 				// waits until a new client connects
@@ -66,6 +67,8 @@ public class Server {
 						new_client_handler.close("Miscomunication with the server");
 					} catch (IllegalAccessError e) {
 						System.out.println("Client failed to put right match name or tried to use an already existing nickname");
+					} catch (InstantiationException e) {
+						System.out.println("A match could not start");
 					}
 				}).start();
 			} catch (IOException e) {
@@ -77,7 +80,7 @@ public class Server {
 	/**
 	 * @param client the client that has to be inserted in the lobby
 	 */
-	private void insertIntoLobby(ClientHandler client) throws IllegalAccessError, InterruptedException {
+	private void insertIntoLobby(ClientHandler client) throws IllegalAccessError, InterruptedException, InstantiationException {
 		String match_name = manageClient(client);
 		// TODO: check for racing conditions
 		if (checkIfAllPlayersPresent(match_name)) {
@@ -86,16 +89,12 @@ public class Server {
 				sendStringToClient(ch, "Start Match\n\n");
 			}
 
-			try {
-				//TODO: if only one player, new_match = new SoloMatch
-				GameController new_match = new GameController(this.lobby.get(match_name));
-				for (ClientHandler c: this.lobby.get(match_name)) {
-					c.setController(new_match);
-				}
-				this.executor.execute(new_match);
-			} catch (InstantiationException e) {
-				// TODO
+			//TODO: if only one player, new_match = new SoloMatch
+			GameController new_match = new GameController(this.lobby.get(match_name));
+			for (ClientHandler c: this.lobby.get(match_name)) {
+				c.setController(new_match);
 			}
+			this.executor.execute(new_match);
 		}
 	}
 
