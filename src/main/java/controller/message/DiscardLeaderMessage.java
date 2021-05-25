@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller.message;
 
-import it.polimi.ingsw.model.card.LeaderCard;
-
 import it.polimi.ingsw.controller.Controller;
+
+import it.polimi.ingsw.model.card.LeaderCard;
 
 public class DiscardLeaderMessage extends LeaderCardMessage {
 	public DiscardLeaderMessage(LeaderCard leader_card){
