@@ -62,10 +62,10 @@ public class StrongBox {
 	 * @param to_check are the resources that need to be checked
 	 * @return true if the resources are contained
 	 */
-	public boolean areContainedInStrongbox(ArrayList<Resource> to_check){
+	public boolean areContainedInStrongbox(ArrayList<Resource> cost){
 		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
 		for (Resource res : check){
-			if(storage.get(res) < (int) to_check.stream().filter(x->x.equals(res)).count()){
+			if(storage.get(res) < (int) cost.stream().filter(x->x.equals(res)).count()){
 				return false;
 			}
 		}

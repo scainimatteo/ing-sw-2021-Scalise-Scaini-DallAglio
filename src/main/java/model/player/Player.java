@@ -44,9 +44,10 @@ public class Player extends Observable {
 		return this.nickname;
 	}
 
-	public FaithTrack getFaithTrack() {
-		return this.track;
-	}
+
+	/**
+	 * LEADER CARD METHODS
+	 */
 	
 	public ArrayList<LeaderCard> getDeck(){
 		return this.leader_cards_deck;
@@ -63,44 +64,6 @@ public class Player extends Observable {
 			return this.isActivable((LeaderCardResourcesCost) card);
 		}
 		return false;
-	}
-
-	/**
-	 * Return the total sum of resources available to the player
-	 * 
-	 * @return an hashmap with the sum of all the resources in the three available storages
-	 */
-
-	public HashMap <Resource, Integer> totalResources() {
-		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
-		total.put(Resource.COIN, strongbox.get(Resource.COIN));
-		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));
-		total.put(Resource.SHIELD, strongbox.get(Resource.SHIELD));
-		total.put(Resource.STONE, strongbox.get(Resource.STONE));
-		for (Resource x : getTopResource()){
-			if (x != null) {
-				total.put(x, total.get(x) + 1);
-			}
-		}
-		for (Resource x : getMiddleResources()){
-			if (x != null) {
-				total.put(x, total.get(x) + 1);
-			}
-		}
-		for (Resource x : getBottomResources()){
-			if (x != null) {
-				total.put(x, total.get(x) + 1);
-			}
-		}
-        ExtraSpaceAbility test = new ExtraSpaceAbility(null);
-		ExtraSpaceAbility ability;
-		for (LeaderCard x : leader_cards_deck){
-			if (x.isActive() && x.getAbility().checkAbility(test)){
-				ability = (ExtraSpaceAbility) x.getAbility();
-				total.put(ability.getResourceType(), total.get(ability.getResourceType()) + ability.peekResources());
-			}
-		}
-		return total;
 	}
 
 	/**
@@ -150,27 +113,72 @@ public class Player extends Observable {
 		return true;
 	}
 
-	// TODO: this method will change
+	public void activateLeader(LeaderCard card){
+		for (LeaderCard x : leader_cards_deck){
+			if (x.equals(card)){
+				x.activateLeaderCard();
+				return;
+			}
+		}
+	}
+
+	public void discardLeader(LeaderCard leader_card){
+		this.leader_cards_deck.remove(leader_card);
+	}
+
 	/**
-	 * @param whichLeaderCard is an array of two boolean that represent which leader card has to be discarded
-	 * @return a faithcontroller that contains the number of discarded leader cards in the faith gained
+	 * Return the total sum of resources available to the player
+	 * 
+	 * @return an hashmap with the sum of all the resources in the three available storages
 	 */
-	//public FaithController discardLeaderCard(boolean[] whichLeaderCard){
-	//	int to_return = 0;
 
-	//	for (int i = 0; i < 2; i ++){
-	//		if (whichLeaderCard[i]){
-	//			this.leader_cards_deck[i] = null;
-	//			to_return ++;
-	//		} 
-	//	}
+	private HashMap <Resource, Integer> totalResources() {
+		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
+		total.put(Resource.COIN, strongbox.get(Resource.COIN));
+		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));
+		total.put(Resource.SHIELD, strongbox.get(Resource.SHIELD));
+		total.put(Resource.STONE, strongbox.get(Resource.STONE));
+		for (Resource x : getTopResource()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+		for (Resource x : getMiddleResources()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+		for (Resource x : getBottomResources()){
+			if (x != null) {
+				total.put(x, total.get(x) + 1);
+			}
+		}
+        ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		ExtraSpaceAbility ability;
+		for (LeaderCard x : leader_cards_deck){
+			if (x.isActive() && x.getAbility().checkAbility(test)){
+				ability = (ExtraSpaceAbility) x.getAbility();
+				total.put(ability.getResourceType(), total.get(ability.getResourceType()) + ability.peekResources());
+			}
+		}
+		return total;
+	}
 
-	//	return new FaithController(this, to_return, 0);
-	//}
+	public boolean hasEnoughResources(ArrayList<Resource> cost){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		HashMap <Resource, Integer> storage = totalResources();
+		for (Resource res : check){
+			if(storage.get(res) < (int) cost.stream().filter(x->x.equals(res)).count()){
+				return false;
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * WAREHOUSE METHODS
 	 */
+
 	public Warehouse getWarehouse(){
 		return this.warehouse;
 	}
@@ -242,7 +250,10 @@ public class Player extends Observable {
 	/**
 	 * DEVCARDSSLOTS METHODS
 	 */
-	
+	public boolean fitsInSlot(DevelopmentCard card, int pos){
+		return this.development_card_slots.fitsInSlot(card, pos);
+	}
+
 	public void buyCard(DevelopmentCard card, int position){
 		this.development_card_slots.buyCard(card, position);
 	}
@@ -266,7 +277,15 @@ public class Player extends Observable {
 	/**
 	 * FAITHTRACK METHODS
 	 */
+	public FaithTrack getFaithTrack() {
+		return this.track;
+	}
+
 	public int getMarkerPosition(){
 		return this.track.getMarkerPosition();
+	}
+
+	public void moveForward(int steps){
+		this.track.moveForward(steps);
 	}
 }

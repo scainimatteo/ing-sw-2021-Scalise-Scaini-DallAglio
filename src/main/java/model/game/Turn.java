@@ -38,16 +38,16 @@ public class Turn implements Serializable {
 		return this.required_resources;
 	}
 
-	public void setRequiredResources(ArrayList<Resource> required) {
-		this.required_resources = required;
+	public void addRequiredResources(ArrayList<Resource> required) {
+		this.required_resources.addAll(required);
 	}
 
 	public ArrayList<Resource> getProducedResources() {
 		return this.produced_resources;
 	}
 
-	public void setProducedResources(ArrayList<Resource> produced) {
-		this.produced_resources = produced;
+	public void addProducedResources(ArrayList<Resource> produced) {
+		this.produced_resources.addAll(produced);
 	}
 
 	public boolean hasDoneAction() {

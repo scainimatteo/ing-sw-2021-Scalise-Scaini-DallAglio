@@ -16,8 +16,8 @@ public interface Controller {
 	public void handleBuyCard(Player player, int row, int column, int slot);
 	public void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles);
 	public void handleProduction(Player player, ProductionInterface production);
-	public void handleActivateLeader(Player player, LeaderCard leader_card);
+	public void handleActivateLeader(Player player, LeaderCard card);
 	public void handleRearrange(Player player, int swap1, int swap2);
 	public void handleEndTurn(Player player);
-	public void handleDiscardLeader(Player player, LeaderCard leader_card);
+	public void handleDiscardLeader(Player player, LeaderCard card);
 }

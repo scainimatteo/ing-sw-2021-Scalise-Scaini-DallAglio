@@ -12,6 +12,7 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.DiscountAbility;
 import it.polimi.ingsw.model.card.WhiteMarblesAbility;
+import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
@@ -23,13 +24,11 @@ import java.util.ArrayList;
 public class GameController implements Runnable, Controller {
 	private ArrayList<ClientHandler> clients;
 	private Game game;
-	private Turn turn;
 
 	public GameController(ArrayList<ClientHandler> clients) throws InstantiationException {
 		this.clients = clients;
 		try {
 			this.game = new Initializer().initializeGame(clients);
-			this.turn = game.getTurn();
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 			throw new InstantiationException();
@@ -44,8 +43,33 @@ public class GameController implements Runnable, Controller {
 	public void run() {
 		return;
 	}
+	
+	/**
+	 * checks whether the player who sent the message is the active player or not
+	 */
+	private boolean checkPlayer(Player player){
+		if (!player.equals(game.getTurn().getPlayer())){
+			return false;
+		} else {return true;}
+	}
 
-	public void handleBuyCard(Player player, int row, int column, int slot) {
+	public void handleActivateLeader(Player player, LeaderCard card) {
+		if (checkPlayer(player)){
+			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
+				if(player.isActivable(card) && !card.isActive()){
+					player.activateLeader(card);	
+				} else {handleError();}
+			} else {handleError();}
+		} else {handleError();}
+	}
+
+	public void handleDiscardLeader(Player player, LeaderCard card) {
+		if (checkPlayer(player)){
+			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
+				player.discardLeader(card);
+				player.moveForward(1);
+			} else {handleError();}
+		} else {handleError();}
 	}
 
 	/**
@@ -77,11 +101,13 @@ public class GameController implements Runnable, Controller {
 	 *
 	 * @param player is the player whose leader cards need to be checked
 	 * @param bonus is the bonus requested by the player 
-	 * @return true if the bonus is legal
-	 */
-	private boolean applyBonus (ArrayList<Resource> bonus, ArrayList<Resource> gains){
+	 * @param gains is the ArrayList of resources gained by the player
+	 * @return an ArrayList with proper bonus applied
+	 * @throws IllegalArgumentException if the bonus is too big
+	 * */
+	private ArrayList<Resource> applyBonus (ArrayList<Resource> bonus, ArrayList<Resource> gains){
 		if (bonus.size() > gains.stream().filter(x->x.equals(null)).count()){
-			return false;
+			throw new IllegalArgumentException();
 		} else {
 			for (Resource x : bonus){
 				if (x == null){
@@ -89,34 +115,74 @@ public class GameController implements Runnable, Controller {
 				}
 			}
 			gains.addAll(bonus);
-			return true;
+			return gains;
 		}
 	}
 
 	public void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> bonus) {
-		if (!checkPlayer(player)){
-			handleError();
-		} else if (!checkCorrectBonus(player, bonus)){
-			handleError();
-		} else {
-			try{
-				if (row_or_column){
-					ArrayList<Resource> gains = game.getColumn(column);
-					if (applyBonus(bonus, gains)){
-						turn.setProducedResources(gains);
-						game.shiftColumn(column);
-					} else {handleError();}
-				} else {
-					ArrayList<Resource> gains = game.getRow(row);
-					if (applyBonus(bonus, gains)){
-						turn.setProducedResources(gains);
-						game.shiftRow(row);
-					} else {handleError();}
-				}
-			} catch (IllegalArgumentException e){
-				handleError();
+		if (checkPlayer(player)){
+			if (game.getTurn().hasDoneAction()){
+				if (checkCorrectBonus(player, bonus)){
+					try{
+						ArrayList<Resource> gains = row_or_column? game.getColumn(column) : game.getRow(row); 
+						try{
+							gains = applyBonus(bonus, gains);
+							game.getTurn().addProducedResources(gains);
+							if (row_or_column){
+								game.shiftColumn(column);
+							} else {
+								game.shiftRow(row);
+							}
+							game.getTurn().setDoneAction(true);
+							game.getTurn().setDiscard(true);
+						} catch (IllegalArgumentException e) {handleError();}
+					} catch (IllegalArgumentException e) {handleError();}
+				} else {handleError();}
+			} else {handleError();}
+		} else {handleError();}
+	}
+
+	/**
+	 * applies discount to given cost
+	 *
+	 * @param player is the player whose leader cards need to be checked
+	 * @param cost is the ArrayList of resources to be paid
+	 * @return an ArrayList with proper discount applied
+	 */ 
+	private ArrayList<Resource> applyDiscount(Player player, ArrayList<Resource> cost){
+		DiscountAbility test = new DiscountAbility(null);
+		ArrayList<Resource> discount = new ArrayList<Resource>();
+		for (LeaderCard x : player.getDeck()){
+			LeaderAbility ability = x.getAbility();
+			if (ability.checkAbility(test)){
+				discount.add(((DiscountAbility) ability).getDiscountedResource());
 			}
 		}
+		for (Resource res : discount){
+			cost.remove(res);
+		}
+		return cost;
+	}
+
+	public void handleBuyCard(Player player, int row, int column, int slot) {
+		if (checkPlayer(player)){
+			if (game.getTurn().hasDoneAction()){
+				try{
+					DevelopmentCard card = game.getTopCards()[row][column]; 
+					ArrayList<Resource> cost = applyDiscount(player, (ArrayList<Resource>)card.getCost().clone());
+					if (player.hasEnoughResources(cost)){
+						if (player.fitsInSlot(card, slot)){
+							try { 
+								game.getFromDeck(card);
+								player.buyCard(card, slot);
+								game.getTurn().addRequiredResources(cost);
+								game.getTurn().setDoneAction(true);
+							} catch (IndexOutOfBoundsException e) {handleError();}
+						} else {handleError();}
+					} else {handleError();}
+				} catch (IndexOutOfBoundsException e) {handleError();}
+			} else {handleError();}
+		} else {handleError();}
 	}
 
 	public void handleProduction(Player player, ProductionInterface production) {
@@ -137,24 +203,8 @@ public class GameController implements Runnable, Controller {
 	public void handleRearrange(Player player, int swap1, int swap2) {
 	}
 
-	public void handleActivateLeader(Player player, LeaderCard leader_card) {
-	}
-
-	public void handleDiscardLeader(Player player, LeaderCard leader_card) {
-	}
-
 	private void handleError(){
 		this.game.handleError();
 	}
-
-	private boolean checkPlayer(Player player){
-		if (!player.equals(game.getTurn().getPlayer())){
-			return false;
-		} else {return true;}
-	}
-
-	
-
-
 
 }

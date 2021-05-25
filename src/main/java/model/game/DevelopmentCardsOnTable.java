@@ -53,7 +53,7 @@ public class DevelopmentCardsOnTable {
 	 * @param chosen_card the card chosen from the one displayed
 	 * @throws NoSuchElementException if the chosen card is not at the top of any deck
 	 */
-	public void getFromDeck(DevelopmentCard chosen_card) {
+	public void getFromDeck(DevelopmentCard chosen_card) throws NoSuchElementException {
 		boolean done = false;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {

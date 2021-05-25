@@ -61,8 +61,19 @@ public class Game extends Observable {
 		return this.market.getColumn(index);
 	}
 
+	/**
+	 * TABLE METHODS
+	 */
 	public DevelopmentCardsOnTable getDevelopmentCardsOnTable() {
 		return this.development_cards_on_table;
+	}
+
+	public DevelopmentCard[][] getTopCards() {
+		return this.development_cards_on_table.getTopCards();
+	}
+
+	public void getFromDeck(DevelopmentCard chosen_card) {
+		this.development_cards_on_table.getFromDeck(chosen_card);
 	}
 
 	public void shiftPlayers() {
