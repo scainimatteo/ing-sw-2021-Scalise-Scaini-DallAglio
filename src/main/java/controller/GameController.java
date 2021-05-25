@@ -46,7 +46,7 @@ public class GameController implements Runnable, Controller {
 	public void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles) {
 	}
 
-	public void handleProduction(Player player, ProductionInterface production) {
+	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
 	}
 
 	public void handleEndTurn(Player player) {

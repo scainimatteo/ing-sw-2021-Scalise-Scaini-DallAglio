@@ -1,19 +1,20 @@
 package it.polimi.ingsw.controller.message;
 
-import it.polimi.ingsw.model.resources.ProductionInterface;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.controller.Controller;
 
+import it.polimi.ingsw.model.resources.ProductionInterface;
 import it.polimi.ingsw.model.player.Player;
 
 public class ProductionMessage extends TurnMessage {
-	public ProductionInterface production;
+	public ArrayList<ProductionInterface> productions;
 
-	public ProductionMessage(ProductionInterface production){
-		this.production = production;
+	public ProductionMessage(ArrayList<ProductionInterface> productions){
+		this.productions = productions;
 	}
 
 	public void useMessage(Controller controller) {
-		controller.handleProduction(this.player, this.production);
+		controller.handleProduction(this.player, this.productions);
 	}
 }
