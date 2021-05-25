@@ -11,12 +11,15 @@ import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.message.Message;
 
-import it.polimi.ingsw.view.cli.Parser;
+import it.polimi.ingsw.view.cli.MessageParser;
+import it.polimi.ingsw.view.cli.ViewParser;
 import it.polimi.ingsw.view.View;
 
 public class CLI extends View {
 	/**
 	 * Start a thread parsing the strings passed from the command line
+	 *
+	 * @param client the Client using the View
 	 */
 	public void startView(Client client) {
 		Scanner stdin = new Scanner(System.in);
@@ -30,8 +33,7 @@ public class CLI extends View {
 						this.nickname_flag = false;
 					}
 
-					Message parsed_message = Parser.parseInput(inputLine, this.initializing, this.getMyPlayer());
-					client.sendMessage(parsed_message);
+					parseInput(client, inputLine);
 				} catch (IllegalArgumentException e) {
 					System.out.println("Sorry, the command was malformed");
 					if (e.getMessage() != null) {
@@ -40,6 +42,22 @@ public class CLI extends View {
 				}
 			}
 		}).start();
+	}
+
+	/**
+	 * Use the two Parsers to parse the input string
+	 *
+	 * @param client the Client using the View
+	 * @param inputLine the String written by the Client
+	 */
+	private void parseInput(Client client, String inputLine) {
+		String[] inputs = inputLine.split(" ");
+		if (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L")) {
+			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.nickname);
+		} else {
+			Message parsed_message = MessageParser.parseInput(inputLine, this.initializing, this.getMyPlayer());
+			client.sendMessage(parsed_message);
+		}
 	}
 
 	/**

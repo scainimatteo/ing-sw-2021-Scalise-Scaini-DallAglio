@@ -26,7 +26,7 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 
-public class Parser {
+public class MessageParser {
 	/**
 	 * Parse the input from the command line
 	 *

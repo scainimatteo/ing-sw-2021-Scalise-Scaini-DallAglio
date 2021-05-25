@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.simplemodel.SimplePlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleGame;
+
 public class Printer {
 	//TODO: rethink these methods
 	/**
@@ -54,6 +57,34 @@ public class Printer {
 		//	}
 		//}
 		//return total;
+		return "";
+	}
+
+	public static String printMarket(SimpleGame game) {
+		return "";
+	}
+
+	public static String printDevelopmentCardsOnTable(SimpleGame game) {
+		return "";
+	}
+
+	public static String printTrack(SimplePlayer player) {
+		return "";
+	}
+
+	public static String printWarehouse(SimplePlayer player) {
+		return "";
+	}
+
+	public static String printStrongbox(SimplePlayer player) {
+		return "";
+	}
+
+	public static String printLeaderCards(SimplePlayer player) {
+		return "";
+	}
+
+	public static String printDevelopmentCardsSlots(SimplePlayer player) {
 		return "";
 	}
 }
