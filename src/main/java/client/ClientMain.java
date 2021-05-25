@@ -7,13 +7,16 @@ import java.io.IOException;
 
 import it.polimi.ingsw.client.Client;
 
+import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.View;
 
 public class ClientMain {
 	private static int port;
 	private static String address;
+	private static View view;
 	private static final int default_port = 1234;
 	private static final String default_address = "127.0.0.1";
+	private static final View default_view = new CLI();
 
 	public static void main(String[] args) {
 		parseArguments(args);
@@ -28,6 +31,7 @@ public class ClientMain {
 	public static void parseArguments(String[] args) {
 		port = default_port;
 		address = default_address;
+		view = default_view;
 
 		if (args.length < 2) {
 			return;
@@ -44,12 +48,15 @@ public class ClientMain {
 		if (arglist.contains("-a") || arglist.contains("--address")) {
 			address = parseAddress(arglist);
 		}
+
+		// VIEW
+		if (arglist.contains("-v") || arglist.contains("--view")) {
+			view = parseView(arglist);
+		}
 	}
 
 	public static void startClient() {
 		try {
-			//TODO: view
-			View view = null;
 			new Client(address, port, view).startClient();
 		} catch (IOException e) {
 			System.out.printf("Can't run client on address %s and port %d\n", address, port);
@@ -80,5 +87,24 @@ public class ClientMain {
 		}
 
 		return arglist.get(index + 1);
+	}
+
+	/**
+	 * @param arglist a List with all the command line arguments
+	 * @return the View specified by command line
+	 */
+	private static View parseView(List<String> arglist) {
+		int index = arglist.indexOf("-v");
+		if (index == -1) {
+			index = arglist.indexOf("--view");
+		}
+
+		String view_string = arglist.get(index + 1);
+		if (view_string.equals("cli")) {
+			return new CLI();
+		} else {
+			// TODO: GUI
+			return null;
+		}
 	}
 }

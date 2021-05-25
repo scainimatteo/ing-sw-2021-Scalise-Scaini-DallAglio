@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.controller.message.Message;
+import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.Initializer;
 import it.polimi.ingsw.controller.Controller;
 
@@ -226,10 +227,10 @@ public class GameController implements Runnable, Controller {
 	public void handleEndTurn(Player player) {
 	}
 
-	public void handlePay(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace) {
+	public void handlePay(Player player, Storage storage) {
 	}
 
-	public void handleStore(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace, int shelf) {
+	public void handleStore(Player player, Storage storage) {
 	}
 
 	public void handleDiscardResources(Player player) {

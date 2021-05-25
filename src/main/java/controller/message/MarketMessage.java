@@ -12,16 +12,16 @@ public class MarketMessage extends TurnMessage{
 	public boolean row_or_column;
 	public ArrayList<Resource> white_marbles;
 
-	public MarketMessage(int row, int column, boolean row_or_column){
-		this.row = row;
-		this.column = column;
+	public MarketMessage(boolean row_or_column, int index){
 		this.row_or_column = row_or_column;
+		if (row_or_column) {
+			this.column = index;
+		} else {
+			this.row = index;
+		}
 	}
 
-	public MarketMessage(int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles){
-		this.row = row;
-		this.column = column;
-		this.row_or_column = row_or_column;
+	public MarketMessage(boolean row_or_column, int index, ArrayList<Resource> white_marbles){
 		this.white_marbles = white_marbles;
 	}
 
