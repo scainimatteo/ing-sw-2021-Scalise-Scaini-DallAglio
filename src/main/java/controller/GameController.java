@@ -53,6 +53,9 @@ public class GameController implements Runnable, Controller {
 		} else {return true;}
 	}
 
+	/**
+	 * LEADER CARD RELATED ACTIONS
+	 */
 	public void handleActivateLeader(Player player, LeaderCard card) {
 		if (checkPlayer(player)){
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
@@ -71,6 +74,10 @@ public class GameController implements Runnable, Controller {
 			} else {handleError();}
 		} else {handleError();}
 	}
+
+	/**
+	 * MAIN ACTIONS
+	 */
 
 	/**
 	 * checks if the bonus can be extracted from the player's leader cards
@@ -121,7 +128,7 @@ public class GameController implements Runnable, Controller {
 
 	public void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> bonus) {
 		if (checkPlayer(player)){
-			if (game.getTurn().hasDoneAction()){
+			if (!game.getTurn().hasDoneAction()){
 				if (checkCorrectBonus(player, bonus)){
 					try{
 						ArrayList<Resource> gains = row_or_column? game.getColumn(column) : game.getRow(row); 
@@ -166,10 +173,11 @@ public class GameController implements Runnable, Controller {
 
 	public void handleBuyCard(Player player, int row, int column, int slot) {
 		if (checkPlayer(player)){
-			if (game.getTurn().hasDoneAction()){
+			if (!game.getTurn().hasDoneAction()){
 				try{
 					DevelopmentCard card = game.getTopCards()[row][column]; 
-					ArrayList<Resource> cost = applyDiscount(player, (ArrayList<Resource>)card.getCost().clone());
+					ArrayList<Resource> cost = new ArrayList<Resource>();
+					cost.addAll(card.getCost());
 					if (player.hasEnoughResources(cost)){
 						if (player.fitsInSlot(card, slot)){
 							try { 
@@ -185,7 +193,34 @@ public class GameController implements Runnable, Controller {
 		} else {handleError();}
 	}
 
-	public void handleProduction(Player player, ProductionInterface production) {
+	private ArrayList<Resource> totalProductionCost(ArrayList<ProductionInterface> productions){
+		ArrayList<Resource> total = new ArrayList<Resource>();
+		for (ProductionInterface x : productions){
+			total.addAll(x.getRequiredResources());
+		}
+		return total;
+	}		
+
+	private ArrayList<Resource> totalProductionGain(ArrayList<ProductionInterface> productions){
+		ArrayList<Resource> total = new ArrayList<Resource>();
+		for (ProductionInterface x : productions){
+			total.addAll(x.getProducedResources());
+		}
+		return total;
+	}		
+
+	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
+		if (checkPlayer(player)){
+			if (!game.getTurn().hasDoneAction()){
+				ArrayList<Resource> required = new totalProductionCost(productions);
+				ArrayList<Resource> produced = new totalProductionGain(productions);
+				if(player.hasEnoughResources(required)){
+					game.getTurn().addRequiredResources(required);
+					game.getTurn().addProducedResources(produced);
+					game.getTurn().setDoneAction(true);
+				} else {handleError();}
+			} else {handleError();}
+		} else {handleError();}
 	}
 
 	public void handleEndTurn(Player player) {
