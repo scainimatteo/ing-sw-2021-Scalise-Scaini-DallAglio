@@ -213,8 +213,8 @@ public class GameController implements Runnable, Controller {
 	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
 		if (checkPlayer(player)){
 			if (!game.getTurn().hasDoneAction()){
-				ArrayList<Resource> required = new totalProductionCost(productions);
-				ArrayList<Resource> produced = new totalProductionGain(productions);
+				ArrayList<Resource> required = totalProductionCost(productions);
+				ArrayList<Resource> produced = totalProductionGain(productions);
 				if(player.hasEnoughResources(required)){
 					game.getTurn().addRequiredResources(required);
 					game.getTurn().addProducedResources(produced);
