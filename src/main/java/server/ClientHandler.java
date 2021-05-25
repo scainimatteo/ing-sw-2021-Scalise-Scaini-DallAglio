@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
 
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.Controller;
 
@@ -67,8 +68,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void close(String error_message) {
 		try {
-			//TODO
-			//asyncSendToClient(error_message);
+			this.sendToClient(new ErrorMessage(error_message));
 			this.server.removeNickname(this.nickname);
 			this.client.close();
 		} catch (IOException e) {
@@ -81,15 +81,15 @@ public class ClientHandler implements Runnable {
 	 */
 	public void run() {
 		while (true) {
-			// TODO: better exception handling
 			try {
 				Message message = (Message) in.readObject();
-				//message.setPlayer(this.player);
+				message.setPlayer(this.player);
 				this.controller.handleMessage(message);
 			} catch (IOException e) {
-				e.printStackTrace();
+				this.close("Connection closed");
+				break;
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				System.out.println("The client sent something not understandable");
 			}
 		}
 	}
