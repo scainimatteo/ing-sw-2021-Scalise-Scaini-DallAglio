@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
 import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
@@ -49,6 +50,7 @@ public class MessageParser {
 			case "M":
 				return parseMarketMessage(inputs);
 			case "PRODUCTION":
+			case "PROD":
 			case "PR":
 				return parseProductionMessage(inputs, player);
 			case "PAY":
@@ -110,59 +112,85 @@ public class MessageParser {
 		}
 	}
 
+	private static ProductionInterface parseBaseProduction(String[] inputs, int i, boolean production_base) throws IndexOutOfBoundsException {
+		if (production_base) {
+			throw new IllegalArgumentException();
+		}
+
+		ArrayList<Resource> required = new ArrayList<Resource>();
+		required.add(Resource.valueOf(inputs[i + 1].toUpperCase()));
+		required.add(Resource.valueOf(inputs[i + 2].toUpperCase()));
+		ArrayList<Resource> produced = new ArrayList<Resource>();
+		produced.add(Resource.valueOf(inputs[i + 3].toUpperCase()));
+		return new Production(required, produced);
+	}
+
+	private static ProductionInterface parseDevelopmentCardProduction(String[] inputs, int i, SimplePlayer player, HashSet<Integer> slots_used) throws IndexOutOfBoundsException, IllegalArgumentException {
+		int slot = Integer.parseInt(inputs[i + 1]);
+		if (slot < 1 || slot > 3 || !slots_used.add(slot)) {
+			throw new IllegalArgumentException();
+		}
+
+		SimpleDevelopmentCardSlot development_card_slots = player.getDevelopmentCardsSlots();
+		if (slot == 1) {
+			DevelopmentCard[] first_column = development_card_slots.getFirstColumn();
+			return first_column[first_column.length - 1];
+		} else if (slot == 2) {
+			DevelopmentCard[] second_column = development_card_slots.getSecondColumn();
+			return second_column[second_column.length - 1];
+		} else {
+			DevelopmentCard[] third_column = development_card_slots.getThirdColumn();
+			return third_column[third_column.length - 1];
+		}
+	}
+
+	private static ProductionInterface parseLeaderCardProduction(String[] inputs, int i, SimplePlayer player, HashSet<Integer> leader_used) throws IndexOutOfBoundsException, IllegalArgumentException {
+		int index = Integer.parseInt(inputs[i + 1]);
+		if (index < 1 || index > 2 || !leader_used.add(index)) {
+			throw new IllegalArgumentException();
+		}
+
+		ArrayList<Resource> cost = new ArrayList<Resource>();
+		cost.add(Resource.valueOf(inputs[i + 2].toUpperCase()));
+
+		ArrayList<LeaderCard> player_deck = player.getDeck();
+		LeaderCard leader_card = player_deck.get(index - 1);
+		ProductionInterface production = (ProductionAbility) leader_card.getAbility();
+		production.setProducedResources(cost);
+		return production;
+	}
+
 	private static Message parseProductionMessage(String[] inputs, SimplePlayer player) throws IllegalArgumentException {
 		try {
-			ProductionInterface production;
-			switch (inputs[1].toUpperCase()) {
-				case "BASE":
-				case "B":
-					ArrayList<Resource> required = new ArrayList<Resource>();
-					required.add(Resource.valueOf(inputs[2].toUpperCase()));
-					required.add(Resource.valueOf(inputs[3].toUpperCase()));
-					ArrayList<Resource> produced = new ArrayList<Resource>();
-					produced.add(Resource.valueOf(inputs[4].toUpperCase()));
-					production = new Production(required, produced);
-					break;
-				case "DEV":
-				case "D":
-					int slot = Integer.parseInt(inputs[2]);
-					if (slot < 1 || slot > 3) {
+			boolean production_base = false;
+			HashSet<Integer> slots_used = new HashSet<Integer>();
+			HashSet<Integer> leader_used = new HashSet<Integer>();
+			ArrayList<ProductionInterface> productions = new ArrayList<ProductionInterface>();
+			for(int i = 1; i < inputs.length;) {
+				switch (inputs[i].toUpperCase()) {
+					case "BASE":
+					case "B":
+						productions.add(parseBaseProduction(inputs, i, production_base));
+						production_base = true;
+						i += 4;
+						break;
+					case "DEV":
+					case "D":
+						productions.add(parseDevelopmentCardProduction(inputs, i, player, slots_used));
+						i += 2;
+						break;
+					case "LEADER":
+					case "L":
+						productions.add(parseLeaderCardProduction(inputs, i, player, leader_used));
+						i += 3;
+						break;
+					default:
 						throw new IllegalArgumentException();
-					}
-
-					SimpleDevelopmentCardSlot development_card_slots = player.getDevelopmentCardsSlots();
-					if (slot == 1) {
-						DevelopmentCard[] first_column = development_card_slots.getFirstColumn();
-						production = first_column[first_column.length - 1];
-					} else if (slot == 2) {
-						DevelopmentCard[] second_column = development_card_slots.getSecondColumn();
-						production = second_column[second_column.length - 1];
-					} else {
-						DevelopmentCard[] third_column = development_card_slots.getThirdColumn();
-						production = third_column[third_column.length - 1];
-					}
-					break;
-				case "LEADER":
-				case "L":
-					int index = Integer.parseInt(inputs[2]);
-					if (index < 1 || index > 2) {
-						throw new IllegalArgumentException();
-					}
-
-					ArrayList<Resource> cost = new ArrayList<Resource>();
-					cost.add(Resource.valueOf(inputs[3].toUpperCase()));
-
-					ArrayList<LeaderCard> player_deck = player.getDeck();
-					LeaderCard leader_card = player_deck.get(index - 1);
-					production = (ProductionAbility) leader_card.getAbility();
-					production.setProducedResources(cost);
-					break;
-				default:
-					throw new IllegalArgumentException();
+				}
 			}
-			return new ProductionMessage(production);
+			return new ProductionMessage(productions);
 		} catch (ClassCastException | IndexOutOfBoundsException | IllegalArgumentException e) {
-			throw new IllegalArgumentException("production <base res1 res2 res3 | dev slot | leader index res>");
+			throw new IllegalArgumentException("production <base res1 res2 res3 | dev slot | leader index res>+");
 		}
 	}
 

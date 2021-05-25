@@ -59,7 +59,7 @@ public class InitialController implements Controller {
 		return;
 	}
 
-	public void handleProduction(Player player, ProductionInterface production) {
+	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
 		return;
 	}
 

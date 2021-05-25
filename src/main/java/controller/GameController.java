@@ -186,7 +186,7 @@ public class GameController implements Runnable, Controller {
 		} else {handleError();}
 	}
 
-	public void handleProduction(Player player, ProductionInterface production) {
+	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
 	}
 
 	public void handleEndTurn(Player player) {
