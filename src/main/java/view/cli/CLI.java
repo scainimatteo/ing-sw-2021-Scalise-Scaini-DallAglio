@@ -52,7 +52,7 @@ public class CLI extends View {
 	 */
 	private void parseInput(Client client, String inputLine) {
 		String[] inputs = inputLine.split(" ");
-		if (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L")) {
+		if (!this.initializing && (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L"))) {
 			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.nickname);
 		} else {
 			Message parsed_message = MessageParser.parseInput(inputLine, this.initializing, this.getMyPlayer());
