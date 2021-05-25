@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.message.Message;
+import it.polimi.ingsw.controller.message.Storage;
 
 import it.polimi.ingsw.model.resources.ProductionInterface;
 import it.polimi.ingsw.model.resources.Resource;
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 public interface Controller {
 	public void handleMessage(Message message);
 	public void handleDiscardResources(Player player);
-	public void handlePay(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace);
-	public void handleStore(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace, int shelf);
+	public void handlePay(Player player, Storage storage);
+	public void handleStore(Player player, Storage storage);
 	public void handleBuyCard(Player player, int row, int column, int slot);
 	public void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles);
 	public void handleProduction(Player player, ProductionInterface production);

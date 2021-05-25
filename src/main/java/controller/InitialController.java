@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.message.Message;
+import it.polimi.ingsw.controller.message.Storage;
 
 import it.polimi.ingsw.model.resources.ProductionInterface;
 import it.polimi.ingsw.model.resources.Resource;
@@ -43,23 +44,42 @@ public class InitialController implements Controller {
 	 * Controller methods
 	 */
 	public void handleDiscardResources(Player player){
+		return;
 	}
-	public void handleStore(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace, int shelf) {
+
+	public void handleStore(Player player, Storage storage) {
+		return;
 	}
+
 	public void handleBuyCard(Player player, int row, int column, int slot) {
+		return;
 	}
+
 	public void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles) {
+		return;
 	}
+
 	public void handleProduction(Player player, ProductionInterface production) {
+		return;
 	}
+
 	public void handleActivateLeader(Player player, LeaderCard leader_card) {
+		return;
 	}
+
 	public void handleRearrange(Player player, int swap1, int swap2) {
+		return;
 	}
+
 	public void handleEndTurn(Player player) {
+		return;
 	}
+
 	public void handleDiscardLeader(Player player, LeaderCard leader_card) {
+		return;
 	}
-	public void handlePay(Player player, ArrayList<Resource> warehouse_top, ArrayList<Resource> warehouse_mid, ArrayList<Resource> warehouse_bot, ArrayList<Resource> strongbox, ArrayList<Resource> extraspace) {
+
+	public void handlePay(Player player, Storage storage) {
+		return;
 	}
 }

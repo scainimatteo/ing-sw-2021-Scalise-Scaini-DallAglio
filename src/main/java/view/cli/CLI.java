@@ -14,9 +14,7 @@ import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.view.cli.Parser;
 import it.polimi.ingsw.view.View;
 
-public class CLI implements View {
-	private boolean initializing = true;
-
+public class CLI extends View {
 	/**
 	 * Start a thread parsing the strings passed from the command line
 	 */
@@ -27,7 +25,12 @@ public class CLI implements View {
 				System.out.print("> ");
 				String inputLine = stdin.nextLine();
 				try {
-					Message parsed_message = Parser.parseInput(inputLine, this.initializing);
+					if (this.nickname_flag) {
+						this.nickname = inputLine;
+						this.nickname_flag = false;
+					}
+
+					Message parsed_message = Parser.parseInput(inputLine, this.initializing, this.getMyPlayer());
 					client.sendMessage(parsed_message);
 				} catch (IllegalArgumentException e) {
 					System.out.println("Sorry, the command was malformed");
@@ -66,6 +69,9 @@ public class CLI implements View {
 		if (initializing_message.message.equals("Start Match\n\n")) {
 			System.out.print("> ");
 			this.initializing = false;
+		} else if (initializing_message.message.equals("Nickname?")) {
+			System.out.print("> ");
+			this.nickname_flag = true;
 		}
 	}
 }
