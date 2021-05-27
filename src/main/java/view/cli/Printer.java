@@ -16,6 +16,7 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
 import it.polimi.ingsw.model.player.track.Cell;
+import it.polimi.ingsw.model.player.track.Tile;
 
 import it.polimi.ingsw.util.ANSI;
 
@@ -222,6 +223,7 @@ public class Printer {
 	public static String printTrack(SimplePlayer player) {
 		Cell[] track = player.getFaithTrack();
 		Cell marker = player.getMarker();
+		Tile[] vatican_reports = player.getReports();
 		int last_position = 20;
 		boolean flag = false;
 		String top = "";
@@ -268,8 +270,22 @@ public class Printer {
 			}
 		}
 		bot = bot + "\n";
+
+		String top_v_r = "|---|   |---|   |---|\n";
+		String mid_v_r = "|";
+
+		for (int i = 0; i < 3; i ++){
+			if (vatican_reports[i].isActive()){
+				mid_v_r += " " + String.valueOf(vatican_reports[i].getVictoryPoints()) + " ";
+			} else {
+				mid_v_r += " X ";
+			}
+
+			mid_v_r += "|";
+		}
+		mid_v_r += "\n";
 		
-		return top + mid + top + "\n\n" + ANSI.red(bot);
+		return top + mid + top + "\n\n" + ANSI.red(bot) + "\n\n" + top_v_r + mid_v_r + top_v_r;
 	}
 
 	public static String printWarehouse(SimplePlayer player) {
