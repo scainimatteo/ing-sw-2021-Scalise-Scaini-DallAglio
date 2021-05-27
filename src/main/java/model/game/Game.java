@@ -32,7 +32,8 @@ public class Game extends Observable {
 		this.players = players;
 		this.market = new Market();
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
-		this.turn = new Turn(this.players[0], false);
+		this.turn = new Turn(this.players[0]);
+		this.notifyGame();
 	}
 
 	public Player[] getPlayers() {
@@ -53,6 +54,13 @@ public class Game extends Observable {
 
 	private SimpleGame simplify() {
 		return new SimpleGame(market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
+	}
+
+	public void shiftPlayers() {
+		List<Player> players_list = Arrays.asList(this.players);
+		Collections.rotate(players_list, 1);
+		this.players = players_list.toArray(new Player[this.players.length]);
+		this.notifyGame();
 	}
 
 	/**
@@ -93,13 +101,6 @@ public class Game extends Observable {
 
 	public void getFromDeck(DevelopmentCard chosen_card) {
 		this.development_cards_on_table.getFromDeck(chosen_card);
-		this.notifyGame();
-	}
-
-	public void shiftPlayers() {
-		List<Player> players_list = Arrays.asList(this.players);
-		Collections.rotate(players_list, 1);
-		this.players = players_list.toArray(new Player[this.players.length]);
 		this.notifyGame();
 	}
 }

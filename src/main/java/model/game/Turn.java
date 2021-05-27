@@ -4,34 +4,38 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.controller.servermessage.ViewUpdate;
+
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
-public class Turn implements Serializable {
+import it.polimi.ingsw.util.Observable;
+
+public class Turn extends Observable implements Serializable {
+	private static final long serialVersionUID = 8008L;
 	Player active_player;
 	ArrayList<Resource> required_resources;
 	ArrayList<Resource> produced_resources;
 	boolean action_done;
 	boolean must_discard;
 	boolean final_turn;
-	private static final long serialVersionUID = 8008L;
 
-
-	public Turn (Player player, boolean final_turn){
+	public Turn(Player player){
 		this.active_player = player;
 		this.required_resources = new ArrayList<Resource>();
 		this.produced_resources = new ArrayList<Resource>();
 		this.action_done = false;
 		this.must_discard = false;
-		this.final_turn = final_turn;
+		this.final_turn = false;
 	}
 
-    public Player getPlayer(){
+	public Player getPlayer(){
 		return this.active_player;
 	}
 
 	public void setPlayer(Player player){
 		this.active_player = player;
+		this.notifyTurn();
 	}
 
 	public ArrayList<Resource> getRequiredResources() {
@@ -40,6 +44,7 @@ public class Turn implements Serializable {
 
 	public void addRequiredResources(ArrayList<Resource> required) {
 		this.required_resources.addAll(required);
+		this.notifyTurn();
 	}
 
 	public ArrayList<Resource> getProducedResources() {
@@ -48,6 +53,7 @@ public class Turn implements Serializable {
 
 	public void addProducedResources(ArrayList<Resource> produced) {
 		this.produced_resources.addAll(produced);
+		this.notifyTurn();
 	}
 
 	public boolean hasDoneAction() {
@@ -56,6 +62,7 @@ public class Turn implements Serializable {
 
 	public void setDoneAction(boolean value) {
 		this.action_done = value;
+		this.notifyTurn();
 	}
 	
 	public boolean mustDiscard() {
@@ -64,6 +71,7 @@ public class Turn implements Serializable {
 
 	public void setDiscard(boolean value) {
 		this.action_done = value;
+		this.notifyTurn();
 	}
 
 	public boolean isFinal() {
@@ -72,5 +80,20 @@ public class Turn implements Serializable {
 
 	public void setFinal(boolean value) {
 		this.final_turn = value;
+		this.notifyTurn();
+	}
+
+	public void clearTurn() {
+		this.active_player = null;
+		this.required_resources.clear();
+		this.produced_resources.clear();
+		this.action_done = false;
+		this.must_discard = false;
+		this.final_turn = false;
+		this.notifyTurn();
+	}
+
+	private void notifyTurn() {
+		notify(new ViewUpdate(this));
 	}
 }
