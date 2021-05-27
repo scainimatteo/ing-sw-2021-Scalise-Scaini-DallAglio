@@ -58,17 +58,14 @@ public abstract class View {
 	 */
 	private void updateSimplePlayer(SimplePlayer simple_player) {
 		String nickname = simple_player.getNickname();
-		if (this.simple_players.isEmpty()) {
-			this.simple_players.add(simple_player);
-			return;
-		}
-
 		for (int i = 0; i < this.simple_players.size(); i++) {
 			if (this.simple_players.get(i).getNickname().equals(nickname)) {
 				this.simple_players.set(i, simple_player);
-				break;
+				return;
 			}
 		}
+
+		this.simple_players.add(simple_player);
 	}
 
 	/**
