@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.controller.servermessage.ViewUpdate;
+
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.model.card.LeaderCardResourcesCost;
@@ -15,6 +17,8 @@ import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
 import it.polimi.ingsw.util.Observable;
+
+import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,6 +48,13 @@ public class Player extends Observable {
 		return this.nickname;
 	}
 
+	private void notifyPlayer() {
+		notify(new ViewUpdate(this.simplify()));
+	}
+
+	private SimplePlayer simplify() {
+		return null;
+	}
 
 	/**
 	 * LEADER CARD METHODS
@@ -55,6 +66,7 @@ public class Player extends Observable {
 
 	public void setLeaderCards(ArrayList<LeaderCard> leader_cards) {
 		this.leader_cards_deck = leader_cards;
+		this.notifyPlayer();
 	}
 
 	public boolean isActivable(LeaderCard card){
@@ -117,6 +129,7 @@ public class Player extends Observable {
 		for (LeaderCard x : leader_cards_deck){
 			if (x.equals(card)){
 				x.activateLeaderCard();
+				this.notifyPlayer();
 				return;
 			}
 		}
@@ -124,6 +137,7 @@ public class Player extends Observable {
 
 	public void discardLeader(LeaderCard leader_card){
 		this.leader_cards_deck.remove(leader_card);
+		this.notifyPlayer();
 	}
 
 	/**
@@ -197,18 +211,22 @@ public class Player extends Observable {
 
 	public void swapRows (int i, int j) {
 		this.warehouse.swapRows(i, j);
+		this.notifyPlayer();
 	}
 
 	public void storeTop(ArrayList<Resource> res){
 		this.warehouse.storeTop(res);
+		this.notifyPlayer();
 	}
 
 	public void storeMiddle(ArrayList<Resource> res){
 		this.warehouse.storeMiddle(res);
+		this.notifyPlayer();
 	}
 
 	public void storeBottom(ArrayList<Resource> res){
 		this.warehouse.storeBottom(res);
+		this.notifyPlayer();
 	}
 
 	public void getFromTop(ArrayList<Resource> res){
@@ -225,6 +243,7 @@ public class Player extends Observable {
 
 	public void clearWarehouse(){
 		this.warehouse.clearWarehouse();
+		this.notifyPlayer();
 	}
 
 		
@@ -233,6 +252,7 @@ public class Player extends Observable {
 	 */
 	public void insertResources(ArrayList<Resource> new_resources){
 		this.strongbox.insertResources(new_resources);
+		this.notifyPlayer();
 	}
 
 	public HashMap<Resource, Integer> getStorage(){
@@ -241,6 +261,7 @@ public class Player extends Observable {
 
 	public void removeResources(ArrayList<Resource> res){
 		this.strongbox.removeResources(res);
+		this.notifyPlayer();
 	}
 
 	public StrongBox getPlayerStrongBox(){
@@ -256,6 +277,7 @@ public class Player extends Observable {
 
 	public void buyCard(DevelopmentCard card, int position){
 		this.development_card_slots.buyCard(card, position);
+		this.notifyPlayer();
 	}
 
 	public DevelopmentCard[] getTopCards(){
@@ -287,5 +309,6 @@ public class Player extends Observable {
 
 	public void moveForward(int steps){
 		this.track.moveForward(steps);
+		this.notifyPlayer();
 	}
 }
