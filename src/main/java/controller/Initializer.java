@@ -73,7 +73,7 @@ public class Initializer {
 
 		for (int i = 0; i < clients.size(); i++) {
 			this.players[i] = new Player(clients.get(i).getNickname(), all_cells, all_tiles);
-			this.remote_views[i] = new RemoteView(this.players[i], clients.get(i));
+			this.remote_views[i] = new RemoteView(clients.get(i));
 			this.players[i].addObserver(this.remote_views[i]);
 			clients.get(i).setPlayer(this.players[i]);
 		}
@@ -125,6 +125,7 @@ public class Initializer {
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
 			game.addObserver(r);
+			game.getTurn().addObserver(r);
 		}
 	}
 
