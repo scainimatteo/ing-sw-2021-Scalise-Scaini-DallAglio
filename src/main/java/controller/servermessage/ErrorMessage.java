@@ -2,10 +2,9 @@ package it.polimi.ingsw.controller.servermessage;
 
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
 
-import it.polimi.ingsw.model.player.Player;
-
 public class ErrorMessage extends ServerMessage {
-	public Player player;
+	protected static final long serialVersionUID = 224224L;
+	public String nickname;
 	public String error_string;
 
 	public ErrorMessage(String error_string) {
@@ -13,7 +12,7 @@ public class ErrorMessage extends ServerMessage {
 		this.error_string = error_string;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 }

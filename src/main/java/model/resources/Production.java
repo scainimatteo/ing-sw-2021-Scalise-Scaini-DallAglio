@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Production implements ProductionInterface, Serializable {
 	private static final long serialVersionUID = 6L;
@@ -40,46 +41,30 @@ public class Production implements ProductionInterface, Serializable {
 		return produced_resources;
 	}
 
+	private HashMap<Resource, Integer> numFromArraylist(ArrayList<Resource> arraylist){
+		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
+
+		for (Resource res : arraylist){
+			if (to_return.containsKey(res)){
+				to_return.put(res, to_return.get(res) + 1);
+			} else {
+				to_return.put(res, 1);
+			}
+		}
+
+		return to_return;
+	}
 	
-/* TODO: move in simpleModel
-	public HashMap<Resource, Integer> numOfRequired(){
-		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
-
-		for (Resource res : required_resources){
-			if (to_return.containsKey(res)){
-				to_return.put(res, to_return.get(res) + 1);
-			} else {
-				to_return.put(res, 1);
-			}
-		}
-
-		return to_return;
-	}
-
-	public HashMap<Resource, Integer> numOfProduced(){
-		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
-
-		for (Resource res : produced_resources){
-			if (to_return.containsKey(res)){
-				to_return.put(res, to_return.get(res) + 1);
-			} else {
-				to_return.put(res, 1);
-			}
-		}
-
-		return to_return;
-	}
-
 	public String[] productionToText(){
 		String[] to_return = new String[5];
 
-		HashMap<Resource, Integer> required = this.numOfRequired();
+		HashMap<Resource, Integer> required = this.numFromArraylist(required_resources);
 		Set<Resource> req_set = required.keySet();
-		ArrayList<Resource> req_array = req_set.toArray(new Resource[req_set.size()]);
+		ArrayList<Resource> req_array = new ArrayList<Resource>(Arrays.asList(req_set.toArray(new Resource[req_set.size()])));
 
-		HashMap<Resource, Integer> produced = this.numOfProduced();
+		HashMap<Resource, Integer> produced = this.numFromArraylist(produced_resources);
 		Set<Resource> prod_set = produced.keySet();
-		ArrayList<Resource> prod_array = prod_set.toArray(new Resource[prod_set.size()]);
+		ArrayList<Resource> prod_array = new ArrayList<Resource>(Arrays.asList(prod_set.toArray(new Resource[prod_set.size()])));
 
 		int req_size = required.size();
 		int prod_size = produced.size();
@@ -87,25 +72,25 @@ public class Production implements ProductionInterface, Serializable {
 		for (int i = 0; i < 5; i ++){
 			if (req_size == 1){
 				if (i == 3){
-					to_return[i] = " " + String.valueOf(required.get(req_array[0])) + " " + req_array[0].getAbbreviation();
+					to_return[i] = " " + String.valueOf(required.get(req_array.get(0))) + " " + req_array.get(0).getAbbreviation();
 				} else {
 					to_return[i] = "     ";
 				}
 			} else if (req_size == 2){
 				if (i == 2){
-					to_return[i] = " " + String.valueOf(required.get(req_array[0])) + " " + req_array[0].getAbbreviation();
+					to_return[i] = " " + String.valueOf(required.get(req_array.get(0))) + " " + req_array.get(0).getAbbreviation();
 				} else if (i == 4){
-					to_return[i] = " " + String.valueOf(required.get(req_array[1])) + " " + req_array[1].getAbbreviation();
+					to_return[i] = " " + String.valueOf(required.get(req_array.get(1))) + " " + req_array.get(1).getAbbreviation();
 				} else {
 					to_return[i] = "     ";
 				}
 			} else if (req_size == 3){
 				if (i == 1){
-					to_return[i] = " " + String.valueOf(required.get(req_array[0])) + " " + req_array[0].getAbbreviation();
+					to_return[i] = " " + String.valueOf(required.get(req_array.get(0))) + " " + req_array.get(0).getAbbreviation();
 				} else if (i == 3){
-					to_return[i] = " " + String.valueOf(required.get(req_array[1])) + " " + req_array[1].getAbbreviation();
+					to_return[i] = " " + String.valueOf(required.get(req_array.get(1))) + " " + req_array.get(1).getAbbreviation();
 				} else if (i == 5){
-					to_return[i] = " " + String.valueOf(required.get(req_array[2])) + " " + req_array[2].getAbbreviation();
+					to_return[i] = " " + String.valueOf(required.get(req_array.get(2))) + " " + req_array.get(2).getAbbreviation();
 				} else {
 					to_return[i] = "     ";
 				}
@@ -124,25 +109,29 @@ public class Production implements ProductionInterface, Serializable {
 
 			if (prod_size == 1){
 				if (i == 3){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array[0])) + " " + prod_array[0].getAbbreviation();
+					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " " + prod_array.get(0).getAbbreviation();
 				} else {
 					to_return[i] += "     ";
 				}
 			} else if (prod_size == 2){
 				if (i == 2){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array[0])) + " " + prod_array[0].getAbbreviation();
+					if (prod_array.get(0) != null) {
+						to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " " + prod_array.get(0).getAbbreviation();
+					} else {
+						to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " ? ";
+					}
 				} else if (i == 4){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array[1])) + " " + prod_array[1].getAbbreviation();
+					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(1))) + " " + prod_array.get(1).getAbbreviation();
 				} else {
 					to_return[i] += "     ";
 				}
 			}else if (prod_size == 3){
 				if (i == 1){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array[0])) + " " + prod_array[0].getAbbreviation();
+					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " " + prod_array.get(0).getAbbreviation();
 				} else if (i == 3){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array[1])) + " " + prod_array[1].getAbbreviation();
+					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(1))) + " " + prod_array.get(1).getAbbreviation();
 				} else if (i == 5){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array[2])) + " " + prod_array[2].getAbbreviation();
+					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(2))) + " " + prod_array.get(2).getAbbreviation();
 				} else {
 					to_return[i] += "     ";
 				}
@@ -153,5 +142,4 @@ public class Production implements ProductionInterface, Serializable {
 
 		return to_return;
 	}
-	*/
 }

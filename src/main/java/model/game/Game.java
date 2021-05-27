@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import java.lang.IllegalArgumentException;
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
+import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 
@@ -19,6 +20,8 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.util.Observable;
 
+import it.polimi.ingsw.view.simplemodel.SimpleGame;
+
 public class Game extends Observable {
 	private Player[] players;
 	private Market market;
@@ -30,6 +33,7 @@ public class Game extends Observable {
 		this.market = new Market();
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
 		this.turn = new Turn(this.players[0]);
+		this.notifyGame();
 	}
 
 	public Player[] getPlayers() {
@@ -38,6 +42,18 @@ public class Game extends Observable {
 
 	public Turn getTurn(){
 		return this.turn;
+	}
+
+	public void handleError(String error_message){
+		notify(new ErrorMessage(error_message));
+	}
+
+	public void notifyGame() {
+		notify(new ViewUpdate(this.simplify()));
+	}
+
+	private SimpleGame simplify() {
+		return new SimpleGame(market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
 	}
 
 	/**
@@ -49,10 +65,12 @@ public class Game extends Observable {
 
 	public void shiftRow(int index) {
 		this.market.shiftRow(index);
+		this.notifyGame();
 	}
 	
 	public void shiftColumn(int index) {
 		this.market.shiftColumn(index);
+		this.notifyGame();
 	}
 
 	public ArrayList<Resource> getRow(int index) {
@@ -76,6 +94,7 @@ public class Game extends Observable {
 
 	public void getFromDeck(DevelopmentCard chosen_card) {
 		this.development_cards_on_table.getFromDeck(chosen_card);
+		this.notifyGame();
 	}
 	
 	/**
@@ -94,6 +113,7 @@ public class Game extends Observable {
 		List<Player> players_list = Arrays.asList(this.players);
 		Collections.rotate(players_list, 1);
 		this.players = players_list.toArray(new Player[this.players.length]);
+		this.notifyGame();
 	}
 
 	public void endTurn(){
@@ -102,15 +122,13 @@ public class Game extends Observable {
 				endGame();
 			} else {
 				shiftPlayers();
-				turn.init(players[0]);
+				turn.clearTurn(players[0]);
 			}
 		} else {
-			turn.init(players[nextPlayer(turn.getPlayer())]);
+			turn.clearTurn(players[nextPlayer(turn.getPlayer())]);
 		}
 	}
 
+	// TODO
 	public void endGame(){}
-
-	public void handleError(){
-	}
 }

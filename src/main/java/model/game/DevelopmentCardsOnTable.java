@@ -8,8 +8,6 @@ import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
-import it.polimi.ingsw.view.cli.Printer;
-
 public class DevelopmentCardsOnTable {
 	private Table<DevelopmentCard> development_cards_table;
 	private final int dim_rows = 4;
@@ -68,14 +66,5 @@ public class DevelopmentCardsOnTable {
 		if (!done) {
 			throw new NoSuchElementException();
 		}
-	}
-
-	public String printText() {
-		DevelopmentCard[][] development_cards_on_top = this.getTopCards();
-		return Printer.printMatrix(development_cards_on_top);
-	}
-
-	public String printText(int index){
-		return null;
 	}
 }

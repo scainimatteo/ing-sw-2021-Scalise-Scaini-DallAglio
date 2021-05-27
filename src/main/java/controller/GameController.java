@@ -434,7 +434,7 @@ public class GameController implements Runnable, Controller {
 	 * HANDLE VARIOUS ERRORS
 	 */
 	private void handleError(){
-		this.game.handleError();
+		this.game.handleError("");
 	}
 
 }

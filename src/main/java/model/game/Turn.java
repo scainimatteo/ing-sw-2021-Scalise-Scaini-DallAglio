@@ -4,43 +4,51 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.controller.servermessage.ViewUpdate;
+
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
-public class Turn implements Serializable {
+import it.polimi.ingsw.util.Observable;
+
+public class Turn extends Observable implements Serializable {
+	private static final long serialVersionUID = 8008L;
 	Player active_player;
 	ArrayList<Resource> required_resources;
 	ArrayList<Resource> produced_resources;
 	boolean action_done;
 	boolean must_discard;
-	boolean final_turn;
-	private static final long serialVersionUID = 8008L;
+	boolean final_round;
 
-
-	public Turn (Player player){
+	public Turn(Player player){
 		this.active_player = player;
 		this.required_resources = new ArrayList<Resource>();
 		this.produced_resources = new ArrayList<Resource>();
 		this.action_done = false;
 		this.must_discard = false;
-		this.final_turn = false;
+		this.final_round = false;
 	}
 
-	public void init(Player player){
-		active_player = player;
-		required_resources.clear();
-		produced_resources.clear();
-		action_done = false;
-		must_discard = false;
+	public void clearTurn(Player player) {
+		this.active_player = player;
+		this.required_resources.clear();
+		this.produced_resources.clear();
+		this.action_done = false;
+		this.must_discard = false;
+		this.notifyTurn();
 	}
-
 
     public Player getPlayer(){
 		return this.active_player;
 	}
 
+	public String getNickname(){
+		return this.active_player.getNickname();
+	}
+
 	public void setPlayer(Player player){
 		this.active_player = player;
+		this.notifyTurn();
 	}
 
 	public ArrayList<Resource> getRequiredResources() {
@@ -49,6 +57,7 @@ public class Turn implements Serializable {
 
 	public void addRequiredResources(ArrayList<Resource> required) {
 		this.required_resources.addAll(required);
+		this.notifyTurn();
 	}
 
 	public void removeRequiredResources(ArrayList<Resource> required) {
@@ -63,6 +72,7 @@ public class Turn implements Serializable {
 
 	public void addProducedResources(ArrayList<Resource> produced) {
 		this.produced_resources.addAll(produced);
+		this.notifyTurn();
 	}
 
 	public void removeProducedResources(ArrayList<Resource> required) {
@@ -77,6 +87,7 @@ public class Turn implements Serializable {
 
 	public void setDoneAction(boolean value) {
 		this.action_done = value;
+		this.notifyTurn();
 	}
 	
 	public boolean mustDiscard() {
@@ -85,13 +96,19 @@ public class Turn implements Serializable {
 
 	public void setDiscard(boolean value) {
 		this.action_done = value;
+		this.notifyTurn();
 	}
 
 	public boolean isFinal() {
-		return this.final_turn;
+		return this.final_round;
 	}
 
 	public void setFinal(boolean value) {
-		this.final_turn = value;
+		this.final_round = value;
+		this.notifyTurn();
+	}
+
+	private void notifyTurn() {
+		notify(new ViewUpdate(this));
 	}
 }

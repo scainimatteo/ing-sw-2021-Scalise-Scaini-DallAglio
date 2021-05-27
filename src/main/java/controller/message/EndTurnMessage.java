@@ -2,7 +2,11 @@ package it.polimi.ingsw.controller.message;
 
 import it.polimi.ingsw.controller.Controller;
 
-public class EndTurnMessage extends Message {
+import java.io.Serializable;
+
+public class EndTurnMessage extends Message implements Serializable {
+	private static final long serialVersionUID = 323444L;
+
 	public EndTurnMessage(){
 	}
 

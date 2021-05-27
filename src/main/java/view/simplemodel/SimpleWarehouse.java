@@ -4,7 +4,10 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public class SimpleWarehouse {
+import java.io.Serializable;
+
+public class SimpleWarehouse implements Serializable {
+	private static final long serialVersionUID = 9348L;
 	private ArrayList<Resource> top_resource;
 	private ArrayList<Resource> middle_resources;
 	private ArrayList<Resource> bottom_resources;
