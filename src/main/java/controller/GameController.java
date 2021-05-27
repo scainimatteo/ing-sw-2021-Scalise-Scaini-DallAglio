@@ -240,7 +240,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	private void handleError(){
-		this.game.handleError();
+		this.game.handleError("");
 	}
 
 }
