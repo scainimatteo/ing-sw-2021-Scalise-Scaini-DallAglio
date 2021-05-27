@@ -20,7 +20,7 @@ public class RemoteView implements Observer {
 
 	public void update(ServerMessage servermessage) {
 		if (servermessage.error) {
-			((ErrorMessage) servermessage).setPlayer(player);
+			((ErrorMessage) servermessage).setNickname(player.getNickname());
 		}
 		this.client_handler.sendToClient(servermessage);
 	}

@@ -321,7 +321,10 @@ public class Printer {
 	}
 
 	public static String printLeaderCards(SimplePlayer player, boolean print_deactivated) {
-		return "";
+		ArrayList<LeaderCard> deck = player.getDeck();
+		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[2]);
+		
+		return printLeaderCardArray(leader_cards, print_deactivated);
 	}
 
 	public static String printDevelopmentCardsSlots(SimplePlayer player) {
@@ -349,5 +352,9 @@ public class Printer {
 		}
 
 		return to_return;
+	}
+
+	public static String printDevelopmentCardsSlots(SimplePlayer player, int slot) {
+		return "";
 	}
 }
