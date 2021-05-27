@@ -33,6 +33,10 @@ public class Turn extends Observable implements Serializable {
 		return this.active_player;
 	}
 
+	public String getNickname(){
+		return this.active_player.getNickname();
+	}
+
 	public void setPlayer(Player player){
 		this.active_player = player;
 		this.notifyTurn();

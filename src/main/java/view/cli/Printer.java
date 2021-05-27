@@ -4,6 +4,8 @@ import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
+import it.polimi.ingsw.model.game.Turn;
+
 import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
 
@@ -387,6 +389,39 @@ public class Printer {
 			case 3: return printDevelopmentCardsArray(player.getThirdColumn());
 			default: return "";
 		}
+		return null;
+	}
+
+	public static String printTurn(Turn turn){
+		String to_return;
+		String top = "|------------------------------------------|\n";
+		String mid = "|                                          |\n";
+		String pad = "                                          ";
+
+		String tmp_nickname = "| ACTIVE PLAYER: " + turn.getNickname() + " ";
+		String nickname_string = tmp_nickname + pad.substring(tmp_nickname.length()) + "|\n";
+
+		String tmp_req_resources = "| REQUIRED RESOURCES: ";
+		String req_pad = pad;
+		ArrayList<Resource> req_resources = turn.getRequiredResources();
+		for (int i = 0; i < req_resources.size(); i ++){
+			tmp_req_resources += req_resources.get(i) + " ";
+			req_pad += "       ";
+		}
+		String req_string = tmp_req_resources + req_pad.substring(tmp_req_resources.length()) + "|\n";
+
+		String tmp_prod_resources = "| PRODUCED RESOURCES: ";
+		String prod_pad = pad;
+		ArrayList<Resource> prod_resources = turn.getProducedResources();
+		for (int i = 0; i < prod_resources.size(); i ++){
+			tmp_prod_resources += prod_resources.get(i) + " ";
+			prod_pad += "       ";
+		}
+		String prod_string = tmp_prod_resources + prod_pad.substring(tmp_prod_resources.length()) + "|\n";
+
+		to_return = top + mid + nickname_string + mid + top + mid + req_string + mid + top + mid + prod_string + mid + top;
+
+		return to_return;
 	}
 
 	public static String printNullCard(){
