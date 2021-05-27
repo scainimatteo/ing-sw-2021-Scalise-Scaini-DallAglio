@@ -73,9 +73,9 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	}
 
 	public String printText(){
-		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |";
+		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |\n";
 		if (storage.size() == 0){
-			string +="|  |   |   |   |  |\n";
+			string +="|  |    | |    |  |\n";
 		} else if (storage.size() ==1){
 			string +="|  | " + resource_type.getAbbreviation() + " |   |   |  |\n";
 		} else if (storage.size() == 2){

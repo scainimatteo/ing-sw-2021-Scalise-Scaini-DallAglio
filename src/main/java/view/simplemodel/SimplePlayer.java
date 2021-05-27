@@ -9,7 +9,10 @@ import it.polimi.ingsw.model.player.track.Tile;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SimplePlayer {
+import java.io.Serializable;
+
+public class SimplePlayer implements Serializable {
+	private static final long serialVersionUID = 7775L;
 	protected String nickname;
 	protected Cell[] track;
 	protected Cell faith_marker;

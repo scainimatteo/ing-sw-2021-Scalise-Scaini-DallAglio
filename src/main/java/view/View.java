@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view;
 
+import java.util.ArrayList;
+
 import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
@@ -13,7 +15,7 @@ import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 public abstract class View {
 	protected SimpleGame simple_game;
-	protected SimplePlayer[] simple_players;
+	protected ArrayList<SimplePlayer> simple_players;
 	protected Turn turn;
 
 	protected boolean initializing = true;
@@ -56,9 +58,13 @@ public abstract class View {
 	 */
 	private void updateSimplePlayer(SimplePlayer simple_player) {
 		String nickname = simple_player.getNickname();
-		for (int i = 0; i < this.simple_players.length; i++) {
-			if (this.simple_players[i].getNickname().equals(nickname)) {
-				this.simple_players[i] = simple_player;
+		if (this.simple_players.isEmpty()) {
+			this.simple_players.add(simple_player);
+		}
+
+		for (int i = 0; i < this.simple_players.size(); i++) {
+			if (this.simple_players.get(i).getNickname().equals(nickname)) {
+				this.simple_players.set(i, simple_player);
 				break;
 			}
 		}

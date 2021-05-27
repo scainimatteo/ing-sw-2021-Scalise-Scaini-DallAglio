@@ -1,10 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Arrays;
-import java.util.List;
 
 import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.player.track.Cell;
@@ -26,6 +23,10 @@ import it.polimi.ingsw.view.cli.ViewParser;
 import it.polimi.ingsw.view.View;
 
 public class CLI extends View {
+	public CLI() {
+		this.simple_players = new ArrayList<SimplePlayer>();
+	}
+
 	/**
 	 * Start a thread parsing the strings passed from the command line
 	 *
@@ -64,7 +65,8 @@ public class CLI extends View {
 	private void parseInput(Client client, String inputLine) {
 		String[] inputs = inputLine.split(" ");
 		if (!this.initializing && (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L"))) {
-			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.nickname);
+			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.turn, this.nickname);
+			System.out.println(to_view);
 		} else {
 			Message parsed_message = MessageParser.parseInput(inputLine, this.initializing, this.getMyPlayer());
 			client.sendMessage(parsed_message);

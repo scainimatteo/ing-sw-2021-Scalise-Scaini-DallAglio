@@ -299,11 +299,41 @@ public class Printer {
 
 		String total = "        /\\\n       /  \\\n      / ";
 
-		total += printResource(top.get(0)) + " \\\n     /------\\\n";
+		if (top.size() == 1) {
+			total += printResource(top.get(0)) + " \\\n     /------\\\n";
+		} else {
+			total += printResource(null) + " \\\n     /------\\\n";
+		}
 
-		total += "    / " + printResource(mid.get(0)) + "  " + printResource(mid.get(1)) + " \\\n   /----------\\\n";
+		if (mid.size() >= 1) {
+			total += "    / " + printResource(mid.get(0)) + "  ";
+		} else {
+			total += "    / " + printResource(null) + "  ";
+		}
 
-		total += "  / " + printResource(bot.get(0)) + "  " + printResource(bot.get(1)) + "  " + printResource(bot.get(2)) + " \\\n";
+		if (mid.size() == 2) {
+			total += printResource(mid.get(1)) + " \\\n   /----------\\\n";
+		} else {
+			total += printResource(null) + " \\\n   /----------\\\n";
+		}
+
+		if (bot.size() >= 1) {
+			total += "  / " + printResource(bot.get(0)) + "  ";
+		} else {
+			total += "  / " + printResource(null) + "  ";
+		}
+
+		if (bot.size() >= 2) {
+			total += printResource(bot.get(1)) + "  ";
+		} else {
+			total += printResource(null) + "  ";
+		}
+
+		if (bot.size() == 3) {
+			total += printResource(bot.get(2)) + " \\\n";
+		} else {
+			total += printResource(null) + " \\\n";
+		}
 
 		return total + " /--------------\\";
 	}
@@ -341,7 +371,7 @@ public class Printer {
 
 	public static String printLeaderCards(SimplePlayer player, boolean print_deactivated) {
 		ArrayList<LeaderCard> deck = player.getDeck();
-		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[2]);
+		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[deck.size()]);
 		
 		return printLeaderCardArray(leader_cards, print_deactivated);
 	}
@@ -355,6 +385,7 @@ public class Printer {
 			case 1: return printDevelopmentCardsArray(player.getFirstColumn());
 			case 2: return printDevelopmentCardsArray(player.getSecondColumn());
 			case 3: return printDevelopmentCardsArray(player.getThirdColumn());
+			default: return "";
 		}
 	}
 
@@ -379,9 +410,5 @@ public class Printer {
 		}
 
 		return to_return;
-	}
-
-	public static String printDevelopmentCardsSlots(SimplePlayer player, int slot) {
-		return "";
 	}
 }

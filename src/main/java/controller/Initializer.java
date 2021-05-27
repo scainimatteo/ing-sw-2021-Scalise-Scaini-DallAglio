@@ -50,6 +50,7 @@ public class Initializer {
 			chooseMatchOrder();
 			Game game = createGame();
 			addRemoteViews(game);
+			game.notifyGame();
 			return createGame();
 		} catch (Exception e) {
 			//TODO: too generic?

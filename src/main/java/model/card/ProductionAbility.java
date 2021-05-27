@@ -61,6 +61,6 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		String prod4 = "| " + production_string[3] + "  |\n";
 		String prod5 = "| " + production_string[4] + "  |\n";
 
-		return prod1 + prod2 + prod3 + prod4 + prod5; 
+		return prod1 + prod2 + prod3 + prod4 + prod5 + "|                 |\n|                 |\n"; 
 	}
 }

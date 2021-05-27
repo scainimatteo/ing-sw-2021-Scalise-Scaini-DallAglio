@@ -2,7 +2,10 @@ package it.polimi.ingsw.view.simplemodel;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 
-public class SimpleDevelopmentCardSlot {
+import java.io.Serializable;
+
+public class SimpleDevelopmentCardSlot implements Serializable {
+	private static final long serialVersionUID = 4664L;
 	private DevelopmentCard[] first_column;
 	private DevelopmentCard[] second_column;
 	private DevelopmentCard[] third_column;

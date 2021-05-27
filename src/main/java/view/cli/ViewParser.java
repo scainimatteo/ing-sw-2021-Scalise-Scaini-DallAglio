@@ -1,11 +1,15 @@
 package it.polimi.ingsw.view.cli;
 
+import java.util.ArrayList;
+
+import it.polimi.ingsw.model.game.Turn;
+
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.cli.Printer;
 
 public class ViewParser {
-	public static String parseInput(String input, SimpleGame game, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static String parseInput(String input, SimpleGame game, ArrayList<SimplePlayer> players, Turn turn, String nickname) throws IllegalArgumentException {
 		try {
 			String[] inputs = input.split(" ");
 			switch(inputs[1].toUpperCase()) {
@@ -31,6 +35,8 @@ public class ViewParser {
 				case "DEVELOPMENTCARDSSLOTS":
 				case "DCS":
 					return parseDevelopmentCardsSlots(inputs, players, nickname);
+				case "TURN":
+					return parseTurn(inputs, turn);
 				default:
 					throw new IllegalArgumentException();
 			}
@@ -44,7 +50,7 @@ public class ViewParser {
 	 * @param nickname the nickname of the Player to look for
 	 * @return the SimplePlayer with that nickname
 	 */
-	public static SimplePlayer getPlayerFromNickname(SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static SimplePlayer getPlayerFromNickname(ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
 		for (SimplePlayer s: players) {
 			if (s.getNickname().equals(nickname)) {
 				return s;
@@ -61,7 +67,7 @@ public class ViewParser {
 		return Printer.printDevelopmentCardsOnTable(game);
 	}
 
-	public static String parseFaithTrack(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
 				return Printer.printTrack(getPlayerFromNickname(players, nickname));
@@ -74,7 +80,7 @@ public class ViewParser {
 		}
 	}
 
-	public static String parseWarehouse(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static String parseWarehouse(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
 				return Printer.printWarehouse(getPlayerFromNickname(players, nickname));
@@ -87,7 +93,7 @@ public class ViewParser {
 		}
 	}
 
-	public static String parseStrongbox(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static String parseStrongbox(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
 				return Printer.printStrongbox(getPlayerFromNickname(players, nickname));
@@ -101,7 +107,7 @@ public class ViewParser {
 
 	}
 
-	public static String parseLeaderCards(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static String parseLeaderCards(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
 				return Printer.printLeaderCards(getPlayerFromNickname(players, nickname), true);
@@ -114,7 +120,7 @@ public class ViewParser {
 		}
 	}
 
-	public static String parseDevelopmentCardsSlots(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
+	public static String parseDevelopmentCardsSlots(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
 				return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, nickname));
@@ -135,5 +141,9 @@ public class ViewParser {
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("look developmentcardsslots <slot> <nickname>");
 		}
+	}
+
+	public static String parseTurn(String[] inputs, Turn turn) throws IllegalArgumentException {
+		return Printer.printTurn(turn);
 	}
 }

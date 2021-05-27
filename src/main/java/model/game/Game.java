@@ -48,7 +48,7 @@ public class Game extends Observable {
 		notify(new ErrorMessage(error_message));
 	}
 
-	private void notifyGame() {
+	public void notifyGame() {
 		notify(new ViewUpdate(this.simplify()));
 	}
 

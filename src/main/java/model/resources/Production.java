@@ -115,7 +115,11 @@ public class Production implements ProductionInterface, Serializable {
 				}
 			} else if (prod_size == 2){
 				if (i == 2){
-					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " " + prod_array.get(0).getAbbreviation();
+					if (prod_array.get(0) != null) {
+						to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " " + prod_array.get(0).getAbbreviation();
+					} else {
+						to_return[i] += " " + String.valueOf(produced.get(prod_array.get(0))) + " ? ";
+					}
 				} else if (i == 4){
 					to_return[i] += " " + String.valueOf(produced.get(prod_array.get(1))) + " " + prod_array.get(1).getAbbreviation();
 				} else {
