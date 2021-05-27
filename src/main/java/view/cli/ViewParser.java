@@ -35,7 +35,7 @@ public class ViewParser {
 					throw new IllegalArgumentException();
 			}
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
-			throw new IllegalArgumentException("look <market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <nickname>>");
+			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname>");
 		}
 	}
 
@@ -104,10 +104,10 @@ public class ViewParser {
 	public static String parseLeaderCards(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
-				return Printer.printLeaderCards(getPlayerFromNickname(players, nickname));
+				return Printer.printLeaderCards(getPlayerFromNickname(players, nickname), true);
 			} else {
 				String player_nickname = inputs[2];
-				return Printer.printLeaderCards(getPlayerFromNickname(players, player_nickname));
+				return Printer.printLeaderCards(getPlayerFromNickname(players, player_nickname), false);
 			}
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("look leadercards <nickname>");
@@ -117,13 +117,23 @@ public class ViewParser {
 	public static String parseDevelopmentCardsSlots(String[] inputs, SimplePlayer[] players, String nickname) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
-				return Printer.printLeaderCards(getPlayerFromNickname(players, nickname));
+				return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, nickname));
 			} else {
-				String player_nickname = inputs[2];
-				return Printer.printLeaderCards(getPlayerFromNickname(players, player_nickname));
+				try {
+					int slot = Integer.parseInt(inputs[2]);
+					if (inputs.length == 3) {
+						return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, nickname), slot);
+					} else {
+						String player_nickname = inputs[3];
+						return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, player_nickname), slot);
+					}
+				} catch (NumberFormatException e) {
+					String player_nickname = inputs[2];
+					return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, player_nickname));
+				}
 			}
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException("look developmentcardsslots <nickname>");
+			throw new IllegalArgumentException("look developmentcardsslots <slot> <nickname>");
 		}
 	}
 }

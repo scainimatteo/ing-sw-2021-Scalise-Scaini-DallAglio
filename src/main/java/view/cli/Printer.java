@@ -80,11 +80,15 @@ public class Printer {
 		return "";
 	}
 
-	public static String printLeaderCards(SimplePlayer player) {
+	public static String printLeaderCards(SimplePlayer player, boolean printDeactivated) {
 		return "";
 	}
 
 	public static String printDevelopmentCardsSlots(SimplePlayer player) {
+		return "";
+	}
+
+	public static String printDevelopmentCardsSlots(SimplePlayer player, int slot) {
 		return "";
 	}
 }
