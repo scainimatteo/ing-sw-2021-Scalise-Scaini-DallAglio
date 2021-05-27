@@ -1,6 +1,8 @@
 package it.polimi.ingsw.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.stream.Collectors;
 
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
@@ -13,8 +15,11 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.DiscountAbility;
 import it.polimi.ingsw.model.card.WhiteMarblesAbility;
+import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.StrongBox;
+import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
 
@@ -81,7 +86,7 @@ public class GameController implements Runnable, Controller {
 	 */
 
 	/**
-	 * checks if the bonus can be extracted from the player's leader cards
+	 * Checks if the bonus can be extracted from the player's leader cards
 	 *
 	 * @param player is the player whose leader cards need to be checked
 	 * @param bonus is the bonus requested by the player 
@@ -105,9 +110,8 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * applies the bonus if it is appliable
+	 * Applies the bonus if it is appliable
 	 *
-	 * @param player is the player whose leader cards need to be checked
 	 * @param bonus is the bonus requested by the player 
 	 * @param gains is the ArrayList of resources gained by the player
 	 * @return an ArrayList with proper bonus applied
@@ -151,7 +155,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * applies discount to given cost
+	 * Applies discount to given cost
 	 *
 	 * @param player is the player whose leader cards need to be checked
 	 * @param cost is the ArrayList of resources to be paid
@@ -194,21 +198,33 @@ public class GameController implements Runnable, Controller {
 		} else {handleError();}
 	}
 
+	/**
+	 * Calculates the total cost of the selected production powers
+	 *
+	 * @param productions is the ArrayList of productions to check
+	 * @return an ArrayList of resources containing the total cost of the productions
+	 * */
 	private ArrayList<Resource> totalProductionCost(ArrayList<ProductionInterface> productions){
 		ArrayList<Resource> total = new ArrayList<Resource>();
 		for (ProductionInterface x : productions){
 			total.addAll(x.getRequiredResources());
 		}
 		return total;
-	}		
+	}
 
+	/**
+	 * Calculates the total gain of the selected production powers
+	 *
+	 * @param productions is the ArrayList of productions to check
+	 * @return an ArrayList of resources containing the total gain of the productions
+	 * */
 	private ArrayList<Resource> totalProductionGain(ArrayList<ProductionInterface> productions){
 		ArrayList<Resource> total = new ArrayList<Resource>();
 		for (ProductionInterface x : productions){
 			total.addAll(x.getProducedResources());
 		}
 		return total;
-	}		
+	}
 
 	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
 		if (checkPlayer(player)){
@@ -217,28 +233,206 @@ public class GameController implements Runnable, Controller {
 				ArrayList<Resource> produced = totalProductionGain(productions);
 				if(player.hasEnoughResources(required)){
 					game.getTurn().addRequiredResources(required);
-					game.getTurn().addProducedResources(produced);
+					player.moveForward((int)produced.stream().filter(x->x.equals(Resource.FAITH)).count());
+					game.getTurn().addProducedResources((ArrayList<Resource>)produced.stream().filter(x->!x.equals(Resource.FAITH)).collect(Collectors.toList()));
 					game.getTurn().setDoneAction(true);
 				} else {handleError();}
 			} else {handleError();}
 		} else {handleError();}
 	}
 
-	public void handleEndTurn(Player player) {
+	/**
+	 * RESOURCE RELATED ACTIONS
+	 */
+
+	private boolean checkCorrectPayAmount(Player player, Storage storage){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		ArrayList<Resource> total = storage.getStrongbox();
+		total.addAll(storage.getWarehouseTop());
+		total.addAll(storage.getWarehouseMid());
+		total.addAll(storage.getWarehouseBot());
+		total.addAll(storage.getExtraspace());
+		for (Resource res : check){
+			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getRequiredResources().stream().filter(x->x.equals(res)).count()){
+				return false;
+			}
+		}
+		return true;
 	}
 
+	private boolean isContainedExtra(Player player, Storage storage){
+		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		LeaderAbility ability;
+		boolean exists = false;
+		ArrayList<Resource> resource = storage.getExtraspace(); 
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			exists = false;
+			for (LeaderCard x : player.getDeck()){
+				ability = x.getAbility();
+				if (ability.checkAbility(test)){
+					exists = exists? exists : ((ExtraSpaceAbility) ability).isContainedExtra((ArrayList<Resource>) resource.stream().filter(e->e.equals(res)).collect(Collectors.toList()));
+				}
+			}
+			if (!exists){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isContainedWarehouse(Player player, Storage storage){
+		Warehouse warehouse = player.getWarehouse();
+		return warehouse.isContainedTop(storage.getWarehouseTop()) && warehouse.isContainedMiddle(storage.getWarehouseMid()) && warehouse.isContainedBottom(storage.getWarehouseBot());    
+	}
+	
+	private boolean isContainedStrongbox(Player player, Storage storage){
+		return player.getPlayerStrongBox().areContainedInStrongbox(storage.getStrongbox());
+	}
+
+	private boolean isContained(Player player, Storage storage){
+		return isContainedStrongbox(player,storage) && isContainedWarehouse(player, storage) && isContainedExtra(player, storage);
+	}
+	
 	public void handlePay(Player player, Storage storage) {
+		if (checkPlayer(player)){
+			if (checkCorrectPayAmount(player, storage)){
+				if (isContained(player, storage)){
+					player.removeResources(storage.getStrongbox());
+					game.getTurn().removeRequiredResources(storage.getStrongbox());
+					player.getFromTop(storage.getWarehouseTop());
+					game.getTurn().removeRequiredResources(storage.getWarehouseTop());
+					player.getFromMiddle(storage.getWarehouseMid());
+					game.getTurn().removeRequiredResources(storage.getWarehouseMid());
+					player.getFromBottom(storage.getWarehouseBot());
+					game.getTurn().removeRequiredResources(storage.getWarehouseBot());
+					player.getFromExtra(storage.getExtraspace());
+					game.getTurn().removeRequiredResources(storage.getExtraspace());
+					//If the payment comes as the result of production all resources must go in the Strongbox
+					if (!game.getTurn().mustDiscard() && game.getTurn().getRequiredResources().isEmpty()){
+						player.insertResources(game.getTurn().getProducedResources());
+						game.getTurn().getProducedResources().clear();
+					}
+				} else {handleError();}
+			} else {handleError();}
+		} else {handleError();}
+	}
+
+	private boolean checkCorrectStoreAmount(Player player, Storage storage){
+		if (!storage.getStrongbox().isEmpty()){
+			return false;
+		}
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		ArrayList<Resource> total = storage.getWarehouseTop();
+		total.addAll(storage.getWarehouseMid());
+		total.addAll(storage.getWarehouseBot());
+		total.addAll(storage.getExtraspace());
+		for (Resource res : check){
+			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getRequiredResources().stream().filter(x->x.equals(res)).count()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean canBeStoredExtra(Player player, Storage storage){
+		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		LeaderAbility ability;
+		boolean exists = false;
+		ArrayList<Resource> resource = storage.getExtraspace(); 
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			exists = false;
+			for (LeaderCard x : player.getDeck()){
+				ability = x.getAbility();
+				if (ability.checkAbility(test)){
+					exists = exists? exists : ((ExtraSpaceAbility) ability).canBeStoredExtra((ArrayList<Resource>) resource.stream().filter(e->e.equals(res)).collect(Collectors.toList()));
+				}
+			}
+			if (!exists){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean canBeStoredWarehouse(Player player, Storage storage){
+		Warehouse warehouse = player.getWarehouse();
+		return warehouse.canBeStoredTop(storage.getWarehouseTop()) && warehouse.canBeStoredMiddle(storage.getWarehouseMid()) && warehouse.canBeStoredBottom(storage.getWarehouseBot());    
+	}
+
+	private boolean canBeStored(Player player, Storage storage){
+		return canBeStoredExtra(player, storage) && canBeStoredWarehouse(player, storage);
 	}
 
 	public void handleStore(Player player, Storage storage) {
+		if (checkPlayer(player)){
+			if (game.getTurn().getRequiredResources().isEmpty()){
+				if (checkCorrectStoreAmount(player, storage)){
+					if (canBeStored(player, storage)){
+						player.storeTop(storage.getWarehouseTop());
+						game.getTurn().removeProducedResources(storage.getWarehouseTop());
+						player.storeMiddle(storage.getWarehouseMid());
+						game.getTurn().removeProducedResources(storage.getWarehouseMid());
+						player.storeBottom(storage.getWarehouseBot());
+						game.getTurn().removeProducedResources(storage.getWarehouseBot());
+						player.storeExtra(storage.getExtraspace());
+						game.getTurn().removeProducedResources(storage.getExtraspace());
+					} else {handleError();}
+				} else {handleError();}
+			} else {handleError();}
+		} else {handleError();}
 	}
 
 	public void handleDiscardResources(Player player) {
+		if (checkPlayer(player)){
+			if (game.getTurn().getRequiredResources().isEmpty()){
+				int discarded = game.getTurn().getProducedResources().size();
+				for (Player p : game.getPlayers()){
+					if (!p.equals(player)){
+						p.moveForward(discarded);
+					}
+				}
+				game.getTurn().getProducedResources().clear();
+			} else {handleError();}
+		} else {handleError();}
 	}
 
 	public void handleRearrange(Player player, int swap1, int swap2) {
+		if (checkPlayer(player)){
+			try {
+				player.swapRows(swap1, swap2);
+			} catch (IllegalArgumentException e){handleError();}
+		} else {handleError();}
 	}
 
+	/**
+	 * END TURN
+	 * */
+	private void checkLastTurn(Player player){
+		int count = 0;
+		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
+		while(iterator.hasNext()){
+			iterator.next();
+			count++;
+		}
+		if (player.endOfTrack() || count >= 7){
+			game.getTurn().setFinal(true);
+		}
+	}
+
+	public void handleEndTurn(Player player) {
+		if (checkPlayer(player)){
+			if (game.getTurn().hasDoneAction() && game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
+				checkLastTurn(player);
+				game.endTurn();
+			}
+		} else {handleError();}
+	}
+
+	/**
+	 * HANDLE VARIOUS ERRORS
+	 */
 	private void handleError(){
 		this.game.handleError("");
 	}

@@ -56,13 +56,6 @@ public class Game extends Observable {
 		return new SimpleGame(market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
 	}
 
-	public void shiftPlayers() {
-		List<Player> players_list = Arrays.asList(this.players);
-		Collections.rotate(players_list, 1);
-		this.players = players_list.toArray(new Player[this.players.length]);
-		this.notifyGame();
-	}
-
 	/**
 	 * MARKET METHODS
 	 */
@@ -103,4 +96,39 @@ public class Game extends Observable {
 		this.development_cards_on_table.getFromDeck(chosen_card);
 		this.notifyGame();
 	}
+	
+	/**
+	 * TURN METHODS
+	 */
+	public int nextPlayer(Player curr) throws IllegalArgumentException {
+		for (int i = 0; i < players.length; i++){
+			if (players[i] == curr){ 
+				return i+1;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
+
+	public void shiftPlayers() {
+		List<Player> players_list = Arrays.asList(this.players);
+		Collections.rotate(players_list, 1);
+		this.players = players_list.toArray(new Player[this.players.length]);
+		this.notifyGame();
+	}
+
+	public void endTurn(){
+		if (nextPlayer(turn.getPlayer()) == 4){
+			if(turn.isFinal()){
+				endGame();
+			} else {
+				shiftPlayers();
+				turn.clearTurn(players[0]);
+			}
+		} else {
+			turn.clearTurn(players[nextPlayer(turn.getPlayer())]);
+		}
+	}
+
+	// TODO
+	public void endGame(){}
 }

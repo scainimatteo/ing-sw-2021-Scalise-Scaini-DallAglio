@@ -18,7 +18,7 @@ public class Turn extends Observable implements Serializable {
 	ArrayList<Resource> produced_resources;
 	boolean action_done;
 	boolean must_discard;
-	boolean final_turn;
+	boolean final_round;
 
 	public Turn(Player player){
 		this.active_player = player;
@@ -26,10 +26,19 @@ public class Turn extends Observable implements Serializable {
 		this.produced_resources = new ArrayList<Resource>();
 		this.action_done = false;
 		this.must_discard = false;
-		this.final_turn = false;
+		this.final_round = false;
 	}
 
-	public Player getPlayer(){
+	public void clearTurn(Player player) {
+		this.active_player = player;
+		this.required_resources.clear();
+		this.produced_resources.clear();
+		this.action_done = false;
+		this.must_discard = false;
+		this.notifyTurn();
+	}
+
+    public Player getPlayer(){
 		return this.active_player;
 	}
 
@@ -51,6 +60,12 @@ public class Turn extends Observable implements Serializable {
 		this.notifyTurn();
 	}
 
+	public void removeRequiredResources(ArrayList<Resource> required) {
+		for (Resource x : required){
+			required_resources.remove(x);
+		}
+	}
+
 	public ArrayList<Resource> getProducedResources() {
 		return this.produced_resources;
 	}
@@ -58,6 +73,12 @@ public class Turn extends Observable implements Serializable {
 	public void addProducedResources(ArrayList<Resource> produced) {
 		this.produced_resources.addAll(produced);
 		this.notifyTurn();
+	}
+
+	public void removeProducedResources(ArrayList<Resource> required) {
+		for (Resource x : required){
+			produced_resources.remove(x);
+		}
 	}
 
 	public boolean hasDoneAction() {
@@ -79,21 +100,11 @@ public class Turn extends Observable implements Serializable {
 	}
 
 	public boolean isFinal() {
-		return this.final_turn;
+		return this.final_round;
 	}
 
 	public void setFinal(boolean value) {
-		this.final_turn = value;
-		this.notifyTurn();
-	}
-
-	public void clearTurn() {
-		this.active_player = null;
-		this.required_resources.clear();
-		this.produced_resources.clear();
-		this.action_done = false;
-		this.must_discard = false;
-		this.final_turn = false;
+		this.final_round = value;
 		this.notifyTurn();
 	}
 
