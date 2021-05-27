@@ -132,16 +132,23 @@ public class MessageParser {
 		}
 
 		SimpleDevelopmentCardSlot development_card_slots = player.getDevelopmentCardsSlots();
+		DevelopmentCard production = null;
 		if (slot == 1) {
 			DevelopmentCard[] first_column = development_card_slots.getFirstColumn();
-			return first_column[first_column.length - 1];
+			production = first_column[0];
 		} else if (slot == 2) {
 			DevelopmentCard[] second_column = development_card_slots.getSecondColumn();
-			return second_column[second_column.length - 1];
+			production = second_column[0];
 		} else {
 			DevelopmentCard[] third_column = development_card_slots.getThirdColumn();
-			return third_column[third_column.length - 1];
+			production = third_column[0];
 		}
+
+		if (production == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return production;
 	}
 
 	private static ProductionInterface parseLeaderCardProduction(String[] inputs, int i, SimplePlayer player, HashSet<Integer> leader_used) throws IndexOutOfBoundsException, IllegalArgumentException {
