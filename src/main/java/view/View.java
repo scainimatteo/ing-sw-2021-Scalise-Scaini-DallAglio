@@ -60,6 +60,7 @@ public abstract class View {
 		String nickname = simple_player.getNickname();
 		if (this.simple_players.isEmpty()) {
 			this.simple_players.add(simple_player);
+			return;
 		}
 
 		for (int i = 0; i < this.simple_players.size(); i++) {

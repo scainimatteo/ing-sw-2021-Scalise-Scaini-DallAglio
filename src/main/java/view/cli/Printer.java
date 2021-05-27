@@ -389,7 +389,6 @@ public class Printer {
 			case 3: return printDevelopmentCardsArray(player.getThirdColumn());
 			default: return "";
 		}
-		return null;
 	}
 
 	public static String printTurn(Turn turn){
