@@ -8,7 +8,10 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public class MarketMessage extends TurnMessage{
+import java.io.Serializable;
+
+public class MarketMessage extends TurnMessage implements Serializable {
+	private static final long serialVersionUID = 88668L;
 	public boolean row_or_column;
 	public ArrayList<Resource> white_marbles;
 

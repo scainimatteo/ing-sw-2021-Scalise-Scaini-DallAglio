@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-public class Storage {
+import java.io.Serializable;
+
+public class Storage implements Serializable {
+	private static final long serialVersionUID = 887742L;
 	public ArrayList<Resource> warehouse_top;
 	public ArrayList<Resource> warehouse_mid;
 	public ArrayList<Resource> warehouse_bot;

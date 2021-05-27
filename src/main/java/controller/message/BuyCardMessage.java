@@ -2,7 +2,10 @@ package it.polimi.ingsw.controller.message;
 
 import it.polimi.ingsw.controller.Controller;
 
-public class BuyCardMessage extends TurnMessage {
+import java.io.Serializable;
+
+public class BuyCardMessage extends TurnMessage implements Serializable {
+	private static final long serialVersionUID = 4321L;
 	public int slot;
 
 	public BuyCardMessage(int row, int column, int slot){
