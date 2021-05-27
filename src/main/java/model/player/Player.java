@@ -19,11 +19,13 @@ import it.polimi.ingsw.model.player.track.Tile;
 import it.polimi.ingsw.util.Observable;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
+import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
 
@@ -53,7 +55,31 @@ public class Player extends Observable {
 	}
 
 	private SimplePlayer simplify() {
-		return null;
+		DevelopmentCard[] first_column = new DevelopmentCard[3];
+		Iterator<DevelopmentCard> iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		int i = 0;
+		while (iterator.hasNext()){
+			first_column[2 - i] = iterator.next();
+			i ++;
+		}
+
+		DevelopmentCard[] second_column = new DevelopmentCard[3];
+		iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		i = 0;
+		while (iterator.hasNext()){
+			second_column[2 - i] = iterator.next();
+			i ++;
+		}
+
+		DevelopmentCard[] third_column = new DevelopmentCard[3];
+		iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		i = 0;
+		while (iterator.hasNext()){
+			third_column[2 - i] = iterator.next();
+			i ++;
+		}
+		
+		return new SimplePlayer(this.nickname, this.track.getCellTrack(), this.track.getMarker(), this.track.getTiles(), new SimpleWarehouse(this.warehouse.getTopResource(), this.warehouse.getMiddleResources(), this.warehouse.getBottomResources()), this.strongbox.getStorage(), this.leader_cards_deck, new SimpleDevelopmentCardSlot(first_column, second_column, third_column));
 	}
 
 	/**
