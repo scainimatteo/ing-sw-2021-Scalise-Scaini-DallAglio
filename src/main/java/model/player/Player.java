@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import java.lang.IllegalArgumentException;
 
@@ -231,11 +232,16 @@ public class Player extends Observable {
 	public void storeExtra(ArrayList<Resource> res){
 		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
 		LeaderAbility ability;
-		for (LeaderCard x : leader_cards_deck){
-			ability = x.getAbility();
-			if (ability.checkAbility(test)) {
-				if (((ExtraSpaceAbility) ability).canBeStoredExtra(res)) {
-					((ExtraSpaceAbility) ability).storeExtra(res);
+		ArrayList<Resource> single_type;
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource r : check){
+			single_type = (ArrayList<Resource>) res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
+			for (LeaderCard x : leader_cards_deck){
+				ability = x.getAbility();
+				if (ability.checkAbility(test)) {
+					if (((ExtraSpaceAbility) ability).canBeStoredExtra(single_type)) {
+						((ExtraSpaceAbility) ability).storeExtra(single_type);
+					}
 				}
 			}
 		}
@@ -244,11 +250,16 @@ public class Player extends Observable {
 	public void getFromExtra(ArrayList<Resource> res){
 		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
 		LeaderAbility ability;
-		for (LeaderCard x : leader_cards_deck){
-			ability = x.getAbility();
-			if (ability.checkAbility(test)) {
-				if (((ExtraSpaceAbility) ability).isContainedExtra(res)){
-					((ExtraSpaceAbility) ability).getFromExtra(res);
+		ArrayList<Resource> single_type;
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource r : check){
+			single_type = (ArrayList<Resource>)res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
+			for (LeaderCard x : leader_cards_deck){
+				ability = x.getAbility();
+				if (ability.checkAbility(test)) {
+					if (((ExtraSpaceAbility) ability).isContainedExtra(single_type)) {
+						((ExtraSpaceAbility) ability).getFromExtra(single_type);
+					}
 				}
 			}
 		}
