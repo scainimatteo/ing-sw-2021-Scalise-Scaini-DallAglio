@@ -281,9 +281,12 @@ public class Printer {
 				mid_v_r += " X ";
 			}
 
-			mid_v_r += "|";
+			if (i != 2){
+				mid_v_r += "|   |";
+			} else {
+				mid_v_r += "|\n";
+			}
 		}
-		mid_v_r += "\n";
 		
 		return top + mid + top + "\n\n" + ANSI.red(bot) + "\n\n" + top_v_r + mid_v_r + top_v_r;
 	}
