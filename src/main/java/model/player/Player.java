@@ -44,13 +44,14 @@ public class Player extends Observable {
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();
 		this.leader_cards_deck = new ArrayList<LeaderCard>();
+		this.notifyPlayer();
 	}
 
 	public String getNickname(){
 		return this.nickname;
 	}
 
-	private void notifyPlayer() {
+	public void notifyPlayer() {
 		notify(new ViewUpdate(this.simplify()));
 	}
 
@@ -78,7 +79,7 @@ public class Player extends Observable {
 			third_column[2 - i] = iterator.next();
 			i ++;
 		}
-		
+
 		return new SimplePlayer(this.nickname, this.track.getCellTrack(), this.track.getMarker(), this.track.getTiles(), new SimpleWarehouse(this.warehouse.getTopResource(), this.warehouse.getMiddleResources(), this.warehouse.getBottomResources()), this.strongbox.getStorage(), this.leader_cards_deck, new SimpleDevelopmentCardSlot(first_column, second_column, third_column));
 	}
 

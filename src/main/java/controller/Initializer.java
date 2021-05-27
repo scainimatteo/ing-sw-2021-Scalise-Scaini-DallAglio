@@ -51,6 +51,9 @@ public class Initializer {
 			Game game = createGame();
 			addRemoteViews(game);
 			game.notifyGame();
+			for (Player p: this.players) {
+				p.notifyPlayer();
+			}
 			return createGame();
 		} catch (Exception e) {
 			//TODO: too generic?
@@ -75,8 +78,13 @@ public class Initializer {
 		for (int i = 0; i < clients.size(); i++) {
 			this.players[i] = new Player(clients.get(i).getNickname(), all_cells, all_tiles);
 			this.remote_views[i] = new RemoteView(clients.get(i));
-			this.players[i].addObserver(this.remote_views[i]);
 			clients.get(i).setPlayer(this.players[i]);
+		}
+
+		for (int i = 0; i < this.players.length; i++) {
+			for (int j = 0; j < this.remote_views.length; j++) {
+				this.players[i].addObserver(this.remote_views[j]);
+			}
 		}
 	}
 
