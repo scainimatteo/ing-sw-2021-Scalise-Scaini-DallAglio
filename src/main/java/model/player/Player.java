@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.card.LeaderCardResourcesCost;
 import it.polimi.ingsw.model.card.LeaderCardLevelCost;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 
@@ -227,6 +228,31 @@ public class Player extends Observable {
 		this.warehouse.clearWarehouse();
 	}
 
+	public void storeExtra(ArrayList<Resource> res){
+		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		LeaderAbility ability;
+		for (LeaderCard x : leader_cards_deck){
+			ability = x.getAbility();
+			if (ability.checkAbility(test)) {
+				if (((ExtraSpaceAbility) ability).canBeStoredExtra(res)) {
+					((ExtraSpaceAbility) ability).storeExtra(res);
+				}
+			}
+		}
+	}
+
+	public void getFromExtra(ArrayList<Resource> res){
+		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		LeaderAbility ability;
+		for (LeaderCard x : leader_cards_deck){
+			ability = x.getAbility();
+			if (ability.checkAbility(test)) {
+				if (((ExtraSpaceAbility) ability).isContainedExtra(res)){
+					((ExtraSpaceAbility) ability).getFromExtra(res);
+				}
+			}
+		}
+	}
 		
 	/**
 	 * STRONGBOX METHODS
@@ -287,5 +313,9 @@ public class Player extends Observable {
 
 	public void moveForward(int steps){
 		this.track.moveForward(steps);
+	}
+
+	public boolean endOfTrack(){
+		return getMarkerPosition() >= track.getLastPosition();
 	}
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import java.lang.IllegalArgumentException;
+
 import it.polimi.ingsw.model.card.DevelopmentCard;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
@@ -27,7 +29,7 @@ public class Game extends Observable {
 		this.players = players;
 		this.market = new Market();
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
-		this.turn = new Turn(this.players[0], false);
+		this.turn = new Turn(this.players[0]);
 	}
 
 	public Player[] getPlayers() {
@@ -75,12 +77,39 @@ public class Game extends Observable {
 	public void getFromDeck(DevelopmentCard chosen_card) {
 		this.development_cards_on_table.getFromDeck(chosen_card);
 	}
+	
+	/**
+	 * TURN METHODS
+	 */
+	public int nextPlayer(Player curr) throws IllegalArgumentException {
+		for (int i = 0; i < players.length; i++){
+			if (players[i] == curr){ 
+				return i+1;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
 
 	public void shiftPlayers() {
 		List<Player> players_list = Arrays.asList(this.players);
 		Collections.rotate(players_list, 1);
 		this.players = players_list.toArray(new Player[this.players.length]);
 	}
+
+	public void endTurn(){
+		if (nextPlayer(turn.getPlayer()) == 4){
+			if(turn.isFinal()){
+				endGame();
+			} else {
+				shiftPlayers();
+				turn.init(players[0]);
+			}
+		} else {
+			turn.init(players[nextPlayer(turn.getPlayer())]);
+		}
+	}
+
+	public void endGame(){}
 
 	public void handleError(){
 	}
