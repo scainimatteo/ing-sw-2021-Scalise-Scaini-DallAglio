@@ -52,7 +52,7 @@ public class Game extends Observable {
 	}
 
 	private SimpleGame simplify() {
-		return null;
+		return new SimpleGame(market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
 	}
 
 	/**

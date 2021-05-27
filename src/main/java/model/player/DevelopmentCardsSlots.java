@@ -31,6 +31,10 @@ public class DevelopmentCardsSlots {
 		this.slots.addElement(card, 0, pos);
 	}
 
+	public Deck<DevelopmentCard> getDeck(int row, int column){
+		return this.slots.getDeck(row, column);
+	}
+
 	/**
 	 * @return an array cointaining the first card of every deck
 	 */

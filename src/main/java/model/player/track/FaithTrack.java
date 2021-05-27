@@ -55,6 +55,18 @@ public class FaithTrack {
 
 	}
 
+	public Cell[] getCellTrack(){
+		return this.track;
+	}
+
+	public Cell getMarker(){
+		return this.faith_marker;
+	}
+
+	public Tile[] getTiles(){
+		return this.vatican_report_tiles;
+	}
+
 	public int getMarkerPosition(){
 		return this.faith_marker.getPosition();
 	}
