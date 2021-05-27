@@ -21,6 +21,7 @@ public class CLI extends View {
 	 *
 	 * @param client the Client using the View
 	 */
+	@Override
 	public void startView(Client client) {
 		Scanner stdin = new Scanner(System.in);
 		new Thread(() -> {
@@ -60,27 +61,18 @@ public class CLI extends View {
 		}
 	}
 
-	/**
-	 * Update the simple model after a ViewUpdate
-	 */
-	public void updateView() {
-		return;
-	}
-
-	/**
-	 * Print the error message
-	 *
-	 * @param error_message the ErrorMessage received from the Server
-	 */
+	@Override
 	public void handleError(ErrorMessage error_message) {
-		return;
+		if (error_message.nickname == null) {
+			System.out.println(error_message.error_string);
+		} else {
+			if (error_message.nickname == this.getMyPlayer().getNickname()) {
+				System.out.println(error_message.error_string);
+			}
+		}
 	}
 
-	/**
-	 * Print the message during the initalization phase
-	 *
-	 * @param error_message the ErrorMessage received from the Server
-	 */
+	@Override
 	public void handleInitializing(InitializingServerMessage initializing_message) {
 		//TODO: temporary?
 		System.out.print(initializing_message.message);
