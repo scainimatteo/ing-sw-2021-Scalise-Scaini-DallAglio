@@ -8,6 +8,7 @@ import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.InitializingMessage;
 import it.polimi.ingsw.controller.message.ProductionMessage;
+import it.polimi.ingsw.controller.message.RearrangeMessage;
 import it.polimi.ingsw.controller.message.EndTurnMessage;
 import it.polimi.ingsw.controller.message.BuyCardMessage;
 import it.polimi.ingsw.controller.message.MarketMessage;
@@ -69,6 +70,9 @@ public class MessageParser {
 			case "ACTIVATE":
 			case "A":
 				return parseActivateLeaderCardMessage(inputs, player);
+			case "REARRANGE":
+			case "R":
+				return parseRearrangeMessage(inputs);
 			default:
 				throw new IllegalArgumentException();
 		}
@@ -294,6 +298,22 @@ public class MessageParser {
 			return new ActivateLeaderMessage(leader_card);
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
 			throw new IllegalArgumentException("activate leader index");
+		}
+	}
+
+	private static Message parseRearrangeMessage(String[] inputs) {
+		try {
+			int swap1 = Integer.parseInt(inputs[2]);
+			int swap2 = Integer.parseInt(inputs[3]);
+			if (swap1 < 1 || swap1 > 3) {
+				throw new IllegalArgumentException();
+			}
+			if (swap2 < 1 || swap2 > 3) {
+				throw new IllegalArgumentException();
+			}
+			return new RearrangeMessage(swap1, swap2);
+		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
+			throw new IllegalArgumentException("rearrange swap1 swap2");
 		}
 	}
 

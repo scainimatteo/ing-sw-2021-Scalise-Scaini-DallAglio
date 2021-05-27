@@ -7,7 +7,10 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public class PayMessage extends ResourceMessage {
+import java.io.Serializable;
+
+public class PayMessage extends ResourceMessage implements Serializable {
+	private static final long serialVersionUID = 323225L;
 	Storage storage;
 
 	public PayMessage(Storage storage) {
