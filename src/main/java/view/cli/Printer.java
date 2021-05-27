@@ -350,6 +350,14 @@ public class Printer {
 		return printDevelopmentCardsArray(player.getTopCards());
 	}
 
+	public static String printDevelopmentCardsSlots(SimplePlayer player, int slot) {
+		switch (slot){
+			case 1: return printDevelopmentCardsArray(player.getFirstColumn());
+			case 2: return printDevelopmentCardsArray(player.getSecondColumn());
+			case 3: return printDevelopmentCardsArray(player.getThirdColumn());
+		}
+	}
+
 	public static String printNullCard(){
 		String top = "|-----------------|\n";
 		String mid = "|                 |\n";
