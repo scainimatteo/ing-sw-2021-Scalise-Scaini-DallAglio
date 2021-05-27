@@ -13,6 +13,11 @@ public class SimpleDevelopmentCardSlot {
 		this.third_column = third_column;
 	}
 
+	public DevelopmentCard[] getTopCards(){
+		DevelopmentCard[] to_return = {first_column[0], second_column[0], third_column[0]};
+		return to_return;
+	}
+
 	public DevelopmentCard[] getFirstColumn(){
 		return this.first_column;
 	}

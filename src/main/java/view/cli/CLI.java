@@ -1,9 +1,19 @@
 package it.polimi.ingsw.view.cli;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.List;
+
+import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.player.track.Cell;
+
+import it.polimi.ingsw.util.ANSI;
+
+import it.polimi.ingsw.view.simplemodel.SimplePlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleGame;
+import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 
 import it.polimi.ingsw.client.Client;
 

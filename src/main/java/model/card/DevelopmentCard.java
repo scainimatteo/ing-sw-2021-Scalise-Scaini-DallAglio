@@ -74,21 +74,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 		return this.production.activateProduction();
 	}
 
-	// TODO: move into view
-//	private HashMap<Resource, Integer> numOfCost(){
-//		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
-//
-//		for (Resource res : cost){
-//			if (to_return.containsKey(res)){
-//				to_return.put(res, to_return.get(res) + 1);
-//			} else {
-//				to_return.put(res, 1);
-//			}
-//		}
-//
-//		return to_return;
-//	}
-//
+
 //	public String printText(){
 //		String top = "|-----------------|\n";
 //		String mid = "|                 |\n";

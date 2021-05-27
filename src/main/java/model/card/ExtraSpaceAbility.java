@@ -72,19 +72,17 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		return true;
 	}
 
-	/* TODO: move in view
 	public String printText(){
 		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |";
-		if (index == 0){
+		if (storage.size() == 0){
 			string +="|  |   |   |   |  |\n";
-		} else if (index ==1){
+		} else if (storage.size() ==1){
 			string +="|  | " + resource_type.getAbbreviation() + " |   |   |  |\n";
-		} else if (index == 2){
+		} else if (storage.size() == 2){
 			string +="|  | " + resource_type.getAbbreviation() + " |   | " + resource_type.getAbbreviation() + " |  |\n";
 		}
 		return string + "|  ·----· ·----·  |\n|                 |\n";
 	}
-	*/
 }
 /*
 | XX |            |

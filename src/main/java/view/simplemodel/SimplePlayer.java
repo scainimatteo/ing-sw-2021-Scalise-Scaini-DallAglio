@@ -85,4 +85,8 @@ public class SimplePlayer {
 	public DevelopmentCard[] getThirdColumn(){
 		return this.development_card_slots.getThirdColumn();
 	}
+
+	public DevelopmentCard[] getTopCards(){
+		return this.development_card_slots.getTopCards();
+	}
 }
