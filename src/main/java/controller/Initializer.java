@@ -48,6 +48,7 @@ public class Initializer {
 			createPlayers(clients);
 			distributeLeaderCards();
 			chooseMatchOrder();
+			movePlayerForward();
 			Game game = createGame();
 			addRemoteViews(game);
 			game.notifyGame();
@@ -126,6 +127,17 @@ public class Initializer {
 		List<Player> players_list = Arrays.asList(this.players);
 		Collections.shuffle(players_list);
 		this.players = players_list.toArray(new Player[this.players.length]);
+	}
+
+	/**
+	 * Move the third and the fourth player one space forward
+	 */
+	private void movePlayerForward() {
+		try {
+			this.players[2].moveForward(1);
+			this.players[3].moveForward(1);
+		} catch (IndexOutOfBoundsException e) {
+		}
 	}
 
 	/**
