@@ -4,7 +4,10 @@ import it.polimi.ingsw.controller.Controller;
 
 import it.polimi.ingsw.model.player.Player;
 
-public class RearrangeMessage extends Message {
+import java.io.Serializable;
+
+public class RearrangeMessage extends Message implements Serializable {
+	private static final long serialVersionUID = 89700L;
 	public int swap1 = 0;
 	public int swap2 = 0;
 

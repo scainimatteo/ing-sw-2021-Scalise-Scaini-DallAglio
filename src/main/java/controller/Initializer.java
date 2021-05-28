@@ -48,8 +48,13 @@ public class Initializer {
 			createPlayers(clients);
 			distributeLeaderCards();
 			chooseMatchOrder();
+			movePlayerForward();
 			Game game = createGame();
 			addRemoteViews(game);
+			game.notifyGame();
+			for (Player p: this.players) {
+				p.notifyPlayer();
+			}
 			return createGame();
 		} catch (Exception e) {
 			//TODO: too generic?
@@ -73,9 +78,14 @@ public class Initializer {
 
 		for (int i = 0; i < clients.size(); i++) {
 			this.players[i] = new Player(clients.get(i).getNickname(), all_cells, all_tiles);
-			this.remote_views[i] = new RemoteView(this.players[i], clients.get(i));
-			this.players[i].addObserver(this.remote_views[i]);
+			this.remote_views[i] = new RemoteView(clients.get(i));
 			clients.get(i).setPlayer(this.players[i]);
+		}
+
+		for (int i = 0; i < this.players.length; i++) {
+			for (int j = 0; j < this.remote_views.length; j++) {
+				this.players[i].addObserver(this.remote_views[j]);
+			}
 		}
 	}
 
@@ -120,11 +130,23 @@ public class Initializer {
 	}
 
 	/**
+	 * Move the third and the fourth player one space forward
+	 */
+	private void movePlayerForward() {
+		try {
+			this.players[2].moveForward(1);
+			this.players[3].moveForward(1);
+		} catch (IndexOutOfBoundsException e) {
+		}
+	}
+
+	/**
 	 * Add the RemoteViews as Observer of Game
 	 */
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
 			game.addObserver(r);
+			game.getTurn().addObserver(r);
 		}
 	}
 

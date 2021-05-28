@@ -18,31 +18,65 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		this.storage = new ArrayList<Resource> ();
 	}
 
+	public Resource getResourceType() {
+		return resource_type;
+	}
+	
+	public int peekResources(){
+		return this.storage.size();
+	}
+
+	/**
+	 * Checks whether the given ArrayList of resources containes only the correct resource type
+	 * 
+	 * @param res is the ArrayList of resources to be checked
+	 */
+	private boolean isAllRightType (ArrayList<Resource> res){
+		for (Resource x : res){
+			if (!x.equals(resource_type)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if the given ArrayList can be stored in the extra space
+	 *
+	 * @param res is the ArrayList to be checked
+	 */
+	public boolean canBeStoredExtra(ArrayList<Resource> res){
+		if (res.isEmpty()){
+			return true;
+		} else {
+			return res.size() <= 2 - storage.size() && isAllRightType(res);
+		}
+	}
+
+	/**
+	 * Checks if the given ArrayList is contained in the extra space
+	 *
+	 * @param res is the ArrayList to be checked
+	 */
+	public boolean isContainedExtra(ArrayList<Resource> res){
+		if (res.isEmpty()){
+			return true;
+		} else {
+		return res.size() <= storage.size() && isAllRightType(res);
+		}
+	}
+
 	/**
 	* @param new_resource is the resource to be added to the space
 	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
-	public void putResource(Resource new_resource) throws IllegalArgumentException {
-		if (!new_resource.equals(resource_type) || storage.size() >= 2){
+	public void storeExtra(ArrayList<Resource> res) throws IllegalArgumentException {
+		if (res.get(0).equals(resource_type) || res.size() > 2 - storage.size()){
 			throw new IllegalArgumentException();	
 		}
 		else {
-			storage.add(new_resource);
+			storage.addAll(res);
 		} 
-	}
-
-	/**
-	* @return the number of resources available
-	*/
-	public int peekResources() {
-		return storage.size();
-	}
-
-	/**
-	* @return the type of resources available
-	*/
-	public Resource getResourceType() {
-		return resource_type;
 	}
 
 	/**
@@ -50,7 +84,7 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	* @return array of requested resources
 	* @throws NoSuchElementException if requested quantity exceed present quantity
 	*/
-	public void getResources(ArrayList<Resource> res) throws NoSuchElementException {
+	public void getFromExtra(ArrayList<Resource> res) throws NoSuchElementException {
 		if (res.size() > storage.size() || res.size() == 0){
 			throw new NoSuchElementException();
 		} else if (res.stream().allMatch(x->x.equals(resource_type))) {
@@ -72,19 +106,17 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		return true;
 	}
 
-	/* TODO: move in view
 	public String printText(){
-		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |";
-		if (index == 0){
-			string +="|  |   |   |   |  |\n";
-		} else if (index ==1){
+		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |\n";
+		if (storage.size() == 0){
+			string +="|  |    | |    |  |\n";
+		} else if (storage.size() ==1){
 			string +="|  | " + resource_type.getAbbreviation() + " |   |   |  |\n";
-		} else if (index == 2){
+		} else if (storage.size() == 2){
 			string +="|  | " + resource_type.getAbbreviation() + " |   | " + resource_type.getAbbreviation() + " |  |\n";
 		}
 		return string + "|  ·----· ·----·  |\n|                 |\n";
 	}
-	*/
 }
 /*
 | XX |            |

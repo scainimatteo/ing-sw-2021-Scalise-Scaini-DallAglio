@@ -1,11 +1,14 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.controller.servermessage.ViewUpdate;
+
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.model.card.LeaderCardResourcesCost;
 import it.polimi.ingsw.model.card.LeaderCardLevelCost;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 
@@ -16,10 +19,15 @@ import it.polimi.ingsw.model.player.track.Tile;
 
 import it.polimi.ingsw.util.Observable;
 
+import it.polimi.ingsw.view.simplemodel.SimplePlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
+import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
-import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
 
@@ -38,12 +46,44 @@ public class Player extends Observable {
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();
 		this.leader_cards_deck = new ArrayList<LeaderCard>();
+		this.notifyPlayer();
 	}
 
 	public String getNickname(){
 		return this.nickname;
 	}
 
+	public void notifyPlayer() {
+		notify(new ViewUpdate(this.simplify()));
+	}
+
+	private SimplePlayer simplify() {
+		DevelopmentCard[] first_column = new DevelopmentCard[3];
+		Iterator<DevelopmentCard> iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		int i = 0;
+		while (iterator.hasNext()){
+			first_column[2 - i] = iterator.next();
+			i ++;
+		}
+
+		DevelopmentCard[] second_column = new DevelopmentCard[3];
+		iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		i = 0;
+		while (iterator.hasNext()){
+			second_column[2 - i] = iterator.next();
+			i ++;
+		}
+
+		DevelopmentCard[] third_column = new DevelopmentCard[3];
+		iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		i = 0;
+		while (iterator.hasNext()){
+			third_column[2 - i] = iterator.next();
+			i ++;
+		}
+
+		return new SimplePlayer(this.nickname, this.track.getCellTrack(), this.track.getMarker(), this.track.getTiles(), new SimpleWarehouse(this.warehouse.getTopResource(), this.warehouse.getMiddleResources(), this.warehouse.getBottomResources()), this.strongbox.getStorage(), this.leader_cards_deck, new SimpleDevelopmentCardSlot(first_column, second_column, third_column));
+	}
 
 	/**
 	 * LEADER CARD METHODS
@@ -55,6 +95,7 @@ public class Player extends Observable {
 
 	public void setLeaderCards(ArrayList<LeaderCard> leader_cards) {
 		this.leader_cards_deck = leader_cards;
+		this.notifyPlayer();
 	}
 
 	public boolean isActivable(LeaderCard card){
@@ -117,6 +158,7 @@ public class Player extends Observable {
 		for (LeaderCard x : leader_cards_deck){
 			if (x.equals(card)){
 				x.activateLeaderCard();
+				this.notifyPlayer();
 				return;
 			}
 		}
@@ -124,6 +166,7 @@ public class Player extends Observable {
 
 	public void discardLeader(LeaderCard leader_card){
 		this.leader_cards_deck.remove(leader_card);
+		this.notifyPlayer();
 	}
 
 	/**
@@ -197,18 +240,22 @@ public class Player extends Observable {
 
 	public void swapRows (int i, int j) {
 		this.warehouse.swapRows(i, j);
+		this.notifyPlayer();
 	}
 
 	public void storeTop(ArrayList<Resource> res){
 		this.warehouse.storeTop(res);
+		this.notifyPlayer();
 	}
 
 	public void storeMiddle(ArrayList<Resource> res){
 		this.warehouse.storeMiddle(res);
+		this.notifyPlayer();
 	}
 
 	public void storeBottom(ArrayList<Resource> res){
 		this.warehouse.storeBottom(res);
+		this.notifyPlayer();
 	}
 
 	public void getFromTop(ArrayList<Resource> res){
@@ -225,14 +272,51 @@ public class Player extends Observable {
 
 	public void clearWarehouse(){
 		this.warehouse.clearWarehouse();
+		this.notifyPlayer();
 	}
 
+	public void storeExtra(ArrayList<Resource> res){
+		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		LeaderAbility ability;
+		ArrayList<Resource> single_type;
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource r : check){
+			single_type = (ArrayList<Resource>) res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
+			for (LeaderCard x : leader_cards_deck){
+				ability = x.getAbility();
+				if (ability.checkAbility(test)) {
+					if (((ExtraSpaceAbility) ability).canBeStoredExtra(single_type)) {
+						((ExtraSpaceAbility) ability).storeExtra(single_type);
+					}
+				}
+			}
+		}
+	}
+
+	public void getFromExtra(ArrayList<Resource> res){
+		ExtraSpaceAbility test = new ExtraSpaceAbility(null);
+		LeaderAbility ability;
+		ArrayList<Resource> single_type;
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource r : check){
+			single_type = (ArrayList<Resource>)res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
+			for (LeaderCard x : leader_cards_deck){
+				ability = x.getAbility();
+				if (ability.checkAbility(test)) {
+					if (((ExtraSpaceAbility) ability).isContainedExtra(single_type)) {
+						((ExtraSpaceAbility) ability).getFromExtra(single_type);
+					}
+				}
+			}
+		}
+	}
 		
 	/**
 	 * STRONGBOX METHODS
 	 */
 	public void insertResources(ArrayList<Resource> new_resources){
 		this.strongbox.insertResources(new_resources);
+		this.notifyPlayer();
 	}
 
 	public HashMap<Resource, Integer> getStorage(){
@@ -241,6 +325,7 @@ public class Player extends Observable {
 
 	public void removeResources(ArrayList<Resource> res){
 		this.strongbox.removeResources(res);
+		this.notifyPlayer();
 	}
 
 	public StrongBox getPlayerStrongBox(){
@@ -256,6 +341,7 @@ public class Player extends Observable {
 
 	public void buyCard(DevelopmentCard card, int position){
 		this.development_card_slots.buyCard(card, position);
+		this.notifyPlayer();
 	}
 
 	public DevelopmentCard[] getTopCards(){
@@ -287,5 +373,10 @@ public class Player extends Observable {
 
 	public void moveForward(int steps){
 		this.track.moveForward(steps);
+		this.notifyPlayer();
+	}
+
+	public boolean endOfTrack(){
+		return getMarkerPosition() >= track.getLastPosition();
 	}
 }

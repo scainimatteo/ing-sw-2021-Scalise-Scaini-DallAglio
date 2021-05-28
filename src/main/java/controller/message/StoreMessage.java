@@ -9,7 +9,11 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import java.util.ArrayList;
 
-public class StoreMessage extends ResourceMessage {
+import java.io.Serializable;
+
+public class StoreMessage extends ResourceMessage implements Serializable {
+	private static final long serialVersionUID = 99772L;
+
 	public StoreMessage(Storage storage){
 		this.storage = storage;
 	}

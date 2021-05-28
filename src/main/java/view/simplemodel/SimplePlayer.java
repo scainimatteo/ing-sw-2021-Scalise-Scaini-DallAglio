@@ -9,7 +9,10 @@ import it.polimi.ingsw.model.player.track.Tile;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SimplePlayer {
+import java.io.Serializable;
+
+public class SimplePlayer implements Serializable {
+	private static final long serialVersionUID = 7775L;
 	protected String nickname;
 	protected Cell[] track;
 	protected Cell faith_marker;
@@ -84,5 +87,9 @@ public class SimplePlayer {
 
 	public DevelopmentCard[] getThirdColumn(){
 		return this.development_card_slots.getThirdColumn();
+	}
+
+	public DevelopmentCard[] getTopCards(){
+		return this.development_card_slots.getTopCards();
 	}
 }

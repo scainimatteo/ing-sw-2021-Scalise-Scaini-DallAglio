@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class LeaderCardResourcesCost extends LeaderCard {
+import java.io.Serializable;
+
+public class LeaderCardResourcesCost extends LeaderCard implements Serializable {
+	private static final long serialVersionUID = 83762L;
 	private ArrayList<Resource> requirements;
 
 	public LeaderCardResourcesCost (int points, LeaderAbility ability, ArrayList<Resource> requirements, int id) {
@@ -41,9 +44,8 @@ public class LeaderCardResourcesCost extends LeaderCard {
 	}
 
 	@Override
-	public String printTop(){
-		//ported from another object
-		String top = "|                 |\n|                  |\n";
+	protected String printTop(){
+		String top = "|                 |\n|                 |\n";
 		HashMap<Resource, Integer> cost_to_print = this.numOfCost();
 		Set<Resource> cost_set = cost_to_print.keySet();
 		Resource[] cost_array = cost_set.toArray(new Resource[cost_set.size()]);
@@ -61,10 +63,6 @@ public class LeaderCardResourcesCost extends LeaderCard {
 		}
 		cost_string += "  |\n";
 
-		return top + cost_string + "|                 |\n|                  |\n";
-	}
-
-	public String printText(int index){
-		return null;
+		return top + cost_string + "|                 |\n|                 |\n";
 	}
 }

@@ -2,8 +2,15 @@ package it.polimi.ingsw.view.cli;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
-import java.util.List;
+
+import it.polimi.ingsw.model.resources.Resource;
+import it.polimi.ingsw.model.player.track.Cell;
+
+import it.polimi.ingsw.util.ANSI;
+
+import it.polimi.ingsw.view.simplemodel.SimplePlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleGame;
+import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 
 import it.polimi.ingsw.client.Client;
 
@@ -16,11 +23,16 @@ import it.polimi.ingsw.view.cli.ViewParser;
 import it.polimi.ingsw.view.View;
 
 public class CLI extends View {
+	public CLI() {
+		this.simple_players = new ArrayList<SimplePlayer>();
+	}
+
 	/**
 	 * Start a thread parsing the strings passed from the command line
 	 *
 	 * @param client the Client using the View
 	 */
+	@Override
 	public void startView(Client client) {
 		Scanner stdin = new Scanner(System.in);
 		new Thread(() -> {
@@ -52,35 +64,27 @@ public class CLI extends View {
 	 */
 	private void parseInput(Client client, String inputLine) {
 		String[] inputs = inputLine.split(" ");
-		if (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L")) {
-			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.nickname);
+		if (!this.initializing && (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L"))) {
+			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.turn, this.nickname);
+			System.out.println(to_view);
 		} else {
 			Message parsed_message = MessageParser.parseInput(inputLine, this.initializing, this.getMyPlayer());
 			client.sendMessage(parsed_message);
 		}
 	}
 
-	/**
-	 * Update the simple model after a ViewUpdate
-	 */
-	public void updateView() {
-		return;
-	}
-
-	/**
-	 * Print the error message
-	 *
-	 * @param error_message the ErrorMessage received from the Server
-	 */
+	@Override
 	public void handleError(ErrorMessage error_message) {
-		return;
+		if (error_message.nickname == null) {
+			System.out.println(error_message.error_string);
+		} else {
+			if (error_message.nickname == this.getMyPlayer().getNickname()) {
+				System.out.println(error_message.error_string);
+			}
+		}
 	}
 
-	/**
-	 * Print the message during the initalization phase
-	 *
-	 * @param error_message the ErrorMessage received from the Server
-	 */
+	@Override
 	public void handleInitializing(InitializingServerMessage initializing_message) {
 		//TODO: temporary?
 		System.out.print(initializing_message.message);

@@ -36,6 +36,9 @@ public class Client {
 		this.in = new ObjectInputStream(server.getInputStream()); 
 	}
 
+	/**
+	 * Start the View thread and start receiving and sending messages
+	 */
 	public void startClient() throws IOException {
 		System.out.printf("Client connected to server %s:%d\n", this.address, this.port);
 
@@ -60,11 +63,20 @@ public class Client {
 		}
 	}
 
+	/**
+	 * Update the View
+	 *
+	 * @param message the ViewUpdate that contains the information to update
+	 */
 	public void updateView(ViewUpdate message) {
-		//TODO change this method
-		this.view.updateView();
+		this.view.updateView(message);
 	}
 
+	/**
+	 * Send a Message to the Server
+	 *
+	 * @param message the Message to send
+	 */
 	public synchronized void sendMessage(Message message) {
 		try {
 			this.out.reset();

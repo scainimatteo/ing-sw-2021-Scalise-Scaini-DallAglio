@@ -18,7 +18,7 @@ public class FaithTrack {
 	 * @return the vatican report activated if the marker reaches or overcomes a pope space
 	 */
 	public VaticanReports moveForward(int number_of_times) {
-		int new_position = number_of_times + faith_marker.getPosition();
+		int new_position = number_of_times + faith_marker.getPosition() < getLastPosition()? number_of_times + faith_marker.getPosition() : getLastPosition();
 		this.faith_marker = track[new_position];
 
 		for (int i = new_position; i > (new_position - number_of_times); i --){
@@ -53,6 +53,18 @@ public class FaithTrack {
 			} 
 		} 
 
+	}
+
+	public Cell[] getCellTrack(){
+		return this.track;
+	}
+
+	public Cell getMarker(){
+		return this.faith_marker;
+	}
+
+	public Tile[] getTiles(){
+		return this.vatican_report_tiles;
 	}
 
 	public int getMarkerPosition(){
