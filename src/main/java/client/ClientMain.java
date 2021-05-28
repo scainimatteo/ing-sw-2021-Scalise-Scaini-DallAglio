@@ -8,6 +8,7 @@ import java.io.IOException;
 import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.view.cli.CLI;
+import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.View;
 
 public class ClientMain {
@@ -103,8 +104,7 @@ public class ClientMain {
 		if (view_string.equals("cli")) {
 			return new CLI();
 		} else {
-			// TODO: GUI
-			return null;
+			return new GUI();
 		}
 	}
 }
