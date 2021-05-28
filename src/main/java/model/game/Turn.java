@@ -19,6 +19,7 @@ public class Turn extends Observable implements Serializable {
 	boolean action_done;
 	boolean must_discard;
 	boolean final_round;
+	boolean initialized;
 
 	public Turn(Player player){
 		this.active_player = player;
@@ -101,6 +102,14 @@ public class Turn extends Observable implements Serializable {
 
 	public boolean isFinal() {
 		return this.final_round;
+	}
+
+	public boolean isInitialized() {
+		return this.initialized;
+	}
+
+	public void setInitialized(boolean value) {
+		this.initialized = value;
 	}
 
 	public void setFinal(boolean value) {

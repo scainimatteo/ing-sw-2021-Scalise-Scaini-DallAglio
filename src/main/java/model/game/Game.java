@@ -23,20 +23,20 @@ import it.polimi.ingsw.util.Observable;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 public class Game extends Observable {
-	private Player[] players;
+	private ArrayList<Player> players;
 	private Market market;
 	private DevelopmentCardsOnTable development_cards_on_table;
 	private Turn turn;
 
-	public Game(Player[] players, DevelopmentCard[] all_development_cards) {
+	public Game(ArrayList<Player> players, DevelopmentCard[] all_development_cards) {
 		this.players = players;
 		this.market = new Market();
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
-		this.turn = new Turn(this.players[0]);
+		this.turn = new Turn(this.players.get(0));
 		this.notifyGame();
 	}
 
-	public Player[] getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
 
@@ -100,32 +100,16 @@ public class Game extends Observable {
 	/**
 	 * TURN METHODS
 	 */
-	public int nextPlayer(Player curr) throws IllegalArgumentException {
-		for (int i = 0; i < players.length; i++){
-			if (players[i] == curr){ 
-				return i+1;
-			}
-		}
-		throw new IllegalArgumentException();
-	}
-
-	public void shiftPlayers() {
-		List<Player> players_list = Arrays.asList(this.players);
-		Collections.rotate(players_list, 1);
-		this.players = players_list.toArray(new Player[this.players.length]);
-		this.notifyGame();
-	}
-
 	public void endTurn(){
-		if (nextPlayer(turn.getPlayer()) == 4){
+		if (players.indexOf(turn.getPlayer()) + 1 == 4){
 			if(turn.isFinal()){
 				endGame();
 			} else {
-				shiftPlayers();
-				turn.clearTurn(players[0]);
+				Collections.rotate(players, 1);
+				turn.clearTurn(players.get(0));
 			}
 		} else {
-			turn.clearTurn(players[nextPlayer(turn.getPlayer())]);
+			turn.clearTurn(players.get(players.indexOf(turn.getPlayer()) + 1));
 		}
 	}
 

@@ -54,9 +54,63 @@ public class GameController implements Runnable, Controller {
 	 * checks whether the player who sent the message is the active player or not
 	 */
 	private boolean checkPlayer(Player player){
-		if (!player.equals(game.getTurn().getPlayer())){
+		if (!player.equals(game.getTurn().getPlayer()) || !game.getTurn().isInitialized()){
 			return false;
 		} else {return true;}
+	}
+	
+	/**
+	 * INITIALIZING RELATED ACTIONS
+	 */ 
+	private boolean checkCardNumber(){
+		for (Player p : game.getPlayers()){
+			if (p.getDeck().size() > 2) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean checkCorrectResources(Player p){
+		int totalWarehouse = p.getTopResource().size() + p.getMiddleResources().size() + p.getBottomResources().size();
+		if (game.getPlayers().indexOf(p) == 1 || game.getPlayers().indexOf(p) == 2){
+			if (totalWarehouse < 1){
+				return false;
+			}
+		} else if (game.getPlayers().indexOf(p) == 3){
+			if (totalWarehouse < 2){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean checkCorrectTotalResources(){
+		int totalWarehouse = 0;
+		for (Player p : game.getPlayers()){
+			if (!checkCorrectResources(p)){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void checkEndInitializing(){
+		if(checkCardNumber() && checkCorrectTotalResources()){
+			game.getTurn().setInitialized(true);
+		}
+	}
+
+	public void handleInitStore(Player player, Storage storage){
+		if (!game.getTurn().isInitialized()){
+			if (!checkCorrectResources(player)){
+				//TODO: check if the resources are correct
+				player.storeTop(storage.getWarehouseTop());
+				player.storeMiddle(storage.getWarehouseMid());
+				player.storeBottom(storage.getWarehouseBot());
+				checkEndInitializing();
+			} else {handleError();}
+		} else {handleError();}
 	}
 
 	/**
@@ -73,10 +127,15 @@ public class GameController implements Runnable, Controller {
 	}
 
 	public void handleDiscardLeader(Player player, LeaderCard card) {
-		if (checkPlayer(player)){
+		if (player.equals(game.getTurn().getPlayer())){
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				player.discardLeader(card);
 				player.moveForward(1);
+			} else {handleError();}
+		} else if (!game.getTurn().isInitialized()){ 
+			if	(player.getDeck().size() > 2) {
+				player.discardLeader(card);	
+				checkEndInitializing();
 			} else {handleError();}
 		} else {handleError();}
 	}
