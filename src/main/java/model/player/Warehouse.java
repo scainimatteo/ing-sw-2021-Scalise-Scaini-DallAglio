@@ -323,26 +323,4 @@ public class Warehouse {
 			}
 		}
 	}
-
-	/* TODO:
-	public String printResource(Resource res) {
-		if (res == null) {
-			return "  ";
-		} else {
-			return res.getAbbreviation();
-		}
-	}
-
-	public String printText(){
-		String total = "        /\\\n       /  \\\n      / ";
-		total += printResource(this.top_resource) + " \\\n     /------\\\n";
-		total += "    / " + printResource(this.middle_resources[0]) + "  " + printResource(this.middle_resources[1]) + " \\\n   /----------\\\n";
-		total += "  / " + printResource(this.bottom_resources[0]) + "  " + printResource(this.bottom_resources[1]) + "  " + printResource(this.bottom_resources[2]) + " \\\n";
-		return total + " /--------------\\";
-	}
-
-	public String printText(int index){
-		return null;
-	}
-	*/
 }

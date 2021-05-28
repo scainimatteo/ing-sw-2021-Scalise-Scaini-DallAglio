@@ -9,12 +9,13 @@ import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.resources.Resource;  
 import it.polimi.ingsw.model.resources.Production;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class DevelopmentCardTest{
 	Resource [] randresource = {Resource.FAITH, Resource.STONE, Resource.SHIELD, Resource.COIN, Resource.SERVANT};
-	Resource[] input = new Resource[2];
-	Resource[] output = new Resource[2];
+	ArrayList<Resource> input = new ArrayList<Resource>(2);
+	ArrayList<Resource> output = new ArrayList<Resource>(2);
 	Random random = new Random();
 	DevelopmentCardsColor[] rand_color = {DevelopmentCardsColor.GREEN, DevelopmentCardsColor.BLUE, DevelopmentCardsColor.YELLOW, DevelopmentCardsColor.PURPLE};
 	DevelopmentCard devcard;
@@ -28,10 +29,10 @@ public class DevelopmentCardTest{
 		y = random.nextInt(4);
 		z = random.nextInt(4);
 		t = random.nextInt(4);
-		input[0] = randresource[x];
-		input[1] = randresource[y];
-		output[0] = randresource[z];
-		output[1] = randresource[t];
+		input.add(randresource[x]);
+		input.add(randresource[y]);
+		output.add(randresource[z]);
+		output.add(randresource[t]);
 		devcard = new DevelopmentCard(random.nextInt(10), new Production(input, output), input, level, random.nextInt(3));
 	}
 	
@@ -41,6 +42,6 @@ public class DevelopmentCardTest{
 	@RepeatedTest(value = 10)
 	public void fullTest(){
 		assertEquals (level, devcard.getCardLevel());
-		assertEquals (output, devcard.useCard(input));	
+		assertEquals (output, devcard.activateProduction());	
 	}
 }

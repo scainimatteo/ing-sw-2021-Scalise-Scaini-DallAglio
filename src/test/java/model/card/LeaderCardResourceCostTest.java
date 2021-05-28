@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 public class LeaderCardResourceCostTest {
 	LeaderCardResourcesCost[] cards;
-	Resource[] requirements_of_a_card;
+	ArrayList<Resource> requirements_of_a_card;
 	int chosen_card_index;
 
 	@BeforeEach
@@ -62,9 +63,9 @@ public class LeaderCardResourceCostTest {
 	public void checkRequirements() {
 		for (int i = 0; i < 4; i++) {
 			if (i == this.chosen_card_index) {
-				assertArrayEquals(requirements_of_a_card, cards[i].getRequirements());
+				assertEquals(requirements_of_a_card, cards[i].getRequirements());
 			} else {
-				assertFalse(Arrays.equals(requirements_of_a_card, cards[i].getRequirements()));
+				assertFalse(requirements_of_a_card.equals(cards[i].getRequirements()));
 			}
 		}
 	}

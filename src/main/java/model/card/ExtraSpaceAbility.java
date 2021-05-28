@@ -71,7 +71,8 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
 	public void storeExtra(ArrayList<Resource> res) throws IllegalArgumentException {
-		if (res.get(0).equals(resource_type) || res.size() > 2 - storage.size()){
+		if (!res.get(0).equals(resource_type) || res.size() > 2 - storage.size()){
+			System.out.println(res.get(0) + " " + resource_type);
 			throw new IllegalArgumentException();	
 		}
 		else {

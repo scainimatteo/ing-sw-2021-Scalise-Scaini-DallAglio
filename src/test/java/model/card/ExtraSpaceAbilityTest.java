@@ -9,6 +9,9 @@ import java.lang.IndexOutOfBoundsException;
 import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.resources.Resource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class ExtraSpaceAbilityTest {
 	Resource wrong_resource = Resource.COIN;
 	Resource test_except = Resource.FAITH;
@@ -26,12 +29,15 @@ public class ExtraSpaceAbilityTest {
 	*/
 	@Test
 	public void testInsert(){
-		test_space.putResource(right_resource);
+		ArrayList<Resource> test_res = new ArrayList<Resource>();
+		test_res.add(right_resource);
+		ArrayList<Resource> wrong_res = new ArrayList<Resource>();
+		wrong_res.add(wrong_resource);
+		test_space.storeExtra(test_res);
 		assertTrue(test_space.peekResources() == 1);
-		test_space.putResource(right_resource);
+		test_space.storeExtra(test_res);
 		assertTrue(test_space.peekResources() == 2);
-		assertThrows(IndexOutOfBoundsException.class, () -> {test_space.putResource(right_resource);})	;
-		assertThrows(IllegalArgumentException.class, () -> {test_space.putResource(wrong_resource);});
+		assertThrows(IllegalArgumentException.class, () -> {test_space.storeExtra(wrong_res);});
 	}
 
 	/**
@@ -39,20 +45,16 @@ public class ExtraSpaceAbilityTest {
 	*/
 	@Test
 	public void testGetter() {
-		test_space.putResource(right_resource);
-		Resource[] return_one = {Resource.SERVANT};
-		assertArrayEquals(test_space.getResource(1), return_one);
-		assertTrue (test_space.peekResources() == 0);
-		test_space.putResource(right_resource);	
-		test_space.putResource(right_resource);
-		Resource[] return_two = {Resource.SERVANT, Resource.SERVANT};
-		assertArrayEquals(test_space.getResource(2), return_two);
-		test_space.putResource(right_resource);	
-		test_space.putResource(right_resource);	
-		assertArrayEquals(test_space.getResource(1), return_one);
-		assertTrue (test_space.peekResources() == 1);	
-		test_space.putResource(right_resource);
-		assertThrows(IndexOutOfBoundsException.class, () -> {test_space.putResource(right_resource);})	;
-				
+		ArrayList<Resource> test_res = new ArrayList<Resource>();
+		test_res.add(right_resource);
+		ArrayList<Resource> wrong_res = new ArrayList<Resource>();
+		wrong_res.add(wrong_resource);
+		test_space.storeExtra(test_res);
+		ArrayList<Resource> return_one = new ArrayList<Resource>(Arrays.asList(Resource.SERVANT));
+		assertEquals(test_space.peekResources(), 1);
+		test_space.storeExtra(test_res);
+		ArrayList<Resource> return_two = new ArrayList<Resource>(Arrays.asList(Resource.SERVANT));
+		assertEquals(test_space.peekResources(), 2);
+		assertThrows(IllegalArgumentException.class, () -> {test_space.storeExtra(test_res);})	;
 	}
 }
