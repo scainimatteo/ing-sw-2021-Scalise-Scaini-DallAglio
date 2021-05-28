@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Random;
 
 import it.polimi.ingsw.model.resources.Resource;
@@ -62,8 +63,8 @@ public class MarketTest {
 	 * @param final_row the same row of the Market after it was shifted
 	 * @return true if the shift was correct
 	 */
-	private boolean checkIfRowShifted(Resource[] initial_row, Resource[] final_row) {
-		return (initial_row[1] == final_row[0]) && (initial_row[2] == final_row[1]) && (initial_row[3] == final_row[2]);
+	private boolean checkIfRowShifted(ArrayList<Resource> initial_row, ArrayList<Resource> final_row) {
+		return (initial_row.get(1) == final_row.get(0)) && (initial_row.get(2) == final_row.get(1)) && (initial_row.get(3) == final_row.get(2));
 	}
 
 	/**
@@ -72,8 +73,9 @@ public class MarketTest {
 	@Test
 	public void shiftAllRowsTest() {
 		for (int i = 0; i < 3; i++) {
-			Resource[] initial_row = market.getRow(i);
-			Resource[] final_row = market.getRow(i);
+			ArrayList<Resource> initial_row = market.getRow(i);
+			market.shiftRow(i);
+			ArrayList<Resource> final_row = market.getRow(i);
 			assertTrue(checkIfRowShifted(initial_row, final_row));
 		}
 	}
@@ -86,14 +88,17 @@ public class MarketTest {
 		Random random = new Random();
 		int row = random.nextInt(3);
 
-		Resource[] first = market.getRow(row);
-		Resource[] second = market.getRow(row);
-		Resource[] third = market.getRow(row);
-		Resource[] fourth = market.getRow(row);
+		ArrayList<Resource> first = market.getRow(row);
+		market.shiftRow(row);
+		ArrayList<Resource> second = market.getRow(row);
+		market.shiftRow(row);
+		ArrayList<Resource> third = market.getRow(row);
+		market.shiftRow(row);
+		ArrayList<Resource> fourth = market.getRow(row);
 
-		assertTrue(first[0] == third[3]);
-		assertTrue(second[0] == fourth[3]);
-		assertTrue(first[3] == second[2] && third[1] == fourth[0] && first[3] == fourth[0]);
+		assertTrue(first.get(0) == third.get(3));
+		assertTrue(second.get(0) == fourth.get(3));
+		assertTrue(first.get(3) == second.get(2) && third.get(1) == fourth.get(0) && first.get(3) == fourth.get(0));
 	}
 
 	/**
@@ -101,8 +106,8 @@ public class MarketTest {
 	 * @param final_column the same column of the Market after it was shifted
 	 * @return true if the shift was correct
 	 */
-	private boolean checkIfColumnShifted(Resource[] initial_column, Resource[] final_column) {
-		return (initial_column[1] == final_column[0]) && (initial_column[2] == final_column[1]);
+	private boolean checkIfColumnShifted(ArrayList<Resource> initial_column, ArrayList<Resource> final_column) {
+		return (initial_column.get(1) == final_column.get(0)) && (initial_column.get(2) == final_column.get(1));
 	}
 
 	/**
@@ -111,8 +116,9 @@ public class MarketTest {
 	@Test
 	public void shiftAllColumnsTest() {
 		for (int i = 0; i < 3; i++) {
-			Resource[] initial_column = market.getColumn(i);
-			Resource[] final_column = market.getColumn(i);
+			ArrayList<Resource> initial_column = market.getColumn(i);
+			market.shiftColumn(i);
+			ArrayList<Resource> final_column = market.getColumn(i);
 			assertTrue(checkIfColumnShifted(initial_column, final_column));
 		}
 	}
@@ -125,11 +131,13 @@ public class MarketTest {
 		Random random = new Random();
 		int column = random.nextInt(4);
 
-		Resource[] first = market.getColumn(column);
-		Resource[] second = market.getColumn(column);
-		Resource[] third = market.getColumn(column);
+		ArrayList<Resource> first = market.getColumn(column);
+		market.shiftColumn(column);
+		ArrayList<Resource> second = market.getColumn(column);
+		market.shiftColumn(column);
+		ArrayList<Resource> third = market.getColumn(column);
 
-		assertTrue(first[0] == third[2]);
-		assertTrue(first[2] == second[1] && third[0] == second[1]);
+		assertTrue(first.get(0) == third.get(2));
+		assertTrue(first.get(2) == second.get(1) && third.get(0) == second.get(1));
 	}
 }

@@ -111,7 +111,7 @@ public class DevelopmentCardsOnTableTest {
 
 		for (int i = 0; i < 4; i++) {
 			CardLevel cardlevel = top_cards[row][column].getCardLevel();
-			assertEquals(cardlevel.getLevel(), row + 1);
+			assertEquals(cardlevel.getLevel(), 3 - row);
 			assertEquals(cardlevel.getColor(), DevelopmentCardsColor.values()[column]);
 			dct.getFromDeck(top_cards[row][column]);
 			top_cards = dct.getTopCards();

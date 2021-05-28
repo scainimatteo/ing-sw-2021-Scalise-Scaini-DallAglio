@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.resources;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 public class ProductionTest {
 	/**
 	 * Test for the method activateProduction
@@ -14,13 +16,18 @@ public class ProductionTest {
 		Resource test_resource_3 = Resource.STONE;
 		Resource test_resource_4 = Resource.FAITH;
 
-		Resource[] required_resource = {test_resource_1, test_resource_2};
-		Resource[] produced_resource = {test_resource_3, test_resource_4};
+		ArrayList<Resource> required_resource = new ArrayList<Resource>();
+		required_resource.add(test_resource_1);
+		required_resource.add(test_resource_2);
+
+		ArrayList<Resource> produced_resource = new ArrayList<Resource>();
+		produced_resource.add(test_resource_3);
+		produced_resource.add(test_resource_4);
 
 		Production test_production = new Production (required_resource, produced_resource);
 
-		Resource[] output_resources = test_production.activateProduction(required_resource);
+		ArrayList<Resource> output_resources = test_production.activateProduction();
 
-		assertTrue(output_resources[0].equals(produced_resource[0]) && output_resources[1].equals(produced_resource[1]));
+		assertTrue(output_resources.get(0).equals(produced_resource.get(0)) && output_resources.get(1).equals(produced_resource.get(1)));
 	}
 }
