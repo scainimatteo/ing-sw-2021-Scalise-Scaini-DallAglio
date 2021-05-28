@@ -13,6 +13,7 @@ public class Turn implements Serializable {
 	ArrayList<Resource> produced_resources;
 	boolean action_done;
 	boolean must_discard;
+	boolean initialized;
 	boolean final_turn;
 	private static final long serialVersionUID = 8008L;
 
@@ -89,6 +90,14 @@ public class Turn implements Serializable {
 
 	public boolean isFinal() {
 		return this.final_turn;
+	}
+
+	public boolean isInitialized() {
+		return this.initialized;
+	}
+
+	public void setInitialized(boolean value) {
+		this.initialized = value;
 	}
 
 	public void setFinal(boolean value) {

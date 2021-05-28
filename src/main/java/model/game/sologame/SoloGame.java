@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.game.sologame;
 import java.util.Collections;
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
@@ -20,7 +21,7 @@ public class SoloGame extends Game {
 	private SoloActionToken[] solo_action_tokens;
 	private ArrayDeque<SoloActionToken> active_tokens;
 
-	public SoloGame(Player[] player, DevelopmentCard[] all_development_cards) {
+	public SoloGame(ArrayList<Player> player, DevelopmentCard[] all_development_cards) {
 		super(player, all_development_cards);
 		this.solo_action_tokens = new SoloActionToken[7];
 		this.solo_action_tokens[0] = new MoveBlackCrossTwoSpaces();

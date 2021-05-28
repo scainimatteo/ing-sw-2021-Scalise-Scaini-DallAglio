@@ -51,6 +51,10 @@ public class InitialController implements Controller {
 		return;
 	}
 
+	public void handleInitStore(Player player, Storage storage) {
+		return;
+	}
+
 	public void handleBuyCard(Player player, int row, int column, int slot) {
 		return;
 	}

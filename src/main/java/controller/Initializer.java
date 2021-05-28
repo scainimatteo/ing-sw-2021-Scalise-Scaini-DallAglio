@@ -31,7 +31,7 @@ import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.server.ClientHandler;
 
 public class Initializer {
-	private Player[] players;
+	private ArrayList<Player> players;
 	private RemoteView[] remote_views;
 
 	/**
@@ -68,14 +68,14 @@ public class Initializer {
 		Cell[] all_cells = factory.getAllCells();
 		Tile[] all_tiles = factory.getAllTiles();
 
-		this.players = new Player[clients.size()];
+		this.players = new ArrayList<Player>();
 		this.remote_views = new RemoteView[clients.size()];
 
 		for (int i = 0; i < clients.size(); i++) {
-			this.players[i] = new Player(clients.get(i).getNickname(), all_cells, all_tiles);
-			this.remote_views[i] = new RemoteView(this.players[i], clients.get(i));
-			this.players[i].addObserver(this.remote_views[i]);
-			clients.get(i).setPlayer(this.players[i]);
+			players.add(new Player(clients.get(i).getNickname(), all_cells, all_tiles));
+			this.remote_views[i] = new RemoteView(this.players.get(i), clients.get(i));
+			this.players.get(i).addObserver(this.remote_views[i]);
+			clients.get(i).setPlayer(this.players.get(i));
 		}
 	}
 
@@ -114,9 +114,7 @@ public class Initializer {
 	 * Shuffle the array of player to choose a random order
 	 */
 	private void chooseMatchOrder() {
-		List<Player> players_list = Arrays.asList(this.players);
-		Collections.shuffle(players_list);
-		this.players = players_list.toArray(new Player[this.players.length]);
+		Collections.shuffle(players);
 	}
 
 	/**
