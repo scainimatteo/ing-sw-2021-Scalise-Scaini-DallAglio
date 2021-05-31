@@ -315,8 +315,8 @@ public class MessageParser {
 
 	private static Message parseRearrangeMessage(String[] inputs) {
 		try {
-			int swap1 = Integer.parseInt(inputs[2]);
-			int swap2 = Integer.parseInt(inputs[3]);
+			int swap1 = Integer.parseInt(inputs[1]);
+			int swap2 = Integer.parseInt(inputs[2]);
 			if (swap1 < 1 || swap1 > 3) {
 				throw new IllegalArgumentException();
 			}
