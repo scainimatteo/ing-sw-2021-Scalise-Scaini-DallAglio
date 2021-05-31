@@ -5,17 +5,15 @@ import java.util.ArrayList;
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
 
 public class Observable {
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
-    private ArrayList<Observer> observers = new ArrayList<>();
+	public void addObserver(Observer observer){
+		observers.add(observer);
+	}
 
-    public void addObserver(Observer observer){
-        observers.add(observer);
-    }
-
-    public void notify(ServerMessage message){
-        for(Observer observer: observers){
-            observer.update(message);
-        }
-    }
-
+	public void notify(ServerMessage message){
+		for(Observer observer: observers){
+			observer.update(message);
+		}
+	}
 }

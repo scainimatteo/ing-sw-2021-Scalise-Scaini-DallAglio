@@ -33,7 +33,6 @@ public class Game extends Observable {
 		this.market = new Market();
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
 		this.turn = new Turn(this.players.get(0));
-		this.notifyGame();
 	}
 
 	public ArrayList<Player> getPlayers() {

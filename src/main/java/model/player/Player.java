@@ -46,7 +46,6 @@ public class Player extends Observable {
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();
 		this.leader_cards_deck = new ArrayList<LeaderCard>();
-		this.notifyPlayer();
 	}
 
 	public String getNickname(){

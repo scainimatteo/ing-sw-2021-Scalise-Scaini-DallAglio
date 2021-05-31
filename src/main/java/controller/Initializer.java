@@ -55,7 +55,7 @@ public class Initializer {
 			for (Player p: this.players) {
 				p.notifyPlayer();
 			}
-			return createGame();
+			return game;
 		} catch (Exception e) {
 			//TODO: too generic?
 			e.printStackTrace();

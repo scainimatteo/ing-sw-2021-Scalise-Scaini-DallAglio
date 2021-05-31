@@ -39,7 +39,7 @@ public class Turn extends Observable implements Serializable {
 		this.notifyTurn();
 	}
 
-    public Player getPlayer(){
+	public Player getPlayer(){
 		return this.active_player;
 	}
 
