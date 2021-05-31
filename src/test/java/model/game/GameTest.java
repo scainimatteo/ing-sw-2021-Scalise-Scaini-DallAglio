@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.game;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import java.io.IOException;
@@ -26,26 +27,11 @@ public class GameTest {
 		this.number_of_players = random.nextInt(4) + 1;
 
 		Factory factory = Factory.getIstance();
-		Player[] players = new Player[this.number_of_players];
+		ArrayList<Player> players = new ArrayList<Player>();
 		for (int i = 0; i < this.number_of_players; i++) {
-			players[i] = new Player(Integer.toString(i), factory.getAllCells(), factory.getAllTiles());
+			players.add(new Player(Integer.toString(i), factory.getAllCells(), factory.getAllTiles()));
 		}
 
 		this.game = new Game(players, Factory.getIstance().getAllDevelopmentCards());
-	}
-
-	/**
-	 * Check that all players correctly shifted
-	 */
-	@RepeatedTest(value = 3)
-	public void shiftPlayersTest() {
-		Player[] before = this.game.getPlayers().clone();
-		this.game.shiftPlayers();
-		Player[] after = this.game.getPlayers();
-
-		assertEquals(before[this.number_of_players - 1], after[0]);
-		for (int i = 1; i < this.number_of_players; i++) {
-			assertEquals(before[i - 1], after[i]);
-		}
 	}
 }

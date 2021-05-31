@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.io.IOException;
@@ -42,7 +43,8 @@ public class SoloGameTest {
 	public void createSoloGame() throws IOException, ParseException {
 		Factory factory = Factory.getIstance();
 
-		Player[] players = {new Player("Paperino", factory.getAllCells(), factory.getAllTiles())};
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Paperino", factory.getAllCells(), factory.getAllTiles()));
 		this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
 	}
 
@@ -51,7 +53,7 @@ public class SoloGameTest {
 	 */
 	@Test
 	public void checkOnlyOnePlayer() {
-		assertEquals(1, this.game.getPlayers().length);
+		assertEquals(1, this.game.getPlayers().size());
 	}
 
 	/**
