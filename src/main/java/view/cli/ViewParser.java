@@ -42,7 +42,7 @@ public class ViewParser {
 					throw new IllegalArgumentException();
 			}
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
-			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname>");
+			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname> | turn");
 		}
 	}
 

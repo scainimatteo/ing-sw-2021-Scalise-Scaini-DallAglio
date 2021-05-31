@@ -21,10 +21,14 @@ public class DevelopmentCardsSlots {
 
 	/**
 	 * @param card is the card that needs to be added to the slots
-	 * @param position is the deck where will be added the card
+	 * @param position is the deck where the card will be added
 	 */
 	public boolean fitsInSlot(DevelopmentCard card, int pos){
-		return pos <= 3 && pos >= 0 && (card.getCardLevel().getLevel() - slots.peekTop(0, pos).getCardLevel().getLevel() == 1);
+		if (slots.peekTop(0, pos) == null) {
+			return true;
+		}
+
+		return pos <= 3 && pos >= 1 && (card.getCardLevel().getLevel() - slots.peekTop(0, pos).getCardLevel().getLevel() == 1);
 	}
 
 	public void buyCard(DevelopmentCard card, int pos) {

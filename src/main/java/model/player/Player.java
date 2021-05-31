@@ -58,27 +58,27 @@ public class Player extends Observable {
 
 	private SimplePlayer simplify() {
 		DevelopmentCard[] first_column = new DevelopmentCard[3];
-		Iterator<DevelopmentCard> iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		Iterator<DevelopmentCard> iterator = this.development_card_slots.getDeck(0, 0).iterator();
 		int i = 0;
 		while (iterator.hasNext()){
-			first_column[2 - i] = iterator.next();
-			i ++;
+			first_column[i] = iterator.next();
+			i++;
 		}
 
 		DevelopmentCard[] second_column = new DevelopmentCard[3];
 		iterator = this.development_card_slots.getDeck(0, 1).iterator();
 		i = 0;
 		while (iterator.hasNext()){
-			second_column[2 - i] = iterator.next();
-			i ++;
+			second_column[i] = iterator.next();
+			i++;
 		}
 
 		DevelopmentCard[] third_column = new DevelopmentCard[3];
-		iterator = this.development_card_slots.getDeck(0, 1).iterator();
+		iterator = this.development_card_slots.getDeck(0, 2).iterator();
 		i = 0;
 		while (iterator.hasNext()){
-			third_column[2 - i] = iterator.next();
-			i ++;
+			third_column[i] = iterator.next();
+			i++;
 		}
 
 		return new SimplePlayer(this.nickname, this.track.getCellTrack(), this.track.getMarker(), this.track.getTiles(), new SimpleWarehouse(this.warehouse.getTopResource(), this.warehouse.getMiddleResources(), this.warehouse.getBottomResources()), this.strongbox.getStorage(), this.leader_cards_deck, new SimpleDevelopmentCardSlot(first_column, second_column, third_column));

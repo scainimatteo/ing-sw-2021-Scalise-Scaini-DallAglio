@@ -306,7 +306,8 @@ public class GameController implements Runnable, Controller {
 
 	private boolean checkCorrectPayAmount(Player player, Storage storage){
 		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
-		ArrayList<Resource> total = storage.getStrongbox();
+		ArrayList<Resource> total = new ArrayList<Resource>();
+		total.addAll(storage.getStrongbox());
 		total.addAll(storage.getWarehouseTop());
 		total.addAll(storage.getWarehouseMid());
 		total.addAll(storage.getWarehouseBot());
@@ -350,7 +351,9 @@ public class GameController implements Runnable, Controller {
 	}
 
 	private boolean isContained(Player player, Storage storage){
-		return isContainedStrongbox(player,storage) && isContainedWarehouse(player, storage) && isContainedExtra(player, storage);
+		//TODO: fix the isContainedExtra function
+		//return isContainedStrongbox(player,storage) && isContainedWarehouse(player, storage) && isContainedExtra(player, storage);
+		return isContainedStrongbox(player,storage) && isContainedWarehouse(player, storage);
 	}
 	
 	public void handlePay(Player player, Storage storage) {
@@ -359,6 +362,7 @@ public class GameController implements Runnable, Controller {
 				if (isContained(player, storage)){
 					player.removeResources(storage.getStrongbox());
 					game.getTurn().removeRequiredResources(storage.getStrongbox());
+					//TODO: can this be a separate function?
 					player.getFromTop(storage.getWarehouseTop());
 					game.getTurn().removeRequiredResources(storage.getWarehouseTop());
 					player.getFromMiddle(storage.getWarehouseMid());
@@ -370,6 +374,7 @@ public class GameController implements Runnable, Controller {
 					//If the payment comes as the result of production all resources must go in the Strongbox
 					if (!game.getTurn().mustDiscard() && game.getTurn().getRequiredResources().isEmpty()){
 						player.insertResources(game.getTurn().getProducedResources());
+						//TODO: change this because this doesn't trigger a notify
 						game.getTurn().getProducedResources().clear();
 					}
 				} else {handleError();}
@@ -456,6 +461,7 @@ public class GameController implements Runnable, Controller {
 						p.moveForward(discarded);
 					}
 				}
+				// TODO: change this because this doesn't trigger a notify
 				game.getTurn().getProducedResources().clear();
 			} else {handleError();}
 		} else {handleError();}

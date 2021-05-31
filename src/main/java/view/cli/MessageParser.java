@@ -80,7 +80,7 @@ public class MessageParser {
 
 	private static Message parseBuyCardMessage(String[] inputs) throws IllegalArgumentException {
 		try {
-			int level = Integer.parseInt(inputs[1]);
+			int level = 3 - Integer.parseInt(inputs[1]);
 			int color = DevelopmentCardsColor.valueOf(inputs[2].toUpperCase()).getOrder();
 			int slot = Integer.parseInt(inputs[3]);
 			return new BuyCardMessage(level, color, slot);

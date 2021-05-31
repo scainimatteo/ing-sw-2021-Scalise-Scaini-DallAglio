@@ -29,10 +29,10 @@ import java.util.Set;
 
 public class Printer {
 	/**
-	 * Print the text of an array of Viewable on one line
+	 * Print the text of an array of DevelopmentCards on one line
 	 *
-	 * @param viewables the array of Viewable to combine
-	 * @return the String with all the Viewables text
+	 * @param cards_array the array of DevelopmentCard to combine
+	 * @return the String with all the DevelopmentCard text
 	 */
 	public static String printDevelopmentCardsArray(DevelopmentCard[] cards_array) {
 		String total = "";
@@ -64,6 +64,12 @@ public class Printer {
 		return total;
 	}
 
+	/**
+	 * Print the text of an array of LeaderCards on one line
+	 *
+	 * @param cards_array the array of LeaderCard to combine
+	 * @return the String with all the LeaderCard text
+	 */
 	public static String printLeaderCardArray(LeaderCard[] cards_array, boolean print_deactivated) {
 		String total = "";
 		int dim = printLeader(cards_array[0], print_deactivated).split("\n").length;
@@ -95,10 +101,10 @@ public class Printer {
 	}
 
 	/**
-	 * Print the text of a matrix of Viewable as a matrix
+	 * Print the text of a matrix of DevelopmentCards as a matrix
 	 *
-	 * @param viewables the array of Viewable to combine
-	 * @return the String with all the Viewables text
+	 * @param viewables the array of DevelopmentCard to combine
+	 * @return the String with all the DevelopmentCard text
 	 */
 	public static String printDevelopmentCardsMatrix(DevelopmentCard[][] cards_matrix) {
 		String total = "";
