@@ -7,6 +7,6 @@
       fx:controller="it.polimi.ingsw.view.gui.scene.Initial">
 
 	  <Label fx:id="label" text="Nickname?"/>
-	  <Button fx:id="button" text="Button" onAction="#buttonHandler"/>
+	  <TextField fx:id="text" onAction="#buttonHandler"/>
     
 </VBox>

@@ -9,9 +9,9 @@ import javafx.scene.layout.*;
 
 public class Initial implements Initializable {
 	@FXML
-	Button button;
-	@FXML
 	Label label;
+	@FXML
+	TextField text;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -19,6 +19,6 @@ public class Initial implements Initializable {
     }
 
 	public void buttonHandler() {
-		label.setText(button.getText());
+		label.setText(text.getText());
 	}
 }
