@@ -36,6 +36,7 @@ public class ViewParser {
 				case "DCS":
 					return parseDevelopmentCardsSlots(inputs, players, nickname);
 				case "TURN":
+				case "TU":
 					return parseTurn(inputs, turn);
 				default:
 					throw new IllegalArgumentException();

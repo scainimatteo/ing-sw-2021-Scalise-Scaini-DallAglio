@@ -393,9 +393,9 @@ public class Printer {
 
 	public static String printTurn(Turn turn){
 		String to_return;
-		String top = "|------------------------------------------|\n";
-		String mid = "|                                          |\n";
-		String pad = "                                          ";
+		String top = "|-----------------------------------------------------|\n";
+		String mid = "|                                                     |\n";
+		String pad = "                                                      ";
 
 		String tmp_nickname = "| ACTIVE PLAYER: " + turn.getNickname() + " ";
 		String nickname_string = tmp_nickname + pad.substring(tmp_nickname.length()) + "|\n";
@@ -405,7 +405,6 @@ public class Printer {
 		ArrayList<Resource> req_resources = turn.getRequiredResources();
 		for (int i = 0; i < req_resources.size(); i ++){
 			tmp_req_resources += req_resources.get(i) + " ";
-			req_pad += "       ";
 		}
 		String req_string = tmp_req_resources + req_pad.substring(tmp_req_resources.length()) + "|\n";
 
@@ -414,7 +413,6 @@ public class Printer {
 		ArrayList<Resource> prod_resources = turn.getProducedResources();
 		for (int i = 0; i < prod_resources.size(); i ++){
 			tmp_prod_resources += prod_resources.get(i) + " ";
-			prod_pad += "       ";
 		}
 		String prod_string = tmp_prod_resources + prod_pad.substring(tmp_prod_resources.length()) + "|\n";
 
