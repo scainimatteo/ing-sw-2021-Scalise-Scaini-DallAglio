@@ -91,7 +91,7 @@ public class MessageParser {
 
 	private static Message parseMarketMessage(String[] inputs) throws IllegalArgumentException {
 		try {
-			boolean row_or_column = inputs[1].toUpperCase().equals("row") ? false : true;
+			boolean row_or_column = inputs[1].toUpperCase().equals("ROW") ? false : true;
 			int index = Integer.parseInt(inputs[2]);
 			if (inputs.length == 3) {
 				return new MarketMessage(row_or_column, index);
@@ -173,6 +173,10 @@ public class MessageParser {
 
 	private static Message parseProductionMessage(String[] inputs, SimplePlayer player) throws IllegalArgumentException {
 		try {
+			if (inputs.length == 1) {
+				throw new IllegalArgumentException();
+			}
+
 			boolean production_base = false;
 			HashSet<Integer> slots_used = new HashSet<Integer>();
 			HashSet<Integer> leader_used = new HashSet<Integer>();
@@ -209,6 +213,10 @@ public class MessageParser {
 		Storage storage = new Storage();
 
 		try {
+			if (inputs.length == 1) {
+				throw new IllegalArgumentException();
+			}
+
 			for(int i = 1; i < inputs.length; i += 3) {
 				int num = Integer.parseInt(inputs[i]);
 				Resource res = Resource.valueOf(inputs[i + 1].toUpperCase());
@@ -228,6 +236,10 @@ public class MessageParser {
 		Storage storage = new Storage();
 
 		try {
+			if (inputs.length == 1) {
+				throw new IllegalArgumentException();
+			}
+
 			for(int i = 1; i < inputs.length; i += 3) {
 				int num = Integer.parseInt(inputs[i]);
 				Resource res = Resource.valueOf(inputs[i + 1].toUpperCase());

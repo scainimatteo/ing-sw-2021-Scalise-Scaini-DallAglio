@@ -91,10 +91,12 @@ public class Warehouse {
 	 * @param res is the ArrayList of resources to be checked
 	 */
 	private boolean isAllTheSame (ArrayList<Resource> res){
-		Resource check = res.get(0);
-		for (Resource x : res){
-			if (!x.equals(check)){
-				return false;
+		if (!res.isEmpty()){
+			Resource check = res.get(0);
+			for (Resource x : res){
+				if (!x.equals(check)){
+					return false;
+				}
 			}
 		}
 		return true;
@@ -156,8 +158,10 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
 	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
 	 **/
-	public void storeTop (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (res.size() > 1 - top_resource.size()){
+	public void storeTop(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+		if (res.isEmpty()){
+			return;
+		} else if (res.size() > 1 - top_resource.size()){
 			throw new IndexOutOfBoundsException();
 		} else if (!isAllTheSame(res)) {
 			throw new IllegalArgumentException();
@@ -176,7 +180,9 @@ public class Warehouse {
 	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
 	 **/
 	public void storeMiddle (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (res.size() > 2 - middle_resources.size()){
+		if (res.isEmpty()){
+			return;
+		} else if (res.size() > 2 - middle_resources.size()){
 			throw new IndexOutOfBoundsException();
 		} else if (!isAllTheSame(res)) {
 			throw new IllegalArgumentException();
@@ -201,7 +207,9 @@ public class Warehouse {
 	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
 	 **/
 	public void storeBottom (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (res.size() > 3 - bottom_resources.size()){
+		if (res.isEmpty()){
+			return;
+		} else if (res.size() > 3 - bottom_resources.size()){
 			throw new IndexOutOfBoundsException();
 		} else if (!isAllTheSame(res)) {
 			throw new IllegalArgumentException();

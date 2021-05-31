@@ -127,15 +127,15 @@ public class GameController implements Runnable, Controller {
 	}
 
 	public void handleDiscardLeader(Player player, LeaderCard card) {
-		if (player.equals(game.getTurn().getPlayer())){
-			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
-				player.discardLeader(card);
-				player.moveForward(1);
-			} else {handleError();}
-		} else if (!game.getTurn().isInitialized()){ 
+		if (!game.getTurn().isInitialized()){
 			if	(player.getDeck().size() > 2) {
-				player.discardLeader(card);	
+				player.discardLeader(card.getId());	
 				checkEndInitializing();
+			} else {handleError();}
+		} else if (player.equals(game.getTurn().getPlayer())){ 
+			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
+				player.discardLeader(card.getId());	
+				player.moveForward(1);
 			} else {handleError();}
 		} else {handleError();}
 	}
@@ -177,7 +177,7 @@ public class GameController implements Runnable, Controller {
 	 * @throws IllegalArgumentException if the bonus is too big
 	 * */
 	private ArrayList<Resource> applyBonus (ArrayList<Resource> bonus, ArrayList<Resource> gains){
-		if (bonus.size() > gains.stream().filter(x->x.equals(null)).count()){
+		if (bonus.size() > gains.stream().filter(x-> x == null).count()) {
 			throw new IllegalArgumentException();
 		} else {
 			for (Resource x : bonus){
@@ -382,12 +382,14 @@ public class GameController implements Runnable, Controller {
 			return false;
 		}
 		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
-		ArrayList<Resource> total = storage.getWarehouseTop();
+		ArrayList<Resource> total = new ArrayList<Resource>();
+		total.addAll(storage.getWarehouseTop());
 		total.addAll(storage.getWarehouseMid());
 		total.addAll(storage.getWarehouseBot());
 		total.addAll(storage.getExtraspace());
 		for (Resource res : check){
-			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getRequiredResources().stream().filter(x->x.equals(res)).count()){
+			//TODO: temporary fix to remove null, they should have not been here
+			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x -> x != null).filter(x->x.equals(res)).count()){
 				return false;
 			}
 		}
@@ -421,7 +423,9 @@ public class GameController implements Runnable, Controller {
 	}
 
 	private boolean canBeStored(Player player, Storage storage){
-		return canBeStoredExtra(player, storage) && canBeStoredWarehouse(player, storage);
+		//TODO: fix the canBeStoredExtra function
+		//return canBeStoredExtra(player, storage) && canBeStoredWarehouse(player, storage);
+		return canBeStoredWarehouse(player, storage);
 	}
 
 	public void handleStore(Player player, Storage storage) {
@@ -495,5 +499,4 @@ public class GameController implements Runnable, Controller {
 	private void handleError(){
 		this.game.handleError("");
 	}
-
 }

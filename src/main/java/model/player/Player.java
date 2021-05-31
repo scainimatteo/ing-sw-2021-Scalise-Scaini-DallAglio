@@ -163,8 +163,13 @@ public class Player extends Observable {
 		}
 	}
 
-	public void discardLeader(LeaderCard leader_card){
-		this.leader_cards_deck.remove(leader_card);
+	public void discardLeader(int leader_card_id){
+		for (LeaderCard l: this.leader_cards_deck) {
+			if (l.getId() == leader_card_id) {
+				this.leader_cards_deck.remove(l);
+				break;
+			}
+		}
 		this.notifyPlayer();
 	}
 
@@ -173,7 +178,6 @@ public class Player extends Observable {
 	 * 
 	 * @return an hashmap with the sum of all the resources in the three available storages
 	 */
-
 	private HashMap <Resource, Integer> totalResources() {
 		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
 		total.put(Resource.COIN, strongbox.get(Resource.COIN));

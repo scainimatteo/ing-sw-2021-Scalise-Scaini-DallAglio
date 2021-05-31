@@ -22,9 +22,11 @@ public class MarketMessage extends TurnMessage implements Serializable {
 		} else {
 			this.row = index;
 		}
+		this.white_marbles = new ArrayList<Resource>();
 	}
 
 	public MarketMessage(boolean row_or_column, int index, ArrayList<Resource> white_marbles){
+		this(row_or_column, index);
 		this.white_marbles = white_marbles;
 	}
 

@@ -13,13 +13,14 @@ import it.polimi.ingsw.util.Observable;
 
 public class Turn extends Observable implements Serializable {
 	private static final long serialVersionUID = 8008L;
-	Player active_player;
+	transient Player active_player;
 	ArrayList<Resource> required_resources;
 	ArrayList<Resource> produced_resources;
 	boolean action_done;
 	boolean must_discard;
 	boolean final_round;
 	boolean initialized;
+	String nickname;
 
 	public Turn(Player player){
 		this.active_player = player;
@@ -28,6 +29,7 @@ public class Turn extends Observable implements Serializable {
 		this.action_done = false;
 		this.must_discard = false;
 		this.final_round = false;
+		this.nickname = player.getNickname();
 	}
 
 	public void clearTurn(Player player) {
@@ -36,6 +38,7 @@ public class Turn extends Observable implements Serializable {
 		this.produced_resources.clear();
 		this.action_done = false;
 		this.must_discard = false;
+		this.nickname = player.getNickname();
 		this.notifyTurn();
 	}
 
@@ -44,11 +47,12 @@ public class Turn extends Observable implements Serializable {
 	}
 
 	public String getNickname(){
-		return this.active_player.getNickname();
+		return this.nickname;
 	}
 
 	public void setPlayer(Player player){
 		this.active_player = player;
+		this.nickname = player.getNickname();
 		this.notifyTurn();
 	}
 
@@ -65,6 +69,7 @@ public class Turn extends Observable implements Serializable {
 		for (Resource x : required){
 			required_resources.remove(x);
 		}
+		this.notifyTurn();
 	}
 
 	public ArrayList<Resource> getProducedResources() {
@@ -80,6 +85,7 @@ public class Turn extends Observable implements Serializable {
 		for (Resource x : required){
 			produced_resources.remove(x);
 		}
+		this.notifyTurn();
 	}
 
 	public boolean hasDoneAction() {
@@ -110,6 +116,7 @@ public class Turn extends Observable implements Serializable {
 
 	public void setInitialized(boolean value) {
 		this.initialized = value;
+		this.notifyTurn();
 	}
 
 	public void setFinal(boolean value) {
@@ -117,7 +124,7 @@ public class Turn extends Observable implements Serializable {
 		this.notifyTurn();
 	}
 
-	private void notifyTurn() {
+	public void notifyTurn() {
 		notify(new ViewUpdate(this));
 	}
 }

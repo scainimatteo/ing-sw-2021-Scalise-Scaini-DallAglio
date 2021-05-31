@@ -48,7 +48,7 @@ public class Server {
 	 * Loops forever - accepts new players and inserts them in the lobby
 	 */
 	public void startServer() {
-		System.out.printf("Server starting on port " + ANSI.green(String.valueOf(this.port)));
+		System.out.println("Server starting on port " + ANSI.green(String.valueOf(this.port)));
 		while (true) {
 			try {
 				// waits until a new client connects

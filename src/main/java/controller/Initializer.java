@@ -55,6 +55,7 @@ public class Initializer {
 			for (Player p: this.players) {
 				p.notifyPlayer();
 			}
+			game.getTurn().notifyTurn();
 			return game;
 		} catch (Exception e) {
 			//TODO: too generic?
