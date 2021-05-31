@@ -1,16 +1,5 @@
 package it.polimi.ingsw.view.gui;
 
-import javafx.application.Platform;
-
-import javafx.fxml.FXMLLoader;
-
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
-import javafx.stage.Stage;
-
-import java.io.File;
-
 import java.util.ArrayList;
 
 import it.polimi.ingsw.client.Client;
