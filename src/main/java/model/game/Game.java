@@ -100,15 +100,15 @@ public class Game extends Observable {
 	 * TURN METHODS
 	 */
 	public void endTurn(){
-		if (players.indexOf(turn.getPlayer()) + 1 == 4){
+		if (this.players.indexOf(turn.getPlayer()) + 1 == this.players.size()){
 			if(turn.isFinal()){
 				endGame();
 			} else {
-				Collections.rotate(players, 1);
-				turn.clearTurn(players.get(0));
+				Collections.rotate(this.players, 1);
+				turn.clearTurn(this.players.get(0));
 			}
 		} else {
-			turn.clearTurn(players.get(players.indexOf(turn.getPlayer()) + 1));
+			turn.clearTurn(this.players.get(this.players.indexOf(turn.getPlayer()) + 1));
 		}
 	}
 
