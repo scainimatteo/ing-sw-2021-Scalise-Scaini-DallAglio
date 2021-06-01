@@ -18,6 +18,7 @@ public class ANSI {
 	public static final String MAGENTA = BASE + "35m";
 	public static final String CYAN = BASE + "36m";
 	public static final String WHITE = BASE + "37m";
+	public static final String GREY = BASE + "38;2;168;168;168m";
 
 	// BACKGROUND COLOR
 	public static final String BG_BLACK = BASE + "40m";
@@ -71,6 +72,10 @@ public class ANSI {
 
 	public synchronized static String white(String s) {
 		return WHITE + s + RST;
+	}
+
+	public synchronized static String grey(String s) {
+		return GREY + s + RST;
 	}
 
 	public synchronized static String blackBg(String s) {
