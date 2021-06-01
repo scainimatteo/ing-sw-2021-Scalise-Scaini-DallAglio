@@ -77,9 +77,11 @@ public class CLI extends View {
 	public void handleError(ErrorMessage error_message) {
 		if (error_message.nickname == null) {
 			System.out.println(error_message.error_string);
+			System.out.print("> ");
 		} else {
 			if (error_message.nickname.equals(this.getMyPlayer().getNickname())) {
 				System.out.println(error_message.error_string);
+				System.out.print("> ");
 			}
 		}
 	}
