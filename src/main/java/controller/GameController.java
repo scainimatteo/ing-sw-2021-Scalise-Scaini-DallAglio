@@ -101,7 +101,7 @@ public class GameController implements Runnable, Controller {
 		}
 	}
 
-	public void handleInitStore(Player player, Storage storage){
+	public void handleChooseResources(Player player, Storage storage){
 		if (!game.getTurn().isInitialized()){
 			if (!checkCorrectResources(player)){
 				//TODO: check if the resources are correct

@@ -18,6 +18,7 @@ public class RemoteView implements Observer {
 
 	public void update(ServerMessage servermessage) {
 		if (servermessage.error) {
+			//TODO: wrong, put the nickname of the active player
 			((ErrorMessage) servermessage).setNickname(this.client_handler.getNickname());
 		}
 		this.client_handler.sendToClient(servermessage);
