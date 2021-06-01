@@ -110,6 +110,7 @@ public class Player extends Observable {
 	 * @param card is the LeaderCard to be checked
 	 * @return true if the card can be activated
 	 */
+	//TODO: .equals does not work. Always returns false. Rewrite using CardLevel methods
 	public boolean isActivable(LeaderCardLevelCost card){
 		CardLevel[] req = card.getRequirements();
 		Iterator<DevelopmentCard> iterator = this.development_card_slots.getIterator();
