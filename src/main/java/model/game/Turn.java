@@ -72,6 +72,11 @@ public class Turn extends Observable implements Serializable {
 		this.notifyTurn();
 	}
 
+	public void clearRequiredResources(){
+		required_resources.clear();
+		this.notifyTurn();
+	}
+
 	public ArrayList<Resource> getProducedResources() {
 		return this.produced_resources;
 	}
@@ -85,6 +90,11 @@ public class Turn extends Observable implements Serializable {
 		for (Resource x : required){
 			produced_resources.remove(x);
 		}
+		this.notifyTurn();
+	}
+	
+	public void clearProducedResources(){
+		produced_resources.clear();
 		this.notifyTurn();
 	}
 
