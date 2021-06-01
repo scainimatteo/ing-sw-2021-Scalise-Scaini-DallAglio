@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import java.net.*;
 
 import java.io.*;
@@ -32,7 +29,6 @@ public class Server {
 	private HashMap<String, Integer> num_players;
 	// contains all the nicknames - there cannot be two that are the same
 	private HashSet<String> nicknames;
-	private ExecutorService executor;
 	private final int match_name_len = 7;
 
 	public Server(int port) throws IOException {
@@ -40,7 +36,6 @@ public class Server {
 		this.server_socket = new ServerSocket(this.port);
 		this.lobby = new HashMap<String, ArrayList<ClientHandler>>();
 		this.num_players = new HashMap<String, Integer>();
-		this.executor = Executors.newCachedThreadPool();
 		this.nicknames = new HashSet<String>();
 	}
 
@@ -55,7 +50,7 @@ public class Server {
 				Socket new_client = this.server_socket.accept();
 				ClientHandler new_client_handler = new ClientHandler(this, new_client);
 				// start the ClientHandler
-				this.executor.execute(new_client_handler);
+				new Thread(new_client_handler).start();
 
 				// insert the clients in the lobby
 				new Thread(() -> {
@@ -94,7 +89,7 @@ public class Server {
 			for (ClientHandler c: this.lobby.get(match_name)) {
 				c.setController(new_match);
 			}
-			this.executor.execute(new_match);
+			new Thread(new_match).start();
 		}
 	}
 
