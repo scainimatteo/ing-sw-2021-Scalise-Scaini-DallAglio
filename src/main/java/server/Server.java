@@ -77,7 +77,6 @@ public class Server {
 	 */
 	private void insertIntoLobby(ClientHandler client) throws IllegalAccessError, InterruptedException, InstantiationException {
 		String match_name = manageClient(client);
-		// TODO: check for racing conditions
 		if (checkIfAllPlayersPresent(match_name)) {
 			// the right amount of clients are connected, start the match
 			for (ClientHandler ch : this.lobby.get(match_name)) {

@@ -71,26 +71,5 @@ public class StrongBox {
 		}
 		return true;
 	}
-
-
-/* TODO: move in view
-	public String printText() {
-		String string = "·--------------·\n|              |\n";
-		for (Resource r: storage.keySet()) {
-			if (storage.get(r) < 10) {
-				string += "|    ";
-			} else {
-				string += "|   ";
-			}
-			string += String.valueOf(storage.get(r)) + " x " + r.getAbbreviation() + "    |\n";
-		}
-		return string + "|              |\n|--------------|\n";
-	}
-
-	public String printText(int index){
-		return null;
-	}
-	*/ 
-
 }
 

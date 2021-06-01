@@ -9,7 +9,7 @@ public abstract class LeaderAbility implements Serializable {
 		return false;
 	}
 
-    public String printText(){
-		return "\n qualcosa non ha funzionato\n";
+	public String printText(){
+		return "";
 	}
 }

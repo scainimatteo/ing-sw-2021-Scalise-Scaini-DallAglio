@@ -109,10 +109,6 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 		}
 		return top;
 	}
-	
-	public String printText(int index){
-		return null;
-	}
 }
 
 /*
