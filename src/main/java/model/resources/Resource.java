@@ -18,7 +18,7 @@ public enum Resource {
 	public String getAbbreviation(){
 		switch (this){
 			case COIN: return ANSI.yellow(this.abbreviation);
-			case STONE: return ANSI.green(this.abbreviation);
+			case STONE: return ANSI.grey(this.abbreviation);
 			case SERVANT: return ANSI.magenta(this.abbreviation);
 			case SHIELD: return ANSI.cyan(this.abbreviation);
 			case FAITH: return ANSI.red(this.abbreviation);
@@ -30,7 +30,7 @@ public enum Resource {
 		char circle = '\u25EF';
 		switch (this){
 			case COIN: return ANSI.yellow(Character.toString(circle));
-			case STONE: return ANSI.green(Character.toString(circle));
+			case STONE: return ANSI.grey(Character.toString(circle));
 			case SERVANT: return ANSI.magenta(Character.toString(circle));
 			case SHIELD: return ANSI.cyan(Character.toString(circle));
 			case FAITH: return ANSI.red(Character.toString(circle));

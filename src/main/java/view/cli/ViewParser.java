@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.util.ANSI;
+
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.cli.Printer;
@@ -74,6 +76,7 @@ public class ViewParser {
 				return Printer.printTrack(getPlayerFromNickname(players, nickname));
 			} else {
 				String player_nickname = inputs[2];
+				System.out.println(ANSI.underline(player_nickname));
 				return Printer.printTrack(getPlayerFromNickname(players, player_nickname));
 			}
 		} catch (IllegalArgumentException e) {
@@ -87,6 +90,7 @@ public class ViewParser {
 				return Printer.printWarehouse(getPlayerFromNickname(players, nickname));
 			} else {
 				String player_nickname = inputs[2];
+				System.out.println(ANSI.underline(player_nickname));
 				return Printer.printWarehouse(getPlayerFromNickname(players, player_nickname));
 			}
 		} catch (IllegalArgumentException e) {
@@ -100,6 +104,7 @@ public class ViewParser {
 				return Printer.printStrongbox(getPlayerFromNickname(players, nickname));
 			} else {
 				String player_nickname = inputs[2];
+				System.out.println(ANSI.underline(player_nickname));
 				return Printer.printStrongbox(getPlayerFromNickname(players, player_nickname));
 			}
 		} catch (IllegalArgumentException e) {
@@ -114,6 +119,7 @@ public class ViewParser {
 				return Printer.printLeaderCards(getPlayerFromNickname(players, nickname), true);
 			} else {
 				String player_nickname = inputs[2];
+				System.out.println(ANSI.underline(player_nickname));
 				return Printer.printLeaderCards(getPlayerFromNickname(players, player_nickname), false);
 			}
 		} catch (IllegalArgumentException e) {
@@ -132,10 +138,12 @@ public class ViewParser {
 						return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, nickname), slot);
 					} else {
 						String player_nickname = inputs[3];
+						System.out.println(ANSI.underline(player_nickname));
 						return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, player_nickname), slot);
 					}
 				} catch (NumberFormatException e) {
 					String player_nickname = inputs[2];
+					System.out.println(ANSI.underline(player_nickname));
 					return Printer.printDevelopmentCardsSlots(getPlayerFromNickname(players, player_nickname));
 				}
 			}

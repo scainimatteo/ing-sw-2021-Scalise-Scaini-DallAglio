@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
+import it.polimi.ingsw.controller.message.ChooseResourcesMessage;
 import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.InitializingMessage;
@@ -73,6 +74,9 @@ public class MessageParser {
 			case "REARRANGE":
 			case "R":
 				return parseRearrangeMessage(inputs);
+			case "CHOOSE":
+			case "C":
+				return parseChooseResourcesMessage(inputs, player);
 			default:
 				throw new IllegalArgumentException();
 		}
@@ -256,7 +260,7 @@ public class MessageParser {
 	}
 
 	private static Message parseEndTurnMessage(String[] inputs) throws IllegalArgumentException {
-		if (inputs.length > 1 && !inputs[1].equals("turn")) {
+		if (inputs.length > 1 && !inputs[1].toUpperCase().equals("TURN")) {
 			throw new IllegalArgumentException("endturn/end turn");
 		}
 
@@ -326,6 +330,35 @@ public class MessageParser {
 			return new RearrangeMessage(swap1, swap2);
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
 			throw new IllegalArgumentException("rearrange swap1 swap2");
+		}
+	}
+
+	private static Message parseChooseResourcesMessage(String[] inputs, SimplePlayer player) throws IllegalArgumentException {
+		try {
+			Storage storage = new Storage();
+			if (inputs.length == 1) {
+				throw new IllegalArgumentException();
+			}
+
+			if (!inputs[1].toUpperCase().equals("RESOURCES") && !inputs[1].toUpperCase().equals("R")) {
+				throw new IllegalArgumentException();
+			}
+
+			for(int i = 2; i < inputs.length; i += 3) {
+				int num = Integer.parseInt(inputs[i]);
+				Resource res = Resource.valueOf(inputs[i + 1].toUpperCase());
+				ArrayList<Resource> resources_to_add = new ArrayList<Resource>();
+				for (int j = 0; j < num; j++) {
+					resources_to_add.add(res);
+				}
+				if (inputs[i + 2].toUpperCase().equals("S") || inputs[i + 2].toUpperCase().equals("L")) {
+					throw new IllegalArgumentException();
+				}
+				addToStorage(inputs[i + 2], resources_to_add, storage);
+			}
+			return new ChooseResourcesMessage(storage);
+		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
+			throw new IllegalArgumentException("choose resources <number resource (wt|wm|wb)>+");
 		}
 	}
 

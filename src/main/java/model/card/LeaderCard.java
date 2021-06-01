@@ -33,7 +33,7 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 	}
 
 	protected String printTop(){
-		return "\n qualcosa è andato storto\n";
+		return "";
 	}
 
 	protected String printBottom(){
@@ -44,7 +44,6 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 		return "/-----------------\\\n" + printTop() + "|-------(" + String.valueOf(this.victory_points) + ")-------|\n" + printBottom() + "\\-----------------/\n";
 	}
 }
-
 
 /*
 

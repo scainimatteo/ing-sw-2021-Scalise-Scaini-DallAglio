@@ -140,7 +140,7 @@ public class GameController implements Runnable, Controller {
 	 * @param player is the player who requested the action
 	 * @param storage contains all the resources involved in the action
 	 */
-	public void handleInitStore(Player player, Storage storage){
+	public void handleChooseResources(Player player, Storage storage){
 		if (!game.getTurn().isInitialized()){
 			if (!checkCorrectResources(player)){
 				if (checkLegalRequestedResources(player, storage)){

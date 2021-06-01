@@ -118,30 +118,6 @@ public class Market {
 		}
 		return column;
 	}
-
-	/* TODO: 
-	public String printText() { 
-		Resource null_marble = Resource.FAITH;
-		String string = "\n·--------------------·--\n|                     ";
-		if (free_marble == null) {
-			string += null_marble.printNullMarble();
-		} else {
-			string += free_marble.printMarble();
-		}
-		string += " )\n|  ·--^---^---^---^--·--\n";
-		for (Resource[] array : market_board){
-			string += "|  |                 |\n|  <";
-			for (Resource x : array) {
-				if (x == null){
-					string += "  " + null_marble.printNullMarble() + " ";
-				} else {
-					string += "  " + x.printMarble() + " ";
-				}
-			}
-			string += " |\n";
-		}
-		return string + "|  |                 |\n·--·-----------------·\n";
-	}*/
 }
 
 /*

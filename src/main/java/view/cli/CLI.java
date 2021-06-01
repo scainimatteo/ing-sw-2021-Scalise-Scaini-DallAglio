@@ -86,7 +86,6 @@ public class CLI extends View {
 
 	@Override
 	public void handleInitializing(InitializingServerMessage initializing_message) {
-		//TODO: temporary?
 		System.out.print(initializing_message.message);
 		if (initializing_message.message.equals("Start Match\n\n")) {
 			System.out.print("> ");

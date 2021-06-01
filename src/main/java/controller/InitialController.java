@@ -51,7 +51,7 @@ public class InitialController implements Controller {
 		return;
 	}
 
-	public void handleInitStore(Player player, Storage storage) {
+	public void handleChooseResources(Player player, Storage storage) {
 		return;
 	}
 
