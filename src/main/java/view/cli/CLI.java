@@ -79,16 +79,9 @@ public class CLI extends View {
 		if (!this.initialized) {
 			System.out.println(error_message.error_string);
 			System.exit(1);
-		}
-
-		if (error_message.nickname == null) {
+		} else if (error_message.nickname == null || error_message.nickname.equals(this.getMyPlayer().getNickname())) {
 			System.out.println(error_message.error_string);
 			System.out.print("> ");
-		} else {
-			if (error_message.nickname.equals(this.getMyPlayer().getNickname())) {
-				System.out.println(error_message.error_string);
-				System.out.print("> ");
-			}
 		}
 	}
 
@@ -97,7 +90,7 @@ public class CLI extends View {
 		System.out.print(initializing_message.message);
 		if (initializing_message.type == InitializingMessageType.START_MATCH) {
 			System.out.print("> ");
-			this.initialized = false;
+			this.initialized = true;
 		} else if (initializing_message.type == InitializingMessageType.NICKNAME) {
 			this.nickname_flag = true;
 		}
