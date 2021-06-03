@@ -22,10 +22,22 @@ public abstract class View {
 	protected boolean nickname_flag = true;
 	protected String nickname;
 
+	public boolean isInitialized() {
+		return this.initialized;
+	}
+
+	public void setUninitialized() {
+		this.initialized = false;
+	}
+
+	public String getNickname() {
+		return this.nickname;
+	}
+
 	public abstract void startView(Client client);
 
 	/**
-	 * Print the error message
+	 * Print the error message, exit if the Client is still in the initialization phase
 	 *
 	 * @param error_message the ErrorMessage received from the Server
 	 */
@@ -37,14 +49,6 @@ public abstract class View {
 	 * @param initializing_message the InitializingServerMessage received from the Server
 	 */
 	public abstract void handleInitializing(InitializingServerMessage initializing_message);
-
-	public boolean isInitialized() {
-		return this.initialized;
-	}
-
-	public void setUninitialized() {
-		this.initialized = false;
-	}
 
 	/**
 	 * Update the simple model after a ViewUpdate

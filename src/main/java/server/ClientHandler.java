@@ -67,7 +67,7 @@ public class ClientHandler implements Runnable {
 	 */
 	public void close(String error_message) {
 		try {
-			this.sendToClient(new ErrorMessage(error_message));
+			this.sendToClient(new ErrorMessage(error_message, this.nickname));
 			this.server.removeNickname(this.nickname);
 			this.client.close();
 		} catch (IOException e) {

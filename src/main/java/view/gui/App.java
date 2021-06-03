@@ -73,24 +73,14 @@ public class App extends Application {
 	}
 
 	/**
-	 * Show an error alert, exit if the Client is still in the initialization phase
+	 * Show an error alert
 	 *
 	 * @param error the error String to display
 	 */
 	public void showError(String error) {
-		Platform.runLater(new Runnable() {
-			public void run() {
-				Alert alert = new Alert(AlertType.ERROR, error, ButtonType.OK);
-				if (!App.gui.isInitialized()) {
-					alert.showAndWait().ifPresent(response -> {
-						 if (response == ButtonType.OK) {
-							 System.exit(1);
-						 }
-					});
-				} else {
-					alert.show();
-				}
-			}
+		Platform.runLater(() -> {
+			Alert alert = new Alert(AlertType.ERROR, error, ButtonType.OK);
+			alert.show();
 		});
 	}
 }

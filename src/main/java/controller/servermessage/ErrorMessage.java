@@ -7,12 +7,9 @@ public class ErrorMessage extends ServerMessage {
 	public String nickname;
 	public String error_string;
 
-	public ErrorMessage(String error_string) {
+	public ErrorMessage(String error_string, String nickname) {
 		this.error = true;
 		this.error_string = error_string;
-	}
-
-	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 }
