@@ -83,9 +83,11 @@ public class CLI extends View {
 
 		if (error_message.nickname == null) {
 			System.out.println(error_message.error_string);
+			System.out.print("> ");
 		} else {
 			if (error_message.nickname.equals(this.getMyPlayer().getNickname())) {
 				System.out.println(error_message.error_string);
+				System.out.print("> ");
 			}
 		}
 	}
