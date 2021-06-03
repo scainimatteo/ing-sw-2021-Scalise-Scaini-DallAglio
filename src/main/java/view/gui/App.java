@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.io.File;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 
@@ -38,7 +37,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception{
-		FXMLLoader loader = new FXMLLoader(new File("src/main/resources/fxml/initialscene.fxml").toURI().toURL());
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/initialscene.fxml"));
 		this.initial_scene = new InitialScene();
 		loader.setController(this.initial_scene);
 		gui.setApp(this);
