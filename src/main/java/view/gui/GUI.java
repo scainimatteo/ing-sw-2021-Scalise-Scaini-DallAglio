@@ -5,30 +5,79 @@ import java.util.ArrayList;
 import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
+import it.polimi.ingsw.controller.message.InitializingMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 
 import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
+import it.polimi.ingsw.view.gui.scene.InitialScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
 
 public class GUI extends View {
+	private App app;
+	private InitialScene initial_scene;
+	private Client client;
+
+	public GUI() {
+		this.simple_players = new ArrayList<SimplePlayer>();
+	}
+
 	@Override
 	public void startView(Client client) {
+		this.client = client;
 		App.setModel(this);
-		App.main(null);
+		new Thread(() -> {
+			App.main(null);
+		}).start();
 	}
 
 	@Override
 	public void handleError(ErrorMessage error_message) {
-		return;
+		app.showError(error_message.error_string);
 	}
 
 	@Override
-	public void handleInitializing(InitializingServerMessage initializing_message) {
-		return;
+	public synchronized void handleInitializing(InitializingServerMessage initializing_message) {
+		try {
+			if (this.initial_scene == null) {
+				while(this.app == null) {
+					wait();
+				};
+				this.initial_scene = this.app.getInitialScene();
+
+				while(!this.initialized) {
+					wait();
+				}
+			}
+
+			switch(initializing_message.type) {
+				case NICKNAME:
+					this.client.sendMessage(new InitializingMessage(this.initial_scene.getNickname()));
+					break;
+				case CHOOSE_MATCH_NAME:
+					this.client.sendMessage(new InitializingMessage(this.initial_scene.getMatchName()));
+					break;
+				case STARTED_MATCH_NAME:
+					//TODO; change Scene
+					System.out.println("Started match " + initializing_message.match_name);
+					break;
+				case NUM_PLAYERS:
+					this.client.sendMessage(new InitializingMessage(String.valueOf(this.initial_scene.getNumPlayers())));
+					break;
+				case START_MATCH:
+					//TODO; change Scene
+					System.out.println("Start");
+					break;
+				default:
+					System.out.println("Errore");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public SimpleGame getSimpleGame() {
@@ -41,5 +90,23 @@ public class GUI extends View {
 
 	public Turn getTurn() {
 		return this.turn;
+	}
+
+	/**
+	 * Set the app and notify the Thread
+	 *
+	 * @param app the main JavaFX class
+	 */
+	public synchronized void setApp(App app) {
+		this.app = app;
+		notify();
+	}
+
+	/**
+	 * Notify the Thread that the initialization has finished
+	 */
+	public synchronized void finishedInitialization() {
+		this.initialized = true;
+		notify();
 	}
 }

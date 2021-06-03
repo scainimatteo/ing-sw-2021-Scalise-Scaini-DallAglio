@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui.scene;
 
 import it.polimi.ingsw.view.gui.App;
 
+import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 
 import it.polimi.ingsw.model.card.LeaderCard;
@@ -15,7 +16,7 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 import java.net.URL;
 
-public class LeaderCardSelector implements Initializable{
+public class LeaderCardSelectorScene extends SceneController implements Initializable{
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
 	SimplePlayer player;
 

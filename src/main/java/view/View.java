@@ -18,7 +18,7 @@ public abstract class View {
 	protected ArrayList<SimplePlayer> simple_players;
 	protected Turn turn;
 
-	protected boolean initializing = true;
+	protected boolean initialized = false;
 	protected boolean nickname_flag = true;
 	protected String nickname;
 
@@ -37,6 +37,14 @@ public abstract class View {
 	 * @param initializing_message the InitializingServerMessage received from the Server
 	 */
 	public abstract void handleInitializing(InitializingServerMessage initializing_message);
+
+	public boolean isInitialized() {
+		return this.initialized;
+	}
+
+	public void setUninitialized() {
+		this.initialized = false;
+	}
 
 	/**
 	 * Update the simple model after a ViewUpdate

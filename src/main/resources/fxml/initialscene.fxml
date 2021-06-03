@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml">
+
+		<Label fx:id="title" text="Maestri del Rinascimento"/>
+		<Label fx:id="nicknameLabel" text="Nickname?"/>
+		<TextField fx:id="nicknameText"/>
+
+		<children>
+			<VBox fx:id="startLayout">
+				<Button fx:id="createMatch" text="Create Match" onAction="#selectCreateHandler"/>
+				<Button fx:id="joinMatch" text="Join Match" onAction="#selectJoinHandler"/>
+			</VBox>
+
+			<VBox fx:id="createLayout">
+				<fx:define>
+					<ToggleGroup fx:id="numPlayersGroup"/>
+				</fx:define>
+				<children>
+					<RadioButton text="1" toggleGroup="$numPlayersGroup" fx:id="rb1"/>
+					<RadioButton text="2" toggleGroup="$numPlayersGroup" fx:id="rb2"/>
+					<RadioButton text="3" toggleGroup="$numPlayersGroup" fx:id="rb3"/>
+					<RadioButton text="4" toggleGroup="$numPlayersGroup" fx:id="rb4"/>
+				</children>
+				<Button fx:id="createButton" text="Create" onAction="#createHandler"/>
+			</VBox>
+
+			<VBox fx:id="joinLayout">
+				<Label fx:id="matchLabel" text="Match Name?"/>
+				<TextField fx:id="matchText"/>
+				<Button fx:id="joinButton" text="Join" onAction="#joinHandler"/>
+			</VBox>
+		</children>
+
+		<Button fx:id="cancelButton" text="Cancel" onAction="#cancelHandler"/>
+
+</VBox>
