@@ -15,6 +15,7 @@ import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.message.Message;
 
@@ -64,17 +65,22 @@ public class CLI extends View {
 	 */
 	private void parseInput(Client client, String inputLine) {
 		String[] inputs = inputLine.split(" ");
-		if (!this.initializing && (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L"))) {
+		if (this.initialized && (inputs[0].toUpperCase().equals("LOOK") || inputs[0].toUpperCase().equals("L"))) {
 			String to_view = ViewParser.parseInput(inputLine, this.simple_game, this.simple_players, this.turn, this.nickname);
 			System.out.println(to_view);
 		} else {
-			Message parsed_message = MessageParser.parseInput(inputLine, this.initializing, this.getMyPlayer());
+			Message parsed_message = MessageParser.parseInput(inputLine, this.initialized, this.getMyPlayer());
 			client.sendMessage(parsed_message);
 		}
 	}
 
 	@Override
 	public void handleError(ErrorMessage error_message) {
+		if (!this.initialized) {
+			System.out.println(error_message.error_string);
+			System.exit(1);
+		}
+
 		if (error_message.nickname == null) {
 			System.out.println(error_message.error_string);
 			System.out.print("> ");
@@ -89,11 +95,10 @@ public class CLI extends View {
 	@Override
 	public void handleInitializing(InitializingServerMessage initializing_message) {
 		System.out.print(initializing_message.message);
-		if (initializing_message.message.equals("Start Match\n\n")) {
+		if (initializing_message.type == InitializingMessageType.START_MATCH) {
 			System.out.print("> ");
-			this.initializing = false;
-		} else if (initializing_message.message.equals("Nickname?")) {
-			System.out.print("> ");
+			this.initialized = false;
+		} else if (initializing_message.type == InitializingMessageType.NICKNAME) {
 			this.nickname_flag = true;
 		}
 	}

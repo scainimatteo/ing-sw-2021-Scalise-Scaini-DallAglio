@@ -11,12 +11,13 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 	private static final long serialVersionUID = 34732L;
 	private CardLevel[] requirements;
 	
-	public LeaderCardLevelCost (int points, LeaderAbility ability, CardLevel[] requirements, int id) {
+	public LeaderCardLevelCost (int points, LeaderAbility ability, CardLevel[] requirements, int id, String front_path) {
 		this.victory_points = points;
 		this.ability = ability;
 		this.activated = false;
 		this.requirements = requirements;
 		this.id = id;
+		this.front_path = front_path;
 	}
 
 	public CardLevel[] getRequirements() {

@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import it.polimi.ingsw.client.Client;
 
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
+
 import it.polimi.ingsw.view.cli.CLI;
 import it.polimi.ingsw.view.gui.GUI;
 import it.polimi.ingsw.view.View;
@@ -60,7 +62,8 @@ public class ClientMain {
 		try {
 			new Client(address, port, view).startClient();
 		} catch (IOException e) {
-			System.out.printf("Can't run client on address %s and port %d\n", address, port);
+			view.setUninitialized();
+			view.handleError(new ErrorMessage("The connection was closed by the server"));
 		}
 	}
 

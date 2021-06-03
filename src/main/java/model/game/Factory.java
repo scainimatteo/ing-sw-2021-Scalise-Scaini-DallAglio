@@ -175,7 +175,10 @@ public class Factory {
 			// VICTORYPOINTS
 			int victory_points = (int)(long) card.get("victory_points");
 
-			development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id);
+			// PATH
+			String front_path = (String) card.get("front_path");
+
+			development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id, front_path);
 		}
 		return development_cards;
 	}
@@ -217,6 +220,7 @@ public class Factory {
 	 */
 	private LeaderCard createLeaderCard(int id, LeaderAbility ability, int victory_points, JSONObject requirements_obj) throws ParseException {
 		String requirements_type = requirements_obj.get("type").toString();
+		String front_path;
 		switch (requirements_type) {
 
 			// to activate the LeaderCard a correct CardLevel is needed
@@ -229,13 +233,15 @@ public class Factory {
 					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
 					requirements_cardlevels[i] = new CardLevel(level, color);
 				}
-				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id);
+				front_path = (String) requirements_obj.get("front_path");
+				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id, front_path);
 
 			// to activate the LeaderCard the correct resources are needed
 			case "RESOURCES":
 				JSONArray resources_arr = (JSONArray) requirements_obj.get("resources");
 				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(resources_arr);
-				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id);
+				front_path = (String) requirements_obj.get("front_path");
+				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id, front_path);
 
 			default:
 				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
