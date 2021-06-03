@@ -92,4 +92,8 @@ public class SimplePlayer implements Serializable {
 	public DevelopmentCard[] getTopCards(){
 		return this.development_card_slots.getTopCards();
 	}
+
+	public ArrayList<LeaderCard> getLeaderCards(){
+		return this.leader_cards_deck;
+	}
 }

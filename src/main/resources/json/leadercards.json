@@ -21,7 +21,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"path": "resources/images/leadercards/front/leader_card_1.png"
+			"front_path": "resources/images/leadercards/front/leader_card_1.png"
         },
         {
             "ability": {
@@ -43,7 +43,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"path": "resources/images/leadercards/front/leader_card_2.png"
+			"front_path": "resources/images/leadercards/front/leader_card_2.png"
         },
         {
             "ability": {
@@ -65,7 +65,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"path": "resources/images/leadercards/front/leader_card_3.png"
+			"front_path": "resources/images/leadercards/front/leader_card_3.png"
         },
         {
             "ability": {
@@ -87,7 +87,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"path": "resources/images/leadercards/front/leader_card_4.png"
+			"front_path": "resources/images/leadercards/front/leader_card_4.png"
         },
         {
             "ability": {
@@ -106,7 +106,7 @@
                 "type": "RESOURCES"
             },
             "victory_points": 3,
-			"path": "resources/images/leadercards/front/leader_card_5.png"
+			"front_path": "resources/images/leadercards/front/leader_card_5.png"
         },
         {
             "ability": {
@@ -125,7 +125,7 @@
                 "type": "RESOURCES"
             },
             "victory_points": 3,
-			"path": "resources/images/leadercards/front/leader_card_6.png"
+			"front_path": "resources/images/leadercards/front/leader_card_6.png"
         },
         {
             "ability": {
@@ -144,7 +144,7 @@
                 "type": "RESOURCES"
             },
             "victory_points": 3,
-			"path": "resources/images/leadercards/front/leader_card_7.png"
+			"front_path": "resources/images/leadercards/front/leader_card_7.png"
         },
         {
             "ability": {
@@ -163,7 +163,7 @@
                 "type": "RESOURCES"
             },
             "victory_points": 3,
-			"path": "resources/images/leadercards/front/leader_card_8.png"
+			"front_path": "resources/images/leadercards/front/leader_card_8.png"
         },
         {
             "ability": {
@@ -189,7 +189,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"path": "resources/images/leadercards/front/leader_card_9.png"
+			"front_path": "resources/images/leadercards/front/leader_card_9.png"
         },
         {
             "ability": {
@@ -215,7 +215,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"path": "resources/images/leadercards/front/leader_card_10.png"
+			"front_path": "resources/images/leadercards/front/leader_card_10.png"
         },
         {
             "ability": {
@@ -241,7 +241,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"path": "resources/images/leadercards/front/leader_card_11.png"
+			"front_path": "resources/images/leadercards/front/leader_card_11.png"
         },
         {
             "ability": {
@@ -267,7 +267,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"path": "required_resourcess/images/leadercards/front/leader_card_12.png"
+			"front_path": "required_resourcess/images/leadercards/front/leader_card_12.png"
         },
         {
             "ability": {
@@ -287,7 +287,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"path": "required_resourcess/images/leadercards/front/leader_card_13.png"
+			"front_path": "required_resourcess/images/leadercards/front/leader_card_13.png"
         },
         {
             "ability": {
@@ -307,7 +307,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"path": "required_resourcess/images/leadercards/front/leader_card_14.png"
+			"front_path": "required_resourcess/images/leadercards/front/leader_card_14.png"
         },
         {
             "ability": {
@@ -327,7 +327,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"path": "required_resourcess/images/leadercards/front/leader_card_15.png"
+			"front_path": "required_resourcess/images/leadercards/front/leader_card_15.png"
         },
         {
             "ability": {
@@ -347,7 +347,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"path": "resources/images/leadercards/front/leader_card_16.png"
+			"front_path": "resources/images/leadercards/front/leader_card_16.png"
         }
     ]
 }
