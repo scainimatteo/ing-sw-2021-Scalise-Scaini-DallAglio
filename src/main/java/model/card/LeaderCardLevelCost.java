@@ -22,7 +22,7 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 
 	public CardLevel[] getRequirements() {
 		CardLevel[] to_return = this.requirements.clone();
-		return to_return;
+	return to_return;
 	}
 
 	public boolean isActivable(Player player){
@@ -51,6 +51,7 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 
 		return to_return;
 	}
+
 
 	@Override
 	protected String printTop() {
@@ -110,6 +111,8 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 		}
 		return top;
 	}
+
+
 }
 
 /*

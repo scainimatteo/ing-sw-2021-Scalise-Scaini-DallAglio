@@ -125,9 +125,9 @@ public class GameController implements Runnable, Controller {
 		if (game.getPlayers().indexOf(player) == 0) {
 			return totalStorage == 0;
 		} else if (game.getPlayers().indexOf(player) == 1 || game.getPlayers().indexOf(player) == 2){
-			return totalStorage < 1 - totalWarehouse;
+			return totalStorage <= 1 - totalWarehouse;
 		} else if (game.getPlayers().indexOf(player) == 3){
-			return totalStorage < 2 - totalWarehouse;
+			return totalStorage <= 2 - totalWarehouse;
 		} else {
 			return false;
 		}
@@ -250,15 +250,11 @@ public class GameController implements Runnable, Controller {
 	 * @param player is the player who gained the given resources
 	 * @param raw_resources is the ArrayList of unfiltered gained resources
 	 */
-	private void filterResources(Player player, ArrayList<Resource> raw_resources){
-		for (Resource res : raw_resources){
-			if (res == null){
-				raw_resources.remove(res);
-			} else if (res.equals(Resource.FAITH)) {
-				raw_resources.remove(res);
-				player.moveForward(1);
-			}
-		}
+	private ArrayList<Resource> filterResources(Player player, ArrayList<Resource> raw_resources){
+		ArrayList<Resource> filtered = (ArrayList<Resource>) raw_resources.stream().filter(e -> e != null).collect(Collectors.toList());
+		int steps = (int) filtered.stream().filter(e -> e.equals(Resource.FAITH)).count();
+		player.moveForward(steps);
+		return (ArrayList<Resource>) filtered.stream().filter(e -> !e.equals(Resource.FAITH)).collect(Collectors.toList());
 	}
 
 	/**
@@ -280,7 +276,7 @@ public class GameController implements Runnable, Controller {
 						ArrayList<Resource> gains = row_or_column? game.getColumn(column - 1) : game.getRow(row - 1); 
 						try{
 							gains = applyBonus(bonus, gains);
-							filterResources(player, gains);
+							gains = filterResources(player, gains);
 							game.getTurn().addProducedResources(gains);
 							if (row_or_column){
 								game.shiftColumn(column - 1);

@@ -133,8 +133,10 @@ public class Warehouse {
 	public boolean canBeStoredMiddle (ArrayList<Resource> res){
 		if (res.isEmpty()){
 			return true;
+		} else if (middle_resources.isEmpty()){
+			return res.size() <= 2 - middle_resources.size() && isAllTheSame(res) && !isPresent(res.get(0));
 		} else {
-			return res.size() <= 2 - middle_resources.size() && isAllTheSame(res) && ((!isPresent(res.get(0)) && middle_resources.isEmpty()) || res.get(0).equals(middle_resources.get(0)));
+			return res.size() <= 2 - middle_resources.size() && isAllTheSame(res) && res.get(0).equals(middle_resources.get(0));
 		}
 	}
 
@@ -146,8 +148,10 @@ public class Warehouse {
 	public boolean canBeStoredBottom (ArrayList<Resource> res){
 		if (res.isEmpty()){
 			return true;
+		} else if (bottom_resources.isEmpty()){
+			return res.size() <= 3 - bottom_resources.size() && isAllTheSame(res) && !isPresent(res.get(0));
 		} else {
-			return res.size() <= 3 - bottom_resources.size() && isAllTheSame(res) && ((!isPresent(res.get(0)) && bottom_resources.isEmpty()) || res.get(0).equals(bottom_resources.get(0)));
+			return res.size() <= 3 - bottom_resources.size() && isAllTheSame(res) && res.get(0).equals(bottom_resources.get(0));
 		}
 	}
 
