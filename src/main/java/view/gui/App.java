@@ -18,6 +18,7 @@ import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.gui.scene.InitialScene;
@@ -37,6 +38,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception{
+		SceneController.setStage(stage);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/initialscene.fxml"));
 		this.initial_scene = new InitialScene();
 		loader.setController(this.initial_scene);

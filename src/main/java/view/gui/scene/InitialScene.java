@@ -95,6 +95,7 @@ public class InitialScene extends SceneController implements Initializable {
 		this.match_name = matchText.getText();
 		this.finishedInitialization = true;
 		App.gui.finishedInitialization();
+		this.changeScene("/fxml/leadercardselectorscene.fxml");
 	}
 
 	/**
