@@ -74,6 +74,7 @@ public class GUI extends View {
 
 			switch(initializing_message.type) {
 				case NICKNAME:
+					this.nickname = this.initial_scene.getNickname();
 					this.client.sendMessage(new InitializingMessage(this.initial_scene.getNickname()));
 					break;
 				case CHOOSE_MATCH_NAME:
@@ -90,8 +91,6 @@ public class GUI extends View {
 					Platform.runLater(() -> {
 						this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
 					});
-					System.out.println("Start");
-					break;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
