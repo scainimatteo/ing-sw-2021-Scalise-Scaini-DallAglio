@@ -52,7 +52,11 @@ public class Game extends Observable {
 	}
 
 	private SimpleGame simplify() {
-		return new SimpleGame(market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
+		ArrayList<String> order = new ArrayList<String>();
+		for (Player p: this.players) {
+			order.add(p.getNickname());
+		}
+		return new SimpleGame(order, market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
 	}
 
 	/**
