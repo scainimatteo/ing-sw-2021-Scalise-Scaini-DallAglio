@@ -18,13 +18,15 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 	private Production production;
 	private ArrayList<Resource> cost;
 	private CardLevel level;
+	private String front_path;
 
-	public DevelopmentCard (int points, Production production, ArrayList<Resource> cost, CardLevel level, int id) {
+	public DevelopmentCard (int points, Production production, ArrayList<Resource> cost, CardLevel level, int id, String front_path) {
 		this.victory_points = points;
 		this.cost = cost;
 		this.production = production;
 		this.level = level;
 		this.id = id;
+		this.front_path = front_path;
 	}
 
 	public CardLevel getCardLevel() {
@@ -66,7 +68,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 		for (Resource x : discount){
 			temp.remove(x);
 		}
-		return new DevelopmentCard (victory_points, production, temp, level, id);
+		return new DevelopmentCard (victory_points, production, temp, level, id, front_path);
 	}
 
 	public ArrayList<Resource> activateProduction(){

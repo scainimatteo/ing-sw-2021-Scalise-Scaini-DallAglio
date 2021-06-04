@@ -43,8 +43,8 @@ public class Game extends Observable {
 		return this.turn;
 	}
 
-	public void handleError(String error_message){
-		notify(new ErrorMessage(error_message));
+	public void handleError(String error_message, Player player){
+		notify(new ErrorMessage(error_message, player.getNickname()));
 	}
 
 	public void notifyGame() {

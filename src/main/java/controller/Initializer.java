@@ -144,7 +144,6 @@ public class Initializer {
 	 */
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
-			r.setTurn(game.getTurn());
 			game.addObserver(r);
 			game.getTurn().addObserver(r);
 		}

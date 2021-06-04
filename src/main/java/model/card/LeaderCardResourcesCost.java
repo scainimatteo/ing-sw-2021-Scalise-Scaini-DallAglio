@@ -17,12 +17,13 @@ public class LeaderCardResourcesCost extends LeaderCard implements Serializable 
 	private static final long serialVersionUID = 83762L;
 	private ArrayList<Resource> requirements;
 
-	public LeaderCardResourcesCost (int points, LeaderAbility ability, ArrayList<Resource> requirements, int id) {
+	public LeaderCardResourcesCost (int points, LeaderAbility ability, ArrayList<Resource> requirements, int id, String front_path) {
 		this.victory_points = points;
 		this.ability = ability;
 		this.activated = false;
 		this.requirements = requirements;
 		this.id = id;
+		this.front_path = front_path;
 	}
 
 	public ArrayList<Resource> getRequirements() {

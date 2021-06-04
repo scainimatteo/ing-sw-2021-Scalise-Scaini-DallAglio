@@ -175,7 +175,10 @@ public class Factory {
 			// VICTORYPOINTS
 			int victory_points = (int)(long) card.get("victory_points");
 
-			development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id);
+			// PATH
+			String front_path = (String) card.get("front_path");
+
+			development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id, front_path);
 		}
 		return development_cards;
 	}
@@ -199,7 +202,7 @@ public class Factory {
 			case "PRODUCTION":
 				JSONArray required_resources_arr = (JSONArray) ability_obj.get("required_resources");
 				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(required_resources_arr);
-				ArrayList<Resource> produced_resources = new ArrayList();
+				ArrayList<Resource> produced_resources = new ArrayList<Resource>();
 				produced_resources.add(null);
 				produced_resources.add(Resource.FAITH);
 				return new ProductionAbility(requirements_resources, produced_resources);
@@ -215,7 +218,7 @@ public class Factory {
 	 * @param requirements_obj the JSONObject containing all the requirements parameters
 	 * @return the correct LeaderCard based on the requirements
 	 */
-	private LeaderCard createLeaderCard(int id, LeaderAbility ability, int victory_points, JSONObject requirements_obj) throws ParseException {
+	private LeaderCard createLeaderCard(int id, String front_path, LeaderAbility ability, int victory_points, JSONObject requirements_obj) throws ParseException {
 		String requirements_type = requirements_obj.get("type").toString();
 		switch (requirements_type) {
 
@@ -229,13 +232,13 @@ public class Factory {
 					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
 					requirements_cardlevels[i] = new CardLevel(level, color);
 				}
-				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id);
+				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id, front_path);
 
 			// to activate the LeaderCard the correct resources are needed
 			case "RESOURCES":
 				JSONArray resources_arr = (JSONArray) requirements_obj.get("resources");
 				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(resources_arr);
-				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id);
+				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id, front_path);
 
 			default:
 				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
@@ -261,6 +264,9 @@ public class Factory {
 			// ID
 			int id = (int)(long) card.get("id");
 
+			// IMAGE
+			String front_path = (String) card.get("front_path");
+
 			// ABILITY
 			JSONObject ability_obj = (JSONObject) card.get("ability");
 			LeaderAbility ability = createAbility(ability_obj);
@@ -271,7 +277,7 @@ public class Factory {
 			// REQUIREMENTS
 			JSONObject requirements_obj = (JSONObject) card.get("requirements");
 
-			leader_cards[i] = createLeaderCard(id, ability, victory_points, requirements_obj);
+			leader_cards[i] = createLeaderCard(id, front_path, ability, victory_points, requirements_obj);
 		}
 		return leader_cards;
 	}
