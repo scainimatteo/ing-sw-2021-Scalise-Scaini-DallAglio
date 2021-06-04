@@ -1,18 +1,21 @@
 package it.polimi.ingsw.view.gui.scene;
 
+import javafx.application.Platform;
+
 import javafx.fxml.*;
 
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-import java.net.URL;
 import java.util.ResourceBundle;
+import java.net.URL;
 
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
 public class InitialScene extends SceneController implements Initializable {
+	@FXML Label nicknameLabel;
 	@FXML TextField nicknameText;
 	@FXML ToggleGroup numPlayersGroup;
 	@FXML RadioButton rb4;
@@ -20,7 +23,9 @@ public class InitialScene extends SceneController implements Initializable {
 	@FXML VBox startLayout;
 	@FXML VBox createLayout;
 	@FXML VBox joinLayout;
+	@FXML VBox matchLayout;
 	@FXML Button cancelButton;
+	@FXML Label matchNameLabel;
 
 	private String nickname = "";
 	private int num_players = -1;
@@ -39,6 +44,11 @@ public class InitialScene extends SceneController implements Initializable {
 		return this.match_name;
 	}
 
+	public void setMatchName(String match_name) {
+		this.match_name = match_name;
+		Platform.runLater(() -> matchNameLabel.setText(this.match_name));
+	}
+
 	public boolean isInitialized() {
 		return this.finishedInitialization;
 	}
@@ -51,6 +61,7 @@ public class InitialScene extends SceneController implements Initializable {
 		hideNode(createLayout);
 		hideNode(joinLayout);
 		hideNode(cancelButton);
+		hideNode(matchLayout);
 	}
 
 	/**
@@ -84,7 +95,8 @@ public class InitialScene extends SceneController implements Initializable {
 		this.nickname = nicknameText.getText();
 		this.num_players = Integer.parseInt(((RadioButton) numPlayersGroup.getSelectedToggle()).getText());
 		this.finishedInitialization = true;
-		App.gui.finishedInitialization();
+		App.finishedInitialization();
+		startWaiting();
 	}
 
 	/**
@@ -94,8 +106,8 @@ public class InitialScene extends SceneController implements Initializable {
 		this.nickname = nicknameText.getText();
 		this.match_name = matchText.getText();
 		this.finishedInitialization = true;
-		App.gui.finishedInitialization();
-		this.changeScene("/fxml/leadercardselectorscene.fxml");
+		App.finishedInitialization();
+		startWaiting();
 	}
 
 	/**
@@ -106,5 +118,18 @@ public class InitialScene extends SceneController implements Initializable {
 		hideNode(joinLayout);
 		hideNode(cancelButton);
 		showNode(startLayout);
+	}
+
+	/**
+	 * Start the waiting layout, until all players are connected to the match
+	 */
+	private void startWaiting() {
+		hideNode(startLayout);
+		hideNode(createLayout);
+		hideNode(joinLayout);
+		hideNode(nicknameLabel);
+		hideNode(nicknameText);
+		hideNode(cancelButton);
+		showNode(matchLayout);
 	}
 }
