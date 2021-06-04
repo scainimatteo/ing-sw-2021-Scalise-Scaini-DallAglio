@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 
 import it.polimi.ingsw.model.game.Turn;
@@ -28,6 +29,11 @@ public class GUI extends View {
 
 	@Override
 	public void handleInitializing(InitializingServerMessage initializing_message) {
+		return;
+	}
+
+	@Override
+	public void handleEndGame(EndGameMessage end_game_message) {
 		return;
 	}
 

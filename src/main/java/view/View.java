@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
@@ -37,6 +38,13 @@ public abstract class View {
 	 * @param initializing_message the InitializingServerMessage received from the Server
 	 */
 	public abstract void handleInitializing(InitializingServerMessage initializing_message);
+
+	/**
+	 * Print the ranking of the Players
+	 *
+	 * @param end_game_message the EndGameMessage received from the Server
+	 */
+	public abstract void handleEndGame(EndGameMessage end_game_message);
 
 	/**
 	 * Update the simple model after a ViewUpdate
