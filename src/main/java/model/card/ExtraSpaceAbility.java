@@ -71,7 +71,9 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	* @throws IllegalArgumentException if resource type isn't compatible with required type or the space is full
 	*/
 	public void storeExtra(ArrayList<Resource> res) throws IllegalArgumentException {
-		if (!res.get(0).equals(resource_type) || res.size() > 2 - storage.size()){
+		if (res.isEmpty()) {
+			return;
+		} else if (!res.get(0).equals(resource_type) || res.size() > 2 - storage.size()){
 			throw new IllegalArgumentException();	
 		}
 		else {
@@ -85,9 +87,11 @@ public class ExtraSpaceAbility extends LeaderAbility {
 	* @throws NoSuchElementException if requested quantity exceed present quantity
 	*/
 	public void getFromExtra(ArrayList<Resource> res) throws NoSuchElementException {
-		if (res.size() > storage.size() || res.size() == 0){
+		if (res.isEmpty()) {
+			return;
+		} else if (res.size() > storage.size() || res.size() == 0){
 			throw new NoSuchElementException();
-		} else if (res.stream().allMatch(x->x.equals(resource_type))) {
+		} else if (!res.stream().allMatch(x->x.equals(resource_type))) {
 			throw new IllegalArgumentException();
 		} else {
 			for (Resource x : res){
@@ -111,9 +115,9 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		if (storage.size() == 0){
 			string +="|  |    | |    |  |\n";
 		} else if (storage.size() ==1){
-			string +="|  | " + resource_type.getAbbreviation() + " |   |   |  |\n";
+			string +="|  | " + resource_type.getAbbreviation() + " | |    |  |\n";
 		} else if (storage.size() == 2){
-			string +="|  | " + resource_type.getAbbreviation() + " |   | " + resource_type.getAbbreviation() + " |  |\n";
+			string +="|  | " + resource_type.getAbbreviation() + " | | " + resource_type.getAbbreviation() + " |  |\n";
 		}
 		return string + "|  ·----· ·----·  |\n|                 |\n";
 	}

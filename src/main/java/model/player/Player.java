@@ -235,9 +235,10 @@ public class Player extends Observable {
 			single_type = (ArrayList<Resource>) res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
 			for (LeaderCard x : leader_cards_deck){
 				ability = x.getAbility();
-				if (ability.checkAbility(test)) {
+				if (x.isActive() && ability.checkAbility(test)) {
 					if (((ExtraSpaceAbility) ability).canBeStoredExtra(single_type)) {
 						((ExtraSpaceAbility) ability).storeExtra(single_type);
+						this.notifyPlayer();
 					}
 				}
 			}
@@ -253,7 +254,7 @@ public class Player extends Observable {
 			single_type = (ArrayList<Resource>)res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
 			for (LeaderCard x : leader_cards_deck){
 				ability = x.getAbility();
-				if (ability.checkAbility(test)) {
+				if (x.isActive() && ability.checkAbility(test)) {
 					if (((ExtraSpaceAbility) ability).isContainedExtra(single_type)) {
 						((ExtraSpaceAbility) ability).getFromExtra(single_type);
 					}
