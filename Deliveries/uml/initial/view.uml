@@ -98,22 +98,22 @@ class App{
 }
 
 class InitialScene {
-	- Label nicknameLabel;
-	- TextField nicknameText;
-	- ToggleGroup numPlayersGroup;
-	- RadioButton rb4;
-	- TextField matchText;
-	- VBox startLayout;
-	- VBox createLayout;
-	- VBox joinLayout;
-	- VBox matchLayout;
-	- Button cancelButton;
-	- Label matchNameLabel;
+	- Label nicknameLabel
+	- TextField nicknameText
+	- ToggleGroup numPlayersGroup
+	- RadioButton rb4
+	- TextField matchText
+	- VBox startLayout
+	- VBox createLayout
+	- VBox joinLayout
+	- VBox matchLayout
+	- Button cancelButton
+	- Label matchNameLabel
 
-	- String nickname = "";
-	- int num_players = -1;
-	- String match_name = "";
-	- boolean finishedInitialization = false;
+	- String nickname
+	- int num_players
+	- String match_name
+	- boolean finishedInitialization
 
 	+ void setMatchName(String match_name)
 	+ boolean isInitialized()
@@ -127,21 +127,21 @@ class InitialScene {
 }
 
 class LeaderCardSelectorScene {
-	- ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
-	- double opacity_percent = 0.5;
-	- SimplePlayer player;
+	- ArrayList<LeaderCard> to_delete
+	- double opacity_percent
+	- SimplePlayer player
 
-	- StackPane leader_card_scene;
+	- StackPane leader_card_scene
 
-	- ImageView leader_card_1;
-	- ImageView leader_card_2;
-	- ImageView leader_card_3;
-	- ImageView leader_card_4;
+	- ImageView leader_card_1
+	- ImageView leader_card_2
+	- ImageView leader_card_3
+	- ImageView leader_card_4
 
-	- Image leader_card_image_1;
-	- Image leader_card_image_2;
-	- Image leader_card_image_3;
-	- Image leader_card_image_4;
+	- Image leader_card_image_1
+	- Image leader_card_image_2
+	- Image leader_card_image_3
+	- Image leader_card_image_4
 
 	+ void initialize(URL location, ResourceBundle resources)
 	+ void leaderCard1Click()
@@ -165,7 +165,7 @@ class FinalScene{
 }
 
 class SceneController {
-	- {static} Stage stage;
+	- {static} Stage stage
 
 	public void hideNode(Node node) 
 	public void showNode(Node node) 
@@ -173,6 +173,7 @@ class SceneController {
 }
 
 class SimpleGame {
+	- ArrayList<String> order
 	- Resource[][] market
 	- Resource free_marble
 	- DevelopmentCard[][] development_cards_on_table
