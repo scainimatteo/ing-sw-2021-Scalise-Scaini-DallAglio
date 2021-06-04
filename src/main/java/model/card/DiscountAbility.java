@@ -19,14 +19,14 @@ public class DiscountAbility extends LeaderAbility {
 
 	public Resource getDiscountedResource(){
 		return discounted_resource;
-	}	
+	}
 	
 	/**
 	* Checks if the target ability is DiscountAbility type through overload of the original method
 	*
 	* @param target allows the ability to run the overloaded method if the type is correct, else the inherited superclass method is run
 	* @return true, as it highlights that target ability is a DiscountAbility type else the inherited superclass method would be run
-	*/ 
+	*/
 	public boolean checkAbility (DiscountAbility target){
 		return true;
 	}

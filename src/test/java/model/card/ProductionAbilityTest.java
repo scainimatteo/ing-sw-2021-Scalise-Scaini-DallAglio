@@ -44,4 +44,11 @@ public class ProductionAbilityTest {
 		ArrayList<Resource> token_prod = test_prod_ability.getProduction().getProducedResources();
 		assertEquals (token_prod.get(0), test_resource_5);
 	}
+
+	@Test
+	public void checkAbilityTest() {
+		LeaderAbility test = new ProductionAbility(null, null);
+		ProductionAbility test2 = new ProductionAbility(null, null);
+		assertTrue(test.checkAbility(test2));
+	}
 }

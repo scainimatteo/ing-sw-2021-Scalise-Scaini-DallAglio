@@ -30,4 +30,11 @@ public class WhiteMarblesAbilityTest {
 	public void testException() {
 		assertThrows(IllegalArgumentException.class, ()-> {wma = new WhiteMarblesAbility(except);});
 	}
+
+	@Test
+	public void checkAbilityTest() {
+		LeaderAbility test = new WhiteMarblesAbility(null);
+		WhiteMarblesAbility test2 = new WhiteMarblesAbility(null);
+		assertTrue(test.checkAbility(test2));
+	}
 }

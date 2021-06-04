@@ -87,7 +87,7 @@ public class Player extends Observable {
 	/**
 	 * LEADER CARD METHODS
 	 */
-	
+	//TODO: change this name
 	public ArrayList<LeaderCard> getDeck(){
 		return this.leader_cards_deck;
 	}
@@ -98,65 +98,12 @@ public class Player extends Observable {
 	}
 
 	public boolean isActivable(LeaderCard card){
-		if (card instanceof LeaderCardLevelCost){
-			return this.isActivable((LeaderCardLevelCost) card);
-		} else if (card instanceof LeaderCardResourcesCost){
-			return this.isActivable((LeaderCardResourcesCost) card);
-		}
-		return false;
-	}
-
-	/**
-	 * @param card is the LeaderCard to be checked
-	 * @return true if the card can be activated
-	 */
-	//TODO: .equals does not work. Always returns false. Rewrite using CardLevel methods
-	public boolean isActivable(LeaderCardLevelCost card){
-		CardLevel[] req = card.getRequirements();
-		Iterator<DevelopmentCard> iterator = this.development_card_slots.getIterator();
-		boolean to_return = true;
-		CardLevel tmp;
-
-		while (iterator.hasNext()){
-			tmp = iterator.next().getCardLevel();
-
-			for (int i = 0; i < req.length; i ++){
-				if (req[i].equals(tmp)){
-					req[i] = null;
-					break;
-				} 
-			}
-		}
-
-		for (int j = 0; j < req.length; j ++){
-			if (req[j] != null){
-				to_return = false;
-				break;
-			} 
-		}
-
-		return to_return;
-	}
-
-	/**
-	 * @param card is the LeaderCard to be checked
-	 * @return true if the card can be activated
-	 */
-	public boolean isActivable(LeaderCardResourcesCost card){
-		ArrayList<Resource> to_check = card.getRequirements();
-		Resource[] all_resources = {Resource.STONE, Resource.COIN, Resource.SERVANT, Resource.SHIELD};
-		HashMap <Resource, Integer> total = totalResources();
-		for (Resource x : all_resources){
-			if (total.get(x) < (int) to_check.stream().filter(y->y.equals(x)).count()) {
-				return false;
-			}
-		}
-		return true;
+		return card.isActivable(this);
 	}
 
 	public void activateLeader(LeaderCard card){
 		for (LeaderCard x : leader_cards_deck){
-			if (x.equals(card)){
+			if (x.getId() == card.getId()){
 				x.activateLeaderCard();
 				this.notifyPlayer();
 				return;
@@ -179,7 +126,7 @@ public class Player extends Observable {
 	 * 
 	 * @return an hashmap with the sum of all the resources in the three available storages
 	 */
-	private HashMap <Resource, Integer> totalResources() {
+	public HashMap <Resource, Integer> totalResources() {
 		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
 		total.put(Resource.COIN, strongbox.get(Resource.COIN));
 		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));
@@ -352,6 +299,8 @@ public class Player extends Observable {
 		return this.development_card_slots.getTopCards();
 	}
 
+	//TODO: change this in getSlot
+	//TODO: why does this return an array?
 	public DevelopmentCard[] getCard(int position){
 		return this.development_card_slots.getCard(position);
 	}

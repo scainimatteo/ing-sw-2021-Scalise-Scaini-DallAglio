@@ -222,12 +222,12 @@ public class Factory {
 			// to activate the LeaderCard a correct CardLevel is needed
 			case "CARDLEVEL":
 				JSONArray cardlevel_arr = (JSONArray) requirements_obj.get("cardlevel");
-				CardLevel requirements_cardlevels[] = new CardLevel[cardlevel_arr.size()];
+				ArrayList<CardLevel> requirements_cardlevels = new ArrayList<CardLevel>();
 				for (int i = 0; i < cardlevel_arr.size(); i++) {
 					JSONObject cardlevel_obj = (JSONObject) this.jsonParser.parse(cardlevel_arr.get(i).toString());
 					int level = (int)(long) cardlevel_obj.get("level");
 					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
-					requirements_cardlevels[i] = new CardLevel(level, color);
+					requirements_cardlevels.add(new CardLevel(level, color));
 				}
 				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id);
 

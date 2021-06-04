@@ -33,11 +33,11 @@ public class LeaderCardLevelCostTest {
 			list.toArray(all_leader_cards);
 
 			int i = 0;
-			for (LeaderCard card : all_leader_cards) {
+			for (LeaderCard card: all_leader_cards) {
 				if (i < 4 && card instanceof LeaderCardLevelCost) {
 					this.cards[i] = (LeaderCardLevelCost) card;
-					int level = this.cards[i].getRequirements()[0].getLevel() - 1;
-					DevelopmentCardsColor color = this.cards[i].getRequirements()[0].getColor();
+					int level = this.cards[i].getRequirements().get(0).getLevel() - 1;
+					DevelopmentCardsColor color = this.cards[i].getRequirements().get(0).getColor();
 					this.cardlevels[i] = new CardLevel(level, color);
 					i++;
 				}
@@ -59,8 +59,9 @@ public class LeaderCardLevelCostTest {
 
 	@Test
 	public void checkRequirements() {
-		for (int i = 0; i < 4; i++) {
-			assertEquals(1, cards[i].getRequirements()[0].compareLevel(this.cardlevels[i]));
+		for (int i = 0; i < this.cards.length; i++) {
+			CardLevel leader_card_level = this.cards[i].getRequirements().get(0);
+			assertTrue(leader_card_level.equals(this.cardlevels[i]));
 		}
 	}
 }

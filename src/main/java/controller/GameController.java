@@ -302,9 +302,9 @@ public class GameController implements Runnable, Controller {
 	private ArrayList<Resource> applyDiscount(Player player, ArrayList<Resource> cost){
 		DiscountAbility test = new DiscountAbility(null);
 		ArrayList<Resource> discount = new ArrayList<Resource>();
-		for (LeaderCard x : player.getDeck()){
+		for (LeaderCard x: player.getDeck()){
 			LeaderAbility ability = x.getAbility();
-			if (ability.checkAbility(test)){
+			if (x.isActive() && ability.checkAbility(test)){
 				discount.add(((DiscountAbility) ability).getDiscountedResource());
 			}
 		}
@@ -313,7 +313,6 @@ public class GameController implements Runnable, Controller {
 		}
 		return cost;
 	}
-
 
 	/**
 	 * Upon receiving the corresponding message, checks if the player who requested the action is active, if they are yet to play their main action, if card they
@@ -332,6 +331,7 @@ public class GameController implements Runnable, Controller {
 					DevelopmentCard card = game.getTopCards()[row][column]; 
 					ArrayList<Resource> cost = new ArrayList<Resource>();
 					cost.addAll(card.getCost());
+					cost = applyDiscount(player, cost);
 					if (player.hasEnoughResources(cost)){
 						if (player.fitsInSlot(card, slot - 1)){
 							game.getFromDeck(card);

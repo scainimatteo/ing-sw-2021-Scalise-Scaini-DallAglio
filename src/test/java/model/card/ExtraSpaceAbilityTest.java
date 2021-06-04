@@ -57,4 +57,11 @@ public class ExtraSpaceAbilityTest {
 		assertEquals(test_space.peekResources(), 2);
 		assertThrows(IllegalArgumentException.class, () -> {test_space.storeExtra(test_res);})	;
 	}
+
+	@Test
+	public void checkAbilityTest() {
+		LeaderAbility test = new ExtraSpaceAbility(null);
+		ExtraSpaceAbility test2 = new ExtraSpaceAbility(null);
+		assertTrue(test.checkAbility(test2));
+	}
 }

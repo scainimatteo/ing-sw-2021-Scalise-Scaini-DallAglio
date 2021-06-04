@@ -25,10 +25,33 @@ public class LeaderCardResourcesCost extends LeaderCard implements Serializable 
 		this.id = id;
 	}
 
+	/**
+	 * For testing purpose only
+	 */
 	public ArrayList<Resource> getRequirements() {
 		return requirements;
 	}
 
+	/**
+	 * The LeaderCardResourcesCost is activable if the player has the resources in the requirements ArrayList
+	 */
+	@Override
+	public boolean isActivable(Player player){
+		Resource[] all_resources = {Resource.STONE, Resource.COIN, Resource.SERVANT, Resource.SHIELD};
+		HashMap <Resource, Integer> total = player.totalResources();
+		for (Resource res: all_resources){
+			if (total.get(res) < (int) this.requirements.stream().filter(y -> y.equals(res)).count()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Method used to print the cost
+	 *
+	 * @return an HashMap with the number of Resources required to activate the LeaderCard
+	 */
 	private HashMap<Resource, Integer> numOfCost(){
 		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
 
