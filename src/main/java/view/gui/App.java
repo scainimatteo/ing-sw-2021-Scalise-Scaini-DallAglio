@@ -70,7 +70,7 @@ public class App extends Application {
 	/**
 	 * @return the SimplePlayer representing the Client
 	 */
-	public SimplePlayer getMyPlayer() {
+	public static SimplePlayer getMyPlayer() {
 		return gui.getMyPlayer();
 	}
 

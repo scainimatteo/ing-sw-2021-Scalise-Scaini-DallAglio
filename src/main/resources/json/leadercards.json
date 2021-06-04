@@ -21,7 +21,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"front_path": "resources/images/leadercards/front/leader_card_1.png"
+			"front_path": "/images/leadercards/front/leader_card_1.png"
         },
         {
             "ability": {
@@ -43,7 +43,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"front_path": "resources/images/leadercards/front/leader_card_2.png"
+			"front_path": "/images/leadercards/front/leader_card_2.png"
         },
         {
             "ability": {
@@ -65,7 +65,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"front_path": "resources/images/leadercards/front/leader_card_3.png"
+			"front_path": "/images/leadercards/front/leader_card_3.png"
         },
         {
             "ability": {
@@ -87,7 +87,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 2,
-			"front_path": "resources/images/leadercards/front/leader_card_4.png"
+			"front_path": "/images/leadercards/front/leader_card_4.png"
         },
         {
             "ability": {
@@ -96,17 +96,17 @@
             },
             "id": 5,
             "requirements": {
-                "resources": [
+                "": [
                     "COIN",
                     "COIN",
                     "COIN",
                     "COIN",
                     "COIN"
                 ],
-                "type": "RESOURCES"
+                "type": ""
             },
             "victory_points": 3,
-			"front_path": "resources/images/leadercards/front/leader_card_5.png"
+			"front_path": "/images/leadercards/front/leader_card_5.png"
         },
         {
             "ability": {
@@ -115,17 +115,17 @@
             },
             "id": 6,
             "requirements": {
-                "resources": [
+                "": [
                     "STONE",
                     "STONE",
                     "STONE",
                     "STONE",
                     "STONE"
                 ],
-                "type": "RESOURCES"
+                "type": ""
             },
             "victory_points": 3,
-			"front_path": "resources/images/leadercards/front/leader_card_6.png"
+			"front_path": "/images/leadercards/front/leader_card_6.png"
         },
         {
             "ability": {
@@ -134,17 +134,17 @@
             },
             "id": 7,
             "requirements": {
-                "resources": [
+                "": [
                     "SERVANT",
                     "SERVANT",
                     "SERVANT",
                     "SERVANT",
                     "SERVANT"
                 ],
-                "type": "RESOURCES"
+                "type": ""
             },
             "victory_points": 3,
-			"front_path": "resources/images/leadercards/front/leader_card_7.png"
+			"front_path": "/images/leadercards/front/leader_card_7.png"
         },
         {
             "ability": {
@@ -153,17 +153,17 @@
             },
             "id": 8,
             "requirements": {
-                "resources": [
+                "": [
                     "SHIELD",
                     "SHIELD",
                     "SHIELD",
                     "SHIELD",
                     "SHIELD"
                 ],
-                "type": "RESOURCES"
+                "type": ""
             },
             "victory_points": 3,
-			"front_path": "resources/images/leadercards/front/leader_card_8.png"
+			"front_path": "/images/leadercards/front/leader_card_8.png"
         },
         {
             "ability": {
@@ -189,7 +189,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"front_path": "resources/images/leadercards/front/leader_card_9.png"
+			"front_path": "/images/leadercards/front/leader_card_9.png"
         },
         {
             "ability": {
@@ -215,7 +215,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"front_path": "resources/images/leadercards/front/leader_card_10.png"
+			"front_path": "/images/leadercards/front/leader_card_10.png"
         },
         {
             "ability": {
@@ -241,7 +241,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"front_path": "resources/images/leadercards/front/leader_card_11.png"
+			"front_path": "/images/leadercards/front/leader_card_11.png"
         },
         {
             "ability": {
@@ -267,11 +267,11 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 5,
-			"front_path": "required_resourcess/images/leadercards/front/leader_card_12.png"
+			"front_path": "required_s/images/leadercards/front/leader_card_12.png"
         },
         {
             "ability": {
-                "required_resources": [
+                "required_": [
                     "SHIELD"
                 ],
                 "type": "PRODUCTION"
@@ -287,11 +287,11 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"front_path": "required_resourcess/images/leadercards/front/leader_card_13.png"
+			"front_path": "required_s/images/leadercards/front/leader_card_13.png"
         },
         {
             "ability": {
-                "required_resources": [
+                "required_": [
                     "SERVANT"
                 ],
                 "type": "PRODUCTION"
@@ -307,11 +307,11 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"front_path": "required_resourcess/images/leadercards/front/leader_card_14.png"
+			"front_path": "required_s/images/leadercards/front/leader_card_14.png"
         },
         {
             "ability": {
-                "required_resources": [
+                "required_": [
                     "STONE"
                 ],
                 "type": "PRODUCTION"
@@ -327,11 +327,11 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"front_path": "required_resourcess/images/leadercards/front/leader_card_15.png"
+			"front_path": "required_s/images/leadercards/front/leader_card_15.png"
         },
         {
             "ability": {
-                "required_resources": [
+                "required_": [
                     "COIN"
                 ],
                 "type": "PRODUCTION"
@@ -347,7 +347,7 @@
                 "type": "CARDLEVEL"
             },
             "victory_points": 4,
-			"front_path": "resources/images/leadercards/front/leader_card_16.png"
+			"front_path": "/images/leadercards/front/leader_card_16.png"
         }
     ]
 }

@@ -18,6 +18,10 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 		return this.ability;
 	}
 
+	public String getFrontPath(){
+		return this.front_path;
+	}
+
 	public void activateLeaderCard() {
 		this.activated = true;
 		return;	
