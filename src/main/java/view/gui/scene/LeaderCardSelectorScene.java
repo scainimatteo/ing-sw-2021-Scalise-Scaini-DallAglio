@@ -25,7 +25,7 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 	SimplePlayer player;
 
 	@FXML
-	StackPane leader_card_scene;
+	StackPane leader_stack_pane;
 
 	@FXML
 	ImageView leader_card_1;
@@ -49,17 +49,17 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 	public void initialize(URL location, ResourceBundle resources){
 		this.player = App.getMyPlayer();
 
-		leader_card_image_1 = new Image(player.getLeaderCards().get(0).getFrontPath());
-		leader_card_image_2 = new Image(player.getLeaderCards().get(1).getFrontPath());
-		leader_card_image_3 = new Image(player.getLeaderCards().get(2).getFrontPath());
-		leader_card_image_4 = new Image(player.getLeaderCards().get(3).getFrontPath());
+		System.out.println(getClass().getResource(player.getLeaderCards().get(0).getFrontPath()));
+		leader_card_image_2 = new Image(getClass().getResource(player.getLeaderCards().get(1).getFrontPath()).toString());
+		leader_card_image_3 = new Image(getClass().getResource(player.getLeaderCards().get(2).getFrontPath()).toString());
+		leader_card_image_4 = new Image(getClass().getResource(player.getLeaderCards().get(3).getFrontPath()).toString());
 
 		leader_card_1.setImage(leader_card_image_1);
 		leader_card_2.setImage(leader_card_image_2);
 		leader_card_3.setImage(leader_card_image_3);
 		leader_card_4.setImage(leader_card_image_4);
 
-		hideNode(leader_card_scene);
+		hideNode(leader_stack_pane);
 	}
 
 	public void leaderCard1Click(){
@@ -111,7 +111,7 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 		message = new DiscardLeaderMessage(to_delete.get(1));
 		App.sendMessage(message);
 		
-		hideNode(leader_card_scene);
+		hideNode(leader_stack_pane);
 
 		// resource_choice_scene.setVisible(true);
 	}
