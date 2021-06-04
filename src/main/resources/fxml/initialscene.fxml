@@ -108,13 +108,13 @@
       	 </Label>
          </children>
       </VBox>
-   <Label fx:id="nicknameLabel" layoutX="278.0" layoutY="167.0" text="Choose nickname" textAlignment="CENTER" visible="false">
+   <Label fx:id="nicknameLabel" layoutX="278.0" layoutY="167.0" text="Choose nickname" textAlignment="CENTER">
 	  <font>
 		 <Font name="System Bold" size="16.0" />
 	  </font>
    </Label>
-   <TextField fx:id="nicknameText" layoutX="267.0" layoutY="199.0" prefHeight="24.0" prefWidth="181.0" visible="false" />
-	 <Button fx:id="cancelButton" layoutX="278.0" layoutY="520.0" onAction="#cancelHandler" prefHeight="28.0" prefWidth="169.0" text="Cancel" visible="false">
+   <TextField fx:id="nicknameText" layoutX="267.0" layoutY="199.0" prefHeight="24.0" prefWidth="181.0"/>
+	 <Button fx:id="cancelButton" layoutX="278.0" layoutY="520.0" onAction="#cancelHandler" prefHeight="28.0" prefWidth="169.0" text="Cancel">
 		<font>
 		   <Font name="System Bold Italic" size="16.0" />
 		</font>

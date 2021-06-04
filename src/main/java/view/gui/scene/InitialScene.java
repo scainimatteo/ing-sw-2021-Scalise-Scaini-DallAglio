@@ -104,7 +104,7 @@ public class InitialScene extends SceneController implements Initializable {
 	 */
 	public void joinHandler() {
 		this.nickname = nicknameText.getText();
-		this.match_name = matchText.getText();
+		this.setMatchName(matchText.getText());
 		this.finishedInitialization = true;
 		App.finishedInitialization();
 		startWaiting();
