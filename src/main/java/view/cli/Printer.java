@@ -385,14 +385,14 @@ public class Printer {
 	}
 
 	public static String printDevelopmentCardsSlots(SimplePlayer player) {
-		return printDevelopmentCardsArray(player.getTopCards());
+		return printDevelopmentCardsArray(player.getTopCards().toArray(new DevelopmentCard[3]));
 	}
 
 	public static String printDevelopmentCardsSlots(SimplePlayer player, int slot) {
 		switch (slot){
-			case 1: return printDevelopmentCardsArray(player.getFirstColumn());
-			case 2: return printDevelopmentCardsArray(player.getSecondColumn());
-			case 3: return printDevelopmentCardsArray(player.getThirdColumn());
+			case 1: return printDevelopmentCardsArray(player.getFirstColumn().toArray(new DevelopmentCard[3]));
+			case 2: return printDevelopmentCardsArray(player.getSecondColumn().toArray(new DevelopmentCard[3]));
+			case 3: return printDevelopmentCardsArray(player.getThirdColumn().toArray(new DevelopmentCard[3]));
 			default: return "";
 		}
 	}

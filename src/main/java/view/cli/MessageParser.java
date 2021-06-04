@@ -142,14 +142,14 @@ public class MessageParser {
 		SimpleDevelopmentCardSlot development_card_slots = player.getDevelopmentCardsSlots();
 		DevelopmentCard production = null;
 		if (slot == 1) {
-			DevelopmentCard[] first_column = development_card_slots.getFirstColumn();
-			production = first_column[0];
+			ArrayList<DevelopmentCard> first_column = development_card_slots.getFirstColumn();
+			production = first_column.get(0);
 		} else if (slot == 2) {
-			DevelopmentCard[] second_column = development_card_slots.getSecondColumn();
-			production = second_column[0];
+			ArrayList<DevelopmentCard> second_column = development_card_slots.getSecondColumn();
+			production = second_column.get(0);
 		} else {
-			DevelopmentCard[] third_column = development_card_slots.getThirdColumn();
-			production = third_column[0];
+			ArrayList<DevelopmentCard> third_column = development_card_slots.getThirdColumn();
+			production = third_column.get(0);
 		}
 
 		if (production == null) {
@@ -170,6 +170,11 @@ public class MessageParser {
 
 		ArrayList<LeaderCard> player_deck = player.getDeck();
 		LeaderCard leader_card = player_deck.get(index - 1);
+
+		if (!leader_card.isActive()) {
+			throw new IllegalArgumentException();
+		}
+
 		ProductionInterface production = (ProductionAbility) leader_card.getAbility();
 		production.setProducedResources(cost);
 		return production;

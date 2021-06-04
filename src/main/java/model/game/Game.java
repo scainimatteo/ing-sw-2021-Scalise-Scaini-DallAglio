@@ -47,10 +47,18 @@ public class Game extends Observable {
 		notify(new ErrorMessage(error_message));
 	}
 
+	/**
+	 * Send a ViewUpdate with the current Game
+	 */
 	public void notifyGame() {
 		notify(new ViewUpdate(this.simplify()));
 	}
 
+	/**
+	 * Simplify the Game to send it to the Client
+	 *
+	 * @return the SimpleGame used to represent this Game
+	 */
 	private SimpleGame simplify() {
 		ArrayList<String> order = new ArrayList<String>();
 		for (Player p: this.players) {

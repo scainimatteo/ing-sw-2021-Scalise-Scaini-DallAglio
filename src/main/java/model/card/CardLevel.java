@@ -45,6 +45,14 @@ public class CardLevel implements Serializable {
 	}
 
 	/**
+	 * @param target the CardLevel of the bottom card
+	 * @return true if the card with this CardLevel is placeable on the one with the target CardLevel
+	 */
+	public boolean isPlaceable(CardLevel target) {
+		return this.level - target.getLevel() == 1;
+	}
+
+	/**
 	 * @param o the CardLevel to compare
 	 * @return true if the CardLevels are equal or if the CardLevel passed is smaller
 	 */

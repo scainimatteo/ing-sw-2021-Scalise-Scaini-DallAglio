@@ -23,10 +23,10 @@ import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
 
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
@@ -52,34 +52,22 @@ public class Player extends Observable {
 		return this.nickname;
 	}
 
+	/**
+	 * Send a ViewUpdate with the current Player
+	 */
 	public void notifyPlayer() {
 		notify(new ViewUpdate(this.simplify()));
 	}
 
+	/**
+	 * Simplify the Player to send it to the Client
+	 *
+	 * @return the SimplePlayer used to represent this Player
+	 */
 	private SimplePlayer simplify() {
-		DevelopmentCard[] first_column = new DevelopmentCard[3];
-		Iterator<DevelopmentCard> iterator = this.development_card_slots.getDeck(0, 0).iterator();
-		int i = 0;
-		while (iterator.hasNext()){
-			first_column[i] = iterator.next();
-			i++;
-		}
-
-		DevelopmentCard[] second_column = new DevelopmentCard[3];
-		iterator = this.development_card_slots.getDeck(0, 1).iterator();
-		i = 0;
-		while (iterator.hasNext()){
-			second_column[i] = iterator.next();
-			i++;
-		}
-
-		DevelopmentCard[] third_column = new DevelopmentCard[3];
-		iterator = this.development_card_slots.getDeck(0, 2).iterator();
-		i = 0;
-		while (iterator.hasNext()){
-			third_column[i] = iterator.next();
-			i++;
-		}
+		ArrayList<DevelopmentCard> first_column = this.development_card_slots.getDeckAsArrayList(0, 0);
+		ArrayList<DevelopmentCard> second_column = this.development_card_slots.getDeckAsArrayList(0, 1);
+		ArrayList<DevelopmentCard> third_column = this.development_card_slots.getDeckAsArrayList(0, 2);
 
 		return new SimplePlayer(this.nickname, this.track.getCellTrack(), this.track.getMarker(), this.track.getTiles(), new SimpleWarehouse(this.warehouse.getTopResource(), this.warehouse.getMiddleResources(), this.warehouse.getBottomResources()), this.strongbox.getStorage(), this.leader_cards_deck, new SimpleDevelopmentCardSlot(first_column, second_column, third_column));
 	}
