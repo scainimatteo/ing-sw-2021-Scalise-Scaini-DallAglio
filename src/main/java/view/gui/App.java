@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
@@ -28,7 +29,7 @@ public class App extends Application {
 	private static SimpleGame game;
 	private static ArrayList<SimplePlayer> players;
 	private static Turn turn;
-	public static GUI gui;
+	private static GUI gui;
 
 	private InitialScene initial_scene;
 
@@ -83,5 +84,28 @@ public class App extends Application {
 			Alert alert = new Alert(AlertType.ERROR, error, ButtonType.OK);
 			alert.show();
 		});
+	}
+
+	/**
+	 * @return true if the gui has finished the initialization phase
+	 */
+	public static boolean isInitialized() {
+		return App.gui.isInitialized();
+	}
+
+	/**
+	 * Send a message to the Client
+	 *
+	 * @param message the Message to send
+	 */
+	public static void sendMessage(Message message) {
+		App.gui.sendMessage(message);
+	}
+
+	/**
+	 * Notify the GUI that the initialization has finished
+	 */
+	public static void finishedInitialization() {
+		App.gui.finishedInitialization();
 	}
 }

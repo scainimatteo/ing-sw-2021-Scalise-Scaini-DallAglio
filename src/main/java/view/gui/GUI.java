@@ -1,5 +1,11 @@
 package it.polimi.ingsw.view.gui;
 
+import javafx.application.Platform;
+
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert;
+
 import java.util.ArrayList;
 
 import it.polimi.ingsw.client.Client;
@@ -8,6 +14,7 @@ import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
 import it.polimi.ingsw.controller.message.InitializingMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
+import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
@@ -37,7 +44,18 @@ public class GUI extends View {
 
 	@Override
 	public void handleError(ErrorMessage error_message) {
-		app.showError(error_message.error_string);
+		Platform.runLater(() -> {
+			Alert alert = new Alert(AlertType.ERROR, error_message.error_string, ButtonType.OK);
+			if (!App.isInitialized()) {
+				alert.showAndWait().ifPresent(response -> {
+					 if (response == ButtonType.OK) {
+						 System.exit(1);
+					 }
+				});
+			} else if (error_message.nickname == null || error_message.nickname.equals(this.getMyPlayer().getNickname())) {
+				alert.show();
+			}
+		});
 	}
 
 	@Override
@@ -62,18 +80,18 @@ public class GUI extends View {
 					this.client.sendMessage(new InitializingMessage(this.initial_scene.getMatchName()));
 					break;
 				case STARTED_MATCH_NAME:
-					//TODO; change Scene
+					this.initial_scene.setMatchName(initializing_message.match_name);
 					System.out.println("Started match " + initializing_message.match_name);
 					break;
 				case NUM_PLAYERS:
 					this.client.sendMessage(new InitializingMessage(String.valueOf(this.initial_scene.getNumPlayers())));
 					break;
 				case START_MATCH:
-					//TODO; change Scene
+					Platform.runLater(() -> {
+						this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
+					});
 					System.out.println("Start");
 					break;
-				default:
-					System.out.println("Errore");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,6 +108,15 @@ public class GUI extends View {
 
 	public Turn getTurn() {
 		return this.turn;
+	}
+
+	/**
+	 * Send a message to the Client
+	 *
+	 * @param message the Message to send
+	 */
+	public void sendMessage(Message message) {
+		this.client.sendMessage(message);
 	}
 
 	/**
