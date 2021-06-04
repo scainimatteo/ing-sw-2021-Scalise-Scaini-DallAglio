@@ -179,7 +179,7 @@ public class Player extends Observable {
 	 * 
 	 * @return an hashmap with the sum of all the resources in the three available storages
 	 */
-	private HashMap <Resource, Integer> totalResources() {
+	public HashMap <Resource, Integer> totalResources() {
 		HashMap<Resource, Integer> total = new HashMap<Resource, Integer>();
 		total.put(Resource.COIN, strongbox.get(Resource.COIN));
 		total.put(Resource.SERVANT, strongbox.get(Resource.SERVANT));

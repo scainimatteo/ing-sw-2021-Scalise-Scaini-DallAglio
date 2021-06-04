@@ -232,7 +232,7 @@ public class Printer {
 		Cell[] track = player.getFaithTrack();
 		Cell marker = player.getMarker();
 		Tile[] vatican_reports = player.getReports();
-		int last_position = 20;
+		int last_position = track.length - 1;
 		boolean flag = false;
 		String top = "";
 		String mid = "";
@@ -379,6 +379,11 @@ public class Printer {
 
 	public static String printLeaderCards(SimplePlayer player, boolean print_deactivated) {
 		ArrayList<LeaderCard> deck = player.getDeck();
+
+		if (deck.size() == 0) {
+			return "All the Leader Cards were discarded";
+		}
+
 		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[deck.size()]);
 		
 		return printLeaderCardArray(leader_cards, print_deactivated);

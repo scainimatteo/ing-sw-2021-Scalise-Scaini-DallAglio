@@ -2,13 +2,17 @@ package it.polimi.ingsw.model.game;
 
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Arrays;
 import java.util.List;
 
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.LeaderCard;
 
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
 import it.polimi.ingsw.model.game.Market;
@@ -26,12 +30,14 @@ public class Game extends Observable {
 	private ArrayList<Player> players;
 	private Market market;
 	private DevelopmentCardsOnTable development_cards_on_table;
+	private HashMap<Player, Integer> victory_points;
 	private Turn turn;
 
 	public Game(ArrayList<Player> players, DevelopmentCard[] all_development_cards) {
 		this.players = players;
 		this.market = new Market();
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
+		this.victory_points = new HashMap<Player, Integer>();
 		this.turn = new Turn(this.players.get(0));
 	}
 
@@ -116,6 +122,63 @@ public class Game extends Observable {
 		}
 	}
 
-	// TODO
-	public void endGame(){}
+	/**
+	 * Calculate the total sum of victory points then send the rankings
+	 */
+	public void endGame(){
+		countVictoryPoints();
+
+		// create a new Hashmap using the nicknames instead of the Players
+		HashMap<String, Integer> rank = new HashMap<String, Integer>();
+		for (Player p: this.victory_points.keySet()) {
+			rank.put(p.getNickname(), this.victory_points.get(p));
+		}
+		notify(new EndGameMessage(rank));
+	}
+
+	/**
+	 * Adds the total victory points of the players and stores them in the victory_points HashMap
+	 */
+	private void countVictoryPoints() {
+		for (Player p: this.players) {
+			this.victory_points.put(p, 0);
+
+			// DEVCARDSLOTS
+			Iterator<DevelopmentCard> slots_iterator = p.getDevCardIterator();
+			while (slots_iterator.hasNext()) {
+				DevelopmentCard card = slots_iterator.next();
+				addPoints(p, card.getPoints());
+			}
+
+			// FAITHTRACK
+			addPoints(p, p.getFaithTrack().getMarkerVictoryPoints());
+
+			// VATICAN REPORTS
+			addPoints(p, p.getFaithTrack().getVaticanReportsPoints());
+
+			// LEADERCARDS
+			for (LeaderCard c: p.getDeck()) {
+				addPoints(p, c.getPoints());
+			}
+
+			// RESOURCES
+			int number_of_resources = 0;
+			HashMap<Resource, Integer> total_resources = p.totalResources();
+			for (Resource r: total_resources.keySet()) {
+				number_of_resources += total_resources.get(r);
+			}
+			addPoints(p, Math.floorDiv(number_of_resources, 5));
+		}
+	}
+
+	/**
+	 * Add points to the victory_points HashMap
+	 *
+	 * @param player the Player that made the points
+	 * @param points the points to add
+	 */
+	private void addPoints(Player player, int points) {
+		int points_now = this.victory_points.get(player);
+		this.victory_points.put(player, points_now + points);
+	}
 }

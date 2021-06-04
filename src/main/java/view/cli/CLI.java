@@ -106,5 +106,6 @@ public class CLI extends View {
 			System.out.println(nickname + ": " + rank.get(nickname) + " points");
 		}
 		System.out.println("Thanks for playing with us!");
+		System.exit(0);
 	}
 }

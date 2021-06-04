@@ -99,6 +99,11 @@ public class GUI extends View implements GameStartObserver {
 		}
 	}
 
+	@Override
+	public void handleEndGame(EndGameMessage end_game_message) {
+		return;
+	}
+
 	/**
 	 * Method from GameStartObserver, gets called when the game is started
 	 */
@@ -107,11 +112,6 @@ public class GUI extends View implements GameStartObserver {
 		Platform.runLater(() -> {
 			this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
 		});
-	}
-
-	@Override
-	public void handleEndGame(EndGameMessage end_game_message) {
-		return;
 	}
 
 	public SimpleGame getSimpleGame() {
