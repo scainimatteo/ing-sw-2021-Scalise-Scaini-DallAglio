@@ -24,6 +24,7 @@ import it.polimi.ingsw.util.GameStartObserver;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.gui.scene.InitialScene;
+import it.polimi.ingsw.view.gui.scene.FinalScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
 
@@ -101,7 +102,10 @@ public class GUI extends View implements GameStartObserver {
 
 	@Override
 	public void handleEndGame(EndGameMessage end_game_message) {
-		return;
+		Platform.runLater(() -> {
+			FinalScene final_scene = new FinalScene(end_game_message.rank);
+			final_scene.changeScene("/fxml/finalscene.fxml");
+		});
 	}
 
 	/**
