@@ -10,10 +10,12 @@ import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.util.GameStartObservable;
+
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
-public abstract class View {
+public abstract class View extends GameStartObservable {
 	protected SimpleGame simple_game;
 	protected ArrayList<SimplePlayer> simple_players;
 	protected Turn turn;
@@ -59,6 +61,10 @@ public abstract class View {
 		} else if (view_update.simple_player != null) {
 			updateSimplePlayer(view_update.simple_player);
 		} else if (view_update.turn != null) {
+			// if the turn was null, this is the first Turn and the game is started
+			if (this.turn == null) {
+				notifyGameStarted();
+			}
 			this.turn = view_update.turn;
 		}
 	}

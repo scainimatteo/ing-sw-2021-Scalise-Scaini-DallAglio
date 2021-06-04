@@ -18,13 +18,15 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.util.GameStartObserver;
+
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.gui.scene.InitialScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
 
-public class GUI extends View {
+public class GUI extends View implements GameStartObserver {
 	private App app;
 	private InitialScene initial_scene;
 	private Client client;
@@ -36,6 +38,7 @@ public class GUI extends View {
 	@Override
 	public void startView(Client client) {
 		this.client = client;
+		this.addObserver(this);
 		App.setModel(this);
 		new Thread(() -> {
 			App.main(null);
@@ -88,13 +91,21 @@ public class GUI extends View {
 					this.client.sendMessage(new InitializingMessage(String.valueOf(this.initial_scene.getNumPlayers())));
 					break;
 				case START_MATCH:
-					Platform.runLater(() -> {
-						this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
-					});
+					System.out.println("Start");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Method from GameStartObserver, gets called when the game is started
+	 */
+	@Override
+	public void gameStarted() {
+		Platform.runLater(() -> {
+			this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
+		});
 	}
 
 	public SimpleGame getSimpleGame() {
