@@ -165,7 +165,7 @@ public class Game extends Observable {
 			addPoints(p, p.getFaithTrack().getVaticanReportsPoints());
 
 			// LEADERCARDS
-			for (LeaderCard c: p.getDeck()) {
+			for (LeaderCard c: p.getLeaderCards()) {
 				addPoints(p, c.getPoints());
 			}
 
