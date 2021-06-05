@@ -104,7 +104,7 @@ public class GUI extends View implements GameStartObserver {
 	@Override
 	public void gameStarted() {
 		Platform.runLater(() -> {
-			this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
+			this.initial_scene.changeScene("/fxml/setupscene.fxml");
 		});
 	}
 

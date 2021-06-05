@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,45 +14,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.scene.SetupScene">
    <children>
-      <ImageView fx:id="select_background" fitHeight="720.0" fitWidth="1080.0" opacity="0.8" pickOnBounds="true">
+      <ImageView fx:id="select_background" fitHeight="768.0" fitWidth="1366.0" opacity="0.8" pickOnBounds="true">
          <image>
             <Image url="@../images/board/background_board.png" />
          </image>
       </ImageView>
-      <Pane fx:id="select_card_pane" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <Pane fx:id="select_card_pane" prefHeight="200.0" prefWidth="200.0">
          <children>
             <HBox fx:id="leader_card_grid" alignment="CENTER" layoutY="167.0" prefHeight="419.0" prefWidth="1080.0" spacing="20.0">
                <children>
-                  <ImageView id="leader_card_2" fx:id="card1" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/leadercards/front/leader_card_1.png" />
-                     </image>
+                  <ImageView fx:id="leader_card_1" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard1Click" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView id="leader_card_2" fx:id="card2" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/leadercards/front/leader_card_1.png" />
-                     </image>
+                  <ImageView fx:id="leader_card_2" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard2Click" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView id="leader_card_3" fx:id="card3" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/leadercards/front/leader_card_1.png" />
-                     </image>
+                  <ImageView fx:id="leader_card_3" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard3Click" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView id="leader_card_4" fx:id="card4" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/leadercards/front/leader_card_1.png" />
-                     </image>
+                  <ImageView fx:id="leader_card_4" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard4Click" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -70,7 +57,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="select_resource_id" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <Pane fx:id="select_resource_pane" prefHeight="200.0" prefWidth="200.0">
          <children>
             <ImageView id="resource_grid_background" fitHeight="433.0" fitWidth="682.0" layoutX="199.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -92,43 +79,43 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView id="coin1" fx:id="coin1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
-                     <image>
+				<ImageView id="coin1" fx:id="coin1" fitHeight="150.0" fitWidth="80.0" onDragDetected="#handleDragDetected" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+					<image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
                   <ImageView id="coin2" fx:id="coin2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
                   <ImageView id="servant1" fx:id="servant1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
                   <ImageView id="servant2" fx:id="servant2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
                   <ImageView id="shield1" fx:id="shield1" fitHeight="150.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
                   <ImageView id="shield2" fx:id="shield2" fitHeight="150.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
                   <ImageView id="stone1" fx:id="stone1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
                   </ImageView>
                   <ImageView id="stone2" fx:id="stone2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
-                     <image>
+					<image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
                   </ImageView>
@@ -142,42 +129,24 @@
             <HBox id="warehouse_top" fx:id="warehouse_top" alignment="CENTER" layoutX="488.0" layoutY="304.0" prefHeight="100.0" prefWidth="106.0">
                <children>
                   <ImageView id="top1" fx:id="top1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/coin.png" />
-                     </image>
                   </ImageView>
                </children>
             </HBox>
             <HBox id="warehouse_bottom" fx:id="warehouse_middle" alignment="CENTER" layoutX="446.0" layoutY="410.0" prefHeight="100.0" prefWidth="189.0">
                <children>
                   <ImageView id="middle1" fx:id="middle1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/coin.png" />
-                     </image>
                   </ImageView>
                   <ImageView id="middle2" fx:id="middle2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/coin.png" />
-                     </image>
                   </ImageView>
                </children>
             </HBox>
             <HBox fx:id="warehouse_bottom" alignment="CENTER" layoutX="418.0" layoutY="520.0" prefHeight="100.0" prefWidth="196.0">
                <children>
                   <ImageView id="bottom1" fx:id="bottom1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/coin.png" />
-                     </image>
                   </ImageView>
                   <ImageView id="bottom2" fx:id="bottom2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/coin.png" />
-                     </image>
                   </ImageView>
                   <ImageView id="bottom3" fx:id="bottom3" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/coin.png" />
-                     </image>
                   </ImageView>
                </children>
             </HBox>
@@ -193,7 +162,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane id="waiting pane" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <Pane fx:id="waiting_pane">
          <children>
             <Text layoutX="295.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players..." textAlignment="CENTER" wrappingWidth="489.7080078125">
                <font>

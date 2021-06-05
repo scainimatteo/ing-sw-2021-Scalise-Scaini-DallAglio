@@ -2,7 +2,6 @@ package it.polimi.ingsw.view.gui.scene;
 
 import it.polimi.ingsw.view.gui.App;
 
-import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 
 import it.polimi.ingsw.model.card.LeaderCard;
@@ -13,43 +12,40 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.TransferMode;
 
 import java.util.ResourceBundle;
 import java.util.ArrayList;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
-public class LeaderCardSelectorScene extends SceneController implements Initializable{
+public class SetupScene extends SceneController implements Initializable{
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
 	double opacity_percent = 0.5;
 	SimplePlayer player;
 
-	@FXML
-	StackPane leader_stack_pane;
+	@FXML private Pane select_card_pane;
+	@FXML private Pane select_resource_pane;
+	@FXML private Pane waiting_pane;
 
-	@FXML
-	ImageView leader_card_1;
-	@FXML
-	ImageView leader_card_2;
-	@FXML
-	ImageView leader_card_3;
-	@FXML
-	ImageView leader_card_4;
+	@FXML private ImageView leader_card_1;
+	@FXML private ImageView leader_card_2;
+	@FXML private ImageView leader_card_3;
+	@FXML private ImageView leader_card_4;
 
-	@FXML
-	Image leader_card_image_1;
-	@FXML
-	Image leader_card_image_2;
-	@FXML
-	Image leader_card_image_3;
-	@FXML
-	Image leader_card_image_4;
+	@FXML private Image leader_card_image_1;
+	@FXML private Image leader_card_image_2;
+	@FXML private Image leader_card_image_3;
+	@FXML private Image leader_card_image_4;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
 		this.player = App.getMyPlayer();
 
-		System.out.println(getClass().getResource(player.getLeaderCards().get(0).getFrontPath()));
+		leader_card_image_1 = new Image(getClass().getResource(player.getLeaderCards().get(0).getFrontPath()).toString());
 		leader_card_image_2 = new Image(getClass().getResource(player.getLeaderCards().get(1).getFrontPath()).toString());
 		leader_card_image_3 = new Image(getClass().getResource(player.getLeaderCards().get(2).getFrontPath()).toString());
 		leader_card_image_4 = new Image(getClass().getResource(player.getLeaderCards().get(3).getFrontPath()).toString());
@@ -59,11 +55,14 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 		leader_card_3.setImage(leader_card_image_3);
 		leader_card_4.setImage(leader_card_image_4);
 
-		hideNode(leader_stack_pane);
+		showNode(select_card_pane);
+		hideNode(select_resource_pane);
+		hideNode(waiting_pane);
 	}
 
 	public void leaderCard1Click(){
-		to_delete.add(player.getLeaderCards().get(1));
+		to_delete.add(player.getLeaderCards().get(0));
+		leader_card_1.setDisable(true);
 		leader_card_1.setOpacity(opacity_percent);
 
 		if (checkLeader()){
@@ -72,7 +71,8 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 	}
 
 	public void leaderCard2Click(){
-		to_delete.add(player.getLeaderCards().get(2));
+		to_delete.add(player.getLeaderCards().get(1));
+		leader_card_2.setDisable(true);
 		leader_card_2.setOpacity(opacity_percent);
 
 		if (checkLeader()){
@@ -81,7 +81,8 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 	}
 
 	public void leaderCard3Click(){
-		to_delete.add(player.getLeaderCards().get(3));
+		to_delete.add(player.getLeaderCards().get(2));
+		leader_card_3.setDisable(true);
 		leader_card_3.setOpacity(opacity_percent);
 
 		if (checkLeader()){
@@ -90,7 +91,8 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 	}
 
 	public void leaderCard4Click(){
-		to_delete.add(player.getLeaderCards().get(4));
+		to_delete.add(player.getLeaderCards().get(3));
+		leader_card_4.setDisable(true);
 		leader_card_4.setOpacity(opacity_percent);
 
 		if (checkLeader()){
@@ -111,8 +113,21 @@ public class LeaderCardSelectorScene extends SceneController implements Initiali
 		message = new DiscardLeaderMessage(to_delete.get(1));
 		App.sendMessage(message);
 		
-		hideNode(leader_stack_pane);
+		hideNode(select_card_pane);
+		showNode(select_resource_pane);
+	}
 
-		// resource_choice_scene.setVisible(true);
+	public void handleDragDetected(MouseEvent event) {
+		/* drag was detected, start a drag-and-drop gesture*/
+        /* allow any transfer mode */
+		ImageView source = (ImageView) event.getSource();
+        Dragboard db = source.startDragAndDrop(TransferMode.ANY);
+        
+        /* Put a string on a dragboard */
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(source.getImage());
+        db.setContent(content);
+        
+        event.consume();
 	}
 }
