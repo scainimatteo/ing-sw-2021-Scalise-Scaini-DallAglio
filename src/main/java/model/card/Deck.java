@@ -96,4 +96,15 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 			Collections.shuffle (structure);
 		}
 	}
+
+	/**
+	 * Convert the Deck in an ArrayList, reversed
+	 *
+	 * @return the Deck as an ArrayList, reversed
+	 */
+	public ArrayList<E> toArrayList() {
+		ArrayList<E> structure_copy = new ArrayList<E>(this.structure);
+		Collections.reverse(structure_copy);
+		return structure_copy;
+	}
 }

@@ -23,10 +23,10 @@ import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
 
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
@@ -52,34 +52,22 @@ public class Player extends Observable {
 		return this.nickname;
 	}
 
+	/**
+	 * Send a ViewUpdate with the current Player
+	 */
 	public void notifyPlayer() {
 		notify(new ViewUpdate(this.simplify()));
 	}
 
+	/**
+	 * Simplify the Player to send it to the Client
+	 *
+	 * @return the SimplePlayer used to represent this Player
+	 */
 	private SimplePlayer simplify() {
-		DevelopmentCard[] first_column = new DevelopmentCard[3];
-		Iterator<DevelopmentCard> iterator = this.development_card_slots.getDeck(0, 0).iterator();
-		int i = 0;
-		while (iterator.hasNext()){
-			first_column[i] = iterator.next();
-			i++;
-		}
-
-		DevelopmentCard[] second_column = new DevelopmentCard[3];
-		iterator = this.development_card_slots.getDeck(0, 1).iterator();
-		i = 0;
-		while (iterator.hasNext()){
-			second_column[i] = iterator.next();
-			i++;
-		}
-
-		DevelopmentCard[] third_column = new DevelopmentCard[3];
-		iterator = this.development_card_slots.getDeck(0, 2).iterator();
-		i = 0;
-		while (iterator.hasNext()){
-			third_column[i] = iterator.next();
-			i++;
-		}
+		ArrayList<DevelopmentCard> first_column = this.development_card_slots.getDeckAsArrayList(0, 0);
+		ArrayList<DevelopmentCard> second_column = this.development_card_slots.getDeckAsArrayList(0, 1);
+		ArrayList<DevelopmentCard> third_column = this.development_card_slots.getDeckAsArrayList(0, 2);
 
 		return new SimplePlayer(this.nickname, this.track.getCellTrack(), this.track.getMarker(), this.track.getTiles(), new SimpleWarehouse(this.warehouse.getTopResource(), this.warehouse.getMiddleResources(), this.warehouse.getBottomResources()), this.strongbox.getStorage(), this.leader_cards_deck, new SimpleDevelopmentCardSlot(first_column, second_column, third_column));
 	}
@@ -87,8 +75,7 @@ public class Player extends Observable {
 	/**
 	 * LEADER CARD METHODS
 	 */
-	
-	public ArrayList<LeaderCard> getDeck(){
+	public ArrayList<LeaderCard> getLeaderCards(){
 		return this.leader_cards_deck;
 	}
 
@@ -98,65 +85,12 @@ public class Player extends Observable {
 	}
 
 	public boolean isActivable(LeaderCard card){
-		if (card instanceof LeaderCardLevelCost){
-			return this.isActivable((LeaderCardLevelCost) card);
-		} else if (card instanceof LeaderCardResourcesCost){
-			return this.isActivable((LeaderCardResourcesCost) card);
-		}
-		return false;
-	}
-
-	/**
-	 * @param card is the LeaderCard to be checked
-	 * @return true if the card can be activated
-	 */
-	//TODO: .equals does not work. Always returns false. Rewrite using CardLevel methods
-	public boolean isActivable(LeaderCardLevelCost card){
-		CardLevel[] req = card.getRequirements();
-		Iterator<DevelopmentCard> iterator = this.development_card_slots.getIterator();
-		boolean to_return = true;
-		CardLevel tmp;
-
-		while (iterator.hasNext()){
-			tmp = iterator.next().getCardLevel();
-
-			for (int i = 0; i < req.length; i ++){
-				if (req[i].equals(tmp)){
-					req[i] = null;
-					break;
-				} 
-			}
-		}
-
-		for (int j = 0; j < req.length; j ++){
-			if (req[j] != null){
-				to_return = false;
-				break;
-			} 
-		}
-
-		return to_return;
-	}
-
-	/**
-	 * @param card is the LeaderCard to be checked
-	 * @return true if the card can be activated
-	 */
-	public boolean isActivable(LeaderCardResourcesCost card){
-		ArrayList<Resource> to_check = card.getRequirements();
-		Resource[] all_resources = {Resource.STONE, Resource.COIN, Resource.SERVANT, Resource.SHIELD};
-		HashMap <Resource, Integer> total = totalResources();
-		for (Resource x : all_resources){
-			if (total.get(x) < (int) to_check.stream().filter(y->y.equals(x)).count()) {
-				return false;
-			}
-		}
-		return true;
+		return card.isActivable(this);
 	}
 
 	public void activateLeader(LeaderCard card){
 		for (LeaderCard x : leader_cards_deck){
-			if (x.equals(card)){
+			if (x.getId() == card.getId()){
 				x.activateLeaderCard();
 				this.notifyPlayer();
 				return;
@@ -288,9 +222,10 @@ public class Player extends Observable {
 			single_type = (ArrayList<Resource>) res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
 			for (LeaderCard x : leader_cards_deck){
 				ability = x.getAbility();
-				if (ability.checkAbility(test)) {
+				if (x.isActive() && ability.checkAbility(test)) {
 					if (((ExtraSpaceAbility) ability).canBeStoredExtra(single_type)) {
 						((ExtraSpaceAbility) ability).storeExtra(single_type);
+						this.notifyPlayer();
 					}
 				}
 			}
@@ -306,7 +241,7 @@ public class Player extends Observable {
 			single_type = (ArrayList<Resource>)res.stream().filter(x->x.equals(r)).collect(Collectors.toList());
 			for (LeaderCard x : leader_cards_deck){
 				ability = x.getAbility();
-				if (ability.checkAbility(test)) {
+				if (x.isActive() && ability.checkAbility(test)) {
 					if (((ExtraSpaceAbility) ability).isContainedExtra(single_type)) {
 						((ExtraSpaceAbility) ability).getFromExtra(single_type);
 					}
@@ -352,6 +287,8 @@ public class Player extends Observable {
 		return this.development_card_slots.getTopCards();
 	}
 
+	//TODO: change this in getSlot
+	//TODO: why does this return an array?
 	public DevelopmentCard[] getCard(int position){
 		return this.development_card_slots.getCard(position);
 	}

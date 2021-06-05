@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.card.Deck;
 import it.polimi.ingsw.view.cli.Printer;
 
 import java.lang.IllegalArgumentException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DevelopmentCardsSlots {
@@ -20,23 +21,29 @@ public class DevelopmentCardsSlots {
 	}
 
 	/**
-	 * @param card is the card that needs to be added to the slots
-	 * @param position is the deck where the card will be added
+	 * @param card is the DevelopmentCard that needs to be added to the slots
+	 * @param position the Deck where the DevelopmentCard will be added
 	 */
 	public boolean fitsInSlot(DevelopmentCard card, int pos){
 		if (slots.peekTop(0, pos) == null) {
-			return true;
+			return card.getCardLevel().getLevel() == 1;
 		}
 
-		return pos <= 3 && pos >= 1 && (card.getCardLevel().getLevel() - slots.peekTop(0, pos).getCardLevel().getLevel() == 1);
+		return pos <= 2 && pos >= 0 && card.getCardLevel().isPlaceable(slots.peekTop(0, pos).getCardLevel());
 	}
 
+	/**
+	 * Add a DevelopmentCard to the slot
+	 *
+	 * @param card the DevelopmentCard to add
+	 * @param pos the slot to add the DevelopmentCard to
+	 */
 	public void buyCard(DevelopmentCard card, int pos) {
 		this.slots.addElement(card, 0, pos);
 	}
 
-	public Deck<DevelopmentCard> getDeck(int row, int column){
-		return this.slots.getDeck(row, column);
+	public ArrayList<DevelopmentCard> getDeckAsArrayList(int row, int column){
+		return this.slots.getDeckAsArrayList(row, column);
 	}
 
 	/**

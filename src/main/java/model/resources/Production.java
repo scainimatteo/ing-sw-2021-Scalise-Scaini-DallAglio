@@ -55,7 +55,12 @@ public class Production implements ProductionInterface, Serializable {
 		return to_return;
 	}
 	
-	public String[] productionToText(){
+	/**
+	 * Used to print the production in the DevelopmentCards and LeaderCards
+	 *
+	 * @return an array of 5 Strings representing the Production
+	 */
+	public String[] productionToString(){
 		String[] to_return = new String[5];
 
 		HashMap<Resource, Integer> required = this.numFromArraylist(required_resources);

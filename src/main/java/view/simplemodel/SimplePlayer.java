@@ -49,7 +49,7 @@ public class SimplePlayer implements Serializable {
 		return this.vatican_reports;
 	}
 
-	public ArrayList<LeaderCard> getDeck(){
+	public ArrayList<LeaderCard> getLeaderCards(){
 		return this.leader_cards_deck;
 	}
 
@@ -77,19 +77,19 @@ public class SimplePlayer implements Serializable {
 		return this.development_card_slots;
 	}
 	
-	public DevelopmentCard[] getFirstColumn(){
+	public ArrayList<DevelopmentCard> getFirstColumn(){
 		return this.development_card_slots.getFirstColumn();
 	}
 
-	public DevelopmentCard[] getSecondColumn(){
+	public ArrayList<DevelopmentCard> getSecondColumn(){
 		return this.development_card_slots.getSecondColumn();
 	}
 
-	public DevelopmentCard[] getThirdColumn(){
+	public ArrayList<DevelopmentCard> getThirdColumn(){
 		return this.development_card_slots.getThirdColumn();
 	}
 
-	public DevelopmentCard[] getTopCards(){
+	public ArrayList<DevelopmentCard> getTopCards(){
 		return this.development_card_slots.getTopCards();
 	}
 

@@ -3,15 +3,18 @@ package it.polimi.ingsw.model.card;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 
+import java.util.stream.Collectors;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import java.io.Serializable;
 
 public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 	private static final long serialVersionUID = 34732L;
-	private CardLevel[] requirements;
+	private ArrayList<CardLevel> requirements;
 	
-	public LeaderCardLevelCost (int points, LeaderAbility ability, CardLevel[] requirements, int id, String front_path) {
+	public LeaderCardLevelCost (int points, LeaderAbility ability, ArrayList<CardLevel> requirements, int id, String front_path) {
 		this.victory_points = points;
 		this.ability = ability;
 		this.activated = false;
@@ -20,38 +23,29 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 		this.front_path = front_path;
 	}
 
-	public CardLevel[] getRequirements() {
-		CardLevel[] to_return = this.requirements.clone();
-	return to_return;
+	/**
+	 * For testing purpose only
+	 */
+	public ArrayList<CardLevel> getRequirements() {
+		return this.requirements;
 	}
 
+	/**
+	 * The LeaderCardLevelCost is activable if the player has bought the correct DevelopmentCards
+	 */
+	@Override
 	public boolean isActivable(Player player){
-		CardLevel[] req = this.getRequirements();
+		ArrayList<CardLevel> req = (ArrayList<CardLevel>) this.requirements.clone();
 		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
 		boolean to_return = true;
-		CardLevel tmp;
 
+		ArrayList<CardLevel> player_card_levels = new ArrayList<CardLevel>();
 		while (iterator.hasNext()){
-			tmp = iterator.next().getCardLevel();
-
-			for (int i = 0; i < req.length; i ++){
-				if (req[i].equals(tmp)){
-					req[i] = null;
-					break;
-				} 
-			}
+			player_card_levels.add(iterator.next().getCardLevel());
 		}
-
-		for (int j = 0; j < req.length; j ++){
-			if (req[j] != null){
-				to_return = false;
-				break;
-			} 
-		}
-
-		return to_return;
+		List<CardLevel> diff = req.stream().filter(e -> !player_card_levels.contains(e)).collect(Collectors.toList());
+		return diff.isEmpty();
 	}
-
 
 	@Override
 	protected String printTop() {
@@ -69,19 +63,19 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 			switch (card_level.getColor()) {
 				case GREEN:
 					green++;
-					greenstring = card_level.toText();
+					greenstring = card_level.toString();
 					break;
 				case BLUE:
 					blue++;
-					bluestring = card_level.toText();
+					bluestring = card_level.toString();
 					break;
 				case YELLOW:
 					yellow++;
-					yellowstring = card_level.toText();
+					yellowstring = card_level.toString();
 					break;
 				case PURPLE:
 					purple++;
-					purplestring = card_level.toText();
+					purplestring = card_level.toString();
 			}
 		}
 

@@ -32,7 +32,7 @@ public class WhiteMarblesAbility extends LeaderAbility {
 	}
 
 	@Override
-	public String printText(){
+	public String toString(){
 		return "|                 |\n|                 |\n|                 |\n" + "|     " + resource_type.printNullMarble() + " ==> " + resource_type.printMarble() + "     |\n|                 |\n|                 |\n|                 |\n";
 	}
 }
