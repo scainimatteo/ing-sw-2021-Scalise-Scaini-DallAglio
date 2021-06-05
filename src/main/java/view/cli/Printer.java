@@ -212,7 +212,7 @@ public class Printer {
 		/**
 		 * production
 		 */
-		String[] production_string = production.productionToText();
+		String[] production_string = production.productionToString();
 		String prod1 = "| " + production_string[0] + "  |\n";
 		String prod2 = "| " + production_string[1] + "  |\n";
 		String prod3 = "| " + production_string[2] + "  |\n";
@@ -371,7 +371,7 @@ public class Printer {
 		} 
 
 		if (card.isActive() || print_deactivated ){
-			return card.printText();
+			return card.toString();
 		} else {
 			return printNullCard();
 		}

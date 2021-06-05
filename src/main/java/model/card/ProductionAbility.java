@@ -53,8 +53,9 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		return this.production.activateProduction();
 	}
 
-	public String printText(){
-		String[] production_string = production.productionToText();
+	@Override
+	public String toString(){
+		String[] production_string = production.productionToString();
 		String prod1 = "| " + production_string[0] + "  |\n";
 		String prod2 = "| " + production_string[1] + "  |\n";
 		String prod3 = "| " + production_string[2] + "  |\n";

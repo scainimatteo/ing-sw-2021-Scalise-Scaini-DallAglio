@@ -77,8 +77,8 @@ public class CardLevel implements Serializable {
 		return Integer.parseInt(this.level + "" + this.color.ordinal());
 	}
 
-	//TODO: rename toString?
-	public String toText(){
+	@Override
+	public String toString(){
 		String lvl = "";
 		char ball = '\u25EF';
 		for (int i = 0; i < this.level; i++){

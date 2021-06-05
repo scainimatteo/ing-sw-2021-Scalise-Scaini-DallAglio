@@ -26,5 +26,5 @@ public abstract class LeaderAbility implements Serializable {
 		return false;
 	}
 
-	public abstract String printText();
+	public abstract String toString();
 }

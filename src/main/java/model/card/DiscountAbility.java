@@ -31,7 +31,8 @@ public class DiscountAbility extends LeaderAbility {
 		return true;
 	}
 
-	public String printText(){
+	@Override
+	public String toString(){
 		return "|                 |\n|                 |\n|                 |\n" + "|     -1 " + discounted_resource.getAbbreviation() + "       |\n|                 |\n|                 |\n|                 |\n";
 	}
 }

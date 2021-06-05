@@ -110,7 +110,8 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		return true;
 	}
 
-	public String printText(){
+	@Override
+	public String toString(){
 		String string = "| " + resource_type.getAbbreviation() + " |            |\n|----·            |\n|                 |\n|  ·----· ·----·  |\n";
 		if (storage.size() == 0){
 			string +="|  |    | |    |  |\n";

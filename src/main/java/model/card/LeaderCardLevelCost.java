@@ -62,19 +62,19 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 			switch (card_level.getColor()) {
 				case GREEN:
 					green++;
-					greenstring = card_level.toText();
+					greenstring = card_level.toString();
 					break;
 				case BLUE:
 					blue++;
-					bluestring = card_level.toText();
+					bluestring = card_level.toString();
 					break;
 				case YELLOW:
 					yellow++;
-					yellowstring = card_level.toText();
+					yellowstring = card_level.toString();
 					break;
 				case PURPLE:
 					purple++;
-					purplestring = card_level.toText();
+					purplestring = card_level.toString();
 			}
 		}
 

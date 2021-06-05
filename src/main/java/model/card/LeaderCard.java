@@ -38,22 +38,21 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 	public abstract boolean isActivable(Player player);
 
 	/**
-	 * Print the cost of the LeaderCard
+	 * Print the cost of the LeaderCard, each type of LeaderCard has its own
 	 */
 	protected abstract String printTop();
 
 	/**
-	 * Print the bottom of the LeaderCard, using the methods of the LeaderAbility
+	 * Print the bottom of the LeaderCard using the methods of the LeaderAbility
 	 */
 	protected String printBottom(){
-		return ability.printText();
+		return ability.toString();
 	}
 
 	/**
 	 * @return the String representation of the LeaderCard
 	 */
-	// TODO: change to toString?
-	public String printText(){
+	public String toString(){
 		return "/-----------------\\\n" + printTop() + "|-------(" + String.valueOf(this.victory_points) + ")-------|\n" + printBottom() + "\\-----------------/\n";
 	}
 }
