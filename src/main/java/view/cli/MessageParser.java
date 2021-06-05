@@ -168,7 +168,7 @@ public class MessageParser {
 		ArrayList<Resource> cost = new ArrayList<Resource>();
 		cost.add(Resource.valueOf(inputs[i + 2].toUpperCase()));
 
-		ArrayList<LeaderCard> player_deck = player.getDeck();
+		ArrayList<LeaderCard> player_deck = player.getLeaderCards();
 		LeaderCard leader_card = player_deck.get(index - 1);
 
 		if (!leader_card.isActive()) {
@@ -299,7 +299,7 @@ public class MessageParser {
 	private static Message parseDiscardLeaderCardMessage(String[] inputs, SimplePlayer player) throws IllegalArgumentException {
 		try {
 			int index = Integer.parseInt(inputs[2]);
-			ArrayList<LeaderCard> player_deck = player.getDeck();
+			ArrayList<LeaderCard> player_deck = player.getLeaderCards();
 			LeaderCard leader_card = player_deck.get(index - 1);
 			return new DiscardLeaderMessage(leader_card);
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
@@ -314,7 +314,7 @@ public class MessageParser {
 				throw new IllegalArgumentException();
 			}
 			int index = Integer.parseInt(inputs[2]);
-			ArrayList<LeaderCard> player_deck = player.getDeck();
+			ArrayList<LeaderCard> player_deck = player.getLeaderCards();
 			LeaderCard leader_card = player_deck.get(index - 1);
 			return new ActivateLeaderMessage(leader_card);
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {

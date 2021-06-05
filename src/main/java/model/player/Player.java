@@ -75,8 +75,7 @@ public class Player extends Observable {
 	/**
 	 * LEADER CARD METHODS
 	 */
-	//TODO: change this name
-	public ArrayList<LeaderCard> getDeck(){
+	public ArrayList<LeaderCard> getLeaderCards(){
 		return this.leader_cards_deck;
 	}
 

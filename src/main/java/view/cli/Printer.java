@@ -378,7 +378,7 @@ public class Printer {
 	}
 
 	public static String printLeaderCards(SimplePlayer player, boolean print_deactivated) {
-		ArrayList<LeaderCard> deck = player.getDeck();
+		ArrayList<LeaderCard> deck = player.getLeaderCards();
 		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[deck.size()]);
 		
 		return printLeaderCardArray(leader_cards, print_deactivated);

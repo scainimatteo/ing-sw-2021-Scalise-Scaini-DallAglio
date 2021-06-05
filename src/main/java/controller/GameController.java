@@ -67,7 +67,7 @@ public class GameController implements Runnable, Controller {
 	 */
 	private boolean checkCardNumber(){
 		for (Player p : game.getPlayers()){
-			if (p.getDeck().size() > 2) {
+			if (p.getLeaderCards().size() > 2) {
 				return false;
 			}
 		}
@@ -189,7 +189,7 @@ public class GameController implements Runnable, Controller {
 	 */
 	public void handleDiscardLeader(Player player, LeaderCard card) {
 		if (!game.getTurn().isInitialized()){
-			if	(player.getDeck().size() > 2) {
+			if	(player.getLeaderCards().size() > 2) {
 				player.discardLeader(card.getId());	
 				checkEndInitializing();
 			} else {handleError("You cannot discard any more cards");}
@@ -213,7 +213,7 @@ public class GameController implements Runnable, Controller {
 	private boolean checkCorrectBonus(Player player, ArrayList<Resource> bonus){
 		WhiteMarblesAbility test = new WhiteMarblesAbility(null);
 		ArrayList<Resource> allowed_bonus = new ArrayList<Resource>();
-		for (LeaderCard x : player.getDeck()){
+		for (LeaderCard x : player.getLeaderCards()){
 			LeaderAbility ability = x.getAbility();
 			if (ability.checkAbility(test)){
 				allowed_bonus.add(((WhiteMarblesAbility) ability).getResourceType());
@@ -302,7 +302,7 @@ public class GameController implements Runnable, Controller {
 	private ArrayList<Resource> applyDiscount(Player player, ArrayList<Resource> cost){
 		DiscountAbility test = new DiscountAbility(null);
 		ArrayList<Resource> discount = new ArrayList<Resource>();
-		for (LeaderCard x: player.getDeck()){
+		for (LeaderCard x: player.getLeaderCards()){
 			LeaderAbility ability = x.getAbility();
 			if (x.isActive() && ability.checkAbility(test)){
 				discount.add(((DiscountAbility) ability).getDiscountedResource());
@@ -437,7 +437,7 @@ public class GameController implements Runnable, Controller {
 			Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
 			for (Resource res : check){
 				exists = false;
-				for (LeaderCard l : player.getDeck()){
+				for (LeaderCard l : player.getLeaderCards()){
 					if (l.isActive()){ 
 						ability = l.getAbility();
 						if (ability.checkAbility(test)){
@@ -479,7 +479,6 @@ public class GameController implements Runnable, Controller {
 	 * @return true only if the amount of resources requested to be paid from each place is present in the corresponding place 
 	 */ 
 	private boolean isContained(Player player, Storage storage){
-		//TODO: fix the isContainedExtra function
 		return isContainedStrongbox(player,storage) && isContainedWarehouse(player, storage) && isContainedExtra(player, storage);
 	}
 	
@@ -531,7 +530,7 @@ public class GameController implements Runnable, Controller {
 		total.addAll(storage.getWarehouseBot());
 		total.addAll(storage.getExtraspace());
 		for (Resource res : check){
-			//TODO: temporary fix to remove null, they should have not been here
+			//TODO: temporary fix to remove null, they should have not been here - check if this has already been fixed
 			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x -> x != null).filter(x->x.equals(res)).count()){
 				return false;
 			}
@@ -556,7 +555,7 @@ public class GameController implements Runnable, Controller {
 			Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
 			for (Resource res : check){
 				exists = false;
-				for (LeaderCard l : player.getDeck()){
+				for (LeaderCard l : player.getLeaderCards()){
 					if (l.isActive()){ 
 						ability = l.getAbility();
 						if (ability.checkAbility(test)){
@@ -589,7 +588,6 @@ public class GameController implements Runnable, Controller {
 	 * @return true only if the amount of resources requested to be stored in each place can be stored in the corresponding place 
 	 */ 
 	private boolean canBeStored(Player player, Storage storage){
-		//TODO: fix the canBeStoredExtra function
 		return canBeStoredExtra(player, storage) && canBeStoredWarehouse(player, storage);
 	}
 

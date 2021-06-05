@@ -49,7 +49,7 @@ public class SimplePlayer implements Serializable {
 		return this.vatican_reports;
 	}
 
-	public ArrayList<LeaderCard> getDeck(){
+	public ArrayList<LeaderCard> getLeaderCards(){
 		return this.leader_cards_deck;
 	}
 
