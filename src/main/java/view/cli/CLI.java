@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import it.polimi.ingsw.model.resources.Resource;
@@ -16,6 +17,7 @@ import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.message.Message;
 
@@ -94,5 +96,16 @@ public class CLI extends View {
 		} else if (initializing_message.type == InitializingMessageType.NICKNAME) {
 			this.nickname_flag = true;
 		}
+	}
+
+	@Override
+	public void handleEndGame(EndGameMessage end_game_message) {
+		HashMap<String, Integer> rank = end_game_message.rank;
+		System.out.println("The game has ended! These are the rankings:");
+		for (String nickname: rank.keySet()) {
+			System.out.println(nickname + ": " + rank.get(nickname) + " points");
+		}
+		System.out.println("Thanks for playing with us!");
+		System.exit(0);
 	}
 }

@@ -40,14 +40,10 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws Exception{
 		SceneController.setStage(stage);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/initialscene.fxml"));
 		this.initial_scene = new InitialScene();
-		loader.setController(this.initial_scene);
+		this.initial_scene.changeScene("/fxml/initialscene.fxml");
 		gui.setApp(this);
-		Parent initial = loader.load();
 		stage.setTitle("Maestri del Rinascimento");
-		Scene scene = new Scene(initial, 300, 275);
-		stage.setScene(scene);
 		stage.show();
 	}
 

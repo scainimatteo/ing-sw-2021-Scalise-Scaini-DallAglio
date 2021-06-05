@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
-import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 
 import it.polimi.ingsw.server.ClientHandler;
 

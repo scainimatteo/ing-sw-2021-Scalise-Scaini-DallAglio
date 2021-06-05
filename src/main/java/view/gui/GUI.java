@@ -12,6 +12,7 @@ import it.polimi.ingsw.client.Client;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.message.InitializingMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.message.Message;
@@ -23,6 +24,7 @@ import it.polimi.ingsw.util.GameStartObserver;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.gui.scene.InitialScene;
+import it.polimi.ingsw.view.gui.scene.FinalScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
 
@@ -96,6 +98,14 @@ public class GUI extends View implements GameStartObserver {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void handleEndGame(EndGameMessage end_game_message) {
+		Platform.runLater(() -> {
+			FinalScene final_scene = new FinalScene(end_game_message.rank);
+			final_scene.changeScene("/fxml/finalscene.fxml");
+		});
 	}
 
 	/**

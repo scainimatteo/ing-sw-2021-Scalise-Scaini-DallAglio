@@ -34,7 +34,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 	}
 
 	public ArrayList<Resource> getCost(){
-		return (ArrayList<Resource>)this.cost.clone();
+		return this.cost;
 	}
 
 	public Production getProduction(){
@@ -55,20 +55,6 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 	
 	public void setProducedResources(ArrayList<Resource> new_resource) {
 		return;
-	}
-
-	/**
-	* applies a discount to the given card 
-	*
-	* @param discount is the discount to be applied
-	* @return a new card with discount applied
-	*/ 
-	public DevelopmentCard applyDiscount (ArrayList<Resource> discount){
-		ArrayList<Resource> temp = (ArrayList<Resource>) cost.clone();
-		for (Resource x : discount){
-			temp.remove(x);
-		}
-		return new DevelopmentCard (victory_points, production, temp, level, id, front_path);
 	}
 
 	public ArrayList<Resource> activateProduction(){

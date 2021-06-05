@@ -24,7 +24,6 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 
 	public void activateLeaderCard() {
 		this.activated = true;
-		return;	
 	}
 
 	public Object clone() {
@@ -37,15 +36,28 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 		return clone;
 	}
 
-	protected String printTop(){
-		return "";
-	}
+	/**
+	 * @param player the Player that wants to activate the LeaderCard
+	 * @return true if the LeaderCard is activable
+	 */
+	public abstract boolean isActivable(Player player);
 
+	/**
+	 * Print the cost of the LeaderCard, each type of LeaderCard has its own
+	 */
+	protected abstract String printTop();
+
+	/**
+	 * Print the bottom of the LeaderCard using the methods of the LeaderAbility
+	 */
 	protected String printBottom(){
-		return ability.printText();
+		return ability.toString();
 	}
 
-	public String printText(){
+	/**
+	 * @return the String representation of the LeaderCard
+	 */
+	public String toString(){
 		return "/-----------------\\\n" + printTop() + "|-------(" + String.valueOf(this.victory_points) + ")-------|\n" + printBottom() + "\\-----------------/\n";
 	}
 }

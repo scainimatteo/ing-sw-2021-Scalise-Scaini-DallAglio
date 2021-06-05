@@ -6,4 +6,5 @@ public abstract class ServerMessage implements Serializable {
 	protected static final long serialVersionUID = 11331L;
 	public boolean error = false;
 	public boolean initializing = false;
+	public boolean end_game = false;
 }

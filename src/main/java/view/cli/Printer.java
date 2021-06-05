@@ -212,7 +212,7 @@ public class Printer {
 		/**
 		 * production
 		 */
-		String[] production_string = production.productionToText();
+		String[] production_string = production.productionToString();
 		String prod1 = "| " + production_string[0] + "  |\n";
 		String prod2 = "| " + production_string[1] + "  |\n";
 		String prod3 = "| " + production_string[2] + "  |\n";
@@ -232,7 +232,7 @@ public class Printer {
 		Cell[] track = player.getFaithTrack();
 		Cell marker = player.getMarker();
 		Tile[] vatican_reports = player.getReports();
-		int last_position = 20;
+		int last_position = track.length - 1;
 		boolean flag = false;
 		String top = "";
 		String mid = "";
@@ -371,28 +371,33 @@ public class Printer {
 		} 
 
 		if (card.isActive() || print_deactivated ){
-			return card.printText();
+			return card.toString();
 		} else {
 			return printNullCard();
 		}
 	}
 
 	public static String printLeaderCards(SimplePlayer player, boolean print_deactivated) {
-		ArrayList<LeaderCard> deck = player.getDeck();
-		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[deck.size()]);
+		ArrayList<LeaderCard> leader_cards_list = player.getLeaderCards();
+
+		if (leader_cards_list.size() == 0) {
+			return "All the Leader Cards were discarded";
+		}
+
+		LeaderCard[] leader_cards = leader_cards_list.toArray(new LeaderCard[leader_cards_list.size()]);
 		
 		return printLeaderCardArray(leader_cards, print_deactivated);
 	}
 
 	public static String printDevelopmentCardsSlots(SimplePlayer player) {
-		return printDevelopmentCardsArray(player.getTopCards());
+		return printDevelopmentCardsArray(player.getTopCards().toArray(new DevelopmentCard[3]));
 	}
 
 	public static String printDevelopmentCardsSlots(SimplePlayer player, int slot) {
 		switch (slot){
-			case 1: return printDevelopmentCardsArray(player.getFirstColumn());
-			case 2: return printDevelopmentCardsArray(player.getSecondColumn());
-			case 3: return printDevelopmentCardsArray(player.getThirdColumn());
+			case 1: return printDevelopmentCardsArray(player.getFirstColumn().toArray(new DevelopmentCard[3]));
+			case 2: return printDevelopmentCardsArray(player.getSecondColumn().toArray(new DevelopmentCard[3]));
+			case 3: return printDevelopmentCardsArray(player.getThirdColumn().toArray(new DevelopmentCard[3]));
 			default: return "";
 		}
 	}

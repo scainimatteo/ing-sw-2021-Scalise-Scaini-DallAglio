@@ -95,6 +95,17 @@ public class Table<E> extends AbstractCollection<E> implements Serializable {
 	}
 
 	/**
+	 * Return the Deck as an ArrayList
+	 *
+	 * @param row the index of the row of the deck 
+	 * @param column the index of the column of the deck
+	 * @return the Deck as an ArrayList
+	 */
+	public ArrayList<E> getDeckAsArrayList(int row, int column) {
+		return this.getDeck(row, column).toArrayList();
+	}
+
+	/**
 	 * Iterator of the class
 	 *
 	 * Iterates between all the elements in the decks

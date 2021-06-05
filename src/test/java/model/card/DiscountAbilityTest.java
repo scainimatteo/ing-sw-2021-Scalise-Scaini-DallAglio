@@ -30,4 +30,11 @@ public class DiscountAbilityTest {
 	public void testException() {
 		assertThrows(IllegalArgumentException.class, ()-> {da = new DiscountAbility(except);});
 	}
+
+	@Test
+	public void checkAbilityTest() {
+		LeaderAbility test = new DiscountAbility(null);
+		DiscountAbility test2 = new DiscountAbility(null);
+		assertTrue(test.checkAbility(test2));
+	}
 }

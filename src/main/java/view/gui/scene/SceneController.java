@@ -45,6 +45,7 @@ public abstract class SceneController {
 	public void changeScene(String layout_fxml) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(layout_fxml));
+			loader.setController(this);
 			Parent layout = loader.load();
 			Scene new_scene = new Scene(layout, 300, 275);
 			SceneController.stage.setScene(new_scene);
