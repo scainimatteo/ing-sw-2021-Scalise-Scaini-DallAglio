@@ -60,6 +60,7 @@ public class SetupScene extends SceneController implements Initializable{
 		hideNode(waiting_pane);
 	}
 
+	@FXML
 	public void leaderCard1Click(){
 		to_delete.add(player.getLeaderCards().get(0));
 		leader_card_1.setDisable(true);
@@ -70,6 +71,7 @@ public class SetupScene extends SceneController implements Initializable{
 		} 
 	}
 
+	@FXML
 	public void leaderCard2Click(){
 		to_delete.add(player.getLeaderCards().get(1));
 		leader_card_2.setDisable(true);
@@ -80,6 +82,7 @@ public class SetupScene extends SceneController implements Initializable{
 		} 
 	}
 
+	@FXML
 	public void leaderCard3Click(){
 		to_delete.add(player.getLeaderCards().get(2));
 		leader_card_3.setDisable(true);
@@ -90,6 +93,7 @@ public class SetupScene extends SceneController implements Initializable{
 		} 
 	}
 
+	@FXML
 	public void leaderCard4Click(){
 		to_delete.add(player.getLeaderCards().get(3));
 		leader_card_4.setDisable(true);
