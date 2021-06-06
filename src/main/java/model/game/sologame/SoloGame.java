@@ -26,17 +26,9 @@ public class SoloGame extends Game {
 	private ArrayDeque<SoloActionToken> active_tokens;
 	private SoloActionToken last_token;
 
-	public SoloGame(ArrayList<Player> player, DevelopmentCard[] all_development_cards) {
+	public SoloGame(ArrayList<Player> player, DevelopmentCard[] all_development_cards, SoloActionToken[] all_solo_action_tokens) {
 		super(player, all_development_cards);
-		//TODO: implement these in the Factory
-		this.solo_action_tokens = new SoloActionToken[7];
-		this.solo_action_tokens[0] = new MoveBlackCrossTwoSpaces();
-		this.solo_action_tokens[1] = new MoveBlackCrossTwoSpaces();
-		this.solo_action_tokens[2] = new MoveBlackCrossOneSpace();
-		this.solo_action_tokens[3] = new DiscardDevelopmentCards(DevelopmentCardsColor.GREEN);
-		this.solo_action_tokens[4] = new DiscardDevelopmentCards(DevelopmentCardsColor.BLUE);
-		this.solo_action_tokens[5] = new DiscardDevelopmentCards(DevelopmentCardsColor.PURPLE);
-		this.solo_action_tokens[6] = new DiscardDevelopmentCards(DevelopmentCardsColor.YELLOW);
+		this.solo_action_tokens = all_solo_action_tokens;
 		shuffleSoloActionTokens();
 	}
 

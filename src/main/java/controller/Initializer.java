@@ -18,6 +18,7 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.Deck;
 
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.sologame.SoloGame;
 import it.polimi.ingsw.model.game.Factory;
 import it.polimi.ingsw.model.game.Game;
@@ -217,6 +218,7 @@ public class Initializer {
 	private SoloGame createSoloGame() throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
-		return new SoloGame(this.players, all_development_cards);
+		SoloActionToken[] all_solo_action_tokens = factory.getAllSoloActionTokens();
+		return new SoloGame(this.players, all_development_cards, all_solo_action_tokens);
 	}
 }
