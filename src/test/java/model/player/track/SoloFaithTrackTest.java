@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.game.Factory;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 
-public class FaithTrackSinglePlayerTest {
+public class SoloFaithTrack {
 	/**
 	 * Test the creation and moveForwardBlackMarker
 	 */
@@ -20,7 +20,7 @@ public class FaithTrackSinglePlayerTest {
 		
 		Tile[] vatican_report_tiles = gen_factory.getAllTiles();
 
-		FaithTrackSinglePlayer faith_track = new FaithTrackSinglePlayer(track, vatican_report_tiles);
+		SoloFaithTrack faith_track = new SoloFaithTrack(track, vatican_report_tiles);
 
 		VaticanReports res_ret = faith_track.moveForwardBlackMarker(3);
 		assertEquals(3, faith_track.getBlackMarkerPosition());
@@ -40,7 +40,7 @@ public class FaithTrackSinglePlayerTest {
 
 		Tile[] vatican_report_tiles = gen_factory.getAllTiles();
 
-		FaithTrackSinglePlayer faith_track = new FaithTrackSinglePlayer(track, vatican_report_tiles);
+		SoloFaithTrack faith_track = new SoloFaithTrack(track, vatican_report_tiles);
 
 		VaticanReports res_ret = null;
 		res_ret = faith_track.moveForwardBlackMarker(9);

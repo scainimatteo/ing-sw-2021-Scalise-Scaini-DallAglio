@@ -39,9 +39,9 @@ public class Player extends Observable {
 	protected DevelopmentCardsSlots development_card_slots;
 	protected ArrayList<LeaderCard> leader_cards_deck;
 
-	public Player(String nickname, Cell[] cell_track, Tile[] v_r_tiles){
+	public Player(String nickname, FaithTrack track){
 		this.nickname = nickname;
-		this.track = new FaithTrack(cell_track, v_r_tiles);
+		this.track = track;
 		this.warehouse = new Warehouse();
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();

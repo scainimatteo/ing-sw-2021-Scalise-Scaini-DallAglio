@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller;
 
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.stream.Collectors;
 
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
@@ -25,29 +25,50 @@ import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-import java.util.ArrayList;
-
 public class GameController implements Runnable, Controller {
-	private ArrayList<ClientHandler> clients;
-	private Game game;
+	protected ArrayList<ClientHandler> clients;
+	protected Game game;
 
-	public GameController(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public GameController(ArrayList<ClientHandler> clients) {
 		this.clients = clients;
+	}
+
+	/**
+	 * Initialize the Game using the Initializer
+	 *
+	 * @throws InstantiationException when the Initializer fails
+	 */
+	public void initializeGame() throws InstantiationException {
 		try {
-			this.game = new Initializer().initializeGame(clients);
+			this.game = new Initializer().initializeGame(this.clients);
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 			throw new InstantiationException();
 		}
 	}
 
+	//TODO: this is empty, should GameController not be a Runnable?
+	public void run() {
+		return;
+	}
+
+	/**
+	 * Handle the Message coming from the Client using the pattern Visitor
+	 *
+	 * @param message the Message to handle
+	 */
 	public void handleMessage(Message message) {
 		message.useMessage(this);
 	}
 
-	//TODO: this is empty, should GameController not be a Runnable?
-	public void run() {
-		return;
+	/**
+	 * Handle Errors by notifying ErrorMessages
+	 *
+	 * @param error_string the error to report
+	 * @param player the Player that committed the error
+	 */
+	private void handleError(String error_string, Player player){
+		this.game.handleError(error_string, player);
 	}
 	
 	/**
@@ -106,7 +127,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * sets the turn to initialized if each player has the correct amount of starting resources and leader cards
+	 * Sets the turn to initialized if each player has the correct amount of starting resources and leader cards
 	 */
 	private void checkEndInitializing(){
 		if(checkCardNumber() && checkCorrectTotalResources()){
@@ -665,7 +686,7 @@ public class GameController implements Runnable, Controller {
 	 *
 	 * @param player is the active player
 	 */
-	private void checkLastTurn(Player player){
+	protected void checkLastTurn(Player player){
 		int count = 0;
 		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
 		while(iterator.hasNext()){
@@ -678,7 +699,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * upon receiving the corresponding message, checks if the player who requested the action is active, if they have played a main action, if they paid the cost of their action completely and
+	 * Upon receiving the corresponding message, checks if the player who requested the action is active, if they have played a main action, if they paid the cost of their action completely and
 	 * completely stored all of their gain.
 	 * End the turn and starts the next player's turn if conditions are met, triggering the last round if needed, raises corresponding error otherwise.
 	 *
@@ -692,12 +713,5 @@ public class GameController implements Runnable, Controller {
 				game.endTurn();
 			} else {handleError("You cannot end your turn now", player);}
 		} else {handleError("It is not your turn", player);}
-	}
-
-	/**
-	 * HANDLE VARIOUS ERRORS
-	 */
-	private void handleError(String string, Player player){
-		this.game.handleError(string, player);
 	}
 }

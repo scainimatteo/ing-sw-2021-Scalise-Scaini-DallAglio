@@ -1,9 +1,9 @@
 package it.polimi.ingsw.model.player.track;
 
-public class FaithTrackSinglePlayer extends FaithTrack {
+public class SoloFaithTrack extends FaithTrack {
 	private Cell black_marker;
 
-	public FaithTrackSinglePlayer(Cell[] track, Tile[] vatican_report_tiles){
+	public SoloFaithTrack(Cell[] track, Tile[] vatican_report_tiles){
 		super(track, vatican_report_tiles);
 		this.black_marker = track[0];
 	}
@@ -12,7 +12,7 @@ public class FaithTrackSinglePlayer extends FaithTrack {
 		int new_position = number_of_times + this.black_marker.getPosition();
 		this.black_marker = super.track[new_position];
 
-		for (int i = new_position; i > (new_position - number_of_times); i --){
+		for (int i = new_position; i > (new_position - number_of_times); i--){
 			if (super.track[i].isPopeSpace()){
 				if (super.checkCell(super.track[i].whichVaticanReport().getIndex())){
 					super.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
