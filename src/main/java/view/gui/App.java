@@ -26,9 +26,6 @@ import it.polimi.ingsw.view.gui.scene.InitialScene;
 import it.polimi.ingsw.view.gui.GUI;
 
 public class App extends Application {
-	private static SimpleGame game;
-	private static ArrayList<SimplePlayer> players;
-	private static Turn turn;
 	private static GUI gui;
 
 	private InitialScene initial_scene;
@@ -52,15 +49,33 @@ public class App extends Application {
 	}
 
 	/**
-	 * Set the three objects representing the model
+	 * Set the GUI that has the model
 	 *
 	 * @param view the GUI to get the model from
 	 */
 	public static void setModel(GUI view) {
-		game = view.getSimpleGame();
-		players = view.getSimplePlayers();
-		turn = view.getTurn();
 		gui = view;
+	}
+
+	/**
+	 * @return the SimpleGame in the GUI
+	 */
+	public static SimpleGame getSimpleGame() {
+		return gui.getSimpleGame();
+	}
+
+	/**
+	 * @return the ArrayList of SimplePlayers in the GUI
+	 */
+	public static ArrayList<SimplePlayer> getSimplePlayers() {
+		return gui.getSimplePlayers();
+	}
+
+	/**
+	 * @return the Turn in the GUI
+	 */
+	public static Turn getTurn() {
+		return gui.getTurn();
 	}
 
 	/**
