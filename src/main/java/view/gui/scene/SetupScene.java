@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.gui.scene;
 import it.polimi.ingsw.view.gui.App;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 import it.polimi.ingsw.model.card.LeaderCard;
 
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.TransferMode;
@@ -24,12 +26,15 @@ import java.net.URL;
 
 public class SetupScene extends SceneController implements Initializable{
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
+	ArrayList<String> order;
 	double opacity_percent = 0.5;
 	SimplePlayer player;
+	SimpleGame game;
 
 	@FXML private Pane select_card_pane;
 	@FXML private Pane select_resource_pane;
 	@FXML private Pane waiting_pane;
+	@FXML private Pane order_pane;
 
 	@FXML private ImageView leader_card_1;
 	@FXML private ImageView leader_card_2;
@@ -41,9 +46,16 @@ public class SetupScene extends SceneController implements Initializable{
 	@FXML private Image leader_card_image_3;
 	@FXML private Image leader_card_image_4;
 
+	@FXML private Text first_player_text;
+	@FXML private Text second_player_text;
+	@FXML private Text third_player_text;
+	@FXML private Text fourth_player_text;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
 		this.player = App.getMyPlayer();
+		// this.game = App.getGame();
+		this.order = App.getGame().getOrder();
 
 		leader_card_image_1 = new Image(getClass().getResource(player.getLeaderCards().get(0).getFrontPath()).toString());
 		leader_card_image_2 = new Image(getClass().getResource(player.getLeaderCards().get(1).getFrontPath()).toString());
@@ -55,9 +67,27 @@ public class SetupScene extends SceneController implements Initializable{
 		leader_card_3.setImage(leader_card_image_3);
 		leader_card_4.setImage(leader_card_image_4);
 
-		showNode(select_card_pane);
+		first_player_text.setText(order.get(0));
+		if (order.size() >= 2){
+			second_player_text.setText(order.get(1));
+		} 
+		if (order.size() >= 3){
+			third_player_text.setText(order.get(2));
+		} 
+		if (order.size() >= 4){
+			fourth_player_text.setText(order.get(3));
+		} 
+
+		showNode(order_pane);
+		hideNode(select_card_pane);
 		hideNode(select_resource_pane);
 		hideNode(waiting_pane);
+	}
+
+	@FXML
+	public void continue_button_click(){
+		hideNode(order_pane);
+		showNode(select_card_pane);
 	}
 
 	@FXML
