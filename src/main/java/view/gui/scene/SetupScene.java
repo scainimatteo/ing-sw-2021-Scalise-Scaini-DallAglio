@@ -24,6 +24,7 @@ import java.net.URL;
 
 public class SetupScene extends SceneController implements Initializable{
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
+	ArrayList<String> order;
 	double opacity_percent = 0.5;
 	SimplePlayer player;
 
@@ -44,6 +45,7 @@ public class SetupScene extends SceneController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
 		this.player = App.getMyPlayer();
+		this.order = App.getSimpleGame().getOrder();
 
 		leader_card_image_1 = new Image(getClass().getResource(player.getLeaderCards().get(0).getFrontPath()).toString());
 		leader_card_image_2 = new Image(getClass().getResource(player.getLeaderCards().get(1).getFrontPath()).toString());

@@ -67,6 +67,7 @@ public class GUI extends View implements GameStartObserver {
 	@Override
 	public synchronized void handleInitializing(InitializingServerMessage initializing_message) {
 		try {
+			//TODO: maybe change the wait with Observers
 			if (this.initial_scene == null) {
 				while(this.app == null) {
 					wait();
