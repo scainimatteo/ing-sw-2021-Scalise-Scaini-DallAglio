@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<!-- <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.scene.SetupScene"> -->
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="select_background" fitHeight="768.0" fitWidth="1366.0" opacity="0.8" pickOnBounds="true">
@@ -26,22 +26,22 @@
          <children>
             <HBox fx:id="leader_card_grid" alignment="CENTER" layoutY="167.0" prefHeight="419.0" prefWidth="1080.0" spacing="20.0">
                <children>
-                  <ImageView fx:id="leader_card_1" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard1Click" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="leader_card_1" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView fx:id="leader_card_2" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard2Click" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="leader_card_2" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView fx:id="leader_card_3" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard3Click" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="leader_card_3" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView fx:id="leader_card_4" fitHeight="380.0" fitWidth="336.0" onMouseClicked="#leaderCard4Click" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="leader_card_4" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -127,13 +127,13 @@
                   <Image url="@../images/board/starting%20warehouse.png" />
                </image>
             </ImageView>
-            <HBox id="warehouse_top" fx:id="warehouse_top" alignment="CENTER" layoutX="488.0" layoutY="304.0" prefHeight="100.0" prefWidth="106.0">
+            <HBox fx:id="warehouse_top" alignment="CENTER" layoutX="488.0" layoutY="304.0" prefHeight="100.0" prefWidth="106.0">
                <children>
                   <ImageView id="top1" fx:id="top1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
                </children>
             </HBox>
-            <HBox id="warehouse_bottom" fx:id="warehouse_middle" alignment="CENTER" layoutX="446.0" layoutY="410.0" prefHeight="100.0" prefWidth="189.0">
+            <HBox fx:id="warehouse_middle" alignment="CENTER" layoutX="446.0" layoutY="410.0" prefHeight="100.0" prefWidth="189.0">
                <children>
                   <ImageView id="middle1" fx:id="middle1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
@@ -170,6 +170,44 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="order_pane" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" translateX="250.0" translateY="150.0">
+               <children>
+                  <Text fx:id="first_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="-100.0">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="second_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="-33.0">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="third_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="33.0">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="fourth_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="100.0">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MATCH ORDER" translateX="250.0" translateY="100.0">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Text>
+            <Button fx:id="continue_button" mnemonicParsing="false" onMouseClicked="#continue_button_click" text="CONTINUE" translateX="850.0" translateY="650.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
   </children>
