@@ -156,7 +156,7 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-            <Button fx:id="confirm_button" layoutX="707.0" layoutY="594.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="157.0" text="Confirm">
+			<Button fx:id="confirm_button" layoutX="707.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#endResourcesScene" prefHeight="52.0" prefWidth="157.0" text="Confirm">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>

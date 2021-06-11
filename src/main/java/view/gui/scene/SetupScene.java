@@ -24,7 +24,9 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.TransferMode;
 
 import java.util.ResourceBundle;
+import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.net.URL;
 
 public class SetupScene extends SceneController implements Initializable{
@@ -90,37 +92,37 @@ public class SetupScene extends SceneController implements Initializable{
 		leader_card_3.setOnMouseClicked(click3 -> leaderCardClick(click3, 2));
 		leader_card_4.setOnMouseClicked(click4 -> leaderCardClick(click4, 3));
 
-		coin1.setOnDragDetected(detected1 -> handleDragDetected(detected1));
-		coin2.setOnDragDetected(detected2 -> handleDragDetected(detected2));
-		servant1.setOnDragDetected(detected3 -> handleDragDetected(detected3));
-		servant2.setOnDragDetected(detected4 -> handleDragDetected(detected4));
-		shield1.setOnDragDetected(detected5 -> handleDragDetected(detected5));
-		shield2.setOnDragDetected(detected6 -> handleDragDetected(detected6));
-		stone1.setOnDragDetected(detected7 -> handleDragDetected(detected7));
-		stone2.setOnDragDetected(detected8 -> handleDragDetected(detected8));
+		coin1.setOnDragDetected(detected1 -> handleDragDetected(detected1, coin1));
+		coin2.setOnDragDetected(detected2 -> handleDragDetected(detected2, coin2));
+		servant1.setOnDragDetected(detected3 -> handleDragDetected(detected3, servant1));
+		servant2.setOnDragDetected(detected4 -> handleDragDetected(detected4, servant2));
+		shield1.setOnDragDetected(detected5 -> handleDragDetected(detected5, shield1));
+		shield2.setOnDragDetected(detected6 -> handleDragDetected(detected6, shield2));
+		stone1.setOnDragDetected(detected7 -> handleDragDetected(detected7, stone1));
+		stone2.setOnDragDetected(detected8 -> handleDragDetected(detected8, stone2));
 
-		coin1.setOnDragDone(done1 -> handleDragDone(done1));
-		coin2.setOnDragDone(done2 -> handleDragDone(done2));
-		servant1.setOnDragDone(done3 -> handleDragDone(done3));
-		servant2.setOnDragDone(done4 -> handleDragDone(done4));
-		shield1.setOnDragDone(done5 -> handleDragDone(done5));
-		shield2.setOnDragDone(done6 -> handleDragDone(done6));
-		stone1.setOnDragDone(done7 -> handleDragDone(done7));
-		stone2.setOnDragDone(done8 -> handleDragDone(done8));
+		coin1.setOnDragDone(done1 -> handleDragDone(done1, coin1));
+		coin2.setOnDragDone(done2 -> handleDragDone(done2, coin2));
+		servant1.setOnDragDone(done3 -> handleDragDone(done3, servant1));
+		servant2.setOnDragDone(done4 -> handleDragDone(done4, servant2));
+		shield1.setOnDragDone(done5 -> handleDragDone(done5, shield1));
+		shield2.setOnDragDone(done6 -> handleDragDone(done6, shield2));
+		stone1.setOnDragDone(done7 -> handleDragDone(done7, stone1));
+		stone2.setOnDragDone(done8 -> handleDragDone(done8, stone2));
 
-		top1.setOnDragOver(over1 -> handleDragOver(over1));
-		middle1.setOnDragOver(over2 -> handleDragOver(over2));
-		middle2.setOnDragOver(over3 -> handleDragOver(over3));
-		bottom1.setOnDragOver(over4 -> handleDragOver(over4));
-		bottom2.setOnDragOver(over5 -> handleDragOver(over5));
-		bottom3.setOnDragOver(over6 -> handleDragOver(over6));
+		top1.setOnDragOver(over1 -> handleDragOver(over1, top1));
+		middle1.setOnDragOver(over2 -> handleDragOver(over2, middle1));
+		middle2.setOnDragOver(over3 -> handleDragOver(over3, middle2));
+		bottom1.setOnDragOver(over4 -> handleDragOver(over4, bottom1));
+		bottom2.setOnDragOver(over5 -> handleDragOver(over5, bottom2));
+		bottom3.setOnDragOver(over6 -> handleDragOver(over6, bottom3));
 
-		top1.setOnDragDropped(dropped1 -> handleDragDropped(dropped1));
-		middle1.setOnDragDropped(dropped2 -> handleDragDropped(dropped2));
-		middle2.setOnDragDropped(dropped3 -> handleDragDropped(dropped3));
-		bottom1.setOnDragDropped(dropped4 -> handleDragDropped(dropped4));
-		bottom2.setOnDragDropped(dropped5 -> handleDragDropped(dropped5));
-		bottom3.setOnDragDropped(dropped6 -> handleDragDropped(dropped6));
+		top1.setOnDragDropped(dropped1 -> handleDragDropped(dropped1, top1));
+		middle1.setOnDragDropped(dropped2 -> handleDragDropped(dropped2, middle1));
+		middle2.setOnDragDropped(dropped3 -> handleDragDropped(dropped3, middle2));
+		bottom1.setOnDragDropped(dropped4 -> handleDragDropped(dropped4, bottom1));
+		bottom2.setOnDragDropped(dropped5 -> handleDragDropped(dropped5, bottom2));
+		bottom3.setOnDragDropped(dropped6 -> handleDragDropped(dropped6, bottom3));
 
 		first_player_text.setText(order.get(0));
 		if (order.size() >= 2){
@@ -175,83 +177,17 @@ public class SetupScene extends SceneController implements Initializable{
 		showNode(select_resource_pane);
 	}
 
-	/**
-	 * SOURCE METHODS
-	 */
 	@FXML
-	public void handleDragDetected(MouseEvent event) {
-		ImageView source = (ImageView) event.getSource();
+	@SuppressWarnings("unchecked")
+	public void endResourcesScene(){
+		ArrayList<String> resources_choice = (ArrayList) drag_and_drop_arraylist.clone();
+		String resize_string;
 
-		source.setOnDragDetected(new EventHandler<MouseEvent>() {
-			public void handle(MouseEvent event) {
-				Dragboard db = source.startDragAndDrop(TransferMode.ANY);
-				
-				ClipboardContent content = new ClipboardContent();
-				content.putImage(source.getImage());
-				db.setContent(content);
-				
-				event.consume();
-			}
-		});
-	}
+		for (int i = 0; i < resources_choice.size(); i ++){
+			resize_string = resources_choice.get(i);
+			resources_choice.set(i, resize_string.substring(0, resize_string.length() - 1));
+		}
 
-	@FXML
-	public void handleDragDone(DragEvent event){
-		ImageView source = (ImageView) event.getSource();
-
-		source.setOnDragDone(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				if (event.getTransferMode() == TransferMode.MOVE) {
-					source.setImage(null);
-				}
-
-				event.consume();
-			}
-		});
-	}
-
-	/**
-	 * TARGET METHODS
-	 */
-	@FXML
-	public void handleDragOver(DragEvent event){
-		ImageView target = (ImageView) event.getTarget();
-
-		target.setOnDragOver(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				/* data is dragged over the target */
-				/* accept it only if it is not dragged from the same node
-				 */
-				if (event.getGestureSource() != target) {
-					/* allow for both copying and moving, whatever user chooses */
-					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-				}
-				
-				event.consume();
-			}
-		});
-	}
-
-	@FXML
-	public void handleDragDropped(DragEvent event){
-		ImageView target = (ImageView) event.getTarget();
-		
-		target.setOnDragDropped(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				/* data dropped */
-				/* if there is a string data on dragboard, read it and use it */
-				Dragboard db = event.getDragboard();
-				boolean success = false;
-				if (db.hasString()) {
-				   target.setImage(db.getImage());
-				   success = true;
-				}
-				/* let the source know whether the string was successfully 
-				 * transferred and used */
-				event.setDropCompleted(success);
-				
-				event.consume();
-			 }
-		});
+		drag_and_drop_arraylist.clear();
 	}
 }

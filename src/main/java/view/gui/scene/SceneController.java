@@ -1,17 +1,31 @@
 package it.polimi.ingsw.view.gui.scene;
 
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 
 import javafx.stage.Stage;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.DragEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.TransferMode;
+
+import java.util.ArrayList;
 import java.io.IOException;
 
 public abstract class SceneController {
-	private static Stage stage;
+	protected static Stage stage;
+	protected ArrayList<String> drag_and_drop_arraylist = new ArrayList<String>();
+	protected String last_resource_dragged;
 
 	public static void setStage(Stage stage) {
 		SceneController.stage = stage;
@@ -53,5 +67,81 @@ public abstract class SceneController {
 			//TODO: better exception handling
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * SOURCE METHODS
+	 */
+	@FXML
+	public void handleDragDetected(MouseEvent event, ImageView source) {
+		EventHandler<MouseEvent> event_handler = new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent event) {
+				Dragboard db = source.startDragAndDrop(TransferMode.MOVE);
+				
+				ClipboardContent content = new ClipboardContent();
+				content.putImage(source.getImage());
+				db.setContent(content);
+				last_resource_dragged = source.getId();
+				
+				event.consume();
+			}
+		};
+
+		event_handler.handle(event);
+	}
+
+	@FXML
+	public void handleDragDone(DragEvent event, ImageView source){
+		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				if (event.getTransferMode() == TransferMode.MOVE) {
+					source.setImage(null);
+				}
+
+				event.consume();
+			}
+		};
+
+		event_handler.handle(event);
+	}
+
+	/**
+	 * TARGET METHODS
+	 */
+	@FXML
+	public void handleDragOver(DragEvent event, ImageView target){
+		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				if (event.getGestureSource() != target) {
+					event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+				}
+				
+				event.consume();
+			}
+		};
+
+		event_handler.handle(event);
+	}
+
+	@FXML
+	public void handleDragDropped(DragEvent event, ImageView target){
+		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				boolean success = false;
+
+				if (db.hasImage()) {
+				   target.setImage(db.getImage());
+				   drag_and_drop_arraylist.add(last_resource_dragged);
+				   success = true;
+				}
+
+				event.setDropCompleted(success);
+				
+				event.consume();
+			 }
+		};
+
+		event_handler.handle(event);
 	}
 }
