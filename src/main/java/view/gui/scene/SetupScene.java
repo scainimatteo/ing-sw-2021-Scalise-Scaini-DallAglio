@@ -6,8 +6,11 @@ import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
+import it.polimi.ingsw.controller.message.ChooseResourcesMessage;
+import it.polimi.ingsw.controller.message.Storage;
 
 import javafx.event.ActionEvent;
 import javafx.scene.input.DragEvent;
@@ -26,6 +29,7 @@ import javafx.scene.input.TransferMode;
 import java.util.ResourceBundle;
 import java.util.Collections;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Arrays;
 import java.net.URL;
 
@@ -180,14 +184,42 @@ public class SetupScene extends SceneController implements Initializable{
 	@FXML
 	@SuppressWarnings("unchecked")
 	public void endResourcesScene(){
-		ArrayList<String> resources_choice = (ArrayList) drag_and_drop_arraylist.clone();
+		HashMap<String, String> resources_hashmap = new HashMap<String, String>();
+		ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
+		ChooseResourcesMessage message;
+		Storage storage = new Storage();
 		String resize_string;
+		int separator_index;
 
-		for (int i = 0; i < resources_choice.size(); i ++){
-			resize_string = resources_choice.get(i);
-			resources_choice.set(i, resize_string.substring(0, resize_string.length() - 1));
+		for (int i = 0; i < drag_and_drop_arraylist.size(); i ++){
+			resize_string = drag_and_drop_arraylist.get(i);
+			resize_string = resize_string.substring(0, resize_string.length() - 1);
+			separator_index = resize_string.indexOf("|");
+
+			resources_hashmap.put(resize_string.substring(0, separator_index - 1), resize_string.substring(separator_index + 1));
 		}
 
+		for (String key : resources_hashmap.keySet()){
+			resource_to_add.add(Resource.valueOf((key.substring(0, key.length() - 1).toUpperCase())));
+
+			switch (resources_hashmap.get(key)){
+				case "top": storage.addToWarehouseTop(resource_to_add);
+							break;
+				case "middle": storage.addToWarehouseMid(resource_to_add);
+							   break;
+				case "bottom": storage.addToWarehouseBot(resource_to_add);
+							   break;
+			}
+
+			resource_to_add.clear();
+		}
+
+		message = new ChooseResourcesMessage(storage);
+		App.sendMessage(message);
+
 		drag_and_drop_arraylist.clear();
+
+		hideNode(select_resource_pane);
+		showNode(waiting_pane);
 	}
 }

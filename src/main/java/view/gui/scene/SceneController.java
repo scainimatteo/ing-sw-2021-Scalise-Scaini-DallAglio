@@ -132,6 +132,7 @@ public abstract class SceneController {
 
 				if (db.hasImage()) {
 				   target.setImage(db.getImage());
+				   last_resource_dragged += " | " + target.getId();
 				   drag_and_drop_arraylist.add(last_resource_dragged);
 				   success = true;
 				}
