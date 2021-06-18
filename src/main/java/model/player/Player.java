@@ -64,7 +64,7 @@ public class Player extends Observable {
 	 *
 	 * @return the SimplePlayer used to represent this Player
 	 */
-	private SimplePlayer simplify() {
+	protected SimplePlayer simplify() {
 		ArrayList<DevelopmentCard> first_column = this.development_card_slots.getDeckAsArrayList(0, 0);
 		ArrayList<DevelopmentCard> second_column = this.development_card_slots.getDeckAsArrayList(0, 1);
 		ArrayList<DevelopmentCard> third_column = this.development_card_slots.getDeckAsArrayList(0, 2);

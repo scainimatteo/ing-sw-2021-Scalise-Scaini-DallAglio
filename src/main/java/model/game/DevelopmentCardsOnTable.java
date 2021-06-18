@@ -55,7 +55,8 @@ public class DevelopmentCardsOnTable {
 		boolean done = false;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (development_cards_table.peekTop(i, j).equals(chosen_card)) {
+				DevelopmentCard card_on_top = development_cards_table.peekTop(i, j);
+				if (card_on_top != null && card_on_top.equals(chosen_card)) {
 					development_cards_table.draw(i, j);
 					done = true;
 					break;

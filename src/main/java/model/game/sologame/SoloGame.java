@@ -2,14 +2,18 @@ package it.polimi.ingsw.model.game.sologame;
 
 import java.util.Collections;
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.DevelopmentCard;
+
+import it.polimi.ingsw.model.player.track.VaticanReports;
 
 import it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards;
 import it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces;
@@ -17,6 +21,7 @@ import it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace;
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.Game;
 
+import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
@@ -25,9 +30,11 @@ public class SoloGame extends Game {
 	private SoloActionToken[] solo_action_tokens;
 	private ArrayDeque<SoloActionToken> active_tokens;
 	private SoloActionToken last_token;
+	private SoloPlayer player;
 
 	public SoloGame(ArrayList<Player> player, DevelopmentCard[] all_development_cards, SoloActionToken[] all_solo_action_tokens) {
 		super(player, all_development_cards);
+		this.player = (SoloPlayer) player.get(0);
 		this.solo_action_tokens = all_solo_action_tokens;
 		shuffleSoloActionTokens();
 	}
@@ -47,7 +54,7 @@ public class SoloGame extends Game {
 	 */
 	private SimpleSoloGame simplify() {
 		ArrayList<String> order = new ArrayList<String>();
-		order.add(super.players.get(0).getNickname());
+		order.add(this.player.getNickname());
 		return new SimpleSoloGame(order, super.market.peekMarket(), super.market.getFreeMarble(), super.development_cards_on_table.getTopCards(), this.last_token, this.active_tokens.size());
 	}
 
@@ -62,7 +69,6 @@ public class SoloGame extends Game {
 
 		// insert the new shuffled array in a Queue
 		this.active_tokens = new ArrayDeque<SoloActionToken>(Arrays.asList(this.solo_action_tokens));
-		this.last_token = null;
 		notifyGame();
 	}
 
@@ -75,8 +81,29 @@ public class SoloGame extends Game {
 		return this.last_token;
 	}
 
-	@Override
-	public void endGame() {
-		//TODO
+	/**
+	 * Move the Black Cross marker forward
+	 *
+	 * @param number_of_times how many Cells to go forward
+	 */
+	public VaticanReports moveForwardBlackMarker(int number_of_times) {
+		return player.moveForwardBlackMarker(number_of_times);
+	}
+
+	/**
+	 * @return true if the Black Cross is at the end of the FaithTrack
+	 */
+	public boolean isBlackCrossAtTheEnd() {
+		return this.player.isBlackCrossAtTheEnd();
+	}
+
+	/**
+	 * Send a EndGameMessage to the Player saying that they lost the game
+	 */
+	public void lostGame() {
+		// send a ranking containing 0 points for them
+		HashMap<String, Integer> rank = new HashMap<String, Integer>();
+		rank.put(this.player.getNickname(), 0);
+		notify(new EndGameMessage(rank));
 	}
 }

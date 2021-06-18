@@ -67,7 +67,7 @@ public class GameController implements Runnable, Controller {
 	 * @param error_string the error to report
 	 * @param player the Player that committed the error
 	 */
-	private void handleError(String error_string, Player player){
+	protected void handleError(String error_string, Player player){
 		this.game.handleError(error_string, player);
 	}
 	
@@ -75,7 +75,7 @@ public class GameController implements Runnable, Controller {
 	 * @param player is the player who sent the message
 	 * @return true only if the player who sent the message is the active player
 	 */
-	private boolean checkPlayer(Player player){
+	protected boolean checkPlayer(Player player){
 		return player.equals(game.getTurn().getPlayer()) && game.getTurn().isInitialized();
 	}
 	
@@ -682,11 +682,12 @@ public class GameController implements Runnable, Controller {
 	 * */
 	
 	/**
-	 * Checks if the player more than 7 development cards or has reached the end of the track and triggers the round to be the last
+	 * Checks if the player has bought at least 7 development cards or has reached the end of the track and triggers the round to be the last
 	 *
 	 * @param player is the active player
 	 */
 	protected void checkLastTurn(Player player){
+		// count the DevelopmentCards of the player
 		int count = 0;
 		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
 		while(iterator.hasNext()){
