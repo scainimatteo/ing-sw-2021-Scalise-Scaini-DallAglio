@@ -85,6 +85,7 @@ public class SoloGame extends Game {
 	 * Move the Black Cross marker forward
 	 *
 	 * @param number_of_times how many Cells to go forward
+	 * @return the VaticanReports activated, null is none was activated
 	 */
 	public VaticanReports moveForwardBlackMarker(int number_of_times) {
 		return player.moveForwardBlackMarker(number_of_times);

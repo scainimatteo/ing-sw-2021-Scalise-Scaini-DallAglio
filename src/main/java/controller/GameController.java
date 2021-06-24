@@ -84,9 +84,9 @@ public class GameController implements Runnable, Controller {
 	 * If a VaticanReports was activated by a Player, activate it on other Players
 	 *
 	 * @param player the Player that activated the VaticanReport
-	 * @param report the VaticanReport activate
+	 * @param report the VaticanReport activated
 	 */
-	protected void handleVaticanReports(Player player, VaticanReports report) {
+	private void handleVaticanReports(Player player, VaticanReports report) {
 		if (report == null) {
 			return;
 		}

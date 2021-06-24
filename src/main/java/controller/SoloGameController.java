@@ -11,6 +11,7 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.sologame.SoloGame;
 
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Player;
 
@@ -97,10 +98,26 @@ public class SoloGameController extends GameController {
 	}
 
 	/**
+	 * If a VaticanReports was activated by the Black Cross, activate it on the Player
+	 *
+	 * @param report the VaticanReport activated
+	 */
+	private void handleBlackMarkerVaticanReports(VaticanReports report) {
+		if (report == null) {
+			return;
+		}
+	
+		Player player = super.game.getPlayers().get(0);
+		if (player.whichVaticanReport().equals(report)) {
+			player.activateVaticanReport();
+		}
+	}
+
+	/**
 	 * Called by the SoloActionToken using the Visitor pattern, move the Black Cross two spaces forward
 	 */
 	public void moveBlackCrossTwoSpaces() {
-		((SoloGame) super.game).moveForwardBlackMarker(2);
+		handleBlackMarkerVaticanReports(((SoloGame) super.game).moveForwardBlackMarker(2));
 	}
 
 	/**
@@ -109,7 +126,7 @@ public class SoloGameController extends GameController {
 	 */
 	public void moveBlackCrossOneSpace() {
 		((SoloGame) super.game).shuffleSoloActionTokens();
-		((SoloGame) super.game).moveForwardBlackMarker(1);
+		handleBlackMarkerVaticanReports(((SoloGame) super.game).moveForwardBlackMarker(1));
 	}
 
 	/**

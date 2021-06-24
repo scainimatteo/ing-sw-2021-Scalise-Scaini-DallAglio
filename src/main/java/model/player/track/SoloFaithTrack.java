@@ -19,11 +19,11 @@ public class SoloFaithTrack extends FaithTrack {
 		this.black_marker = super.track[new_position];
 
 		for (int i = new_position; i > (new_position - number_of_times); i--){
+			VaticanReports vatican_report = super.track[i].whichVaticanReport();
 			if (super.track[i].isPopeSpace()){
-				if (super.checkCell(super.track[i].whichVaticanReport().getIndex())){
-					super.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
-					super.activateVaticanReport(super.track[i].whichVaticanReport());
-					return super.track[i].whichVaticanReport();
+				if (super.checkCell(vatican_report.getIndex())){
+					super.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
+					return vatican_report;
 				}
 			}
 		}
