@@ -13,6 +13,7 @@ import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
 import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
 import it.polimi.ingsw.controller.message.InitializingMessage;
+import it.polimi.ingsw.controller.SoloGameController;
 import it.polimi.ingsw.controller.InitialController;
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.GameController;
@@ -84,8 +85,15 @@ public class Server {
 				sendStringToClient(ch, "Start Match\n\n", InitializingMessageType.START_MATCH);
 			}
 
-			//TODO: if only one player, new_match = new SoloMatch
-			GameController new_match = new GameController(this.lobby.get(match_name));
+			// create, initialize and start a new Game or SoloGame
+			GameController new_match;
+			if (this.lobby.get(match_name).size() == 1) {
+				new_match = new SoloGameController(this.lobby.get(match_name));
+			} else {
+				new_match = new GameController(this.lobby.get(match_name));
+			}
+
+			new_match.initializeGame();
 			for (ClientHandler c: this.lobby.get(match_name)) {
 				c.setController(new_match);
 			}
@@ -99,6 +107,7 @@ public class Server {
 	 */
 	private String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
+		//TODO: refute null nicknames
 		sendStringToClient(client, "Nickname? ", InitializingMessageType.NICKNAME);
 		String nickname = receiveStringFromClient(client);
 
@@ -155,6 +164,7 @@ public class Server {
 	 */
 	private void manageOtherClient(ClientHandler client, String match_name) throws IllegalAccessError {
 		synchronized(this.lobby) {
+			//TODO: make the match_name uppercase
 			if (this.lobby.containsKey(match_name)) {
 				this.lobby.get(match_name).add(client);
 			} else {

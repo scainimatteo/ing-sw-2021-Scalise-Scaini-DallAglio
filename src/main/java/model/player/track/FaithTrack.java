@@ -18,14 +18,16 @@ public class FaithTrack {
 	 * @return the vatican report activated if the marker reaches or overcomes a pope space
 	 */
 	public VaticanReports moveForward(int number_of_times) {
+		// the new position can be max the last position on the FaithTrack
 		int new_position = number_of_times + faith_marker.getPosition() < getLastPosition()? number_of_times + faith_marker.getPosition() : getLastPosition();
 		this.faith_marker = track[new_position];
 
-		for (int i = new_position; i > (new_position - number_of_times); i --){
-			if (track[i].isPopeSpace()){
-				if (checkCell(this.track[i].whichVaticanReport().getIndex())){
-					this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
-					return this.track[i].whichVaticanReport();
+		for (int i = new_position; i > (new_position - number_of_times); i--){
+			VaticanReports vatican_report = this.track[i].whichVaticanReport();
+			if (this.track[i].isPopeSpace()){
+				if (checkCell(vatican_report.getIndex())){
+					this.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
+					return vatican_report;
 				}
 			}
 		}

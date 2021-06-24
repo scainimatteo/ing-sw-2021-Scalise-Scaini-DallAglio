@@ -27,11 +27,11 @@ import it.polimi.ingsw.util.Observable;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 public class Game extends Observable {
-	private ArrayList<Player> players;
-	private Market market;
-	private DevelopmentCardsOnTable development_cards_on_table;
+	protected ArrayList<Player> players;
+	protected Turn turn;
+	protected Market market;
+	protected DevelopmentCardsOnTable development_cards_on_table;
 	private HashMap<Player, Integer> victory_points;
-	private Turn turn;
 
 	public Game(ArrayList<Player> players, DevelopmentCard[] all_development_cards) {
 		this.players = players;
@@ -49,8 +49,14 @@ public class Game extends Observable {
 		return this.turn;
 	}
 
-	public void handleError(String error_message, Player player){
-		notify(new ErrorMessage(error_message, player.getNickname()));
+	/**
+	 * Notify an ErrorMessage to the Clients
+	 *
+	 * @param error_string the error to report
+	 * @param player the Player that committed the error
+	 */
+	public void handleError(String error_string, Player player){
+		notify(new ErrorMessage(error_string, player.getNickname()));
 	}
 
 	/**
@@ -70,7 +76,7 @@ public class Game extends Observable {
 		for (Player p: this.players) {
 			order.add(p.getNickname());
 		}
-		return new SimpleGame(order, market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
+		return new SimpleGame(order, this.market.peekMarket(), this.market.getFreeMarble(), this.development_cards_on_table.getTopCards());
 	}
 
 	/**
