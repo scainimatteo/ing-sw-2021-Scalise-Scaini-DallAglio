@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="background" fitHeight="720.0" fitWidth="1080.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/board/background_board.png" />
+         </image>
+      </ImageView>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="441.0" StackPane.alignment="CENTER_LEFT">
+         <children>
+            <ImageView fx:id="market_image" fitHeight="563.0" fitWidth="434.0" layoutX="4.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/board/market_board.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="73.0" layoutY="149.0" prefHeight="247.0" prefWidth="296.0">
+               <children>
+                  <ImageView fx:id="marble_space_img" fitHeight="247.0" fitWidth="296.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/board/marble_container.png" />
+                     </image>
+                  </ImageView>
+                  <GridPane fx:id="market_grid" layoutX="62.0" layoutY="61.0" prefHeight="141.0" prefWidth="189.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="marble00" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble10" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble20" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble30" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble01" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble11" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble21" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble31" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble02" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble12" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble22" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="marble32" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../images/tokens/resources/white_marble.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <ImageView fx:id="free_marble" fitHeight="48.0" fitWidth="47.0" layoutX="235.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/tokens/resources/white_marble.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER" layoutX="138.0" layoutY="396.0" prefHeight="100.0" prefWidth="183.0" spacing="22.0">
+               <children>
+                  <Button fx:id="col0_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
+                  <Button fx:id="col1_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
+                  <Button fx:id="col2_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
+                  <Button fx:id="col3_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="CLOSED_HAND" />
+               </cursor>
+            </HBox>
+            <VBox alignment="CENTER" layoutX="381.0" layoutY="210.0" prefHeight="141.0" prefWidth="57.0" spacing="21.0" visible="false">
+               <children>
+                  <Button fx:id="row0_button" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="row1_button" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="row2_button" mnemonicParsing="false" text="Button" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+      <GridPane fx:id="dev_card_grid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="627.0" vgap="5.0" StackPane.alignment="CENTER_RIGHT">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <StackPane.margin>
+            <Insets right="10.0" />
+         </StackPane.margin>
+         <children>
+            <StackPane fx:id="deck00" prefHeight="163.0" prefWidth="119.0">
+               <children>
+                  <ImageView fx:id="card3" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck10" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fx:id="card31" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck20" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fx:id="card32" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck30" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="3">
+               <children>
+                  <ImageView fx:id="card33" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck01" prefHeight="163.0" prefWidth="119.0" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="card34" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck11" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="card35" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck21" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="card36" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck31" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fx:id="card37" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck02" prefHeight="163.0" prefWidth="119.0" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="card38" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck12" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="card39" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck22" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="card310" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane fx:id="deck32" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="card311" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+                     <image>
+                        <Image url="@../images/developmentcards/front/development_card_1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow height="40.0" radius="19.5" width="40.0" />
+                     </effect>
+                  </ImageView>
+                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="Slot1">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 2">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Slot 3">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
+                  </HBox>
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
+      <Button fx:id="player_scene_button" mnemonicParsing="false" rotate="270.0" text="Your board" translateX="30.0" StackPane.alignment="CENTER_RIGHT">
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </Button>
+   </children>
+</StackPane>
