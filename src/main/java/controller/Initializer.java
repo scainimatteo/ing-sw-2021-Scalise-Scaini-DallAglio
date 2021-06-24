@@ -106,12 +106,13 @@ public class Initializer {
 	private void createPlayers(ArrayList<ClientHandler> clients) throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		Cell[] all_cells = factory.getAllCells();
-		Tile[] all_tiles = factory.getAllTiles();
 
 		this.players = new ArrayList<Player>();
 		this.remote_views = new RemoteView[clients.size()];
 
 		for (int i = 0; i < clients.size(); i++) {
+			// every time create a different array of cloned Tiles
+			Tile[] all_tiles = factory.getAllTiles();
 			players.add(new Player(clients.get(i).getNickname(), new FaithTrack(all_cells, all_tiles)));
 			this.remote_views[i] = new RemoteView(clients.get(i));
 			clients.get(i).setPlayer(this.players.get(i));

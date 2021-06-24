@@ -22,10 +22,11 @@ public class FaithTrack {
 		this.faith_marker = track[new_position];
 
 		for (int i = new_position; i > (new_position - number_of_times); i --){
+			VaticanReports vatican_report = this.track[i].whichVaticanReport();
 			if (track[i].isPopeSpace()){
-				if (checkCell(this.track[i].whichVaticanReport().getIndex())){
-					this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
-					return this.track[i].whichVaticanReport();
+				if (checkCell(vatican_report.getIndex())){
+					this.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
+					return vatican_report;
 				}
 			}
 		}

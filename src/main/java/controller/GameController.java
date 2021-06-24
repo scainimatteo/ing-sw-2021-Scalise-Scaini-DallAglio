@@ -20,6 +20,7 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Warehouse;
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
 
@@ -77,6 +78,26 @@ public class GameController implements Runnable, Controller {
 	 */
 	protected boolean checkPlayer(Player player){
 		return player.equals(game.getTurn().getPlayer()) && game.getTurn().isInitialized();
+	}
+
+	/**
+	 * If a VaticanReports was activated by a Player, activate it on other Players
+	 *
+	 * @param player the Player that activated the VaticanReport
+	 * @param report the VaticanReport activate
+	 */
+	protected void handleVaticanReports(Player player, VaticanReports report) {
+		if (report == null) {
+			return;
+		}
+
+		for (Player p: this.game.getPlayers()) {
+			if (!p.equals(player)) {
+				if (p.whichVaticanReport().equals(report)) {
+					p.activateVaticanReport();
+				}
+			}
+		}
 	}
 	
 	/**
@@ -217,7 +238,7 @@ public class GameController implements Runnable, Controller {
 		} else if (player.equals(game.getTurn().getPlayer())){ 
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				player.discardLeader(card.getId());	
-				player.moveForward(1);
+				handleVaticanReports(player, player.moveForward(1));
 			} else {handleError("You must end your turn first", player);}
 		} else {handleError("It is not your turn", player);}
 	}
@@ -274,7 +295,7 @@ public class GameController implements Runnable, Controller {
 	private ArrayList<Resource> filterResources(Player player, ArrayList<Resource> raw_resources){
 		ArrayList<Resource> filtered = (ArrayList<Resource>) raw_resources.stream().filter(e -> e != null).collect(Collectors.toList());
 		int steps = (int) filtered.stream().filter(e -> e.equals(Resource.FAITH)).count();
-		player.moveForward(steps);
+		handleVaticanReports(player, player.moveForward(steps));
 		return (ArrayList<Resource>) filtered.stream().filter(e -> !e.equals(Resource.FAITH)).collect(Collectors.toList());
 	}
 
@@ -408,7 +429,8 @@ public class GameController implements Runnable, Controller {
 				ArrayList<Resource> produced = totalProductionGain(productions);
 				if(player.hasEnoughResources(required)){
 					game.getTurn().addRequiredResources(required);
-					player.moveForward((int)produced.stream().filter(x->x.equals(Resource.FAITH)).count());
+					int number_of_faith = (int)produced.stream().filter(x->x.equals(Resource.FAITH)).count();
+					handleVaticanReports(player, player.moveForward(number_of_faith));
 					game.getTurn().addProducedResources((ArrayList<Resource>)produced.stream().filter(x->!x.equals(Resource.FAITH)).collect(Collectors.toList()));
 					game.getTurn().setDoneAction(true);
 				} else {handleError("You don't have enough resources to activate these production powers", player);}
@@ -652,7 +674,7 @@ public class GameController implements Runnable, Controller {
 				int discarded = game.getTurn().getProducedResources().size();
 				for (Player p : game.getPlayers()){
 					if (!p.equals(player)){
-						p.moveForward(discarded);
+						handleVaticanReports(p, p.moveForward(discarded));
 					}
 				}
 				game.getTurn().clearProducedResources();

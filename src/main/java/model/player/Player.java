@@ -312,12 +312,35 @@ public class Player extends Observable {
 		return this.track.getMarkerPosition();
 	}
 
-	public void moveForward(int steps){
-		this.track.moveForward(steps);
+	/**
+	 * Move the Player forward on the FaithTrack
+	 *
+	 * @param steps how many Cells to move forward to
+	 * @return the VaticanReport activated, null if nothing was activated
+	 */
+	public VaticanReports moveForward(int steps){
+		VaticanReports vatican_report = this.track.moveForward(steps);
 		this.notifyPlayer();
+		return vatican_report;
 	}
 
 	public boolean endOfTrack(){
 		return getMarkerPosition() >= track.getLastPosition();
+	}
+
+	/**
+	 * @return the VaticanReport the Player is on
+	 */
+	public VaticanReports whichVaticanReport() {
+		return this.track.getMarker().whichVaticanReport();
+	}
+
+	/**
+	 * Activate the VaticanReport the Player is on
+	 */
+	public void activateVaticanReport() {
+		VaticanReports vatican_report = this.track.getMarker().whichVaticanReport();
+		this.track.activateVaticanReport(vatican_report);
+		this.notifyPlayer();
 	}
 }
