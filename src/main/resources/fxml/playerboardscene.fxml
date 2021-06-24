@@ -114,6 +114,37 @@
             </ImageView>
          </children>
       </HBox>
+      <Pane fx:id="leader_card_pane" layoutX="2.0" prefHeight="720.0" prefWidth="341.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" layoutX="412.0" layoutY="256.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
+            <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="436.0" layoutY="312.0" prefHeight="331.0" prefWidth="570.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/leadercards/back/leader_card_back.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" text="Activate" />
+                        <Button mnemonicParsing="false" text="Discard" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/leadercards/back/leader_card_back.png" />
+                           </image>
+                        </ImageView>
+                        <Button mnemonicParsing="false" text="Activate" />
+                        <Button mnemonicParsing="false" text="Discard" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
       <HBox id="WarehouseBottom" fx:id="warehouse_bottom" alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="161.0">
          <children>
             <ImageView fx:id="bottom1" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
@@ -429,6 +460,7 @@
                   <Insets bottom="35.0" left="28.0" />
                </StackPane.margin>
             </ImageView>
+            <Button mnemonicParsing="false" text="Activate Production" StackPane.alignment="BOTTOM_CENTER" />
          </children>
       </StackPane>
       <Pane prefHeight="211.0" prefWidth="1080.0" visible="false">
@@ -466,37 +498,6 @@
             </Button>
          </children>
       </VBox>
-      <Pane fx:id="leader_card_pane" layoutX="2.0" prefHeight="720.0" prefWidth="341.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" layoutX="412.0" layoutY="256.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
-            <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="436.0" layoutY="312.0" prefHeight="331.0" prefWidth="570.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/leadercards/back/leader_card_back.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" text="Activate" />
-                        <Button mnemonicParsing="false" text="Discard" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/leadercards/back/leader_card_back.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" text="Activate" />
-                        <Button mnemonicParsing="false" text="Discard" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
-      </Pane>
       <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
       <Pane fx:id="cost_resources_pane" layoutX="25.0" layoutY="4.0" prefHeight="200.0" prefWidth="1033.0">
          <children>
