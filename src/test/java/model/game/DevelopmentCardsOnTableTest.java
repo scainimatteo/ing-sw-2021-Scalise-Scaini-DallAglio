@@ -76,7 +76,7 @@ public class DevelopmentCardsOnTableTest {
 	 */
 	@Test
 	public void getCardNotInDeckTest() {
-		DevelopmentCard new_card = new DevelopmentCard(0, null, null, null, 0);
+		DevelopmentCard new_card = new DevelopmentCard(0, null, null, null, 0, null);
 		assertThrows(NoSuchElementException.class, () -> dct.getFromDeck(new_card));
 	}
 

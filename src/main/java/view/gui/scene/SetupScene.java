@@ -203,12 +203,15 @@ public class SetupScene extends SceneController implements Initializable{
 			resource_to_add.add(Resource.valueOf((key.substring(0, key.length() - 1).toUpperCase())));
 
 			switch (resources_hashmap.get(key)){
-				case "top": storage.addToWarehouseTop(resource_to_add);
-							break;
-				case "middle": storage.addToWarehouseMid(resource_to_add);
-							   break;
-				case "bottom": storage.addToWarehouseBot(resource_to_add);
-							   break;
+				case "top":
+					storage.addToWarehouseTop(resource_to_add);
+					break;
+				case "middle":
+					storage.addToWarehouseMid(resource_to_add);
+					break;
+				case "bottom":
+					storage.addToWarehouseBot(resource_to_add);
+					break;
 			}
 
 			resource_to_add.clear();
