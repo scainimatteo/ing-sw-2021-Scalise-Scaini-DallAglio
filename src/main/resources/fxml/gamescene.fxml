@@ -129,12 +129,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -160,12 +160,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -191,12 +191,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -222,12 +222,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -253,12 +253,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -284,12 +284,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -315,12 +315,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -346,12 +346,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -377,12 +377,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -408,12 +408,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -439,12 +439,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -470,12 +470,12 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
+                        <Button mnemonicParsing="false" text="Slot 2" onMouseClicked="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
+                        <Button mnemonicParsing="false" text="Slot 3" onMouseClicked="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
