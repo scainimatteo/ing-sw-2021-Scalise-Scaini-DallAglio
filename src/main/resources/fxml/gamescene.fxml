@@ -50,71 +50,32 @@
                     </rowConstraints>
                      <children>
                         <ImageView fx:id="marble00" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble10" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble20" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble30" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble01" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble11" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble21" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble31" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble02" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble12" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble22" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                         <ImageView fx:id="marble32" fitHeight="48.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                           <image>
-                              <Image url="@../images/tokens/resources/white_marble.png" />
-                           </image>
                         </ImageView>
                      </children>
                   </GridPane>
                   <ImageView fx:id="free_marble" fitHeight="48.0" fitWidth="47.0" layoutX="235.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/tokens/resources/white_marble.png" />
-                     </image>
                   </ImageView>
                </children>
             </Pane>
@@ -156,27 +117,24 @@
          <children>
             <StackPane fx:id="deck00" prefHeight="163.0" prefWidth="119.0">
                <children>
-                  <ImageView fx:id="card3" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card00" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -190,27 +148,24 @@
             </StackPane>
             <StackPane fx:id="deck10" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="1">
                <children>
-                  <ImageView fx:id="card31" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card10" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -224,27 +179,24 @@
             </StackPane>
             <StackPane fx:id="deck20" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="2">
                <children>
-                  <ImageView fx:id="card32" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card20" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -258,27 +210,24 @@
             </StackPane>
             <StackPane fx:id="deck30" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="3">
                <children>
-                  <ImageView fx:id="card33" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card30" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -292,27 +241,24 @@
             </StackPane>
             <StackPane fx:id="deck01" prefHeight="163.0" prefWidth="119.0" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="card34" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card10" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -326,27 +272,24 @@
             </StackPane>
             <StackPane fx:id="deck11" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="card35" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card11" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -360,27 +303,24 @@
             </StackPane>
             <StackPane fx:id="deck21" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="card36" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card12" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -394,27 +334,24 @@
             </StackPane>
             <StackPane fx:id="deck31" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <ImageView fx:id="card37" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card13" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -428,27 +365,24 @@
             </StackPane>
             <StackPane fx:id="deck02" prefHeight="163.0" prefWidth="119.0" GridPane.rowIndex="2">
                <children>
-                  <ImageView fx:id="card38" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card20" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -462,27 +396,24 @@
             </StackPane>
             <StackPane fx:id="deck12" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <ImageView fx:id="card39" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card21" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -496,27 +427,24 @@
             </StackPane>
             <StackPane fx:id="deck22" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <ImageView fx:id="card310" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card22" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -530,27 +458,24 @@
             </StackPane>
             <StackPane fx:id="deck32" prefHeight="163.0" prefWidth="119.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <ImageView fx:id="card311" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
-                     <image>
-                        <Image url="@../images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card23" fitHeight="237.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
                      <effect>
                         <DropShadow height="40.0" radius="19.5" width="40.0" />
                      </effect>
                   </ImageView>
-                  <HBox alignment="BOTTOM_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
+                  <HBox alignment="BOTTOM_CENTER" disable="true" visible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="158.0" spacing="2.0" StackPane.alignment="BOTTOM_CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="Slot1">
+                        <Button mnemonicParsing="false" text="Slot 1" onMouseClicked="#selectSlot1">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 2">
+                        <Button mnemonicParsing="false" text="Slot 2" onAction="#selectSlot2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" text="Slot 3">
+                        <Button mnemonicParsing="false" text="Slot 3" onAction="#selectSlot3">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -564,7 +489,7 @@
             </StackPane>
          </children>
       </GridPane>
-      <Button fx:id="player_scene_button" mnemonicParsing="false" rotate="270.0" text="Your board" translateX="30.0" StackPane.alignment="CENTER_RIGHT">
+      <Button fx:id="player_scene_button" mnemonicParsing="false" rotate="270.0" text="Your board" translateX="30.0" StackPane.alignment="CENTER_RIGHT" onAction="#changeSceneToBoard">
          <StackPane.margin>
             <Insets />
          </StackPane.margin>
