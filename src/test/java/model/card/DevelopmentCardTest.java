@@ -33,7 +33,7 @@ public class DevelopmentCardTest{
 		input.add(randresource[y]);
 		output.add(randresource[z]);
 		output.add(randresource[t]);
-		devcard = new DevelopmentCard(random.nextInt(10), new Production(input, output), input, level, random.nextInt(3));
+		devcard = new DevelopmentCard(random.nextInt(10), new Production(input, output), input, level, random.nextInt(3), null);
 	}
 	
 	/**

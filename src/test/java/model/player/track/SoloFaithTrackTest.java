@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.game.Factory;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 
-public class SoloFaithTrack {
+public class SoloFaithTrackTest {
 	/**
 	 * Test the creation and moveForwardBlackMarker
 	 */
