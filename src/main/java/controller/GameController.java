@@ -93,7 +93,7 @@ public class GameController implements Runnable, Controller {
 
 		for (Player p: this.game.getPlayers()) {
 			if (!p.equals(player)) {
-				if (p.whichVaticanReport().equals(report)) {
+				if (p.whichVaticanReport() != null && p.whichVaticanReport().equals(report)) {
 					p.activateVaticanReport();
 				}
 			}

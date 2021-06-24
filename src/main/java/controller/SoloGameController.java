@@ -126,7 +126,7 @@ public class SoloGameController extends GameController {
 		}
 	
 		Player player = super.game.getPlayers().get(0);
-		if (player.whichVaticanReport().equals(report)) {
+		if (player.whichVaticanReport() != null && player.whichVaticanReport().equals(report)) {
 			player.activateVaticanReport();
 		}
 	}
