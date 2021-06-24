@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.Node;
 
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 import java.net.URL;
 
 import it.polimi.ingsw.controller.message.BuyCardMessage;
+import it.polimi.ingsw.controller.message.MarketMessage;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 
@@ -29,6 +31,8 @@ public class GameScene extends SceneController implements Initializable{
 	@FXML private ImageView free_marble;
 	@FXML private GridPane market_grid;
 	@FXML private GridPane dev_card_grid;
+	@FXML private VBox row_buttons;
+	@FXML private HBox column_buttons;
 	
 	// indexes of the card chosen by the player
 	private int chosen_card_row;
@@ -65,6 +69,7 @@ public class GameScene extends SceneController implements Initializable{
 				i++;
 			}
 		}
+		setMarketButtons();
 	}
 
 	/**
@@ -78,6 +83,45 @@ public class GameScene extends SceneController implements Initializable{
 		}
 
 		return resource.getPath();
+	}
+
+	/**
+	 * Set the methods for the Market buttons
+	 */
+	private void setMarketButtons() {
+		int i = 0;
+		for (Node node: row_buttons.getChildren()) {
+			final int row = i;
+			node.setOnMouseClicked(e -> chooseRow(row));
+			i++;
+		}
+
+		int j = 0;
+		for (Node node: column_buttons.getChildren()) {
+			final int column = j;
+			node.setOnMouseClicked(e -> chooseColumn(column));
+			j++;
+		}
+	}
+
+	/**
+	 * Send a MarketMessage with the Market row chosen
+	 *
+	 * @param row the row chosen
+	 */
+	public void chooseRow(int row) {
+		MarketMessage message = new MarketMessage(false, row);
+		App.sendMessage(message);
+	}
+
+	/**
+	 * Send a MarketMessage with the Market column chosen
+	 *
+	 * @param column the column chosen
+	 */
+	public void chooseColumn(int column) {
+		MarketMessage message = new MarketMessage(true, column);
+		App.sendMessage(message);
 	}
 
 	/**

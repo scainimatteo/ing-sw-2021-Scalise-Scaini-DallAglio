@@ -79,22 +79,22 @@
                   </ImageView>
                </children>
             </Pane>
-            <HBox alignment="CENTER" layoutX="138.0" layoutY="396.0" prefHeight="100.0" prefWidth="183.0" spacing="22.0">
+            <HBox fx:id="column_buttons" alignment="CENTER" layoutX="138.0" layoutY="396.0" prefHeight="100.0" prefWidth="183.0" spacing="22.0" opacity="0.1">
                <children>
-                  <Button fx:id="col0_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
-                  <Button fx:id="col1_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
-                  <Button fx:id="col2_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
-                  <Button fx:id="col3_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0" visible="false" />
+                  <Button fx:id="col0_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0"/>
+                  <Button fx:id="col1_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0"/>
+                  <Button fx:id="col2_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0"/>
+                  <Button fx:id="col3_button" mnemonicParsing="false" prefHeight="75.0" prefWidth="27.0" text="0"/>
                </children>
                <cursor>
                   <Cursor fx:constant="CLOSED_HAND" />
                </cursor>
             </HBox>
-            <VBox alignment="CENTER" layoutX="381.0" layoutY="210.0" prefHeight="141.0" prefWidth="57.0" spacing="21.0" visible="false">
+            <VBox fx:id="row_buttons" alignment="CENTER" layoutX="381.0" layoutY="210.0" prefHeight="141.0" prefWidth="57.0" spacing="21.0" opacity="0.1">
                <children>
-                  <Button fx:id="row0_button" mnemonicParsing="false" text="Button" />
-                  <Button fx:id="row1_button" mnemonicParsing="false" text="Button" />
-                  <Button fx:id="row2_button" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="row0_button" mnemonicParsing="false" text="0"/>
+                  <Button fx:id="row1_button" mnemonicParsing="false" text="0"/>
+                  <Button fx:id="row2_button" mnemonicParsing="false" text="0"/>
                </children>
             </VBox>
          </children>
