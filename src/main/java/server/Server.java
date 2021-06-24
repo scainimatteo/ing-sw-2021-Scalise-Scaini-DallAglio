@@ -107,6 +107,7 @@ public class Server {
 	 */
 	private String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
+		//TODO: refute null nicknames
 		sendStringToClient(client, "Nickname? ", InitializingMessageType.NICKNAME);
 		String nickname = receiveStringFromClient(client);
 
@@ -163,6 +164,7 @@ public class Server {
 	 */
 	private void manageOtherClient(ClientHandler client, String match_name) throws IllegalAccessError {
 		synchronized(this.lobby) {
+			//TODO: make the match_name uppercase
 			if (this.lobby.containsKey(match_name)) {
 				this.lobby.get(match_name).add(client);
 			} else {
