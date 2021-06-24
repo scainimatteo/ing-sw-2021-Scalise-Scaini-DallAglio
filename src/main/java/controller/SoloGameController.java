@@ -98,6 +98,24 @@ public class SoloGameController extends GameController {
 	}
 
 	/**
+	 * Upon receiving the corresponding message, checks if the player who requested the action is active and if they already paid every cost,
+	 * Discards all the remaining resources from the turn state and moves forward the Black Cross if conditions are met, raises corresponding error otherwise.
+	 *
+	 * @param player is the player who requested the action
+	 */
+	@Override
+	public void handleDiscardResources(Player player) {
+		if (checkPlayer(player)){
+			if (super.game.getTurn().getRequiredResources().isEmpty()){
+				int discarded = super.game.getTurn().getProducedResources().size();
+				System.out.println(discarded);
+				handleBlackMarkerVaticanReports(((SoloGame) super.game).moveForwardBlackMarker(discarded));
+				super.game.getTurn().clearProducedResources();
+			} else {handleError("You must pay all of the cost first", player);}
+		} else {handleError("It is not your turn", player);}
+	}
+
+	/**
 	 * If a VaticanReports was activated by the Black Cross, activate it on the Player
 	 *
 	 * @param report the VaticanReport activated
