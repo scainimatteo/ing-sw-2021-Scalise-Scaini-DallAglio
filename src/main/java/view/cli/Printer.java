@@ -1,9 +1,12 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.simplemodel.SimpleSoloPlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
+import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.model.resources.Production;
@@ -232,7 +235,7 @@ public class Printer {
 		Cell[] track = player.getFaithTrack();
 		Cell marker = player.getMarker();
 		Tile[] vatican_reports = player.getReports();
-		int last_position = 20;
+		int last_position = track.length - 1;
 		boolean flag = false;
 		String top = "";
 		String mid = "";
@@ -248,6 +251,9 @@ public class Printer {
 
 			if (marker.getPosition() == i){
 				mid = mid + ANSI.blue("M");
+			//TODO: remove instanceof
+			} else if (player instanceof SimpleSoloPlayer && ((SimpleSoloPlayer) player).getBlackMarkerPosition() == i) {
+				mid = mid + ANSI.white("L");
 			} else if (track[i].isPopeSpace()){
 				mid = mid + ANSI.red("P");
 			} else {
@@ -378,8 +384,13 @@ public class Printer {
 	}
 
 	public static String printLeaderCards(SimplePlayer player, boolean print_deactivated) {
-		ArrayList<LeaderCard> deck = player.getLeaderCards();
-		LeaderCard[] leader_cards = deck.toArray(new LeaderCard[deck.size()]);
+		ArrayList<LeaderCard> leader_cards_list = player.getLeaderCards();
+
+		if (leader_cards_list.size() == 0) {
+			return "All the Leader Cards were discarded";
+		}
+
+		LeaderCard[] leader_cards = leader_cards_list.toArray(new LeaderCard[leader_cards_list.size()]);
 		
 		return printLeaderCardArray(leader_cards, print_deactivated);
 	}
@@ -425,6 +436,13 @@ public class Printer {
 		to_return = top + mid + nickname_string + mid + top + mid + req_string + mid + top + mid + prod_string + mid + top;
 
 		return to_return;
+	}
+
+	public static String printSoloActionToken(SoloActionToken token){
+		if (token == null) {
+			return "No SoloActionToken was played yet";
+		}
+		return token.toString();
 	}
 
 	public static String printNullCard(){

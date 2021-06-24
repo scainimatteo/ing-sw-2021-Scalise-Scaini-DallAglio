@@ -37,8 +37,8 @@ public class MessageParser {
 	 * @return the Message created to send to the client
 	 * @throws IllegalArgumentException if the input cannot be parsed
 	 */
-	public static Message parseInput(String input, boolean initializing, SimplePlayer player) throws IllegalArgumentException {
-		if (initializing) {
+	public static Message parseInput(String input, boolean initialized, SimplePlayer player) throws IllegalArgumentException {
+		if (!initialized) {
 			return new InitializingMessage(input);
 		}
 

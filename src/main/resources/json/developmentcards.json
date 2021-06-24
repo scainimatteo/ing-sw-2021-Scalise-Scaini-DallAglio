@@ -19,7 +19,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 1
+            "victory_points": 1,
+			"front_path": "resources/images/developmentcards/front/development_card_1.png"
         },
         {
             "cardlevel": {
@@ -39,7 +40,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 1
+            "victory_points": 1,
+			"front_path": "resources/images/developmentcards/front/development_card_2.png"
         },
         {
             "cardlevel": {
@@ -59,7 +61,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 1
+            "victory_points": 1,
+			"front_path": "resources/images/developmentcards/front/development_card_3.png"
         },
         {
             "cardlevel": {
@@ -79,7 +82,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 1
+            "victory_points": 1,
+			"front_path": "resources/images/developmentcards/front/development_card_4.png"
         },
         {
             "cardlevel": {
@@ -100,7 +104,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 2
+            "victory_points": 2,
+			"front_path": "resources/images/developmentcards/front/development_card_5.png"
         },
         {
             "cardlevel": {
@@ -121,7 +126,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 2
+            "victory_points": 2,
+			"front_path": "resources/images/developmentcards/front/development_card_6.png"
         },
         {
             "cardlevel": {
@@ -142,7 +148,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 2
+            "victory_points": 2,
+			"front_path": "resources/images/developmentcards/front/development_card_7.png"
         },
         {
             "cardlevel": {
@@ -163,7 +170,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 2
+            "victory_points": 2,
+			"front_path": "resources/images/developmentcards/front/development_card_8.png"
         },
         {
             "cardlevel": {
@@ -187,7 +195,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 3
+            "victory_points": 3,
+			"front_path": "resources/images/developmentcards/front/development_card_9.png"
         },
         {
             "cardlevel": {
@@ -211,7 +220,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 3
+            "victory_points": 3,
+			"front_path": "resources/images/developmentcards/front/development_card_10.png"
         },
         {
             "cardlevel": {
@@ -235,7 +245,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 3
+            "victory_points": 3,
+			"front_path": "resources/images/developmentcards/front/development_card_11.png"
         },
         {
             "cardlevel": {
@@ -259,7 +270,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 3
+            "victory_points": 3,
+			"front_path": "resources/images/developmentcards/front/development_card_12.png"
         },
         {
             "cardlevel": {
@@ -284,7 +296,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 4
+            "victory_points": 4,
+			"front_path": "resources/images/developmentcards/front/development_card_13.png"
         },
         {
             "cardlevel": {
@@ -309,7 +322,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 4
+            "victory_points": 4,
+			"front_path": "resources/images/developmentcards/front/development_card_14.png"
         },
         {
             "cardlevel": {
@@ -334,7 +348,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 4
+            "victory_points": 4,
+			"front_path": "resources/images/developmentcards/front/development_card_15.png"
         },
         {
             "cardlevel": {
@@ -359,7 +374,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 4
+            "victory_points": 4,
+			"front_path": "resources/images/developmentcards/front/development_card_16.png"
         },
         {
             "cardlevel": {
@@ -382,7 +398,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 5
+            "victory_points": 5,
+			"front_path": "resources/images/developmentcards/front/development_card_17.png"
         },
         {
             "cardlevel": {
@@ -405,7 +422,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 5
+            "victory_points": 5,
+			"front_path": "resources/images/developmentcards/front/development_card_18.png"
         },
         {
             "cardlevel": {
@@ -428,7 +446,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 5
+            "victory_points": 5,
+			"front_path": "resources/images/developmentcards/front/development_card_19.png"
         },
         {
             "cardlevel": {
@@ -451,7 +470,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 5
+            "victory_points": 5,
+			"front_path": "resources/images/developmentcards/front/development_card_20.png"
         },
         {
             "cardlevel": {
@@ -477,7 +497,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 6
+            "victory_points": 6,
+			"front_path": "resources/images/developmentcards/front/development_card_21.png"
         },
         {
             "cardlevel": {
@@ -503,7 +524,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 6
+            "victory_points": 6,
+			"front_path": "resources/images/developmentcards/front/development_card_22.png"
         },
         {
             "cardlevel": {
@@ -529,7 +551,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 6
+            "victory_points": 6,
+			"front_path": "resources/images/developmentcards/front/development_card_23.png"
         },
         {
             "cardlevel": {
@@ -555,7 +578,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 6
+            "victory_points": 6,
+			"front_path": "resources/images/developmentcards/front/development_card_24.png"
         },
         {
             "cardlevel": {
@@ -582,7 +606,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 7
+            "victory_points": 7,
+			"front_path": "resources/images/developmentcards/front/development_card_25.png"
         },
         {
             "cardlevel": {
@@ -609,7 +634,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 7
+            "victory_points": 7,
+			"front_path": "resources/images/developmentcards/front/development_card_26.png"
         },
         {
             "cardlevel": {
@@ -636,7 +662,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 7
+            "victory_points": 7,
+			"front_path": "resources/images/developmentcards/front/development_card_27.png"
         },
         {
             "cardlevel": {
@@ -663,7 +690,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 7
+            "victory_points": 7,
+			"front_path": "resources/images/developmentcards/front/development_card_28.png"
         },
         {
             "cardlevel": {
@@ -689,7 +717,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 8
+            "victory_points": 8,
+			"front_path": "resources/images/developmentcards/front/development_card_29.png"
         },
         {
             "cardlevel": {
@@ -715,7 +744,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 8
+            "victory_points": 8,
+			"front_path": "resources/images/developmentcards/front/development_card_30.png"
         },
         {
             "cardlevel": {
@@ -741,7 +771,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 8
+            "victory_points": 8,
+			"front_path": "resources/images/developmentcards/front/development_card_31.png"
         },
         {
             "cardlevel": {
@@ -767,7 +798,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 8
+            "victory_points": 8,
+			"front_path": "resources/images/developmentcards/front/development_card_32.png"
         },
         {
             "cardlevel": {
@@ -796,7 +828,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 9
+            "victory_points": 9,
+			"front_path": "resources/images/developmentcards/front/development_card_33.png"
         },
         {
             "cardlevel": {
@@ -825,7 +858,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 9
+            "victory_points": 9,
+			"front_path": "resources/images/developmentcards/front/development_card_34.png"
         },
         {
             "cardlevel": {
@@ -854,7 +888,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 9
+            "victory_points": 9,
+			"front_path": "resources/images/developmentcards/front/development_card_35.png"
         },
         {
             "cardlevel": {
@@ -883,7 +918,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 9
+            "victory_points": 9,
+			"front_path": "resources/images/developmentcards/front/development_card_36.png"
         },
         {
             "cardlevel": {
@@ -913,7 +949,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 10
+            "victory_points": 10,
+			"front_path": "resources/images/developmentcards/front/development_card_37.png"
         },
         {
             "cardlevel": {
@@ -943,7 +980,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 10
+            "victory_points": 10,
+			"front_path": "resources/images/developmentcards/front/development_card_38.png"
         },
         {
             "cardlevel": {
@@ -973,7 +1011,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 10
+            "victory_points": 10,
+			"front_path": "resources/images/developmentcards/front/development_card_39.png"
         },
         {
             "cardlevel": {
@@ -1003,7 +1042,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 10
+            "victory_points": 10,
+			"front_path": "resources/images/developmentcards/front/development_card_40.png"
         },
         {
             "cardlevel": {
@@ -1031,7 +1071,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 11
+            "victory_points": 11,
+			"front_path": "resources/images/developmentcards/front/development_card_41.png"
         },
         {
             "cardlevel": {
@@ -1059,7 +1100,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 11
+            "victory_points": 11,
+			"front_path": "resources/images/developmentcards/front/development_card_42.png"
         },
         {
             "cardlevel": {
@@ -1087,7 +1129,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 11
+            "victory_points": 11,
+			"front_path": "resources/images/developmentcards/front/development_card_43.png"
         },
         {
             "cardlevel": {
@@ -1115,7 +1158,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 11
+            "victory_points": 11,
+			"front_path": "resources/images/developmentcards/front/development_card_44.png"
         },
         {
             "cardlevel": {
@@ -1144,7 +1188,8 @@
                     "STONE"
                 ]
             },
-            "victory_points": 12
+            "victory_points": 12,
+			"front_path": "resources/images/developmentcards/front/development_card_45.png"
         },
         {
             "cardlevel": {
@@ -1173,7 +1218,8 @@
                     "COIN"
                 ]
             },
-            "victory_points": 12
+            "victory_points": 12,
+			"front_path": "resources/images/developmentcards/front/development_card_46.png"
         },
         {
             "cardlevel": {
@@ -1202,7 +1248,8 @@
                     "SERVANT"
                 ]
             },
-            "victory_points": 12
+            "victory_points": 12,
+			"front_path": "resources/images/developmentcards/front/development_card_47.png"
         },
         {
             "cardlevel": {
@@ -1231,7 +1278,8 @@
                     "SHIELD"
                 ]
             },
-            "victory_points": 12
+            "victory_points": 12,
+			"front_path": "resources/images/developmentcards/front/development_card_48.png"
         }
     ]
 }

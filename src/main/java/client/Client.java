@@ -10,6 +10,7 @@ import java.net.*;
 import java.io.*;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.EndGameMessage;
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
 import it.polimi.ingsw.controller.servermessage.ErrorMessage;
 import it.polimi.ingsw.controller.servermessage.ViewUpdate;
@@ -50,6 +51,8 @@ public class Client {
 					this.view.handleError((ErrorMessage) message);
 				} else if (message.initializing) {
 					this.view.handleInitializing((InitializingServerMessage) message);
+				} else if (message.end_game) {
+					this.view.handleEndGame((EndGameMessage) message);
 				} else {
 					this.updateView((ViewUpdate) message);
 				}

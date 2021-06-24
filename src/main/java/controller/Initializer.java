@@ -18,12 +18,16 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.Deck;
 
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+import it.polimi.ingsw.model.game.sologame.SoloGame;
 import it.polimi.ingsw.model.game.Factory;
 import it.polimi.ingsw.model.game.Game;
 
-import it.polimi.ingsw.model.player.track.VaticanReports;
+import it.polimi.ingsw.model.player.track.SoloFaithTrack;
+import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
+import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.model.resources.Resource;
@@ -35,10 +39,13 @@ public class Initializer {
 	private RemoteView[] remote_views;
 
 	/**
-	 * Starting procedure for the match:
+	 * Initialize a Game:
 	 *   - create the Players and the RemoteViews from the ClientHandlers
-	 *   - distribute 4 LeaderCards to each player
-	 *   - choose randomly the first player
+	 *   - distribute 4 LeaderCards to each Player
+	 *   - choose randomly the first Player
+	 *   - move the third and fourth Player forward on their FaithTracks
+	 *   - add the RemoteViews as Observers
+	 *   - send the Model to the Clients using the Observers
 	 *
 	 * @param clients the ClientHandlers of the Players
 	 * @return the new Game
@@ -65,6 +72,33 @@ public class Initializer {
 	}
 
 	/**
+	 * Initialize a SoloGame:
+	 *   - create the Player and the RemoteView from the ClientHandler
+	 *   - distribute 4 LeaderCards to the Player
+	 *   - add the RemoteView as Observer
+	 *   - send the Model to the Client using the Observer
+	 *
+	 * @param clients the ClientHandler of the Player
+	 * @return the new SoloGame
+	 */
+	public SoloGame initializeSoloGame(ArrayList<ClientHandler> clients) throws InstantiationException {
+		try {
+			createSoloPlayer(clients);
+			distributeLeaderCards();
+			SoloGame game = createSoloGame();
+			addRemoteViews(game);
+			game.notifyGame();
+			this.players.get(0).notifyPlayer();
+			game.getTurn().notifyTurn();
+			return game;
+		} catch (Exception e) {
+			//TODO: too generic?
+			e.printStackTrace();
+			throw new InstantiationException();
+		}
+	}
+
+	/**
 	 * Create an array of Players using the ClientHandlers
 	 *
 	 * @param clients the ClientHandlers of the Players
@@ -72,13 +106,14 @@ public class Initializer {
 	private void createPlayers(ArrayList<ClientHandler> clients) throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		Cell[] all_cells = factory.getAllCells();
-		Tile[] all_tiles = factory.getAllTiles();
 
 		this.players = new ArrayList<Player>();
 		this.remote_views = new RemoteView[clients.size()];
 
 		for (int i = 0; i < clients.size(); i++) {
-			players.add(new Player(clients.get(i).getNickname(), all_cells, all_tiles));
+			// every time create a different array of cloned Tiles
+			Tile[] all_tiles = factory.getAllTiles();
+			players.add(new Player(clients.get(i).getNickname(), new FaithTrack(all_cells, all_tiles)));
 			this.remote_views[i] = new RemoteView(clients.get(i));
 			clients.get(i).setPlayer(this.players.get(i));
 		}
@@ -88,6 +123,26 @@ public class Initializer {
 				this.players.get(i).addObserver(this.remote_views[j]);
 			}
 		}
+	}
+
+	/**
+	 * Create a SoloPlayer using the ClientHandler
+	 *
+	 * @param clients the ClientHandler of the Player
+	 */
+	private void createSoloPlayer(ArrayList<ClientHandler> clients) throws ParseException, IOException {
+		Factory factory = Factory.getIstance();
+		Cell[] all_cells = factory.getAllCells();
+		Tile[] all_tiles = factory.getAllTiles();
+
+		this.players = new ArrayList<Player>();
+		this.remote_views = new RemoteView[1];
+
+		players.add(new SoloPlayer(clients.get(0).getNickname(), new SoloFaithTrack(all_cells, all_tiles)));
+		this.remote_views[0] = new RemoteView(clients.get(0));
+		clients.get(0).setPlayer(this.players.get(0));
+
+		this.players.get(0).addObserver(this.remote_views[0]);
 	}
 
 	/**
@@ -144,7 +199,6 @@ public class Initializer {
 	 */
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
-			r.setTurn(game.getTurn());
 			game.addObserver(r);
 			game.getTurn().addObserver(r);
 		}
@@ -157,5 +211,15 @@ public class Initializer {
 		Factory factory = Factory.getIstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		return new Game(this.players, all_development_cards);
+	}
+
+	/**
+	 * @return the new SoloGame
+	 */
+	private SoloGame createSoloGame() throws ParseException, IOException {
+		Factory factory = Factory.getIstance();
+		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
+		SoloActionToken[] all_solo_action_tokens = factory.getAllSoloActionTokens();
+		return new SoloGame(this.players, all_development_cards, all_solo_action_tokens);
 	}
 }

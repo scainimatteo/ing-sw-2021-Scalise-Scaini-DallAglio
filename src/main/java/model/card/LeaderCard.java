@@ -8,6 +8,7 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 	private static final long serialVersionUID = 883L;
 	protected LeaderAbility ability;
 	protected boolean activated;
+	protected String front_path;
 
 	public boolean isActive() {
 		return this.activated;
@@ -15,6 +16,10 @@ public abstract class LeaderCard extends Card implements Cloneable, Serializable
 	
 	public LeaderAbility getAbility(){
 		return this.ability;
+	}
+
+	public String getFrontPath(){
+		return this.front_path;
 	}
 
 	public void activateLeaderCard() {

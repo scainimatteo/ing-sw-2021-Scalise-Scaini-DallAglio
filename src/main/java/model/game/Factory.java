@@ -25,6 +25,11 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
+import it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards;
+import it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces;
+import it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace;
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+
 import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.track.Tile;
 import it.polimi.ingsw.model.player.track.Cell;
@@ -42,12 +47,14 @@ public class Factory {
 	private LeaderCard[] all_leader_cards;
 	private Cell[] all_cells;
 	private Tile[] all_tiles;
+	private SoloActionToken[] all_solo_action_tokens;
 	private JSONParser jsonParser;
 
 	private int development_cards_number;
 	private int leader_cards_number;
 	private int cells_number;
 	private int tiles_number;
+	private int solo_action_tokens_number;
 
 	private Factory() throws ParseException, IOException {
 		this.jsonParser = new JSONParser();
@@ -55,6 +62,7 @@ public class Factory {
 		this.all_leader_cards = readAllLeaderCards();
 		this.all_cells = readAllCells();
 		this.all_tiles = readAllTiles();
+		this.all_solo_action_tokens = readAllSoloActionTokens();
 	}
 
 	/**
@@ -100,6 +108,13 @@ public class Factory {
 	}
 
 	/**
+	 * @return an array containing all the SoloActionTokens specified in the json file
+	 */
+	public SoloActionToken[] getAllSoloActionTokens() {
+		return this.all_solo_action_tokens;
+	}
+
+	/**
 	 * @return the number of DevelopmentCards
 	 */
 	public int getDevelopmentCardsNumber() {
@@ -125,6 +140,13 @@ public class Factory {
 	 */
 	public int getTilesNumber() {
 		return this.tiles_number;
+	}
+
+	/**
+	 * @return the number of SoloActionToken
+	 */
+	public int getSoloActionTokensNumber() {
+		return this.solo_action_tokens_number;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -175,7 +197,10 @@ public class Factory {
 			// VICTORYPOINTS
 			int victory_points = (int)(long) card.get("victory_points");
 
-			development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id);
+			// PATH
+			String front_path = (String) card.get("front_path");
+
+			development_cards[i] = new DevelopmentCard(victory_points, new_production, cost, cardlevel, id, front_path);
 		}
 		return development_cards;
 	}
@@ -199,7 +224,7 @@ public class Factory {
 			case "PRODUCTION":
 				JSONArray required_resources_arr = (JSONArray) ability_obj.get("required_resources");
 				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(required_resources_arr);
-				ArrayList<Resource> produced_resources = new ArrayList();
+				ArrayList<Resource> produced_resources = new ArrayList<Resource>();
 				produced_resources.add(null);
 				produced_resources.add(Resource.FAITH);
 				return new ProductionAbility(requirements_resources, produced_resources);
@@ -215,7 +240,7 @@ public class Factory {
 	 * @param requirements_obj the JSONObject containing all the requirements parameters
 	 * @return the correct LeaderCard based on the requirements
 	 */
-	private LeaderCard createLeaderCard(int id, LeaderAbility ability, int victory_points, JSONObject requirements_obj) throws ParseException {
+	private LeaderCard createLeaderCard(int id, String front_path, LeaderAbility ability, int victory_points, JSONObject requirements_obj) throws ParseException {
 		String requirements_type = requirements_obj.get("type").toString();
 		switch (requirements_type) {
 
@@ -229,13 +254,13 @@ public class Factory {
 					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(cardlevel_obj.get("color").toString());
 					requirements_cardlevels.add(new CardLevel(level, color));
 				}
-				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id);
+				return new LeaderCardLevelCost(victory_points, ability, requirements_cardlevels, id, front_path);
 
 			// to activate the LeaderCard the correct resources are needed
 			case "RESOURCES":
 				JSONArray resources_arr = (JSONArray) requirements_obj.get("resources");
 				ArrayList<Resource> requirements_resources = convertJsonArrayToResourceArray(resources_arr);
-				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id);
+				return new LeaderCardResourcesCost(victory_points, ability, requirements_resources, id, front_path);
 
 			default:
 				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
@@ -261,6 +286,9 @@ public class Factory {
 			// ID
 			int id = (int)(long) card.get("id");
 
+			// IMAGE
+			String front_path = (String) card.get("front_path");
+
 			// ABILITY
 			JSONObject ability_obj = (JSONObject) card.get("ability");
 			LeaderAbility ability = createAbility(ability_obj);
@@ -271,7 +299,7 @@ public class Factory {
 			// REQUIREMENTS
 			JSONObject requirements_obj = (JSONObject) card.get("requirements");
 
-			leader_cards[i] = createLeaderCard(id, ability, victory_points, requirements_obj);
+			leader_cards[i] = createLeaderCard(id, front_path, ability, victory_points, requirements_obj);
 		}
 		return leader_cards;
 	}
@@ -341,5 +369,53 @@ public class Factory {
 			tiles[i] = new Tile(report, victory_points);
 		}
 		return tiles;
+	}
+
+	/**
+	 * Create a SoloActionToken
+	 *
+	 * @param solo_action_token the JSONObject containing all the information about the SoloActionToken
+	 * @throws ParseException if it cannot parse the token or if a DiscardDevelopmentCards token has a wrong color
+	 * @return the correct SoloActionToken based on the type
+	 */
+	private SoloActionToken createSoloActionToken(JSONObject solo_action_token) throws ParseException {
+		String type = solo_action_token.get("type").toString();
+		switch (type) {
+			case "MOVEBLACKCROSSTWOSPACES":
+				return new MoveBlackCrossTwoSpaces();
+			case "MOVEBLACKCROSSONESPACE":
+				return new MoveBlackCrossOneSpace();
+			case "DISCARDDEVELOPMENTCARDS":
+				try {
+					String color_type = solo_action_token.get("color").toString();
+					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(color_type);
+					return new DiscardDevelopmentCards(color);
+				} catch (IllegalArgumentException e) {
+					// if the color is not a DevelopmentCardsColor
+					throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
+				}
+			default:
+				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
+		}
+	}
+
+	/**
+	 * Parse the json file for the SoloActionTokens
+	 *
+	 * @return an array containing all the SoloActionTokens specified in the json file
+	 */
+	private SoloActionToken[] readAllSoloActionTokens() throws ParseException, IOException {
+		InputStream is = getClass().getClassLoader().getResourceAsStream("json/soloactiontokens.json");
+		JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+		this.solo_action_tokens_number = (int)(long) jsonObject.get("solo_action_tokens_number");
+		SoloActionToken[] solo_action_tokens = new SoloActionToken[solo_action_tokens_number];
+
+		JSONArray solo_action_tokens_obj = (JSONArray) jsonObject.get("solo_action_tokens");
+		for (int i = 0; i < solo_action_tokens_number; i++) {
+			JSONObject solo_action_token = (JSONObject) this.jsonParser.parse(solo_action_tokens_obj.get(i).toString());
+			solo_action_tokens[i] = createSoloActionToken(solo_action_token);
+		}
+		return solo_action_tokens;
 	}
 }

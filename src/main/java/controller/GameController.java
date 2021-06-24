@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller;
 
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.stream.Collectors;
 
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
@@ -20,42 +20,84 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Warehouse;
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-import java.util.ArrayList;
-
 public class GameController implements Runnable, Controller {
-	private ArrayList<ClientHandler> clients;
-	private Game game;
+	protected ArrayList<ClientHandler> clients;
+	protected Game game;
 
-	public GameController(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public GameController(ArrayList<ClientHandler> clients) {
 		this.clients = clients;
+	}
+
+	/**
+	 * Initialize the Game using the Initializer
+	 *
+	 * @throws InstantiationException when the Initializer fails
+	 */
+	public void initializeGame() throws InstantiationException {
 		try {
-			this.game = new Initializer().initializeGame(clients);
+			this.game = new Initializer().initializeGame(this.clients);
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 			throw new InstantiationException();
 		}
 	}
 
+	//TODO: this is empty, should GameController not be a Runnable?
+	public void run() {
+		return;
+	}
+
+	/**
+	 * Handle the Message coming from the Client using the pattern Visitor
+	 *
+	 * @param message the Message to handle
+	 */
 	public void handleMessage(Message message) {
 		message.useMessage(this);
 	}
 
-	//TODO: this is empty, should GameController not be a Runnable?
-	public void run() {
-		return;
+	/**
+	 * Handle Errors by notifying ErrorMessages
+	 *
+	 * @param error_string the error to report
+	 * @param player the Player that committed the error
+	 */
+	protected void handleError(String error_string, Player player){
+		this.game.handleError(error_string, player);
 	}
 	
 	/**
 	 * @param player is the player who sent the message
 	 * @return true only if the player who sent the message is the active player
 	 */
-	private boolean checkPlayer(Player player){
+	protected boolean checkPlayer(Player player){
 		return player.equals(game.getTurn().getPlayer()) && game.getTurn().isInitialized();
+	}
+
+	/**
+	 * If a VaticanReports was activated by a Player, activate it on other Players
+	 *
+	 * @param player the Player that activated the VaticanReport
+	 * @param report the VaticanReport activated
+	 */
+	private void handleVaticanReports(Player player, VaticanReports report) {
+		if (report == null) {
+			return;
+		}
+
+		for (Player p: this.game.getPlayers()) {
+			if (!p.equals(player)) {
+				if (p.whichVaticanReport() != null && p.whichVaticanReport().equals(report)) {
+					p.activateVaticanReport();
+				}
+			}
+		}
 	}
 	
 	/**
@@ -106,7 +148,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * sets the turn to initialized if each player has the correct amount of starting resources and leader cards
+	 * Sets the turn to initialized if each player has the correct amount of starting resources and leader cards
 	 */
 	private void checkEndInitializing(){
 		if(checkCardNumber() && checkCorrectTotalResources()){
@@ -149,10 +191,10 @@ public class GameController implements Runnable, Controller {
 						player.storeMiddle(storage.getWarehouseMid());
 						player.storeBottom(storage.getWarehouseBot());
 						checkEndInitializing();
-					} else {handleError("You cannot store resources in such a way");}
-				} else {handleError("You cannot choose so many starting resources");}
-			} else {handleError("You already have the correct amount of starting resources");}
-		} else {handleError("The game has already started");}
+					} else {handleError("You cannot store resources in such a way", player);}
+				} else {handleError("You cannot choose so many starting resources", player);}
+			} else {handleError("You already have the correct amount of starting resources", player);}
+		} else {handleError("The game has already started", player);}
 	}
 
 	/**
@@ -172,9 +214,9 @@ public class GameController implements Runnable, Controller {
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				if(player.isActivable(card) && !card.isActive()){
 					player.activateLeader(card);	
-				} else {handleError("The requested card cannot be activated");}
-			} else {handleError("You must end your turn first");}
-		} else {handleError("It is not your turn");}
+				} else {handleError("The requested card cannot be activated", player);}
+			} else {handleError("You must end your turn first", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -192,13 +234,13 @@ public class GameController implements Runnable, Controller {
 			if	(player.getLeaderCards().size() > 2) {
 				player.discardLeader(card.getId());	
 				checkEndInitializing();
-			} else {handleError("You cannot discard any more cards");}
+			} else {handleError("You cannot discard any more cards", player);}
 		} else if (player.equals(game.getTurn().getPlayer())){ 
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				player.discardLeader(card.getId());	
-				player.moveForward(1);
-			} else {handleError("You must end your turn first");}
-		} else {handleError("It is not your turn");}
+				handleVaticanReports(player, player.moveForward(1));
+			} else {handleError("You must end your turn first", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -253,7 +295,7 @@ public class GameController implements Runnable, Controller {
 	private ArrayList<Resource> filterResources(Player player, ArrayList<Resource> raw_resources){
 		ArrayList<Resource> filtered = (ArrayList<Resource>) raw_resources.stream().filter(e -> e != null).collect(Collectors.toList());
 		int steps = (int) filtered.stream().filter(e -> e.equals(Resource.FAITH)).count();
-		player.moveForward(steps);
+		handleVaticanReports(player, player.moveForward(steps));
 		return (ArrayList<Resource>) filtered.stream().filter(e -> !e.equals(Resource.FAITH)).collect(Collectors.toList());
 	}
 
@@ -285,11 +327,11 @@ public class GameController implements Runnable, Controller {
 							}
 							game.getTurn().setDoneAction(true);
 							game.getTurn().setDiscard(true);
-						} catch (IllegalArgumentException e) {handleError("The bonus you requested cannot be applied to the resources you have gained");}
-					} catch (IllegalArgumentException e) {handleError("The row or column you requested doesn't exist");}
-				} else {handleError("You cannot ask for such a bonus");}
-			} else {handleError("You already played your main action");}
-		} else {handleError("It is not your turn");}
+						} catch (IllegalArgumentException e) {handleError("The bonus you requested cannot be applied to the resources you have gained", player);}
+					} catch (IllegalArgumentException e) {handleError("The row or column you requested doesn't exist", player);}
+				} else {handleError("You cannot ask for such a bonus", player);}
+			} else {handleError("You already played your main action", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -338,11 +380,11 @@ public class GameController implements Runnable, Controller {
 							player.buyCard(card, slot - 1);
 							game.getTurn().addRequiredResources(cost);
 							game.getTurn().setDoneAction(true);
-						} else {handleError("You cannot put the card in the requested slot");}
-					} else {handleError("You do not have enough resources to buy this card");}
-				} catch (IndexOutOfBoundsException e) {handleError("The card you requested does not exist");}
-			} else {handleError("You already played your main action");}
-		} else {handleError("It is not your turn");}
+						} else {handleError("You cannot put the card in the requested slot", player);}
+					} else {handleError("You do not have enough resources to buy this card", player);}
+				} catch (IndexOutOfBoundsException e) {handleError("The card you requested does not exist", player);}
+			} else {handleError("You already played your main action", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -387,12 +429,13 @@ public class GameController implements Runnable, Controller {
 				ArrayList<Resource> produced = totalProductionGain(productions);
 				if(player.hasEnoughResources(required)){
 					game.getTurn().addRequiredResources(required);
-					player.moveForward((int)produced.stream().filter(x->x.equals(Resource.FAITH)).count());
+					int number_of_faith = (int)produced.stream().filter(x->x.equals(Resource.FAITH)).count();
+					handleVaticanReports(player, player.moveForward(number_of_faith));
 					game.getTurn().addProducedResources((ArrayList<Resource>)produced.stream().filter(x->!x.equals(Resource.FAITH)).collect(Collectors.toList()));
 					game.getTurn().setDoneAction(true);
-				} else {handleError("You don't have enough resources to activate these production powers");}
-			} else {handleError("You already played your main action");}
-		} else {handleError("It is not your turn");}
+				} else {handleError("You don't have enough resources to activate these production powers", player);}
+			} else {handleError("You already played your main action", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -509,9 +552,9 @@ public class GameController implements Runnable, Controller {
 						player.insertResources(game.getTurn().getProducedResources());
 						game.getTurn().clearProducedResources();
 					}
-				} else {handleError("The resources you offered for payment aren't available");}
-			} else {handleError("You cannot pay more than you should");}
-		} else {handleError("It is not your turn");}
+				} else {handleError("The resources you offered for payment aren't available", player);}
+			} else {handleError("You cannot pay more than you should", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -613,10 +656,10 @@ public class GameController implements Runnable, Controller {
 						game.getTurn().removeProducedResources(storage.getWarehouseBot());
 						player.storeExtra(storage.getExtraspace());
 						game.getTurn().removeProducedResources(storage.getExtraspace());
-					} else {handleError("You cannot put the resources there");}
-				} else {handleError("You cannot store more than you should");}
-			} else {handleError("You must pay all of the cost first");}
-		} else {handleError("It is not your turn");}
+					} else {handleError("There isn't enough room for the resources you are trying to store", player);}
+				} else {handleError("You cannot store more than you should", player);}
+			} else {handleError("You must pay all of the cost first", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -631,12 +674,12 @@ public class GameController implements Runnable, Controller {
 				int discarded = game.getTurn().getProducedResources().size();
 				for (Player p : game.getPlayers()){
 					if (!p.equals(player)){
-						p.moveForward(discarded);
+						handleVaticanReports(p, p.moveForward(discarded));
 					}
 				}
 				game.getTurn().clearProducedResources();
-			} else {handleError("You must pay all of the cost first");}
-		} else {handleError("It is not your turn");}
+			} else {handleError("You must pay all of the cost first", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -652,8 +695,8 @@ public class GameController implements Runnable, Controller {
 		if (checkPlayer(player)){
 			try {
 				player.swapRows(swap1, swap2);
-			} catch (IllegalArgumentException e){handleError();}
-		} else {handleError("It is not your turn");}
+			} catch (IllegalArgumentException e){handleError("You cannot swap the selected rows", player);}
+		} else {handleError("It is not your turn", player);}
 	}
 
 	/**
@@ -661,11 +704,12 @@ public class GameController implements Runnable, Controller {
 	 * */
 	
 	/**
-	 * Checks if the player more than 7 development cards or has reached the end of the track and triggers the round to be the last
+	 * Checks if the player has bought at least 7 development cards or has reached the end of the track and triggers the round to be the last
 	 *
 	 * @param player is the active player
 	 */
-	private void checkLastTurn(Player player){
+	protected void checkLastTurn(Player player){
+		// count the DevelopmentCards of the player
 		int count = 0;
 		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
 		while(iterator.hasNext()){
@@ -678,7 +722,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * upon receiving the corresponding message, checks if the player who requested the action is active, if they have played a main action, if they paid the cost of their action completely and
+	 * Upon receiving the corresponding message, checks if the player who requested the action is active, if they have played a main action, if they paid the cost of their action completely and
 	 * completely stored all of their gain.
 	 * End the turn and starts the next player's turn if conditions are met, triggering the last round if needed, raises corresponding error otherwise.
 	 *
@@ -690,16 +734,7 @@ public class GameController implements Runnable, Controller {
 			if (game.getTurn().hasDoneAction() && game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				checkLastTurn(player);
 				game.endTurn();
-			} else {handleError("You cannot end your turn now");}
-		} else {handleError("It is not your turn");}
+			} else {handleError("You cannot end your turn now", player);}
+		} else {handleError("It is not your turn", player);}
 	}
-
-	/**
-	 * HANDLE VARIOUS ERRORS
-	 */
-	private void handleError(String string){
-		this.game.handleError(string);
-	}
-
-	private void handleError(){};
 }

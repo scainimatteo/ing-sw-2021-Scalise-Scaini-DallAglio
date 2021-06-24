@@ -10,8 +10,10 @@ import java.net.*;
 import java.io.*;
 
 import it.polimi.ingsw.controller.servermessage.InitializingServerMessage;
+import it.polimi.ingsw.controller.servermessage.InitializingMessageType;
 import it.polimi.ingsw.controller.servermessage.ServerMessage;
 import it.polimi.ingsw.controller.message.InitializingMessage;
+import it.polimi.ingsw.controller.SoloGameController;
 import it.polimi.ingsw.controller.InitialController;
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.GameController;
@@ -80,11 +82,18 @@ public class Server {
 		if (checkIfAllPlayersPresent(match_name)) {
 			// the right amount of clients are connected, start the match
 			for (ClientHandler ch : this.lobby.get(match_name)) {
-				sendStringToClient(ch, "Start Match\n\n");
+				sendStringToClient(ch, "Start Match\n\n", InitializingMessageType.START_MATCH);
 			}
 
-			//TODO: if only one player, new_match = new SoloMatch
-			GameController new_match = new GameController(this.lobby.get(match_name));
+			// create, initialize and start a new Game or SoloGame
+			GameController new_match;
+			if (this.lobby.get(match_name).size() == 1) {
+				new_match = new SoloGameController(this.lobby.get(match_name));
+			} else {
+				new_match = new GameController(this.lobby.get(match_name));
+			}
+
+			new_match.initializeGame();
 			for (ClientHandler c: this.lobby.get(match_name)) {
 				c.setController(new_match);
 			}
@@ -98,7 +107,8 @@ public class Server {
 	 */
 	private String manageClient(ClientHandler client) throws IllegalAccessError, InterruptedException {
 		//TODO: put all strings in a separate class
-		sendStringToClient(client, "Nickname? ");
+		//TODO: refute null nicknames
+		sendStringToClient(client, "Nickname? ", InitializingMessageType.NICKNAME);
 		String nickname = receiveStringFromClient(client);
 
 		synchronized (this.nicknames) {
@@ -110,12 +120,12 @@ public class Server {
 		}
 		client.setNickname(nickname);
 
-		sendStringToClient(client, "Match name? ");
+		sendStringToClient(client, "Match name? ", InitializingMessageType.CHOOSE_MATCH_NAME);
 		String match_name = receiveStringFromClient(client);
 
 		if (match_name.equals("")) {
 			match_name = manageFirstClient(client);
-			sendStringToClient(client, "Started match with match name " + match_name + "\n\n");
+			sendStringToClient(client, "Started match with match name " + match_name + "\n\n", InitializingMessageType.STARTED_MATCH_NAME, match_name);
 		} else {
 			manageOtherClient(client, match_name);
 		}
@@ -130,7 +140,7 @@ public class Server {
 		int num;
 
 		//TODO: put all strings in a separate class
-		sendStringToClient(first_client, "How many player in match? ");
+		sendStringToClient(first_client, "How many player in match? ", InitializingMessageType.NUM_PLAYERS);
 		try {
 			num = Integer.parseInt(receiveStringFromClient(first_client));
 		} catch (NumberFormatException e) {
@@ -154,6 +164,7 @@ public class Server {
 	 */
 	private void manageOtherClient(ClientHandler client, String match_name) throws IllegalAccessError {
 		synchronized(this.lobby) {
+			//TODO: make the match_name uppercase
 			if (this.lobby.containsKey(match_name)) {
 				this.lobby.get(match_name).add(client);
 			} else {
@@ -201,9 +212,21 @@ public class Server {
 	/**
 	 * @param client the ClientHandler of the client
 	 * @param string the message to send
+	 * @param type the InitializingMessageType of the message to send
 	 */
-	public void sendStringToClient(ClientHandler client, String string) {
-		ServerMessage message = new InitializingServerMessage(string);
+	public void sendStringToClient(ClientHandler client, String string, InitializingMessageType type) {
+		ServerMessage message = new InitializingServerMessage(string, type);
+		client.sendToClient(message);
+	}
+
+	/**
+	 * @param client the ClientHandler of the client
+	 * @param string the message to send
+	 * @param type the InitializingMessageType of the message to send
+	 * @param match_name the name of the match that was just created
+	 */
+	public void sendStringToClient(ClientHandler client, String string, InitializingMessageType type, String match_name) {
+		ServerMessage message = new InitializingServerMessage(string, type, match_name);
 		client.sendToClient(message);
 	}
 

@@ -1,11 +1,11 @@
 {
-	"leader_cards_number": 16,
     "leader_cards": [
         {
             "ability": {
                 "resource": "SERVANT",
                 "type": "DISCOUNT"
             },
+            "front_path": "/images/leadercards/front/leader_card_1.png",
             "id": 1,
             "requirements": {
                 "cardlevel": [
@@ -27,6 +27,7 @@
                 "resource": "SHIELD",
                 "type": "DISCOUNT"
             },
+            "front_path": "/images/leadercards/front/leader_card_2.png",
             "id": 2,
             "requirements": {
                 "cardlevel": [
@@ -48,6 +49,7 @@
                 "resource": "STONE",
                 "type": "DISCOUNT"
             },
+            "front_path": "/images/leadercards/front/leader_card_3.png",
             "id": 3,
             "requirements": {
                 "cardlevel": [
@@ -69,6 +71,7 @@
                 "resource": "COIN",
                 "type": "DISCOUNT"
             },
+            "front_path": "/images/leadercards/front/leader_card_4.png",
             "id": 4,
             "requirements": {
                 "cardlevel": [
@@ -90,6 +93,7 @@
                 "resource": "STONE",
                 "type": "EXTRA_SPACE"
             },
+            "front_path": "/images/leadercards/front/leader_card_5.png",
             "id": 5,
             "requirements": {
                 "resources": [
@@ -108,6 +112,7 @@
                 "resource": "SERVANT",
                 "type": "EXTRA_SPACE"
             },
+            "front_path": "/images/leadercards/front/leader_card_6.png",
             "id": 6,
             "requirements": {
                 "resources": [
@@ -126,6 +131,7 @@
                 "resource": "SHIELD",
                 "type": "EXTRA_SPACE"
             },
+            "front_path": "/images/leadercards/front/leader_card_7.png",
             "id": 7,
             "requirements": {
                 "resources": [
@@ -144,6 +150,7 @@
                 "resource": "COIN",
                 "type": "EXTRA_SPACE"
             },
+            "front_path": "/images/leadercards/front/leader_card_8.png",
             "id": 8,
             "requirements": {
                 "resources": [
@@ -162,6 +169,7 @@
                 "resource": "SERVANT",
                 "type": "WHITE_MARBLES"
             },
+            "front_path": "/images/leadercards/front/leader_card_9.png",
             "id": 9,
             "requirements": {
                 "cardlevel": [
@@ -187,6 +195,7 @@
                 "resource": "SHIELD",
                 "type": "WHITE_MARBLES"
             },
+            "front_path": "/images/leadercards/front/leader_card_10.png",
             "id": 10,
             "requirements": {
                 "cardlevel": [
@@ -212,6 +221,7 @@
                 "resource": "STONE",
                 "type": "WHITE_MARBLES"
             },
+            "front_path": "/images/leadercards/front/leader_card_11.png",
             "id": 11,
             "requirements": {
                 "cardlevel": [
@@ -237,6 +247,7 @@
                 "resource": "COIN",
                 "type": "WHITE_MARBLES"
             },
+            "front_path": "/images/leadercards/front/leader_card_12.png",
             "id": 12,
             "requirements": {
                 "cardlevel": [
@@ -264,6 +275,7 @@
                 ],
                 "type": "PRODUCTION"
             },
+            "front_path": "/images/leadercards/front/leader_card_13.png",
             "id": 13,
             "requirements": {
                 "cardlevel": [
@@ -283,6 +295,7 @@
                 ],
                 "type": "PRODUCTION"
             },
+            "front_path": "/images/leadercards/front/leader_card_14.png",
             "id": 14,
             "requirements": {
                 "cardlevel": [
@@ -302,6 +315,7 @@
                 ],
                 "type": "PRODUCTION"
             },
+            "front_path": "/images/leadercards/front/leader_card_15.png",
             "id": 15,
             "requirements": {
                 "cardlevel": [
@@ -321,6 +335,7 @@
                 ],
                 "type": "PRODUCTION"
             },
+            "front_path": "/images/leadercards/front/leader_card_16.png",
             "id": 16,
             "requirements": {
                 "cardlevel": [
@@ -333,5 +348,6 @@
             },
             "victory_points": 4
         }
-    ]
+    ],
+    "leader_cards_number": 16
 }
