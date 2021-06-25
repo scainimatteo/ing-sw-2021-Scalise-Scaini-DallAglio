@@ -22,11 +22,11 @@ import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-import it.polimi.ingsw.util.observer.Observable;
+import it.polimi.ingsw.util.observer.ModelObservable;
 
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
-public class Game extends Observable {
+public class Game extends ModelObservable {
 	private ArrayList<Player> players;
 	private Market market;
 	private DevelopmentCardsOnTable development_cards_on_table;
@@ -50,14 +50,14 @@ public class Game extends Observable {
 	}
 
 	public void handleError(String error_message, Player player){
-		notify(new ErrorMessage(error_message, player.getNickname()));
+		notifyModel(new ErrorMessage(error_message, player.getNickname()));
 	}
 
 	/**
 	 * Send a ViewUpdate with the current Game
 	 */
 	public void notifyGame() {
-		notify(new ViewUpdate(this.simplify()));
+		notifyModel(new ViewUpdate(this.simplify()));
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class Game extends Observable {
 		for (Player p: this.victory_points.keySet()) {
 			rank.put(p.getNickname(), this.victory_points.get(p));
 		}
-		notify(new EndGameMessage(rank));
+		notifyModel(new EndGameMessage(rank));
 	}
 
 	/**

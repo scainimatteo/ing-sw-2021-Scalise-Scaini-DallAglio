@@ -17,7 +17,7 @@ import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
-import it.polimi.ingsw.util.observer.Observable;
+import it.polimi.ingsw.util.observer.ModelObservable;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
@@ -31,7 +31,7 @@ import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
 
-public class Player extends Observable {
+public class Player extends ModelObservable {
 	protected String nickname;
 	protected FaithTrack track;
 	protected Warehouse warehouse;
@@ -56,7 +56,7 @@ public class Player extends Observable {
 	 * Send a ViewUpdate with the current Player
 	 */
 	public void notifyPlayer() {
-		notify(new ViewUpdate(this.simplify()));
+		notifyModel(new ViewUpdate(this.simplify()));
 	}
 
 	/**

@@ -9,9 +9,9 @@ import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
-import it.polimi.ingsw.util.observer.Observable;
+import it.polimi.ingsw.util.observer.ModelObservable;
 
-public class Turn extends Observable implements Serializable {
+public class Turn extends ModelObservable implements Serializable {
 	private static final long serialVersionUID = 8008L;
 	transient Player active_player;
 	ArrayList<Resource> required_resources;
@@ -135,6 +135,6 @@ public class Turn extends Observable implements Serializable {
 	}
 
 	public void notifyTurn() {
-		notify(new ViewUpdate(this));
+		notifyModel(new ViewUpdate(this));
 	}
 }

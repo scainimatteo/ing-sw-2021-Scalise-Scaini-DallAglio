@@ -85,7 +85,7 @@ public class Initializer {
 
 		for (int i = 0; i < this.players.size(); i++) {
 			for (int j = 0; j < this.remote_views.length; j++) {
-				this.players.get(i).addObserver(this.remote_views[j]);
+				this.players.get(i).addModelObserver(this.remote_views[j]);
 			}
 		}
 	}
@@ -140,12 +140,12 @@ public class Initializer {
 	}
 
 	/**
-	 * Add the RemoteViews as Observer of Game
+	 * Add the RemoteViews as ModelObserver of Game
 	 */
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
-			game.addObserver(r);
-			game.getTurn().addObserver(r);
+			game.addModelObserver(r);
+			game.getTurn().addModelObserver(r);
 		}
 	}
 
