@@ -7,7 +7,7 @@ import it.polimi.ingsw.util.observer.GameStartObserver;
 public class GameStartObservable {
 	private ArrayList<GameStartObserver> observers = new ArrayList<GameStartObserver>();
 
-	public void addObserver(GameStartObserver observer){
+	public void addGameStartObserver(GameStartObserver observer){
 		observers.add(observer);
 	}
 

@@ -107,7 +107,7 @@ public class App extends Application {
 	}
 
 	/**
-	 * Send a message to the Client
+	 * Send a message to the Server
 	 *
 	 * @param message the Message to send
 	 */

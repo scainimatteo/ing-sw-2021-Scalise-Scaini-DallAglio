@@ -33,15 +33,17 @@ public class GUI extends View implements GameStartObserver {
 	private App app;
 	private InitialScene initial_scene;
 	private Client client;
+	private ArrayList<InitializingServerMessage> messages_queued;
 
 	public GUI() {
 		this.simple_players = new ArrayList<SimplePlayer>();
+		this.messages_queued = new ArrayList<InitializingServerMessage>();
 	}
 
 	@Override
 	public void startView(Client client) {
 		this.client = client;
-		this.addObserver(this);
+		this.addGameStartObserver(this);
 		App.setModel(this);
 		new Thread(() -> {
 			App.main(null);
@@ -65,40 +67,33 @@ public class GUI extends View implements GameStartObserver {
 	}
 
 	@Override
-	public synchronized void handleInitializing(InitializingServerMessage initializing_message) {
-		try {
-			//TODO: maybe change the wait with Observers
-			if (this.initial_scene == null) {
-				while(this.app == null) {
-					wait();
-				};
-				this.initial_scene = this.app.getInitialScene();
+	public void handleInitializing(InitializingServerMessage initializing_message) {
+		// if the game isn't initialized yet, add the InitializingServerMessages to an ArrayList
+		// the method will be called when the initialization is done using the pattern Observer
+		if (!this.initialized) {
+			this.messages_queued.add(initializing_message);
+			return;
+		}
 
-				while(!this.initialized) {
-					wait();
-				}
-			}
-
-			switch(initializing_message.type) {
-				case NICKNAME:
-					this.nickname = this.initial_scene.getNickname();
-					this.client.sendMessage(new InitializingMessage(this.initial_scene.getNickname()));
-					break;
-				case CHOOSE_MATCH_NAME:
-					this.client.sendMessage(new InitializingMessage(this.initial_scene.getMatchName()));
-					break;
-				case STARTED_MATCH_NAME:
-					this.initial_scene.setMatchName(initializing_message.match_name);
-					System.out.println("Started match " + initializing_message.match_name);
-					break;
-				case NUM_PLAYERS:
-					this.client.sendMessage(new InitializingMessage(String.valueOf(this.initial_scene.getNumPlayers())));
-					break;
-				case START_MATCH:
-					System.out.println("Start");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		// get all the answers from the InitialScene
+		switch(initializing_message.type) {
+			case NICKNAME:
+				this.nickname = this.initial_scene.getNickname();
+				this.client.sendMessage(new InitializingMessage(this.initial_scene.getNickname()));
+				break;
+			case CHOOSE_MATCH_NAME:
+				this.client.sendMessage(new InitializingMessage(this.initial_scene.getMatchName()));
+				break;
+			case STARTED_MATCH_NAME:
+				// show the match_name to the Client
+				this.initial_scene.setMatchName(initializing_message.match_name);
+				System.out.println("Started match " + initializing_message.match_name);
+				break;
+			case NUM_PLAYERS:
+				this.client.sendMessage(new InitializingMessage(String.valueOf(this.initial_scene.getNumPlayers())));
+				break;
+			case START_MATCH:
+				System.out.println("Start");
 		}
 	}
 
@@ -133,7 +128,7 @@ public class GUI extends View implements GameStartObserver {
 	}
 
 	/**
-	 * Send a message to the Client
+	 * Send a message to the Server
 	 *
 	 * @param message the Message to send
 	 */
@@ -142,20 +137,23 @@ public class GUI extends View implements GameStartObserver {
 	}
 
 	/**
-	 * Set the app and notify the Thread
+	 * Set the app and and the initial scene
 	 *
 	 * @param app the main JavaFX class
 	 */
-	public synchronized void setApp(App app) {
+	public void setApp(App app) {
 		this.app = app;
-		notify();
+		this.initial_scene = this.app.getInitialScene();
 	}
 
 	/**
-	 * Notify the Thread that the initialization has finished
+	 * Now that the initialization has finished, call handleInitializing again with the queued messages
 	 */
-	public synchronized void finishedInitialization() {
+	public void finishedInitialization() {
 		this.initialized = true;
-		notify();
+		for (InitializingServerMessage message: this.messages_queued) {
+			handleInitializing(message);
+		}
+		this.messages_queued.clear();
 	}
 }

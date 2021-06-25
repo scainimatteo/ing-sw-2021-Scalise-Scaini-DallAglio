@@ -51,7 +51,7 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	public abstract void handleError(ErrorMessage error_message);
 
 	/**
-	 * Print the message during the initalization phase
+	 * Answer the messages during the initalization phase
 	 *
 	 * @param initializing_message the InitializingServerMessage received from the Server
 	 */
