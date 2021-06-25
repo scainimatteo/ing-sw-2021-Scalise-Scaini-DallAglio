@@ -18,7 +18,7 @@ public class Production implements ProductionInterface, Serializable {
 		this.produced_resources = produced;
 	}
 
-	public ArrayList<Resource> getRequiredResources(){
+    public ArrayList<Resource> getRequiredResources(){
 		return this.required_resources;
 	}
 

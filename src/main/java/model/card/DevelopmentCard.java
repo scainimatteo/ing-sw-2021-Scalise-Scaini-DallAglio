@@ -60,6 +60,10 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 	public ArrayList<Resource> activateProduction(){
 		return this.production.activateProduction();
 	}
+
+	public String getPath() {
+		return this.front_path;
+	}
 }
 
 /**

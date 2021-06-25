@@ -1,8 +1,8 @@
-package it.polimi.ingsw.util;
+package it.polimi.ingsw.util.observer;
 
 import java.util.ArrayList;
 
-import it.polimi.ingsw.util.GameStartObserver;
+import it.polimi.ingsw.util.observer.GameStartObserver;
 
 public class GameStartObservable {
 	private ArrayList<GameStartObserver> observers = new ArrayList<GameStartObserver>();

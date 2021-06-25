@@ -1,12 +1,13 @@
 package it.polimi.ingsw.model.card;
 
 import org.junit.jupiter.api.*; 
-import static org.junit.jupiter.api.Assertions.*;   
+import static org.junit.jupiter.api.Assertions.*;
 
-import it.polimi.ingsw.model.card.Card;
+import it.polimi.ingsw.model.card.DevelopmentCardsColor;
+import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
-import it.polimi.ingsw.model.resources.Resource;  
+import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.model.resources.Production;
 
 import java.util.ArrayList;

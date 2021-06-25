@@ -408,34 +408,42 @@ public class Printer {
 		}
 	}
 
-	public static String printTurn(Turn turn){
-		String to_return;
+	public static String printTurn(Turn turn, SimpleGame game){
 		String top = "|-----------------------------------------------------|\n";
 		String mid = "|                                                     |\n";
 		String pad = "                                                      ";
 
-		String tmp_nickname = "| ACTIVE PLAYER: " + turn.getNickname() + " ";
-		String nickname_string = tmp_nickname + pad.substring(tmp_nickname.length()) + "|\n";
+		String final_round = "";
+		if (turn.isFinal()) {
+			final_round = ANSI.red("|                     FINAL ROUND                     |\n");
+		}
 
-		String tmp_req_resources = "| REQUIRED RESOURCES: ";
-		String req_pad = pad;
+		String nickname_string = "| PLAYING: ";
+		for (String nickname: game.getOrder()) {
+			if (nickname.equals(turn.getNickname())) {
+				nickname_string += ANSI.green(ANSI.bold(nickname));
+			} else {
+				nickname_string += nickname;
+			}
+			nickname_string += pad.substring(nickname.length() + 11) + "|\n|          ";
+		}
+		nickname_string += "                                           |\n";
+
+		String tmp_req_resources = "| RESOURCES TO PAY: ";
 		ArrayList<Resource> req_resources = turn.getRequiredResources();
 		for (int i = 0; i < req_resources.size(); i ++){
 			tmp_req_resources += req_resources.get(i) + " ";
 		}
-		String req_string = tmp_req_resources + req_pad.substring(tmp_req_resources.length()) + "|\n";
+		String req_string = tmp_req_resources + pad.substring(tmp_req_resources.length()) + "|\n";
 
-		String tmp_prod_resources = "| PRODUCED RESOURCES: ";
-		String prod_pad = pad;
+		String tmp_prod_resources = "| RESOURCES TO STORE: ";
 		ArrayList<Resource> prod_resources = turn.getProducedResources();
 		for (int i = 0; i < prod_resources.size(); i ++){
 			tmp_prod_resources += prod_resources.get(i) + " ";
 		}
-		String prod_string = tmp_prod_resources + prod_pad.substring(tmp_prod_resources.length()) + "|\n";
+		String prod_string = tmp_prod_resources + pad.substring(tmp_prod_resources.length()) + "|\n";
 
-		to_return = top + mid + nickname_string + mid + top + mid + req_string + mid + top + mid + prod_string + mid + top;
-
-		return to_return;
+		return final_round + top + mid + nickname_string + top + mid + req_string + mid + top + mid + prod_string + mid + top;
 	}
 
 	public static String printSoloActionToken(SoloActionToken token){

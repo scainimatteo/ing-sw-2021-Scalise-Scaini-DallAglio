@@ -19,11 +19,12 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.GameStartObserver;
+import it.polimi.ingsw.util.observer.GameStartObserver;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.gui.scene.InitialScene;
+import it.polimi.ingsw.view.gui.scene.SetupScene;
 import it.polimi.ingsw.view.gui.scene.FinalScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
@@ -66,6 +67,7 @@ public class GUI extends View implements GameStartObserver {
 	@Override
 	public synchronized void handleInitializing(InitializingServerMessage initializing_message) {
 		try {
+			//TODO: maybe change the wait with Observers
 			if (this.initial_scene == null) {
 				while(this.app == null) {
 					wait();
@@ -114,7 +116,7 @@ public class GUI extends View implements GameStartObserver {
 	@Override
 	public void gameStarted() {
 		Platform.runLater(() -> {
-			this.initial_scene.changeScene("/fxml/leadercardselectorscene.fxml");
+			new SetupScene().changeScene("/fxml/setupscene.fxml");
 		});
 	}
 
