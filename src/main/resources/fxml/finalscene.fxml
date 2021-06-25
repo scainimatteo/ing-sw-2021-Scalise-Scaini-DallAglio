@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane stylesheets="@../css/finalscene.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.8" pickOnBounds="true" StackPane.alignment="CENTER">
-         <image>
-            <Image url="@../images/board/background_board.png" />
-         </image>
-      </ImageView>
-      <VBox fx:id="lost_pane" alignment="TOP_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="736.0" spacing="100.0" StackPane.alignment="CENTER">
+      <VBox fx:id="lost_pane" alignment="TOP_CENTER" disable="true" spacing="100.0" StackPane.alignment="CENTER">
          <children>
             <Text fill="#d30000" stroke="#fff6f6" strokeType="OUTSIDE" text="YOU LOST!" textAlignment="CENTER">
                <VBox.margin>
@@ -35,7 +28,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <VBox fx:id="won_pane" alignment="TOP_CENTER" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="908.0" spacing="100.0" StackPane.alignment="CENTER">
+      <VBox fx:id="won_pane" alignment="TOP_CENTER" disable="true" spacing="100.0" StackPane.alignment="CENTER">
          <children>
             <Text fill="#16db5d" stroke="#1b1818" strokeType="OUTSIDE" text="YOU WON!" textAlignment="CENTER">
                <VBox.margin>
@@ -60,7 +53,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <VBox fx:id="endgame_pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="736.0" spacing="100.0" StackPane.alignment="CENTER">
+      <VBox fx:id="endgame_pane" alignment="TOP_CENTER" spacing="100.0" StackPane.alignment="CENTER">
          <children>
             <Text fx:id="game_over" fill="#2566d0" stroke="#bfb8b8" strokeType="OUTSIDE" text="The game has ended! These are the rankings:" textAlignment="CENTER">
                <VBox.margin>
@@ -105,7 +98,7 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="138.0" prefWidth="955.0" StackPane.alignment="BOTTOM_CENTER">
+      <VBox alignment="BOTTOM_CENTER" StackPane.alignment="BOTTOM_CENTER">
          <children>
             <Text fill="#52a7eb" stroke="BLACK" strokeType="OUTSIDE" text="Thanks for playing with us!" textAlignment="CENTER" wrappingWidth="954.347412109375">
                <font>
