@@ -23,11 +23,12 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import it.polimi.ingsw.util.observer.ViewUpdateObserver;
+
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
-
-public class GameScene extends SceneController implements Initializable{
+public class GameScene extends SceneController implements ViewUpdateObserver, Initializable {
 	@FXML private ImageView free_marble;
 	@FXML private GridPane market_grid;
 	@FXML private GridPane dev_card_grid;
@@ -40,6 +41,17 @@ public class GameScene extends SceneController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
+		this.updateView();
+
+		// get updated everytime the View gets updated
+		App.setViewUpdateObserver(this);
+	}
+
+	/**
+	 * Set the Market and the DevelopmentCardsOnTable, using the ViewUpdateObserver
+	 */
+	@Override
+	public void updateView() {
 		Resource[][] market = App.getSimpleGame().getMarket();
 		Resource free_marble = App.getSimpleGame().getFreeMarble();
 		DevelopmentCard[][] development_cards_on_table = App.getSimpleGame().getDevelopmentCardsOnTable();
@@ -89,14 +101,14 @@ public class GameScene extends SceneController implements Initializable{
 	 * Set the methods for the Market buttons
 	 */
 	private void setMarketButtons() {
-		int i = 0;
+		int i = 1;
 		for (Node node: row_buttons.getChildren()) {
 			final int row = i;
 			node.setOnMouseClicked(e -> chooseRow(row));
 			i++;
 		}
 
-		int j = 0;
+		int j = 1;
 		for (Node node: column_buttons.getChildren()) {
 			final int column = j;
 			node.setOnMouseClicked(e -> chooseColumn(column));

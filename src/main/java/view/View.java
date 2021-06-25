@@ -11,12 +11,14 @@ import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.GameStartObservable;
+import it.polimi.ingsw.util.observer.ViewUpdateObservable;
+import it.polimi.ingsw.util.observer.GameStartObservable;
+import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
-public abstract class View extends GameStartObservable {
+public abstract class View extends GameStartObservable implements ViewUpdateObservable {
 	protected SimpleGame simple_game;
 	protected ArrayList<SimplePlayer> simple_players;
 	protected Turn turn;
@@ -24,6 +26,8 @@ public abstract class View extends GameStartObservable {
 	protected boolean initialized = false;
 	protected boolean nickname_flag = true;
 	protected String nickname;
+
+	private ArrayList<ViewUpdateObserver> view_update_observers = new ArrayList<ViewUpdateObserver>();
 
 	public boolean isInitialized() {
 		return this.initialized;
@@ -75,6 +79,9 @@ public abstract class View extends GameStartObservable {
 			}
 			this.turn = view_update.turn;
 		}
+
+		// send the update to the SceneControllers listening on the view_update_observers
+		notifyViewUpdate();
 	}
 
 	/**
@@ -111,5 +118,25 @@ public abstract class View extends GameStartObservable {
 		}
 		// unreachable
 		return null;
+	}
+
+	/**
+	 * Add a ViewUpdateObserver to the view_update_observers array
+	 *
+	 * @param observer the ViewUpdateObserver to add
+	 */
+	@Override
+	public void addViewUpdateObserver(ViewUpdateObserver observer) {
+		this.view_update_observers.add(observer);
+	}
+
+	/**
+	 * Notify to the ViewUpdateObservers listening that the SimpleModel has been updated
+	 */
+	@Override
+	public void notifyViewUpdate() {
+		for (ViewUpdateObserver v: this.view_update_observers) {
+			v.updateView();
+		}
 	}
 }

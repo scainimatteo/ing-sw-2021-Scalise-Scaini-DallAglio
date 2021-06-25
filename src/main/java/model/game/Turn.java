@@ -9,7 +9,7 @@ import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.resources.Resource;
 
-import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.observer.Observable;
 
 public class Turn extends Observable implements Serializable {
 	private static final long serialVersionUID = 8008L;

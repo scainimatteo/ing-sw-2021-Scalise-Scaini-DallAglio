@@ -19,7 +19,7 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.GameStartObserver;
+import it.polimi.ingsw.util.observer.GameStartObserver;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;

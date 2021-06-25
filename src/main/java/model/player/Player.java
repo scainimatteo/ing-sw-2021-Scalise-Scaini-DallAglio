@@ -17,7 +17,7 @@ import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
-import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.observer.Observable;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;

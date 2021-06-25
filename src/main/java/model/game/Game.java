@@ -22,7 +22,7 @@ import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.observer.Observable;
 
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 

@@ -4,7 +4,7 @@ import it.polimi.ingsw.controller.servermessage.ServerMessage;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-import it.polimi.ingsw.util.Observer;
+import it.polimi.ingsw.util.observer.Observer;
 
 public class RemoteView implements Observer {
 	private ClientHandler client_handler;
