@@ -616,13 +616,39 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
+	 * checks that each warehouse storage contains different resources
+	 * @param storage contains all the resources involved in the action
+	 */
+	private boolean isAllDifferent(Storage storage){
+		ArrayList<Resource> top = storage.getWarehouseTop();
+		ArrayList<Resource> mid = storage.getWarehouseMid();
+		ArrayList<Resource> bot = storage.getWarehouseBot();
+		if (top.size() > 0 && mid.size() > 0){
+			if (top.get(0).equals(mid.get(0))){
+				return false;
+			}
+		}
+		if (top.size() > 0 && bot.size() > 0){
+			if (top.get(0).equals(bot.get(0))){
+				return false;
+			}
+		}
+		if (mid.size() > 0 && bot.size() > 0){
+			if (mid.get(0).equals(bot.get(0))){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * @param player is the player who requested the action
 	 * @param storage contains all the resources involved in the action
 	 * @return true only if the amount of resources requested to be stored in the warehouse can be stored in the warehouse 
 	 */ 
 	private boolean canBeStoredWarehouse(Player player, Storage storage){
 		Warehouse warehouse = player.getWarehouse();
-		return warehouse.canBeStoredTop(storage.getWarehouseTop()) && warehouse.canBeStoredMiddle(storage.getWarehouseMid()) && warehouse.canBeStoredBottom(storage.getWarehouseBot());    
+		return isAllDifferent(storage) && warehouse.canBeStoredTop(storage.getWarehouseTop()) && warehouse.canBeStoredMiddle(storage.getWarehouseMid()) && warehouse.canBeStoredBottom(storage.getWarehouseBot());    
 	}
 
 	/**

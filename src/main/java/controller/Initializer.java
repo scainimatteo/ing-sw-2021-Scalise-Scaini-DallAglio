@@ -35,7 +35,7 @@ import it.polimi.ingsw.model.resources.Resource;
 import it.polimi.ingsw.server.ClientHandler;
 
 public class Initializer {
-	private ArrayList<Player> players;
+	protected ArrayList<Player> players;
 	private RemoteView[] remote_views;
 
 	/**
@@ -103,7 +103,7 @@ public class Initializer {
 	 *
 	 * @param clients the ClientHandlers of the Players
 	 */
-	private void createPlayers(ArrayList<ClientHandler> clients) throws ParseException, IOException {
+	protected void createPlayers(ArrayList<ClientHandler> clients) throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		Cell[] all_cells = factory.getAllCells();
 
@@ -148,7 +148,7 @@ public class Initializer {
 	/**
 	 * Distribute the starting LeaderCards to the Players
 	 */
-	private void distributeLeaderCards() throws ParseException, IOException {
+	protected void distributeLeaderCards() throws ParseException, IOException {
 		Deck<LeaderCard> all_leader_cards = getLeaderCardDeck();
 
 		for (Player p: this.players) {
@@ -179,14 +179,14 @@ public class Initializer {
 	/**
 	 * Shuffle the array of player to choose a random order
 	 */
-	private void chooseMatchOrder() {
+	protected void chooseMatchOrder() {
 		Collections.shuffle(players);
 	}
 
 	/**
 	 * Move the third and the fourth player one space forward
 	 */
-	private void movePlayerForward() {
+	protected void movePlayerForward() {
 		try {
 			this.players.get(2).moveForward(1);
 			this.players.get(3).moveForward(1);
@@ -207,7 +207,7 @@ public class Initializer {
 	/**
 	 * @return the new Game
 	 */
-	private Game createGame() throws ParseException, IOException {
+	protected Game createGame() throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		return new Game(this.players, all_development_cards);
