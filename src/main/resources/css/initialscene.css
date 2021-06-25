@@ -1,0 +1,7 @@
+.root{
+	-fx-background-color: linear-gradient(#000, #fff);
+	-fx-background-image: url("../images/board/starting_background.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: contain;
+}
