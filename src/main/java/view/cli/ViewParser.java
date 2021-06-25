@@ -39,7 +39,7 @@ public class ViewParser {
 					return parseDevelopmentCardsSlots(inputs, players, nickname);
 				case "TURN":
 				case "TU":
-					return parseTurn(inputs, turn);
+					return parseTurn(inputs, turn, game);
 				default:
 					throw new IllegalArgumentException();
 			}
@@ -152,7 +152,7 @@ public class ViewParser {
 		}
 	}
 
-	public static String parseTurn(String[] inputs, Turn turn) throws IllegalArgumentException {
-		return Printer.printTurn(turn);
+	public static String parseTurn(String[] inputs, Turn turn, SimpleGame game) throws IllegalArgumentException {
+		return Printer.printTurn(turn, game);
 	}
 }
