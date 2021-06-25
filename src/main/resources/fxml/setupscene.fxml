@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -8,23 +9,75 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane stylesheets="@../css/setupscene.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="select_background" fitHeight="768.0" fitWidth="1366.0" opacity="0.8" pickOnBounds="true">
-         <image>
-            <Image url="@../images/board/background_board.png" />
-         </image>
-      </ImageView>
-      <Pane fx:id="select_card_pane" prefHeight="200.0" prefWidth="200.0">
+      <VBox fx:id="order_pane" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="729.0" prefWidth="705.0" spacing="20.0" StackPane.alignment="TOP_CENTER">
          <children>
-            <HBox fx:id="leader_card_grid" alignment="CENTER" layoutY="167.0" prefHeight="419.0" prefWidth="1080.0" spacing="20.0">
+            <Text fill="#542a2a" stroke="#fff6f6" text="MATCH ORDER">
+               <font>
+                  <Font name="Lato Black Italic" size="75.0" />
+               </font>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Text>
+            <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="70.0">
+               <children>
+                  <Text fx:id="first_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="1. A">
+                     <font>
+                        <Font name="Lato Black" size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="second_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="2. B">
+                     <font>
+                        <Font name="Lato Black" size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="third_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="3. C">
+                     <font>
+                        <Font name="Lato Black" size="50.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="fourth_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="4.D">
+                     <font>
+                        <Font name="Lato Black" size="50.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="70.0" />
+               </VBox.margin>
+            </VBox>
+            <Button fx:id="continue_button" defaultButton="true" mnemonicParsing="false" onMouseClicked="#continue_button_click" text="CONTINUE">
+               <font>
+                  <Font name="Lato Black" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="select_card_pane" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Text fill="#542a2a" stroke="#fff6f6" strokeType="OUTSIDE" text="Select two leader cards to be discarded" textAlignment="CENTER" wrappingWidth="874.7080078125">
+               <font>
+                  <Font name="Lato Black Italic" size="57.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Text>
+            <HBox fx:id="leader_card_grid" alignment="CENTER" prefHeight="419.0" prefWidth="1080.0" spacing="20.0">
                <children>
                   <ImageView fx:id="leader_card_1" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
@@ -50,22 +103,36 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="80.0" />
+               </VBox.margin>
             </HBox>
-            <Text layoutX="103.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select two leader cards to be discarded" textAlignment="CENTER" wrappingWidth="874.7080078125">
+         </children>
+      </VBox>
+      <GridPane fx:id="select_resource_pane" prefHeight="1080.0" prefWidth="1920.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="613.3333129882812" minWidth="10.0" prefWidth="612.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1196.0" minWidth="10.0" prefWidth="653.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="655.0" minWidth="0.0" prefWidth="655.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="242.0" minHeight="0.0" prefHeight="242.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="360.0" minHeight="10.0" prefHeight="152.33334350585938" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="627.6666564941406" minHeight="10.0" prefHeight="627.6666564941406" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="228.33331298828125" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#542a2a" stroke="#fff6f6" strokeType="OUTSIDE" text="Pick your starting resources" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font name="System Bold" size="30.0" />
+                  <Font name="Lato Black Italic" size="57.0" />
                </font>
             </Text>
-         </children>
-      </Pane>
-      <Pane fx:id="select_resource_pane" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <ImageView id="resource_grid_background" fitHeight="433.0" fitWidth="682.0" layoutX="199.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="resource_grid_background" fitHeight="433.0" fitWidth="682.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" StackPane.alignment="BOTTOM_CENTER">
                <image>
                   <Image url="@../images/board/resource_container.png" />
                </image>
             </ImageView>
-            <GridPane id="resource_grid" fx:id="resource_grid" alignment="CENTER" layoutX="209.0" layoutY="70.0" prefHeight="169.0" prefWidth="658.0">
+            <GridPane id="resource_grid" fx:id="resource_grid" alignment="CENTER" prefHeight="169.0" prefWidth="658.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="81.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="84.0" />
@@ -80,135 +147,104 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-				<ImageView id="coin1" fx:id="coin1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+				<ImageView id="coin1" fx:id="coin1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
 					<image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="coin2" fx:id="coin2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView id="coin2" fx:id="coin2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
 					<image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="servant1" fx:id="servant1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView id="servant1" fx:id="servant1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
 					<image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="servant2" fx:id="servant2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                  <ImageView id="servant2" fx:id="servant2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
 					<image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="shield1" fx:id="shield1" fitHeight="150.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                  <ImageView id="shield1" fx:id="shield1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
 					<image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="shield2" fx:id="shield2" fitHeight="150.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER">
+                  <ImageView id="shield2" fx:id="shield2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER">
 					<image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="stone1" fx:id="stone1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+                  <ImageView id="stone1" fx:id="stone1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
 					<image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="stone2" fx:id="stone2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
+                  <ImageView id="stone2" fx:id="stone2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
 					<image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
                   </ImageView>
                </children>
             </GridPane>
-            <ImageView fitHeight="461.0" fitWidth="575.0" layoutX="349.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/board/starting%20warehouse.png" />
+                  <Image url="@../images/board/starting_warehouse.png" />
                </image>
             </ImageView>
-            <HBox fx:id="warehouse_top" alignment="CENTER" layoutX="488.0" layoutY="304.0" prefHeight="100.0" prefWidth="106.0">
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="195.66668701171875" minHeight="10.0" prefHeight="195.66668701171875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="157.6666259765625" minHeight="10.0" prefHeight="157.6666259765625" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="160.33331298828125" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="189.0" minHeight="10.0" prefHeight="113.66668701171875" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <ImageView id="top1" fx:id="top1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <HBox fx:id="warehouse_top" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="87.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <children>
+                        <ImageView id="top1" fx:id="top1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="warehouse_middle" alignment="CENTER" layoutX="318.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="177.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <children>
+					  <ImageView id="middle1" fx:id="middle1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+					  </ImageView>
+                        <ImageView id="middle2" fx:id="middle2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    	</ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="warehouse_bottom" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="94.0" prefWidth="247.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <children>
+                        <ImageView id="bottom1" fx:id="bottom1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
+                        <ImageView id="bottom2" fx:id="bottom2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+                        <ImageView id="bottom3" fx:id="bottom3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  </ImageView>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox fx:id="warehouse_middle" alignment="CENTER" layoutX="446.0" layoutY="410.0" prefHeight="100.0" prefWidth="189.0">
-               <children>
-                  <ImageView id="middle1" fx:id="middle1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                  <ImageView id="middle2" fx:id="middle2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox fx:id="warehouse_bottom" alignment="CENTER" layoutX="418.0" layoutY="520.0" prefHeight="100.0" prefWidth="196.0">
-               <children>
-                  <ImageView id="bottom1" fx:id="bottom1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                  <ImageView id="bottom2" fx:id="bottom2" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                  <ImageView id="bottom3" fx:id="bottom3" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-               </children>
-            </HBox>
-            <Text layoutX="296.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick your starting resources" textAlignment="CENTER" wrappingWidth="489.7080078125">
+            </GridPane>
+			<Button fx:id="confirm_button" mnemonicParsing="false" onMouseClicked="#endResourcesScene" prefHeight="52.0" prefWidth="157.0" text="Confirm" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-			<Button fx:id="confirm_button" layoutX="707.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#endResourcesScene" prefHeight="52.0" prefWidth="157.0" text="Confirm">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="Lato Black Italic" size="25.0" />
                </font>
             </Button>
          </children>
-      </Pane>
-      <Pane fx:id="waiting_pane">
+      </GridPane>
+      <VBox fx:id="waiting_pane" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
          <children>
-            <Text layoutX="295.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for other players..." textAlignment="CENTER" wrappingWidth="489.7080078125">
+            <Text fill="#542a2a" stroke="#fff6f6" text="Waiting for other players..." textAlignment="CENTER" wrappingWidth="744.3746948242188">
                <font>
-                  <Font name="System Bold" size="30.0" />
+                  <Font name="Lato Black Italic" size="80.0" />
                </font>
             </Text>
          </children>
-      </Pane>
-      <Pane fx:id="order_pane" prefHeight="200.0" prefWidth="200.0">
-         <children>
-            <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" translateX="250.0" translateY="150.0">
-               <children>
-                  <Text fx:id="first_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="-100.0">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="second_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="-33.0">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="third_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="33.0">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="fourth_player_text" strokeType="OUTSIDE" strokeWidth="0.0" translateY="100.0">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MATCH ORDER" translateX="250.0" translateY="100.0">
-               <font>
-                  <Font size="75.0" />
-               </font>
-            </Text>
-            <Button fx:id="continue_button" mnemonicParsing="false" onMouseClicked="#continue_button_click" text="CONTINUE" translateX="850.0" translateY="650.0">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
+      </VBox>
   </children>
 </StackPane>
