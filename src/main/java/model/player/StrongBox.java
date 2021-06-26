@@ -71,5 +71,28 @@ public class StrongBox {
 		}
 		return true;
 	}
+
+	/**
+	 * sets all resource values to zero
+	 */
+	public void clear(){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			storage.put(res, 0);	
+		}
+	}
+
+	/**
+	 * @return true if every resource value is zero
+	 */
+	public boolean isEmpty(){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			if(storage.get(res) != 0){
+				return false;
+			}
+		}
+		return true;
+	}
 }
 

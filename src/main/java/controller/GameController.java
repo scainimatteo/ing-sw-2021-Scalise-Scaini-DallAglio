@@ -215,7 +215,7 @@ public class GameController implements Runnable, Controller {
 				if(player.isActivable(card) && !card.isActive()){
 					player.activateLeader(card);	
 				} else {handleError("The requested card cannot be activated", player);}
-			} else {handleError("You must end your turn first", player);}
+			} else {handleError("You must end your action first", player);}
 		} else {handleError("It is not your turn", player);}
 	}
 
@@ -239,7 +239,7 @@ public class GameController implements Runnable, Controller {
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				player.discardLeader(card.getId());	
 				handleVaticanReports(player, player.moveForward(1));
-			} else {handleError("You must end your turn first", player);}
+			} else {handleError("You must end your action first", player);}
 		} else {handleError("It is not your turn", player);}
 	}
 

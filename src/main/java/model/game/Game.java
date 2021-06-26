@@ -123,6 +123,10 @@ public class Game extends Observable {
 	/**
 	 * TURN METHODS
 	 */
+
+	/**
+	 * Sets the following player as active, initiates a new round if there is no following player
+	 */
 	public void endTurn(){
 		if (this.players.indexOf(turn.getPlayer()) + 1 == this.players.size()){
 			if(turn.isFinal()){

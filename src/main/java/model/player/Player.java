@@ -270,6 +270,11 @@ public class Player extends Observable {
 	public StrongBox getPlayerStrongBox(){
 		return this.strongbox;
 	}
+	
+	public void clearStrongbox(){
+		this.strongbox.clear();
+		this.notifyPlayer();
+	}
 
 	/**
 	 * DEVCARDSSLOTS METHODS
