@@ -20,9 +20,3 @@ public class MoveBlackCrossTwoSpaces implements SoloActionToken, Serializable {
 	}
 }
 
-/*
-   _  ___
- _| ||_  )
-|_   _/ /
-  |_|/___|
-*/

@@ -31,9 +31,3 @@ public class DiscardDevelopmentCards implements SoloActionToken, Serializable {
 	}
 }
 
-/*
-    ___
- __|_  )
-|___/ /
-   /___|
-*/

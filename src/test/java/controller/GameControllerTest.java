@@ -63,6 +63,9 @@ public class GameControllerTest {
 		playerOrder = game.getPlayers();
 	}
 	
+	/**
+	 * Tests handleDiscardResources method from first player with full instruction coverage 
+	 */
 	@Test
 	public void testFirstPlayerInitResources(){
 		initGame();
@@ -76,6 +79,9 @@ public class GameControllerTest {
 		controller.clearError();
 	}
 
+	/**
+	 * Tests handleDiscardResources method from second player with full instruction coverage 
+	 */
 	@Test
 	public void testSecondPlayerInitResources(){
 		initGame();
@@ -91,6 +97,9 @@ public class GameControllerTest {
 		controller.clearError();
 	}
 
+	/**
+	 * Tests handleDiscardResources method from third player with full instruction coverage 
+	 */
 	@Test
 	public void testThirdPlayerInitResources(){
 		initGame();
@@ -114,6 +123,9 @@ public class GameControllerTest {
 		assertEquals(player.getMiddleResources().get(0), Resource.SHIELD);
 	}
 
+	/**
+	 * Tests handleDiscardResources method from fourth player with full instruction coverage 
+	 */
 	@Test
 	public void testFourthPlayerInitResources(){
 		initGame();
@@ -162,6 +174,9 @@ public class GameControllerTest {
 		assertEquals(player.getBottomResources().get(1), Resource.COIN);
 	}
 
+	/**
+	 * Properly distributes resources to each player
+	 */
 	private void distributeResources(){
 		initGame();
 		Player player =  playerOrder.get(1);
@@ -187,6 +202,9 @@ public class GameControllerTest {
 		controller.handleMessage(message);
 	}
 
+	/**
+	 * Tests handleDiscard method, with full instruction coverage, after setting up the game
+	 */
 	@Test
 	public void testInitDiscard(){
 		distributeResources();
@@ -210,10 +228,17 @@ public class GameControllerTest {
 		}
 	}
 	
+	/**
+	 * @param player is the player whose warehouse will be checked
+	 * @return the number of resources in the player's warehouse
+	 */
 	private int totalWarehouse(Player player){
 		return player.getTopResource().size() + player.getMiddleResources().size() + player.getBottomResources().size();
 	}
 
+	/**
+	 * Tests the correct outcome of the setup phase before the game can properly begin
+	 */
 	@Test 
 	public void testStartGame(){
 		testInitDiscard();
@@ -227,6 +252,9 @@ public class GameControllerTest {
 		assertTrue(game.getTurn().isInitialized());
 	}
 
+	/**
+	 * Causes the active player to do an always legal action
+	 */
 	private void emptyAction(){
 		Player player = game.getTurn().getPlayer();
 		message = new MarketMessage(true, 1);
@@ -237,6 +265,9 @@ public class GameControllerTest {
 		controller.handleMessage(message);
 	}
 
+	/**
+	 * Causes the active player to do an always legal action and ends their turn
+	 */
 	private void skipTurn(){
 		Player player = game.getTurn().getPlayer();
 		emptyAction();
@@ -244,7 +275,10 @@ public class GameControllerTest {
 		message.setPlayer(player);
 		controller.handleMessage(message);
 	}
-
+	
+	/**
+	 *TODO: complete test documentation
+	 */
 	@RepeatedTest(value = 3)
 	public void testFullRoundEndTurn(){
 		testStartGame();

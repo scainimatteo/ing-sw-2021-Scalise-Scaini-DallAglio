@@ -105,14 +105,12 @@ public class SoloGameController extends GameController {
 	 */
 	@Override
 	public void handleDiscardResources(Player player) {
-		if (checkPlayer(player)){
-			if (super.game.getTurn().getRequiredResources().isEmpty()){
-				int discarded = super.game.getTurn().getProducedResources().size();
-				System.out.println(discarded);
-				handleBlackMarkerVaticanReports(((SoloGame) super.game).moveForwardBlackMarker(discarded));
-				super.game.getTurn().clearProducedResources();
-			} else {handleError("You must pay all of the cost first", player);}
-		} else {handleError("It is not your turn", player);}
+		if (super.game.getTurn().getRequiredResources().isEmpty()){
+			int discarded = super.game.getTurn().getProducedResources().size();
+			System.out.println(discarded);
+			handleBlackMarkerVaticanReports(((SoloGame) super.game).moveForwardBlackMarker(discarded));
+			super.game.getTurn().clearProducedResources();
+		} else {handleError("You must pay all of the cost first", player);}
 	}
 
 	/**

@@ -62,7 +62,7 @@ public class SoloGame extends Game {
 	 * Shuffle the tokens and put them in a Queue
 	 */
 	public void shuffleSoloActionTokens() {
-		// convert the array to a List, shuffle it then convert it back to an array
+		// convert the full token array to a List, shuffle it then convert it back to an array
 		List<SoloActionToken> solo_action_tokens_list = Arrays.asList(this.solo_action_tokens);
         Collections.shuffle(solo_action_tokens_list);
 		solo_action_tokens_list.toArray(this.solo_action_tokens);
@@ -79,6 +79,14 @@ public class SoloGame extends Game {
 		this.last_token = this.active_tokens.pop();
 		notifyGame();
 		return this.last_token;
+	}
+
+	/**
+	 * @return the size of the token queue
+	 * testing only
+	 */
+	public int getTokenAmount(){
+		return active_tokens.size();
 	}
 
 	/**
