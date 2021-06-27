@@ -28,38 +28,20 @@ import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-//TODO: are all imports necessary?
 
-public class StubGameController extends GameController{
+public class StubSoloGameController extends GameController{
 	String error;
 
-	public StubGameController(ArrayList<ClientHandler> clients){
+	public StubSoloGameController(ArrayList<ClientHandler> clients){
 		super(clients);
 	}
 
 	@Override
 	public void initializeGame(){
 		try {
-			this.game = new StubInitializer().initializeGame(4);
+			this.game = new StubInitializer().initializeSoloGame();
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 		}
-	}
-
-	public Game getGame(){
-		return this.game;
-	}
-
-	@Override
-	protected void handleError(String error_string, Player player){;
-		this.error = error_string;
-	}
-
-	protected void clearError(){
-		this.error = null;
-	}
-
-	protected String getError(){
-		return this.error;
 	}
 }

@@ -130,7 +130,7 @@ public class Initializer {
 	 *
 	 * @param clients the ClientHandler of the Player
 	 */
-	private void createSoloPlayer(ArrayList<ClientHandler> clients) throws ParseException, IOException {
+	protected void createSoloPlayer(ArrayList<ClientHandler> clients) throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		Cell[] all_cells = factory.getAllCells();
 		Tile[] all_tiles = factory.getAllTiles();
@@ -216,7 +216,7 @@ public class Initializer {
 	/**
 	 * @return the new SoloGame
 	 */
-	private SoloGame createSoloGame() throws ParseException, IOException {
+	protected SoloGame createSoloGame() throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		SoloActionToken[] all_solo_action_tokens = factory.getAllSoloActionTokens();

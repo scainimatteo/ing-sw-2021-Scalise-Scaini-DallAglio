@@ -52,6 +52,20 @@ public class StubInitializer extends Initializer {
 			throw new InstantiationException();
 		}
 	}
+
+	public SoloGame initializeSoloGame() throws InstantiationException {
+		try {
+			createSoloPlayer();
+			distributeLeaderCards();
+			SoloGame game = createSoloGame();
+			return game;
+		} catch (Exception e) {
+			//TODO: too generic?
+			e.printStackTrace();
+			throw new InstantiationException();
+		}
+	}
+
 	private void createPlayers(int numofplayers) throws ParseException, IOException {
 		Factory factory = Factory.getIstance();
 		Cell[] all_cells = factory.getAllCells();
@@ -60,5 +74,13 @@ public class StubInitializer extends Initializer {
 			Tile[] all_tiles = factory.getAllTiles();
 			players.add(new Player("player" + String.valueOf(i), new FaithTrack(all_cells, all_tiles)));
 		}
+	}
+
+	private void createSoloPlayer() throws ParseException, IOException {
+		Factory factory = Factory.getIstance();
+		Cell[] all_cells = factory.getAllCells();
+		Tile[] all_tiles = factory.getAllTiles();
+		this.players = new ArrayList<Player>();
+		players.add(new SoloPlayer("SoloPlayer", new SoloFaithTrack(all_cells, all_tiles)));
 	}
 }
