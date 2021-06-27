@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import it.polimi.ingsw.model.game.Factory;
 
+import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
@@ -31,7 +32,7 @@ public class PlayerTest {
 	public void createPlayer() throws ParseException, IOException{
 		Factory factory = Factory.getIstance();
 
-		this.player = new Player("scainimatteo", factory.getAllCells(), factory.getAllTiles());
+		this.player = new Player("scainimatteo", new FaithTrack(factory.getAllCells(), factory.getAllTiles()));
 		this.dev_card = factory.getAllDevelopmentCards();
 
 		ArrayList<Resource> wh_resources = new ArrayList<Resource>(Arrays.asList(Resource.SHIELD, Resource.SHIELD));

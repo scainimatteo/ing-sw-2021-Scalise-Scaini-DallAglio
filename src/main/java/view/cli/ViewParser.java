@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.util.ANSI;
 
+import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.cli.Printer;
@@ -40,11 +41,15 @@ public class ViewParser {
 				case "TURN":
 				case "TU":
 					return parseTurn(inputs, turn, game);
+				case "SOLOACTIONTOKEN":
+				case "TOKEN":
+				case "TO":
+					return parseSoloActionToken(inputs, game);
 				default:
 					throw new IllegalArgumentException();
 			}
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
-			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname> | turn");
+			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname> | turn | soloactiontoken");
 		}
 	}
 
@@ -154,5 +159,13 @@ public class ViewParser {
 
 	public static String parseTurn(String[] inputs, Turn turn, SimpleGame game) throws IllegalArgumentException {
 		return Printer.printTurn(turn, game);
+	}
+
+	public static String parseSoloActionToken(String[] inputs, SimpleGame game) throws IllegalArgumentException {
+		try {
+			return Printer.printSoloActionToken(((SimpleSoloGame) game).getLastToken());
+		} catch (ClassCastException e) {
+			throw new IllegalArgumentException("SoloActionTokens can be viewed only during a SoloGame");
+		}
 	}
 }

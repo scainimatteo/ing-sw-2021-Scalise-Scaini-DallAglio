@@ -1,9 +1,12 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.simplemodel.SimpleSoloPlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
+import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.model.resources.Production;
@@ -248,6 +251,9 @@ public class Printer {
 
 			if (marker.getPosition() == i){
 				mid = mid + ANSI.blue("M");
+			//TODO: remove instanceof
+			} else if (player instanceof SimpleSoloPlayer && ((SimpleSoloPlayer) player).getBlackMarkerPosition() == i) {
+				mid = mid + ANSI.white("L");
 			} else if (track[i].isPopeSpace()){
 				mid = mid + ANSI.red("P");
 			} else {
@@ -438,6 +444,13 @@ public class Printer {
 		String prod_string = tmp_prod_resources + pad.substring(tmp_prod_resources.length()) + "|\n";
 
 		return final_round + top + mid + nickname_string + top + mid + req_string + mid + top + mid + prod_string + mid + top;
+	}
+
+	public static String printSoloActionToken(SoloActionToken token){
+		if (token == null) {
+			return "No SoloActionToken was played yet";
+		}
+		return token.toString();
 	}
 
 	public static String printNullCard(){
