@@ -42,6 +42,6 @@ public class DevelopmentCardTest{
 	@RepeatedTest(value = 10)
 	public void fullTest(){
 		assertEquals (level, devcard.getCardLevel());
-		assertEquals (output, devcard.activateProduction());	
+		assertEquals (output, devcard.getProducedResources());	
 	}
 }
