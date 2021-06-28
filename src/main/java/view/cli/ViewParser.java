@@ -25,7 +25,7 @@ public class ViewParser {
 				case "FAITHTRACK":
 				case "TRACK":
 				case "T":
-					return parseFaithTrack(inputs, players, nickname);
+					return parseFaithTrack(inputs, players, nickname, game.getOrder().size() == 1);
 				case "WAREHOUSE":
 				case "W":
 					return parseWarehouse(inputs, players, nickname);
@@ -75,14 +75,14 @@ public class ViewParser {
 		return Printer.printDevelopmentCardsOnTable(game);
 	}
 
-	public static String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
+	public static String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname, boolean is_sologame) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
-				return Printer.printTrack(getPlayerFromNickname(players, nickname));
+				return Printer.printTrack(getPlayerFromNickname(players, nickname), is_sologame);
 			} else {
 				String player_nickname = inputs[2];
 				System.out.println(ANSI.underline(player_nickname));
-				return Printer.printTrack(getPlayerFromNickname(players, player_nickname));
+				return Printer.printTrack(getPlayerFromNickname(players, player_nickname), is_sologame);
 			}
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("look track <nickname>");

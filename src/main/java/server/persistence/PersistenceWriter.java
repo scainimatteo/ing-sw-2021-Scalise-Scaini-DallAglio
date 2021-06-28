@@ -290,13 +290,15 @@ public class PersistenceWriter {
 		JSONArray dcot_array = new JSONArray();
 
 		for (int i = 0; i < 3; i++) {
+			JSONArray row_array = new JSONArray();
 			for (int j = 0; j < 4; j++) {
 				JSONArray deck_array = new JSONArray();
 				for (DevelopmentCard dev_card: development_cards_on_table.getDeckAsArrayList(i, j)) {
 					deck_array.add(dev_card.getId());
 				}
-				dcot_array.add(deck_array);
+				row_array.add(deck_array);
 			}
+			dcot_array.add(row_array);
 		}
 
 		return dcot_array;
@@ -313,5 +315,4 @@ public class PersistenceWriter {
 			return res.toString();
 		}
 	}
-
 }

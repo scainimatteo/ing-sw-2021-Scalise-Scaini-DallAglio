@@ -271,15 +271,13 @@ public class PersistenceParser {
 	 */
 
 	private static Game parseGame(JSONObject game_object, Turn turn, ArrayList<Player> players) throws ParseException, IOException {
-		Market market = createMarket((JSONArray) game_object.get("market"), game_object.get("free_marble").toString());
+		Market market = createMarket((JSONArray) game_object.get("market"), (JSONObject) game_object.get("free_marble"));
 		DevelopmentCardsOnTable development_cards_on_table = createDevelopmentCardsOnTable((JSONArray) game_object.get("development_cards_on_table"));
 		return new Game(players, market, development_cards_on_table, turn);
 	}
 
-	private static Market createMarket(JSONArray market_array, String free_marble_string) {
-		Resource free_marble = Resource.valueOf(free_marble_string);
-		//TODO avoid constants
-		Resource[][] market_board = new Resource[3][4];
+	private static Market createMarket(JSONArray market_array, JSONObject free_marble_object) {
+		Resource[][] market_board = new Resource[Market.dim_cols][Market.dim_rows];
 		for (int i = 0; i < market_array.size(); i++) {
 			JSONArray row = (JSONArray) market_array.get(i);
 			for (int j = 0; j < row.size(); j++) {
@@ -290,22 +288,33 @@ public class PersistenceParser {
 				}
 			}
 		}
-		return new Market(market_board, free_marble);
+		return new Market(market_board, createFreeMarble(free_marble_object));
+	}
+
+	private static Resource createFreeMarble(JSONObject free_marble_object) {
+		if (free_marble_object == null) {
+			return null;
+		} else {
+			return Resource.valueOf(free_marble_object.toString());
+		}
 	}
 
 	private static DevelopmentCardsOnTable createDevelopmentCardsOnTable(JSONArray dcot_array) throws ParseException, IOException {
-		Table<DevelopmentCard> development_cards_table = new Table<DevelopmentCard>(4, 3);
+		Table<DevelopmentCard> development_cards_table = new Table<DevelopmentCard>(DevelopmentCardsOnTable.dim_rows, DevelopmentCardsOnTable.dim_cols);
 
 		for (int i = 0; i < dcot_array.size(); i++) {
 			JSONArray deck_array = (JSONArray) jsonParser.parse(dcot_array.get(i).toString());
 
-			Deck<DevelopmentCard> deck = new Deck<DevelopmentCard>(4);
 			for (int j = 0; j < deck_array.size(); j++) {
-				int id = (int)(long) deck_array.get(j);
-				deck.add(getDevelopmentCardFromId(id));
+				Deck<DevelopmentCard> deck = new Deck<DevelopmentCard>(4);
+
+				JSONArray row_array = (JSONArray) jsonParser.parse(deck_array.get(j).toString());
+				for (int k = row_array.size() - 1; k >= 0; k--) {
+					int id = (int)(long) row_array.get(k);
+					deck.add(getDevelopmentCardFromId(id));
+				}
+				development_cards_table.addDeck(deck, i, j);
 			}
-			// TODO rewrite using matrixes
-			development_cards_table.addDeck(deck, 0, 0);
 		}
 		return new DevelopmentCardsOnTable(development_cards_table);
 	}

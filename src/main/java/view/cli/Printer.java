@@ -231,7 +231,7 @@ public class Printer {
 		return printDevelopmentCardsMatrix(game.getDevelopmentCardsOnTable());
 	}
 
-	public static String printTrack(SimplePlayer player) {
+	public static String printTrack(SimplePlayer player, boolean is_sologame) {
 		Cell[] track = player.getFaithTrack();
 		Cell marker = player.getMarker();
 		Tile[] vatican_reports = player.getReports();
@@ -251,8 +251,7 @@ public class Printer {
 
 			if (marker.getPosition() == i){
 				mid = mid + ANSI.blue("M");
-			//TODO: remove instanceof
-			} else if (player instanceof SimpleSoloPlayer && ((SimpleSoloPlayer) player).getBlackMarkerPosition() == i) {
+			} else if (is_sologame && ((SimpleSoloPlayer) player).getBlackMarkerPosition() == i) {
 				mid = mid + ANSI.white("L");
 			} else if (track[i].isPopeSpace()){
 				mid = mid + ANSI.red("P");
