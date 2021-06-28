@@ -3,6 +3,10 @@ package it.polimi.ingsw.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.controller.GameController;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
@@ -15,6 +19,8 @@ import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Player;
 
+import it.polimi.ingsw.server.persistence.PersistenceParser;
+import it.polimi.ingsw.server.persistence.PersistenceWriter;
 import it.polimi.ingsw.server.ClientHandler;
 
 public class SoloGameController extends GameController {
@@ -23,6 +29,24 @@ public class SoloGameController extends GameController {
 	public SoloGameController(ArrayList<ClientHandler> clients) {
 		super(clients);
 	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public SoloGameController(ArrayList<ClientHandler> clients, String match_name) throws InstantiationException {
+		super(clients);
+		super.match_name = match_name;
+		try {
+			super.game = PersistenceParser.parseSoloMatch(match_name);
+			new Initializer().initializePersistenceSoloGame(clients, super.game);
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+			System.out.println("SoloGame could not start");
+			throw new InstantiationException();
+		}
+	}
+
 
 	/**
 	 * Initialize the SoloGame using the Initializer
@@ -176,5 +200,18 @@ public class SoloGameController extends GameController {
 		for (int i = 0; i < 2; i++) {
 			discardOneCard(order);
 		}
+	}
+
+	/**
+	 * PERSISTENCE
+	 */
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	@Override
+	public void handlePersistence(Player player) {
+		PersistenceWriter.writeSoloPersistenceFile(this.match_name, (SoloGame) this.game);
 	}
 }

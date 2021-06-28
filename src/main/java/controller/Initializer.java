@@ -45,7 +45,7 @@ public class Initializer {
 	 *   - choose randomly the first Player
 	 *   - move the third and fourth Player forward on their FaithTracks
 	 *   - add the RemoteViews as Observers
-	 *   - send the Model to the Clients using the Observers
+	 *   - send the Model to the Clients using the ModelObservers
 	 *
 	 * @param clients the ClientHandlers of the Players
 	 * @return the new Game
@@ -74,7 +74,7 @@ public class Initializer {
 	 *   - create the Player and the RemoteView from the ClientHandler
 	 *   - distribute 4 LeaderCards to the Player
 	 *   - add the RemoteView as Observer
-	 *   - send the Model to the Client using the Observer
+	 *   - send the Model to the Client using the ModelObserver
 	 *
 	 * @param clients the ClientHandler of the Player
 	 * @return the new SoloGame
@@ -96,7 +96,13 @@ public class Initializer {
 
 	/**
 	 * Persistence
-	 * TODO: Better comment
+	 * Recreate a Game:
+	 *   - create the RemoteViews from the ClientHandlers
+	 *   - add the RemoteViews as ModelObservers
+	 *   - send the Model to the Clients using the ModelObservers
+	 *
+	 * @param clients the ClientHandlers of the Players
+	 * @param game the Game parsed from the json file
 	 */
 	public void initializePersistenceGame(ArrayList<ClientHandler> clients, Game game) {
 		this.players = game.getPlayers();
@@ -118,6 +124,31 @@ public class Initializer {
 		for (Player p: this.players) {
 			p.notifyPlayer();
 		}
+		game.getTurn().notifyTurn();
+	}
+
+	/**
+	 * Persistence
+	 * Recreate a SoloGame:
+	 *   - create the RemoteView from the ClientHandler
+	 *   - add the RemoteView as ModelObserver
+	 *   - send the Model to the Client using the ModelObserver
+	 *
+	 * @param clients the ClientHandlers of the Players
+	 * @param game the SoloGame parsed from the json file
+	 */
+	public void initializePersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game) {
+		this.players = game.getPlayers();
+		this.remote_views = new RemoteView[1];
+
+		this.remote_views[0] = new RemoteView(clients.get(0));
+		clients.get(0).setPlayer(this.players.get(0));
+
+		this.players.get(0).addModelObserver(this.remote_views[0]);
+
+		addRemoteViews(game);
+		game.notifyGame();
+		this.players.get(0).notifyPlayer();
 		game.getTurn().notifyTurn();
 	}
 

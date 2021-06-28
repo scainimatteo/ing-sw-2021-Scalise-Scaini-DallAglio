@@ -93,23 +93,50 @@ public class Server {
 			}
 
 			// create, initialize and start a new Game or SoloGame or recreate a persistent match
-			GameController new_match;
-			if (PersistenceUtil.checkPersistence(match_name)) {
-				new_match = new GameController(this.lobby.get(match_name), match_name);
-			} else if (this.lobby.get(match_name).size() == 1) {
-				new_match = new SoloGameController(this.lobby.get(match_name));
-				new_match.setMatchName(match_name);
-				new_match.initializeGame();
-			} else {
-				new_match = new GameController(this.lobby.get(match_name));
-				new_match.setMatchName(match_name);
-				new_match.initializeGame();
-			}
+			GameController new_match = chooseGameController(match_name);
 
 			for (ClientHandler c: this.lobby.get(match_name)) {
 				c.setController(new_match);
 			}
 		}
+	}
+
+	/**
+	 * Check if a match is a SoloGame or not
+	 *
+	 * @param match_name the name of the match to check
+	 * @return true if in the match there's only one Client allowed
+	 */
+	private boolean isSoloGame(String match_name) {
+		return this.lobby.get(match_name).size() == 1;
+	}
+
+	/**
+	 * Choose the right GameController based on the match_name and initialize it accordingly
+	 *
+	 * @param match_name the name of the match to create or recreate
+	 * @return the appropriate GameController or SoloGameController
+	 */
+	private GameController chooseGameController(String match_name) throws InstantiationException {
+		// if it's a match_name that's saved in memory
+		if (PersistenceUtil.checkPersistence(match_name)) {
+			if (isSoloGame(match_name)) {
+				return new SoloGameController(this.lobby.get(match_name), match_name);
+			} else {
+				return new GameController(this.lobby.get(match_name), match_name);
+			}
+		} 
+		
+		GameController new_match;
+		if (isSoloGame(match_name)) {
+			new_match = new SoloGameController(this.lobby.get(match_name));
+		} else {
+			new_match = new GameController(this.lobby.get(match_name));
+		}
+
+		new_match.setMatchName(match_name);
+		new_match.initializeGame();
+		return new_match;
 	}
 
 	/**

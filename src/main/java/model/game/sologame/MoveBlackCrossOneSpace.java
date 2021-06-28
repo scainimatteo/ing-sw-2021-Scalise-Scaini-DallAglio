@@ -18,6 +18,11 @@ public class MoveBlackCrossOneSpace implements SoloActionToken, Serializable {
 	public String toString() {
 		return "   _   _\n _| |_/ |\n|_   _| |\n  |_| |_|\n";
 	}
+
+	@Override
+	public String getType() {
+		return "MOVEBLACKCROSSONESPACE";
+	}
 }
 
 /*

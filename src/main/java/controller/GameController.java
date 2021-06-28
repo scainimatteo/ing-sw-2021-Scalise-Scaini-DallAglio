@@ -36,7 +36,7 @@ import it.polimi.ingsw.server.ClientHandler;
 public class GameController implements Controller {
 	protected ArrayList<ClientHandler> clients;
 	protected Game game;
-	private String match_name;
+	protected String match_name;
 
 	public GameController(ArrayList<ClientHandler> clients) {
 		this.clients = clients;

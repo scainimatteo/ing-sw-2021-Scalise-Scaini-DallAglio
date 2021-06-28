@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.persistence;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import java.io.*;
@@ -16,13 +17,18 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.LeaderCard;
 
+import it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards;
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
+import it.polimi.ingsw.model.game.sologame.SoloGame;
 import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Turn;
 import it.polimi.ingsw.model.game.Game;
 
 import it.polimi.ingsw.model.player.DevelopmentCardsSlots;
+import it.polimi.ingsw.model.player.track.SoloFaithTrack;
 import it.polimi.ingsw.model.player.track.FaithTrack;
+import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.track.Tile;
 import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.player.StrongBox;
@@ -56,6 +62,27 @@ public class PersistenceWriter {
 	}
 
 	/**
+	 * Dump all the whole SoloGame in the appropriate json file
+	 *
+	 * @param match_name the identifier of the match to save
+	 * @param sologame the SoloGame to write onto the file
+	 */
+	public static void writeSoloPersistenceFile(String match_name, SoloGame sologame) {
+		JSONObject persistent_match_object = new JSONObject();
+
+		populateJSON(persistent_match_object, sologame);
+
+		String filename = PersistenceUtil.getPersistenceFileFromMatchName(match_name);
+		try {
+			FileWriter file = new FileWriter(filename);
+			file.write(persistent_match_object.toJSONString()); 
+			file.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Populate the JSONObject with the whole content of the Game
 	 *
 	 * @param match_object the JSONObject to write the Game to
@@ -66,6 +93,19 @@ public class PersistenceWriter {
 		populateJSONPlayers(match_object, game.getPlayers());
 		populateJSONTurn(match_object, game.getTurn());
 		populateJSONGame(match_object, game);
+	}
+
+	/**
+	 * Populate the JSONObject with the whole content of the SoloGame
+	 *
+	 * @param match_object the JSONObject to write the Game to
+	 * @param sologame the SoloGame to write onto the JSONObject
+	 */
+	private static void populateJSON(JSONObject match_object, SoloGame sologame) {
+		populateJSONClient(match_object, sologame.getPlayers());
+		populateJSONSoloPlayer(match_object, (SoloPlayer) sologame.getPlayers().get(0));
+		populateJSONTurn(match_object, sologame.getTurn());
+		populateJSONSoloGame(match_object, sologame);
 	}
 
 	/**
@@ -109,13 +149,17 @@ public class PersistenceWriter {
 
 		JSONArray tiles_array = new JSONArray();
 		for (Tile tile: track.getTiles()) {
-			JSONObject tile_object = new JSONObject();
-			tile_object.put("activated", tile.isActive());
-			tile_object.put("victory_points", tile.getVictoryPoints());
-			tile_object.put("report", tile.getVaticanReport().toString());
-			tiles_array.add(tile_object);
+			tiles_array.add(populateJSONTile(tile));
 		}
 		player_object.put("tiles", tiles_array);
+	}
+
+	private static JSONObject populateJSONTile(Tile tile) {
+		JSONObject tile_object = new JSONObject();
+		tile_object.put("activated", tile.isActive());
+		tile_object.put("victory_points", tile.getVictoryPoints());
+		tile_object.put("report", tile.getVaticanReport().toString());
+		return tile_object;
 	}
 
 	private static JSONArray populateJSONWarehouse(Warehouse warehouse) {
@@ -302,6 +346,68 @@ public class PersistenceWriter {
 		}
 
 		return dcot_array;
+	}
+
+	/**
+	 * SOLOPLAYER
+	 */
+
+	private static void populateJSONSoloPlayer(JSONObject match_object, SoloPlayer player) {
+		JSONObject player_object = new JSONObject();
+		player_object.put("nickname", player.getNickname());
+		populateJSONSoloFaithTrack(player_object, (SoloFaithTrack) player.getFaithTrack());
+		player_object.put("warehouse", populateJSONWarehouse(player.getWarehouse()));
+		player_object.put("strongbox", populateJSONStrongBox(player.getStrongBox()));
+		player_object.put("development_cards_slots", populateJSONDevelopmentCardsSlots(player.getDevelopmentCardsSlots()));
+		player_object.put("leader_cards", populateJSONLeaderCards(player.getLeaderCards()));
+		match_object.put("player", player_object);
+	}
+
+	private static void populateJSONSoloFaithTrack(JSONObject player_object, SoloFaithTrack track) {
+		player_object.put("marker_position", track.getMarkerPosition());
+		player_object.put("black_marker_position", track.getBlackMarkerPosition());
+
+		JSONArray tiles_array = new JSONArray();
+		for (Tile tile: track.getTiles()) {
+			tiles_array.add(populateJSONTile(tile));
+		}
+		player_object.put("tiles", tiles_array);
+	}
+
+	/**
+	 * SOLOGAME
+	 */
+
+	private static void populateJSONSoloGame(JSONObject match_object, SoloGame sologame) {
+		JSONObject game_object = new JSONObject();
+		populateJSONMarket(game_object, sologame.getMarket());
+		game_object.put("development_cards_on_table", populateJSONDevelopmentCardsOnTable(sologame.getDevelopmentCardsOnTable()));
+		game_object.put("active_tokens", populateJSONActiveTokens(sologame.getActiveTokens()));
+		game_object.put("last_token", populateJSONSoloActionToken(sologame.getLastToken()));
+		match_object.put("game", game_object);
+	}
+
+	private static JSONArray populateJSONActiveTokens(ArrayDeque<SoloActionToken> active_tokens) {
+		JSONArray active_tokens_array = new JSONArray();
+		while (active_tokens.size() != 0) {
+			active_tokens_array.add(populateJSONSoloActionToken(active_tokens.pop()));
+		}
+		return active_tokens_array;
+	}
+
+	private static JSONObject populateJSONSoloActionToken(SoloActionToken token) {
+		if (token == null) {
+			return null;
+		}
+
+		JSONObject token_object = new JSONObject();
+		token_object.put("type", token.getType());
+
+		if (token.getType().equals("DISCARDDEVELOPMENTCARDS")) {
+			token_object.put("color", ((DiscardDevelopmentCards) token).getColor().toString());
+		}
+
+		return token_object;
 	}
 
 	/**

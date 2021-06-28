@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.persistence;
 
 import java.util.stream.Collectors;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.nio.file.Path;
 import org.json.simple.parser.*;
 import org.json.simple.*;
 
+import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderAbility;
@@ -25,7 +27,12 @@ import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.Table;
 import it.polimi.ingsw.model.card.Deck;
 
+import it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards;
+import it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces;
+import it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace;
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
+import it.polimi.ingsw.model.game.sologame.SoloGame;
 import it.polimi.ingsw.model.game.Factory;
 import it.polimi.ingsw.model.game.Market;
 import it.polimi.ingsw.model.game.Turn;
@@ -33,8 +40,10 @@ import it.polimi.ingsw.model.game.Game;
 
 import it.polimi.ingsw.model.player.DevelopmentCardsSlots;
 import it.polimi.ingsw.model.player.track.VaticanReports;
+import it.polimi.ingsw.model.player.track.SoloFaithTrack;
 import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Tile;
+import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Warehouse;
 import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Player;
@@ -93,6 +102,24 @@ public class PersistenceParser {
 	}
 
 	/**
+	 *  Parse the entire match from the json file and create all the model classes for a SoloGame
+	 *
+	 * @param match_name the identifier of the saved match
+	 *  @return the SoloGame as it's represented in the json file
+	 */
+	public static SoloGame parseSoloMatch(String match_name) throws ParseException, IOException {
+		InputStream is = new FileInputStream(new File(PersistenceUtil.getPersistenceFileFromMatchName(match_name)));
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(new InputStreamReader(is));
+
+		ArrayList<Player> players = new ArrayList<Player>();
+		SoloPlayer player = parseSoloPlayer((JSONObject) jsonObject.get("player"));
+		players.add(player);
+
+		Turn turn = parseTurn((JSONObject) jsonObject.get("turn"), players);
+		return parseSoloGame((JSONObject) jsonObject.get("game"), turn, players);
+	}
+
+	/**
 	 * TURN
 	 */
 
@@ -143,21 +170,24 @@ public class PersistenceParser {
 		return new Player(nickname, track, warehouse, strongbox, development_card_slots, leader_cards);
 	}
 
+	private static Tile createTile(JSONObject tile_object) throws ParseException, IOException {
+		VaticanReports report = VaticanReports.valueOf(tile_object.get("report").toString());
+		int victory_points = (int)(long) tile_object.get("victory_points");
+		Tile tile = new Tile(report, victory_points);
+
+		if (Boolean.parseBoolean(tile_object.get("activated").toString())) {
+			tile.activateVaticanReport();
+		}
+		return tile;
+	}
+
 	private static FaithTrack createFaithTrack(JSONObject player_object) throws ParseException, IOException {
 		int marker_position = (int)(long) player_object.get("marker_position");
 
 		JSONArray tiles_array = (JSONArray) player_object.get("tiles");
 		Tile[] tiles = new Tile[tiles_array.size()];
 		for (int i = 0; i < tiles_array.size(); i++) {
-			JSONObject tile = (JSONObject) jsonParser.parse(tiles_array.get(i).toString());
-
-			VaticanReports report = VaticanReports.valueOf(tile.get("report").toString());
-			int victory_points = (int)(long) tile.get("victory_points");
-			tiles[i] = new Tile(report, victory_points);
-
-			if (Boolean.parseBoolean(tile.get("activated").toString())) {
-				tiles[i].activateVaticanReport();
-			}
+			tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
 		}
 
 		return new FaithTrack(Factory.getIstance().getAllCells(), tiles, marker_position);
@@ -317,6 +347,79 @@ public class PersistenceParser {
 			}
 		}
 		return new DevelopmentCardsOnTable(development_cards_table);
+	}
+
+	/**
+	 * SOLOPLAYER
+	 */
+
+	private static SoloPlayer parseSoloPlayer(JSONObject player_object) throws ParseException, IOException {
+		String nickname = player_object.get("nickname").toString();
+		SoloFaithTrack track = createSoloFaithTrack(player_object);
+		Warehouse warehouse = createWarehouse((JSONArray) player_object.get("warehouse"));
+		StrongBox strongbox = createStrongBox((JSONArray) player_object.get("strongbox"));
+		DevelopmentCardsSlots development_card_slots = createDevelopmentCardsSlots((JSONArray) player_object.get("development_cards_slots"));
+		ArrayList<LeaderCard> leader_cards = createLeaderCards((JSONArray) player_object.get("leader_cards"));
+		return new SoloPlayer(nickname, track, warehouse, strongbox, development_card_slots, leader_cards);
+	}
+
+	private static SoloFaithTrack createSoloFaithTrack(JSONObject player_object) throws ParseException, IOException {
+		int marker_position = (int)(long) player_object.get("marker_position");
+		int black_marker_position = (int)(long) player_object.get("black_marker_position");
+
+		JSONArray tiles_array = (JSONArray) player_object.get("tiles");
+		Tile[] tiles = new Tile[tiles_array.size()];
+		for (int i = 0; i < tiles_array.size(); i++) {
+			tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
+		}
+
+		return new SoloFaithTrack(Factory.getIstance().getAllCells(), tiles, marker_position, black_marker_position);
+	}
+
+	/**
+	 * SOLOGAME
+	 */
+
+	private static SoloGame parseSoloGame(JSONObject game_object, Turn turn, ArrayList<Player> players) throws ParseException, IOException {
+		Market market = createMarket((JSONArray) game_object.get("market"), (JSONObject) game_object.get("free_marble"));
+		DevelopmentCardsOnTable development_cards_on_table = createDevelopmentCardsOnTable((JSONArray) game_object.get("development_cards_on_table"));
+		ArrayDeque<SoloActionToken> active_tokens = createActiveTokens((JSONArray) game_object.get("active_tokens"));
+		SoloActionToken last_token = createSoloActionToken((JSONObject) game_object.get("last_token"));
+		return new SoloGame(players, market, development_cards_on_table, turn, Factory.getIstance().getAllSoloActionTokens(), active_tokens, last_token);
+	}
+
+	private static ArrayDeque<SoloActionToken> createActiveTokens(JSONArray active_tokens_array) throws ParseException {
+		ArrayDeque<SoloActionToken> active_tokens = new ArrayDeque<SoloActionToken>();
+		for (int i = active_tokens_array.size() - 1; i >= 0; i--) {
+			active_tokens.push(createSoloActionToken((JSONObject) active_tokens_array.get(i)));
+		}
+		return active_tokens;
+	}
+
+	//TODO: it's the same of createSoloActionToken in the Factory
+	private static SoloActionToken createSoloActionToken(JSONObject token_object) throws ParseException {
+		if (token_object == null) {
+			return null;
+		}
+
+		String type = token_object.get("type").toString();
+		switch (type) {
+			case "MOVEBLACKCROSSTWOSPACES":
+				return new MoveBlackCrossTwoSpaces();
+			case "MOVEBLACKCROSSONESPACE":
+				return new MoveBlackCrossOneSpace();
+			case "DISCARDDEVELOPMENTCARDS":
+				try {
+					String color_type = token_object.get("color").toString();
+					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(color_type);
+					return new DiscardDevelopmentCards(color);
+				} catch (IllegalArgumentException e) {
+					// if the color is not a DevelopmentCardsColor
+					throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
+				}
+			default:
+				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

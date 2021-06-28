@@ -29,5 +29,10 @@ public class DiscardDevelopmentCards implements SoloActionToken, Serializable {
 	public String toString() {
 		return this.color.colorString("    ___\n __|_  )\n|___/ /\n   /___|\n");
 	}
+
+	@Override
+	public String getType() {
+		return "DISCARDDEVELOPMENTCARDS";
+	}
 }
 
