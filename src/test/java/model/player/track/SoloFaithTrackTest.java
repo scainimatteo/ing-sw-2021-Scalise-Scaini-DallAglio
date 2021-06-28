@@ -45,13 +45,11 @@ public class SoloFaithTrackTest {
 		VaticanReports res_ret = null;
 		res_ret = faith_track.moveForwardBlackMarker(9);
 		assertEquals(res_ret, VaticanReports.REPORT1);
-		assertTrue(faith_track.checkIfTileIsActive(0));
 		assertEquals(9, faith_track.getBlackMarkerPosition());
 
 		res_ret = faith_track.moveForwardBlackMarker(7);
 		assertEquals(16, faith_track.getBlackMarkerPosition());
 		assertEquals(0, faith_track.getMarkerPosition());
 		assertEquals(res_ret, VaticanReports.REPORT2);
-		assertTrue(faith_track.checkIfTileIsActive(1));
 	}
 }
