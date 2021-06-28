@@ -203,7 +203,7 @@ public class GameControllerTest {
 	}
 
 	/**
-	 * Tests handleDiscard method, with full instruction coverage, after setting up the game
+	 * Tests handleDiscard method, with full instruction coverage, before the game can properly begin
 	 */
 	@Test
 	public void testInitDiscard(){
@@ -277,7 +277,7 @@ public class GameControllerTest {
 	}
 	
 	/**
-	 *TODO: complete test documentation
+	 * Tests handleEndTurn method for each player in a round, then tests the game to properly update for the following round 
 	 */
 	@RepeatedTest(value = 3)
 	public void testFullRoundEndTurn(){
@@ -307,6 +307,9 @@ public class GameControllerTest {
 
 	}
 
+	/**
+	 * Tests handleDiscardLeader for each player at the start of their turn
+	 * */
 	@RepeatedTest(value = 5)
 	public void testDiscardLeaderStart(){
 		testStartGame();
@@ -330,6 +333,9 @@ public class GameControllerTest {
 		}
 	}
 
+	/**
+	 * Tests handleDiscardLeader for each player at the end of their turn
+	 * */
 	@RepeatedTest(value = 5)
 	public void testDiscardLeaderEnd(){
 		testStartGame();
@@ -369,6 +375,10 @@ public class GameControllerTest {
 		}
 	}
 
+	/**
+	 * Grants the active player enough material to activate a leader card
+	 * @Param leader is card to be activated
+	 */
 	private void makeActivable(LeaderCard leader){
 		if (leader instanceof LeaderCardResourcesCost){
 			LeaderCardResourcesCost true_card = (LeaderCardResourcesCost) leader;
@@ -385,6 +395,9 @@ public class GameControllerTest {
 		}
 	}
 	
+	/**
+	 * Tests handleActivateLeader for each player at the start of their turn
+	 * */
 	@RepeatedTest(value = 5)
 	public void testActivateLeaderStart(){
 		testStartGame();
@@ -415,6 +428,9 @@ public class GameControllerTest {
 		}
 	}
 
+	/**
+	 * Tests handleActivateLeader for each player at the end of their turn
+	 * */
 	@RepeatedTest(value = 5)
 	public void testActivateLeaderEnd(){
 		testStartGame();
@@ -457,10 +473,11 @@ public class GameControllerTest {
 		}
 	}
 	
-	@RepeatedTest(value = 5)
-	public void testMarketRows(){
-		testStartGame();
-		message = new MarketMessage(true, 0);
+	/**
+	 * Tests the controller to correctly deny non-active players the requested action
+	 * @param message contains the requested action
+	 */
+	private void checkIsNotYourTurn (Message message){
 	    for (Player p : playerOrder){
 			if (!p.equals(game.getTurn().getPlayer())){
 				message.setPlayer(p);
@@ -469,6 +486,16 @@ public class GameControllerTest {
 				controller.clearError();
 			}
 		}
+	}
+
+	/**
+	 * Tests handleMarket to properly return requested resource rows for every player
+	 */
+	@RepeatedTest(value = 5)
+	public void testMarketRows(){
+		testStartGame();
+		message = new MarketMessage(true, 0);
+		checkIsNotYourTurn(message);
 
 		ArrayList<Resource> test_market;
 		int prevpos, steps;
@@ -505,18 +532,14 @@ public class GameControllerTest {
 
 	}
 	
+	/**
+	 * Tests handleMarket to properly return requested resource columns for every player 
+	 */
 	@RepeatedTest(value = 5)
 	public void testMarketColumns(){
 		testStartGame();
 		message = new MarketMessage(true, 0);
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
+		checkIsNotYourTurn(message);
 
 		ArrayList<Resource> test_market;
 		int prevpos, steps;
@@ -553,22 +576,22 @@ public class GameControllerTest {
 
 	}
 
+	/**
+	 * Grants to the active player enough resources to buy a card
+	 * @param card is the card to activate
+	 */
 	private void makeBuyable(DevelopmentCard card){
 		game.getTurn().getPlayer().insertResources(card.getCost());
 	}
 
+	/**
+	 * Tests handleBuyCard with full instruction coverage for each player
+	 */
 	@RepeatedTest(value = 5)
 	public void testBuyCard(){
 		testStartGame();
 		message = new BuyCardMessage(0, 0, 0);
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
+		checkIsNotYourTurn(message);
 
 		int column = 0, slot = 0;
 		DevelopmentCard card;
@@ -637,23 +660,19 @@ public class GameControllerTest {
 		}
 	}
 
+	/**
+	 * Tests handleProduction with full instruction coverage for each player
+	 */
 	@Test
 	public void testActivateProduction(){
 		testStartGame();
 		ArrayList<ProductionInterface> productions = new ArrayList<ProductionInterface>();
 		message = new ProductionMessage(productions);
+		checkIsNotYourTurn(message);
 		ArrayList<Resource> cost = new ArrayList<Resource>();
 		ArrayList<Resource> produced = new ArrayList<Resource>();
 		ArrayList<Resource> tot_cost = new ArrayList<Resource>();
 		ArrayList<Resource> tot_produced = new ArrayList<Resource>();
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
 
 		int steps, prevpos;
 		for (Player p : playerOrder){
@@ -723,18 +742,14 @@ public class GameControllerTest {
 		}
 	}
 
+	/**
+	 * Tests handlePay with full instruction coverage for each player
+	 */
 	@RepeatedTest(value = 10)
 	public void testPayResources(){
 		testStartGame();
 		message = new PayMessage(new Storage());
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
+		checkIsNotYourTurn(message);
 
 		ArrayList<Resource> warehousebot_res = new ArrayList<Resource>();
 		ArrayList<Resource> warehousemid_res = new ArrayList<Resource>();
@@ -795,18 +810,14 @@ public class GameControllerTest {
 		}
 	}
 	
+	/**
+	 * Tests handleStore with full instruction coverage for each player
+	 */
 	@RepeatedTest(value = 10)
 	public void testStoreResources(){
 		testStartGame();
 		message = new StoreMessage(new Storage());
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
+		checkIsNotYourTurn(message);
 
 		ArrayList<Resource> warehousebot_res = new ArrayList<Resource>();
 		ArrayList<Resource> warehousemid_res = new ArrayList<Resource>();
@@ -873,18 +884,15 @@ public class GameControllerTest {
 		}
 	}
 
+	/**
+	 * Tests handleDiscardResources with full instruction coverage for each player
+	 */
 	@RepeatedTest(value = 5)
 	public void testDiscardResources(){
 		testStartGame();
 		message = new DiscardResourcesMessage();
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
+		checkIsNotYourTurn(message);
+		
 		Player p;
 		int prevpos[] = {0, 0, 0, 0};
 		int steps;
@@ -918,18 +926,14 @@ public class GameControllerTest {
 		}
 	}
 	
+	/**
+	 * Tests handleRearrange with full instruction coverage for each player
+	 */
 	@Test
 	public void testRearrange(){
 		testStartGame();
 		message = new RearrangeMessage(1, 1);
-	    for (Player p : playerOrder){
-			if (!p.equals(game.getTurn().getPlayer())){
-				message.setPlayer(p);
-				controller.handleMessage(message);
-				assertEquals(controller.getError(), "It is not your turn");
-				controller.clearError();
-			}
-		}
+		checkIsNotYourTurn(message);
 		
 		ArrayList<Resource> bot_res = new ArrayList<Resource>();
 		ArrayList<Resource> mid_res = new ArrayList<Resource>();
