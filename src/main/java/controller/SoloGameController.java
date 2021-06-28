@@ -39,7 +39,7 @@ public class SoloGameController extends GameController {
 		super.match_name = match_name;
 		try {
 			super.game = PersistenceParser.parseSoloMatch(match_name);
-			new Initializer().initializePersistenceSoloGame(clients, super.game);
+			new Initializer().initializePersistenceSoloGame(clients, (SoloGame) super.game);
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 			System.out.println("SoloGame could not start");
