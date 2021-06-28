@@ -68,4 +68,13 @@ public class DevelopmentCardsOnTable {
 			throw new NoSuchElementException();
 		}
 	}
+
+	/**
+	 * Returns the size of the given deck
+	 *
+	 * testing only
+	 */
+	public int getDeckSize(int i, int j){
+		return development_cards_table.getDeck(i,j).size();
+	}
 }

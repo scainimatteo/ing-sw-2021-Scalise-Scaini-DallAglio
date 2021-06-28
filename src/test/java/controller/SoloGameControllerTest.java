@@ -37,6 +37,7 @@ import it.polimi.ingsw.model.card.DiscountAbility;
 import it.polimi.ingsw.model.card.WhiteMarblesAbility;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.CardLevel;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.SoloPlayer;
@@ -56,7 +57,7 @@ import it.polimi.ingsw.server.ClientHandler;
 
 public class SoloGameControllerTest{
 	StubSoloGameController controller;
-	Game game;
+	SoloGame game;
 	Message message;
 	SoloPlayer p;
 	ArrayList<Resource> test_resources;
@@ -82,9 +83,9 @@ public class SoloGameControllerTest{
 		
 		for (int i = 0; i < 5; i++){
 			game.getTurn().setDoneAction(true);
-			int prevsize = ((SoloGame) game).getTokenAmount();
+			int prevsize = game.getTokenAmount();
 			controller.handleMessage(message);
-			assertTrue(((SoloGame) game).getTokenAmount() == prevsize - 1 || ((SoloGame) game).getTokenAmount() == 7); 
+			assertTrue(game.getTokenAmount() == prevsize - 1 || game.getTokenAmount() == 7); 
 			assertFalse(game.getTurn().hasDoneAction());
 		}
 	}
@@ -115,33 +116,68 @@ public class SoloGameControllerTest{
 	}
 	
 	@Test
-	@Disabled
 	public void testMoveTwoSpaces(){
 		initGame();
 		SoloActionToken token; 
-		int steps = 0, prevpos = 0;
+		int prevpos = 0;
 		for (int i = 0; i < 5; i++){
 			token = new MoveBlackCrossTwoSpaces();
 			prevpos = p.getBlackMarkerPosition();
-			System.out.println ("\n \n" + steps + " " + prevpos);
 			token.useToken(controller);
-			steps = steps + 2;
-			assertEquals(p.getBlackMarkerPosition(), steps + prevpos);
+			assertEquals(p.getBlackMarkerPosition(), prevpos + 2);
 		}
 	}
 	
-
+	@Test
 	public void testMoveOneSpace(){
 		initGame();
 		SoloActionToken token; 
-		int steps = 0, prevpos = 0;
-		for (int i = 0; i < 5; i++){
-			token = new MoveBlackCrossTwoSpaces();
+		int prevpos = 0;
+		for (int i = 1; i <= 7; i++){
+			for (int j = 1; j <= i; j++){
+				token = game.getTopToken();
+				assertEquals(game.getTokenAmount(), 7 - j);
+			}
+			token = new MoveBlackCrossOneSpace();
 			prevpos = p.getBlackMarkerPosition();
-			System.out.println ("\n \n" + steps + " " + prevpos);
 			token.useToken(controller);
-			steps = steps + 2;
-			assertEquals(p.getBlackMarkerPosition(), steps + prevpos);
+			assertEquals(p.getBlackMarkerPosition(), prevpos + 1);
+			assertEquals(game.getTokenAmount(), 7);
+		}
+	}
+
+	@Test
+	public void testDiscardDevelopmentCards(){
+		initGame();
+		DevelopmentCardsColor allcolors[] = {DevelopmentCardsColor.GREEN, DevelopmentCardsColor.BLUE, DevelopmentCardsColor.YELLOW, DevelopmentCardsColor.PURPLE};
+		int order;
+		assertFalse(controller.wasLastCardDiscarded());
+		for (DevelopmentCardsColor color : allcolors){
+			DiscardDevelopmentCards token = new DiscardDevelopmentCards(color);
+			order = color.getOrder();
+			game.getFromDeck(game.getTopCards()[2][order]);
+			assertEquals(3, game.getDevelopmentCardsOnTable().getDeckSize(2, order));
+			
+			token.useToken(controller);
+			assertEquals(1, game.getDevelopmentCardsOnTable().getDeckSize(2, order));
+
+			token.useToken(controller);
+			assertEquals(0, game.getDevelopmentCardsOnTable().getDeckSize(2, order));
+			assertEquals(3, game.getDevelopmentCardsOnTable().getDeckSize(1, order));
+
+			token.useToken(controller);
+			assertEquals(1, game.getDevelopmentCardsOnTable().getDeckSize(1, order));
+
+			token.useToken(controller);
+			assertEquals(0, game.getDevelopmentCardsOnTable().getDeckSize(1, order));
+			assertEquals(3, game.getDevelopmentCardsOnTable().getDeckSize(0, order));
+
+			token.useToken(controller);
+			assertEquals(1, game.getDevelopmentCardsOnTable().getDeckSize(0, order));
+
+			token.useToken(controller);
+			assertEquals(0, game.getDevelopmentCardsOnTable().getDeckSize(0, order));
+			assertTrue(controller.wasLastCardDiscarded());
 		}
 	}
 }

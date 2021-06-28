@@ -39,6 +39,10 @@ public class SoloGameController extends GameController {
 		}
 	}
 
+	public boolean wasLastCardDiscarded(){
+		return last_card_discarded;
+	}
+
 	/**
 	 * Checks if the Player more than 7 development cards or has reached the end of the track and triggers the round to be the last
 	 * First it checks the losing conditions:
@@ -107,7 +111,6 @@ public class SoloGameController extends GameController {
 	public void handleDiscardResources(Player player) {
 		if (super.game.getTurn().getRequiredResources().isEmpty()){
 			int discarded = super.game.getTurn().getProducedResources().size();
-			System.out.println(discarded);
 			handleBlackMarkerVaticanReports(((SoloGame) super.game).moveForwardBlackMarker(discarded));
 			super.game.getTurn().clearProducedResources();
 		} else {handleError("You must pay all of the cost first", player);}

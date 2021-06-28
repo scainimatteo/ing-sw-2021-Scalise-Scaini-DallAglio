@@ -208,6 +208,9 @@ public class Player extends Observable {
 		this.warehouse.getFromBottom(res);
 	}
 
+	/**
+	 * Testing only
+	 */
 	public void clearWarehouse(){
 		this.warehouse.clearWarehouse();
 		this.notifyPlayer();
@@ -271,11 +274,6 @@ public class Player extends Observable {
 		return this.strongbox;
 	}
 	
-	public void clearStrongbox(){
-		this.strongbox.clear();
-		this.notifyPlayer();
-	}
-
 	/**
 	 * DEVCARDSSLOTS METHODS
 	 */
@@ -290,12 +288,6 @@ public class Player extends Observable {
 
 	public DevelopmentCard[] getTopCards(){
 		return this.development_card_slots.getTopCards();
-	}
-
-	//TODO: change this in getSlot
-	//TODO: why does this return an array?
-	public DevelopmentCard[] getCard(int position){
-		return this.development_card_slots.getCard(position);
 	}
 
 	public Iterator<DevelopmentCard> getDevCardIterator(){

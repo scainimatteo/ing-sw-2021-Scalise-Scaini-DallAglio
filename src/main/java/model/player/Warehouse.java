@@ -7,7 +7,7 @@ import java.lang.IllegalArgumentException;
 import java.util.NoSuchElementException;
 import java.util.ArrayList;
 
-//TODO: remove various exceptions raised by methods
+//TODO: remove various exceptions raised by methods and clean documentation
 public class Warehouse {
 	private ArrayList<Resource> top_resource;
 	private ArrayList<Resource> middle_resources;
@@ -162,8 +162,8 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
 	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
 	 **/
-	public void storeTop(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (res.isEmpty()){
+	public void storeTop(ArrayList<Resource> res){
+	/*	if (res.isEmpty()){
 			return;
 		} else if (res.size() > 1 - top_resource.size()){
 			throw new IndexOutOfBoundsException();
@@ -174,6 +174,8 @@ public class Warehouse {
 				top_resource.addAll(res);
 			} else {throw new IllegalArgumentException();}
 		}
+		*/
+		top_resource.addAll(res);
 	}
 	
 	/**
@@ -183,7 +185,8 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
 	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
 	 **/
-	public void storeMiddle (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+	public void storeMiddle (ArrayList<Resource> res){
+		/*
 		if (res.isEmpty()){
 			return;
 		} else if (res.size() > 2 - middle_resources.size()){
@@ -201,6 +204,8 @@ public class Warehouse {
 				} else {throw new IllegalArgumentException();}
 			}		
 		}
+		*/
+		middle_resources.addAll(res);
 	}
 
 	/**
@@ -210,7 +215,8 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the space available
 	 * @exception IllegalArgumentException is thrown if the list contains different resources or resources which cannot be put in the shelf
 	 **/
-	public void storeBottom (ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+	public void storeBottom (ArrayList<Resource> res) {
+		/*
 		if (res.isEmpty()){
 			return;
 		} else if (res.size() > 3 - bottom_resources.size()){
@@ -228,7 +234,10 @@ public class Warehouse {
 				} else {throw new IllegalArgumentException();}
 			}		
 		}
+		*/
+		bottom_resources.addAll(res);
 	}
+	
 	
 	/**
 	 * PAYMENT RELATED METHODS
@@ -243,7 +252,7 @@ public class Warehouse {
 		if (res.isEmpty()){
 			return true;
 		} else {
-			return res.size() <= top_resource.size() && isAllTheSame(res) && res.get(0).equals(top_resource.get(0));
+			return res.size() <= top_resource.size() && res.get(0).equals(top_resource.get(0));
 		}
 	}
 
@@ -280,7 +289,8 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 * @exception IllegalArgumentException is thrown if the list contains a type of resources not contained in the row
 	 **/
-	public void getFromTop(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
+	public void getFromTop(ArrayList<Resource> res){
+		/*
 		if (res.size() > top_resource.size()){
 			throw new IndexOutOfBoundsException();
 		} else {
@@ -292,6 +302,10 @@ public class Warehouse {
 				} else {throw new IllegalArgumentException();}
 			}
 		}
+		*/
+		for (Resource x :res) {
+			top_resource.remove(x);
+		}
 	}
 
 	/**
@@ -301,8 +315,8 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 * @exception IllegalArgumentException is thrown if the list contains a type of resources not contained in the row
 	 **/
-	public void getFromMiddle(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (res.size() > middle_resources.size()){
+	public void getFromMiddle(ArrayList<Resource> res){
+		/*if (res.size() > middle_resources.size()){
 			throw new IndexOutOfBoundsException();
 		} else {
 			if (!res.isEmpty()) {
@@ -312,6 +326,9 @@ public class Warehouse {
 					}
 				} else {throw new IllegalArgumentException();}
 			}
+		}*/
+		for (Resource x :res) {
+			middle_resources.remove(x);
 		}
 	}
 
@@ -322,8 +339,8 @@ public class Warehouse {
 	 * @exception IndexOutOfBoundsException is thrown if the quantity requested is greater than the resource available
 	 * @exception IllegalArgumentException is thrown if the list contains a type of resources not contained in the row
 	 **/
-	public void getFromBottom(ArrayList<Resource> res) throws IndexOutOfBoundsException, IllegalArgumentException {
-		if (res.size() > bottom_resources.size()){
+	public void getFromBottom(ArrayList<Resource> res){
+		/*if (res.size() > bottom_resources.size()){
 			throw new IndexOutOfBoundsException();
 		} else {
 			if (!res.isEmpty()) {
@@ -333,6 +350,9 @@ public class Warehouse {
 					}
 				} else {throw new IllegalArgumentException();}
 			}
+		}*/
+		for (Resource x :res) {
+			bottom_resources.remove(x);
 		}
 	}
 }
