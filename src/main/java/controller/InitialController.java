@@ -86,4 +86,8 @@ public class InitialController implements Controller {
 	public void handlePay(Player player, Storage storage) {
 		return;
 	}
+
+	public void handlePersistence(Player player) {
+		return;
+	}
 }

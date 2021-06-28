@@ -57,4 +57,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 		return;
 	}
 
+	public String getPath() {
+		return this.front_path;
+	}
 }

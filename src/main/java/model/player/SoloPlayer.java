@@ -22,7 +22,7 @@ public class SoloPlayer extends Player{
 	 * Send a ViewUpdate with the current Player
 	 */
 	public void notifyPlayer() {
-		notify(new ViewUpdate(this.simplify()));
+		notifyModel(new ViewUpdate(this.simplify()));
 	}
 
 	/**

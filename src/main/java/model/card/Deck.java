@@ -20,6 +20,15 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Deck(int size, ArrayList<E> structure) {
+		this.max_size = size;
+		this.structure = structure;
+	}
+
+	/**
 	* @return is the structure empty?
 	*/
 	public boolean isEmpty(){

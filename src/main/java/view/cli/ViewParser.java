@@ -40,7 +40,7 @@ public class ViewParser {
 					return parseDevelopmentCardsSlots(inputs, players, nickname);
 				case "TURN":
 				case "TU":
-					return parseTurn(inputs, turn);
+					return parseTurn(inputs, turn, game);
 				case "SOLOACTIONTOKEN":
 				case "TOKEN":
 				case "TO":
@@ -157,8 +157,8 @@ public class ViewParser {
 		}
 	}
 
-	public static String parseTurn(String[] inputs, Turn turn) throws IllegalArgumentException {
-		return Printer.printTurn(turn);
+	public static String parseTurn(String[] inputs, Turn turn, SimpleGame game) throws IllegalArgumentException {
+		return Printer.printTurn(turn, game);
 	}
 
 	public static String parseSoloActionToken(String[] inputs, SimpleGame game) throws IllegalArgumentException {

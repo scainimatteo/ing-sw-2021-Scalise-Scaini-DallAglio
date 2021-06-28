@@ -19,6 +19,8 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.util.observer.ViewUpdateObserver;
+
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
@@ -105,7 +107,7 @@ public class App extends Application {
 	}
 
 	/**
-	 * Send a message to the Client
+	 * Send a message to the Server
 	 *
 	 * @param message the Message to send
 	 */
@@ -118,5 +120,14 @@ public class App extends Application {
 	 */
 	public static void finishedInitialization() {
 		App.gui.finishedInitialization();
+	}
+
+	/**
+	 * Set a ViewUpdateObserver to be updated when there's a ViewUpdate
+	 *
+	 * @param observer the ViewUpdateObserver to set
+	 */
+	public static void setViewUpdateObserver(ViewUpdateObserver observer) {
+		gui.addViewUpdateObserver(observer);
 	}
 }

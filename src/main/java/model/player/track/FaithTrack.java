@@ -14,6 +14,20 @@ public class FaithTrack {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public FaithTrack(Cell[] track, Tile[] vatican_report_tiles, int marker_position) {
+		this(track, vatican_report_tiles);
+		for (Cell cell: track) {
+			if (cell.getPosition() == marker_position) {
+				this.faith_marker = cell;
+				break;
+			}
+		}
+	}
+
+	/**
 	 * @param number_of_times represent how many cells the marker has to move
 	 * @return the vatican report activated if the marker reaches or overcomes a pope space
 	 */

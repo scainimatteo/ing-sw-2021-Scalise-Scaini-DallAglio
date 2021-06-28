@@ -6,118 +6,159 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="0.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-<children>
-   <ImageView fitHeight="720.0" fitWidth="715.0" opacity="0.69" pickOnBounds="true" preserveRatio="true">
-	  <image>
-		  <Image url="@../images/starting_background.jpg" />
-	  </image>
-   </ImageView>
-   <VBox fx:id="startLayout" alignment="CENTER" layoutX="252.0" layoutY="427.0" prefHeight="188.0" prefWidth="213.0" spacing="40.0">
+<StackPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/initialscene.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="530.0" prefWidth="800.0" StackPane.alignment="CENTER">
+         <children>
+         <Label fx:id="nicknameLabel" alignment="TOP_CENTER" text="Choose nickname" textAlignment="CENTER">
+      	  <font>
+      		 <Font name="Lato Black Italic" size="62.0" />
+      	  </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+         </Label>
+         <TextField fx:id="nicknameText" alignment="CENTER" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Nickname">
+               <font>
+                  <Font name="Lato Black Italic" size="50.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </VBox>
+   <VBox fx:id="startLayout" alignment="CENTER" prefHeight="188.0" prefWidth="213.0" spacing="40.0" StackPane.alignment="CENTER">
 	  <children>
-		 <Button mnemonicParsing="false" onAction="#selectCreateHandler" prefHeight="28.0" prefWidth="169.0" text="Create match">
+		 <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#selectCreateHandler" prefHeight="60.0" prefWidth="200.0" text="Create match">
 			<font>
-			   <Font name="System Bold Italic" size="16.0" />
+			   <Font name="Lato Black Italic" size="25.0" />
 			</font>
 			<opaqueInsets>
 			   <Insets />
 			</opaqueInsets>
+               <VBox.margin>
+                  <Insets top="90.0" />
+               </VBox.margin>
 		 </Button>
-		 <Button mnemonicParsing="false" onAction="#selectJoinHandler" prefHeight="28.0" prefWidth="169.0" text="Join match">
-			<font>
-			   <Font name="System Bold Italic" size="16.0" />
-			</font>
-		 </Button>
+		 <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#selectJoinHandler" prefHeight="60.0" prefWidth="200.0" text="Join match">
+               <font>
+                  <Font name="Lato Black Italic" size="25.0" />
+               </font></Button>
 	  </children>
    </VBox>
-   <VBox fx:id="createLayout" alignment="CENTER" layoutX="252.0" layoutY="253.0" prefHeight="188.0" prefWidth="213.0" spacing="20.0">
+   <VBox fx:id="createLayout" alignment="CENTER" prefHeight="188.0" prefWidth="213.0" StackPane.alignment="CENTER">
 	  <children>
 		 <Label text="How many players?" textAlignment="CENTER">
 			<font>
-			   <Font name="System Bold" size="16.0" />
+			   <Font name="Lato Black Italic" size="50.0" />
 			</font>
+               <VBox.margin>
+                  <Insets top="230.0" />
+               </VBox.margin>
 		 </Label>
 			<fx:define>
 				<ToggleGroup fx:id="numPlayersGroup" />
 			</fx:define>
 		 <RadioButton fx:id="rb1" mnemonicParsing="false" text="1">
-			<font>
-			   <Font name="System Bold" size="16.0" />
-			</font>
                <toggleGroup>
                   <ToggleGroup fx:id="numPlayersGroup" />
                </toggleGroup>
+               <font>
+                  <Font name="Lato Black" size="34.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
 		 </RadioButton>
 		 <RadioButton fx:id="rb2" mnemonicParsing="false" text="2" toggleGroup="$numPlayersGroup">
-			<font>
-			   <Font name="System Bold" size="16.0" />
-			</font>
-		 </RadioButton>
+               <font>
+                  <Font name="Lato Black" size="34.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin></RadioButton>
 		 <RadioButton fx:id="rb3" mnemonicParsing="false" text="3" toggleGroup="$numPlayersGroup">
-			<font>
-			   <Font name="System Bold" size="16.0" />
-			</font>
-		 </RadioButton>
+               <font>
+                  <Font name="Lato Black" size="34.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin></RadioButton>
 		 <RadioButton fx:id="rb4" mnemonicParsing="false" text="4" toggleGroup="$numPlayersGroup">
-			<font>
-			   <Font name="System Bold" size="16.0" />
-			</font>
-		 </RadioButton>
-		 <Button mnemonicParsing="false" onAction="#createHandler" prefHeight="28.0" prefWidth="169.0" text="Create match">
-			<font>
-			   <Font name="System Bold Italic" size="16.0" />
-			</font>
-		 </Button>
+               <font>
+                  <Font name="Lato Black" size="34.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin></RadioButton>
+		 <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#createHandler" prefHeight="60.0" prefWidth="200.0" text="Create match">
+               <font>
+                  <Font name="Lato Black" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></Button>
 	  </children>
    </VBox>
-   <VBox fx:id="joinLayout" alignment="CENTER" layoutX="226.0" layoutY="247.0" prefHeight="228.0" prefWidth="262.0" spacing="20.0">
+   <VBox fx:id="joinLayout" alignment="CENTER" prefHeight="228.0" prefWidth="262.0" visible="false" StackPane.alignment="CENTER">
 	  <children>
-		 <Label text="Match name?" textAlignment="CENTER">
+		 <Label alignment="CENTER" text="Match name?" textAlignment="CENTER">
 			<font>
-			   <Font name="System Bold" size="16.0" />
+			   <Font name="Lato Black Italic" size="50.0" />
 			</font>
+               <VBox.margin>
+                  <Insets top="120.0" />
+               </VBox.margin>
 		 </Label>
-		 <TextField fx:id="matchText" prefHeight="24.0" prefWidth="0.0" />
-		 <Button mnemonicParsing="false" onAction="#joinHandler" prefHeight="28.0" prefWidth="169.0" text="Join match">
+		 <TextField fx:id="matchText" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="500.0" promptText="Match name">
+               <font>
+                  <Font name="Lato Black" size="50.0" />
+               </font></TextField>
+		 <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#joinHandler" prefHeight="60.0" prefWidth="200.0" text="Join match">
 			<font>
 			   <Font name="System Bold Italic" size="16.0" />
 			</font>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
 		 </Button>
 	  </children>
    </VBox>
-      <VBox fx:id="matchLayout" alignment="TOP_CENTER" layoutX="-3.0" layoutY="187.0" prefHeight="163.0" prefWidth="709.0">
+      <VBox fx:id="matchLayout" alignment="CENTER" prefHeight="1010.0" prefWidth="1782.0" visible="false" StackPane.alignment="CENTER">
          <children>
-      	 <Label fx:id="waitingLabel" prefWidth="619.0" text="WAITING FOR OTHER PLAYERS TO JOIN ON MATCH NAME:">
+      	 <Label fx:id="waitingLabel" prefHeight="174.0" prefWidth="881.0" text="WAITING FOR OTHER PLAYERS TO JOIN ON MATCH NAME:" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
       		  <font>
-      			 <Font name="Serif Bold Italic" size="18.0" />
+      			 <Font name="Lato Black Italic" size="46.0" />
       		  </font>
       	 </Label>
       	 <Label id="matchNameLabel" fx:id="matchNameLabel" alignment="TOP_LEFT" text="" textFill="#eb6a57">
       		  <font>
-      			 <Font name="System Bold Italic" size="53.0" />
+      			 <Font name="Lato Black Italic" size="53.0" />
       		  </font>
-               <padding>
-                  <Insets top="50.0" />
-               </padding>
       	 </Label>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <StackPane.margin>
+            <Insets bottom="70.0" />
+         </StackPane.margin>
       </VBox>
-   <Label fx:id="nicknameLabel" layoutX="278.0" layoutY="167.0" text="Choose nickname" textAlignment="CENTER">
-	  <font>
-		 <Font name="System Bold" size="16.0" />
-	  </font>
-   </Label>
-   <TextField fx:id="nicknameText" layoutX="267.0" layoutY="199.0" prefHeight="24.0" prefWidth="181.0"/>
-	 <Button fx:id="cancelButton" layoutX="278.0" layoutY="520.0" onAction="#cancelHandler" prefHeight="28.0" prefWidth="169.0" text="Cancel">
+	 <Button fx:id="cancelButton" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#cancelHandler" prefHeight="60.0" prefWidth="200.0" text="Cancel" StackPane.alignment="BOTTOM_CENTER">
 		<font>
-		   <Font name="System Bold Italic" size="16.0" />
+		   <Font name="Lato Black" size="25.0" />
 		</font>
+         <StackPane.margin>
+            <Insets bottom="50.0" />
+         </StackPane.margin>
 	 </Button>
-</children>
-</AnchorPane>
+   </children>
+</StackPane>

@@ -8,6 +8,7 @@ import it.polimi.ingsw.controller.message.ChooseResourcesMessage;
 import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.InitializingMessage;
+import it.polimi.ingsw.controller.message.PersistenceMessage;
 import it.polimi.ingsw.controller.message.ProductionMessage;
 import it.polimi.ingsw.controller.message.RearrangeMessage;
 import it.polimi.ingsw.controller.message.EndTurnMessage;
@@ -77,6 +78,9 @@ public class MessageParser {
 			case "CHOOSE":
 			case "C":
 				return parseChooseResourcesMessage(inputs, player);
+			case "PERSISTENCE":
+			case "SAVE":
+				return parsePersistenceMessage(inputs);
 			default:
 				throw new IllegalArgumentException();
 		}
@@ -293,6 +297,7 @@ public class MessageParser {
 	}
 
 	private static Message parseDiscardResourcesMessage(String[] inputs) throws IllegalArgumentException {
+		//TODO: does not check for other words after
 		return new DiscardResourcesMessage();
 	}
 
@@ -365,6 +370,11 @@ public class MessageParser {
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
 			throw new IllegalArgumentException("choose resources <number resource (wt|wm|wb)>+");
 		}
+	}
+
+	private static Message parsePersistenceMessage(String[] inputs) throws IllegalArgumentException {
+		//TODO: does not check for other words after
+		return new PersistenceMessage();
 	}
 
 	/**

@@ -71,6 +71,7 @@ public class Client {
 	 *
 	 * @param message the ViewUpdate that contains the information to update
 	 */
+	//TODO: why is this a method?
 	public void updateView(ViewUpdate message) {
 		this.view.updateView(message);
 	}
