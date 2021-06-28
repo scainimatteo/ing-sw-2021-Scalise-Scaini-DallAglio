@@ -44,7 +44,7 @@ public class SoloGame extends Game {
 	 */
 	@Override
 	public void notifyGame() {
-		notify(new ViewUpdate(this.simplify()));
+		notifyModel(new ViewUpdate(this.simplify()));
 	}
 
 	/**
@@ -113,6 +113,6 @@ public class SoloGame extends Game {
 		// send a ranking containing 0 points for them
 		HashMap<String, Integer> rank = new HashMap<String, Integer>();
 		rank.put(this.player.getNickname(), 0);
-		notify(new EndGameMessage(rank));
+		notifyModel(new EndGameMessage(rank));
 	}
 }

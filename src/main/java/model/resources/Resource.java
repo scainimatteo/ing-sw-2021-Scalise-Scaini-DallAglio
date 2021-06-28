@@ -26,6 +26,9 @@ public enum Resource {
 		}
 	}
 
+	/**
+	 * @return a String with a circle of the right color
+	 */
 	public String printMarble(){
 		char circle = '\u25EF';
 		switch (this){
@@ -38,8 +41,32 @@ public enum Resource {
 		}
 	}
 
+	/**
+	 * @return a String with a white circle
+	 */
 	public String printNullMarble(){
 		char circle = '\u25EF';
 		return ANSI.white(Character.toString(circle));
+	}
+
+	/**
+	 * @return a String with the path of the image of the marble of the right color
+	 */
+	public String getPath() {
+		switch (this){
+			case COIN: return "/images/tokens/resources/yellow_marble.png";
+			case STONE: return "/images/tokens/resources/grey_marble.png";
+			case SERVANT: return "/images/tokens/resources/purple_marble.png";
+			case SHIELD: return "/images/tokens/resources/blue_marble.png";
+			case FAITH: return "/images/tokens/resources/red_marble.png";
+			default: return "/images/tokens/resources/white_marble.png";
+		}
+	}
+
+	/**
+	 * @return a String with the path of the image of the white marble
+	 */
+	public static String getNullMarblePath(){
+		return "/images/tokens/resources/white_marble.png";
 	}
 }

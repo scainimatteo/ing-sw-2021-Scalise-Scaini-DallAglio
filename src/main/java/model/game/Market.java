@@ -7,8 +7,8 @@ import java.util.Random;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class Market {
-	private final int dim_rows = 4;
-	private final int dim_cols = 3;
+	public final int dim_rows = 4;
+	public final int dim_cols = 3;
 	private Resource[][] market_board;
 	private Resource free_marble;
 	private ArrayList<Resource> all_resources;
@@ -30,6 +30,15 @@ public class Market {
 		all_resources.add(Resource.SERVANT);
 		all_resources.add(Resource.FAITH);
 		randomizeMarket();
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Market(Resource[][] market_board, Resource free_marble) {
+		this.market_board = market_board;
+		this.free_marble = free_marble;
 	}
 
 	/**

@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.card;
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 
 import java.io.Serializable;
-//TODO: eliminate unused methods
+
 public class CardLevel implements Serializable {
 	private static final long serialVersionUID = 8L;
 	private int level;

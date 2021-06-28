@@ -12,12 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.DragEvent;
-import javafx.event.EventHandler;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.event.EventHandler;
 
 import java.util.ArrayList;
 import java.io.IOException;
@@ -64,7 +64,6 @@ public abstract class SceneController {
 			Scene new_scene = new Scene(layout, 300, 275);
 			SceneController.stage.setScene(new_scene);
 		} catch (IOException e) {
-			//TODO: better exception handling
 			e.printStackTrace();
 		}
 	}

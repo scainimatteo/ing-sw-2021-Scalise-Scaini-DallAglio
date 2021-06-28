@@ -47,7 +47,6 @@ public class StubInitializer extends Initializer {
 			Game game = createGame();
 			return game;
 		} catch (Exception e) {
-			//TODO: too generic?
 			e.printStackTrace();
 			throw new InstantiationException();
 		}
@@ -60,7 +59,6 @@ public class StubInitializer extends Initializer {
 			SoloGame game = createSoloGame();
 			return game;
 		} catch (Exception e) {
-			//TODO: too generic?
 			e.printStackTrace();
 			throw new InstantiationException();
 		}

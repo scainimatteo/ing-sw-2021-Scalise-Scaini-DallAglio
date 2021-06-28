@@ -43,12 +43,12 @@ import it.polimi.ingsw.model.resources.Resource;
  */
 public class Factory {
 	private static Factory istance;
+	private JSONParser jsonParser;
 	private DevelopmentCard[] all_development_cards;
 	private LeaderCard[] all_leader_cards;
 	private Cell[] all_cells;
 	private Tile[] all_tiles;
 	private SoloActionToken[] all_solo_action_tokens;
-	private JSONParser jsonParser;
 
 	private int development_cards_number;
 	private int leader_cards_number;

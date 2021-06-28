@@ -65,8 +65,6 @@ public class Initializer {
 			game.getTurn().notifyTurn();
 			return game;
 		} catch (Exception e) {
-			//TODO: too generic?
-			e.printStackTrace();
 			throw new InstantiationException();
 		}
 	}
@@ -92,10 +90,35 @@ public class Initializer {
 			game.getTurn().notifyTurn();
 			return game;
 		} catch (Exception e) {
-			//TODO: too generic?
-			e.printStackTrace();
 			throw new InstantiationException();
 		}
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public void initializePersistenceGame(ArrayList<ClientHandler> clients, Game game) {
+		this.players = game.getPlayers();
+		this.remote_views = new RemoteView[players.size()];
+
+		for (int i = 0; i < clients.size(); i++) {
+			this.remote_views[i] = new RemoteView(clients.get(i));
+			clients.get(i).setPlayer(this.players.get(i));
+		}
+
+		for (int i = 0; i < this.players.size(); i++) {
+			for (int j = 0; j < this.remote_views.length; j++) {
+				this.players.get(i).addModelObserver(this.remote_views[j]);
+			}
+		}
+
+		addRemoteViews(game);
+		game.notifyGame();
+		for (Player p: this.players) {
+			p.notifyPlayer();
+		}
+		game.getTurn().notifyTurn();
 	}
 
 	/**
@@ -120,7 +143,7 @@ public class Initializer {
 
 		for (int i = 0; i < this.players.size(); i++) {
 			for (int j = 0; j < this.remote_views.length; j++) {
-				this.players.get(i).addObserver(this.remote_views[j]);
+				this.players.get(i).addModelObserver(this.remote_views[j]);
 			}
 		}
 	}
@@ -142,7 +165,7 @@ public class Initializer {
 		this.remote_views[0] = new RemoteView(clients.get(0));
 		clients.get(0).setPlayer(this.players.get(0));
 
-		this.players.get(0).addObserver(this.remote_views[0]);
+		this.players.get(0).addModelObserver(this.remote_views[0]);
 	}
 
 	/**
@@ -195,12 +218,12 @@ public class Initializer {
 	}
 
 	/**
-	 * Add the RemoteViews as Observer of Game
+	 * Add the RemoteViews as ModelObserver of Game
 	 */
 	private void addRemoteViews(Game game) {
 		for (RemoteView r: this.remote_views) {
-			game.addObserver(r);
-			game.getTurn().addObserver(r);
+			game.addModelObserver(r);
+			game.getTurn().addModelObserver(r);
 		}
 	}
 

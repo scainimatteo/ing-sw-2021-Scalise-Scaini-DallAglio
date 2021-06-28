@@ -22,11 +22,11 @@ import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.model.resources.Resource;
 
-import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.observer.ModelObservable;
 
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
-public class Game extends Observable {
+public class Game extends ModelObservable {
 	protected ArrayList<Player> players;
 	protected Turn turn;
 	protected Market market;
@@ -39,6 +39,18 @@ public class Game extends Observable {
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
 		this.victory_points = new HashMap<Player, Integer>();
 		this.turn = new Turn(this.players.get(0));
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Game(ArrayList<Player> players, Market market, DevelopmentCardsOnTable development_cards_on_table, Turn turn) {
+		this.players = players;
+		this.market = market;
+		this.development_cards_on_table = development_cards_on_table;
+		this.victory_points = new HashMap<Player, Integer>();
+		this.turn = turn;
 	}
 
 	public ArrayList<Player> getPlayers() {
@@ -56,14 +68,14 @@ public class Game extends Observable {
 	 * @param player the Player that committed the error
 	 */
 	public void handleError(String error_string, Player player){
-		notify(new ErrorMessage(error_string, player.getNickname()));
+		notifyModel(new ErrorMessage(error_string, player.getNickname()));
 	}
 
 	/**
 	 * Send a ViewUpdate with the current Game
 	 */
 	public void notifyGame() {
-		notify(new ViewUpdate(this.simplify()));
+		notifyModel(new ViewUpdate(this.simplify()));
 	}
 
 	/**
@@ -151,7 +163,7 @@ public class Game extends Observable {
 		for (Player p: this.victory_points.keySet()) {
 			rank.put(p.getNickname(), this.victory_points.get(p));
 		}
-		notify(new EndGameMessage(rank));
+		notifyModel(new EndGameMessage(rank));
 	}
 
 	/**

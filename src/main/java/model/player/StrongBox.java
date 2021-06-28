@@ -25,6 +25,14 @@ public class StrongBox {
 		this.storage.put(servant_resource, 0);
 	}
 
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public StrongBox(HashMap<Resource, Integer> storage){
+		this.storage = storage;
+	}
+
 	public int get(Resource res){
 		return storage.get(res);
 	}

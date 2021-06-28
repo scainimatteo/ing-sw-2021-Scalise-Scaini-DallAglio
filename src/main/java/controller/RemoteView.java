@@ -4,9 +4,9 @@ import it.polimi.ingsw.controller.servermessage.ServerMessage;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-import it.polimi.ingsw.util.Observer;
+import it.polimi.ingsw.util.observer.ModelObserver;
 
-public class RemoteView implements Observer {
+public class RemoteView implements ModelObserver {
 	private ClientHandler client_handler;
 
 	public RemoteView(ClientHandler client_handler) {
@@ -18,7 +18,7 @@ public class RemoteView implements Observer {
 	 *
 	 * @param servermessage the ServerMessage to send
 	 */
-	public void update(ServerMessage servermessage) {
+	public void updateModel(ServerMessage servermessage) {
 		this.client_handler.sendToClient(servermessage);
 	}
 }

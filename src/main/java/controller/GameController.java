@@ -4,6 +4,10 @@ import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.Initializer;
@@ -24,14 +28,35 @@ import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.server.persistence.PersistenceParser;
+import it.polimi.ingsw.server.persistence.PersistenceWriter;
+import it.polimi.ingsw.server.persistence.PersistenceUtil;
 import it.polimi.ingsw.server.ClientHandler;
 
-public class GameController implements Runnable, Controller {
+public class GameController implements Controller {
 	protected ArrayList<ClientHandler> clients;
 	protected Game game;
+	private String match_name;
 
 	public GameController(ArrayList<ClientHandler> clients) {
 		this.clients = clients;
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public GameController(ArrayList<ClientHandler> clients, String match_name) throws InstantiationException {
+		this.clients = clients;
+		this.match_name = match_name;
+		try {
+			this.game = PersistenceParser.parseMatch(match_name);
+			new Initializer().initializePersistenceGame(this.clients, this.game);
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+			System.out.println("Game could not start");
+			throw new InstantiationException();
+		}
 	}
 
 	/**
@@ -48,9 +73,8 @@ public class GameController implements Runnable, Controller {
 		}
 	}
 
-	//TODO: this is empty, should GameController not be a Runnable?
-	public void run() {
-		return;
+	public void setMatchName(String match_name) {
+		this.match_name = match_name;
 	}
 
 	/**
@@ -513,7 +537,7 @@ public class GameController implements Runnable, Controller {
 	 * @return true only if the amount of resources requested to be paid from the strongbox is present in the strongbox 
 	 */ 
 	private boolean isContainedStrongbox(Player player, Storage storage){
-		return player.getPlayerStrongBox().areContainedInStrongbox(storage.getStrongbox());
+		return player.getStrongBox().areContainedInStrongbox(storage.getStrongbox());
 	}
 
 	/**
@@ -573,8 +597,7 @@ public class GameController implements Runnable, Controller {
 		total.addAll(storage.getWarehouseBot());
 		total.addAll(storage.getExtraspace());
 		for (Resource res : check){
-			//TODO: temporary fix to remove null, they should have not been here - check if this has already been fixed
-			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x -> x != null).filter(x->x.equals(res)).count()){
+			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x->x.equals(res)).count()){
 				return false;
 			}
 		}
@@ -762,5 +785,17 @@ public class GameController implements Runnable, Controller {
 				game.endTurn();
 			} else {handleError("You cannot end your turn now", player);}
 		} else {handleError("It is not your turn", player);}
+	}
+
+	/**
+	 * PERSISTENCE
+	 */
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public void handlePersistence(Player player) {
+		PersistenceWriter.writePersistenceFile(this.match_name, this.game);
 	}
 }

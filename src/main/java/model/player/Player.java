@@ -17,7 +17,7 @@ import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
-import it.polimi.ingsw.util.Observable;
+import it.polimi.ingsw.util.observer.ModelObservable;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
@@ -31,7 +31,7 @@ import java.util.Iterator;
 
 import java.lang.IllegalArgumentException;
 
-public class Player extends Observable {
+public class Player extends ModelObservable {
 	protected String nickname;
 	protected FaithTrack track;
 	protected Warehouse warehouse;
@@ -48,6 +48,18 @@ public class Player extends Observable {
 		this.leader_cards_deck = new ArrayList<LeaderCard>();
 	}
 
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Player(String nickname, FaithTrack track, Warehouse warehouse, StrongBox strongbox, DevelopmentCardsSlots development_card_slots, ArrayList<LeaderCard> leader_cards) {
+		this(nickname, track);
+		this.warehouse = warehouse;
+		this.strongbox = strongbox;
+		this.leader_cards_deck = leader_cards;
+		this.development_card_slots = development_card_slots;
+	}
+
 	public String getNickname(){
 		return this.nickname;
 	}
@@ -56,7 +68,7 @@ public class Player extends Observable {
 	 * Send a ViewUpdate with the current Player
 	 */
 	public void notifyPlayer() {
-		notify(new ViewUpdate(this.simplify()));
+		notifyModel(new ViewUpdate(this.simplify()));
 	}
 
 	/**
@@ -270,7 +282,7 @@ public class Player extends Observable {
 		this.notifyPlayer();
 	}
 
-	public StrongBox getPlayerStrongBox(){
+	public StrongBox getStrongBox(){
 		return this.strongbox;
 	}
 	

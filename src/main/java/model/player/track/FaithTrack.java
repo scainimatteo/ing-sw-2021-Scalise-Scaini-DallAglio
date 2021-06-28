@@ -14,6 +14,20 @@ public class FaithTrack {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public FaithTrack(Cell[] track, Tile[] vatican_report_tiles, int marker_position) {
+		this(track, vatican_report_tiles);
+		for (Cell cell: track) {
+			if (cell.getPosition() == marker_position) {
+				this.faith_marker = cell;
+				break;
+			}
+		}
+	}
+
+	/**
 	 * @param number_of_times represent how many cells the marker has to move
 	 * @return the vatican report activated if the marker reaches or overcomes a pope space
 	 */
@@ -45,8 +59,6 @@ public class FaithTrack {
 
 	/**
 	 * @param vr_param is the vatican report to be activated
-	 *
-	 * TODO: alla riga 51 il faith_marker si è spostato quindi il player attualmente non si trova su un vatican report, ma si può trovare oltre e quindi non venire considerato nell'attivazione
 	 */
 	public void activateVaticanReport(VaticanReports vr_param){
 		if (this.checkCell(vr_param.getIndex())){
