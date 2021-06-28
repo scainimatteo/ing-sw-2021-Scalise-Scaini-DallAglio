@@ -51,7 +51,6 @@ public class PersistenceWriter {
 			file.write(persistent_match_object.toJSONString()); 
 			file.flush();
 		} catch (IOException e) {
-			//TODO: better exception handling - maybe not necessary
 			e.printStackTrace();
 		}
 	}

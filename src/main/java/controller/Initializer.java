@@ -65,8 +65,6 @@ public class Initializer {
 			game.getTurn().notifyTurn();
 			return game;
 		} catch (Exception e) {
-			//TODO: too generic?
-			e.printStackTrace();
 			throw new InstantiationException();
 		}
 	}
@@ -92,8 +90,6 @@ public class Initializer {
 			game.getTurn().notifyTurn();
 			return game;
 		} catch (Exception e) {
-			//TODO: too generic?
-			e.printStackTrace();
 			throw new InstantiationException();
 		}
 	}

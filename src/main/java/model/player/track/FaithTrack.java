@@ -59,8 +59,6 @@ public class FaithTrack {
 
 	/**
 	 * @param vr_param is the vatican report to be activated
-	 *
-	 * TODO: alla riga 51 il faith_marker si è spostato quindi il player attualmente non si trova su un vatican report, ma si può trovare oltre e quindi non venire considerato nell'attivazione
 	 */
 	public void activateVaticanReport(VaticanReports vr_param){
 		if (this.checkCell(vr_param.getIndex())){

@@ -7,7 +7,14 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 
 public class PersistenceUtil {
-	//TODO copied from <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
+	/**
+	 * Get the directory for the persistence files
+	 *
+	 * @return a Path object representing the directory
+	 *
+	 * Source: <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
+	 */
+	// TODO: test on other OSes
 	public static Path getPersistenceDirectory() {
 		String os = System.getProperty("os.name");
 		String home = System.getProperty("user.home");
@@ -26,7 +33,6 @@ public class PersistenceUtil {
 		}
 	}
 
-	//TODO copied from <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
 	/**
 	* Retrieves a path from an environment variable, substituting a default
 	* if the value is absent or invalid.
@@ -34,8 +40,9 @@ public class PersistenceUtil {
 	* @param envVar name of environment variable to read
 	* @param mustBeAbsolute whether enviroment variable's value should be considered invalid if it's not an absolute path
 	* @param defaultPath default to use if environment variable is absent or invalid
-	*
 	* @return environment variable's value as a Path, or de defaultPath
+	*
+	 * Source: <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
 	*/
 	private static Path getFromEnv(String envVar, boolean mustBeAbsolute, Path defaultPath) {
 		Path dir;

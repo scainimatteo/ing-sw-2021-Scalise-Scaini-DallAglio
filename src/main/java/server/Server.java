@@ -96,7 +96,6 @@ public class Server {
 			GameController new_match;
 			if (PersistenceUtil.checkPersistence(match_name)) {
 				new_match = new GameController(this.lobby.get(match_name), match_name);
-				//TODO: remove peristent file
 			} else if (this.lobby.get(match_name).size() == 1) {
 				new_match = new SoloGameController(this.lobby.get(match_name));
 				new_match.setMatchName(match_name);
@@ -110,7 +109,6 @@ public class Server {
 			for (ClientHandler c: this.lobby.get(match_name)) {
 				c.setController(new_match);
 			}
-			new Thread(new_match).start();
 		}
 	}
 
@@ -154,7 +152,6 @@ public class Server {
 	private String manageFirstClient(ClientHandler first_client) throws InterruptedException, NumberFormatException {
 		int num;
 
-		//TODO: put all strings in a separate class
 		sendStringToClient(first_client, "How many players will the match have? ", InitializingMessageType.NUM_PLAYERS);
 		num = Integer.parseInt(receiveStringFromClient(first_client));
 		if (num < 1 || num > 4) {

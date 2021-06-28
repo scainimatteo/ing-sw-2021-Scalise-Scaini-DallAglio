@@ -33,7 +33,7 @@ import it.polimi.ingsw.server.persistence.PersistenceWriter;
 import it.polimi.ingsw.server.persistence.PersistenceUtil;
 import it.polimi.ingsw.server.ClientHandler;
 
-public class GameController implements Runnable, Controller {
+public class GameController implements Controller {
 	protected ArrayList<ClientHandler> clients;
 	protected Game game;
 	private String match_name;
@@ -71,11 +71,6 @@ public class GameController implements Runnable, Controller {
 			System.out.println("Game could not start");
 			throw new InstantiationException();
 		}
-	}
-
-	//TODO: this is empty, should GameController not be a Runnable?
-	public void run() {
-		return;
 	}
 
 	public void setMatchName(String match_name) {
@@ -602,8 +597,7 @@ public class GameController implements Runnable, Controller {
 		total.addAll(storage.getWarehouseBot());
 		total.addAll(storage.getExtraspace());
 		for (Resource res : check){
-			//TODO: temporary fix to remove null, they should have not been here - check if this has already been fixed
-			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x -> x != null).filter(x->x.equals(res)).count()){
+			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x->x.equals(res)).count()){
 				return false;
 			}
 		}
@@ -797,12 +791,11 @@ public class GameController implements Runnable, Controller {
 	 * PERSISTENCE
 	 */
 
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
 	public void handlePersistence(Player player) {
 		PersistenceWriter.writePersistenceFile(this.match_name, this.game);
-
-		// TODO:
-		// is it necessary?
-		// close connection with all clients
-		// remove players from lobby (if it's not automatically done by the close)
 	}
 }

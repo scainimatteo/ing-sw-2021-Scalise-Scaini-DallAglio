@@ -297,7 +297,6 @@ public class MessageParser {
 	}
 
 	private static Message parseDiscardResourcesMessage(String[] inputs) throws IllegalArgumentException {
-		//TODO: does not check for other words after
 		return new DiscardResourcesMessage();
 	}
 
@@ -373,7 +372,6 @@ public class MessageParser {
 	}
 
 	private static Message parsePersistenceMessage(String[] inputs) throws IllegalArgumentException {
-		//TODO: does not check for other words after
 		return new PersistenceMessage();
 	}
 

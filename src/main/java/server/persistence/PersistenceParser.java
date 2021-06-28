@@ -304,7 +304,7 @@ public class PersistenceParser {
 				int id = (int)(long) deck_array.get(j);
 				deck.add(getDevelopmentCardFromId(id));
 			}
-			// TODO FAre queszto non sokk
+			// TODO rewrite using matrixes
 			development_cards_table.addDeck(deck, 0, 0);
 		}
 		return new DevelopmentCardsOnTable(development_cards_table);

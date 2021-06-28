@@ -47,7 +47,6 @@ public class SoloPlayer extends Player{
 	 *
 	 * @param number_of_times how many Cells to go forward
 	 */
-	//TODO: is there a way to avoid this and the other casting?
 	public VaticanReports moveForwardBlackMarker(int number_of_times){
 		VaticanReports vatican_report = ((SoloFaithTrack) super.track).moveForwardBlackMarker(number_of_times);
 		notifyPlayer();

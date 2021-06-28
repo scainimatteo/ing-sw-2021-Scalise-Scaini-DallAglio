@@ -7,8 +7,8 @@ import java.util.Random;
 import it.polimi.ingsw.model.resources.Resource;
 
 public class Market {
-	private final int dim_rows = 4;
-	private final int dim_cols = 3;
+	public final int dim_rows = 4;
+	public final int dim_cols = 3;
 	private Resource[][] market_board;
 	private Resource free_marble;
 	private ArrayList<Resource> all_resources;
