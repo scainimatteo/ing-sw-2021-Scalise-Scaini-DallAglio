@@ -66,7 +66,7 @@ public class Server {
 						insertIntoLobby(new_client_handler);
 					} catch (InterruptedException e) {
 						System.out.println("Miscomunication with the client");
-						new_client_handler.close("Miscomunication with the server");
+						new_client_handler.close("Miscomunication with the server, you will be disconnected");
 					} catch (NumberFormatException e) {
 						new_client_handler.close("A match can only consist of 1 to 4 players");
 					} catch (IllegalAccessError e) {
@@ -238,6 +238,10 @@ public class Server {
 			// random integer that represents a ascii uppercase letter
 			int randint = random.nextInt(26) + 65;
 			match_name = match_name + Character.toString((char) randint);
+		}
+		// if a file with that match_name exists, call the function again
+		if (new File(PersistenceUtil.getPersistenceFileFromMatchName(match_name)).exists()) {
+			match_name = newMatchName();
 		}
 		return match_name;
 	}
