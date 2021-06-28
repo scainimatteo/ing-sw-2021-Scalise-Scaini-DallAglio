@@ -22,7 +22,6 @@ public class SoloFaithTrack extends FaithTrack {
 			VaticanReports vatican_report = super.track[i].whichVaticanReport();
 			if (super.track[i].isPopeSpace()){
 				if (super.checkCell(vatican_report.getIndex())){
-					super.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
 					return vatican_report;
 				}
 			}
