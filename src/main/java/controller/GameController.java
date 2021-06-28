@@ -537,7 +537,7 @@ public class GameController implements Controller {
 	 * @return true only if the amount of resources requested to be paid from the strongbox is present in the strongbox 
 	 */ 
 	private boolean isContainedStrongbox(Player player, Storage storage){
-		return player.getPlayerStrongBox().areContainedInStrongbox(storage.getStrongbox());
+		return player.getStrongBox().areContainedInStrongbox(storage.getStrongbox());
 	}
 
 	/**

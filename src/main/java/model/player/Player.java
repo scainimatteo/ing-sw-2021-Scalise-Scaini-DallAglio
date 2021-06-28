@@ -282,8 +282,7 @@ public class Player extends ModelObservable {
 		this.notifyPlayer();
 	}
 
-	//TODO: rename in getStrongBox
-	public StrongBox getPlayerStrongBox(){
+	public StrongBox getStrongBox(){
 		return this.strongbox;
 	}
 	

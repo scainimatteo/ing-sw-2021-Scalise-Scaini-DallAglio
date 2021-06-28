@@ -98,7 +98,7 @@ public class PersistenceWriter {
 		player_object.put("nickname", player.getNickname());
 		populateJSONFaithTrack(player_object, player.getFaithTrack());
 		player_object.put("warehouse", populateJSONWarehouse(player.getWarehouse()));
-		player_object.put("strongbox", populateJSONStrongBox(player.getPlayerStrongBox()));
+		player_object.put("strongbox", populateJSONStrongBox(player.getStrongBox()));
 		player_object.put("development_cards_slots", populateJSONDevelopmentCardsSlots(player.getDevelopmentCardsSlots()));
 		player_object.put("leader_cards", populateJSONLeaderCards(player.getLeaderCards()));
 		return player_object;

@@ -770,7 +770,7 @@ public class GameControllerTest {
 			p.storeMiddle(warehousemid_res);
 			controller.handleMessage(message);
 			assertEquals(game.getTurn().getRequiredResources(), warehousebot_res);
-			assertTrue(p.getPlayerStrongBox().isEmpty());
+			assertTrue(p.getStrongBox().isEmpty());
 			assertTrue(p.getMiddleResources().isEmpty());
 			
 			game.getTurn().getProducedResources().addAll(strongbox_res);
@@ -782,7 +782,7 @@ public class GameControllerTest {
 			assertTrue(game.getTurn().getRequiredResources().isEmpty());
 			assertTrue(p.getBottomResources().isEmpty());
 			assertTrue(game.getTurn().getProducedResources().isEmpty());
-			assertTrue(p.getPlayerStrongBox().areContainedInStrongbox(strongbox_res));
+			assertTrue(p.getStrongBox().areContainedInStrongbox(strongbox_res));
 			
 			game.getTurn().setDoneAction(true);
 			message = new EndTurnMessage();
