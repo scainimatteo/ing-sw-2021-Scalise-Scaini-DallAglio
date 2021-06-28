@@ -21,6 +21,14 @@ public class DevelopmentCardsSlots {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public DevelopmentCardsSlots(Table<DevelopmentCard> slots){
+		this.slots = slots;
+	}
+
+	/**
 	 * @param card is the DevelopmentCard that needs to be added to the slots
 	 * @param position the Deck where the DevelopmentCard will be added
 	 */

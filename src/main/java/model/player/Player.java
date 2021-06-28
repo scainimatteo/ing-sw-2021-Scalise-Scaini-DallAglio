@@ -48,6 +48,18 @@ public class Player extends ModelObservable {
 		this.leader_cards_deck = new ArrayList<LeaderCard>();
 	}
 
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Player(String nickname, FaithTrack track, Warehouse warehouse, StrongBox strongbox, DevelopmentCardsSlots development_card_slots, ArrayList<LeaderCard> leader_cards) {
+		this(nickname, track);
+		this.warehouse = warehouse;
+		this.strongbox = strongbox;
+		this.leader_cards_deck = leader_cards;
+		this.development_card_slots = development_card_slots;
+	}
+
 	public String getNickname(){
 		return this.nickname;
 	}
@@ -267,6 +279,7 @@ public class Player extends ModelObservable {
 		this.notifyPlayer();
 	}
 
+	//TODO: rename in getStrongBox
 	public StrongBox getPlayerStrongBox(){
 		return this.strongbox;
 	}

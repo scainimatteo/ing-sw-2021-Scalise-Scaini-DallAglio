@@ -41,6 +41,18 @@ public class Game extends ModelObservable {
 		this.turn = new Turn(this.players.get(0));
 	}
 
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Game(ArrayList<Player> players, Market market, DevelopmentCardsOnTable development_cards_on_table, Turn turn) {
+		this.players = players;
+		this.market = market;
+		this.development_cards_on_table = development_cards_on_table;
+		this.victory_points = new HashMap<Player, Integer>();
+		this.turn = turn;
+	}
+
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}

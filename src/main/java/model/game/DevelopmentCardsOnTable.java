@@ -17,6 +17,13 @@ public class DevelopmentCardsOnTable {
 		this.development_cards_table = createDecks(all_development_cards);
 	}
 
+	/**
+	 * Persintsjrn
+	 */
+	public DevelopmentCardsOnTable(Table<DevelopmentCard> development_cards_table) {
+		this.development_cards_table = development_cards_table;
+	}
+
 	private Table<DevelopmentCard> createDecks(DevelopmentCard[] all_development_cards) {
 		Table<DevelopmentCard> table = new Table<DevelopmentCard>(dim_rows, dim_cols);
 		for (int i = 0; i < dim_cols; i++) {
@@ -30,6 +37,14 @@ public class DevelopmentCardsOnTable {
 		}
 		table.shuffleAllDecks();
 		return table;
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public ArrayList<DevelopmentCard> getDeckAsArrayList(int row, int column) {
+		return this.development_cards_table.getDeckAsArrayList(row, column);
 	}
 
 	/**

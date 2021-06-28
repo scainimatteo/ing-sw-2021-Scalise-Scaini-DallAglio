@@ -99,6 +99,33 @@ public class Initializer {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public void initializePersistenceGame(ArrayList<ClientHandler> clients, Game game) {
+		this.players = game.getPlayers();
+		this.remote_views = new RemoteView[players.size()];
+
+		for (int i = 0; i < clients.size(); i++) {
+			this.remote_views[i] = new RemoteView(clients.get(i));
+			clients.get(i).setPlayer(this.players.get(i));
+		}
+
+		for (int i = 0; i < this.players.size(); i++) {
+			for (int j = 0; j < this.remote_views.length; j++) {
+				this.players.get(i).addModelObserver(this.remote_views[j]);
+			}
+		}
+
+		addRemoteViews(game);
+		game.notifyGame();
+		for (Player p: this.players) {
+			p.notifyPlayer();
+		}
+		game.getTurn().notifyTurn();
+	}
+
+	/**
 	 * Create an array of Players using the ClientHandlers
 	 *
 	 * @param clients the ClientHandlers of the Players

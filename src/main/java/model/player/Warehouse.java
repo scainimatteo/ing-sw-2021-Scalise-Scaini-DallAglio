@@ -14,12 +14,22 @@ public class Warehouse {
 	private ArrayList<Resource>bottom_resources;
 
 	public Warehouse(){
-		top_resource = new ArrayList<Resource>();
-		middle_resources = new ArrayList<Resource>();
-		bottom_resources = new ArrayList<Resource>();
+		this.top_resource = new ArrayList<Resource>();
+		this.middle_resources = new ArrayList<Resource>();
+		this.bottom_resources = new ArrayList<Resource>();
 	}
 
-	public ArrayList<Resource>  getTopResource(){
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Warehouse(ArrayList<Resource> top_resource, ArrayList<Resource> middle_resources, ArrayList<Resource> bottom_resources){
+		this.top_resource = top_resource;
+		this.middle_resources = middle_resources;
+		this.bottom_resources = bottom_resources;
+	}
+
+	public ArrayList<Resource> getTopResource(){
 		 return top_resource;
 	}
 

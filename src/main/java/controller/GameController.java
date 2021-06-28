@@ -4,6 +4,10 @@ import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.Initializer;
@@ -24,14 +28,35 @@ import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.server.persistence.PersistenceParser;
+import it.polimi.ingsw.server.persistence.PersistenceWriter;
+import it.polimi.ingsw.server.persistence.PersistenceUtil;
 import it.polimi.ingsw.server.ClientHandler;
 
 public class GameController implements Runnable, Controller {
 	protected ArrayList<ClientHandler> clients;
 	protected Game game;
+	private String match_name;
 
 	public GameController(ArrayList<ClientHandler> clients) {
 		this.clients = clients;
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public GameController(ArrayList<ClientHandler> clients, String match_name) throws InstantiationException {
+		this.clients = clients;
+		this.match_name = match_name;
+		try {
+			this.game = PersistenceParser.parseMatch(match_name);
+			new Initializer().initializePersistenceGame(this.clients, this.game);
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+			System.out.println("Game could not start");
+			throw new InstantiationException();
+		}
 	}
 
 	/**
@@ -51,6 +76,10 @@ public class GameController implements Runnable, Controller {
 	//TODO: this is empty, should GameController not be a Runnable?
 	public void run() {
 		return;
+	}
+
+	public void setMatchName(String match_name) {
+		this.match_name = match_name;
 	}
 
 	/**
@@ -736,5 +765,18 @@ public class GameController implements Runnable, Controller {
 				game.endTurn();
 			} else {handleError("You cannot end your turn now", player);}
 		} else {handleError("It is not your turn", player);}
+	}
+
+	/**
+	 * PERSISTENCE
+	 */
+
+	public void handlePersistence(Player player) {
+		PersistenceWriter.writePersistenceFile(this.match_name, this.game);
+
+		// TODO:
+		// is it necessary?
+		// close connection with all clients
+		// remove players from lobby (if it's not automatically done by the close)
 	}
 }

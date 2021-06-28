@@ -33,6 +33,15 @@ public class Market {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public Market(Resource[][] market_board, Resource free_marble) {
+		this.market_board = market_board;
+		this.free_marble = free_marble;
+	}
+
+	/**
 	 * Put the resources in radom order; the last one is the free marble
 	 */
 	private void randomizeMarket() {

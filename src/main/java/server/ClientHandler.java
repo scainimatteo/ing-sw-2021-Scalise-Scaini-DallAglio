@@ -69,6 +69,7 @@ public class ClientHandler implements Runnable {
 		try {
 			this.sendToClient(new ErrorMessage(error_message, this.nickname));
 			this.server.removeNickname(this.nickname);
+			// TODO: remove from lobby
 			this.client.close();
 		} catch (IOException e) {
 			System.out.println("Connection closed");

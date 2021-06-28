@@ -18,6 +18,8 @@ import it.polimi.ingsw.controller.InitialController;
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.GameController;
 
+import it.polimi.ingsw.server.persistence.PersistenceParser;
+import it.polimi.ingsw.server.persistence.PersistenceUtil;
 import it.polimi.ingsw.server.ClientHandler;
 
 import it.polimi.ingsw.util.ANSI;
@@ -46,6 +48,9 @@ public class Server {
 	 */
 	public void startServer() {
 		System.out.println("Server starting on port " + ANSI.green(String.valueOf(this.port)));
+		// create persistence directory using OS conventions
+		PersistenceUtil.getPersistenceDirectory().toFile().mkdir();
+
 		while (true) {
 			try {
 				// waits until a new client connects
@@ -87,15 +92,21 @@ public class Server {
 				sendStringToClient(ch, "Start Match\n\n", InitializingMessageType.START_MATCH);
 			}
 
-			// create, initialize and start a new Game or SoloGame
+			// create, initialize and start a new Game or SoloGame or recreate a persistent match
 			GameController new_match;
-			if (this.lobby.get(match_name).size() == 1) {
+			if (PersistenceUtil.checkPersistence(match_name)) {
+				new_match = new GameController(this.lobby.get(match_name), match_name);
+				//TODO: remove peristent file
+			} else if (this.lobby.get(match_name).size() == 1) {
 				new_match = new SoloGameController(this.lobby.get(match_name));
+				new_match.setMatchName(match_name);
+				new_match.initializeGame();
 			} else {
 				new_match = new GameController(this.lobby.get(match_name));
+				new_match.setMatchName(match_name);
+				new_match.initializeGame();
 			}
 
-			new_match.initializeGame();
 			for (ClientHandler c: this.lobby.get(match_name)) {
 				c.setController(new_match);
 			}
@@ -126,7 +137,10 @@ public class Server {
 
 		if (match_name.equals("")) {
 			match_name = manageFirstClient(client);
-			sendStringToClient(client, "Started match with match name " + match_name + "\n\nSend this match name to the other players to start playing", InitializingMessageType.STARTED_MATCH_NAME, match_name);
+			sendStringToClient(client, "Started match with match name " + match_name + "\n\nSend this match name to the other players to start playing\n\n", InitializingMessageType.STARTED_MATCH_NAME, match_name);
+		} else if (PersistenceUtil.checkPersistence(match_name)) {
+			// if the match_name put from the Client matches a saved match, create or join that one
+			createOrJoinPersistenceGame(client, match_name, nickname);
 		} else {
 			manageOtherClient(client, match_name);
 		}
@@ -176,6 +190,42 @@ public class Server {
 				client.close("Sorry but there is no current match named " + match_name);
 				throw new IllegalAccessError();
 			}
+		}
+	}
+
+	/**
+	 * If it's the first user, create a match using the parameters saved in memory
+	 * If it's not the first user, join that match
+	 *
+	 * @param client the ClientHandler that wants to create or join the match
+	 * @param match_name the identifier of the saved match
+	 * @param nickname the nickname of the ClientHandler that wants to create or join (has to be the same of the saved match)
+	 */
+	private void createOrJoinPersistenceGame(ClientHandler client, String match_name, String nickname) throws IllegalAccessError, InterruptedException {
+		try {
+			ArrayList<String> match_nicknames = PersistenceParser.getAllClientsNickname(match_name);
+			int match_clients_number = PersistenceParser.getClientsNumber(match_name);
+			// check if nickname is correct
+			if (!match_nicknames.contains(nickname)) {
+				client.close("Sorry but you can't partecipate in the match " + match_name + " with the nickname " + nickname);
+				throw new IllegalAccessError();
+			}
+
+			// if it's first create clients and add to lobby
+			if (!this.lobby.containsKey(match_name)) {
+				ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
+				clients.add(client);
+				synchronized(this.lobby) {
+					this.lobby.put(match_name, clients);
+					this.num_players.put(match_name, match_clients_number);
+				}
+			} else {
+				// treat like any other ClientHandler
+				manageOtherClient(client, match_name);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new InterruptedException();
 		}
 	}
 
