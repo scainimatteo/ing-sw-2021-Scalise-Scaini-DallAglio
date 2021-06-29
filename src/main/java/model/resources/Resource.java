@@ -52,7 +52,7 @@ public enum Resource {
 	/**
 	 * @return a String with the path of the image of the marble of the right color
 	 */
-	public String getPath() {
+	public String getMarblePath() {
 		switch (this){
 			case COIN: return "/images/tokens/resources/yellow_marble.png";
 			case STONE: return "/images/tokens/resources/grey_marble.png";
@@ -60,6 +60,17 @@ public enum Resource {
 			case SHIELD: return "/images/tokens/resources/blue_marble.png";
 			case FAITH: return "/images/tokens/resources/red_marble.png";
 			default: return "/images/tokens/resources/white_marble.png";
+		}
+	}
+
+	public String getPath(){
+		switch (this){
+			case COIN: return "/images/tokens/resources/coin.png";
+			case STONE: return "/images/tokens/resources/stone.png";
+			case SERVANT: return "/images/tokens/resources/servant.png";
+			case SHIELD: return "/images/tokens/resources/shield.png";
+			case FAITH: return "/images/tokens/resources/faith.png";
+			default: return null;
 		}
 	}
 

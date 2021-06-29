@@ -91,10 +91,10 @@ public abstract class SceneController {
 	}
 
 	@FXML
-	public void handleDragDone(DragEvent event, ImageView source){
+	public void handleDragDone(DragEvent event, ImageView source, boolean set_null){
 		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-				if (event.getTransferMode() == TransferMode.MOVE) {
+				if (event.getTransferMode() == TransferMode.MOVE && set_null) {
 					source.setImage(null);
 				}
 

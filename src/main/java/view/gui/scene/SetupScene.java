@@ -106,14 +106,14 @@ public class SetupScene extends SceneController implements Initializable{
 		stone1.setOnDragDetected(detected7 -> handleDragDetected(detected7, stone1));
 		stone2.setOnDragDetected(detected8 -> handleDragDetected(detected8, stone2));
 
-		coin1.setOnDragDone(done1 -> handleDragDone(done1, coin1));
-		coin2.setOnDragDone(done2 -> handleDragDone(done2, coin2));
-		servant1.setOnDragDone(done3 -> handleDragDone(done3, servant1));
-		servant2.setOnDragDone(done4 -> handleDragDone(done4, servant2));
-		shield1.setOnDragDone(done5 -> handleDragDone(done5, shield1));
-		shield2.setOnDragDone(done6 -> handleDragDone(done6, shield2));
-		stone1.setOnDragDone(done7 -> handleDragDone(done7, stone1));
-		stone2.setOnDragDone(done8 -> handleDragDone(done8, stone2));
+		coin1.setOnDragDone(done1 -> handleDragDone(done1, coin1, true));
+		coin2.setOnDragDone(done2 -> handleDragDone(done2, coin2, true));
+		servant1.setOnDragDone(done3 -> handleDragDone(done3, servant1, true));
+		servant2.setOnDragDone(done4 -> handleDragDone(done4, servant2, true));
+		shield1.setOnDragDone(done5 -> handleDragDone(done5, shield1, true));
+		shield2.setOnDragDone(done6 -> handleDragDone(done6, shield2, true));
+		stone1.setOnDragDone(done7 -> handleDragDone(done7, stone1, true));
+		stone2.setOnDragDone(done8 -> handleDragDone(done8, stone2, true));
 
 		top1.setOnDragOver(over1 -> handleDragOver(over1, top1));
 		middle1.setOnDragOver(over2 -> handleDragOver(over2, middle1));
@@ -129,21 +129,27 @@ public class SetupScene extends SceneController implements Initializable{
 		bottom2.setOnDragDropped(dropped5 -> handleDragDropped(dropped5, bottom2));
 		bottom3.setOnDragDropped(dropped6 -> handleDragDropped(dropped6, bottom3));
 
-		first_player_text.setText(order.get(0));
+		first_player_text.setText("[1] " + order.get(0));
 		if (order.size() >= 2){
-			second_player_text.setText(order.get(1));
+			second_player_text.setText("[2] " + order.get(1));
 		} 
 		if (order.size() >= 3){
-			third_player_text.setText(order.get(2));
+			third_player_text.setText("[3] " + order.get(2));
 		} 
 		if (order.size() >= 4){
-			fourth_player_text.setText(order.get(3));
+			fourth_player_text.setText("[4] " + order.get(3));
 		} 
 
-		showNode(order_pane);
-		hideNode(select_card_pane);
 		hideNode(select_resource_pane);
 		hideNode(waiting_pane);
+
+		if (order.size() != 1){
+			showNode(order_pane);
+			hideNode(select_card_pane);
+		} else {
+			hideNode(order_pane);
+			showNode(select_card_pane);
+		}
 	}
 
 	@FXML
@@ -177,9 +183,13 @@ public class SetupScene extends SceneController implements Initializable{
 
 		message = new DiscardLeaderMessage(to_delete.get(1));
 		App.sendMessage(message);
-		
+
 		hideNode(select_card_pane);
-		showNode(select_resource_pane);
+		if (player.getNickname().equals(order.get(0))){
+			showNode(waiting_pane);
+		} else {
+			showNode(select_resource_pane);
+		}
 	}
 
 	@FXML

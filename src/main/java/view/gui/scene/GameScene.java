@@ -67,13 +67,13 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 * @param free_marble the free Resource in the Market
 	 */
 	private void setMarket(Resource[][] market, Resource free_marble) {
-		this.free_marble.setImage(new Image(getClass().getResource(getPath(free_marble)).toString()));
+		this.free_marble.setImage(new Image(getClass().getResource(getMarblePath(free_marble)).toString()));
 
 		int i = 0;
 		int j = 0;
 		for (Node node: this.market_grid.getChildren()) {
 			// set the path of each square of the GridPane
-			((ImageView) node).setImage(new Image(getClass().getResource(getPath(market[i][j])).toString()));
+			((ImageView) node).setImage(new Image(getClass().getResource(getMarblePath(market[i][j])).toString()));
 
 			j++;
 			if (j % 4 == 0) {
@@ -88,13 +88,13 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 * @param resource the Resource to get the path to
 	 * @return the String with the path of the Resource
 	 */
-	private String getPath(Resource resource) {
+	private String getMarblePath(Resource resource) {
 		if (resource == null) {
 			// white marble
 			return Resource.getNullMarblePath();
 		}
 
-		return resource.getPath();
+		return resource.getMarblePath();
 	}
 
 	/**
