@@ -39,11 +39,11 @@ public class SoloGameTest {
 	}
 
 	/**
-	 * Create an istance of SoloGame
+	 * Create an instance of SoloGame
 	 */
 	@BeforeEach
 	public void createSoloGame() throws IOException, ParseException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new SoloPlayer("Paperino", new SoloFaithTrack(factory.getAllCells(), factory.getAllTiles())));

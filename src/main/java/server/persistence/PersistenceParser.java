@@ -190,7 +190,7 @@ public class PersistenceParser {
 			tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
 		}
 
-		return new FaithTrack(Factory.getIstance().getAllCells(), tiles, marker_position);
+		return new FaithTrack(Factory.getInstance().getAllCells(), tiles, marker_position);
 	}
 
 	private static Warehouse createWarehouse(JSONArray warehouse_array) throws ParseException {
@@ -373,7 +373,7 @@ public class PersistenceParser {
 			tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
 		}
 
-		return new SoloFaithTrack(Factory.getIstance().getAllCells(), tiles, marker_position, black_marker_position);
+		return new SoloFaithTrack(Factory.getInstance().getAllCells(), tiles, marker_position, black_marker_position);
 	}
 
 	/**
@@ -385,7 +385,7 @@ public class PersistenceParser {
 		DevelopmentCardsOnTable development_cards_on_table = createDevelopmentCardsOnTable((JSONArray) game_object.get("development_cards_on_table"));
 		ArrayDeque<SoloActionToken> active_tokens = createActiveTokens((JSONArray) game_object.get("active_tokens"));
 		SoloActionToken last_token = createSoloActionToken((JSONObject) game_object.get("last_token"));
-		return new SoloGame(players, market, development_cards_on_table, turn, Factory.getIstance().getAllSoloActionTokens(), active_tokens, last_token);
+		return new SoloGame(players, market, development_cards_on_table, turn, Factory.getInstance().getAllSoloActionTokens(), active_tokens, last_token);
 	}
 
 	private static ArrayDeque<SoloActionToken> createActiveTokens(JSONArray active_tokens_array) throws ParseException {
@@ -438,7 +438,7 @@ public class PersistenceParser {
 	 * @return the DevelopmentCard with that specified id
 	 */
 	private static DevelopmentCard getDevelopmentCardFromId(int id) throws ParseException, IOException {
-		DevelopmentCard[] all_development_cards = Factory.getIstance().getAllDevelopmentCards();
+		DevelopmentCard[] all_development_cards = Factory.getInstance().getAllDevelopmentCards();
 		for (DevelopmentCard card: all_development_cards) {
 			if (card.getId() == id) {
 				return card;
@@ -453,7 +453,7 @@ public class PersistenceParser {
 	 * @return the LeaderCard with that specified id
 	 */
 	private static LeaderCard getLeaderCardFromId(int id) throws ParseException, IOException {
-		LeaderCard[] all_leader_cards = Factory.getIstance().getAllLeaderCards();
+		LeaderCard[] all_leader_cards = Factory.getInstance().getAllLeaderCards();
 		for (LeaderCard card: all_leader_cards) {
 			if (card.getId() == id) {
 				return card;

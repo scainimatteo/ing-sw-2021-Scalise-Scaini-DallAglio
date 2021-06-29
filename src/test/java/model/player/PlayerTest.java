@@ -30,7 +30,7 @@ public class PlayerTest {
 	 */
 	@BeforeEach
 	public void createPlayer() throws ParseException, IOException{
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 
 		this.player = new Player("scainimatteo", new FaithTrack(factory.getAllCells(), factory.getAllTiles()));
 		this.dev_card = factory.getAllDevelopmentCards();

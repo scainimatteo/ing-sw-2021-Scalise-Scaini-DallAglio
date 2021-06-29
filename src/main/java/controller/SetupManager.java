@@ -158,7 +158,7 @@ public class SetupManager {
 	 * @param clients the ClientHandlers of the Players
 	 */
 	protected void createPlayers(ArrayList<ClientHandler> clients) throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 
 		this.players = new ArrayList<Player>();
@@ -185,7 +185,7 @@ public class SetupManager {
 	 * @param clients the ClientHandler of the Player
 	 */
 	protected void createSoloPlayer(ArrayList<ClientHandler> clients) throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 		Tile[] all_tiles = factory.getAllTiles();
 
@@ -219,7 +219,7 @@ public class SetupManager {
 	 * @return a Deck containing all the LeaderCards in random order
 	 */
 	private Deck<LeaderCard> getLeaderCardDeck() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		LeaderCard[] all_leader_cards = factory.getAllLeaderCards();
 
 		Deck<LeaderCard> deck = new Deck<LeaderCard>(all_leader_cards.length);
@@ -262,7 +262,7 @@ public class SetupManager {
 	 * @return the new Game
 	 */
 	protected Game createGame() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		return new Game(this.players, all_development_cards);
 	}
@@ -271,7 +271,7 @@ public class SetupManager {
 	 * @return the new SoloGame
 	 */
 	protected SoloGame createSoloGame() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		SoloActionToken[] all_solo_action_tokens = factory.getAllSoloActionTokens();
 		return new SoloGame(this.players, all_development_cards, all_solo_action_tokens);

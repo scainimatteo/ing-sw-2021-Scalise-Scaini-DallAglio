@@ -42,7 +42,7 @@ import it.polimi.ingsw.model.resources.Resource;
  * 			   all the DevelopmentCards, LeaderCards, Cells and Tiles
  */
 public class Factory {
-	private static Factory istance;
+	private static Factory instance;
 	private JSONParser jsonParser;
 	private DevelopmentCard[] all_development_cards;
 	private LeaderCard[] all_leader_cards;
@@ -66,13 +66,13 @@ public class Factory {
 	}
 
 	/**
-	 * @return the istance of Factory, creating it if it was not already created
+	 * @return the instance of Factory, creating it if it was not already created
 	 */
-	public static Factory getIstance() throws ParseException, IOException {
-		if (istance == null) {
-			istance = new Factory();
+	public static Factory getInstance() throws ParseException, IOException {
+		if (instance == null) {
+			instance = new Factory();
 		}
-		return istance;
+		return instance;
 	}
 
 	/**

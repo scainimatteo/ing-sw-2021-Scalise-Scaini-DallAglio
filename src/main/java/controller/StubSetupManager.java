@@ -65,7 +65,7 @@ public class StubSetupManager extends SetupManager {
 	}
 
 	private void createPlayers(int numofplayers) throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 		this.players = new ArrayList<Player>();
 		for (int i = 1; i <= numofplayers; i++) {
@@ -75,7 +75,7 @@ public class StubSetupManager extends SetupManager {
 	}
 
 	private void createSoloPlayer() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 		Tile[] all_tiles = factory.getAllTiles();
 		this.players = new ArrayList<Player>();

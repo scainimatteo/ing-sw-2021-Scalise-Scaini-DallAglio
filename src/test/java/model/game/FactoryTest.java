@@ -28,11 +28,11 @@ public class FactoryTest {
 	private int solo_action_tokens_number;
 
 	/**
-	 * Save the istance of Factory
+	 * Save the instance of Factory
 	 */
 	@BeforeEach
 	public void createFactory() throws IOException, ParseException {
-		this.factory = Factory.getIstance();
+		this.factory = Factory.getInstance();
 	}
 
 	@Test
