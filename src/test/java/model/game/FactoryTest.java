@@ -13,6 +13,8 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+
 import it.polimi.ingsw.model.player.track.Cell;
 import it.polimi.ingsw.model.player.track.Tile;
 
@@ -23,6 +25,7 @@ public class FactoryTest {
 	private int leader_cards_number;
 	private int cells_number;
 	private int tiles_number;
+	private int solo_action_tokens_number;
 
 	/**
 	 * Save the istance of Factory
@@ -52,6 +55,10 @@ public class FactoryTest {
 		this.tiles_number = this.factory.getTilesNumber();
 		Tile[] all_tiles = this.factory.getAllTiles();
 		assertEquals(tiles_number, all_tiles.length);
+
+		this.solo_action_tokens_number = this.factory.getSoloActionTokensNumber();
+		SoloActionToken[] all_solo_action_tokens = this.factory.getAllSoloActionTokens();
+		assertEquals(solo_action_tokens_number, all_solo_action_tokens.length);
 	}
 
 	@Test
@@ -107,6 +114,20 @@ public class FactoryTest {
 		for (Tile tile : all_tiles) {
 			// if the element is already in the set set.add will return false
 			assertTrue(set.add(tile));
+		}
+	}
+
+	@Test
+	/**
+	 * Check that all SoloActionTokens are different
+	 */
+	public void allDifferentSoloActionTokens() {
+		SoloActionToken[] all_solo_action_tokens = this.factory.getAllSoloActionTokens();
+
+		HashSet<SoloActionToken> set = new HashSet<SoloActionToken>();
+		for (SoloActionToken solo_action_token : all_solo_action_tokens) {
+			// if the element is already in the set set.add will return false
+			assertTrue(set.add(solo_action_token));
 		}
 	}
 
