@@ -20,8 +20,7 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a Deck from the match saved in memory
 	 */
 	public Deck(int size, ArrayList<E> structure) {
 		this.max_size = size;

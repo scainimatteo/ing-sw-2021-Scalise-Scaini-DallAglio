@@ -27,8 +27,7 @@ public class Tile implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a Tile from the match saved in memory
 	 */
 	public VaticanReports getVaticanReport() {
 		return this.report;

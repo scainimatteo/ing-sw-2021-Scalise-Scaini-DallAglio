@@ -49,8 +49,7 @@ public class Player extends ModelObservable {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a Player from the match saved in memory
 	 */
 	public Player(String nickname, FaithTrack track, Warehouse warehouse, StrongBox strongbox, DevelopmentCardsSlots development_card_slots, ArrayList<LeaderCard> leader_cards) {
 		this(nickname, track);

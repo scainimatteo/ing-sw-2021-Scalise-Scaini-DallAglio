@@ -42,8 +42,7 @@ public class SoloGame extends Game {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a SoloGame from the match saved in memory
 	 */
 	public SoloGame(ArrayList<Player> player, Market market, DevelopmentCardsOnTable development_cards_on_table, Turn turn, SoloActionToken[] all_solo_action_tokens, ArrayDeque<SoloActionToken> active_tokens, SoloActionToken last_token) {
 		super(player, market, development_cards_on_table, turn);
@@ -54,16 +53,14 @@ public class SoloGame extends Game {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only
 	 */
 	public ArrayDeque<SoloActionToken> getActiveTokens() {
 		return new ArrayDeque<SoloActionToken>(this.active_tokens);
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only
 	 */
 	public SoloActionToken getLastToken() {
 		return this.last_token;

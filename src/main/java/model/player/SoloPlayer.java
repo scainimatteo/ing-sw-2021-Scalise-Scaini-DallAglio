@@ -20,8 +20,7 @@ public class SoloPlayer extends Player{
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a SoloPlayer from the match saved in memory
 	 */
 	public SoloPlayer(String nickname, SoloFaithTrack track, Warehouse warehouse, StrongBox strongbox, DevelopmentCardsSlots development_card_slots, ArrayList<LeaderCard> leader_cards) {
 		this(nickname, track);

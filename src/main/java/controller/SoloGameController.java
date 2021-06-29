@@ -32,8 +32,7 @@ public class SoloGameController extends GameController {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a SoloGameController from the match saved in memory
 	 */
 	public SoloGameController(ArrayList<ClientHandler> clients, String match_name) throws InstantiationException {
 		super(clients);

@@ -26,8 +26,7 @@ public class StrongBox {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a StrongBox from the match saved in memory
 	 */
 	public StrongBox(HashMap<Resource, Integer> storage){
 		this.storage = storage;

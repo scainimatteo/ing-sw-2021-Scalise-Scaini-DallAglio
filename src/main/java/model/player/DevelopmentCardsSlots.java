@@ -21,8 +21,7 @@ public class DevelopmentCardsSlots {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a DevelopmentCardsSlots from the match saved in memory
 	 */
 	public DevelopmentCardsSlots(Table<DevelopmentCard> slots){
 		this.slots = slots;

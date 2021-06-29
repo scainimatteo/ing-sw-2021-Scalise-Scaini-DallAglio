@@ -14,8 +14,7 @@ public class FaithTrack {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a FaithTrack from the match saved in memory
 	 */
 	public FaithTrack(Cell[] track, Tile[] vatican_report_tiles, int marker_position) {
 		this(track, vatican_report_tiles);

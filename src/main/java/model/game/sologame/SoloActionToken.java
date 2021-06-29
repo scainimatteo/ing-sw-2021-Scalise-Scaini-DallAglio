@@ -18,8 +18,9 @@ public interface SoloActionToken {
 	public String toString();
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - used to write the SoloActionToken in the json file
+	 *
+	 * @return a String representing the SoloActionToken type
 	 */
 	public String getType();
 }

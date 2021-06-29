@@ -18,8 +18,7 @@ public class DevelopmentCardsOnTable {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a DevelopmentCardsOnTable from the match saved in memory
 	 */
 	public DevelopmentCardsOnTable(Table<DevelopmentCard> development_cards_table) {
 		this.development_cards_table = development_cards_table;
@@ -41,8 +40,7 @@ public class DevelopmentCardsOnTable {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only
 	 */
 	public ArrayList<DevelopmentCard> getDeckAsArrayList(int row, int column) {
 		return this.development_cards_table.getDeckAsArrayList(row, column);

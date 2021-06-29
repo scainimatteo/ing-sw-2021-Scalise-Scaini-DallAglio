@@ -33,8 +33,7 @@ public class Market {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a Market from the match saved in memory
 	 */
 	public Market(Resource[][] market_board, Resource free_marble) {
 		this.market_board = market_board;

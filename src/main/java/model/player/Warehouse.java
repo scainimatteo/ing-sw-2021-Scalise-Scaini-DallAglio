@@ -20,8 +20,7 @@ public class Warehouse {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a Warehouse from the match saved in memory
 	 */
 	public Warehouse(ArrayList<Resource> top_resource, ArrayList<Resource> middle_resources, ArrayList<Resource> bottom_resources){
 		this.top_resource = top_resource;

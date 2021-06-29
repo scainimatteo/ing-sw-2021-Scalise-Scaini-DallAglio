@@ -42,8 +42,7 @@ public class Game extends ModelObservable {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a Game from the match saved in memory
 	 */
 	public Game(ArrayList<Player> players, Market market, DevelopmentCardsOnTable development_cards_on_table, Turn turn) {
 		this.players = players;

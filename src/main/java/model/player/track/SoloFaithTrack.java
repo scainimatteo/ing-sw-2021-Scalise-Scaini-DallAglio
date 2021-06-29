@@ -9,8 +9,7 @@ public class SoloFaithTrack extends FaithTrack {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a SoloFaithTrack from the match saved in memory
 	 */
 	public SoloFaithTrack(Cell[] track, Tile[] vatican_report_tiles, int marker_position, int black_marker_position) {
 		this(track, vatican_report_tiles);
