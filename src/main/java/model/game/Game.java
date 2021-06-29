@@ -27,11 +27,11 @@ import it.polimi.ingsw.util.observer.ModelObservable;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 public class Game extends ModelObservable {
-	private ArrayList<Player> players;
-	private Market market;
-	private DevelopmentCardsOnTable development_cards_on_table;
+	protected ArrayList<Player> players;
+	protected Turn turn;
+	protected Market market;
+	protected DevelopmentCardsOnTable development_cards_on_table;
 	private HashMap<Player, Integer> victory_points;
-	private Turn turn;
 
 	public Game(ArrayList<Player> players, DevelopmentCard[] all_development_cards) {
 		this.players = players;
@@ -39,6 +39,17 @@ public class Game extends ModelObservable {
 		this.development_cards_on_table = new DevelopmentCardsOnTable(all_development_cards);
 		this.victory_points = new HashMap<Player, Integer>();
 		this.turn = new Turn(this.players.get(0));
+	}
+
+	/**
+	 * Persistence only - recreate a Game from the match saved in memory
+	 */
+	public Game(ArrayList<Player> players, Market market, DevelopmentCardsOnTable development_cards_on_table, Turn turn) {
+		this.players = players;
+		this.market = market;
+		this.development_cards_on_table = development_cards_on_table;
+		this.victory_points = new HashMap<Player, Integer>();
+		this.turn = turn;
 	}
 
 	public ArrayList<Player> getPlayers() {
@@ -49,8 +60,14 @@ public class Game extends ModelObservable {
 		return this.turn;
 	}
 
-	public void handleError(String error_message, Player player){
-		notifyModel(new ErrorMessage(error_message, player.getNickname()));
+	/**
+	 * Notify an ErrorMessage to the Clients
+	 *
+	 * @param error_string the error to report
+	 * @param player the Player that committed the error
+	 */
+	public void handleError(String error_string, Player player){
+		notifyModel(new ErrorMessage(error_string, player.getNickname()));
 	}
 
 	/**
@@ -70,7 +87,7 @@ public class Game extends ModelObservable {
 		for (Player p: this.players) {
 			order.add(p.getNickname());
 		}
-		return new SimpleGame(order, market.peekMarket(), market.getFreeMarble(), development_cards_on_table.getTopCards());
+		return new SimpleGame(order, this.market.peekMarket(), this.market.getFreeMarble(), this.development_cards_on_table.getTopCards());
 	}
 
 	/**
@@ -116,6 +133,10 @@ public class Game extends ModelObservable {
 	
 	/**
 	 * TURN METHODS
+	 */
+
+	/**
+	 * Sets the following player as active, initiates a new round if there is no following player
 	 */
 	public void endTurn(){
 		if (this.players.indexOf(turn.getPlayer()) + 1 == this.players.size()){

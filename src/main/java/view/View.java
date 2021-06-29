@@ -11,16 +11,16 @@ import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.observer.InitializedGameObservable;
-import it.polimi.ingsw.util.observer.InitializedGameObserver;
+import it.polimi.ingsw.util.observer.SetupGameObservable;
 import it.polimi.ingsw.util.observer.ViewUpdateObservable;
 import it.polimi.ingsw.util.observer.GameStartObservable;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
+import it.polimi.ingsw.util.observer.SetupGameObserver;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
-public abstract class View extends GameStartObservable implements ViewUpdateObservable, InitializedGameObservable {
+public abstract class View extends GameStartObservable implements ViewUpdateObservable, SetupGameObservable {
 	protected SimpleGame simple_game;
 	protected ArrayList<SimplePlayer> simple_players;
 	protected Turn turn;
@@ -31,7 +31,7 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	protected String nickname;
 
 	private ArrayList<ViewUpdateObserver> view_update_observers = new ArrayList<ViewUpdateObserver>();
-	private ArrayList<InitializedGameObserver> initialized_game_update_observers = new ArrayList<InitializedGameObserver>();
+	private ArrayList<SetupGameObserver> setup_game_observers = new ArrayList<SetupGameObserver>();
 
 	public boolean isInitialized() {
 		return this.initialized;
@@ -77,15 +77,13 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 		} else if (view_update.simple_player != null) {
 			updateSimplePlayer(view_update.simple_player);
 		} else if (view_update.turn != null) {
-			System.out.println("updateView: " + !this.setup_done + " | " + view_update.turn.isInitialized());
 			// if the turn was null, this is the first Turn and the game is started
 			if (this.turn == null) {
-				System.out.println("this.turn == null");
 				notifyGameStarted();
-			} else if (!this.setup_done && view_update.turn.isInitialized()){
-				System.out.println("else if giusto");
+			// if the turn has done the setup, start the SetupScene
+			} else if (!this.setup_done && view_update.turn.hasDoneSetup()){
 				this.setup_done = true;
-				notifyInitialied();
+				notifySetupDone();
 			} 
 			this.turn = view_update.turn;
 		}
@@ -151,23 +149,22 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	}
 
 	/**
-	 * Add a InitializedGameObserver to the initialized_game_update_observers array
+	 * Add a SetupGameObserver to the setup_game_observers array
 	 *
-	 * @param observer the InitializedGameObserver to add
+	 * @param observer the SetupGameObserver to add
 	 */
 	@Override
-	public void addInitializedGameObserver(InitializedGameObserver observer){
-		this.initialized_game_update_observers.add(observer);
+	public void addSetupGameObserver(SetupGameObserver observer){
+		this.setup_game_observers.add(observer);
 	}
 
 	/**
-	 * Notify to the InitializedGameObservers listening that the game is initialized
+	 * Notify to the SetupGameObserver listening that the game has finished the setup phase
 	 */
 	@Override
-	public void notifyInitialied(){
-		System.out.println("eddaiiiii notifyInitialied");
-		for (InitializedGameObserver init_observer : this.initialized_game_update_observers){
-			init_observer.updateInitializedGame();
+	public void notifySetupDone(){
+		for (SetupGameObserver s: this.setup_game_observers){
+			s.gameHasDoneSetup();
 		}
 	}
 }

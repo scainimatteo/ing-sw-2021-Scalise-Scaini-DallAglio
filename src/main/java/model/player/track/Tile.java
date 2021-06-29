@@ -26,6 +26,13 @@ public class Tile implements Cloneable, Serializable {
 		return this.victory_points;
 	}
 
+	/**
+	 * Persistence only - recreate a Tile from the match saved in memory
+	 */
+	public VaticanReports getVaticanReport() {
+		return this.report;
+	}
+
 	public Object clone() {
 		Object clone = null;
 

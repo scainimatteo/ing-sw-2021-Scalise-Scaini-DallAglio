@@ -25,6 +25,11 @@ import it.polimi.ingsw.model.card.LeaderAbility;
 import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.CardLevel;
 
+import it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards;
+import it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces;
+import it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace;
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+
 import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.track.Tile;
 import it.polimi.ingsw.model.player.track.Cell;
@@ -37,17 +42,19 @@ import it.polimi.ingsw.model.resources.Resource;
  * 			   all the DevelopmentCards, LeaderCards, Cells and Tiles
  */
 public class Factory {
-	private static Factory istance;
+	private static Factory instance;
+	private JSONParser jsonParser;
 	private DevelopmentCard[] all_development_cards;
 	private LeaderCard[] all_leader_cards;
 	private Cell[] all_cells;
 	private Tile[] all_tiles;
-	private JSONParser jsonParser;
+	private SoloActionToken[] all_solo_action_tokens;
 
 	private int development_cards_number;
 	private int leader_cards_number;
 	private int cells_number;
 	private int tiles_number;
+	private int solo_action_tokens_number;
 
 	private Factory() throws ParseException, IOException {
 		this.jsonParser = new JSONParser();
@@ -55,16 +62,17 @@ public class Factory {
 		this.all_leader_cards = readAllLeaderCards();
 		this.all_cells = readAllCells();
 		this.all_tiles = readAllTiles();
+		this.all_solo_action_tokens = readAllSoloActionTokens();
 	}
 
 	/**
-	 * @return the istance of Factory, creating it if it was not already created
+	 * @return the instance of Factory, creating it if it was not already created
 	 */
-	public static Factory getIstance() throws ParseException, IOException {
-		if (istance == null) {
-			istance = new Factory();
+	public static Factory getInstance() throws ParseException, IOException {
+		if (instance == null) {
+			instance = new Factory();
 		}
-		return istance;
+		return instance;
 	}
 
 	/**
@@ -100,6 +108,13 @@ public class Factory {
 	}
 
 	/**
+	 * @return an array containing all the SoloActionTokens specified in the json file
+	 */
+	public SoloActionToken[] getAllSoloActionTokens() {
+		return this.all_solo_action_tokens;
+	}
+
+	/**
 	 * @return the number of DevelopmentCards
 	 */
 	public int getDevelopmentCardsNumber() {
@@ -125,6 +140,13 @@ public class Factory {
 	 */
 	public int getTilesNumber() {
 		return this.tiles_number;
+	}
+
+	/**
+	 * @return the number of SoloActionToken
+	 */
+	public int getSoloActionTokensNumber() {
+		return this.solo_action_tokens_number;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -347,5 +369,53 @@ public class Factory {
 			tiles[i] = new Tile(report, victory_points);
 		}
 		return tiles;
+	}
+
+	/**
+	 * Create a SoloActionToken
+	 *
+	 * @param solo_action_token the JSONObject containing all the information about the SoloActionToken
+	 * @throws ParseException if it cannot parse the token or if a DiscardDevelopmentCards token has a wrong color
+	 * @return the correct SoloActionToken based on the type
+	 */
+	private SoloActionToken createSoloActionToken(JSONObject solo_action_token) throws ParseException {
+		String type = solo_action_token.get("type").toString();
+		switch (type) {
+			case "MOVEBLACKCROSSTWOSPACES":
+				return new MoveBlackCrossTwoSpaces();
+			case "MOVEBLACKCROSSONESPACE":
+				return new MoveBlackCrossOneSpace();
+			case "DISCARDDEVELOPMENTCARDS":
+				try {
+					String color_type = solo_action_token.get("color").toString();
+					DevelopmentCardsColor color = DevelopmentCardsColor.valueOf(color_type);
+					return new DiscardDevelopmentCards(color);
+				} catch (IllegalArgumentException e) {
+					// if the color is not a DevelopmentCardsColor
+					throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
+				}
+			default:
+				throw new ParseException(ParseException.ERROR_UNEXPECTED_EXCEPTION);
+		}
+	}
+
+	/**
+	 * Parse the json file for the SoloActionTokens
+	 *
+	 * @return an array containing all the SoloActionTokens specified in the json file
+	 */
+	private SoloActionToken[] readAllSoloActionTokens() throws ParseException, IOException {
+		InputStream is = getClass().getClassLoader().getResourceAsStream("json/soloactiontokens.json");
+		JSONObject jsonObject = (JSONObject) this.jsonParser.parse(new InputStreamReader(is));
+
+		this.solo_action_tokens_number = (int)(long) jsonObject.get("solo_action_tokens_number");
+		SoloActionToken[] solo_action_tokens = new SoloActionToken[solo_action_tokens_number];
+
+		JSONArray solo_action_tokens_obj = (JSONArray) jsonObject.get("solo_action_tokens");
+		for (int i = 0; i < solo_action_tokens_number; i++) {
+			JSONObject solo_action_token = (JSONObject) this.jsonParser.parse(solo_action_tokens_obj.get(i).toString());
+			solo_action_tokens[i] = createSoloActionToken(solo_action_token);
+		}
+		return solo_action_tokens;
 	}
 }

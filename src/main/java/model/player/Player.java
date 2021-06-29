@@ -39,13 +39,24 @@ public class Player extends ModelObservable {
 	protected DevelopmentCardsSlots development_card_slots;
 	protected ArrayList<LeaderCard> leader_cards_deck;
 
-	public Player(String nickname, Cell[] cell_track, Tile[] v_r_tiles){
+	public Player(String nickname, FaithTrack track){
 		this.nickname = nickname;
-		this.track = new FaithTrack(cell_track, v_r_tiles);
+		this.track = track;
 		this.warehouse = new Warehouse();
 		this.strongbox = new StrongBox();
 		this.development_card_slots = new DevelopmentCardsSlots();
 		this.leader_cards_deck = new ArrayList<LeaderCard>();
+	}
+
+	/**
+	 * Persistence only - recreate a Player from the match saved in memory
+	 */
+	public Player(String nickname, FaithTrack track, Warehouse warehouse, StrongBox strongbox, DevelopmentCardsSlots development_card_slots, ArrayList<LeaderCard> leader_cards) {
+		this(nickname, track);
+		this.warehouse = warehouse;
+		this.strongbox = strongbox;
+		this.leader_cards_deck = leader_cards;
+		this.development_card_slots = development_card_slots;
 	}
 
 	public String getNickname(){
@@ -64,7 +75,7 @@ public class Player extends ModelObservable {
 	 *
 	 * @return the SimplePlayer used to represent this Player
 	 */
-	private SimplePlayer simplify() {
+	protected SimplePlayer simplify() {
 		ArrayList<DevelopmentCard> first_column = this.development_card_slots.getDeckAsArrayList(0, 0);
 		ArrayList<DevelopmentCard> second_column = this.development_card_slots.getDeckAsArrayList(0, 1);
 		ArrayList<DevelopmentCard> third_column = this.development_card_slots.getDeckAsArrayList(0, 2);
@@ -208,6 +219,9 @@ public class Player extends ModelObservable {
 		this.warehouse.getFromBottom(res);
 	}
 
+	/**
+	 * Testing only
+	 */
 	public void clearWarehouse(){
 		this.warehouse.clearWarehouse();
 		this.notifyPlayer();
@@ -267,10 +281,10 @@ public class Player extends ModelObservable {
 		this.notifyPlayer();
 	}
 
-	public StrongBox getPlayerStrongBox(){
+	public StrongBox getStrongBox(){
 		return this.strongbox;
 	}
-
+	
 	/**
 	 * DEVCARDSSLOTS METHODS
 	 */
@@ -285,12 +299,6 @@ public class Player extends ModelObservable {
 
 	public DevelopmentCard[] getTopCards(){
 		return this.development_card_slots.getTopCards();
-	}
-
-	//TODO: change this in getSlot
-	//TODO: why does this return an array?
-	public DevelopmentCard[] getCard(int position){
-		return this.development_card_slots.getCard(position);
 	}
 
 	public Iterator<DevelopmentCard> getDevCardIterator(){
@@ -312,12 +320,35 @@ public class Player extends ModelObservable {
 		return this.track.getMarkerPosition();
 	}
 
-	public void moveForward(int steps){
-		this.track.moveForward(steps);
+	/**
+	 * Move the Player forward on the FaithTrack
+	 *
+	 * @param steps how many Cells to move forward to
+	 * @return the VaticanReport activated, null if nothing was activated
+	 */
+	public VaticanReports moveForward(int steps){
+		VaticanReports vatican_report = this.track.moveForward(steps);
 		this.notifyPlayer();
+		return vatican_report;
 	}
 
 	public boolean endOfTrack(){
 		return getMarkerPosition() >= track.getLastPosition();
+	}
+
+	/**
+	 * @return the VaticanReport the Player is on
+	 */
+	public VaticanReports whichVaticanReport() {
+		return this.track.getMarker().whichVaticanReport();
+	}
+
+	/**
+	 * Activate the VaticanReport the Player is on
+	 */
+	public void activateVaticanReport() {
+		VaticanReports vatican_report = this.track.getMarker().whichVaticanReport();
+		this.track.activateVaticanReport(vatican_report);
+		this.notifyPlayer();
 	}
 }

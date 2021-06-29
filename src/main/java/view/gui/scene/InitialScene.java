@@ -6,6 +6,7 @@ import javafx.fxml.*;
 
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.scene.layout.*;
 
 import java.util.ResourceBundle;
@@ -15,8 +16,8 @@ import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
 public class InitialScene extends SceneController implements Initializable {
-	@FXML Label nicknameLabel;
-	@FXML TextField nicknameText;
+	@FXML Text nicknameText;
+	@FXML TextField nicknameTextField;
 	@FXML ToggleGroup numPlayersGroup;
 	@FXML RadioButton rb4;
 	@FXML TextField matchText;
@@ -25,7 +26,7 @@ public class InitialScene extends SceneController implements Initializable {
 	@FXML VBox joinLayout;
 	@FXML VBox matchLayout;
 	@FXML Button cancelButton;
-	@FXML Label matchNameLabel;
+	@FXML Text matchNameText;
 
 	private String nickname = "";
 	private int num_players = -1;
@@ -46,7 +47,7 @@ public class InitialScene extends SceneController implements Initializable {
 
 	public void setMatchName(String match_name) {
 		this.match_name = match_name;
-		Platform.runLater(() -> matchNameLabel.setText(this.match_name));
+		Platform.runLater(() -> matchNameText.setText(this.match_name));
 	}
 
 	public boolean isInitialized() {
@@ -92,7 +93,7 @@ public class InitialScene extends SceneController implements Initializable {
 	 * Create the match and finish the initialization
 	 */
 	public void createHandler() {
-		this.nickname = nicknameText.getText();
+		this.nickname = nicknameTextField.getText();
 		this.num_players = Integer.parseInt(((RadioButton) numPlayersGroup.getSelectedToggle()).getText());
 		this.finishedInitialization = true;
 		App.finishedInitialization();
@@ -103,7 +104,7 @@ public class InitialScene extends SceneController implements Initializable {
 	 * Join the match and finish the initialization
 	 */
 	public void joinHandler() {
-		this.nickname = nicknameText.getText();
+		this.nickname = nicknameTextField.getText();
 		this.setMatchName(matchText.getText());
 		this.finishedInitialization = true;
 		App.finishedInitialization();
@@ -127,8 +128,8 @@ public class InitialScene extends SceneController implements Initializable {
 		hideNode(startLayout);
 		hideNode(createLayout);
 		hideNode(joinLayout);
-		hideNode(nicknameLabel);
 		hideNode(nicknameText);
+		hideNode(nicknameTextField);
 		hideNode(cancelButton);
 		showNode(matchLayout);
 	}

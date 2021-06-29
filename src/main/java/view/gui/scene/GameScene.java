@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.util.ResourceBundle;
 import java.net.URL;
 
+import it.polimi.ingsw.controller.message.PersistenceMessage;
 import it.polimi.ingsw.controller.message.BuyCardMessage;
 import it.polimi.ingsw.controller.message.MarketMessage;
 
@@ -220,5 +221,13 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 */
 	public void changeSceneToBoard() {
 		return;
+	}
+
+	/**
+	 * Save the current state of the Game in a file
+	 */
+	public void saveGame() {
+		PersistenceMessage message = new PersistenceMessage();
+		App.sendMessage(message);
 	}
 }

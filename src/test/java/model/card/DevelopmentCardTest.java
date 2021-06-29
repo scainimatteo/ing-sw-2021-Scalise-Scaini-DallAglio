@@ -34,7 +34,7 @@ public class DevelopmentCardTest{
 		input.add(randresource[y]);
 		output.add(randresource[z]);
 		output.add(randresource[t]);
-		devcard = new DevelopmentCard(random.nextInt(10), new Production(input, output), input, level, random.nextInt(3),null);
+		devcard = new DevelopmentCard(random.nextInt(10), new Production(input, output), input, level, random.nextInt(3), null);
 	}
 	
 	/**
@@ -43,6 +43,6 @@ public class DevelopmentCardTest{
 	@RepeatedTest(value = 10)
 	public void fullTest(){
 		assertEquals (level, devcard.getCardLevel());
-		assertEquals (output, devcard.activateProduction());	
+		assertEquals (output, devcard.getProducedResources());	
 	}
 }

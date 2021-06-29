@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.model.game.Factory;
 
+import it.polimi.ingsw.model.player.track.FaithTrack;
 import it.polimi.ingsw.model.player.Player;
 
 public class GameTest {
@@ -19,19 +20,19 @@ public class GameTest {
 	int number_of_players;
 
 	/**
-	 * Create an istance of Game
+	 * Create an instance of Game
 	 */
 	@BeforeEach
 	public void createGame() throws IOException, ParseException {
 		Random random = new Random();
 		this.number_of_players = random.nextInt(4) + 1;
 
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		ArrayList<Player> players = new ArrayList<Player>();
 		for (int i = 0; i < this.number_of_players; i++) {
-			players.add(new Player(Integer.toString(i), factory.getAllCells(), factory.getAllTiles()));
+			players.add(new Player(Integer.toString(i), new FaithTrack(factory.getAllCells(), factory.getAllTiles())));
 		}
 
-		this.game = new Game(players, Factory.getIstance().getAllDevelopmentCards());
+		this.game = new Game(players, factory.getAllDevelopmentCards());
 	}
 }

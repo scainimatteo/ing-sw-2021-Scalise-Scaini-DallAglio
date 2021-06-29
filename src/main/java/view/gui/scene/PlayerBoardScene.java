@@ -25,6 +25,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -96,7 +97,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Text stone_amount;
 	@FXML private Text servant_amount;
 
-
+	@FXML private HBox cost_box;
 	@FXML private ImageView cost1;
 	@FXML private ImageView cost2;
 	@FXML private ImageView cost3;
@@ -174,27 +175,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		servant_sprite.setOnDragDone(done -> handleDragDone(done, servant_sprite, false));
 		stone_sprite.setOnDragDone(done -> handleDragDone(done, stone_sprite, false));
 
-		cost1.setOnDragOver(over -> handleDragOver(over, cost1));
-		cost2.setOnDragOver(over -> handleDragOver(over, cost2));
-		cost3.setOnDragOver(over -> handleDragOver(over, cost3));
-		cost4.setOnDragOver(over -> handleDragOver(over, cost4));
-		cost5.setOnDragOver(over -> handleDragOver(over, cost5));
-		cost6.setOnDragOver(over -> handleDragOver(over, cost6));
-		cost7.setOnDragOver(over -> handleDragOver(over, cost7));
-		cost8.setOnDragOver(over -> handleDragOver(over, cost8));
-		cost9.setOnDragOver(over -> handleDragOver(over, cost9));
-		cost10.setOnDragOver(over -> handleDragOver(over, cost10));
-
-		cost1.setOnDragDropped(dropped -> handleDragDropped(dropped, cost1));
-		cost2.setOnDragDropped(dropped -> handleDragDropped(dropped, cost2));
-		cost3.setOnDragDropped(dropped -> handleDragDropped(dropped, cost3));
-		cost4.setOnDragDropped(dropped -> handleDragDropped(dropped, cost4));
-		cost5.setOnDragDropped(dropped -> handleDragDropped(dropped, cost5));
-		cost6.setOnDragDropped(dropped -> handleDragDropped(dropped, cost6));
-		cost7.setOnDragDropped(dropped -> handleDragDropped(dropped, cost7));
-		cost8.setOnDragDropped(dropped -> handleDragDropped(dropped, cost8));
-		cost9.setOnDragDropped(dropped -> handleDragDropped(dropped, cost9));
-		cost10.setOnDragDropped(dropped -> handleDragDropped(dropped, cost10));
+		// set Drag and Drop for the cost box
+		for (Node node: this.cost_box.getChildren()) {
+			node.setOnDragOver(over -> handleDragOver(over, (ImageView) node));
+			node.setOnDragDropped(dropped -> handleDragDropped(dropped, (ImageView) node));
+		}
 
 		hideNode(leader_card_pane);
 		hideNode(cost_resources_pane);

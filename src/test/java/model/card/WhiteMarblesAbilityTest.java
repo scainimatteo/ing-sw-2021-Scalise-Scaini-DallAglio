@@ -15,19 +15,12 @@ public class WhiteMarblesAbilityTest {
 	Resource type = Resource.COIN;
 	WhiteMarblesAbility wma = new WhiteMarblesAbility(type);
 	Resource except = Resource.FAITH;
-	/*
-	* Test verificare il costruttore
-	*/ 
+	/**
+	* Constructor test
+	* */ 
 	@Test
 	public void testType(){
 		assertEquals (type, wma.getResourceType());
-	}
-
-	/*
-	* Test per verificare il lancio di eccezione
-	*/
-	@Test
-	public void testException() {
 		assertThrows(IllegalArgumentException.class, ()-> {wma = new WhiteMarblesAbility(except);});
 	}
 

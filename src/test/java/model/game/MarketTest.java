@@ -13,7 +13,7 @@ public class MarketTest {
 	Market market;
 
 	/**
-	 * Create an istance of Market
+	 * Create an instance of Market
 	 */
 	@BeforeEach
 	public void createMarket() {

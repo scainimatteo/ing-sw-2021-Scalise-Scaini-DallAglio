@@ -54,7 +54,7 @@ public class Client {
 				} else if (message.end_game) {
 					this.view.handleEndGame((EndGameMessage) message);
 				} else {
-					this.updateView((ViewUpdate) message);
+					this.view.updateView((ViewUpdate) message);
 				}
 			}
 		} catch(ClassNotFoundException e) {
@@ -64,16 +64,6 @@ public class Client {
 			this.out.close();
 			this.server.close();
 		}
-	}
-
-	/**
-	 * Update the View
-	 *
-	 * @param message the ViewUpdate that contains the information to update
-	 */
-	//TODO: why is this a method?
-	public void updateView(ViewUpdate message) {
-		this.view.updateView(message);
 	}
 
 	/**

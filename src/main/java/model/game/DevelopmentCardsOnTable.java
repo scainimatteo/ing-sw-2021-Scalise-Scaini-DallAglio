@@ -10,11 +10,18 @@ import it.polimi.ingsw.model.card.Deck;
 
 public class DevelopmentCardsOnTable {
 	private Table<DevelopmentCard> development_cards_table;
-	private final int dim_rows = 4;
-	private final int dim_cols = 3;
+	public static final int dim_rows = 4;
+	public static final int dim_cols = 3;
 
 	public DevelopmentCardsOnTable(DevelopmentCard[] all_development_cards) {
 		this.development_cards_table = createDecks(all_development_cards);
+	}
+
+	/**
+	 * Persistence only - recreate a DevelopmentCardsOnTable from the match saved in memory
+	 */
+	public DevelopmentCardsOnTable(Table<DevelopmentCard> development_cards_table) {
+		this.development_cards_table = development_cards_table;
 	}
 
 	private Table<DevelopmentCard> createDecks(DevelopmentCard[] all_development_cards) {
@@ -30,6 +37,13 @@ public class DevelopmentCardsOnTable {
 		}
 		table.shuffleAllDecks();
 		return table;
+	}
+
+	/**
+	 * Persistence only
+	 */
+	public ArrayList<DevelopmentCard> getDeckAsArrayList(int row, int column) {
+		return this.development_cards_table.getDeckAsArrayList(row, column);
 	}
 
 	/**
@@ -55,7 +69,8 @@ public class DevelopmentCardsOnTable {
 		boolean done = false;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 4; j++) {
-				if (development_cards_table.peekTop(i, j).equals(chosen_card)) {
+				DevelopmentCard card_on_top = development_cards_table.peekTop(i, j);
+				if (card_on_top != null && card_on_top.equals(chosen_card)) {
 					development_cards_table.draw(i, j);
 					done = true;
 					break;
@@ -66,5 +81,14 @@ public class DevelopmentCardsOnTable {
 		if (!done) {
 			throw new NoSuchElementException();
 		}
+	}
+
+	/**
+	 * Returns the size of the given deck
+	 *
+	 * testing only
+	 */
+	public int getDeckSize(int i, int j){
+		return development_cards_table.getDeck(i,j).size();
 	}
 }

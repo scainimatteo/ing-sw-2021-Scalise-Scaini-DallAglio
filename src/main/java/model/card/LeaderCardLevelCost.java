@@ -23,15 +23,12 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 		this.front_path = front_path;
 	}
 
-	/**
-	 * For testing purpose only
-	 */
 	public ArrayList<CardLevel> getRequirements() {
 		return this.requirements;
 	}
 
 	/**
-	 * The LeaderCardLevelCost is activable if the player has bought the correct DevelopmentCards
+	 *@return true if the player has bought the correct DevelopmentCards
 	 */
 	@Override
 	public boolean isActivable(Player player){
@@ -109,20 +106,3 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 
 }
 
-/*
-/-----------------\
-|                 |
-|                 |
-|                 |
-|                 |
-|                 |
-|-------(X)-------|
-|                 |
-|                 |
-|                 |
-|                 |
-|                 |
-|                 |
-|                 |
-\-----------------/
-*/

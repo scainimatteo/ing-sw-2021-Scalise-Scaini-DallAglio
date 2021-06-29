@@ -10,9 +10,10 @@ public class CardLevelTest {
 	int i = 0;
 	int j = 0;
 	DevelopmentCardsColor[] rand_color = {DevelopmentCardsColor.GREEN, DevelopmentCardsColor.BLUE, DevelopmentCardsColor.YELLOW, DevelopmentCardsColor.PURPLE};
+	
 	/**
-	* Testa diverse combinazioni randomiche di livelli e colori
-	*/
+	* Tests various random combinations of levels and colors	
+	* */
 	@RepeatedTest(value = 10)
 	public void RandTestMethods (){
 		Random random = new Random();

@@ -19,7 +19,7 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.observer.InitializedGameObserver;
+import it.polimi.ingsw.util.observer.SetupGameObserver;
 import it.polimi.ingsw.util.observer.GameStartObserver;
 
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
@@ -33,7 +33,7 @@ import it.polimi.ingsw.view.gui.scene.FinalScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
 
-public class GUI extends View implements GameStartObserver, InitializedGameObserver {
+public class GUI extends View implements GameStartObserver, SetupGameObserver {
 	private App app;
 	private InitialScene initial_scene;
 	private Client client;
@@ -48,7 +48,7 @@ public class GUI extends View implements GameStartObserver, InitializedGameObser
 	public void startView(Client client) {
 		this.client = client;
 		this.addGameStartObserver(this);
-		this.addInitializedGameObserver(this);
+		this.addSetupGameObserver(this);
 		App.setModel(this);
 		new Thread(() -> {
 			App.main(null);
@@ -164,11 +164,10 @@ public class GUI extends View implements GameStartObserver, InitializedGameObser
 	}
 
 	/**
-	 * Method from InitializedGameObserver, gets called when the game is initialized
+	 * Method from SetupGameObserver, gets called when the game is initialized
 	 */
 	@Override
-	public void updateInitializedGame(){
-		System.out.println("eddai porcodiooooo updateInitializedGame");
+	public void gameHasDoneSetup(){
 		Platform.runLater(() -> {
 			new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 		});

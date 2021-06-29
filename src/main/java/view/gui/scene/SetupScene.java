@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.gui.scene;
+import it.polimi.ingsw.view.gui.scene.SceneController;
 
+import it.polimi.ingsw.view.gui.scene.PlayerBoardScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
@@ -13,6 +15,7 @@ import it.polimi.ingsw.controller.message.ChooseResourcesMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.Storage;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.input.DragEvent;
 import javafx.event.EventHandler;
@@ -34,7 +37,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.net.URL;
 
-public class SetupScene extends SceneController implements Initializable{
+public class SetupScene extends SceneController implements Initializable {
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
 	ArrayList<String> order;
 	double opacity_percent = 0.5;

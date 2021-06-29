@@ -1,0 +1,30 @@
+{
+    "solo_action_tokens": [
+        {
+            "type": "MOVEBLACKCROSSTWOSPACES"
+        },
+        {
+            "type": "MOVEBLACKCROSSTWOSPACES"
+        },
+        {
+            "type": "MOVEBLACKCROSSONESPACE"
+        },
+        {
+            "color": "GREEN",
+            "type": "DISCARDDEVELOPMENTCARDS"
+        },
+        {
+            "color": "BLUE",
+            "type": "DISCARDDEVELOPMENTCARDS"
+        },
+        {
+            "color": "PURPLE",
+            "type": "DISCARDDEVELOPMENTCARDS"
+        },
+        {
+            "color": "YELLOW",
+            "type": "DISCARDDEVELOPMENTCARDS"
+        }
+    ],
+    "solo_action_tokens_number": 7
+}

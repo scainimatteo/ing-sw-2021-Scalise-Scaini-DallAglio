@@ -27,7 +27,7 @@ public class LeaderCardLevelCostTest {
 		try {
 			this.cards = new LeaderCardLevelCost[4];
 			this.cardlevels = new CardLevel[4];
-			LeaderCard[] all_leader_cards = Factory.getIstance().getAllLeaderCards();
+			LeaderCard[] all_leader_cards = Factory.getInstance().getAllLeaderCards();
 			List<LeaderCard> list = Arrays.asList(all_leader_cards);
 			Collections.shuffle(list);
 			list.toArray(all_leader_cards);
