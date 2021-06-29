@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.LeaderCard;
 
 import it.polimi.ingsw.model.player.track.SoloFaithTrack;
 import it.polimi.ingsw.model.player.track.VaticanReports;
@@ -16,6 +17,18 @@ import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 public class SoloPlayer extends Player{
 	public SoloPlayer(String nickname, SoloFaithTrack track){
 		super(nickname, track);
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public SoloPlayer(String nickname, SoloFaithTrack track, Warehouse warehouse, StrongBox strongbox, DevelopmentCardsSlots development_card_slots, ArrayList<LeaderCard> leader_cards) {
+		this(nickname, track);
+		this.warehouse = warehouse;
+		this.strongbox = strongbox;
+		this.leader_cards_deck = leader_cards;
+		this.development_card_slots = development_card_slots;
 	}
 
 	/**

@@ -9,6 +9,23 @@ public class SoloFaithTrack extends FaithTrack {
 	}
 
 	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public SoloFaithTrack(Cell[] track, Tile[] vatican_report_tiles, int marker_position, int black_marker_position) {
+		this(track, vatican_report_tiles);
+		for (Cell cell: track) {
+			if (cell.getPosition() == marker_position) {
+				this.faith_marker = cell;
+			}
+
+			if (cell.getPosition() == black_marker_position) {
+				this.black_marker = cell;
+			}
+		}
+	}
+
+	/**
 	 * Move the Black Cross marker forward
 	 *
 	 * @param number_of_times how many Cells to go forward
@@ -22,7 +39,6 @@ public class SoloFaithTrack extends FaithTrack {
 			VaticanReports vatican_report = super.track[i].whichVaticanReport();
 			if (super.track[i].isPopeSpace()){
 				if (super.checkCell(vatican_report.getIndex())){
-					super.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
 					return vatican_report;
 				}
 			}

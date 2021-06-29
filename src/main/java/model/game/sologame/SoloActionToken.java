@@ -16,4 +16,10 @@ public interface SoloActionToken {
 	 * Used by the CLI
 	 */
 	public String toString();
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public String getType();
 }

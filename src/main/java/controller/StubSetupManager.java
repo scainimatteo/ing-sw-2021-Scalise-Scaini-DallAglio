@@ -34,11 +34,11 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-import it.polimi.ingsw.controller.Initializer;
+import it.polimi.ingsw.controller.SetupManager;
 
 
-public class StubInitializer extends Initializer {
-	public Game initializeGame(int numofplayers) throws InstantiationException {
+public class StubSetupManager extends SetupManager {
+	public Game setupGame(int numofplayers) throws InstantiationException {
 		try {
 			createPlayers(numofplayers);
 			distributeLeaderCards();
@@ -52,7 +52,7 @@ public class StubInitializer extends Initializer {
 		}
 	}
 
-	public SoloGame initializeSoloGame() throws InstantiationException {
+	public SoloGame setupSoloGame() throws InstantiationException {
 		try {
 			createSoloPlayer();
 			distributeLeaderCards();
@@ -65,7 +65,7 @@ public class StubInitializer extends Initializer {
 	}
 
 	private void createPlayers(int numofplayers) throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 		this.players = new ArrayList<Player>();
 		for (int i = 1; i <= numofplayers; i++) {
@@ -75,7 +75,7 @@ public class StubInitializer extends Initializer {
 	}
 
 	private void createSoloPlayer() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 		Tile[] all_tiles = factory.getAllTiles();
 		this.players = new ArrayList<Player>();

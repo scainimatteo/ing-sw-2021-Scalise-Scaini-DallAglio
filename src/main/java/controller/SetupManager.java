@@ -34,23 +34,23 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-public class Initializer {
+public class SetupManager {
 	protected ArrayList<Player> players;
 	private RemoteView[] remote_views;
 
 	/**
-	 * Initialize a Game:
+	 * Setup a Game:
 	 *   - create the Players and the RemoteViews from the ClientHandlers
 	 *   - distribute 4 LeaderCards to each Player
 	 *   - choose randomly the first Player
 	 *   - move the third and fourth Player forward on their FaithTracks
 	 *   - add the RemoteViews as Observers
-	 *   - send the Model to the Clients using the Observers
+	 *   - send the Model to the Clients using the ModelObservers
 	 *
 	 * @param clients the ClientHandlers of the Players
 	 * @return the new Game
 	 */
-	public Game initializeGame(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public Game setupGame(ArrayList<ClientHandler> clients) throws InstantiationException {
 		try {
 			createPlayers(clients);
 			distributeLeaderCards();
@@ -70,16 +70,16 @@ public class Initializer {
 	}
 
 	/**
-	 * Initialize a SoloGame:
+	 * Setup a SoloGame:
 	 *   - create the Player and the RemoteView from the ClientHandler
 	 *   - distribute 4 LeaderCards to the Player
 	 *   - add the RemoteView as Observer
-	 *   - send the Model to the Client using the Observer
+	 *   - send the Model to the Client using the ModelObserver
 	 *
 	 * @param clients the ClientHandler of the Player
 	 * @return the new SoloGame
 	 */
-	public SoloGame initializeSoloGame(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public SoloGame setupSoloGame(ArrayList<ClientHandler> clients) throws InstantiationException {
 		try {
 			createSoloPlayer(clients);
 			distributeLeaderCards();
@@ -96,9 +96,15 @@ public class Initializer {
 
 	/**
 	 * Persistence
-	 * TODO: Better comment
+	 * Recreate a Game:
+	 *   - create the RemoteViews from the ClientHandlers
+	 *   - add the RemoteViews as ModelObservers
+	 *   - send the Model to the Clients using the ModelObservers
+	 *
+	 * @param clients the ClientHandlers of the Players
+	 * @param game the Game parsed from the json file
 	 */
-	public void initializePersistenceGame(ArrayList<ClientHandler> clients, Game game) {
+	public void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game) {
 		this.players = game.getPlayers();
 		this.remote_views = new RemoteView[players.size()];
 
@@ -122,12 +128,37 @@ public class Initializer {
 	}
 
 	/**
+	 * Persistence
+	 * Recreate a SoloGame:
+	 *   - create the RemoteView from the ClientHandler
+	 *   - add the RemoteView as ModelObserver
+	 *   - send the Model to the Client using the ModelObserver
+	 *
+	 * @param clients the ClientHandlers of the Players
+	 * @param game the SoloGame parsed from the json file
+	 */
+	public void setupPersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game) {
+		this.players = game.getPlayers();
+		this.remote_views = new RemoteView[1];
+
+		this.remote_views[0] = new RemoteView(clients.get(0));
+		clients.get(0).setPlayer(this.players.get(0));
+
+		this.players.get(0).addModelObserver(this.remote_views[0]);
+
+		addRemoteViews(game);
+		game.notifyGame();
+		this.players.get(0).notifyPlayer();
+		game.getTurn().notifyTurn();
+	}
+
+	/**
 	 * Create an array of Players using the ClientHandlers
 	 *
 	 * @param clients the ClientHandlers of the Players
 	 */
 	protected void createPlayers(ArrayList<ClientHandler> clients) throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 
 		this.players = new ArrayList<Player>();
@@ -154,7 +185,7 @@ public class Initializer {
 	 * @param clients the ClientHandler of the Player
 	 */
 	protected void createSoloPlayer(ArrayList<ClientHandler> clients) throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		Cell[] all_cells = factory.getAllCells();
 		Tile[] all_tiles = factory.getAllTiles();
 
@@ -188,7 +219,7 @@ public class Initializer {
 	 * @return a Deck containing all the LeaderCards in random order
 	 */
 	private Deck<LeaderCard> getLeaderCardDeck() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		LeaderCard[] all_leader_cards = factory.getAllLeaderCards();
 
 		Deck<LeaderCard> deck = new Deck<LeaderCard>(all_leader_cards.length);
@@ -231,7 +262,7 @@ public class Initializer {
 	 * @return the new Game
 	 */
 	protected Game createGame() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		return new Game(this.players, all_development_cards);
 	}
@@ -240,7 +271,7 @@ public class Initializer {
 	 * @return the new SoloGame
 	 */
 	protected SoloGame createSoloGame() throws ParseException, IOException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		DevelopmentCard[] all_development_cards = factory.getAllDevelopmentCards();
 		SoloActionToken[] all_solo_action_tokens = factory.getAllSoloActionTokens();
 		return new SoloGame(this.players, all_development_cards, all_solo_action_tokens);

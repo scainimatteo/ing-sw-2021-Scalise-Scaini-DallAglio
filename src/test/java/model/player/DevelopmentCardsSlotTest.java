@@ -18,7 +18,7 @@ public class DevelopmentCardsSlotTest {
 	public void creationTest() throws ParseException, IOException{
 		DevelopmentCardsSlots test_slot = new DevelopmentCardsSlots();
 
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 		DevelopmentCard[] test_devcard = factory.getAllDevelopmentCards();
 
 		DevelopmentCard[] expected0 = {null};

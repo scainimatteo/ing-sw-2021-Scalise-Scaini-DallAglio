@@ -13,14 +13,16 @@ import it.polimi.ingsw.controller.servermessage.ViewUpdate;
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 
-import it.polimi.ingsw.model.player.track.VaticanReports;
-
 import it.polimi.ingsw.model.game.sologame.DiscardDevelopmentCards;
 import it.polimi.ingsw.model.game.sologame.MoveBlackCrossTwoSpaces;
 import it.polimi.ingsw.model.game.sologame.MoveBlackCrossOneSpace;
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+import it.polimi.ingsw.model.game.DevelopmentCardsOnTable;
+import it.polimi.ingsw.model.game.Market;
+import it.polimi.ingsw.model.game.Turn;
 import it.polimi.ingsw.model.game.Game;
 
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Player;
 
@@ -37,6 +39,34 @@ public class SoloGame extends Game {
 		this.player = (SoloPlayer) player.get(0);
 		this.solo_action_tokens = all_solo_action_tokens;
 		shuffleSoloActionTokens();
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public SoloGame(ArrayList<Player> player, Market market, DevelopmentCardsOnTable development_cards_on_table, Turn turn, SoloActionToken[] all_solo_action_tokens, ArrayDeque<SoloActionToken> active_tokens, SoloActionToken last_token) {
+		super(player, market, development_cards_on_table, turn);
+		this.player = (SoloPlayer) player.get(0);
+		this.solo_action_tokens = all_solo_action_tokens;
+		this.active_tokens = active_tokens;
+		this.last_token = last_token;
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public ArrayDeque<SoloActionToken> getActiveTokens() {
+		return new ArrayDeque<SoloActionToken>(this.active_tokens);
+	}
+
+	/**
+	 * Persistence
+	 * TODO: Better comment
+	 */
+	public SoloActionToken getLastToken() {
+		return this.last_token;
 	}
 
 	/**

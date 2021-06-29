@@ -10,15 +10,16 @@ import it.polimi.ingsw.model.card.Deck;
 
 public class DevelopmentCardsOnTable {
 	private Table<DevelopmentCard> development_cards_table;
-	private final int dim_rows = 4;
-	private final int dim_cols = 3;
+	public static final int dim_rows = 4;
+	public static final int dim_cols = 3;
 
 	public DevelopmentCardsOnTable(DevelopmentCard[] all_development_cards) {
 		this.development_cards_table = createDecks(all_development_cards);
 	}
 
 	/**
-	 * Persintsjrn
+	 * Persistence
+	 * TODO: Better comment
 	 */
 	public DevelopmentCardsOnTable(Table<DevelopmentCard> development_cards_table) {
 		this.development_cards_table = development_cards_table;

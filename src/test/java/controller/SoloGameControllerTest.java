@@ -20,7 +20,7 @@ import it.polimi.ingsw.controller.message.StoreMessage;
 import it.polimi.ingsw.controller.message.RearrangeMessage;
 import it.polimi.ingsw.controller.message.EndTurnMessage;
 import it.polimi.ingsw.controller.message.Storage;
-import it.polimi.ingsw.controller.Initializer;
+import it.polimi.ingsw.controller.SetupManager;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.StubGameController;
@@ -65,7 +65,7 @@ public class SoloGameControllerTest{
 
 	private void initGame(){
 		controller =  new StubSoloGameController(null);
-		controller.initializeGame();
+		controller.setupGame();
 		game = controller.getGame();
 		test_resources = new ArrayList<Resource>();
 		test_storage = new Storage();

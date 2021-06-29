@@ -22,11 +22,11 @@ public class DevelopmentCardsOnTableTest {
 	private DevelopmentCardsOnTable dct;
 
 	/**
-	 * Create an istance of DevelopmentCardsOnTable
+	 * Create an instance of DevelopmentCardsOnTable
 	 */
 	@BeforeEach
 	public void createDevelopmentCardsOnTable() throws IOException, ParseException{
-		this.dct = new DevelopmentCardsOnTable(Factory.getIstance().getAllDevelopmentCards());
+		this.dct = new DevelopmentCardsOnTable(Factory.getInstance().getAllDevelopmentCards());
 	}
 
 	/**

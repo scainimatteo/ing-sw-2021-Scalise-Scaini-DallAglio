@@ -26,7 +26,7 @@ public class TableTest {
 	}
 
 	/**
-	 * Create a random istance of Table
+	 * Create a random instance of Table
 	 */
 	@BeforeEach
 	public void createTable() {

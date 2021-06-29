@@ -17,9 +17,9 @@ public class StubSoloGameController extends SoloGameController{
 		super(clients);
 	}
 
-	public void initializeGame(){
+	public void setupGame(){
 		try {
-			this.game = new StubInitializer().initializeSoloGame();
+			this.game = new StubSetupManager().setupSoloGame();
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 		}
