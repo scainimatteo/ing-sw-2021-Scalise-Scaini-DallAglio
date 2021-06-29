@@ -19,6 +19,7 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.util.observer.InitializedGameObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import it.polimi.ingsw.view.gui.scene.SceneController;
@@ -129,5 +130,14 @@ public class App extends Application {
 	 */
 	public static void setViewUpdateObserver(ViewUpdateObserver observer) {
 		gui.addViewUpdateObserver(observer);
+	}
+
+	/**
+	 * Set a InitializedGameObserver to be updated when there Game in initialized
+	 *
+	 * @param observer the InitializedGameObserver to set
+	 */
+	public static void setInitializedGameObserver(InitializedGameObserver observer) {
+		gui.addInitializedGameObserver(observer);
 	}
 }

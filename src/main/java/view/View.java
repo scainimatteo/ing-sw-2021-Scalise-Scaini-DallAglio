@@ -31,7 +31,7 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	protected String nickname;
 
 	private ArrayList<ViewUpdateObserver> view_update_observers = new ArrayList<ViewUpdateObserver>();
-	private ArrayList<InitializedGameObserver> initialized_game_update_observers = new ArrayList<InitializedGameObserver>();
+	private ArrayList<InitializedGameObserver> initialized_game_observers = new ArrayList<InitializedGameObserver>();
 
 	public boolean isInitialized() {
 		return this.initialized;
@@ -77,15 +77,12 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 		} else if (view_update.simple_player != null) {
 			updateSimplePlayer(view_update.simple_player);
 		} else if (view_update.turn != null) {
-			System.out.println("updateView: " + !this.setup_done + " | " + view_update.turn.isInitialized());
 			// if the turn was null, this is the first Turn and the game is started
 			if (this.turn == null) {
-				System.out.println("this.turn == null");
 				notifyGameStarted();
 			} else if (!this.setup_done && view_update.turn.isInitialized()){
-				System.out.println("else if giusto");
 				this.setup_done = true;
-				notifyInitialied();
+				notifyInitialized();
 			} 
 			this.turn = view_update.turn;
 		}
@@ -157,17 +154,16 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	 */
 	@Override
 	public void addInitializedGameObserver(InitializedGameObserver observer){
-		this.initialized_game_update_observers.add(observer);
+		this.initialized_game_observers.add(observer);
 	}
 
 	/**
 	 * Notify to the InitializedGameObservers listening that the game is initialized
 	 */
 	@Override
-	public void notifyInitialied(){
-		System.out.println("eddaiiiii notifyInitialied");
-		for (InitializedGameObserver init_observer : this.initialized_game_update_observers){
-			init_observer.updateInitializedGame();
+	public void notifyInitialized(){
+		for (InitializedGameObserver i: this.initialized_game_observers){
+			i.updateInitializedGame();
 		}
 	}
 }

@@ -167,7 +167,6 @@ public class GUI extends View implements GameStartObserver, InitializedGameObser
 	 */
 	@Override
 	public void updateInitializedGame(){
-		System.out.println("eddai porcodiooooo updateInitializedGame");
 		Platform.runLater(() -> {
 			new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 		});
