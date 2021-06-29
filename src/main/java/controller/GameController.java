@@ -43,8 +43,7 @@ public class GameController implements Controller {
 	}
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Persistence only - recreate a GameController from the match saved in memory
 	 */
 	public GameController(ArrayList<ClientHandler> clients, String match_name) throws InstantiationException {
 		this.clients = clients;
@@ -792,8 +791,9 @@ public class GameController implements Controller {
 	 */
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Upon receiving the corresponding message, save the current state of the match in an appropriate json file
+	 *
+	 * @param player is the player who requested the action
 	 */
 	public void handlePersistence(Player player) {
 		PersistenceWriter.writePersistenceFile(this.match_name, this.game);

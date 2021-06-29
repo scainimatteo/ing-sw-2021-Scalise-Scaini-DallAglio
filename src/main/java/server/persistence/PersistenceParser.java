@@ -396,7 +396,6 @@ public class PersistenceParser {
 		return active_tokens;
 	}
 
-	//TODO: it's the same of createSoloActionToken in the Factory
 	private static SoloActionToken createSoloActionToken(JSONObject token_object) throws ParseException {
 		if (token_object == null) {
 			return null;

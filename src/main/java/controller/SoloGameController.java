@@ -207,8 +207,9 @@ public class SoloGameController extends GameController {
 	 */
 
 	/**
-	 * Persistence
-	 * TODO: Better comment
+	 * Upon receiving the corresponding message, save the current state of the match in an appropriate json file
+	 *
+	 * @param player is the player who requested the action
 	 */
 	@Override
 	public void handlePersistence(Player player) {
