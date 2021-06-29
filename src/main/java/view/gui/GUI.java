@@ -117,7 +117,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver {
 	public void gameStarted() {
 		Platform.runLater(() -> {
 			//new SetupScene().changeScene("/fxml/setupscene.fxml");
-			new PlayerBoardScene().changeScene("/fxml/setupscene.fxml");	
+			new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");	
 		});
 	}
 
