@@ -19,7 +19,7 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.observer.InitializedGameObserver;
+import it.polimi.ingsw.util.observer.SetupGameObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import it.polimi.ingsw.view.gui.scene.SceneController;
@@ -133,11 +133,11 @@ public class App extends Application {
 	}
 
 	/**
-	 * Set a InitializedGameObserver to be updated when there Game in initialized
+	 * Set a SetupGameObserver to be updated when the Game has finished the setup phase
 	 *
-	 * @param observer the InitializedGameObserver to set
+	 * @param observer the SetupGameObserver to set
 	 */
-	public static void setInitializedGameObserver(InitializedGameObserver observer) {
-		gui.addInitializedGameObserver(observer);
+	public static void setSetupGameObserver(SetupGameObserver observer) {
+		gui.addSetupGameObserver(observer);
 	}
 }
