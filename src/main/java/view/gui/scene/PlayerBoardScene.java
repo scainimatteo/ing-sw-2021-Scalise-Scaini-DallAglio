@@ -86,10 +86,16 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private ImageView bottom1;
 	@FXML private ImageView bottom2;
 	@FXML private ImageView bottom3;
+
 	@FXML private ImageView coin_sprite;
 	@FXML private ImageView shield_sprite;
 	@FXML private ImageView servant_sprite;
 	@FXML private ImageView stone_sprite;
+	@FXML private Text coin_amount;
+	@FXML private Text shield_amount;
+	@FXML private Text stone_amount;
+	@FXML private Text servant_amount;
+
 
 	@FXML private ImageView cost1;
 	@FXML private ImageView cost2;
@@ -105,8 +111,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	/**
 	 * TODO:
 	 * set:
-	 *	 - warehouse
-	 *	 - strongbox
 	 *	 - dev card slot
 	 *	 - leader card
 	 *	 - faith track (+ black marker)
@@ -217,6 +221,82 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		SimpleDevelopmentCardSlot dev_card_slot = App.getMyPlayer().getDevelopmentCardsSlots();
 		ArrayList<LeaderCard> leader_card = App.getMyPlayer().getLeaderCards();
 		int marker_position = App.getMyPlayer().getMarker().getPosition();
+
+		setWarehouse(warehouse);
+		setStrongbox(strongbox);
+	}
+
+	private void setWarehouse(SimpleWarehouse warehouse){
+		ArrayList<Resource> top = warehouse.getTopResource();
+		ArrayList<Resource> mid = warehouse.getMiddleResources();
+		ArrayList<Resource> bot = warehouse.getBottomResources();
+		int counter = 0;
+
+		for (Resource res : top){
+			if (res != null){
+				top1.setImage(new Image(res.getPath()));
+			} else {
+				top1.setImage(null);
+			}
+		}
+
+		for (Resource res : mid){
+			if (res != null){
+				if (counter == 0){
+					middle1.setImage(new Image(res.getPath()));
+				} else if (counter == 1){
+					middle2.setImage(new Image(res.getPath()));
+				}
+			} else {
+				if (counter == 0){
+					middle1.setImage(null);
+				} else if (counter == 1){
+					middle2.setImage(null);
+				}
+			}
+			counter += 1;
+		}
+
+		for (Resource res : bot){
+			if (res != null){
+				if (counter == 0){
+					bottom1.setImage(new Image(res.getPath()));
+				} else if (counter == 1){
+					bottom2.setImage(new Image(res.getPath()));
+				} else if (counter == 2){
+					bottom3.setImage(new Image(res.getPath()));
+				}
+			} else {
+				if (counter == 0){
+					bottom1.setImage(null);
+				} else if (counter == 1){
+					bottom2.setImage(null);
+				} else if (counter == 2){
+					bottom3.setImage(null);
+				}
+			}
+		}
+	}
+
+	private void setStrongbox(HashMap<Resource, Integer> strongbox){
+		for (Resource res : strongbox.keySet()){
+			switch (res){
+				case COIN:
+					coin_amount.setText(String.valueOf(strongbox.get(Resource.COIN)));
+					break;
+				case SERVANT:
+					servant_amount.setText(String.valueOf(strongbox.get(Resource.SERVANT)));
+					break;
+				case SHIELD:
+					shield_amount.setText(String.valueOf(strongbox.get(Resource.SHIELD)));
+					break;
+				case STONE:
+					stone_amount.setText(String.valueOf(strongbox.get(Resource.STONE)));
+					break;
+				default:
+					break;
+			}
+		}
 	}
 
 	public void handleChangeScene(SceneController controller, String fxml_path){
@@ -275,7 +355,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} 
 
 		for (String prod_string : production_arraylist){
-			production_interface_arraylist.add(this.getDevelopmentCard(Integer.valueOf(prod_string.charAt(5))));
+			production_interface_arraylist.add(this.getDevelopmentCard(Character.getNumericValue(prod_string.charAt(5))));
 		}
 
 		ProductionMessage message = new ProductionMessage(production_interface_arraylist);
