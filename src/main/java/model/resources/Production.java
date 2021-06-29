@@ -34,13 +34,6 @@ public class Production implements ProductionInterface, Serializable {
 		this.produced_resources = output;
 	}
 
-	/**
-	 * @return the requested resources if compareArrays returns true, null if compareArrays returns false
-	 */
-	public ArrayList<Resource> activateProduction(){
-		return produced_resources;
-	}
-
 	private HashMap<Resource, Integer> numFromArraylist(ArrayList<Resource> arraylist){
 		HashMap<Resource, Integer> to_return = new HashMap<Resource, Integer>();
 

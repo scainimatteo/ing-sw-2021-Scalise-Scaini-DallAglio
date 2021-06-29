@@ -1,12 +1,16 @@
 package it.polimi.ingsw.controller;
 
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.stream.Collectors;
+
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
-import it.polimi.ingsw.controller.Initializer;
+import it.polimi.ingsw.controller.SetupManager;
 import it.polimi.ingsw.controller.Controller;
 
 import it.polimi.ingsw.model.resources.ProductionInterface;
@@ -20,46 +24,107 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.StrongBox;
 import it.polimi.ingsw.model.player.Warehouse;
+import it.polimi.ingsw.model.player.track.VaticanReports;
 import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.server.persistence.PersistenceParser;
+import it.polimi.ingsw.server.persistence.PersistenceWriter;
+import it.polimi.ingsw.server.persistence.PersistenceUtil;
 import it.polimi.ingsw.server.ClientHandler;
 
-import java.util.ArrayList;
+public class GameController implements Controller {
+	protected ArrayList<ClientHandler> clients;
+	protected Game game;
+	protected String match_name;
 
-public class GameController implements Runnable, Controller {
-	private ArrayList<ClientHandler> clients;
-	private Game game;
-
-	public GameController(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public GameController(ArrayList<ClientHandler> clients) {
 		this.clients = clients;
+	}
+
+	/**
+	 * Persistence only - recreate a GameController from the match saved in memory
+	 */
+	public GameController(ArrayList<ClientHandler> clients, String match_name) throws InstantiationException {
+		this.clients = clients;
+		this.match_name = match_name;
 		try {
-			this.game = new Initializer().initializeGame(clients);
+			this.game = PersistenceParser.parseMatch(match_name);
+			new SetupManager().setupPersistenceGame(this.clients, this.game);
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+			System.out.println("Game could not start");
+			throw new InstantiationException();
+		}
+	}
+
+	/**
+	 * Setup the Game using the SetupManager
+	 *
+	 * @throws InstantiationException when the SetupManager fails
+	 */
+	public void setupGame() throws InstantiationException {
+		try {
+			this.game = new SetupManager().setupGame(this.clients);
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 			throw new InstantiationException();
 		}
 	}
 
+	public void setMatchName(String match_name) {
+		this.match_name = match_name;
+	}
+
+	/**
+	 * Handle the Message coming from the Client using the pattern Visitor
+	 *
+	 * @param message the Message to handle
+	 */
 	public void handleMessage(Message message) {
 		message.useMessage(this);
 	}
 
-	//TODO: this is empty, should GameController not be a Runnable?
-	public void run() {
-		return;
+	/**
+	 * Handle Errors by notifying ErrorMessages
+	 *
+	 * @param error_string the error to report
+	 * @param player the Player that committed the error
+	 */
+	protected void handleError(String error_string, Player player){
+		this.game.handleError(error_string, player);
 	}
 	
 	/**
 	 * @param player is the player who sent the message
 	 * @return true only if the player who sent the message is the active player
 	 */
-	private boolean checkPlayer(Player player){
-		return player.equals(game.getTurn().getPlayer()) && game.getTurn().isInitialized();
+	protected boolean checkPlayer(Player player){
+		return player.equals(game.getTurn().getPlayer()) && game.getTurn().hasDoneSetup();
+	}
+
+	/**
+	 * If a VaticanReports was activated by a Player, activate it on other Players
+	 *
+	 * @param player the Player that activated the VaticanReport
+	 * @param report the VaticanReport activated
+	 */
+	private void handleVaticanReports(Player player, VaticanReports report) {
+		if (report == null) {
+			return;
+		}
+
+		for (Player p: this.game.getPlayers()) {
+			if (!p.equals(player)) {
+				if (p.whichVaticanReport() != null && p.whichVaticanReport().equals(report)) {
+					p.activateVaticanReport();
+				}
+			}
+		}
 	}
 	
 	/**
-	 * INITIALIZING RELATED ACTIONS
+	 * SETUP RELATED ACTIONS
 	 */ 
 
 	/**
@@ -106,11 +171,11 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * sets the turn to initialized if each player has the correct amount of starting resources and leader cards
+	 * Sets the turn to setup_done if each player has the correct amount of starting resources and leader cards
 	 */
-	private void checkEndInitializing(){
+	private void checkEndSetup(){
 		if(checkCardNumber() && checkCorrectTotalResources()){
-			game.getTurn().setInitialized(true);
+			game.getTurn().setupDone(true);
 		}
 	}
 
@@ -141,14 +206,14 @@ public class GameController implements Runnable, Controller {
 	 * @param storage contains all the resources involved in the action
 	 */
 	public void handleChooseResources(Player player, Storage storage){
-		if (!game.getTurn().isInitialized()){
+		if (!game.getTurn().hasDoneSetup()){
 			if (!checkCorrectResources(player)){
 				if (checkLegalRequestedResources(player, storage)){
 					if (canBeStoredWarehouse(player, storage)) {
 						player.storeTop(storage.getWarehouseTop());
 						player.storeMiddle(storage.getWarehouseMid());
 						player.storeBottom(storage.getWarehouseBot());
-						checkEndInitializing();
+						checkEndSetup();
 					} else {handleError("You cannot store resources in such a way", player);}
 				} else {handleError("You cannot choose so many starting resources", player);}
 			} else {handleError("You already have the correct amount of starting resources", player);}
@@ -173,7 +238,7 @@ public class GameController implements Runnable, Controller {
 				if(player.isActivable(card) && !card.isActive()){
 					player.activateLeader(card);	
 				} else {handleError("The requested card cannot be activated", player);}
-			} else {handleError("You must end your turn first", player);}
+			} else {handleError("You must end your action first", player);}
 		} else {handleError("It is not your turn", player);}
 	}
 
@@ -188,16 +253,16 @@ public class GameController implements Runnable, Controller {
 	 * @param card is the card which the player is requesting to discard
 	 */
 	public void handleDiscardLeader(Player player, LeaderCard card) {
-		if (!game.getTurn().isInitialized()){
+		if (!game.getTurn().hasDoneSetup()){
 			if	(player.getLeaderCards().size() > 2) {
 				player.discardLeader(card.getId());	
-				checkEndInitializing();
+				checkEndSetup();
 			} else {handleError("You cannot discard any more cards", player);}
 		} else if (player.equals(game.getTurn().getPlayer())){ 
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){
 				player.discardLeader(card.getId());	
-				player.moveForward(1);
-			} else {handleError("You must end your turn first", player);}
+				handleVaticanReports(player, player.moveForward(1));
+			} else {handleError("You must end your action first", player);}
 		} else {handleError("It is not your turn", player);}
 	}
 
@@ -253,7 +318,7 @@ public class GameController implements Runnable, Controller {
 	private ArrayList<Resource> filterResources(Player player, ArrayList<Resource> raw_resources){
 		ArrayList<Resource> filtered = (ArrayList<Resource>) raw_resources.stream().filter(e -> e != null).collect(Collectors.toList());
 		int steps = (int) filtered.stream().filter(e -> e.equals(Resource.FAITH)).count();
-		player.moveForward(steps);
+		handleVaticanReports(player, player.moveForward(steps));
 		return (ArrayList<Resource>) filtered.stream().filter(e -> !e.equals(Resource.FAITH)).collect(Collectors.toList());
 	}
 
@@ -387,7 +452,8 @@ public class GameController implements Runnable, Controller {
 				ArrayList<Resource> produced = totalProductionGain(productions);
 				if(player.hasEnoughResources(required)){
 					game.getTurn().addRequiredResources(required);
-					player.moveForward((int)produced.stream().filter(x->x.equals(Resource.FAITH)).count());
+					int number_of_faith = (int)produced.stream().filter(x->x.equals(Resource.FAITH)).count();
+					handleVaticanReports(player, player.moveForward(number_of_faith));
 					game.getTurn().addProducedResources((ArrayList<Resource>)produced.stream().filter(x->!x.equals(Resource.FAITH)).collect(Collectors.toList()));
 					game.getTurn().setDoneAction(true);
 				} else {handleError("You don't have enough resources to activate these production powers", player);}
@@ -470,7 +536,7 @@ public class GameController implements Runnable, Controller {
 	 * @return true only if the amount of resources requested to be paid from the strongbox is present in the strongbox 
 	 */ 
 	private boolean isContainedStrongbox(Player player, Storage storage){
-		return player.getPlayerStrongBox().areContainedInStrongbox(storage.getStrongbox());
+		return player.getStrongBox().areContainedInStrongbox(storage.getStrongbox());
 	}
 
 	/**
@@ -530,8 +596,7 @@ public class GameController implements Runnable, Controller {
 		total.addAll(storage.getWarehouseBot());
 		total.addAll(storage.getExtraspace());
 		for (Resource res : check){
-			//TODO: temporary fix to remove null, they should have not been here - check if this has already been fixed
-			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x -> x != null).filter(x->x.equals(res)).count()){
+			if ((int) total.stream().filter(x->x.equals(res)).count() > (int) game.getTurn().getProducedResources().stream().filter(x->x.equals(res)).count()){
 				return false;
 			}
 		}
@@ -573,13 +638,39 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
+	 * checks that each warehouse storage contains different resources
+	 * @param storage contains all the resources involved in the action
+	 */
+	private boolean isAllDifferent(Storage storage){
+		ArrayList<Resource> top = storage.getWarehouseTop();
+		ArrayList<Resource> mid = storage.getWarehouseMid();
+		ArrayList<Resource> bot = storage.getWarehouseBot();
+		if (top.size() > 0 && mid.size() > 0){
+			if (top.get(0).equals(mid.get(0))){
+				return false;
+			}
+		}
+		if (top.size() > 0 && bot.size() > 0){
+			if (top.get(0).equals(bot.get(0))){
+				return false;
+			}
+		}
+		if (mid.size() > 0 && bot.size() > 0){
+			if (mid.get(0).equals(bot.get(0))){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * @param player is the player who requested the action
 	 * @param storage contains all the resources involved in the action
 	 * @return true only if the amount of resources requested to be stored in the warehouse can be stored in the warehouse 
 	 */ 
 	private boolean canBeStoredWarehouse(Player player, Storage storage){
 		Warehouse warehouse = player.getWarehouse();
-		return warehouse.canBeStoredTop(storage.getWarehouseTop()) && warehouse.canBeStoredMiddle(storage.getWarehouseMid()) && warehouse.canBeStoredBottom(storage.getWarehouseBot());    
+		return isAllDifferent(storage) && warehouse.canBeStoredTop(storage.getWarehouseTop()) && warehouse.canBeStoredMiddle(storage.getWarehouseMid()) && warehouse.canBeStoredBottom(storage.getWarehouseBot());    
 	}
 
 	/**
@@ -631,7 +722,7 @@ public class GameController implements Runnable, Controller {
 				int discarded = game.getTurn().getProducedResources().size();
 				for (Player p : game.getPlayers()){
 					if (!p.equals(player)){
-						p.moveForward(discarded);
+						handleVaticanReports(p, p.moveForward(discarded));
 					}
 				}
 				game.getTurn().clearProducedResources();
@@ -661,11 +752,12 @@ public class GameController implements Runnable, Controller {
 	 * */
 	
 	/**
-	 * Checks if the player more than 7 development cards or has reached the end of the track and triggers the round to be the last
+	 * Checks if the player has bought at least 7 development cards or has reached the end of the track and triggers the round to be the last
 	 *
 	 * @param player is the active player
 	 */
-	private void checkLastTurn(Player player){
+	protected void checkLastTurn(Player player){
+		// count the DevelopmentCards of the player
 		int count = 0;
 		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
 		while(iterator.hasNext()){
@@ -678,7 +770,7 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * upon receiving the corresponding message, checks if the player who requested the action is active, if they have played a main action, if they paid the cost of their action completely and
+	 * Upon receiving the corresponding message, checks if the player who requested the action is active, if they have played a main action, if they paid the cost of their action completely and
 	 * completely stored all of their gain.
 	 * End the turn and starts the next player's turn if conditions are met, triggering the last round if needed, raises corresponding error otherwise.
 	 *
@@ -695,9 +787,15 @@ public class GameController implements Runnable, Controller {
 	}
 
 	/**
-	 * HANDLE VARIOUS ERRORS
+	 * PERSISTENCE
 	 */
-	private void handleError(String string, Player player){
-		this.game.handleError(string, player);
+
+	/**
+	 * Upon receiving the corresponding message, save the current state of the match in an appropriate json file
+	 *
+	 * @param player is the player who requested the action
+	 */
+	public void handlePersistence(Player player) {
+		PersistenceWriter.writePersistenceFile(this.match_name, this.game);
 	}
 }

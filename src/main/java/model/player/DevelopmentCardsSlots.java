@@ -21,6 +21,13 @@ public class DevelopmentCardsSlots {
 	}
 
 	/**
+	 * Persistence only - recreate a DevelopmentCardsSlots from the match saved in memory
+	 */
+	public DevelopmentCardsSlots(Table<DevelopmentCard> slots){
+		this.slots = slots;
+	}
+
+	/**
 	 * @param card is the DevelopmentCard that needs to be added to the slots
 	 * @param position the Deck where the DevelopmentCard will be added
 	 */

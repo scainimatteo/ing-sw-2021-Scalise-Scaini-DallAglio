@@ -123,12 +123,4 @@ public class ExtraSpaceAbility extends LeaderAbility {
 		return string + "|  ·----· ·----·  |\n|                 |\n";
 	}
 }
-/*
-| XX |            |
-|----·            |
-|                 |
-|  ·----· ·----·  |
-|  |    | |    |  |
-|  ·----· ·----·  |
-|                 |
-*/
+

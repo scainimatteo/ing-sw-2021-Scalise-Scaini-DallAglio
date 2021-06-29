@@ -57,29 +57,7 @@ public class DevelopmentCard extends Card implements ProductionInterface, Serial
 		return;
 	}
 
-	public ArrayList<Resource> activateProduction(){
-		return this.production.activateProduction();
-	}
-
 	public String getPath() {
 		return this.front_path;
 	}
 }
-
-/**
- * -------------------	X
- * |                 |	X
- * -------------------	X
- * |                 |	X
- * | 0 sp 0 sp 0 sp  |  X
- * |                 |	X
- * -------------------	X
- * |                 |	X
- * |                 |	X
- * |                 |	X
- * |                 |	X
- * |                 |	X
- * |                 |	X
- * |                 |	X
- * -------------------	X
- */

@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.util.ANSI;
 
+import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.view.cli.Printer;
@@ -24,7 +25,7 @@ public class ViewParser {
 				case "FAITHTRACK":
 				case "TRACK":
 				case "T":
-					return parseFaithTrack(inputs, players, nickname);
+					return parseFaithTrack(inputs, players, nickname, game.getOrder().size() == 1);
 				case "WAREHOUSE":
 				case "W":
 					return parseWarehouse(inputs, players, nickname);
@@ -40,11 +41,15 @@ public class ViewParser {
 				case "TURN":
 				case "TU":
 					return parseTurn(inputs, turn, game);
+				case "SOLOACTIONTOKEN":
+				case "TOKEN":
+				case "TO":
+					return parseSoloActionToken(inputs, game);
 				default:
 					throw new IllegalArgumentException();
 			}
 		} catch (IndexOutOfBoundsException | IllegalArgumentException e) {
-			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname> | turn");
+			throw new IllegalArgumentException("look market | developmentcardsontable | track <nickname> | warehouse <nickname> | strongbox <nickname> | leadercards <nickname> | developmentcardsslots <slot> <nickname> | turn | soloactiontoken");
 		}
 	}
 
@@ -70,14 +75,14 @@ public class ViewParser {
 		return Printer.printDevelopmentCardsOnTable(game);
 	}
 
-	public static String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname) throws IllegalArgumentException {
+	public static String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname, boolean is_sologame) throws IllegalArgumentException {
 		try {
 			if (inputs.length == 2) {
-				return Printer.printTrack(getPlayerFromNickname(players, nickname));
+				return Printer.printTrack(getPlayerFromNickname(players, nickname), is_sologame);
 			} else {
 				String player_nickname = inputs[2];
 				System.out.println(ANSI.underline(player_nickname));
-				return Printer.printTrack(getPlayerFromNickname(players, player_nickname));
+				return Printer.printTrack(getPlayerFromNickname(players, player_nickname), is_sologame);
 			}
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("look track <nickname>");
@@ -154,5 +159,13 @@ public class ViewParser {
 
 	public static String parseTurn(String[] inputs, Turn turn, SimpleGame game) throws IllegalArgumentException {
 		return Printer.printTurn(turn, game);
+	}
+
+	public static String parseSoloActionToken(String[] inputs, SimpleGame game) throws IllegalArgumentException {
+		try {
+			return Printer.printSoloActionToken(((SimpleSoloGame) game).getLastToken());
+		} catch (ClassCastException e) {
+			throw new IllegalArgumentException("SoloActionTokens can be viewed only during a SoloGame");
+		}
 	}
 }

@@ -14,6 +14,8 @@ import org.json.simple.parser.ParseException;
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 import it.polimi.ingsw.model.game.Factory;
 
+import it.polimi.ingsw.model.player.track.SoloFaithTrack;
+import it.polimi.ingsw.model.player.SoloPlayer;
 import it.polimi.ingsw.model.player.Player;
 
 import it.polimi.ingsw.model.player.track.Cell;
@@ -37,15 +39,15 @@ public class SoloGameTest {
 	}
 
 	/**
-	 * Create an istance of SoloGame
+	 * Create an instance of SoloGame
 	 */
 	@BeforeEach
 	public void createSoloGame() throws IOException, ParseException {
-		Factory factory = Factory.getIstance();
+		Factory factory = Factory.getInstance();
 
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Paperino", factory.getAllCells(), factory.getAllTiles()));
-		this.game = new SoloGame(players, Factory.getIstance().getAllDevelopmentCards());
+		players.add(new SoloPlayer("Paperino", new SoloFaithTrack(factory.getAllCells(), factory.getAllTiles())));
+		this.game = new SoloGame(players, factory.getAllDevelopmentCards(), factory.getAllSoloActionTokens());
 	}
 
 	/**

@@ -14,18 +14,33 @@ public class FaithTrack {
 	}
 
 	/**
+	 * Persistence only - recreate a FaithTrack from the match saved in memory
+	 */
+	public FaithTrack(Cell[] track, Tile[] vatican_report_tiles, int marker_position) {
+		this(track, vatican_report_tiles);
+		for (Cell cell: track) {
+			if (cell.getPosition() == marker_position) {
+				this.faith_marker = cell;
+				break;
+			}
+		}
+	}
+
+	/**
 	 * @param number_of_times represent how many cells the marker has to move
 	 * @return the vatican report activated if the marker reaches or overcomes a pope space
 	 */
 	public VaticanReports moveForward(int number_of_times) {
+		// the new position can be max the last position on the FaithTrack
 		int new_position = number_of_times + faith_marker.getPosition() < getLastPosition()? number_of_times + faith_marker.getPosition() : getLastPosition();
 		this.faith_marker = track[new_position];
 
-		for (int i = new_position; i > (new_position - number_of_times); i --){
-			if (track[i].isPopeSpace()){
-				if (checkCell(this.track[i].whichVaticanReport().getIndex())){
-					this.vatican_report_tiles[this.track[i].whichVaticanReport().getIndex()].activateVaticanReport();
-					return this.track[i].whichVaticanReport();
+		for (int i = new_position; i > (new_position - number_of_times); i--){
+			VaticanReports vatican_report = this.track[i].whichVaticanReport();
+			if (this.track[i].isPopeSpace()){
+				if (checkCell(vatican_report.getIndex())){
+					this.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
+					return vatican_report;
 				}
 			}
 		}
@@ -43,8 +58,6 @@ public class FaithTrack {
 
 	/**
 	 * @param vr_param is the vatican report to be activated
-	 *
-	 * TODO: alla riga 51 il faith_marker si è spostato quindi il player attualmente non si trova su un vatican report, ma si può trovare oltre e quindi non venire considerato nell'attivazione
 	 */
 	public void activateVaticanReport(VaticanReports vr_param){
 		if (this.checkCell(vr_param.getIndex())){

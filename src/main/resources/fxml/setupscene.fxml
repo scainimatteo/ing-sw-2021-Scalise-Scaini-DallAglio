@@ -32,22 +32,22 @@
             </Text>
             <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="70.0">
                <children>
-                  <Text fx:id="first_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE">
+                  <Text fx:id="first_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="">
                      <font>
                         <Font name="Lato Black" size="50.0" />
                      </font>
                   </Text>
-                  <Text fx:id="second_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE">
+                  <Text fx:id="second_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="">
                      <font>
                         <Font name="Lato Black" size="50.0" />
                      </font>
                   </Text>
-                  <Text fx:id="third_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE">
+                  <Text fx:id="third_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="">
                      <font>
                         <Font name="Lato Black" size="50.0" />
                      </font>
                   </Text>
-                  <Text fx:id="fourth_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE">
+                  <Text fx:id="fourth_player_text" fill="#111640" stroke="#fff6f6" strokeType="OUTSIDE" text="">
                      <font>
                         <Font name="Lato Black" size="50.0" />
                      </font>

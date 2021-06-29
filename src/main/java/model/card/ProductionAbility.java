@@ -49,10 +49,6 @@ public class ProductionAbility extends LeaderAbility implements ProductionInterf
 		return true;
 	}
 
-	public ArrayList<Resource> activateProduction(){
-		return this.production.activateProduction();
-	}
-
 	@Override
 	public String toString(){
 		String[] production_string = production.productionToString();

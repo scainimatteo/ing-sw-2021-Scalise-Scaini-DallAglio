@@ -58,12 +58,27 @@ public class ClientHandler implements Runnable {
 			out.writeObject(message);
 			out.flush();
 		} catch (IOException e) {
+			this.close();
+		}
+	}
+	
+	/**
+	 * Safely close the connection with the client, removing the nickname from the Server
+	 */
+	public void close() {
+		try {
+			this.server.removeNickname(this.nickname);
+			this.client.close();
+		} catch (IOException e) {
+		} finally {
 			System.out.println("Connection closed");
 		}
 	}
 
 	/**
-	 * Safely close the connection with the client
+	 * Safely close the connection with the client, removing the nickname from the Server and sending them the error_message
+	 *
+	 * @param error_message a String with the message to send
 	 */
 	public void close(String error_message) {
 		try {
@@ -71,6 +86,7 @@ public class ClientHandler implements Runnable {
 			this.server.removeNickname(this.nickname);
 			this.client.close();
 		} catch (IOException e) {
+		} finally {
 			System.out.println("Connection closed");
 		}
 	}
@@ -85,7 +101,7 @@ public class ClientHandler implements Runnable {
 				message.setPlayer(this.player);
 				this.controller.handleMessage(message);
 			} catch (IOException e) {
-				this.close("Connection closed");
+				this.close();
 				break;
 			} catch (ClassNotFoundException e) {
 				System.out.println("The client sent something not understandable");

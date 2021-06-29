@@ -64,7 +64,6 @@ public abstract class SceneController {
 			Scene new_scene = new Scene(layout, 300, 275);
 			SceneController.stage.setScene(new_scene);
 		} catch (IOException e) {
-			//TODO: better exception handling
 			e.printStackTrace();
 		}
 	}

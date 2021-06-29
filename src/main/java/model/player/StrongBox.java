@@ -25,6 +25,13 @@ public class StrongBox {
 		this.storage.put(servant_resource, 0);
 	}
 
+	/**
+	 * Persistence only - recreate a StrongBox from the match saved in memory
+	 */
+	public StrongBox(HashMap<Resource, Integer> storage){
+		this.storage = storage;
+	}
+
 	public int get(Resource res){
 		return storage.get(res);
 	}
@@ -66,6 +73,29 @@ public class StrongBox {
 		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
 		for (Resource res : check){
 			if(storage.get(res) < (int) cost.stream().filter(x->x.equals(res)).count()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * sets all resource values to zero
+	 */
+	public void clear(){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			storage.put(res, 0);	
+		}
+	}
+
+	/**
+	 * @return true if every resource value is zero
+	 */
+	public boolean isEmpty(){
+		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
+		for (Resource res : check){
+			if(storage.get(res) != 0){
 				return false;
 			}
 		}

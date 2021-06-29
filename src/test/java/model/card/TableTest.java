@@ -26,7 +26,7 @@ public class TableTest {
 	}
 
 	/**
-	 * Create a random istance of Table
+	 * Create a random instance of Table
 	 */
 	@BeforeEach
 	public void createTable() {
@@ -38,7 +38,6 @@ public class TableTest {
 		this.objects = new ArrayList<Object>();
 		this.table = new Table<Object>(this.row_size, this.column_size);
 		for (int i = 0; i < this.max_size; i++) {
-			// create the decks and fill them with random objects
 			Deck<Object> deck = new Deck<Object>(this.deck_size);
 			for (int j = 0; j < this.deck_size; j++) {
 				Object new_obj = new Object();
@@ -52,7 +51,7 @@ public class TableTest {
 	/**
 	 * Check that the iterator returns all the elements in the decks
 	 */
-	@RepeatedTest(value = 3)
+	@RepeatedTest(value = 5)
 	public void IteratorTest() {
 		Iterator<Object> iterator = this.table.iterator();
 		for (int i = 0; iterator.hasNext(); i++) {
@@ -63,7 +62,7 @@ public class TableTest {
 	/**
 	 * Check that the method returns the elements on top of the decks
 	 */
-	@RepeatedTest(value = 3)
+	@RepeatedTest(value = 5)
 	public void peekTopTest() {
 		Random random = new Random();
 		int row = random.nextInt(this.column_size);
@@ -76,7 +75,7 @@ public class TableTest {
 	/**
 	 * Check that the method returns the elements on top of the decks while removing them
 	 */
-	@RepeatedTest(value = 3)
+	@RepeatedTest(value = 5)
 	public void drawTest() {
 		Random random = new Random();
 		int row = random.nextInt(this.column_size);

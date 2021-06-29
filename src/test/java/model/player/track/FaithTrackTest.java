@@ -14,7 +14,7 @@ public class FaithTrackTest {
 	 */
 	@Test
 	public void creationTest() throws ParseException, IOException{
-		Factory gen_factory = Factory.getIstance();
+		Factory gen_factory = Factory.getInstance();
 
 		Cell[] track = gen_factory.getAllCells();
 		
@@ -34,7 +34,7 @@ public class FaithTrackTest {
 	 */
 	@Test
 	public void activateVaticanReportTest() throws ParseException, IOException{
-		Factory gen_factory = Factory.getIstance();
+		Factory gen_factory = Factory.getInstance();
 
 		Cell[] track = gen_factory.getAllCells();
 
