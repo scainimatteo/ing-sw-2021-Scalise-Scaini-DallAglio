@@ -127,7 +127,7 @@ public class PersistenceParser {
 		Turn turn = createTurn(players, turn_object.get("active_player").toString());
 		turn.setDoneAction(Boolean.parseBoolean(turn_object.get("action_done").toString()));
 		turn.setFinal(Boolean.parseBoolean(turn_object.get("final_round").toString()));
-		turn.setInitialized(Boolean.parseBoolean(turn_object.get("initialized").toString()));
+		turn.setupDone(Boolean.parseBoolean(turn_object.get("setup_done").toString()));
 		turn.setDiscard(Boolean.parseBoolean(turn_object.get("must_discard").toString()));
 		turn.addProducedResources(convertJsonArrayToResourceArray((JSONArray) turn_object.get("produced_resources")));
 		turn.addRequiredResources(convertJsonArrayToResourceArray((JSONArray) turn_object.get("required_resources")));

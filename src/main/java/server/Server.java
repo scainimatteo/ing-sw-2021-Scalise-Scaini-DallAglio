@@ -112,7 +112,7 @@ public class Server {
 	}
 
 	/**
-	 * Choose the right GameController based on the match_name and initialize it accordingly
+	 * Choose the right GameController based on the match_name and setup it accordingly
 	 *
 	 * @param match_name the name of the match to create or recreate
 	 * @return the appropriate GameController or SoloGameController
@@ -135,7 +135,7 @@ public class Server {
 		}
 
 		new_match.setMatchName(match_name);
-		new_match.initializeGame();
+		new_match.setupGame();
 		return new_match;
 	}
 

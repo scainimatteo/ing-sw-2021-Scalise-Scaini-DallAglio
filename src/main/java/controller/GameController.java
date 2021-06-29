@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.controller.message.Message;
 import it.polimi.ingsw.controller.message.Storage;
-import it.polimi.ingsw.controller.Initializer;
+import it.polimi.ingsw.controller.SetupManager;
 import it.polimi.ingsw.controller.Controller;
 
 import it.polimi.ingsw.model.resources.ProductionInterface;
@@ -51,7 +51,7 @@ public class GameController implements Controller {
 		this.match_name = match_name;
 		try {
 			this.game = PersistenceParser.parseMatch(match_name);
-			new Initializer().initializePersistenceGame(this.clients, this.game);
+			new SetupManager().setupPersistenceGame(this.clients, this.game);
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 			System.out.println("Game could not start");
@@ -60,13 +60,13 @@ public class GameController implements Controller {
 	}
 
 	/**
-	 * Initialize the Game using the Initializer
+	 * Setup the Game using the SetupManager
 	 *
-	 * @throws InstantiationException when the Initializer fails
+	 * @throws InstantiationException when the SetupManager fails
 	 */
-	public void initializeGame() throws InstantiationException {
+	public void setupGame() throws InstantiationException {
 		try {
-			this.game = new Initializer().initializeGame(this.clients);
+			this.game = new SetupManager().setupGame(this.clients);
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 			throw new InstantiationException();
@@ -101,7 +101,7 @@ public class GameController implements Controller {
 	 * @return true only if the player who sent the message is the active player
 	 */
 	protected boolean checkPlayer(Player player){
-		return player.equals(game.getTurn().getPlayer()) && game.getTurn().isInitialized();
+		return player.equals(game.getTurn().getPlayer()) && game.getTurn().hasDoneSetup();
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class GameController implements Controller {
 	}
 	
 	/**
-	 * INITIALIZING RELATED ACTIONS
+	 * SETUP RELATED ACTIONS
 	 */ 
 
 	/**
@@ -172,11 +172,11 @@ public class GameController implements Controller {
 	}
 
 	/**
-	 * Sets the turn to initialized if each player has the correct amount of starting resources and leader cards
+	 * Sets the turn to setup_done if each player has the correct amount of starting resources and leader cards
 	 */
-	private void checkEndInitializing(){
+	private void checkEndSetup(){
 		if(checkCardNumber() && checkCorrectTotalResources()){
-			game.getTurn().setInitialized(true);
+			game.getTurn().setupDone(true);
 		}
 	}
 
@@ -207,14 +207,14 @@ public class GameController implements Controller {
 	 * @param storage contains all the resources involved in the action
 	 */
 	public void handleChooseResources(Player player, Storage storage){
-		if (!game.getTurn().isInitialized()){
+		if (!game.getTurn().hasDoneSetup()){
 			if (!checkCorrectResources(player)){
 				if (checkLegalRequestedResources(player, storage)){
 					if (canBeStoredWarehouse(player, storage)) {
 						player.storeTop(storage.getWarehouseTop());
 						player.storeMiddle(storage.getWarehouseMid());
 						player.storeBottom(storage.getWarehouseBot());
-						checkEndInitializing();
+						checkEndSetup();
 					} else {handleError("You cannot store resources in such a way", player);}
 				} else {handleError("You cannot choose so many starting resources", player);}
 			} else {handleError("You already have the correct amount of starting resources", player);}
@@ -254,10 +254,10 @@ public class GameController implements Controller {
 	 * @param card is the card which the player is requesting to discard
 	 */
 	public void handleDiscardLeader(Player player, LeaderCard card) {
-		if (!game.getTurn().isInitialized()){
+		if (!game.getTurn().hasDoneSetup()){
 			if	(player.getLeaderCards().size() > 2) {
 				player.discardLeader(card.getId());	
-				checkEndInitializing();
+				checkEndSetup();
 			} else {handleError("You cannot discard any more cards", player);}
 		} else if (player.equals(game.getTurn().getPlayer())){ 
 			if (game.getTurn().getRequiredResources().isEmpty() && game.getTurn().getProducedResources().isEmpty()){

@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
 import it.polimi.ingsw.controller.GameController;
+import it.polimi.ingsw.controller.SetupManager;
 
 import it.polimi.ingsw.model.card.DevelopmentCardsColor;
 import it.polimi.ingsw.model.card.DevelopmentCard;
@@ -39,7 +40,7 @@ public class SoloGameController extends GameController {
 		super.match_name = match_name;
 		try {
 			super.game = PersistenceParser.parseSoloMatch(match_name);
-			new Initializer().initializePersistenceSoloGame(clients, (SoloGame) super.game);
+			new SetupManager().setupPersistenceSoloGame(clients, (SoloGame) super.game);
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 			System.out.println("SoloGame could not start");
@@ -49,14 +50,14 @@ public class SoloGameController extends GameController {
 
 
 	/**
-	 * Initialize the SoloGame using the Initializer
+	 * Setup the SoloGame using the SetupManager
 	 *
-	 * @throws InstantiationException when the Initializer fails
+	 * @throws InstantiationException when the SetupManager fails
 	 */
 	@Override
-	public void initializeGame() throws InstantiationException {
+	public void setupGame() throws InstantiationException {
 		try {
-			super.game = new Initializer().initializeSoloGame(super.clients);
+			super.game = new SetupManager().setupSoloGame(super.clients);
 		} catch (InstantiationException e) {
 			System.out.println("SoloGame could not start");
 			throw new InstantiationException();

@@ -17,9 +17,9 @@ public class StubGameController extends GameController{
 	}
 
 	@Override
-	public void initializeGame(){
+	public void setupGame(){
 		try {
-			this.game = new StubInitializer().initializeGame(4);
+			this.game = new StubSetupManager().setupGame(4);
 		} catch (InstantiationException e) {
 			System.out.println("Game could not start");
 		}

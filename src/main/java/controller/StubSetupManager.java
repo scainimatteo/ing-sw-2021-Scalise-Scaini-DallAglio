@@ -34,11 +34,11 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-import it.polimi.ingsw.controller.Initializer;
+import it.polimi.ingsw.controller.SetupManager;
 
 
-public class StubInitializer extends Initializer {
-	public Game initializeGame(int numofplayers) throws InstantiationException {
+public class StubSetupManager extends SetupManager {
+	public Game setupGame(int numofplayers) throws InstantiationException {
 		try {
 			createPlayers(numofplayers);
 			distributeLeaderCards();
@@ -52,7 +52,7 @@ public class StubInitializer extends Initializer {
 		}
 	}
 
-	public SoloGame initializeSoloGame() throws InstantiationException {
+	public SoloGame setupSoloGame() throws InstantiationException {
 		try {
 			createSoloPlayer();
 			distributeLeaderCards();

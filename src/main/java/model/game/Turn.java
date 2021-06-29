@@ -19,7 +19,7 @@ public class Turn extends ModelObservable implements Serializable {
 	boolean action_done;
 	boolean must_discard;
 	boolean final_round;
-	boolean initialized;
+	boolean setup_done;
 	String nickname;
 
 	public Turn(Player player){
@@ -120,12 +120,12 @@ public class Turn extends ModelObservable implements Serializable {
 		return this.final_round;
 	}
 
-	public boolean isInitialized() {
-		return this.initialized;
+	public boolean hasDoneSetup() {
+		return this.setup_done;
 	}
 
-	public void setInitialized(boolean value) {
-		this.initialized = value;
+	public void setupDone(boolean value) {
+		this.setup_done = value;
 		this.notifyTurn();
 	}
 

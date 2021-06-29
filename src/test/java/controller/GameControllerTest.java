@@ -20,7 +20,7 @@ import it.polimi.ingsw.controller.message.StoreMessage;
 import it.polimi.ingsw.controller.message.RearrangeMessage;
 import it.polimi.ingsw.controller.message.EndTurnMessage;
 import it.polimi.ingsw.controller.message.Storage;
-import it.polimi.ingsw.controller.Initializer;
+import it.polimi.ingsw.controller.SetupManager;
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.controller.StubGameController;
@@ -56,7 +56,7 @@ public class GameControllerTest {
 
 	private void initGame(){
 		controller =  new StubGameController(null);
-		controller.initializeGame();
+		controller.setupGame();
 		game = controller.getGame();
 		test_resources = new ArrayList<Resource>();
 		test_storage = new Storage();
@@ -249,7 +249,7 @@ public class GameControllerTest {
 		for (Player p : playerOrder){
 			assertEquals(p.getLeaderCards().size(), 2);
 		}
-		assertTrue(game.getTurn().isInitialized());
+		assertTrue(game.getTurn().hasDoneSetup());
 	}
 
 	/**

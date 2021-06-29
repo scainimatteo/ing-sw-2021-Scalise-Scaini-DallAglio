@@ -284,7 +284,7 @@ public class PersistenceWriter {
 		turn_object.put("active_player", turn.getNickname());
 		turn_object.put("action_done", turn.hasDoneAction());
 		turn_object.put("final_round", turn.isFinal());
-		turn_object.put("initialized", turn.isInitialized());
+		turn_object.put("setup_done", turn.hasDoneSetup());
 		turn_object.put("must_discard", turn.mustDiscard());
 
 		JSONArray produced_array = new JSONArray();

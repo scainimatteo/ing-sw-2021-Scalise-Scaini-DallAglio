@@ -34,12 +34,12 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.server.ClientHandler;
 
-public class Initializer {
+public class SetupManager {
 	protected ArrayList<Player> players;
 	private RemoteView[] remote_views;
 
 	/**
-	 * Initialize a Game:
+	 * Setup a Game:
 	 *   - create the Players and the RemoteViews from the ClientHandlers
 	 *   - distribute 4 LeaderCards to each Player
 	 *   - choose randomly the first Player
@@ -50,7 +50,7 @@ public class Initializer {
 	 * @param clients the ClientHandlers of the Players
 	 * @return the new Game
 	 */
-	public Game initializeGame(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public Game setupGame(ArrayList<ClientHandler> clients) throws InstantiationException {
 		try {
 			createPlayers(clients);
 			distributeLeaderCards();
@@ -70,7 +70,7 @@ public class Initializer {
 	}
 
 	/**
-	 * Initialize a SoloGame:
+	 * Setup a SoloGame:
 	 *   - create the Player and the RemoteView from the ClientHandler
 	 *   - distribute 4 LeaderCards to the Player
 	 *   - add the RemoteView as Observer
@@ -79,7 +79,7 @@ public class Initializer {
 	 * @param clients the ClientHandler of the Player
 	 * @return the new SoloGame
 	 */
-	public SoloGame initializeSoloGame(ArrayList<ClientHandler> clients) throws InstantiationException {
+	public SoloGame setupSoloGame(ArrayList<ClientHandler> clients) throws InstantiationException {
 		try {
 			createSoloPlayer(clients);
 			distributeLeaderCards();
@@ -104,7 +104,7 @@ public class Initializer {
 	 * @param clients the ClientHandlers of the Players
 	 * @param game the Game parsed from the json file
 	 */
-	public void initializePersistenceGame(ArrayList<ClientHandler> clients, Game game) {
+	public void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game) {
 		this.players = game.getPlayers();
 		this.remote_views = new RemoteView[players.size()];
 
@@ -137,7 +137,7 @@ public class Initializer {
 	 * @param clients the ClientHandlers of the Players
 	 * @param game the SoloGame parsed from the json file
 	 */
-	public void initializePersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game) {
+	public void setupPersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game) {
 		this.players = game.getPlayers();
 		this.remote_views = new RemoteView[1];
 
