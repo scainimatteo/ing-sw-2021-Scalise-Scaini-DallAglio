@@ -96,13 +96,13 @@
                   </Text>
                </children>
             </GridPane>
-            <HBox id="WarehouseTop" fx:id="warehouse_top" alignment="CENTER" layoutX="120.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="54.0">
+            <HBox fx:id="warehouse_top" alignment="CENTER" layoutX="120.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="54.0">
                <children>
                   <ImageView fx:id="top1" fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
                </children>
             </HBox>
-            <HBox id="WarehouseMiddle" fx:id="warehouse_middle" alignment="BOTTOM_LEFT" layoutX="90.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="112.0">
+            <HBox fx:id="warehouse_middle" alignment="BOTTOM_LEFT" layoutX="90.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="112.0">
                <children>
                   <ImageView fx:id="middle1" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
@@ -110,7 +110,7 @@
             </ImageView>
                </children>
             </HBox>
-            <HBox id="WarehouseBottom" fx:id="warehouse_bottom" alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="161.0">
+            <HBox fx:id="warehouse_bottom" alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="161.0">
                <children>
                   <ImageView fx:id="bottom1" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
             </ImageView>
@@ -151,7 +151,7 @@
                   </HBox>
                </children>
             </Pane>
-            <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0" visible="false">
+            <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="0.0" prefWidth="56.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="6.0" prefWidth="52.0" />
@@ -336,7 +336,7 @@
                         <Insets bottom="35.0" left="28.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <Button fx:id="activate_prod_button" mnemonicParsing="false" text="Activate Production" StackPane.alignment="BOTTOM_CENTER" />
+                  <Button fx:id="activate_prod_button" mnemonicParsing="false" text="Activate Production" onMouseClicked="#activateProductions" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
             <Pane prefHeight="211.0" prefWidth="1080.0">
@@ -358,7 +358,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button fx:id="game_button" layoutX="-35.0" layoutY="341.0" mnemonicParsing="false" rotate="90.0" text="Game board" />
+            <Button fx:id="game_button" layoutX="-35.0" layoutY="341.0" mnemonicParsing="false" rotate="90.0" text="Game board" onAction="#changeSceneToGame"/>
             <VBox alignment="CENTER" layoutX="1014.0" layoutY="236.0" prefHeight="227.0" prefWidth="104.0">
                <children>
                   <Button fx:id="view_player2_button" mnemonicParsing="false" rotate="270.0" text="Player 2">

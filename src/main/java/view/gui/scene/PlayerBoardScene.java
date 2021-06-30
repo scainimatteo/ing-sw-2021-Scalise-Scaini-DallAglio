@@ -25,6 +25,7 @@ import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
+//TODO: remove useless imports
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -54,20 +55,14 @@ import java.util.List;
 import java.net.URL;
 
 public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
-	ArrayList<Resource> all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
-	ArrayList<Resource> setted_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
-	ArrayList<String> production_arraylist;
-	ArrayList<String> order;
-	SimplePlayer player;
+	ArrayList<Integer> development_card_productions;
+	ArrayList<Resource> all_resources;
+	ArrayList<Resource> set_resources; 
 
-	@FXML private GridPane strongbox;
-	@FXML private HBox WarehouseTop;
-	@FXML private HBox WarehouseMiddle;
-	@FXML private HBox WarehouseBottom;
-	@FXML private Pane leader_card_pane;
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
 	@FXML private Pane cost_resources_pane;
+	@FXML private Pane leader_card_pane;
 	@FXML private HBox leader_card_array;
 
 	@FXML private Button game_button;
@@ -112,26 +107,53 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane second_slot;
 	@FXML private StackPane third_slot;
 
+	public PlayerBoardScene() {
+		this.development_card_productions = new ArrayList<Integer>();
+		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
+		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
+	}
+
+	/**
+	 * INITIALIZATION
+	 */
+
 	@Override
 	public void initialize(URL location, ResourceBundle resouces){
-		this.player = App.getMyPlayer();
-		this.order = App.getSimpleGame().getOrder();
-		this.production_arraylist = new ArrayList<String>();
-		App.setViewUpdateObserver(this);
 		this.updateView();
 
+		// get updated everytime the View gets updated
+		App.setViewUpdateObserver(this);
 
-		game_button.setOnMouseClicked(click -> handleChangeScene(new GameScene(), "/fxml/gamescene.fxml"));
-		// view_player2_button.setOnMouseClicked(click -> handleChangeScene(new OtherPlayerScene(), "/fxml/otherplayerscene.fxml"));
-		// view_player3_button.setOnMouseClicked(click -> handleChangeScene(new OtherPlayerScene(), "/fxml/otherplayerscene.fxml"));
-		// view_player4_button.setOnMouseClicked(click -> handleChangeScene(new OtherPlayerScene(), "/fxml/otherplayerscene.fxml"));
-		
 		leaders_button.setOnMouseClicked(click -> handleToggleLeaderButton(leaders_button));
 
+		initializeBaseProduction();
+
+		// set the Drag and Drop
+		initializeWarehouseDragAndDrop();
+		initializeStrongBoxDragAndDrop();
+		initializeCostBoxDragAndDrop();
+
+		hideNode(leader_card_pane);
+		hideNode(cost_resources_pane);
+		hideNode(last_turn_text);
+
+		initializeOtherPlayersButton();
+	}
+
+	/**
+	 * Set the onMouseClicked methods for the BaseProduction
+	 */
+	private void initializeBaseProduction() {
 		input1.setOnMouseClicked(click -> handleBaseProductionResource(input1, 0));
 		input2.setOnMouseClicked(click -> handleBaseProductionResource(input2, 1));
 		output1.setOnMouseClicked(click -> handleBaseProductionResource(output1, 2));
+	}
 
+	/**
+	 * Set the methods to drag and drop the resources in and out of the Warehouse
+	 */
+	private void initializeWarehouseDragAndDrop() {
+		// DRAG
 		top1.setOnDragDetected(detected -> handleDragDetected(detected, top1));
 		middle1.setOnDragDetected(detected -> handleDragDetected(detected, middle1));
 		middle2.setOnDragDetected(detected -> handleDragDetected(detected, middle2));
@@ -139,44 +161,67 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		bottom2.setOnDragDetected(detected -> handleDragDetected(detected, bottom2));
 		bottom3.setOnDragDetected(detected -> handleDragDetected(detected, bottom3));
 
-		coin_sprite.setOnDragDetected(detected -> handleDragDetected(detected, coin_sprite));
-		shield_sprite.setOnDragDetected(detected -> handleDragDetected(detected, shield_sprite));
-		servant_sprite.setOnDragDetected(detected -> handleDragDetected(detected, servant_sprite));
-		stone_sprite.setOnDragDetected(detected -> handleDragDetected(detected, stone_sprite));
-
+		// DROP
 		top1.setOnDragDone(done -> handleDragDone(done, top1, true));
 		middle1.setOnDragDone(done -> handleDragDone(done, middle1, true));
 		middle2.setOnDragDone(done -> handleDragDone(done, middle2, true));
 		bottom1.setOnDragDone(done -> handleDragDone(done, bottom1, true));
 		bottom2.setOnDragDone(done -> handleDragDone(done, bottom2, true));
 		bottom3.setOnDragDone(done -> handleDragDone(done, bottom3, true));
+	}
 
+	/**
+	 * Set the methods to drag and drop the resources in and out of the StrongBox
+	 */
+	private void initializeStrongBoxDragAndDrop() {
+		// DRAG
+		coin_sprite.setOnDragDetected(detected -> handleDragDetected(detected, coin_sprite));
+		shield_sprite.setOnDragDetected(detected -> handleDragDetected(detected, shield_sprite));
+		servant_sprite.setOnDragDetected(detected -> handleDragDetected(detected, servant_sprite));
+		stone_sprite.setOnDragDetected(detected -> handleDragDetected(detected, stone_sprite));
+
+		// DROP
 		coin_sprite.setOnDragDone(done -> handleDragDone(done, coin_sprite, false));
 		shield_sprite.setOnDragDone(done -> handleDragDone(done, shield_sprite, false));
 		servant_sprite.setOnDragDone(done -> handleDragDone(done, servant_sprite, false));
 		stone_sprite.setOnDragDone(done -> handleDragDone(done, stone_sprite, false));
 
-		// set Drag and Drop for the cost box
+	}
+
+	/**
+	 * Set the methods to drag and drop the resources in and out of the cost box
+	 */
+	private void initializeCostBoxDragAndDrop() {
 		for (Node node: this.cost_box.getChildren()) {
 			node.setOnDragOver(over -> handleDragOver(over, (ImageView) node));
 			node.setOnDragDropped(dropped -> handleDragDropped(dropped, (ImageView) node));
 		}
+	}
 
-		hideNode(leader_card_pane);
-		hideNode(cost_resources_pane);
-		hideNode(last_turn_text);
+	/**
+	 * Set the buttons that allow the Player to see other Players boards
+	 *
+	 * If it's not a SoloGame, don't show the SoloActionTokens
+	 */
+	private void initializeOtherPlayersButton() {
+		ArrayList<String> order = App.getSimpleGame().getOrder();
 
-		if (this.order.size() != 1){
+		if (order.size() != 1){
 			hideNode(last_token);
 		} 
 
-		if (this.order.size() <= 3){
+		if (order.size() <= 3){
+			//TODO: view_player4_button changeScene to player 4
 			hideNode(view_player4_button);
 		} 
-		if (this.order.size() <= 2){
+
+		if (order.size() <= 2){
+			//TODO: view_player3_button changeScene to player 3
 			hideNode(view_player3_button);
 		} 
-		if (this.order.size() == 1){
+
+		if (order.size() == 1){
+			//TODO: view_player2_button changeScene to player 2
 			hideNode(view_player2_button);
 		} 
 	}
@@ -310,15 +355,17 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 
 		// set methods to activate the DevelopmentCards
-		for (Node node: this.development_card_slot.getChildren()) {
-			List<Node> nodes = ((StackPane) node).getChildren();
+		for (int i = 0; i < this.development_card_slot.getChildren().size(); i++) {
+			List<Node> nodes = ((StackPane) this.development_card_slot.getChildren().get(i)).getChildren();
 
+			final int slot = i;
+			// the only activable DevelopmentCard is the one on top
 			if (((ImageView) nodes.get(2)).getImage() != null) {
-				nodes.get(2).setOnMouseClicked(click -> handleProductionClick((ImageView) nodes.get(2)));
+				nodes.get(2).setOnMouseClicked(click -> setDevelopmentCardProduction((ImageView) nodes.get(2), slot));
 			} else if (((ImageView) nodes.get(1)).getImage() != null) {
-				nodes.get(1).setOnMouseClicked(click -> handleProductionClick((ImageView) nodes.get(1)));
+				nodes.get(1).setOnMouseClicked(click -> setDevelopmentCardProduction((ImageView) nodes.get(1), slot));
 			} else if (((ImageView) nodes.get(0)).getImage() != null) {
-				nodes.get(0).setOnMouseClicked(click -> handleProductionClick((ImageView) nodes.get(0)));
+				nodes.get(0).setOnMouseClicked(click -> setDevelopmentCardProduction((ImageView) nodes.get(0), slot));
 			}
 		}
 	}
@@ -396,20 +443,22 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * BUTTON HANDLERS
 	 */
 
-	public void handleChangeScene(SceneController controller, String fxml_path){
-		Platform.runLater(() -> {
-			controller.changeScene(fxml_path);
-		});
+	/**
+	 * Show the GameScene
+	 */
+	public void changeSceneToGame(){
+		new GameScene().changeScene("/fxml/gamescene.fxml");
 	}
 
-	public void handleProductionClick(ImageView production){
-		String production_id = production.getId();
-
-		if (!production_arraylist.contains(production_id)){
-			production_arraylist.add(production_id);
+	/**
+	 * Select a DevelopmentCard as a Production
+	 */
+	public void setDevelopmentCardProduction(ImageView production, int slot){
+		if (!development_card_productions.contains(slot)){
+			development_card_productions.add(slot);
 			production.setOpacity(0.50);
 		} else {
-			production_arraylist.remove(production_id);
+			development_card_productions.remove(slot);
 			production.setOpacity(1);
 		}
 	}
@@ -427,43 +476,51 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	public void handleBaseProductionResource(ImageView source, int pos){
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
-			setted_resources.set(pos, all_resources.get(0));
+			set_resources.set(pos, all_resources.get(0));
 		} else {
-			int resource_pos = all_resources.indexOf(setted_resources.get(pos));
+			int resource_pos = all_resources.indexOf(set_resources.get(pos));
 
 			if (resource_pos != 3){
 				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
-				setted_resources.set(pos, all_resources.get(resource_pos + 1));
+				set_resources.set(pos, all_resources.get(resource_pos + 1));
 			} else {
 				source.setImage(null);
-				setted_resources.set(pos, null);
+				set_resources.set(pos, null);
 			}
 		}
 	}
 
-	public void handleActivateProdButton(){
-		ArrayList<ProductionInterface> production_interface_arraylist = new ArrayList<ProductionInterface>();
-		ArrayList<Resource> input = new ArrayList<Resource>(Arrays.asList(setted_resources.get(0), setted_resources.get(1)));
-		ArrayList<Resource> output = new ArrayList<Resource>(Arrays.asList(setted_resources.get(2)));
+	/**
+	 * Send a ProductionMessage with all the ProductionInterfaces selected
+	 */
+	public void activateProductions(){
+		ArrayList<ProductionInterface> productions = new ArrayList<ProductionInterface>();
 
-		if (checkProdBase()){
-			Production production_base = new Production(input, output);
-			production_interface_arraylist.add(production_base);
+		ArrayList<Resource> input = new ArrayList<Resource>(Arrays.asList(set_resources.get(0), set_resources.get(1)));
+		ArrayList<Resource> output = new ArrayList<Resource>(Arrays.asList(set_resources.get(2)));
+
+		// if all the elements of the base production are set, activate it
+		if (checkBaseProductionSet()){
+			Production base_production = new Production(input, output);
+			productions.add(base_production);
 		} 
 
-		for (String prod_string : production_arraylist){
-			production_interface_arraylist.add(this.getDevelopmentCard(Character.getNumericValue(prod_string.charAt(5))));
+		// activate every DevelopmentCard selected
+		for (Integer slot: development_card_productions){
+			productions.add(this.getDevelopmentCard(slot));
 		}
 
-		ProductionMessage message = new ProductionMessage(production_interface_arraylist);
+		// TODO: LeaderCard Productions
+
+		ProductionMessage message = new ProductionMessage(productions);
 		App.sendMessage(message);
 	}
 	
 	private ProductionInterface getDevelopmentCard(int index){
-		return player.getDevelopmentCardsSlots().getTopCards().get(index);
+		return App.getMyPlayer().getDevelopmentCardsSlots().getTopCards().get(index);
 	}
 
-	private boolean checkProdBase(){
+	private boolean checkBaseProductionSet(){
 		return input1.getImage() != null && input2.getImage() != null && output1.getImage() != null;
 	}
 }
