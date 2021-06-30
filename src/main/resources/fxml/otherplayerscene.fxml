@@ -62,7 +62,7 @@
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
                   </ImageView>
-            <Text fx:id="servant_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="servant_amount" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="x0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -70,7 +70,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </Text>
-            <Text fx:id="coin_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="coin_amount" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="x0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -78,7 +78,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </Text>
-            <Text fx:id="shield_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="shield_amount" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -86,7 +86,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </Text>
-            <Text fx:id="stone_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="stone_amount" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -334,9 +334,21 @@
                   </ImageView>
                </children>
       </Pane>
-      <Button fx:id="board_button" layoutX="-35.0" layoutY="341.0" mnemonicParsing="false" rotate="90.0" text="Your board" onMouseClicked="#changeSceneToBoard"/>
       <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
    </children>
 </Pane>
+      <Text fx:id="nickname_text" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="Player's Board">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+         <StackPane.margin>
+            <Insets bottom="780.0" right="800.0" />
+         </StackPane.margin>
+      </Text>
+      <Button fx:id="board_button" mnemonicParsing="false" onAction="#changeSceneToGame" rotate="90.0" text="Game board" translateX="-60.0" StackPane.alignment="CENTER_LEFT">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </StackPane>
