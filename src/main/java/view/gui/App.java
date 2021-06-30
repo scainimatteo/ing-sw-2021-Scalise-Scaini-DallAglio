@@ -19,8 +19,9 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
-import it.polimi.ingsw.util.observer.SetupGameObserver;
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
+import it.polimi.ingsw.util.observer.SetupGameObserver;
 
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
@@ -132,6 +133,10 @@ public class App extends Application {
 	}
 
 	/**
+	 * OBSERVERS
+	 */
+
+	/**
 	 * Notify the GUI that the initialization has finished
 	 */
 	public static void finishedInitialization() {
@@ -154,5 +159,14 @@ public class App extends Application {
 	 */
 	public static void setSetupGameObserver(SetupGameObserver observer) {
 		gui.addSetupGameObserver(observer);
+	}
+
+	/**
+	 * Set a ErrorMessageObserver to be updated when the Player receives an ErrorMessage
+	 *
+	 * @param observer the ErrorMessageObserver to set
+	 */
+	public static void setErrorMessageObserver(ErrorMessageObserver observer) {
+		gui.addErrorMessageObserver(observer);
 	}
 }
