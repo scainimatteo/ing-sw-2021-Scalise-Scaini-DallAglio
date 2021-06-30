@@ -215,7 +215,7 @@ public class PersistenceWriter {
 		stone_object.put("number", strongbox.get(Resource.STONE));
 
 		strongbox_array.add(coin_object);
-		strongbox_array.add(stone_object);
+		strongbox_array.add(shield_object);
 		strongbox_array.add(servant_object);
 		strongbox_array.add(stone_object);
 		return strongbox_array;

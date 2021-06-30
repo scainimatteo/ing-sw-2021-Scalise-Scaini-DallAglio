@@ -243,7 +243,7 @@ public class PersistenceParser {
 
 			JSONArray slot_array = (JSONArray) slot_object.get("cards");
 			for (int j = 0; j < slot_array.size(); j++) {
-				int id = (int)(long) slot_array.get(i);
+				int id = (int)(long) slot_array.get(j);
 				switch (slot_number) {
 					case 1:
 						first_slot.add(getDevelopmentCardFromId(id));
@@ -301,12 +301,12 @@ public class PersistenceParser {
 	 */
 
 	private static Game parseGame(JSONObject game_object, Turn turn, ArrayList<Player> players) throws ParseException, IOException {
-		Market market = createMarket((JSONArray) game_object.get("market"), (JSONObject) game_object.get("free_marble"));
+		Market market = createMarket((JSONArray) game_object.get("market"), game_object.get("free_marble"));
 		DevelopmentCardsOnTable development_cards_on_table = createDevelopmentCardsOnTable((JSONArray) game_object.get("development_cards_on_table"));
 		return new Game(players, market, development_cards_on_table, turn);
 	}
 
-	private static Market createMarket(JSONArray market_array, JSONObject free_marble_object) {
+	private static Market createMarket(JSONArray market_array, Object free_marble_object) {
 		Resource[][] market_board = new Resource[Market.dim_cols][Market.dim_rows];
 		for (int i = 0; i < market_array.size(); i++) {
 			JSONArray row = (JSONArray) market_array.get(i);
@@ -321,7 +321,7 @@ public class PersistenceParser {
 		return new Market(market_board, createFreeMarble(free_marble_object));
 	}
 
-	private static Resource createFreeMarble(JSONObject free_marble_object) {
+	private static Resource createFreeMarble(Object free_marble_object) {
 		if (free_marble_object == null) {
 			return null;
 		} else {
@@ -381,7 +381,7 @@ public class PersistenceParser {
 	 */
 
 	private static SoloGame parseSoloGame(JSONObject game_object, Turn turn, ArrayList<Player> players) throws ParseException, IOException {
-		Market market = createMarket((JSONArray) game_object.get("market"), (JSONObject) game_object.get("free_marble"));
+		Market market = createMarket((JSONArray) game_object.get("market"), game_object.get("free_marble"));
 		DevelopmentCardsOnTable development_cards_on_table = createDevelopmentCardsOnTable((JSONArray) game_object.get("development_cards_on_table"));
 		ArrayDeque<SoloActionToken> active_tokens = createActiveTokens((JSONArray) game_object.get("active_tokens"));
 		SoloActionToken last_token = createSoloActionToken((JSONObject) game_object.get("last_token"));
