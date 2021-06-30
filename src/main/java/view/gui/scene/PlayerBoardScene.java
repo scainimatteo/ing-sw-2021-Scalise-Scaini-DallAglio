@@ -300,6 +300,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * @return an array of all the other Players
+	 */
 	private ArrayList<SimplePlayer> getOtherPlayers(ArrayList<SimplePlayer> players) {
 		ArrayList<SimplePlayer> other_players = new ArrayList<SimplePlayer>();
 		for (SimplePlayer p: players) {
@@ -573,6 +576,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		new GameScene().changeScene("/fxml/gamescene.fxml");
 	}
 
+	/**
+	 * Show the Board of the other Players
+	 */
 	public void changeSceneToOtherPlayer(SimplePlayer other_player){
 		new OtherPlayerScene(other_player).changeScene("/fxml/otherplayerscene.fxml");
 	}
