@@ -154,7 +154,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 			// set the path and the methods of each square of the GridPane
 			ImageView imageview = (ImageView)((StackPane) node).getChildren().get(0);
 			imageview.setOnMouseClicked(x -> chooseCard(x, row, column));
-			imageview.setImage(new Image(getClass().getResource(development_cards_on_table[i][j].getPath()).toString()));
+			imageview.setImage(getDevelopmentCardImage(development_cards_on_table[i][j]));
 
 			j++;
 			if (j % 4 == 0) {
@@ -162,6 +162,20 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 				i++;
 			}
 		}
+	}
+
+	/**
+	 * Create an Image made from a DevelopmentCard
+	 *
+	 * @param development_card the DevelopmentCard to get the Image of
+	 * @return the new Image or null if development_card is null
+	 */
+	private Image getDevelopmentCardImage(DevelopmentCard development_card) {
+		if (development_card == null) {
+			return null;
+		}
+
+		return new Image(development_card.getPath());
 	}
 
 	/**
@@ -223,6 +237,8 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 * Show the PlayerBoardScene
 	 */
 	public void changeSceneToBoard() {
+		// remove the Scene from the array of ViewUpdateObservers to save memory
+		App.removeViewUpdateObserver(this);
 		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 

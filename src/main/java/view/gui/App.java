@@ -153,6 +153,15 @@ public class App extends Application {
 	}
 
 	/**
+	 * Remove a ViewUpdateObserver from the GUI array of ViewUpdateObservers
+	 *
+	 * @param observer the ViewUpdateObserver to remove
+	 */
+	public static void removeViewUpdateObserver(ViewUpdateObserver observer) {
+		gui.removeViewUpdateObserver(observer);
+	}
+
+	/**
 	 * Set a SetupGameObserver to be updated when the Game has finished the setup phase
 	 *
 	 * @param observer the SetupGameObserver to set

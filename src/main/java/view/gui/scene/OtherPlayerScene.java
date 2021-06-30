@@ -272,6 +272,8 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	 * Show the PlayerBoardScene
 	 */
 	public void changeSceneToBoard(){
+		// remove the Scene from the array of ViewUpdateObservers to save memory
+		App.removeViewUpdateObserver(this);
 		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 
