@@ -672,6 +672,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		ProductionMessage message = new ProductionMessage(productions);
 		App.sendMessage(message);
+		updateView();
 	}
 	
 	private ProductionInterface getDevelopmentCard(int index){
@@ -685,6 +686,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	public void handleDiscardButton(){
 		DiscardResourcesMessage message = new DiscardResourcesMessage();
 		App.sendMessage(message);
+		updateView();
 	}
 
 	public void handleLeaderAction(boolean activate_or_discard, int index){
@@ -698,5 +700,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 
 		App.sendMessage(message);
+		updateView();
 	}
 }
