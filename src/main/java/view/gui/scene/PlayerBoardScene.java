@@ -466,7 +466,31 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			VBox leader_card = (VBox) node;
 			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
 			leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			if (leader_cards.get(i).getAbility().checkAbility(new ExtraSpaceAbility(null))){
+				setExtraSpace(leader_cards.get(i), i);
+			} 
 			i++;
+		}
+	}
+
+	public void setExtraSpace(LeaderCard card, int index){
+		Resource extra_space_resource = ((ExtraSpaceAbility) card.getAbility()).getResourceType();
+		int num_resources = ((ExtraSpaceAbility) card.getAbility()).peekResources();
+
+		if (index == 0){
+			if (num_resources >= 2){
+				extra_space_12.setImage(new Image(extra_space_resource.getPath()));
+			} 
+			if (num_resources >= 1){
+				extra_space_11.setImage(new Image(extra_space_resource.getPath()));
+			} 
+		} else if (index == 1){
+			if (num_resources >= 2){
+				extra_space_22.setImage(new Image(extra_space_resource.getPath()));
+			} 
+			if (num_resources >= 1){
+				extra_space_21.setImage(new Image(extra_space_resource.getPath()));
+			} 
 		}
 	}
 
