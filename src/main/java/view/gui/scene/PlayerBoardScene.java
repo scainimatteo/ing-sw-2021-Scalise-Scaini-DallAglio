@@ -397,6 +397,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		Tile[] tiles = App.getMyPlayer().getReports();
 		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
 		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
+		boolean is_last_turn = App.getTurn().isFinal();
 		resetFaithTrack();
 
 		// PLAYER
@@ -425,7 +426,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		setLeaderCards(leader_cards);
 		setFaithMarker(marker_position);
 		setTiles(tiles);
+
+		// TURN
 		setTurnResources(to_pay, to_store);
+		setLastTurn(is_last_turn);
 	}
 
 	private void setWarehouse(SimpleWarehouse warehouse){
@@ -574,44 +578,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
-	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store){
-		String active_player = App.getTurn().getPlayer().getNickname();
-
-		if (!to_pay.isEmpty() && !App.getMyPlayer().getNickname().equals(active_player)){
-			showNode(cost_resources_pane);
-			showNode(cost_box);
-			hideNode(gain_box);
-			pay_or_store_text.setText("Drop these resources here to pay the cost");
-			List<Node> hbox_nodes = this.cost_box.getChildren();
-			ImageView res_view;
-			for (int i = 0; i < 10; i++){
-				try{
-					res_view = (ImageView) hbox_nodes.get(i);
-					res_view.setImage(new Image(to_pay.get(i).getPath()));
-				} catch (IndexOutOfBoundsException e){
-					break;
-				}
-			}
-		} else if (!to_store.isEmpty()) {
-			showNode(cost_resources_pane);
-			showNode(gain_box);
-			hideNode(cost_box);
-			pay_or_store_text.setText("Drag these resources away to store your gains");
-			List<Node> hbox_nodes = this.gain_box.getChildren();
-			ImageView res_view;
-			for (int i = 0; i < 10; i++){
-				try{
-					res_view = (ImageView) hbox_nodes.get(i);
-					res_view.setImage(new Image(to_store.get(i).getPath()));
-				} catch (IndexOutOfBoundsException e){
-					break;
-				}
-			}
-		} else {
-			hideNode(cost_resources_pane);
-		}
-	}
-
 	private void setFaithMarker(int faith_marker){
 		int i = 0;
 		for (Node cell: faith_track.getChildren()) {
@@ -653,6 +619,52 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			this.last_token.setImage(new Image(last_token.getPath()));
 		} else {
 			this.last_token.setImage(new Image("/images/tokens/sologame/lorenzo.png"));
+		}
+	}
+
+	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store){
+		String active_player = App.getTurn().getNickname();
+
+		if (!to_pay.isEmpty() && !App.getMyPlayer().getNickname().equals(active_player)){
+			showNode(cost_resources_pane);
+			showNode(cost_box);
+			hideNode(gain_box);
+			pay_or_store_text.setText("Drop these resources here to pay the cost");
+			List<Node> hbox_nodes = this.cost_box.getChildren();
+			ImageView res_view;
+			for (int i = 0; i < 10; i++){
+				try{
+					res_view = (ImageView) hbox_nodes.get(i);
+					res_view.setImage(new Image(to_pay.get(i).getPath()));
+				} catch (IndexOutOfBoundsException e){
+					break;
+				}
+			}
+		} else if (!to_store.isEmpty()) {
+			showNode(cost_resources_pane);
+			showNode(gain_box);
+			hideNode(cost_box);
+			pay_or_store_text.setText("Drag these resources away to store your gains");
+			List<Node> hbox_nodes = this.gain_box.getChildren();
+			ImageView res_view;
+			for (int i = 0; i < 10; i++){
+				try{
+					res_view = (ImageView) hbox_nodes.get(i);
+					res_view.setImage(new Image(to_store.get(i).getPath()));
+				} catch (IndexOutOfBoundsException e){
+					break;
+				}
+			}
+		} else {
+			hideNode(cost_resources_pane);
+		}
+	}
+
+	private void setLastTurn(boolean is_last_turn){
+		if (is_last_turn) {
+			showNode(this.last_turn_text);
+		} else {
+			hideNode(this.last_turn_text);
 		}
 	}
 
