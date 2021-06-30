@@ -15,6 +15,9 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.message.ProductionMessage;
 import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
+import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
+import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
+import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
@@ -120,6 +123,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private ImageView prod_ability_2;
 	@FXML private ImageView extra_space_21;
 	@FXML private ImageView extra_space_22;
+	@FXML private Button activate_leader_1;
+	@FXML private Button discard_leader_1;
+	@FXML private Button activate_leader_2;
+	@FXML private Button discard_leader_2;
 
 	public PlayerBoardScene() {
 		this.development_card_productions = new ArrayList<Integer>();
@@ -254,6 +261,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	private void initializeLeaderCards(){
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
 		int counter = 0;
+
+		activate_leader_1.setOnMouseClicked(click -> handleLeaderAction(true, 0));
+		discard_leader_1.setOnMouseClicked(click -> handleLeaderAction(false, 1));
+		activate_leader_2.setOnMouseClicked(click -> handleLeaderAction(true, 2));
+		discard_leader_2.setOnMouseClicked(click -> handleLeaderAction(false, 3));
 
 		for (LeaderCard card : player_leader_cards){
 			if (card.getAbility().checkAbility(new ExtraSpaceAbility(null))){
@@ -578,6 +590,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * Method which toggle the sight of the leader card pane
+	 *
+	 * @param button is the button that toggle the sight of the leader card pane
+	 */
 	public void handleToggleLeaderButton(ToggleButton button){
 		if (!button.isSelected()){
 			showNode(leader_card_pane);
@@ -588,6 +605,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * Method that set the resource images in the base production
+	 */
 	public void handleBaseProductionResource(ImageView source, int pos){
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
@@ -658,6 +678,19 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 	public void handleDiscardButton(){
 		DiscardResourcesMessage message = new DiscardResourcesMessage();
+		App.sendMessage(message);
+	}
+
+	public void handleLeaderAction(boolean activate_or_discard, int index){
+		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
+		Message message;
+
+		if (activate_or_discard){
+			message = new ActivateLeaderMessage(player_leader_cards.get(index));
+		} else {
+			message = new DiscardLeaderMessage(player_leader_cards.get(index));
+		}
+
 		App.sendMessage(message);
 	}
 }

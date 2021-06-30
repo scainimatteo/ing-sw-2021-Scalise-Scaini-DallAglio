@@ -132,8 +132,8 @@
                                     <Image url="@../images/leadercards/back/leader_card_back.png" />
                                  </image>
                               </ImageView>
-                              <Button mnemonicParsing="false" text="Activate" />
-                              <Button mnemonicParsing="false" text="Discard" />
+							  <Button fx:id="activate_leader_1" mnemonicParsing="false" text="Activate" />
+                              <Button fx:id="discard_leader_1" mnemonicParsing="false" text="Discard" />
                               <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-150.0" />
                               <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-207.0" />
                               <ImageView fx:id="prod_ability_1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-267.0" />
@@ -146,8 +146,8 @@
                                     <Image url="@../images/leadercards/back/leader_card_back.png" />
                                  </image>
                               </ImageView>
-                              <Button mnemonicParsing="false" text="Activate" />
-                              <Button mnemonicParsing="false" text="Discard" />
+							  <Button fx:id="activate_leader_2" mnemonicParsing="false" text="Activate" />
+                              <Button fx:id="discard_leader_2" mnemonicParsing="false" text="Discard" />
                               <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-150.0" />
                               <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-207.0" />
                               <ImageView fx:id="prod_ability_2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-267.0" />
