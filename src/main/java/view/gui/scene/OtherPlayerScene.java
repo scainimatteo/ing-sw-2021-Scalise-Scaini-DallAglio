@@ -1,84 +1,51 @@
 package it.polimi.ingsw.view.gui.scene;
 
+import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.StackPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.Node;
+
+import java.util.ResourceBundle;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.net.URL;
+
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 
-import it.polimi.ingsw.model.game.sologame.SoloActionToken;
-
 import it.polimi.ingsw.model.player.track.Tile;
 
-import it.polimi.ingsw.model.resources.ProductionInterface;
-import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
-
-import it.polimi.ingsw.controller.message.ProductionMessage;
 
 import it.polimi.ingsw.view.gui.scene.PlayerBoardScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
 import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
-import it.polimi.ingsw.view.simplemodel.SimpleSoloPlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
-import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
 import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
-
-//TODO: remove useless imports
-import javafx.application.Platform;
-import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-
-import java.util.ResourceBundle;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Arrays;
-import java.util.List;
-import java.net.URL;
 
 public class OtherPlayerScene extends SceneController implements ViewUpdateObserver, Initializable {
 	SimplePlayer other_player;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
-	@FXML private Pane cost_resources_pane;
 	@FXML private Pane leader_card_pane;
 	@FXML private HBox leader_card_array;
 
-	@FXML private Button game_button;
-	@FXML private Button view_player2_button;
-	@FXML private Button view_player3_button;
-	@FXML private Button view_player4_button;
 	@FXML private ToggleButton leaders_button;
-
-	@FXML private Text last_turn_text;
-	@FXML private ImageView last_token;
-
-	@FXML private StackPane base_production;
-	@FXML private ImageView input1;
-	@FXML private ImageView input2;
-	@FXML private ImageView output1;
-
-	@FXML private Button activate_prod_button;
 
 	@FXML private ImageView top1;
 	@FXML private ImageView middle1;
@@ -87,16 +54,10 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	@FXML private ImageView bottom2;
 	@FXML private ImageView bottom3;
 
-	@FXML private ImageView coin_sprite;
-	@FXML private ImageView shield_sprite;
-	@FXML private ImageView servant_sprite;
-	@FXML private ImageView stone_sprite;
 	@FXML private Text coin_amount;
 	@FXML private Text shield_amount;
 	@FXML private Text stone_amount;
 	@FXML private Text servant_amount;
-
-	@FXML private HBox cost_box;
 
 	@FXML private ImageView tile1;
 	@FXML private ImageView tile2;
@@ -105,6 +66,8 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane first_slot;
 	@FXML private StackPane second_slot;
 	@FXML private StackPane third_slot;
+
+	@FXML private Text nickname_text;
 
 	public OtherPlayerScene(SimplePlayer other_player) {
 		this.other_player = other_player;
@@ -122,6 +85,8 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		App.setViewUpdateObserver(this);
 
 		leaders_button.setOnMouseClicked(click -> handleToggleLeaderButton(leaders_button));
+
+		this.nickname_text.setText(this.other_player.getNickname());
 
 		hideNode(leader_card_pane);
 	}
@@ -248,12 +213,13 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	}
 
 	private void setLeaderCards(ArrayList<LeaderCard> leader_cards){
-		//TODO: do not show not activated leader cards
 		int i = 0;
 		for (Node node: this.leader_card_array.getChildren()) {
 			VBox leader_card = (VBox) node;
 			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
-			leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			if (leader_cards.get(i).isActive()) {
+				leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			}
 			i++;
 		}
 	}
