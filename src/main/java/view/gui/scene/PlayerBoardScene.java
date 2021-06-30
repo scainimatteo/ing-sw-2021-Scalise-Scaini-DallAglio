@@ -14,6 +14,7 @@ import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.message.ProductionMessage;
+import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
 
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
@@ -653,5 +654,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 	private boolean checkBaseProductionSet(){
 		return input1.getImage() != null && input2.getImage() != null && output1.getImage() != null;
+	}
+
+	public void handleDiscardButton(){
+		DiscardResourcesMessage message = new DiscardResourcesMessage();
+		App.sendMessage(message);
 	}
 }
