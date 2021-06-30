@@ -17,14 +17,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../css/playerboardscene.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1080.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true">
-         <image>
-            <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/board/main_board.png" />
-         </image>
-      </ImageView>
-      <GridPane id="Strongbox" fx:id="strongbox" alignment="CENTER" hgap="10.0" layoutX="1.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="212.0" vgap="10.0">
+      <Pane maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0">
+   <children>
+            <ImageView fitHeight="720.0" fitWidth="1080.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/board/main_board.png" />
+               </image>
+               <effect>
+                  <DropShadow height="40.5" radius="36.7675" width="108.57" />
+               </effect>
+            </ImageView>
+      <GridPane fx:id="strongbox" alignment="CENTER" hgap="10.0" layoutX="1.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="212.0" vgap="10.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="61.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="79.0" />
@@ -37,27 +42,27 @@
             <Insets bottom="60.0" left="40.0" />
          </padding>
          <children>
-            <ImageView id="Servant" fx:id="servant_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/servant.png" />
-               </image>
-            </ImageView>
-            <ImageView id="Coin" fx:id="coin_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/coin.png" />
-               </image>
-            </ImageView>
-            <ImageView id="Shield" fx:id="shield_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/shield.png" />
-               </image>
-            </ImageView>
-            <ImageView id="Stone" fx:id="stone_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/stone.png" />
-               </image>
-            </ImageView>
-            <Text id="ServantNum" fx:id="servant_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ImageView id="Servant" fx:id="servant_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../images/tokens/resources/servant.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="Coin" fx:id="coin_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../images/tokens/resources/coin.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="Shield" fx:id="shield_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../images/tokens/resources/shield.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="Stone" fx:id="stone_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <image>
+                        <Image url="@../images/tokens/resources/stone.png" />
+                     </image>
+                  </ImageView>
+            <Text fx:id="servant_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -65,7 +70,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </Text>
-            <Text id="CoinNum" fx:id="coin_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="coin_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -73,7 +78,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </Text>
-            <Text id="ShieldNum" fx:id="shield_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text fx:id="shield_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -81,7 +86,7 @@
                   <Insets right="7.0" />
                </GridPane.margin>
             </Text>
-            <Text id="StoneNum" fx:id="stone_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text fx:id="stone_amount" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -91,76 +96,58 @@
             </Text>
          </children>
       </GridPane>
-      <HBox id="WarehouseTop" fx:id="warehouse_top" alignment="CENTER" layoutX="120.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="54.0">
+      <HBox fx:id="warehouse_top" alignment="CENTER" layoutX="120.0" layoutY="299.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="54.0">
          <children>
             <ImageView fx:id="top1" fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/shield.png" />
-               </image>
             </ImageView>
          </children>
       </HBox>
-      <HBox id="WarehouseMiddle" fx:id="warehouse_middle" alignment="BOTTOM_LEFT" layoutX="90.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="112.0">
+      <HBox fx:id="warehouse_middle" alignment="BOTTOM_LEFT" layoutX="90.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="112.0">
          <children>
             <ImageView fx:id="middle1" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/coin.png" />
-               </image>
             </ImageView>
             <ImageView fx:id="middle2" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/coin.png" />
-               </image>
             </ImageView>
          </children>
       </HBox>
-      <HBox id="WarehouseBottom" fx:id="warehouse_bottom" alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="161.0">
+      <HBox fx:id="warehouse_bottom" alignment="BOTTOM_LEFT" layoutX="66.0" layoutY="423.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="161.0">
          <children>
             <ImageView fx:id="bottom1" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/servant.png" />
-               </image>
             </ImageView>
             <ImageView fx:id="bottom2" fitHeight="50.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/servant.png" />
-               </image>
             </ImageView>
             <ImageView fx:id="bottom3" fitHeight="50.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/servant.png" />
-               </image>
             </ImageView>
          </children>
       </HBox>
-      <Pane fx:id="leader_card_pane" layoutX="2.0" prefHeight="720.0" prefWidth="341.0">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" layoutX="412.0" layoutY="256.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
-            <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="436.0" layoutY="312.0" prefHeight="331.0" prefWidth="570.0">
+            <Pane fx:id="leader_card_pane" layoutX="2.0" prefHeight="720.0" prefWidth="1080.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" layoutX="412.0" layoutY="256.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
+                  <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="436.0" layoutY="312.0" prefHeight="331.0" prefWidth="570.0">
                      <children>
-                        <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/leadercards/back/leader_card_back.png" />
-                           </image>
-                        </ImageView>
+                        <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/leadercards/back/leader_card_back.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/leadercards/back/leader_card_back.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/leadercards/back/leader_card_back.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
-         </children>
-      </Pane>
-      <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0" visible="false">
+            </Pane>
+      <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="0.0" prefWidth="56.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="6.0" prefWidth="52.0" />
@@ -192,148 +179,67 @@
          </padding>
          <children>
             <ImageView fx:id="cell0" fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fx:id="cell1" fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="10" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="11" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="12" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="13" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="14" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="15" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="16" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="17" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
             <ImageView fitHeight="68.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="18" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/fxml/resources/punchboard/croce.png" />
-               </image>
             </ImageView>
          </children>
       </GridPane>
-      <HBox fx:id="development_card_slots" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" visible="false" StackPane.alignment="CENTER_LEFT">
+      <HBox fx:id="development_card_slot" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" StackPane.alignment="CENTER_LEFT">
          <children>
-            <StackPane id="LeaderCardSlots1" fx:id="slot1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
+            <StackPane fx:id="first_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                <children>
-                  <ImageView id="Card1" fx:id="card11" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card11" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView id="Card2" fx:id="card12" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card12" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <StackPane.margin>
                         <Insets bottom="55.0" />
                      </StackPane.margin>
@@ -341,10 +247,7 @@
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView id="Card3" fx:id="card13" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_3.png" />
-                     </image>
+                  <ImageView fx:id="card13" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <StackPane.margin>
                         <Insets bottom="110.0" />
                      </StackPane.margin>
@@ -357,20 +260,14 @@
                   <Insets bottom="110.0" />
                </StackPane.margin>
             </StackPane>
-            <StackPane id="LeaderCardSlots1" fx:id="slot2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
+            <StackPane fx:id="second_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                <children>
-                  <ImageView id="Card1" fx:id="card21" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card21" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
                   </ImageView>
-                  <ImageView id="Card2" fx:id="card22" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card22" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -378,10 +275,7 @@
                         <Insets bottom="55.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <ImageView id="Card3" fx:id="card23" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_3.png" />
-                     </image>
+                  <ImageView fx:id="card23" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -391,12 +285,9 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane id="LeaderCardSlots1" fx:id="slot3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
+            <StackPane fx:id="third_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                <children>
-                  <ImageView id="Card1" fx:id="card31" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card31" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -404,10 +295,7 @@
                         <Insets left="18.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <ImageView id="Card2" fx:id="card32" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_1.png" />
-                     </image>
+                  <ImageView fx:id="card32" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -415,10 +303,7 @@
                         <Insets bottom="55.0" left="18.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <ImageView id="Card3" fx:id="card33" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
-                     <image>
-                        <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/developmentcards/front/development_card_3.png" />
-                     </image>
+                  <ImageView fx:id="card33" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
                         <DropShadow height="50.0" radius="24.5" width="50.0" />
                      </effect>
@@ -430,54 +315,28 @@
             </StackPane>
          </children>
       </HBox>
-      <StackPane id="BaseProduction" fx:id="base_production" layoutX="257.0" layoutY="481.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="124.0" prefWidth="141.0">
-         <children>
-            <ImageView id="Input2" fx:id="input2" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/coin.png" />
-               </image>
-               <StackPane.margin>
-                  <Insets left="27.0" top="34.0" />
-               </StackPane.margin>
-            </ImageView>
-            <ImageView id="Output1" fx:id="input1" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/stone.png" />
-               </image>
-               <StackPane.margin>
-                  <Insets left="85.0" />
-               </StackPane.margin>
-            </ImageView>
-            <ImageView id="Input1" fx:id="output1" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/resources/servant.png" />
-               </image>
-               <StackPane.margin>
-                  <Insets bottom="35.0" left="28.0" />
-               </StackPane.margin>
-            </ImageView>
-         </children>
-      </StackPane>
-      <Pane prefHeight="211.0" prefWidth="1080.0" visible="false">
-         <children>
-            <ImageView fx:id="tile1" fitHeight="84.0" fitWidth="81.0" layoutX="264.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/faithtrack/pope_favor1_back.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="tile2" fitHeight="84.0" fitWidth="81.0" layoutX="529.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" y="-5.0">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/faithtrack/pope_favor2_back.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="tile3" fitHeight="84.0" fitWidth="81.0" layoutX="844.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" x="2.0">
-               <image>
-                  <Image url="@../git/ing-sw-2021-Scalise-Scaini-DallAglio/src/main/resources/images/tokens/faithtrack/pope_favor3_back.png" />
-               </image>
-            </ImageView>
-         </children>
+      <Pane prefHeight="211.0" prefWidth="1080.0">
+               <children>
+                  <ImageView fx:id="tile1" fitHeight="84.0" fitWidth="81.0" layoutX="264.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/tokens/faithtrack/pope_favor1_back.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tile2" fitHeight="84.0" fitWidth="81.0" layoutX="529.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" y="-5.0">
+                     <image>
+                        <Image url="@../images/tokens/faithtrack/pope_favor2_back.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tile3" fitHeight="84.0" fitWidth="81.0" layoutX="844.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" x="2.0">
+                     <image>
+                        <Image url="@../images/tokens/faithtrack/pope_favor3_back.png" />
+                     </image>
+                  </ImageView>
+               </children>
       </Pane>
-      <Button fx:id="game_button" layoutX="-35.0" layoutY="341.0" mnemonicParsing="false" rotate="90.0" text="Your board" />
+      <Button fx:id="board_button" layoutX="-35.0" layoutY="341.0" mnemonicParsing="false" rotate="90.0" text="Your board" onMouseClicked="#changeSceneToBoard"/>
       <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
    </children>
 </Pane>
+   </children>
+</StackPane>
