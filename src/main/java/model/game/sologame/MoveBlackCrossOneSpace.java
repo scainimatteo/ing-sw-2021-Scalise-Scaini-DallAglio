@@ -20,6 +20,11 @@ public class MoveBlackCrossOneSpace implements SoloActionToken, Serializable {
 	}
 
 	@Override
+	public String getPath() {
+		return "/images/tokens/sologame/move_black_cross_one_space";
+	}
+
+	@Override
 	public String getType() {
 		return "MOVEBLACKCROSSONESPACE";
 	}

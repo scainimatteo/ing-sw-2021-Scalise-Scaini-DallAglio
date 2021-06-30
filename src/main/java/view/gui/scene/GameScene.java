@@ -26,6 +26,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
+import it.polimi.ingsw.view.gui.scene.PlayerBoardScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
@@ -50,6 +51,8 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 
 	/**
 	 * Set the Market and the DevelopmentCardsOnTable, using the ViewUpdateObserver
+	 *
+	 * This method gets called once at the start and everytime there's a ViewUpdate (when the Model is changed)
 	 */
 	@Override
 	public void updateView() {
@@ -220,7 +223,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 * Show the PlayerBoardScene
 	 */
 	public void changeSceneToBoard() {
-		return;
+		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 
 	/**

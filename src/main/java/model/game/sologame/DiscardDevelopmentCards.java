@@ -31,6 +31,22 @@ public class DiscardDevelopmentCards implements SoloActionToken, Serializable {
 	}
 
 	@Override
+	public String getPath() {
+		switch(this.color) {
+			case GREEN:
+				return "/images/tokens/sologame/discard_development_card_green.png";
+			case YELLOW:
+				return "/images/tokens/sologame/discard_development_card_yellow.png";
+			case PURPLE:
+				return "/images/tokens/sologame/discard_development_card_purple.png";
+			case BLUE:
+				return "/images/tokens/sologame/discard_development_card_blue.png";
+			default:
+				return "/images/tokens/sologame/discard_development_card_green.png";
+		}
+	}
+
+	@Override
 	public String getType() {
 		return "DISCARDDEVELOPMENTCARDS";
 	}

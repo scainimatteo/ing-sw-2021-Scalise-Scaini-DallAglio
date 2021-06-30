@@ -63,6 +63,9 @@ public enum Resource {
 		}
 	}
 
+	/**
+	 * @return a String with the path of the image of the Resource of the right type
+	 */
 	public String getPath(){
 		switch (this){
 			case COIN: return "/images/tokens/resources/coin.png";

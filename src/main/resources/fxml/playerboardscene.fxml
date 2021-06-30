@@ -146,7 +146,7 @@
             </HBox>
          </children>
       </Pane>
-      <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0" visible="false">
+      <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="0.0" prefWidth="56.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="6.0" prefWidth="52.0" />
@@ -229,9 +229,9 @@
             </ImageView>
          </children>
       </GridPane>
-      <HBox fx:id="development_card_slots" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" StackPane.alignment="CENTER_LEFT">
+      <HBox fx:id="development_card_slot" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" StackPane.alignment="CENTER_LEFT">
          <children>
-            <StackPane fx:id="slot1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
+            <StackPane fx:id="first_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                <children>
                   <ImageView fx:id="card11" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
@@ -259,7 +259,7 @@
                   <Insets bottom="110.0" />
                </StackPane.margin>
             </StackPane>
-            <StackPane fx:id="slot2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
+            <StackPane fx:id="second_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                <children>
                   <ImageView fx:id="card21" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
@@ -284,7 +284,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane fx:id="slot3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
+            <StackPane fx:id="third_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                <children>
                   <ImageView fx:id="card31" fitHeight="366.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_CENTER">
                      <effect>
@@ -334,7 +334,7 @@
             <Button fx:id="activate_prod_button" mnemonicParsing="false" text="Activate Production" StackPane.alignment="BOTTOM_CENTER" />
          </children>
       </StackPane>
-      <Pane prefHeight="211.0" prefWidth="1080.0" visible="false">
+      <Pane prefHeight="211.0" prefWidth="1080.0">
          <children>
             <ImageView fx:id="tile1" fitHeight="84.0" fitWidth="81.0" layoutX="264.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -406,13 +406,10 @@
       </Pane>
 	  <Text fx:id="last_turn_text" fill="RED" layoutX="30.0" layoutY="699.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last turn!">
 	     <font>
-	    	<Font name="System Bold Italic" size="31.0" />
+	    	<Font name="Lato Black" size="30.0" />
 	     </font>
 	</Text>
-	<ImageView fx:id="solo_game_token" fitHeight="147.0" fitWidth="141.0" layoutX="271.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
-	   <image>
-		  <Image url="@../images/tokens/sologame/lorenzo.png" />
-	   </image>
+	<ImageView fx:id="last_token" fitHeight="147.0" fitWidth="141.0" layoutX="271.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
 	   <effect>
 		  <DropShadow blurType="GAUSSIAN" height="50.0" radius="24.5" width="50.0" />
 	   </effect>

@@ -18,6 +18,13 @@ public interface SoloActionToken {
 	public String toString();
 
 	/**
+	 * Return the path of the SoloActionToken's image
+	 *
+	 * Used by the GUI
+	 */
+	public String getPath();
+
+	/**
 	 * Persistence only - used to write the SoloActionToken in the json file
 	 *
 	 * @return a String representing the SoloActionToken type

@@ -1,19 +1,26 @@
 package it.polimi.ingsw.view.gui.scene;
 
-import it.polimi.ingsw.model.resources.Resource;
-import it.polimi.ingsw.model.resources.Production;
-import it.polimi.ingsw.model.resources.ProductionInterface;
-
+import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
+
+import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+
+import it.polimi.ingsw.model.player.track.Tile;
+
+import it.polimi.ingsw.model.resources.ProductionInterface;
+import it.polimi.ingsw.model.resources.Production;
+import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.message.ProductionMessage;
 
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
-import it.polimi.ingsw.view.simplemodel.SimplePlayer;
-import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
 import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
+import it.polimi.ingsw.view.simplemodel.SimpleSoloPlayer;
+import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
+import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
+import it.polimi.ingsw.view.simplemodel.SimplePlayer;
 import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
@@ -43,6 +50,7 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Arrays;
+import java.util.List;
 import java.net.URL;
 
 public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
@@ -58,8 +66,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private HBox WarehouseBottom;
 	@FXML private Pane leader_card_pane;
 	@FXML private GridPane faith_track;
-	@FXML private HBox development_card_slots;
+	@FXML private HBox development_card_slot;
 	@FXML private Pane cost_resources_pane;
+	@FXML private HBox leader_card_array;
 
 	@FXML private Button game_button;
 	@FXML private Button view_player2_button;
@@ -67,12 +76,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Button view_player4_button;
 	@FXML private ToggleButton leaders_button;
 
-	@FXML private ImageView card11;
-	@FXML private ImageView card21;
-	@FXML private ImageView card31;
-
 	@FXML private Text last_turn_text;
-	@FXML private ImageView solo_game_token;
+	@FXML private ImageView last_token;
 
 	@FXML private StackPane base_production;
 	@FXML private ImageView input1;
@@ -98,36 +103,14 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Text servant_amount;
 
 	@FXML private HBox cost_box;
-	@FXML private ImageView cost1;
-	@FXML private ImageView cost2;
-	@FXML private ImageView cost3;
-	@FXML private ImageView cost4;
-	@FXML private ImageView cost5;
-	@FXML private ImageView cost6;
-	@FXML private ImageView cost7;
-	@FXML private ImageView cost8;
-	@FXML private ImageView cost9;
-	@FXML private ImageView cost10;
 
-	/**
-	 * TODO:
-	 * set:
-	 *	 - dev card slot
-	 *	 - leader card
-	 *	 - faith track (+ black marker)
-	 *	 - token
-	 *
-	 * setOnMouseClicked:
-	 *	 ~ other players (forse dovrei mettergli l'indice del giocatore)
-	 *	 - [LEADERCARD] setOnMouseClicked con metodo che loopa nelle risorse
-	 *
-	 * showNode methods:
-	 *	 - last_turn_text
-	 *	 - cost_resources_pane
-	 *
-	 * drag:
-	 *	 - extraspace
-	 */
+	@FXML private ImageView tile1;
+	@FXML private ImageView tile2;
+	@FXML private ImageView tile3;
+
+	@FXML private StackPane first_slot;
+	@FXML private StackPane second_slot;
+	@FXML private StackPane third_slot;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resouces){
@@ -135,6 +118,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		this.order = App.getSimpleGame().getOrder();
 		this.production_arraylist = new ArrayList<String>();
 		App.setViewUpdateObserver(this);
+		this.updateView();
+
 
 		game_button.setOnMouseClicked(click -> handleChangeScene(new GameScene(), "/fxml/gamescene.fxml"));
 		// view_player2_button.setOnMouseClicked(click -> handleChangeScene(new OtherPlayerScene(), "/fxml/otherplayerscene.fxml"));
@@ -142,10 +127,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		// view_player4_button.setOnMouseClicked(click -> handleChangeScene(new OtherPlayerScene(), "/fxml/otherplayerscene.fxml"));
 		
 		leaders_button.setOnMouseClicked(click -> handleToggleLeaderButton(leaders_button));
-
-		card11.setOnMouseClicked(click -> handleProductionClick(card11));
-		card21.setOnMouseClicked(click -> handleProductionClick(card21));
-		card31.setOnMouseClicked(click -> handleProductionClick(card31));
 
 		input1.setOnMouseClicked(click -> handleBaseProductionResource(input1, 0));
 		input2.setOnMouseClicked(click -> handleBaseProductionResource(input2, 1));
@@ -186,7 +167,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		hideNode(last_turn_text);
 
 		if (this.order.size() != 1){
-			hideNode(solo_game_token);
+			hideNode(last_token);
 		} 
 
 		if (this.order.size() <= 3){
@@ -200,15 +181,36 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} 
 	}
 
+	/**
+	 * VIEW SETTERS
+	 *
+	 * Set all the ImageViews and methods of the board, using the ViewUpdateObserver
+	 *
+	 * This method gets called once at the start and everytime there's a ViewUpdate (when the Model is changed)
+	 */
 	public void updateView(){
 		SimpleWarehouse warehouse = App.getMyPlayer().getWarehouse();
 		HashMap<Resource, Integer> strongbox = App.getMyPlayer().getStrongbox();
-		SimpleDevelopmentCardSlot dev_card_slot = App.getMyPlayer().getDevelopmentCardsSlots();
-		ArrayList<LeaderCard> leader_card = App.getMyPlayer().getLeaderCards();
+		SimpleDevelopmentCardSlot development_card_slot = App.getMyPlayer().getDevelopmentCardsSlots();
+		ArrayList<LeaderCard> leader_cards = App.getMyPlayer().getLeaderCards();
 		int marker_position = App.getMyPlayer().getMarker().getPosition();
+		Tile[] tiles = App.getMyPlayer().getReports();
 
+		// PLAYER
 		setWarehouse(warehouse);
 		setStrongbox(strongbox);
+		setDevelopmentCardSlot(development_card_slot);
+		setLeaderCards(leader_cards);
+		setFaithMarker(marker_position);
+		setTiles(tiles);
+
+		// SOLOGAME
+		if (App.isSoloGame()) {
+			SimpleSoloGame game = (SimpleSoloGame) App.getSimpleGame();
+			SimpleSoloPlayer player = (SimpleSoloPlayer) App.getMyPlayer();
+			setLastToken(game.getLastToken());
+			setBlackMarker(player.getBlackMarkerPosition());
+		}
 	}
 
 	private void setWarehouse(SimpleWarehouse warehouse){
@@ -284,6 +286,116 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	private void setDevelopmentCardSlot(SimpleDevelopmentCardSlot development_card_slot){
+		ArrayList<DevelopmentCard> first_column = development_card_slot.getFirstColumn();
+		ArrayList<DevelopmentCard> second_column = development_card_slot.getSecondColumn();
+		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
+
+		// first slot
+		for (int i = 0; i < this.first_slot.getChildren().size(); i++) {
+			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, i));
+			this.first_slot.getChildren().get(i).setOnMouseClicked(null);
+		}
+
+		// second slot
+		for (int i = 0; i < this.second_slot.getChildren().size(); i++) {
+			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, i));
+			this.second_slot.getChildren().get(i).setOnMouseClicked(null);
+		}
+
+		// third slot
+		for (int i = 0; i < this.third_slot.getChildren().size(); i++) {
+			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, i));
+			this.third_slot.getChildren().get(i).setOnMouseClicked(null);
+		}
+
+		// set methods to activate the DevelopmentCards
+		for (Node node: this.development_card_slot.getChildren()) {
+			List<Node> nodes = ((StackPane) node).getChildren();
+
+			if (((ImageView) nodes.get(2)).getImage() != null) {
+				nodes.get(2).setOnMouseClicked(click -> handleProductionClick((ImageView) nodes.get(2)));
+			} else if (((ImageView) nodes.get(1)).getImage() != null) {
+				nodes.get(1).setOnMouseClicked(click -> handleProductionClick((ImageView) nodes.get(1)));
+			} else if (((ImageView) nodes.get(0)).getImage() != null) {
+				nodes.get(0).setOnMouseClicked(click -> handleProductionClick((ImageView) nodes.get(0)));
+			}
+		}
+	}
+
+	private void setLeaderCards(ArrayList<LeaderCard> leader_cards){
+		int i = 0;
+		for (Node node: this.leader_card_array.getChildren()) {
+			VBox leader_card = (VBox) node;
+			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
+			leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			i++;
+		}
+	}
+
+	private void setFaithMarker(int faith_marker){
+		int i = 0;
+		for (Node cell: faith_track.getChildren()) {
+			if (i == faith_marker) {
+				((ImageView) cell).setImage(new Image("/images/tokens/faithtrack/faith_marker.png"));
+				break;
+			}
+			i++;
+		}
+	}
+
+	private void setTiles(Tile[] tiles){
+		if (tiles[0].isActive()) {
+			this.tile1.setImage(new Image("/images/tokens/faithtrack/pope_favor1_front.png"));
+		}
+
+		if (tiles[1].isActive()) {
+			this.tile2.setImage(new Image("/images/tokens/faithtrack/pope_favor2_front.png"));
+		}
+
+		if (tiles[2].isActive()) {
+			this.tile3.setImage(new Image("/images/tokens/faithtrack/pope_favor3_front.png"));
+		}
+	}
+
+	private void setBlackMarker(int black_marker){
+		int i = 0;
+		for (Node cell: faith_track.getChildren()) {
+			if (i == black_marker) {
+				((ImageView) cell).setImage(new Image("/images/tokens/sologame/black_marker.png"));
+				break;
+			}
+			i++;
+		}
+	}
+
+	private void setLastToken(SoloActionToken last_token){
+		if (last_token != null) {
+			this.last_token.setImage(new Image(last_token.getPath()));
+		} else {
+			this.last_token.setImage(new Image("/images/tokens/sologame/lorenzo.png"));
+		}
+	}
+
+	/**
+	 * Get an Image with the index's element of the column array
+	 *
+	 * @param column the ArrayList of DevelopmentCard to choose from
+	 * @param index the index of the DevelopmentCard to get the Image of
+	 * @return the new Image, null if the index's element doesn't exist
+	 */
+	private Image getDevelopmentCardPath(ArrayList<DevelopmentCard> column, int index) {
+		try {
+			return new Image(column.get(index).getPath());
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * BUTTON HANDLERS
+	 */
+
 	public void handleChangeScene(SceneController controller, String fxml_path){
 		Platform.runLater(() -> {
 			controller.changeScene(fxml_path);
@@ -305,10 +417,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	public void handleToggleLeaderButton(ToggleButton button){
 		if (!button.isSelected()){
 			showNode(leader_card_pane);
-			hideNode(development_card_slots);
+			hideNode(development_card_slot);
 		} else {
 			hideNode(leader_card_pane);
-			showNode(development_card_slots);
+			showNode(development_card_slot);
 		}
 	}
 

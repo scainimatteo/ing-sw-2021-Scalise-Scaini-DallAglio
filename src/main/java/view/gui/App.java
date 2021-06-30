@@ -89,6 +89,13 @@ public class App extends Application {
 	}
 
 	/**
+	 * @return true if there is a SimpleGame going on
+	 */
+	public static boolean isSoloGame() {
+		return gui.getSimplePlayers().size() == 1;
+	}
+
+	/**
 	 * Show an error alert
 	 *
 	 * @param error the error String to display
