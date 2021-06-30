@@ -19,6 +19,8 @@ import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.model.game.Turn;
 
+import it.polimi.ingsw.util.observer.ErrorMessageObservable;
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 import it.polimi.ingsw.util.observer.SetupGameObserver;
 import it.polimi.ingsw.util.observer.GameStartObserver;
 
@@ -33,11 +35,12 @@ import it.polimi.ingsw.view.gui.scene.FinalScene;
 import it.polimi.ingsw.view.gui.App;
 import it.polimi.ingsw.view.View;
 
-public class GUI extends View implements GameStartObserver, SetupGameObserver {
+public class GUI extends View implements GameStartObserver, SetupGameObserver, ErrorMessageObservable {
 	private App app;
 	private InitialScene initial_scene;
 	private Client client;
 	private ArrayList<InitializingServerMessage> messages_queued;
+	private ArrayList<ErrorMessageObserver> error_message_observers = new ArrayList<ErrorMessageObserver>();
 
 	public GUI() {
 		this.simple_players = new ArrayList<SimplePlayer>();
@@ -67,6 +70,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver {
 				});
 			} else if (error_message.nickname == null || error_message.nickname.equals(this.getMyPlayer().getNickname())) {
 				alert.show();
+				notifyReceivedErrorMessage(error_message);
 			}
 		});
 	}
@@ -170,5 +174,27 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver {
 		Platform.runLater(() -> {
 			new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 		});
+	}
+
+	/**
+	 * Add a ErrorMessageObserver to the error_message_observers array
+	 *
+	 * @param observer the ErrorMessageObserver to add
+	 */
+	@Override
+	public void addErrorMessageObserver(ErrorMessageObserver observer){
+		this.error_message_observers.add(observer);
+	}
+
+	/**
+	 * Notify to the ErrorMessageObserver listening that the Player received an ErrorMessage
+	 *
+	 * @param error_message the ErrorMessage received
+	 */
+	@Override
+	public void notifyReceivedErrorMessage(ErrorMessage error_message){
+		for (ErrorMessageObserver e: this.error_message_observers){
+			e.receivedErrorMessage(error_message);
+		}
 	}
 }
