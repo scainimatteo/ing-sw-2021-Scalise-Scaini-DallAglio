@@ -144,6 +144,16 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	}
 
 	/**
+	 * Remove a ViewUpdateObserver from the view_update_observers array
+	 *
+	 * @param observer the ViewUpdateObserver to remove
+	 */
+	@Override
+	public void removeViewUpdateObserver(ViewUpdateObserver observer) {
+		this.view_update_observers.remove(observer);
+	}
+
+	/**
 	 * Notify to the ViewUpdateObservers listening that the SimpleModel has been updated
 	 */
 	@Override

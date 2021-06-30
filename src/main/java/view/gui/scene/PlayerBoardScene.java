@@ -1,9 +1,9 @@
 package it.polimi.ingsw.view.gui.scene;
 
-import it.polimi.ingsw.model.card.DevelopmentCard;
-import it.polimi.ingsw.model.card.LeaderCard;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.ProductionAbility;
+import it.polimi.ingsw.model.card.DevelopmentCard;
+import it.polimi.ingsw.model.card.LeaderCard;
 
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 
@@ -13,16 +13,18 @@ import it.polimi.ingsw.model.resources.ProductionInterface;
 import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
 
-import it.polimi.ingsw.controller.message.ProductionMessage;
 import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
-import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
+import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
+import it.polimi.ingsw.controller.message.ProductionMessage;
+import it.polimi.ingsw.controller.message.EndTurnMessage;
 import it.polimi.ingsw.controller.message.StoreMessage;
 import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
+import it.polimi.ingsw.view.gui.scene.GameScene;
 import it.polimi.ingsw.view.gui.App;
 
 import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
@@ -34,28 +36,20 @@ import it.polimi.ingsw.view.simplemodel.SimpleGame;
 
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
-//TODO: remove useless imports
-import javafx.application.Platform;
-import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.StackPane;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.input.DragEvent;
+import javafx.scene.Node;
+import javafx.fxml.FXML;
 
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -82,7 +76,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Pane leader_card_pane;
 	@FXML private HBox leader_card_array;
 
-	@FXML private Button game_button;
 	@FXML private Button view_player2_button;
 	@FXML private Button view_player3_button;
 	@FXML private Button view_player4_button;
@@ -404,6 +397,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		Tile[] tiles = App.getMyPlayer().getReports();
 		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
 		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
+		resetFaithTrack();
 
 		// PLAYER
 		setWarehouse(warehouse);
@@ -423,6 +417,15 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			setLastToken(game.getLastToken());
 			setBlackMarker(player.getBlackMarkerPosition());
 		}
+
+		// PLAYER
+		setWarehouse(warehouse);
+		setStrongbox(strongbox);
+		setDevelopmentCardSlot(development_card_slot);
+		setLeaderCards(leader_cards);
+		setFaithMarker(marker_position);
+		setTiles(tiles);
+		setTurnResources(to_pay, to_store);
 	}
 
 	private void setWarehouse(SimpleWarehouse warehouse){
@@ -654,6 +657,15 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
+	 * Set all the ImageViews of the FaithTrack as null
+	 */
+	private void resetFaithTrack() {
+		for (Node cell: faith_track.getChildren()) {
+			((ImageView) cell).setImage(null);
+		}
+	}
+
+	/**
 	 * Get an Image with the index's element of the column array
 	 *
 	 * @param column the ArrayList of DevelopmentCard to choose from
@@ -676,6 +688,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Show the GameScene
 	 */
 	public void changeSceneToGame(){
+		// remove the Scene from the array of ViewUpdateObservers to save memory
+		App.removeViewUpdateObserver(this);
 		new GameScene().changeScene("/fxml/gamescene.fxml");
 	}
 
@@ -683,6 +697,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Show the Board of the other Players
 	 */
 	public void changeSceneToOtherPlayer(SimplePlayer other_player){
+		// remove the Scene from the array of ViewUpdateObservers to save memory
+		App.removeViewUpdateObserver(this);
 		new OtherPlayerScene(other_player).changeScene("/fxml/otherplayerscene.fxml");
 	}
 
@@ -804,5 +820,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		App.sendMessage(message);
 		updateView();
+	}
+
+	/**
+	 * Send a EndTurnMessage
+	 */
+	public void handleEndTurn(){
+		EndTurnMessage message = new EndTurnMessage();
+		App.sendMessage(message);
 	}
 }
