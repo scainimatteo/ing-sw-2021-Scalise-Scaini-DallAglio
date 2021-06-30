@@ -53,6 +53,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.net.URL;
 
+/**
+ * TODO:
+ * + paymessage
+ * + 
+ */
 public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
 	ArrayList<Resource> all_resources;
 	// contains the list of all the DevelopmentCardSlots activated
@@ -139,6 +144,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		initializeGainBoxDragAndDrop();
 
 		hideNode(leader_card_pane);
+		hideNode(cost_resources_pane);
+		hideNode(last_turn_text);
 
 		initializeOtherPlayersButton();
 	}
@@ -238,7 +245,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
 
 			// get the name of the Resource from the userdata in the FXML
-			resource_to_add.add(Resource.valueOf(key.getUserData().toString()));
+			resource_to_add.add(App.getTurn().getProducedResources().get(Integer.parseInt((String) key.getUserData())));
 
 			// select which shelf of the Warehouse to put the Resources in
 			switch (drag_and_drop_hashmap.get(key).getParent().getId()){
@@ -336,8 +343,18 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
 		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
 		boolean is_last_turn = App.getTurn().isFinal();
-
 		resetFaithTrack();
+
+		// PLAYER
+		setWarehouse(warehouse);
+		setStrongbox(strongbox);
+		setDevelopmentCardSlot(development_card_slot);
+		setLeaderCards(leader_cards);
+		setFaithMarker(marker_position);
+		setTiles(tiles);
+		if (App.getTurn().getPlayer() != null){
+			setTurnResources(to_pay, to_store);
+		} 
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
