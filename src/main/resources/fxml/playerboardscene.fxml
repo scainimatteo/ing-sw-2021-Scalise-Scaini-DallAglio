@@ -134,9 +134,9 @@
                               </ImageView>
 							  <Button fx:id="activate_leader_1" mnemonicParsing="false" text="Activate" />
                               <Button fx:id="discard_leader_1" mnemonicParsing="false" text="Discard" />
-                              <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-150.0" />
-                              <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-207.0" />
-                              <ImageView fx:id="prod_ability_1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-267.0" />
+							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-100.0"/>
+                              <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0"/>
+							  <ImageView fx:id="prod_ability_1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-225.0"/>
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
@@ -148,9 +148,9 @@
                               </ImageView>
 							  <Button fx:id="activate_leader_2" mnemonicParsing="false" text="Activate" />
                               <Button fx:id="discard_leader_2" mnemonicParsing="false" text="Discard" />
-                              <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-150.0" />
-                              <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-207.0" />
-                              <ImageView fx:id="prod_ability_2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-267.0" />
+							  <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-110.0"/>
+							  <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0"/>
+							  <ImageView fx:id="prod_ability_2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-200.0"/>
                            </children>
                         </VBox>
                      </children>
@@ -367,7 +367,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
+            <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" onMouseClicked="#showOrHideLeaderCards" text="Show Leader" />
         	<Button fx:id="end_turn_button" layoutX="974.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleEndTurn" text="End your turn" />
             <StackPane fx:id="cost_resources_pane" prefHeight="190.0" prefWidth="1080.0">
                <children>
@@ -414,7 +414,7 @@
                         <Insets bottom="85.0" />
                      </StackPane.margin>
                   </Text>
-                  <Button fx:id="discard_button" mnemonicParsing="false" onMouseClicked="#handleDiscardButton" text="DISCARD" translateX="335.0" translateY="50.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#handleDiscardResources" text="DISCARD" translateX="335.0" translateY="50.0" />
                </children>
             </StackPane>
       	  <Text fx:id="last_turn_text" fill="#ee1e1e" layoutX="30.0" layoutY="699.0" stroke="BLACK" strokeType="OUTSIDE" text="Last turn!">
