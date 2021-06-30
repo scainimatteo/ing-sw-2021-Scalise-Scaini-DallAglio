@@ -92,4 +92,25 @@ public class SimplePlayer implements Serializable {
 	public ArrayList<DevelopmentCard> getTopCards(){
 		return this.development_card_slots.getTopCards();
 	}
+
+	/**
+	 * @return the overall number of Resources in the Warehouse
+	 */
+	public int numberOfResourcesInWarehouse() {
+		int number_of_resource = 0;
+
+		for (Resource res: this.warehouse.getTopResource()) {
+			number_of_resource++;
+		}
+
+		for (Resource res: this.warehouse.getMiddleResources()) {
+			number_of_resource++;
+		}
+
+		for (Resource res: this.warehouse.getBottomResources()) {
+			number_of_resource++;
+		}
+
+		return number_of_resource;
+	}
 }

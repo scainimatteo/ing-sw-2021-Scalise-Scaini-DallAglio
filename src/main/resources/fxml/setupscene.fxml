@@ -57,7 +57,7 @@
                   <Insets top="70.0" />
                </VBox.margin>
             </VBox>
-            <Button fx:id="continue_button" defaultButton="true" mnemonicParsing="false" onMouseClicked="#continue_button_click" text="CONTINUE">
+            <Button fx:id="end_order_button" defaultButton="true" mnemonicParsing="false" onMouseClicked="#endOrder" text="CONTINUE">
                <font>
                   <Font name="Lato Black" size="25.0" />
                </font>
@@ -77,7 +77,7 @@
                   <Insets top="40.0" />
                </VBox.margin>
             </Text>
-            <HBox fx:id="leader_card_grid" alignment="CENTER" prefHeight="419.0" prefWidth="1080.0" spacing="20.0">
+            <HBox fx:id="leader_card_array" alignment="CENTER" prefHeight="419.0" prefWidth="1080.0" spacing="20.0">
                <children>
                   <ImageView fx:id="leader_card_1" fitHeight="380.0" fitWidth="336.0" pickOnBounds="true" preserveRatio="true">
                      <effect>
@@ -147,42 +147,42 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-				<ImageView id="coin1" fx:id="coin1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+				<ImageView fx:id="coin1" userData="COIN" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
 					<image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="coin2" fx:id="coin2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                  <ImageView fx:id="coin2" userData="COIN" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
 					<image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="servant1" fx:id="servant1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                  <ImageView fx:id="servant1" userData="SERVANT" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
 					<image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="servant2" fx:id="servant2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                  <ImageView fx:id="servant2" userData="SERVANT" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
 					<image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="shield1" fx:id="shield1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                  <ImageView fx:id="shield1" userData="SHIELD" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
 					<image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="shield2" fx:id="shield2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER">
+                  <ImageView fx:id="shield2" userData="SHIELD" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="CENTER">
 					<image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="stone1" fx:id="stone1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
+                  <ImageView fx:id="stone1" userData="STONE" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6">
 					<image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="stone2" fx:id="stone2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
+                  <ImageView fx:id="stone2" userData="STONE" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7">
 					<image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
@@ -207,24 +207,24 @@
                <children>
                   <HBox fx:id="warehouse_top" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="57.0" prefWidth="87.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                      <children>
-                        <ImageView id="top1" fx:id="top1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="top1" fitHeight="150.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                   <HBox fx:id="warehouse_middle" alignment="CENTER" layoutX="318.0" layoutY="93.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="95.0" prefWidth="177.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                      <children>
-					  <ImageView id="middle1" fx:id="middle1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+					  <ImageView fx:id="middle1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
 					  </ImageView>
-                        <ImageView id="middle2" fx:id="middle2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="middle2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     	</ImageView>
                      </children>
                   </HBox>
                   <HBox fx:id="warehouse_bottom" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="94.0" prefWidth="247.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <children>
-                        <ImageView id="bottom1" fx:id="bottom1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bottom1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
-                        <ImageView id="bottom2" fx:id="bottom2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bottom2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
-                        <ImageView id="bottom3" fx:id="bottom3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bottom3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                   </ImageView>
                      </children>
                   </HBox>

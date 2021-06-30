@@ -206,16 +206,16 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		for (Resource res : strongbox.keySet()){
 			switch (res){
 				case COIN:
-					coin_amount.setText(String.valueOf(strongbox.get(Resource.COIN)));
+					coin_amount.setText("x" + String.valueOf(strongbox.get(Resource.COIN)));
 					break;
 				case SERVANT:
-					servant_amount.setText(String.valueOf(strongbox.get(Resource.SERVANT)));
+					servant_amount.setText("x" + String.valueOf(strongbox.get(Resource.SERVANT)));
 					break;
 				case SHIELD:
-					shield_amount.setText(String.valueOf(strongbox.get(Resource.SHIELD)));
+					shield_amount.setText("x" + String.valueOf(strongbox.get(Resource.SHIELD)));
 					break;
 				case STONE:
-					stone_amount.setText(String.valueOf(strongbox.get(Resource.STONE)));
+					stone_amount.setText("x" + String.valueOf(strongbox.get(Resource.STONE)));
 					break;
 				default:
 					break;

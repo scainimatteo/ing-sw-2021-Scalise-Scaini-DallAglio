@@ -115,6 +115,13 @@ public class App extends Application {
 	}
 
 	/**
+	 * @return true if the gui has finished the setup phase
+	 */
+	public static boolean hasDoneSetup() {
+		return App.gui.hasDoneSetup();
+	}
+
+	/**
 	 * Send a message to the Server
 	 *
 	 * @param message the Message to send
