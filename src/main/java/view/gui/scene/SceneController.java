@@ -71,6 +71,12 @@ public abstract class SceneController {
 	/**
 	 * SOURCE METHODS
 	 */
+	/**
+	 * method called when an image is dragged
+	 *
+	 * @param event the event that creates the drag gesture
+	 * @param source the imageview that creates the drag gesture
+	 */
 	@FXML
 	public void handleDragDetected(MouseEvent event, ImageView source) {
 		EventHandler<MouseEvent> event_handler = new EventHandler<MouseEvent>() {
@@ -89,6 +95,13 @@ public abstract class SceneController {
 		event_handler.handle(event);
 	}
 
+	/**
+	 * method that handle when an image is dropped on a target
+	 *
+	 * @param event is the event drag done when the image is dropped on a target
+	 * @param source is the imageview that is the source of the drag
+	 * @param set_null is the boolean that defines if in the source has to be setted to null the image
+	 */
 	@FXML
 	public void handleDragDone(DragEvent event, ImageView source, boolean set_null){
 		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {
@@ -107,6 +120,12 @@ public abstract class SceneController {
 	/**
 	 * TARGET METHODS
 	 */
+	/**
+	 * method called when the drag gesture is over a target
+	 *
+	 * @param event is the event of drag over a target
+	 * @param target is the imageview on which a drop gesture is passed
+	 */
 	@FXML
 	public void handleDragOver(DragEvent event, ImageView target){
 		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {
@@ -122,6 +141,12 @@ public abstract class SceneController {
 		event_handler.handle(event);
 	}
 
+	/**
+	 * method that handle the drop on a target
+	 *
+	 * @param event is the event of drop on a target
+	 * @param target is the imageview on which is dropped the image
+	 */
 	@FXML
 	public void handleDragDropped(DragEvent event, ImageView target){
 		EventHandler<DragEvent> event_handler = new EventHandler<DragEvent>() {

@@ -155,12 +155,21 @@ public class SetupScene extends SceneController implements Initializable {
 		}
 	}
 
+	/**
+	 * method that handles the click on the continue_button
+	 */
 	@FXML
 	public void continue_button_click(){
 		hideNode(order_pane);
 		showNode(select_card_pane);
 	}
 
+	/**
+	 * method that handles the click on a leader card
+	 *
+	 * @param event is the click on a leader card
+	 * @param index is the index of the card clicked used to identify the leader card 
+	 */
 	@FXML
 	public void leaderCardClick(MouseEvent event, int index){
 		ImageView source = (ImageView) event.getSource();
@@ -174,10 +183,16 @@ public class SetupScene extends SceneController implements Initializable {
 		} 
 	}
 
+	/**
+	 * @return true if the number of leader card choosen is 2
+	 */
 	private boolean checkLeader(){
 		return to_delete.size() == 2;
 	}
 
+	/**
+	 * method called when the player choose 2 leader cards for the end of the leader card scene
+	 */
 	private void endLeaderScene(){
 		DiscardLeaderMessage message;
 
@@ -195,6 +210,9 @@ public class SetupScene extends SceneController implements Initializable {
 		}
 	}
 
+	/**
+	 * method called with the button confirm in the resource scene to send the initial storage
+	 */
 	@FXML
 	@SuppressWarnings("unchecked")
 	public void endResourcesScene(){
