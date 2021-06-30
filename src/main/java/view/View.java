@@ -37,6 +37,10 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 		return this.initialized;
 	}
 
+	public boolean hasDoneSetup() {
+		return this.setup_done;
+	}
+
 	public void setUninitialized() {
 		this.initialized = false;
 	}
@@ -77,14 +81,15 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 		} else if (view_update.simple_player != null) {
 			updateSimplePlayer(view_update.simple_player);
 		} else if (view_update.turn != null) {
-			// if the turn was null, this is the first Turn and the game is started
-			if (this.turn == null) {
-				notifyGameStarted();
 			// if the turn has done the setup, start the SetupScene
-			} else if (!this.setup_done && view_update.turn.hasDoneSetup()){
+			if (!this.setup_done && view_update.turn.hasDoneSetup()){
 				this.setup_done = true;
 				notifySetupDone();
-			} 
+			// if the turn was null, this is the first Turn and the game is started
+			} else if (this.turn == null) {
+				notifyGameStarted();
+			}
+
 			this.turn = view_update.turn;
 		}
 

@@ -345,7 +345,7 @@
             <Insets bottom="780.0" right="800.0" />
          </StackPane.margin>
       </Text>
-      <Button fx:id="board_button" mnemonicParsing="false" onAction="#changeSceneToGame" rotate="90.0" text="Game board" translateX="-60.0" StackPane.alignment="CENTER_LEFT">
+      <Button fx:id="board_button" mnemonicParsing="false" onAction="#changeSceneToBoard" rotate="90.0" text="Your board" translateX="-60.0" StackPane.alignment="CENTER_LEFT">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

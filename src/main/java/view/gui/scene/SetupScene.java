@@ -20,11 +20,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.DragEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.ClipboardContent;
@@ -48,30 +51,13 @@ public class SetupScene extends SceneController implements Initializable {
 	@FXML private Pane select_resource_pane;
 	@FXML private Pane waiting_pane;
 	@FXML private Pane order_pane;
-
-	@FXML private ImageView leader_card_1;
-	@FXML private ImageView leader_card_2;
-	@FXML private ImageView leader_card_3;
-	@FXML private ImageView leader_card_4;
-
-	@FXML private Image leader_card_image_1;
-	@FXML private Image leader_card_image_2;
-	@FXML private Image leader_card_image_3;
-	@FXML private Image leader_card_image_4;
+	@FXML private GridPane resource_grid;
+	@FXML private HBox leader_card_array;
 
 	@FXML private Text first_player_text;
 	@FXML private Text second_player_text;
 	@FXML private Text third_player_text;
 	@FXML private Text fourth_player_text;
-
-	@FXML private ImageView coin1;
-	@FXML private ImageView coin2;
-	@FXML private ImageView servant1;
-	@FXML private ImageView servant2;
-	@FXML private ImageView shield1;
-	@FXML private ImageView shield2;
-	@FXML private ImageView stone1;
-	@FXML private ImageView stone2;
 
 	@FXML private ImageView top1;
 	@FXML private ImageView middle1;
@@ -85,39 +71,85 @@ public class SetupScene extends SceneController implements Initializable {
 		this.player = App.getMyPlayer();
 		this.order = App.getSimpleGame().getOrder();
 
-		leader_card_image_1 = new Image(getClass().getResource(player.getLeaderCards().get(0).getFrontPath()).toString());
-		leader_card_image_2 = new Image(getClass().getResource(player.getLeaderCards().get(1).getFrontPath()).toString());
-		leader_card_image_3 = new Image(getClass().getResource(player.getLeaderCards().get(2).getFrontPath()).toString());
-		leader_card_image_4 = new Image(getClass().getResource(player.getLeaderCards().get(3).getFrontPath()).toString());
+		setOrderPane();
+		setChooseResources();
+		initializeWarehouseDrop();
+		chooseWhatToShowAndHide();
+	}
 
-		leader_card_1.setImage(leader_card_image_1);
-		leader_card_2.setImage(leader_card_image_2);
-		leader_card_3.setImage(leader_card_image_3);
-		leader_card_4.setImage(leader_card_image_4);
+	/**
+	 * Hide and show panels based on many factors, mainly order of the Player, SoloGame or Persistence (the Player could have completed the setup partially or fully)
+	 */
+	private void chooseWhatToShowAndHide() {
+		hideNode(order_pane);
+		hideNode(select_card_pane);
+		hideNode(select_resource_pane);
+		hideNode(waiting_pane);
 
-		leader_card_1.setOnMouseClicked(click1 -> leaderCardClick(click1, 0));
-		leader_card_2.setOnMouseClicked(click2 -> leaderCardClick(click2, 1));
-		leader_card_3.setOnMouseClicked(click3 -> leaderCardClick(click3, 2));
-		leader_card_4.setOnMouseClicked(click4 -> leaderCardClick(click4, 3));
+		// if not sologame, show the order of the Players
+		if (order.size() != 1){
+			showNode(order_pane);
+		} else {
+			// if the LeaderCards weren't discarded already
+			if (player.getLeaderCards().size() > 2) {
+				setLeaderCards();
+				showNode(select_card_pane);
+			} else {
+				// if the setup is done wait until the PlayerBoardScene gets called
+				showNode(waiting_pane);
+			}
+		}
+	}
 
-		coin1.setOnDragDetected(detected1 -> handleDragDetected(detected1, coin1));
-		coin2.setOnDragDetected(detected2 -> handleDragDetected(detected2, coin2));
-		servant1.setOnDragDetected(detected3 -> handleDragDetected(detected3, servant1));
-		servant2.setOnDragDetected(detected4 -> handleDragDetected(detected4, servant2));
-		shield1.setOnDragDetected(detected5 -> handleDragDetected(detected5, shield1));
-		shield2.setOnDragDetected(detected6 -> handleDragDetected(detected6, shield2));
-		stone1.setOnDragDetected(detected7 -> handleDragDetected(detected7, stone1));
-		stone2.setOnDragDetected(detected8 -> handleDragDetected(detected8, stone2));
+	/**
+	 * Show the random order of Players
+	 */
+	private void setOrderPane() {
+		first_player_text.setText("[1] " + order.get(0));
 
-		coin1.setOnDragDone(done1 -> handleDragDone(done1, coin1, true));
-		coin2.setOnDragDone(done2 -> handleDragDone(done2, coin2, true));
-		servant1.setOnDragDone(done3 -> handleDragDone(done3, servant1, true));
-		servant2.setOnDragDone(done4 -> handleDragDone(done4, servant2, true));
-		shield1.setOnDragDone(done5 -> handleDragDone(done5, shield1, true));
-		shield2.setOnDragDone(done6 -> handleDragDone(done6, shield2, true));
-		stone1.setOnDragDone(done7 -> handleDragDone(done7, stone1, true));
-		stone2.setOnDragDone(done8 -> handleDragDone(done8, stone2, true));
+		if (order.size() >= 2){
+			second_player_text.setText("[2] " + order.get(1));
+		} 
 
+		if (order.size() >= 3){
+			third_player_text.setText("[3] " + order.get(2));
+		} 
+
+		if (order.size() >= 4){
+			fourth_player_text.setText("[4] " + order.get(3));
+		} 
+	}
+
+	/**
+	 * Show the Player four or three LeaderCards to discard
+	 *
+	 *TODO: test with three
+	 */
+	private void setLeaderCards() {
+		for (int i = 0; i < this.leader_card_array.getChildren().size(); i++) {
+			ImageView leader_card_imageview = (ImageView) this.leader_card_array.getChildren().get(i);
+			leader_card_imageview.setImage(new Image(this.player.getLeaderCards().get(i).getFrontPath()));
+
+			// set the method to discard them
+			final int index = i;
+			leader_card_imageview.setOnMouseClicked(click -> leaderCardClick(click, index));
+		}
+	}
+
+	/**
+	 * Set the methods to drag resources in the Warehouse
+	 */
+	private void setChooseResources() {
+		for (Node node: this.resource_grid.getChildren()) {
+			((ImageView) node).setOnDragDetected(detected -> handleDragDetected(detected, (ImageView) node));
+			((ImageView) node).setOnDragDone(done -> handleDragDone(done, (ImageView) node, true));
+		}
+	}
+
+	/**
+	 * Set the methods to drop the resources in the Warehouse
+	 */
+	private void initializeWarehouseDrop() {
 		top1.setOnDragOver(over1 -> handleDragOver(over1, top1));
 		middle1.setOnDragOver(over2 -> handleDragOver(over2, middle1));
 		middle2.setOnDragOver(over3 -> handleDragOver(over3, middle2));
@@ -131,44 +163,32 @@ public class SetupScene extends SceneController implements Initializable {
 		bottom1.setOnDragDropped(dropped4 -> handleDragDropped(dropped4, bottom1));
 		bottom2.setOnDragDropped(dropped5 -> handleDragDropped(dropped5, bottom2));
 		bottom3.setOnDragDropped(dropped6 -> handleDragDropped(dropped6, bottom3));
+	}
 
-		first_player_text.setText("[1] " + order.get(0));
-		if (order.size() >= 2){
-			second_player_text.setText("[2] " + order.get(1));
-		} 
-		if (order.size() >= 3){
-			third_player_text.setText("[3] " + order.get(2));
-		} 
-		if (order.size() >= 4){
-			fourth_player_text.setText("[4] " + order.get(3));
-		} 
+	/**
+	 * Show the right panel after showing the order of the Players
+	 */
+	@FXML
+	public void endOrder(){
+		hideNode(order_pane);
 
-		hideNode(select_resource_pane);
-		hideNode(waiting_pane);
-
-		if (order.size() != 1){
-			showNode(order_pane);
-			hideNode(select_card_pane);
-		} else {
-			hideNode(order_pane);
+		// if the LeaderCards weren't discarded already
+		if (this.player.getLeaderCards().size() > 2) {
+			setLeaderCards();
 			showNode(select_card_pane);
+		// if the Player has to choose Resources to put in their Warehouse
+		} else if (!checkChooseResourceDone(this.player.numberOfResourcesInWarehouse())) {
+			showNode(select_resource_pane);
+		} else {
+			showNode(waiting_pane);
 		}
 	}
 
 	/**
-	 * method that handles the click on the continue_button
-	 */
-	@FXML
-	public void continue_button_click(){
-		hideNode(order_pane);
-		showNode(select_card_pane);
-	}
-
-	/**
-	 * method that handles the click on a leader card
+	 * Set which LeaderCard to discard
 	 *
-	 * @param event is the click on a leader card
-	 * @param index is the index of the card clicked used to identify the leader card 
+	 * @param event the click on a LeaderCard
+	 * @param index the index of the LeaderCard clicked
 	 */
 	@FXML
 	public void leaderCardClick(MouseEvent event, int index){
@@ -178,83 +198,116 @@ public class SetupScene extends SceneController implements Initializable {
 		source.setDisable(true);
 		source.setOpacity(opacity_percent);
 
+		// if all the LeaderCards are discarded, change panel
 		if (checkLeader()){
 			endLeaderScene();
 		} 
 	}
 
 	/**
-	 * @return true if the number of leader card choosen is 2
+	 * @return true if the number of LeaderCard the Player has is 2
 	 */
 	private boolean checkLeader(){
-		return to_delete.size() == 2;
+		int number_of_leader_cards = this.player.getLeaderCards().size() - this.to_delete.size();
+		return number_of_leader_cards == 2;
 	}
 
 	/**
-	 * method called when the player choose 2 leader cards for the end of the leader card scene
+	 * If the Player has discarded all the LeaderCards, change panel
 	 */
 	private void endLeaderScene(){
 		DiscardLeaderMessage message;
 
-		message = new DiscardLeaderMessage(to_delete.get(0));
-		App.sendMessage(message);
-
-		message = new DiscardLeaderMessage(to_delete.get(1));
-		App.sendMessage(message);
+		for (int i = 0; i < to_delete.size(); i++) {
+			message = new DiscardLeaderMessage(to_delete.get(i));
+			App.sendMessage(message);
+		}
 
 		hideNode(select_card_pane);
-		if (player.getNickname().equals(order.get(0))){
+
+		// if the Player is the first one, it doesn't have to choose Resources
+		if (this.player.getNickname().equals(this.order.get(0))){
 			showNode(waiting_pane);
-		} else {
+		// if the Player hasn't already chosen the Resources (in a Persistence Game)
+		} else if (!checkChooseResourceDone(this.player.numberOfResourcesInWarehouse())) {
 			showNode(select_resource_pane);
+		} else {
+			showNode(waiting_pane);
 		}
 	}
 
 	/**
-	 * method called with the button confirm in the resource scene to send the initial storage
+	 * Send the chosen Resources to the Server
 	 */
 	@FXML
-	@SuppressWarnings("unchecked")
 	public void endResourcesScene(){
-		HashMap<String, String> resources_hashmap = new HashMap<String, String>();
-		ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
-		ChooseResourcesMessage message;
-		Storage storage = new Storage();
-		String resize_string;
-		int separator_index;
-
-		for (int i = 0; i < drag_and_drop_arraylist.size(); i ++){
-			resize_string = drag_and_drop_arraylist.get(i);
-			resize_string = resize_string.substring(0, resize_string.length() - 1);
-			separator_index = resize_string.indexOf("|");
-
-			resources_hashmap.put(resize_string.substring(0, separator_index - 1), resize_string.substring(separator_index + 1));
+		// if the sum of the Player's Resources and the one that they chose are different than the supposed one, reverse the drag and drop
+		if (!checkChooseResourceDone(this.drag_and_drop_hashmap.keySet().size() + this.player.numberOfResourcesInWarehouse())) {
+			reverseDragAndDrop();
+			return;
 		}
 
-		for (String key : resources_hashmap.keySet()){
-			resource_to_add.add(Resource.valueOf((key.substring(0, key.length() - 1).toUpperCase())));
+		Storage storage = new Storage();
+		for (ImageView key: this.drag_and_drop_hashmap.keySet()){
+			ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
 
-			switch (resources_hashmap.get(key)){
-				case "top":
+			// get the name of the Resource from the userdata in the FXML
+			resource_to_add.add(Resource.valueOf(key.getUserData().toString()));
+
+			// select which shelf of the Warehouse to put the Resources in
+			switch (drag_and_drop_hashmap.get(key).getParent().getId()){
+				case "warehouse_top":
 					storage.addToWarehouseTop(resource_to_add);
 					break;
-				case "middle":
+				case "warehouse_middle":
 					storage.addToWarehouseMid(resource_to_add);
 					break;
-				case "bottom":
+				case "warehouse_bottom":
 					storage.addToWarehouseBot(resource_to_add);
 					break;
 			}
-
-			resource_to_add.clear();
 		}
 
-		message = new ChooseResourcesMessage(storage);
+		ChooseResourcesMessage message = new ChooseResourcesMessage(storage);
 		App.sendMessage(message);
 
-		drag_and_drop_arraylist.clear();
+		this.drag_and_drop_hashmap.clear();
 
 		hideNode(select_resource_pane);
 		showNode(waiting_pane);
+	}
+
+	/**
+	 * @param number_of_chosen_resources how many Resources the Player has or has chosen
+	 * @return true if the Player has chosen the right amount of Resources
+	 */
+	private boolean checkChooseResourceDone(int number_of_chosen_resources) {
+		switch(getMyOrder()) {
+			case 0:
+				return true;
+			case 1:
+			case 2:
+				return number_of_chosen_resources == 1;
+			case 3:
+				return number_of_chosen_resources == 2;
+			// unreachable
+			default:
+				return false;
+		}
+	}
+
+	/**
+	 * @return the position in the order array
+	 */
+	private int getMyOrder() {
+		int i = 0;
+		for (String nickname: this.order) {
+			if (this.player.getNickname().equals(nickname)) {
+				return i;
+			}
+			i++;
+		}
+		// unreachable
+		return 0;
 	}
 }

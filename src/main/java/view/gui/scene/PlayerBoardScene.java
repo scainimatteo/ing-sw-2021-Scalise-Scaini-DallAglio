@@ -300,6 +300,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * @return an array of all the other Players
+	 */
 	private ArrayList<SimplePlayer> getOtherPlayers(ArrayList<SimplePlayer> players) {
 		ArrayList<SimplePlayer> other_players = new ArrayList<SimplePlayer>();
 		for (SimplePlayer p: players) {
@@ -401,16 +404,16 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (Resource res : strongbox.keySet()){
 			switch (res){
 				case COIN:
-					coin_amount.setText(String.valueOf(strongbox.get(Resource.COIN)));
+					coin_amount.setText("x" + String.valueOf(strongbox.get(Resource.COIN)));
 					break;
 				case SERVANT:
-					servant_amount.setText(String.valueOf(strongbox.get(Resource.SERVANT)));
+					servant_amount.setText("x" + String.valueOf(strongbox.get(Resource.SERVANT)));
 					break;
 				case SHIELD:
-					shield_amount.setText(String.valueOf(strongbox.get(Resource.SHIELD)));
+					shield_amount.setText("x" + String.valueOf(strongbox.get(Resource.SHIELD)));
 					break;
 				case STONE:
-					stone_amount.setText(String.valueOf(strongbox.get(Resource.STONE)));
+					stone_amount.setText("x" + String.valueOf(strongbox.get(Resource.STONE)));
 					break;
 				default:
 					break;
@@ -573,6 +576,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		new GameScene().changeScene("/fxml/gamescene.fxml");
 	}
 
+	/**
+	 * Show the Board of the other Players
+	 */
 	public void changeSceneToOtherPlayer(SimplePlayer other_player){
 		new OtherPlayerScene(other_player).changeScene("/fxml/otherplayerscene.fxml");
 	}

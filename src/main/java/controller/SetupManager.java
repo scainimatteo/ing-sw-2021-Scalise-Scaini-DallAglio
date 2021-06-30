@@ -104,10 +104,11 @@ public class SetupManager {
 	 * @param clients the ClientHandlers of the Players
 	 * @param game the Game parsed from the json file
 	 */
-	public void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game) {
+	public void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game) throws InstantiationException {
 		this.players = game.getPlayers();
 		this.remote_views = new RemoteView[players.size()];
 
+		rearrangeClientHandlers(clients, players);
 		for (int i = 0; i < clients.size(); i++) {
 			this.remote_views[i] = new RemoteView(clients.get(i));
 			clients.get(i).setPlayer(this.players.get(i));
@@ -137,7 +138,7 @@ public class SetupManager {
 	 * @param clients the ClientHandlers of the Players
 	 * @param game the SoloGame parsed from the json file
 	 */
-	public void setupPersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game) {
+	public void setupPersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game) throws InstantiationException {
 		this.players = game.getPlayers();
 		this.remote_views = new RemoteView[1];
 
@@ -150,6 +151,31 @@ public class SetupManager {
 		game.notifyGame();
 		this.players.get(0).notifyPlayer();
 		game.getTurn().notifyTurn();
+	}
+
+	/**
+	 * Rearrange the ClientHandlers array to match the Players one
+	 *
+	 * The ClientHandlers one is ordered as the Clients connected, the Players one as the order of the Game
+	 */
+	private void rearrangeClientHandlers(ArrayList<ClientHandler> clients, ArrayList<Player> players) throws InstantiationException {
+		for (int i = 0; i < clients.size(); i++) {
+			int index = findMatchClientHandlerPlayer(clients, players.get(i));
+			Collections.swap(clients, i, index);
+		}
+	}
+
+	/**
+	 * @return the index in the clients array of the element with the same nickname as the player
+	 */
+	private int findMatchClientHandlerPlayer(ArrayList<ClientHandler> clients, Player player) throws InstantiationException {
+		for (int i = 0; i < clients.size(); i++) {
+			if (clients.get(i).getNickname().equals(player.getNickname())) {
+				return i;
+			}
+		}
+
+		throw new InstantiationException();
 	}
 
 	/**

@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 
 import javafx.stage.Stage;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,11 +21,12 @@ import javafx.event.EventHandler;
 
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.HashMap;
 
 public abstract class SceneController {
 	protected static Stage stage;
-	protected ArrayList<String> drag_and_drop_arraylist = new ArrayList<String>();
-	protected String last_resource_dragged;
+	protected HashMap<ImageView, ImageView> drag_and_drop_hashmap = new HashMap<ImageView, ImageView>();
+	protected ImageView last_image_dragged;
 
 	public static void setStage(Stage stage) {
 		SceneController.stage = stage;
@@ -72,7 +73,7 @@ public abstract class SceneController {
 	 * SOURCE METHODS
 	 */
 	/**
-	 * method called when an image is dragged
+	 * Method called when an image is dragged
 	 *
 	 * @param event the event that creates the drag gesture
 	 * @param source the imageview that creates the drag gesture
@@ -86,7 +87,7 @@ public abstract class SceneController {
 				ClipboardContent content = new ClipboardContent();
 				content.putImage(source.getImage());
 				db.setContent(content);
-				last_resource_dragged = source.getId();
+				last_image_dragged = source;
 				
 				event.consume();
 			}
@@ -96,7 +97,7 @@ public abstract class SceneController {
 	}
 
 	/**
-	 * method that handle when an image is dropped on a target
+	 * Method that handle when an image is dropped on a target
 	 *
 	 * @param event is the event drag done when the image is dropped on a target
 	 * @param source is the imageview that is the source of the drag
@@ -121,7 +122,7 @@ public abstract class SceneController {
 	 * TARGET METHODS
 	 */
 	/**
-	 * method called when the drag gesture is over a target
+	 * Method called when the drag gesture is over a target
 	 *
 	 * @param event is the event of drag over a target
 	 * @param target is the imageview on which a drop gesture is passed
@@ -142,7 +143,7 @@ public abstract class SceneController {
 	}
 
 	/**
-	 * method that handle the drop on a target
+	 * Method that handle the drop on a target
 	 *
 	 * @param event is the event of drop on a target
 	 * @param target is the imageview on which is dropped the image
@@ -156,8 +157,7 @@ public abstract class SceneController {
 
 				if (db.hasImage()) {
 				   target.setImage(db.getImage());
-				   last_resource_dragged += " | " + target.getId();
-				   drag_and_drop_arraylist.add(last_resource_dragged);
+				   drag_and_drop_hashmap.put(last_image_dragged, target);
 				   success = true;
 				}
 
@@ -168,5 +168,18 @@ public abstract class SceneController {
 		};
 
 		event_handler.handle(event);
+	}
+
+	/**
+	 * Return all the ImageViews from the target back to the source and clear the drag_and_drop_hashmap
+	 */
+	protected void reverseDragAndDrop() {
+		for (ImageView imgview: this.drag_and_drop_hashmap.keySet()) {
+			Image tmp_image = imgview.getImage();
+			imgview.setImage(this.drag_and_drop_hashmap.get(imgview).getImage());
+			this.drag_and_drop_hashmap.get(imgview).setImage(tmp_image);
+		}
+
+		this.drag_and_drop_hashmap.clear();
 	}
 }
