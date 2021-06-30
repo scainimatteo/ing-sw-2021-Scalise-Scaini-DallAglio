@@ -414,6 +414,7 @@
                         <Insets bottom="85.0" />
                      </StackPane.margin>
                   </Text>
+                  <Button fx:id="discard_button" mnemonicParsing="false" text="DISCARD" translateX="335.0" translateY="50.0" />
                </children>
             </StackPane>
       	  <Text fx:id="last_turn_text" fill="#ee1e1e" layoutX="30.0" layoutY="699.0" stroke="BLACK" strokeType="OUTSIDE" text="Last turn!">
