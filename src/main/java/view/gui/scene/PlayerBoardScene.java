@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.message.ProductionMessage;
 
+import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
@@ -204,26 +205,43 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * If it's not a SoloGame, don't show the SoloActionTokens
 	 */
 	private void initializeOtherPlayersButton() {
-		ArrayList<String> order = App.getSimpleGame().getOrder();
+		ArrayList<SimplePlayer> players = App.getSimplePlayers();
 
-		if (order.size() != 1){
+		if (players.size() != 1){
 			hideNode(last_token);
 		} 
 
-		if (order.size() <= 3){
-			//TODO: view_player4_button changeScene to player 4
-			hideNode(view_player4_button);
-		} 
-
-		if (order.size() <= 2){
-			//TODO: view_player3_button changeScene to player 3
-			hideNode(view_player3_button);
-		} 
-
-		if (order.size() == 1){
-			//TODO: view_player2_button changeScene to player 2
+		ArrayList<SimplePlayer> other_players = getOtherPlayers(players);
+		if (players.size() == 1){
 			hideNode(view_player2_button);
-		} 
+		} else {
+			view_player2_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(0)));
+			view_player2_button.setText(other_players.get(0).getNickname());
+		}
+
+		if (players.size() <= 2){
+			hideNode(view_player3_button);
+		} else {
+			view_player3_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(1)));
+			view_player3_button.setText(other_players.get(1).getNickname());
+		}
+
+		if (players.size() <= 3){
+			hideNode(view_player4_button);
+		} else {
+			view_player4_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(2)));
+			view_player4_button.setText(other_players.get(2).getNickname());
+		}
+	}
+
+	private ArrayList<SimplePlayer> getOtherPlayers(ArrayList<SimplePlayer> players) {
+		ArrayList<SimplePlayer> other_players = new ArrayList<SimplePlayer>();
+		for (SimplePlayer p: players) {
+			if (!p.getNickname().equals(App.getMyPlayer().getNickname())) {
+				other_players.add(p);
+			}
+		}
+		return other_players;
 	}
 
 	/**
@@ -448,6 +466,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 */
 	public void changeSceneToGame(){
 		new GameScene().changeScene("/fxml/gamescene.fxml");
+	}
+
+	public void changeSceneToOtherPlayer(SimplePlayer other_player){
+		new OtherPlayerScene(other_player).changeScene("/fxml/otherplayerscene.fxml");
 	}
 
 	/**
