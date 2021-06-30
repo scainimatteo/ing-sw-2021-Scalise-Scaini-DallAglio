@@ -99,6 +99,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Text servant_amount;
 
 	@FXML private HBox cost_box;
+	@FXML private HBox gain_box;
+	@FXML private Text pay_or_store_text;
 
 	@FXML private ImageView tile1;
 	@FXML private ImageView tile2;
@@ -135,7 +137,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		initializeCostBoxDragAndDrop();
 
 		hideNode(leader_card_pane);
-		hideNode(cost_resources_pane);
+		//hideNode(cost_resources_pane);
 		hideNode(last_turn_text);
 
 		initializeOtherPlayersButton();
@@ -258,6 +260,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<LeaderCard> leader_cards = App.getMyPlayer().getLeaderCards();
 		int marker_position = App.getMyPlayer().getMarker().getPosition();
 		Tile[] tiles = App.getMyPlayer().getReports();
+		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
+		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
 
 		// PLAYER
 		setWarehouse(warehouse);
@@ -266,6 +270,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		setLeaderCards(leader_cards);
 		setFaithMarker(marker_position);
 		setTiles(tiles);
+		setTurnResources(to_pay, to_store);
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -395,6 +400,42 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
 			leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
 			i++;
+		}
+	}
+
+	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store){
+		if (!to_pay.isEmpty()){
+			showNode(cost_resources_pane);
+			showNode(cost_box);
+			hideNode(gain_box);
+			pay_or_store_text.setText("Drop these resources here to pay the cost");
+			List<Node> hbox_nodes = this.cost_box.getChildren();
+			ImageView res_view;
+			for (int i = 0; i < 10; i++){
+				try{
+					res_view = (ImageView) hbox_nodes.get(i);
+					res_view.setImage(new Image(to_pay.get(i).getPath()));
+				} catch (IndexOutOfBoundsException e){
+					break;
+				}
+			}
+		} else if (!to_store.isEmpty()) {
+			showNode(cost_resources_pane);
+			showNode(gain_box);
+			hideNode(cost_box);
+			pay_or_store_text.setText("Drag these resources away to store your gains");
+			List<Node> hbox_nodes = this.gain_box.getChildren();
+			ImageView res_view;
+			for (int i = 0; i < 10; i++){
+				try{
+					res_view = (ImageView) hbox_nodes.get(i);
+					res_view.setImage(new Image(to_store.get(i).getPath()));
+				} catch (IndexOutOfBoundsException e){
+					break;
+				}
+			}
+		} else {
+			hideNode(cost_resources_pane);
 		}
 	}
 

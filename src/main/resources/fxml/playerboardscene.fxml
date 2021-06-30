@@ -151,6 +151,7 @@
                   </HBox>
                </children>
             </Pane>
+            <Button fx:id="end_turn_button" layoutX="974.0" layoutY="196.0" mnemonicParsing="false" text="End your turn" />
             <GridPane fx:id="faith_track" layoutY="-10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="227.0" prefWidth="1080.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="65.0" minWidth="0.0" prefWidth="56.0" />
@@ -336,7 +337,7 @@
                         <Insets bottom="35.0" left="28.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <Button fx:id="activate_prod_button" mnemonicParsing="false" text="Activate Production" onMouseClicked="#activateProductions" StackPane.alignment="BOTTOM_CENTER" />
+                  <Button fx:id="activate_prod_button" mnemonicParsing="false" onMouseClicked="#activateProductions" text="Activate Production" StackPane.alignment="BOTTOM_CENTER" />
                </children>
             </StackPane>
             <Pane prefHeight="211.0" prefWidth="1080.0">
@@ -358,57 +359,54 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button fx:id="game_button" layoutX="-35.0" layoutY="341.0" mnemonicParsing="false" rotate="90.0" text="Game board" onAction="#changeSceneToGame"/>
-            <VBox alignment="CENTER" layoutX="1014.0" layoutY="236.0" prefHeight="227.0" prefWidth="104.0">
-               <children>
-                  <Button fx:id="view_player2_button" mnemonicParsing="false" rotate="270.0" text="Player 2">
-                     <VBox.margin>
-                        <Insets bottom="80.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="view_player3_button" mnemonicParsing="false" rotate="270.0" text="Player 3" />
-                  <Button fx:id="view_player4_button" mnemonicParsing="false" rotate="270.0" text="Player 4">
-                     <VBox.margin>
-                        <Insets top="80.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
             <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
-            <Pane fx:id="cost_resources_pane" disable="true" layoutX="25.0" layoutY="4.0" prefHeight="200.0" prefWidth="1033.0">
-				 <children>
-					<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d0d0d" height="115.0" layoutX="145.0" layoutY="37.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" width="743.0" />
-					<HBox fx:id="cost_box" alignment="CENTER_LEFT" layoutX="152.0" layoutY="51.0" prefHeight="100.0" prefWidth="729.0">
+            <StackPane fx:id="cost_resources_pane" prefHeight="227.0" prefWidth="1080.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d0d0d" height="115.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" width="778.0" />
+                  <HBox fx:id="cost_box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="765.0">
                      <children>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
-                        <ImageView  fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-                  </ImageView>
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
+                     <StackPane.margin>
+                        <Insets top="25.0" />
+                     </StackPane.margin>
                   </HBox>
-                  <Text fill="WHITE" layoutX="300.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drag here the highlighted resources to pay">
+                  <HBox fx:id="gain_box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="761.0">
+                     <children>
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                     <StackPane.margin>
+                        <Insets top="25.0" />
+                     </StackPane.margin>
+                  </HBox>
+                  <Text fx:id="pay_or_store_text" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Drag here the highlighted resources to pay" x="-70.0">
                      <font>
-	    				<Font name="Lato Black" size="30.0" />
+                        <Font name="Lato Black" size="30.0" />
                      </font>
+                     <StackPane.margin>
+                        <Insets bottom="85.0" />
+                     </StackPane.margin>
                   </Text>
                </children>
-            </Pane>
+            </StackPane>
       	  <Text fx:id="last_turn_text" fill="RED" layoutX="30.0" layoutY="699.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last turn!">
       	     <font>
       	    	<Font name="System Bold Italic" size="31.0" />
@@ -421,5 +419,41 @@
 		</ImageView>
          </children>
       </Pane>
+      <Button fx:id="game_button" mnemonicParsing="false" onAction="#changeSceneToGame" rotate="90.0" text="Game board" translateX="-50.0" StackPane.alignment="CENTER_LEFT">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </Button>
+      <VBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="648.0" prefWidth="244.0" translateX="29.0" StackPane.alignment="CENTER_RIGHT">
+         <children>
+            <Button fx:id="view_player2_button" mnemonicParsing="false" rotate="270.0" text="Player 2">
+               <VBox.margin>
+                  <Insets bottom="80.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="view_player3_button" mnemonicParsing="false" rotate="270.0" text="Player 3">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="view_player4_button" mnemonicParsing="false" rotate="270.0" text="Player 4">
+               <VBox.margin>
+                  <Insets top="80.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </VBox>
    </children>
 </StackPane>
