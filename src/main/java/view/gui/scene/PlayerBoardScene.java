@@ -2,6 +2,8 @@ package it.polimi.ingsw.view.gui.scene;
 
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
+import it.polimi.ingsw.model.card.ExtraSpaceAbility;
+import it.polimi.ingsw.model.card.ProductionAbility;
 
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
 
@@ -12,6 +14,10 @@ import it.polimi.ingsw.model.resources.Production;
 import it.polimi.ingsw.model.resources.Resource;
 
 import it.polimi.ingsw.controller.message.ProductionMessage;
+import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
+import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
+import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
+import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
@@ -59,6 +65,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	ArrayList<Integer> development_card_productions;
 	ArrayList<Resource> all_resources;
 	ArrayList<Resource> set_resources; 
+	ArrayList<Resource> leader_card_output;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
@@ -110,10 +117,22 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane second_slot;
 	@FXML private StackPane third_slot;
 
+	@FXML private ImageView prod_ability_1;
+	@FXML private ImageView extra_space_11;
+	@FXML private ImageView extra_space_12;
+	@FXML private ImageView prod_ability_2;
+	@FXML private ImageView extra_space_21;
+	@FXML private ImageView extra_space_22;
+	@FXML private Button activate_leader_1;
+	@FXML private Button discard_leader_1;
+	@FXML private Button activate_leader_2;
+	@FXML private Button discard_leader_2;
+
 	public PlayerBoardScene() {
 		this.development_card_productions = new ArrayList<Integer>();
 		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
-		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
+		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null, null));
+		this.leader_card_output = new ArrayList<Resource>(Arrays.asList(null, null));
 	}
 
 	/**
@@ -233,6 +252,51 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} else {
 			view_player4_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(2)));
 			view_player4_button.setText(other_players.get(2).getNickname());
+		}
+	}
+
+	/**
+	 * Initialize the leader cards imageview
+	 */
+	private void initializeLeaderCards(){
+		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
+		int counter = 0;
+
+		activate_leader_1.setOnMouseClicked(click -> handleLeaderAction(true, 0));
+		discard_leader_1.setOnMouseClicked(click -> handleLeaderAction(false, 1));
+		activate_leader_2.setOnMouseClicked(click -> handleLeaderAction(true, 2));
+		discard_leader_2.setOnMouseClicked(click -> handleLeaderAction(false, 3));
+
+		for (LeaderCard card : player_leader_cards){
+			if (card.getAbility().checkAbility(new ExtraSpaceAbility(null))){
+				if (counter == 0){
+					prod_ability_1.setDisable(true);
+				} else {
+					prod_ability_2.setDisable(true);
+				}
+			} else if (card.getAbility().checkAbility(new ProductionAbility(null, null))){
+				if (counter == 0){
+					extra_space_11.setDisable(true);
+					extra_space_12.setDisable(true);
+					prod_ability_1.setOnMouseClicked(click -> handleLeaderCardProductionResource(prod_ability_1, 0));
+				} else {
+					extra_space_21.setDisable(true);
+					extra_space_22.setDisable(true);
+					prod_ability_2.setOnMouseClicked(click -> handleLeaderCardProductionResource(prod_ability_2, 1));
+				}
+			} else {
+				if (counter == 0){
+					prod_ability_1.setDisable(true);
+					extra_space_11.setDisable(true);
+					extra_space_12.setDisable(true);
+				} else {
+					prod_ability_2.setDisable(true);
+					extra_space_21.setDisable(true);
+					extra_space_22.setDisable(true);
+				}
+			}
+
+			counter += 1;
 		}
 	}
 
@@ -526,6 +590,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * Method which toggle the sight of the leader card pane
+	 *
+	 * @param button is the button that toggle the sight of the leader card pane
+	 */
 	public void handleToggleLeaderButton(ToggleButton button){
 		if (!button.isSelected()){
 			showNode(leader_card_pane);
@@ -536,6 +605,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * Method that set the resource images in the base production
+	 */
 	public void handleBaseProductionResource(ImageView source, int pos){
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
@@ -549,6 +621,23 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			} else {
 				source.setImage(null);
 				set_resources.set(pos, null);
+			}
+		}
+	}
+
+	public void handleLeaderCardProductionResource(ImageView source, int pos){
+		if (source.getImage() == null){
+			source.setImage(new Image((all_resources.get(0)).getPath()));
+			leader_card_output.set(pos, all_resources.get(0));
+		} else {
+			int resource_pos = all_resources.indexOf(set_resources.get(pos));
+
+			if (resource_pos != 3){
+				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
+				leader_card_output.set(pos, all_resources.get(resource_pos + 1));
+			} else {
+				source.setImage(null);
+				leader_card_output.set(pos, null);
 			}
 		}
 	}
@@ -585,5 +674,23 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 	private boolean checkBaseProductionSet(){
 		return input1.getImage() != null && input2.getImage() != null && output1.getImage() != null;
+	}
+
+	public void handleDiscardButton(){
+		DiscardResourcesMessage message = new DiscardResourcesMessage();
+		App.sendMessage(message);
+	}
+
+	public void handleLeaderAction(boolean activate_or_discard, int index){
+		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
+		Message message;
+
+		if (activate_or_discard){
+			message = new ActivateLeaderMessage(player_leader_cards.get(index));
+		} else {
+			message = new DiscardLeaderMessage(player_leader_cards.get(index));
+		}
+
+		App.sendMessage(message);
 	}
 }

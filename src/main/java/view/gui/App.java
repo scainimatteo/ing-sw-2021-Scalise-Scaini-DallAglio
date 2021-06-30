@@ -44,6 +44,7 @@ public class App extends Application {
 		this.initial_scene.changeScene("/fxml/initialscene.fxml");
 		gui.setApp(this);
 		stage.setTitle("Maestri del Rinascimento");
+		stage.setMaximized(true);
 		stage.show();
 	}
 
