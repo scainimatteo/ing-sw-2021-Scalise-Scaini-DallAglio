@@ -414,7 +414,7 @@ public class Printer {
 
 		String final_round = "";
 		if (turn.isFinal()) {
-			final_round = ANSI.red("|                     FINAL ROUND                     |\n");
+			final_round = ANSI.red("\n|                     FINAL ROUND                     |\n");
 		}
 
 		String nickname_string = "| PLAYING: ";
