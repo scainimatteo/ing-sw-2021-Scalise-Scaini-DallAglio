@@ -17,6 +17,8 @@ import it.polimi.ingsw.controller.message.ProductionMessage;
 import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
+import it.polimi.ingsw.controller.message.StoreMessage;
+import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.message.Message;
 
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
@@ -53,6 +55,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.input.DragEvent;
 
 import java.util.ResourceBundle;
 import java.util.ArrayList;
@@ -66,6 +69,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	ArrayList<Resource> all_resources;
 	ArrayList<Resource> set_resources; 
 	ArrayList<Resource> leader_card_output;
+	Storage warehouse_storage;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
@@ -154,6 +158,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		initializeWarehouseDragAndDrop();
 		initializeStrongBoxDragAndDrop();
 		initializeCostBoxDragAndDrop();
+		initializeGainBoxDragAndDrop();
 
 		hideNode(leader_card_pane);
 		//hideNode(cost_resources_pane);
@@ -183,13 +188,27 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		bottom2.setOnDragDetected(detected -> handleDragDetected(detected, bottom2));
 		bottom3.setOnDragDetected(detected -> handleDragDetected(detected, bottom3));
 
-		// DROP
 		top1.setOnDragDone(done -> handleDragDone(done, top1, true));
 		middle1.setOnDragDone(done -> handleDragDone(done, middle1, true));
 		middle2.setOnDragDone(done -> handleDragDone(done, middle2, true));
 		bottom1.setOnDragDone(done -> handleDragDone(done, bottom1, true));
 		bottom2.setOnDragDone(done -> handleDragDone(done, bottom2, true));
 		bottom3.setOnDragDone(done -> handleDragDone(done, bottom3, true));
+
+		// DROP
+		top1.setOnDragOver(over -> handleDragOver(over, top1));
+		middle1.setOnDragOver(over -> handleDragOver(over, middle1));
+		middle2.setOnDragOver(over -> handleDragOver(over, middle2));
+		bottom1.setOnDragOver(over -> handleDragOver(over, bottom1));
+		bottom2.setOnDragOver(over -> handleDragOver(over, bottom2));
+		bottom3.setOnDragOver(over -> handleDragOver(over, bottom3));
+
+		top1.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, top1));
+		middle1.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, middle1));
+		middle2.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, middle2));
+		bottom1.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, bottom1));
+		bottom2.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, bottom2));
+		bottom3.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, bottom3));
 	}
 
 	/**
@@ -218,6 +237,57 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			node.setOnDragOver(over -> handleDragOver(over, (ImageView) node));
 			node.setOnDragDropped(dropped -> handleDragDropped(dropped, (ImageView) node));
 		}
+	}
+
+	private void initializeGainBoxDragAndDrop(){
+		for (Node node : this.gain_box.getChildren()){
+			node.setOnDragDetected(detected -> handleDragDetected(detected, (ImageView) node));
+			node.setOnDragDone(done -> handleDragDone(done, (ImageView) node, true));
+		}
+	}
+
+	private void handleWarehouseDragDropped(DragEvent event, ImageView target){
+		handleDragDropped(event, target);
+
+		if (warehouse_storage == null){
+			warehouse_storage = new Storage();
+		} 
+
+		for (ImageView key: this.drag_and_drop_hashmap.keySet()){
+			ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
+
+			// get the name of the Resource from the userdata in the FXML
+			resource_to_add.add(Resource.valueOf(key.getUserData().toString()));
+
+			// select which shelf of the Warehouse to put the Resources in
+			switch (drag_and_drop_hashmap.get(key).getParent().getId()){
+				case "warehouse_top":
+					warehouse_storage.addToWarehouseTop(resource_to_add);
+					break;
+				case "warehouse_middle":
+					warehouse_storage.addToWarehouseMid(resource_to_add);
+					break;
+				case "warehouse_bottom":
+					warehouse_storage.addToWarehouseBot(resource_to_add);
+					break;
+			}
+		}
+
+		if (checkGainBox()){
+			StoreMessage message = new StoreMessage(warehouse_storage);
+			App.sendMessage(message);
+			warehouse_storage = null;
+		} 
+	}
+
+	private boolean checkGainBox(){
+		for (Node node : this.gain_box.getChildren()){
+			if (((ImageView) node).getImage() != null){
+				return false;
+			} 
+		}
+
+		return true;
 	}
 
 	/**
@@ -495,7 +565,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store){
-		if (!to_pay.isEmpty()){
+		String active_player = App.getTurn().getPlayer().getNickname();
+
+		if (!to_pay.isEmpty() && !App.getMyPlayer().getNickname().equals(active_player)){
 			showNode(cost_resources_pane);
 			showNode(cost_box);
 			hideNode(gain_box);
