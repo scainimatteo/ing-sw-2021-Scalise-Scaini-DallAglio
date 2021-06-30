@@ -61,6 +61,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	ArrayList<Integer> development_card_productions;
 	ArrayList<Resource> all_resources;
 	ArrayList<Resource> set_resources; 
+	ArrayList<Resource> leader_card_output;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
@@ -123,6 +124,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		this.development_card_productions = new ArrayList<Integer>();
 		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
 		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null, null));
+		this.leader_card_output = new ArrayList<Resource>(Arrays.asList(null, null));
 	}
 
 	/**
@@ -263,9 +265,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 				if (counter == 0){
 					extra_space_11.setDisable(true);
 					extra_space_12.setDisable(true);
+					prod_ability_1.setOnMouseClicked(click -> handleLeaderCardProductionResource(prod_ability_1, 0));
 				} else {
 					extra_space_21.setDisable(true);
 					extra_space_22.setDisable(true);
+					prod_ability_2.setOnMouseClicked(click -> handleLeaderCardProductionResource(prod_ability_2, 1));
 				}
 			} else {
 				if (counter == 0){
@@ -281,7 +285,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 			counter += 1;
 		}
-		
 	}
 
 	private ArrayList<SimplePlayer> getOtherPlayers(ArrayList<SimplePlayer> players) {
@@ -597,6 +600,23 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			} else {
 				source.setImage(null);
 				set_resources.set(pos, null);
+			}
+		}
+	}
+
+	public void handleLeaderCardProductionResource(ImageView source, int pos){
+		if (source.getImage() == null){
+			source.setImage(new Image((all_resources.get(0)).getPath()));
+			leader_card_output.set(pos, all_resources.get(0));
+		} else {
+			int resource_pos = all_resources.indexOf(set_resources.get(pos));
+
+			if (resource_pos != 3){
+				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
+				leader_card_output.set(pos, all_resources.get(resource_pos + 1));
+			} else {
+				source.setImage(null);
+				leader_card_output.set(pos, null);
 			}
 		}
 	}
