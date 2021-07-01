@@ -24,6 +24,8 @@ import it.polimi.ingsw.controller.message.PayMessage;
 import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.message.Message;
 
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
+
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.scene.GameScene;
@@ -31,6 +33,7 @@ import it.polimi.ingsw.view.gui.App;
 
 import it.polimi.ingsw.view.simplemodel.*;
 
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import javafx.scene.control.ToggleButton;
@@ -55,7 +58,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.net.URL;
 
-public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
+public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, ErrorMessageObserver, Initializable {
 	ArrayList<Resource> all_resources;
 	// contains the list of all the DevelopmentCardSlots activated
 	ArrayList<Integer> development_card_productions;
@@ -133,6 +136,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
+
+		// get updated everytime an ErrorMessage is received
+		App.setErrorMessageObserver(this);
 
 		initializeBaseProduction();
 
@@ -291,30 +297,37 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		Storage warehouse_storage = new Storage();
 
-		for (ImageView key: this.drag_and_drop_hashmap.keySet()){
-			ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
+		try {
+			for (ImageView key: this.drag_and_drop_hashmap.keySet()){
+				ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
 
-			// get the name of the Resource from the userdata in the FXML
-			resource_to_add.add(App.getTurn().getProducedResources().get(Integer.parseInt((String) key.getUserData())));
+				// get the name of the Resource from the userdata in the FXML
+				resource_to_add.add(App.getTurn().getProducedResources().get(Integer.parseInt((String) key.getUserData())));
 
-			// select which shelf of the Warehouse to put the Resources in
-			switch (drag_and_drop_hashmap.get(key).getParent().getId()){
-				case "warehouse_top":
-					warehouse_storage.addToWarehouseTop(resource_to_add);
-					break;
-				case "warehouse_middle":
-					warehouse_storage.addToWarehouseMid(resource_to_add);
-					break;
-				case "warehouse_bottom":
-					warehouse_storage.addToWarehouseBot(resource_to_add);
-					break;
+				// select which shelf of the Warehouse to put the Resources in
+				switch (drag_and_drop_hashmap.get(key).getParent().getId()){
+					case "warehouse_top":
+						warehouse_storage.addToWarehouseTop(resource_to_add);
+						break;
+					case "warehouse_middle":
+						warehouse_storage.addToWarehouseMid(resource_to_add);
+						break;
+					case "warehouse_bottom":
+						warehouse_storage.addToWarehouseBot(resource_to_add);
+						break;
+					default:
+						reverseDragAndDrop();
+						return;
+				}
 			}
+		} catch (NumberFormatException e){
+			// something not allowed was trying to insert in the warehouse
+			this.updateView();
+			return;
 		}
 
 		StoreMessage message = new StoreMessage(warehouse_storage);
 		App.sendMessage(message);
-		resetWarehouse();
-		resetTurnResources();
 		this.drag_and_drop_hashmap.clear();
 	}
 
@@ -347,21 +360,21 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		if (players.size() == 1){
 			hideNode(view_player2_button);
 		} else {
-			view_player2_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(0)));
+			view_player2_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(0).getNickname()));
 			view_player2_button.setText(other_players.get(0).getNickname());
 		}
 
 		if (players.size() <= 2){
 			hideNode(view_player3_button);
 		} else {
-			view_player3_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(1)));
+			view_player3_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(1).getNickname()));
 			view_player3_button.setText(other_players.get(1).getNickname());
 		}
 
 		if (players.size() <= 3){
 			hideNode(view_player4_button);
 		} else {
-			view_player4_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(2)));
+			view_player4_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(2).getNickname()));
 			view_player4_button.setText(other_players.get(2).getNickname());
 		}
 	}
@@ -398,6 +411,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		boolean is_last_turn = App.getTurn().isFinal();
 
 		resetFaithTrack();
+		resetWarehouse();
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -473,21 +487,24 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
 
 		// first slot
-		for (int i = this.first_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, i));
-			this.first_slot.getChildren().get(i).setOnMouseClicked(null);
+		for (int i = 0; i < this.first_slot.getChildren().size(); i++) {
+			int size = this.first_slot.getChildren().size() - 1;
+			((ImageView) this.first_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(first_column, i));
+			this.first_slot.getChildren().get(size - i).setOnMouseClicked(null);
 		}
 
 		// second slot
-		for (int i = this.second_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, i));
-			this.second_slot.getChildren().get(i).setOnMouseClicked(null);
+		for (int i = 0; i < this.second_slot.getChildren().size(); i++) {
+			int size = this.second_slot.getChildren().size() - 1;
+			((ImageView) this.second_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(second_column, i));
+			this.second_slot.getChildren().get(size - i).setOnMouseClicked(null);
 		}
 
 		// third slot
-		for (int i = this.third_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, i));
-			this.third_slot.getChildren().get(i).setOnMouseClicked(null);
+		for (int i = 0; i < this.third_slot.getChildren().size(); i++) {
+			int size = this.third_slot.getChildren().size() - 1;
+			((ImageView) this.third_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(third_column, i));
+			this.third_slot.getChildren().get(size - i).setOnMouseClicked(null);
 		}
 
 		// set methods to activate the DevelopmentCards
@@ -677,7 +694,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 *
+	 * @param res the Resource to get the Image of
+	 * @return the Image representing res, null if res was null
 	 */
 	private Image getImageFromResource(Resource res) {
 		if (res == null) {
@@ -697,7 +715,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 *
+	 * Set all the ImageViews of the TurnResources as null
 	 */
 	private void resetTurnResources() {
 		for (int i = 0; i < this.cost_box.getChildren().size(); i++) {
@@ -710,7 +728,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 *
+	 * Set all the ImageViews of the Warehouse as null
 	 */
 	private void resetWarehouse(){
 		for (int i = 0; i < this.warehouse_top.getChildren().size(); i++){
@@ -745,6 +763,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
+	 * Reset the View after if ErrorMessage is received
+	 */
+	public void receivedErrorMessage() {
+		this.updateView();
+	}
+
+	/**
 	 * BUTTON HANDLERS
 	 */
 
@@ -752,18 +777,20 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Show the GameScene
 	 */
 	public void changeSceneToGame(){
-		// remove the Scene from the array of ViewUpdateObservers to save memory
+		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
+		App.removeErrorMessageObserver(this);
 		new GameScene().changeScene("/fxml/gamescene.fxml");
 	}
 
 	/**
 	 * Show the Board of the other Players
 	 */
-	public void changeSceneToOtherPlayer(SimplePlayer other_player){
-		// remove the Scene from the array of ViewUpdateObservers to save memory
+	public void changeSceneToOtherPlayer(String other_player_nickname){
+		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
-		new OtherPlayerScene(other_player).changeScene("/fxml/otherplayerscene.fxml");
+		App.removeErrorMessageObserver(this);
+		new OtherPlayerScene(other_player_nickname).changeScene("/fxml/otherplayerscene.fxml");
 	}
 
 	/**

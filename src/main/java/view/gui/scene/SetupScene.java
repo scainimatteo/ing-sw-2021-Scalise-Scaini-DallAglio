@@ -15,6 +15,10 @@ import it.polimi.ingsw.controller.message.ChooseResourcesMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.Storage;
 
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
+
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.input.DragEvent;
@@ -40,7 +44,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.net.URL;
 
-public class SetupScene extends SceneController implements Initializable {
+public class SetupScene extends SceneController implements Initializable, ErrorMessageObserver {
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
 	ArrayList<String> order;
 	double opacity_percent = 0.5;
@@ -70,6 +74,9 @@ public class SetupScene extends SceneController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources){
 		this.player = App.getMyPlayer();
 		this.order = App.getSimpleGame().getOrder();
+
+		// get updated everytime an ErrorMessage is received
+		App.setErrorMessageObserver(this);
 
 		setOrderPane();
 		setChooseResources();
@@ -163,6 +170,17 @@ public class SetupScene extends SceneController implements Initializable {
 		bottom1.setOnDragDropped(dropped4 -> handleDragDropped(dropped4, bottom1));
 		bottom2.setOnDragDropped(dropped5 -> handleDragDropped(dropped5, bottom2));
 		bottom3.setOnDragDropped(dropped6 -> handleDragDropped(dropped6, bottom3));
+	}
+
+	/**
+	 * Reverse the drag and drop if an ErrorMessage is received while choosing the Resources
+	 */
+	public void receivedErrorMessage() {
+		reverseDragAndDrop();
+		this.drag_and_drop_hashmap.clear();
+
+		showNode(select_resource_pane);
+		hideNode(waiting_pane);
 	}
 
 	/**
@@ -270,8 +288,6 @@ public class SetupScene extends SceneController implements Initializable {
 
 		ChooseResourcesMessage message = new ChooseResourcesMessage(storage);
 		App.sendMessage(message);
-
-		this.drag_and_drop_hashmap.clear();
 
 		hideNode(select_resource_pane);
 		showNode(waiting_pane);

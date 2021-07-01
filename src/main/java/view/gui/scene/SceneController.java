@@ -99,9 +99,9 @@ public abstract class SceneController {
 	/**
 	 * Method that handle when an image is dropped on a target
 	 *
-	 * @param event is the event drag done when the image is dropped on a target
-	 * @param source is the imageview that is the source of the drag
-	 * @param set_null is the boolean that defines if in the source has to be setted to null the image
+	 * @param event the event drag done when the image is dropped on a target
+	 * @param source the imageview that is the source of the drag
+	 * @param set_null the boolean that defines if in the source has to be setted to null the image
 	 */
 	@FXML
 	public void handleDragDone(DragEvent event, ImageView source, boolean set_null){
@@ -124,8 +124,8 @@ public abstract class SceneController {
 	/**
 	 * Method called when the drag gesture is over a target
 	 *
-	 * @param event is the event of drag over a target
-	 * @param target is the imageview on which a drop gesture is passed
+	 * @param event the event of drag over a target
+	 * @param target the imageview on which a drop gesture is passed
 	 */
 	@FXML
 	public void handleDragOver(DragEvent event, ImageView target){
@@ -145,8 +145,8 @@ public abstract class SceneController {
 	/**
 	 * Method that handle the drop on a target
 	 *
-	 * @param event is the event of drop on a target
-	 * @param target is the imageview on which is dropped the image
+	 * @param event the event of drop on a target
+	 * @param target the imageview on which is dropped the image
 	 */
 	@FXML
 	public void handleDragDropped(DragEvent event, ImageView target){

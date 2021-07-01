@@ -70,7 +70,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 				});
 			} else if (error_message.nickname == null || error_message.nickname.equals(this.getMyPlayer().getNickname())) {
 				alert.show();
-				notifyReceivedErrorMessage(error_message);
+				notifyReceivedErrorMessage();
 			}
 		});
 	}
@@ -156,6 +156,10 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	}
 
 	/**
+	 * OBSERVERS
+	 */
+
+	/**
 	 * Now that the initialization has finished, call handleInitializing again with the queued messages
 	 */
 	public void finishedInitialization() {
@@ -187,14 +191,23 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	}
 
 	/**
+	 * Remove a ErrorMessageObserver from the error_message_observers array
+	 *
+	 * @param observer the ErrorMessageObserver to remove
+	 */
+	public void removeErrorMessageObserver(ErrorMessageObserver observer) {
+		this.error_message_observers.remove(observer);
+	}
+
+	/**
 	 * Notify to the ErrorMessageObserver listening that the Player received an ErrorMessage
 	 *
 	 * @param error_message the ErrorMessage received
 	 */
 	@Override
-	public void notifyReceivedErrorMessage(ErrorMessage error_message){
+	public void notifyReceivedErrorMessage(){
 		for (ErrorMessageObserver e: this.error_message_observers){
-			e.receivedErrorMessage(error_message);
+			e.receivedErrorMessage();
 		}
 	}
 }

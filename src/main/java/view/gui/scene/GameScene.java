@@ -24,13 +24,14 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import it.polimi.ingsw.view.gui.scene.PlayerBoardScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
-public class GameScene extends SceneController implements ViewUpdateObserver, Initializable {
+public class GameScene extends SceneController implements ViewUpdateObserver, ErrorMessageObserver, Initializable {
 	@FXML private ImageView free_marble;
 	@FXML private GridPane market_grid;
 	@FXML private GridPane dev_card_grid;
@@ -47,6 +48,9 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
+
+		// get updated everytime an ErrorMessage is received
+		App.setErrorMessageObserver(this);
 	}
 
 	/**
@@ -71,13 +75,13 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 * @param free_marble the free Resource in the Market
 	 */
 	private void setMarket(Resource[][] market, Resource free_marble) {
-		this.free_marble.setImage(new Image(getClass().getResource(getMarblePath(free_marble)).toString()));
+		this.free_marble.setImage(new Image(getMarblePath(free_marble)));
 
 		int i = 0;
 		int j = 0;
 		for (Node node: this.market_grid.getChildren()) {
 			// set the path of each square of the GridPane
-			((ImageView) node).setImage(new Image(getClass().getResource(getMarblePath(market[i][j])).toString()));
+			((ImageView) node).setImage(new Image(getMarblePath(market[i][j])));
 
 			j++;
 			if (j % 4 == 0) {
@@ -179,7 +183,18 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	}
 
 	/**
-	 * Method called when a DevelopmentCard is clicked on
+	 * Reset the View after if ErrorMessage is received
+	 */
+	public void receivedErrorMessage() {
+		this.updateView();
+	}
+
+	/**
+	 * BUTTON HANDLERS
+	 */
+
+	/**
+	 * Called when a DevelopmentCard is clicked on
 	 *
 	 * @param e the MouseEvent that triggered this method
 	 * @param row the row on the DevelopmentCardsOnTable matrix
@@ -190,8 +205,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		this.chosen_card_column = column;
 		// show the buttons for the slot
 		StackPane pane = (StackPane)((ImageView) e.getSource()).getParent();
-		pane.getChildren().get(1).setVisible(true);
-		pane.getChildren().get(1).setDisable(false);
+		showNode(pane.getChildren().get(1));
 	}
 
 	/**
@@ -203,8 +217,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		App.sendMessage(message);
 		// hide the slot buttons
 		HBox hbox = (HBox)((Node) e.getSource()).getParent();
-		hbox.setVisible(false);
-		hbox.setDisable(true);
+		hideNode(hbox);
 	}
 
 	/**
@@ -216,8 +229,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		App.sendMessage(message);
 		// hide the slot buttons
 		HBox hbox = (HBox)((Node) e.getSource()).getParent();
-		hbox.setVisible(false);
-		hbox.setDisable(true);
+		hideNode(hbox);
 	}
 
 	/**
@@ -229,16 +241,16 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		App.sendMessage(message);
 		// hide the slot buttons
 		HBox hbox = (HBox)((Node) e.getSource()).getParent();
-		hbox.setVisible(false);
-		hbox.setDisable(true);
+		hideNode(hbox);
 	}
 
 	/**
 	 * Show the PlayerBoardScene
 	 */
 	public void changeSceneToBoard() {
-		// remove the Scene from the array of ViewUpdateObservers to save memory
+		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
+		App.removeErrorMessageObserver(this);
 		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 

@@ -178,4 +178,13 @@ public class App extends Application {
 	public static void setErrorMessageObserver(ErrorMessageObserver observer) {
 		gui.addErrorMessageObserver(observer);
 	}
+
+	/**
+	 * Remove a ErrorMessageObserver from the GUI array of ErrorMessageObservers
+	 *
+	 * @param observer the ErrorMessageObserver to remove
+	 */
+	public static void removeErrorMessageObserver(ErrorMessageObserver observer) {
+		gui.removeErrorMessageObserver(observer);
+	}
 }

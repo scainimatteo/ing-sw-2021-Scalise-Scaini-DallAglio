@@ -29,7 +29,7 @@
                   <DropShadow height="40.5" radius="36.7675" width="108.57" />
                </effect>
             </ImageView>
-            <GridPane id="Strongbox" fx:id="strongbox" alignment="CENTER" hgap="10.0" layoutX="1.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="212.0" vgap="10.0">
+            <GridPane fx:id="strongbox" alignment="CENTER" hgap="10.0" layoutX="1.0" layoutY="526.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="212.0" vgap="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.0" minWidth="10.0" prefWidth="61.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="79.0" />
@@ -256,7 +256,7 @@
             </ImageView>
                </children>
             </GridPane>
-            <HBox fx:id="development_card_slot" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" visible="false" StackPane.alignment="CENTER_LEFT">
+            <HBox fx:id="development_card_slot" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" StackPane.alignment="CENTER_LEFT">
                <children>
                   <StackPane fx:id="first_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                      <children>
