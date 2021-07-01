@@ -14,6 +14,7 @@ import javafx.scene.Node;
 
 import java.awt.event.ActionEvent;
 import java.util.ResourceBundle;
+import java.util.ArrayList;
 import java.net.URL;
 
 import it.polimi.ingsw.controller.message.PersistenceMessage;
@@ -41,6 +42,13 @@ public class GameScene extends SceneController implements ViewUpdateObserver, Er
 	// indexes of the card chosen by the player
 	private int chosen_card_row;
 	private int chosen_card_column;
+
+	// contains all the Resources chosen from WhiteMarblesAbilities
+	private ArrayList<Resource> white_marbles_resources;
+
+	public GameScene(ArrayList<Resource> white_marbles_resources) {
+		this.white_marbles_resources = white_marbles_resources;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
@@ -130,7 +138,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, Er
 	 * @param row the row chosen
 	 */
 	public void chooseRow(int row) {
-		MarketMessage message = new MarketMessage(false, row);
+		MarketMessage message = new MarketMessage(false, row, this.white_marbles_resources);
 		App.sendMessage(message);
 	}
 
@@ -140,7 +148,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, Er
 	 * @param column the column chosen
 	 */
 	public void chooseColumn(int column) {
-		MarketMessage message = new MarketMessage(true, column);
+		MarketMessage message = new MarketMessage(true, column, this.white_marbles_resources);
 		App.sendMessage(message);
 	}
 
