@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui.scene;
 
+import it.polimi.ingsw.model.card.WhiteMarblesAbility;
 import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.ProductionAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
@@ -66,6 +67,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	ArrayList<Resource> set_resources; 
 	// contains the Resources decided by the ProductionAbilities of the LeaderCards
 	ArrayList<Resource> leader_card_output;
+	// contains the number of Resources decided by the WhiteMarblesAbilities of the LeaderCards
+	ArrayList<Integer> white_marbles_numbers;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
@@ -124,6 +127,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
 		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
 		this.leader_card_output = new ArrayList<Resource>(Arrays.asList(null, null));
+		this.white_marbles_numbers = new ArrayList<Integer>(Arrays.asList(0, 0));
 	}
 
 	/**
@@ -558,20 +562,30 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		// if the LeaderCard has an ExtraSpaceAbility
 		if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ExtraSpaceAbility(null))) {
-			// hide the ProductionAbility modifier
+			// hide the ProductionAbility and WhiteMarblesAbility modifier
 			hideNode(leader_card.getChildren().get(2));
+			hideNode(leader_card.getChildren().get(3));
 
 			setExtraSpaceAbility((HBox) leader_card.getChildren().get(1), player_leader_card);
 		// if the LeaderCard has a ProductionAbility
 		} else if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ProductionAbility(null, null))) {
-			// hide the ProductionAbility modifier
+			// hide the ExtraSpaceAbility and WhiteMarblesAbility modifier
 			hideNode(leader_card.getChildren().get(1));
+			hideNode(leader_card.getChildren().get(3));
 
-			setProductionAbility((ImageView) leader_card.getChildren().get(2), player_leader_card, index);
+			setProductionAbility((ImageView) leader_card.getChildren().get(2), index);
+		// if the LeaderCard has a WhiteMarblesAbility
+		} else if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new WhiteMarblesAbility(null))) {
+			// hide the ExtraSpaceAbility and ProductionAbility modifier
+			hideNode(leader_card.getChildren().get(1));
+			hideNode(leader_card.getChildren().get(2));
+
+			setWhiteMarbleAbility((Text) leader_card.getChildren().get(3), index);
 		} else {
 			// hide every LeaderCard modifier
 			hideNode(leader_card.getChildren().get(1));
 			hideNode(leader_card.getChildren().get(2));
+			hideNode(leader_card.getChildren().get(3));
 		}
 	}
 
@@ -587,9 +601,14 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
-	private void setProductionAbility(ImageView production_image, LeaderCard player_leader_card, int index) {
+	private void setProductionAbility(ImageView production_image, int index) {
 		production_image.setOnMouseClicked(click -> chooseProductionAbilityResource(production_image, index));
 		showNode(production_image);
+	}
+
+	private void setWhiteMarbleAbility(Text white_marbles_text, int index) {
+		white_marbles_text.setOnMouseClicked(click -> chooseWhiteMarblesNumber(white_marbles_text, index));
+		showNode(white_marbles_text);
 	}
 
 	private void setFaithMarker(int faith_marker){
@@ -780,7 +799,31 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
 		App.removeErrorMessageObserver(this);
-		new GameScene().changeScene("/fxml/gamescene.fxml");
+
+		// send the GameScene the array of Resources chosen by the WhiteMarblesAbilities
+		new GameScene(createWhiteMarblesResources()).changeScene("/fxml/gamescene.fxml");
+	}
+
+	/**
+	 * Create an array of Resources as chosen by the WhiteMarblesAbility
+	 */
+	private ArrayList<Resource> createWhiteMarblesResources() {
+		ArrayList<Resource> white_marbles_resources = new ArrayList<Resource>();
+
+		for (int i = 0; i < this.white_marbles_numbers.size(); i++) {
+			// if the LeaderCard doesn't have a WhiteMarblesAbility or if it's not active
+			if (this.white_marbles_numbers.get(i) == 0) {
+				continue;
+			}
+
+			// add to the Resources array the ones chosen by the Player
+			WhiteMarblesAbility white_marbles = (WhiteMarblesAbility) App.getMyPlayer().getLeaderCards().get(i).getAbility();
+			for (int j = 0; j < this.white_marbles_numbers.get(i); j++) {
+				white_marbles_resources.add(white_marbles.getResourceType());
+			}
+		}
+
+		return white_marbles_resources;
 	}
 
 	/**
@@ -900,7 +943,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		ProductionMessage message = new ProductionMessage(productions);
 		App.sendMessage(message);
-		// TODO: updateView();
 	}
 
 	/**
@@ -935,12 +977,31 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
+	 * Set the number chosen in the WhiteMarblesAbility, looping between all the possible choices (0-4)
+	 *
+	 * @param source the text of the WhiteMarblesAbility
+	 * @param index the index of the LeaderCard in the leader_card_output array
+	 */
+	public void chooseWhiteMarblesNumber(Text source, int index){
+		int current_state = this.white_marbles_numbers.get(index);
+
+		// loop for all the possible numbers
+		if (current_state == 4){
+			 current_state = 0;
+		} else {
+			 current_state = current_state + 1;
+		}
+
+		this.white_marbles_numbers.set(index, current_state);
+		source.setText("+" + String.valueOf(current_state));
+	}
+
+	/**
 	 * Send a DiscardResourcesMessage
 	 */
 	public void handleDiscardResources(){
 		DiscardResourcesMessage message = new DiscardResourcesMessage();
 		App.sendMessage(message);
-		//TODO: updateView();
 	}
 
 	/**
@@ -965,16 +1026,25 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		App.sendMessage(message);
 	}
 
+	/**
+	 * Send a RearrangeMessage to swap the first and the second rows of the Warehouse
+	 */
 	public void handleSwapFirstSecond(){
 		RearrangeMessage message = new RearrangeMessage(1, 2);
 		App.sendMessage(message);
 	}
 
+	/**
+	 * Send a RearrangeMessage to swap the second and the third rows of the Warehouse
+	 */
 	public void handleSwapSecondThird(){
 		RearrangeMessage message = new RearrangeMessage(2, 3);
 		App.sendMessage(message);
 	}
 
+	/**
+	 * Send a RearrangeMessage to swap the first and the third rows of the Warehouse
+	 */
 	public void handleSwapFirstThird(){
 		RearrangeMessage message = new RearrangeMessage(1, 3);
 		App.sendMessage(message);
