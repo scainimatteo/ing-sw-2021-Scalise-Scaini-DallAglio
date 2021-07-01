@@ -24,6 +24,8 @@ import it.polimi.ingsw.controller.message.PayMessage;
 import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.message.Message;
 
+import it.polimi.ingsw.controller.servermessage.ErrorMessage;
+
 import it.polimi.ingsw.view.gui.scene.OtherPlayerScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.scene.GameScene;
@@ -31,6 +33,7 @@ import it.polimi.ingsw.view.gui.App;
 
 import it.polimi.ingsw.view.simplemodel.*;
 
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import javafx.scene.control.ToggleButton;
@@ -55,7 +58,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.net.URL;
 
-public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
+public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, ErrorMessageObserver, Initializable {
 	ArrayList<Resource> all_resources;
 	// contains the list of all the DevelopmentCardSlots activated
 	ArrayList<Integer> development_card_productions;
@@ -133,6 +136,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
+
+		// get updated everytime an ErrorMessage is received
+		App.setErrorMessageObserver(this);
 
 		initializeBaseProduction();
 
@@ -747,6 +753,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
+	 * Reset the View after if ErrorMessage is received
+	 */
+	public void receivedErrorMessage() {
+		this.updateView();
+	}
+
+	/**
 	 * BUTTON HANDLERS
 	 */
 
@@ -754,8 +767,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Show the GameScene
 	 */
 	public void changeSceneToGame(){
-		// remove the Scene from the array of ViewUpdateObservers to save memory
+		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
+		App.removeErrorMessageObserver(this);
 		new GameScene().changeScene("/fxml/gamescene.fxml");
 	}
 
@@ -763,8 +777,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Show the Board of the other Players
 	 */
 	public void changeSceneToOtherPlayer(String other_player_nickname){
-		// remove the Scene from the array of ViewUpdateObservers to save memory
+		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
+		App.removeErrorMessageObserver(this);
 		new OtherPlayerScene(other_player_nickname).changeScene("/fxml/otherplayerscene.fxml");
 	}
 

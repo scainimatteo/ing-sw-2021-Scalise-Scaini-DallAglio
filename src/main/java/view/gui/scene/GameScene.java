@@ -24,13 +24,14 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 
 import it.polimi.ingsw.model.resources.Resource;
 
+import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 import it.polimi.ingsw.view.gui.scene.PlayerBoardScene;
 import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.App;
 
-public class GameScene extends SceneController implements ViewUpdateObserver, Initializable {
+public class GameScene extends SceneController implements ViewUpdateObserver, ErrorMessageObserver, Initializable {
 	@FXML private ImageView free_marble;
 	@FXML private GridPane market_grid;
 	@FXML private GridPane dev_card_grid;
@@ -47,6 +48,9 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
+
+		// get updated everytime an ErrorMessage is received
+		App.setErrorMessageObserver(this);
 	}
 
 	/**
@@ -179,7 +183,18 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	}
 
 	/**
-	 * Method called when a DevelopmentCard is clicked on
+	 * Reset the View after if ErrorMessage is received
+	 */
+	public void receivedErrorMessage() {
+		this.updateView();
+	}
+
+	/**
+	 * BUTTON HANDLERS
+	 */
+
+	/**
+	 * Called when a DevelopmentCard is clicked on
 	 *
 	 * @param e the MouseEvent that triggered this method
 	 * @param row the row on the DevelopmentCardsOnTable matrix
@@ -233,8 +248,9 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 	 * Show the PlayerBoardScene
 	 */
 	public void changeSceneToBoard() {
-		// remove the Scene from the array of ViewUpdateObservers to save memory
+		// remove the Scene from the array of ViewUpdateObservers and ErrorMessageObserver to save memory
 		App.removeViewUpdateObserver(this);
+		App.removeErrorMessageObserver(this);
 		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 
