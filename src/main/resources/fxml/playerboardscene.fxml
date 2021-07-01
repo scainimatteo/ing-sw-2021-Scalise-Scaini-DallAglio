@@ -477,9 +477,9 @@
             <Insets />
          </StackPane.margin>
       </Button>
-      <VBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="648.0" prefWidth="147.0" spacing="20.0" translateX="35.0" StackPane.alignment="CENTER_RIGHT">
+      <VBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="648.0" prefWidth="147.0" spacing="80.0" translateX="35.0" StackPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="view_player2_button" mnemonicParsing="false" rotate="270.0" text="Player 2" translateX="30.0">
+            <Button fx:id="view_player2_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" rotate="270.0" text="Player 2" translateX="40.0">
                <VBox.margin>
                   <Insets bottom="80.0" />
                </VBox.margin>
@@ -487,12 +487,12 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="view_player3_button" mnemonicParsing="false" rotate="270.0" text="Player 3" translateX="30.0">
+            <Button fx:id="view_player3_button" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" rotate="270.0" text="Player 3" translateX="40.0">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="view_player4_button" mnemonicParsing="false" rotate="270.0" text="Player 4" translateX="30.0">
+            <Button fx:id="view_player4_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" rotate="270.0" text="Player 4" translateX="40.0">
                <VBox.margin>
                   <Insets top="80.0" />
                </VBox.margin>
