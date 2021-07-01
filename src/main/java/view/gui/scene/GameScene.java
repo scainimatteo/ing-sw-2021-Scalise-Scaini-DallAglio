@@ -75,13 +75,13 @@ public class GameScene extends SceneController implements ViewUpdateObserver, Er
 	 * @param free_marble the free Resource in the Market
 	 */
 	private void setMarket(Resource[][] market, Resource free_marble) {
-		this.free_marble.setImage(new Image(getClass().getResource(getMarblePath(free_marble)).toString()));
+		this.free_marble.setImage(new Image(getMarblePath(free_marble)));
 
 		int i = 0;
 		int j = 0;
 		for (Node node: this.market_grid.getChildren()) {
 			// set the path of each square of the GridPane
-			((ImageView) node).setImage(new Image(getClass().getResource(getMarblePath(market[i][j])).toString()));
+			((ImageView) node).setImage(new Image(getMarblePath(market[i][j])));
 
 			j++;
 			if (j % 4 == 0) {
