@@ -39,7 +39,7 @@ import it.polimi.ingsw.view.simplemodel.SimpleGame;
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
 public class OtherPlayerScene extends SceneController implements ViewUpdateObserver, Initializable {
-	SimplePlayer other_player;
+	String other_player_nickname;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
@@ -49,11 +49,9 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	@FXML private ToggleButton leaders_button;
 
 	@FXML private ImageView top1;
-	@FXML private ImageView middle1;
-	@FXML private ImageView middle2;
-	@FXML private ImageView bottom1;
-	@FXML private ImageView bottom2;
-	@FXML private ImageView bottom3;
+	@FXML private HBox warehouse_top;
+	@FXML private HBox warehouse_middle;
+	@FXML private HBox warehouse_bottom;
 
 	@FXML private Text coin_amount;
 	@FXML private Text shield_amount;
@@ -70,8 +68,8 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 
 	@FXML private Text nickname_text;
 
-	public OtherPlayerScene(SimplePlayer other_player) {
-		this.other_player = other_player;
+	public OtherPlayerScene(String other_player_nickname) {
+		this.other_player_nickname = other_player_nickname;
 	}
 
 	/**
@@ -85,11 +83,9 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
 
-		leaders_button.setOnMouseClicked(click -> handleToggleLeaderButton(leaders_button));
-
-		this.nickname_text.setText(this.other_player.getNickname());
-
 		hideNode(leader_card_pane);
+
+		this.nickname_text.setText(this.other_player_nickname);
 	}
 
 	/**
@@ -100,12 +96,16 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	 * This method gets called once at the start and everytime there's a ViewUpdate (when the Model is changed)
 	 */
 	public void updateView(){
-		SimpleWarehouse warehouse = this.other_player.getWarehouse();
-		HashMap<Resource, Integer> strongbox = this.other_player.getStrongbox();
-		SimpleDevelopmentCardSlot development_card_slot = this.other_player.getDevelopmentCardsSlots();
-		ArrayList<LeaderCard> leader_cards = this.other_player.getLeaderCards();
-		int marker_position = this.other_player.getMarker().getPosition();
-		Tile[] tiles = this.other_player.getReports();
+		SimplePlayer other_player = getOtherPlayer();
+		SimpleWarehouse warehouse = other_player.getWarehouse();
+		HashMap<Resource, Integer> strongbox = other_player.getStrongbox();
+		SimpleDevelopmentCardSlot development_card_slot = other_player.getDevelopmentCardsSlots();
+		ArrayList<LeaderCard> leader_cards = other_player.getLeaderCards();
+		int marker_position = other_player.getMarker().getPosition();
+		Tile[] tiles = other_player.getReports();
+
+		resetFaithTrack();
+		resetWarehouse();
 
 		// PLAYER
 		setWarehouse(warehouse);
@@ -116,54 +116,38 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		setTiles(tiles);
 	}
 
+	private SimplePlayer getOtherPlayer() {
+		for (SimplePlayer p: App.getSimplePlayers()) {
+			if (p.getNickname().equals(this.other_player_nickname)) {
+				return p;
+			}
+		}
+
+		return null;
+	}
+
 	private void setWarehouse(SimpleWarehouse warehouse){
 		ArrayList<Resource> top = warehouse.getTopResource();
 		ArrayList<Resource> mid = warehouse.getMiddleResources();
 		ArrayList<Resource> bot = warehouse.getBottomResources();
-		int counter = 0;
 
 		for (Resource res : top){
-			if (res != null){
-				top1.setImage(new Image(res.getPath()));
-			} else {
-				top1.setImage(null);
+			this.top1.setImage(getImageFromResource(res));
+		}
+
+		for (int i = 0; i < this.warehouse_middle.getChildren().size(); i++){
+			ImageView middle_image = (ImageView) this.warehouse_middle.getChildren().get(i);
+			try {
+				middle_image.setImage(getImageFromResource(mid.get(i)));
+			} catch (IndexOutOfBoundsException e) {
 			}
 		}
 
-		for (Resource res : mid){
-			if (res != null){
-				if (counter == 0){
-					middle1.setImage(new Image(res.getPath()));
-				} else if (counter == 1){
-					middle2.setImage(new Image(res.getPath()));
-				}
-			} else {
-				if (counter == 0){
-					middle1.setImage(null);
-				} else if (counter == 1){
-					middle2.setImage(null);
-				}
-			}
-			counter += 1;
-		}
-
-		for (Resource res : bot){
-			if (res != null){
-				if (counter == 0){
-					bottom1.setImage(new Image(res.getPath()));
-				} else if (counter == 1){
-					bottom2.setImage(new Image(res.getPath()));
-				} else if (counter == 2){
-					bottom3.setImage(new Image(res.getPath()));
-				}
-			} else {
-				if (counter == 0){
-					bottom1.setImage(null);
-				} else if (counter == 1){
-					bottom2.setImage(null);
-				} else if (counter == 2){
-					bottom3.setImage(null);
-				}
+		for (int i = 0; i < this.warehouse_bottom.getChildren().size(); i++){
+			ImageView bottom_image = (ImageView) this.warehouse_bottom.getChildren().get(i);
+			try {
+				bottom_image.setImage(getImageFromResource(bot.get(i)));
+			} catch (IndexOutOfBoundsException e) {
 			}
 		}
 	}
@@ -195,21 +179,18 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
 
 		// first slot
-		for (int i = 0; i < this.first_slot.getChildren().size(); i++) {
+		for (int i = this.first_slot.getChildren().size() - 1; i >= 0; i--) {
 			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, i));
-			this.first_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// second slot
-		for (int i = 0; i < this.second_slot.getChildren().size(); i++) {
+		for (int i = this.second_slot.getChildren().size() - 1; i >= 0; i--) {
 			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, i));
-			this.second_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// third slot
-		for (int i = 0; i < this.third_slot.getChildren().size(); i++) {
+		for (int i = this.third_slot.getChildren().size() - 1; i >= 0; i--) {
 			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, i));
-			this.third_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 	}
 
@@ -217,13 +198,13 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		int i = 0;
 		for (Node node: this.leader_card_array.getChildren()) {
 			if (i < leader_cards.size()) {
-				VBox leader_card = (VBox) node;
-				ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
+				StackPane leader_card_stackpane = (StackPane) node;
+				ImageView leader_card_image = (ImageView) leader_card_stackpane.getChildren().get(0);
 				// only show the active LeaderCards of the other Players
 				if (leader_cards.get(i).isActive()) {
 					leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
 			
-					setLeaderCardAbility(leader_card, leader_cards.get(i));
+					setLeaderCardAbility(leader_card_stackpane, leader_cards.get(i));
 				}
 
 				showNode(node);
@@ -234,28 +215,25 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
-	private void setLeaderCardAbility(VBox leader_card, LeaderCard player_leader_card) {
+	private void setLeaderCardAbility(StackPane leader_card, LeaderCard player_leader_card) {
 		// if the LeaderCard has an ExtraSpaceAbility
 		if (player_leader_card.getAbility().checkAbility(new ExtraSpaceAbility(null))) {
-			setExtraSpaceAbility(leader_card, player_leader_card);
+			setExtraSpaceAbility((HBox) leader_card.getChildren().get(1), player_leader_card);
 		} else {
 			// hide every LeaderCard modifier
 			hideNode(leader_card.getChildren().get(1));
-			hideNode(leader_card.getChildren().get(2));
 		}
 	}
 
-	private void setExtraSpaceAbility(VBox leader_card, LeaderCard player_leader_card) {
+	private void setExtraSpaceAbility(HBox extra_space, LeaderCard player_leader_card) {
 		Resource extra_space_resource = ((ExtraSpaceAbility) player_leader_card.getAbility()).getResourceType();
 		int number_of_resources = ((ExtraSpaceAbility) player_leader_card.getAbility()).peekResources();
 
 		// set the images of the Resources contained in the LeaderCard
-		int j = 1;
 		for (int i = 0; i < number_of_resources; i++) {
-			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(j);
-			leader_card_image.setImage(new Image(extra_space_resource.getPath()));
-			showNode(leader_card_image);
-			j++;
+			ImageView extra_space_image = (ImageView) extra_space.getChildren().get(i);
+			extra_space_image.setImage(new Image(extra_space_resource.getPath()));
+			showNode(extra_space);
 		}
 	}
 
@@ -281,6 +259,47 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 
 		if (tiles[2].isActive()) {
 			this.tile3.setImage(new Image("/images/tokens/faithtrack/pope_favor3_front.png"));
+		}
+	}
+
+	/**
+	 * @param res the Resource to get the Image of
+	 * @return the Image representing res, null if res was null
+	 */
+	private Image getImageFromResource(Resource res) {
+		if (res == null) {
+			return null;
+		}
+		
+		return new Image(res.getPath());
+	}
+
+	/**
+	 * Set all the ImageViews of the FaithTrack as null
+	 */
+	private void resetFaithTrack() {
+		for (Node cell: faith_track.getChildren()) {
+			((ImageView) cell).setImage(null);
+		}
+	}
+
+	/**
+	 * Set all the ImageViews of the Warehouse as null
+	 */
+	private void resetWarehouse(){
+		for (int i = 0; i < this.warehouse_top.getChildren().size(); i++){
+			ImageView top_image = (ImageView) this.warehouse_top.getChildren().get(i);
+			top_image.setImage(null);
+		}
+
+		for (int i = 0; i < this.warehouse_middle.getChildren().size(); i++){
+			ImageView middle_image = (ImageView) this.warehouse_middle.getChildren().get(i);
+			middle_image.setImage(null);
+		}
+
+		for (int i = 0; i < this.warehouse_bottom.getChildren().size(); i++){
+			ImageView bottom_image = (ImageView) this.warehouse_bottom.getChildren().get(i);
+			bottom_image.setImage(null);
 		}
 	}
 
@@ -312,8 +331,8 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 
-	public void handleToggleLeaderButton(ToggleButton button){
-		if (!button.isSelected()){
+	public void showOrHideLeaderCards(){
+		if (!this.leaders_button.isSelected()){
 			showNode(leader_card_pane);
 			hideNode(development_card_slot);
 		} else {

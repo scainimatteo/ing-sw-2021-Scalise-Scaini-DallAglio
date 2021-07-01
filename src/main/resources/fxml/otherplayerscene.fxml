@@ -109,49 +109,39 @@
             </ImageView>
          </children>
       </HBox>
-            <Pane fx:id="leader_card_pane3" layoutX="430.0" layoutY="267.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="614.0">
+            <Pane fx:id="leader_card_pane" layoutX="430.0" layoutY="267.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="614.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
-                  <HBox fx:id="leader_card_array1" alignment="TOP_CENTER" layoutX="18.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="570.0" spacing="45.0">
+                  <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="18.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="570.0" spacing="45.0">
                      <children>
-                        <StackPane fx:id="leader_card_pane1" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="202.0">
+                        <StackPane alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="202.0">
                            <children>
                               <ImageView fx:id="leader_card_1" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/leadercards/front/leader_card_5.png" />
+                                    <Image url="@../images/leadercards/back/leader_card_back.png" />
                                  </image>
                               </ImageView>
-                              <HBox fx:id="extra_space_ability1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
                                  <children>
-                                    <ImageView fx:id="extra_space_112" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fx:id="extra_space_122" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </HBox>
-                              <ImageView fx:id="prod_ability_1" fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                 <StackPane.margin>
-                                    <Insets bottom="27.0" left="33.0" />
-                                 </StackPane.margin>
-                              </ImageView>
                            </children>
                         </StackPane>
-                        <StackPane fx:id="leader_card_pane2" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="202.0">
+                        <StackPane alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="202.0">
                            <children>
                               <ImageView fx:id="leader_card_2" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/leadercards/front/leader_card_13.png" />
+                                    <Image url="@../images/leadercards/back/leader_card_back.png" />
                                  </image>
                               </ImageView>
-                              <HBox fx:id="extra_space_storage11" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
                                  <children>
-                                    <ImageView fx:id="extra_space_111" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                                    <ImageView fx:id="extra_space_121" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </HBox>
-                              <ImageView fx:id="prod_ability_11" fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                                 <StackPane.margin>
-                                    <Insets bottom="27.0" left="33.0" />
-                                 </StackPane.margin>
-                              </ImageView>
                            </children>
                         </StackPane>
                      </children>
@@ -355,7 +345,7 @@
                   </ImageView>
                </children>
       </Pane>
-      <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
+      <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" onMouseClicked="#showOrHideLeaderCards"/>
    </children>
 </Pane>
       <Text fx:id="nickname_text" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="Player's Board">

@@ -347,21 +347,21 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		if (players.size() == 1){
 			hideNode(view_player2_button);
 		} else {
-			view_player2_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(0)));
+			view_player2_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(0).getNickname()));
 			view_player2_button.setText(other_players.get(0).getNickname());
 		}
 
 		if (players.size() <= 2){
 			hideNode(view_player3_button);
 		} else {
-			view_player3_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(1)));
+			view_player3_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(1).getNickname()));
 			view_player3_button.setText(other_players.get(1).getNickname());
 		}
 
 		if (players.size() <= 3){
 			hideNode(view_player4_button);
 		} else {
-			view_player4_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(2)));
+			view_player4_button.setOnMouseClicked(click -> changeSceneToOtherPlayer(other_players.get(2).getNickname()));
 			view_player4_button.setText(other_players.get(2).getNickname());
 		}
 	}
@@ -398,6 +398,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		boolean is_last_turn = App.getTurn().isFinal();
 
 		resetFaithTrack();
+		resetWarehouse();
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -677,7 +678,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 *
+	 * @param res the Resource to get the Image of
+	 * @return the Image representing res, null if res was null
 	 */
 	private Image getImageFromResource(Resource res) {
 		if (res == null) {
@@ -697,7 +699,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 *
+	 * Set all the ImageViews of the TurnResources as null
 	 */
 	private void resetTurnResources() {
 		for (int i = 0; i < this.cost_box.getChildren().size(); i++) {
@@ -710,7 +712,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 *
+	 * Set all the ImageViews of the Warehouse as null
 	 */
 	private void resetWarehouse(){
 		for (int i = 0; i < this.warehouse_top.getChildren().size(); i++){
@@ -760,10 +762,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	/**
 	 * Show the Board of the other Players
 	 */
-	public void changeSceneToOtherPlayer(SimplePlayer other_player){
+	public void changeSceneToOtherPlayer(String other_player_nickname){
 		// remove the Scene from the array of ViewUpdateObservers to save memory
 		App.removeViewUpdateObserver(this);
-		new OtherPlayerScene(other_player).changeScene("/fxml/otherplayerscene.fxml");
+		new OtherPlayerScene(other_player_nickname).changeScene("/fxml/otherplayerscene.fxml");
 	}
 
 	/**
