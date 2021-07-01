@@ -53,18 +53,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.net.URL;
 
-/**
- * TODO:
- * + paymessage
- * + 
- */
 public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
 	ArrayList<Resource> all_resources;
 	// contains the list of all the DevelopmentCardSlots activated
 	ArrayList<Integer> development_card_productions;
-	//TODO: rethink this array
+	// contains the Resources for the Production base
 	ArrayList<Resource> set_resources; 
-	// contains the resources decided by the ProductionAbilities of the LeaderCards
+	// contains the Resources decided by the ProductionAbilities of the LeaderCards
 	ArrayList<Resource> leader_card_output;
 	Storage warehouse_storage;
 
@@ -85,7 +80,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane base_production;
 	@FXML private ImageView input1;
 	@FXML private ImageView input2;
-	@FXML private ImageView output1;
+	@FXML private ImageView output;
 
 	@FXML private Button activate_prod_button;
 
@@ -120,7 +115,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	public PlayerBoardScene() {
 		this.development_card_productions = new ArrayList<Integer>();
 		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
-		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null, null));
+		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
 		this.leader_card_output = new ArrayList<Resource>(Arrays.asList(null, null));
 	}
 
@@ -156,7 +151,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	private void initializeBaseProduction() {
 		input1.setOnMouseClicked(click -> chooseBaseProductionResource(input1, 0));
 		input2.setOnMouseClicked(click -> chooseBaseProductionResource(input2, 1));
-		output1.setOnMouseClicked(click -> chooseBaseProductionResource(output1, 2));
+		output.setOnMouseClicked(click -> chooseBaseProductionResource(output, 2));
 	}
 
 	/**
@@ -343,18 +338,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
 		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
 		boolean is_last_turn = App.getTurn().isFinal();
-		resetFaithTrack();
 
-		// PLAYER
-		setWarehouse(warehouse);
-		setStrongbox(strongbox);
-		setDevelopmentCardSlot(development_card_slot);
-		setLeaderCards(leader_cards);
-		setFaithMarker(marker_position);
-		setTiles(tiles);
-		if (App.getTurn().getPlayer() != null){
-			setTurnResources(to_pay, to_store);
-		} 
+		resetFaithTrack();
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -718,41 +703,53 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Set the Resource images in the base Production
+	 * Set the Resource images in the base Production, looping between all the possible choices
+	 *
+	 * @param source the ImageView of the Production
+	 * @param index the index of the source in the set_resources array
 	 */
 	public void chooseBaseProductionResource(ImageView source, int index){
+		// if there's no Resource set, use the first one
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
-			set_resources.set(index, all_resources.get(0));
+			this.set_resources.set(index, all_resources.get(0));
 		} else {
-			int resource_pos = all_resources.indexOf(set_resources.get(index));
+			int resource_pos = all_resources.indexOf(this.set_resources.get(index));
 
-			if (resource_pos != 3){
+			// if the Resource set is not the last one, use the consecutive one
+			if (resource_pos != this.all_resources.size() - 1){
 				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
-				set_resources.set(index, all_resources.get(resource_pos + 1));
+				this.set_resources.set(index, all_resources.get(resource_pos + 1));
+			// if the Resource set is the last one, loop back to null
 			} else {
 				source.setImage(null);
-				set_resources.set(index, null);
+				this.set_resources.set(index, null);
 			}
 		}
 	}
 
 	/**
-	 * Set the Resource images in the ProductionAbility
+	 * Set the Resource images in the ProductionAbility, looping between all the possible choices
+	 *
+	 * @param source the ImageView of the Production
+	 * @param index the index of the LeaderCard in the leader_card_output array
 	 */
 	public void chooseProductionAbilityResource(ImageView source, int index){
+		// if there's no Resource set, use the first one
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
-			leader_card_output.set(index, all_resources.get(0));
+			this.leader_card_output.set(index, all_resources.get(0));
 		} else {
-			int resource_pos = all_resources.indexOf(leader_card_output.get(index));
+			int resource_pos = all_resources.indexOf(this.leader_card_output.get(index));
 
+			// if the Resource set is not the last one, use the consecutive one
 			if (resource_pos != all_resources.size() - 1){
 				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
-				leader_card_output.set(index, all_resources.get(resource_pos + 1));
+				this.leader_card_output.set(index, all_resources.get(resource_pos + 1));
+			// if the Resource set is the last one, loop back to null
 			} else {
 				source.setImage(null);
-				leader_card_output.set(index, null);
+				this.leader_card_output.set(index, null);
 			}
 		}
 	}
@@ -773,15 +770,36 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} 
 
 		// activate every DevelopmentCard selected
-		for (Integer slot: development_card_productions){
+		for (Integer slot: this.development_card_productions){
 			productions.add(this.getDevelopmentCard(slot));
 		}
 
-		// TODO: LeaderCard Productions
+		// activate every ProductionAbility selected
+		for (int i = 0; i < this.leader_card_output.size(); i++){
+			if (leader_card_output.get(i) != null) {
+				productions.add(createProductionAbility(i));
+			}
+		}
 
 		ProductionMessage message = new ProductionMessage(productions);
 		App.sendMessage(message);
-		updateView();
+		// TODO: updateView();
+	}
+
+	/**
+	 * @param index the index of the LeaderCard and of the Resource in the leader_card_output array
+	 * @return the ProductionAbility of the LeaderCard with the Resource set
+	 */
+	private ProductionAbility createProductionAbility(int index) {
+		// create an ArrayList from the chosen Resource
+		Resource required_resource = this.leader_card_output.get(index);
+		ArrayList<Resource> new_resource = new ArrayList<Resource>();
+		new_resource.add(leader_card_output.get(index));
+
+		// get the ProductionAbility of the LeaderCard and set the chosen Resource
+		ProductionAbility production_ability = (ProductionAbility) App.getMyPlayer().getLeaderCards().get(index).getAbility();
+		production_ability.setProducedResources(new_resource);
+		return production_ability;
 	}
 	
 	private ProductionInterface getDevelopmentCard(int index){
@@ -789,7 +807,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	private boolean checkBaseProductionSet(){
-		return input1.getImage() != null && input2.getImage() != null && output1.getImage() != null;
+		return input1.getImage() != null && input2.getImage() != null && output.getImage() != null;
 	}
 
 	public void handleDiscardResources(){
