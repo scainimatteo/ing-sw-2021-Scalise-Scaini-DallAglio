@@ -297,30 +297,37 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		Storage warehouse_storage = new Storage();
 
-		for (ImageView key: this.drag_and_drop_hashmap.keySet()){
-			ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
+		try {
+			for (ImageView key: this.drag_and_drop_hashmap.keySet()){
+				ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
 
-			// get the name of the Resource from the userdata in the FXML
-			resource_to_add.add(App.getTurn().getProducedResources().get(Integer.parseInt((String) key.getUserData())));
+				// get the name of the Resource from the userdata in the FXML
+				resource_to_add.add(App.getTurn().getProducedResources().get(Integer.parseInt((String) key.getUserData())));
 
-			// select which shelf of the Warehouse to put the Resources in
-			switch (drag_and_drop_hashmap.get(key).getParent().getId()){
-				case "warehouse_top":
-					warehouse_storage.addToWarehouseTop(resource_to_add);
-					break;
-				case "warehouse_middle":
-					warehouse_storage.addToWarehouseMid(resource_to_add);
-					break;
-				case "warehouse_bottom":
-					warehouse_storage.addToWarehouseBot(resource_to_add);
-					break;
+				// select which shelf of the Warehouse to put the Resources in
+				switch (drag_and_drop_hashmap.get(key).getParent().getId()){
+					case "warehouse_top":
+						warehouse_storage.addToWarehouseTop(resource_to_add);
+						break;
+					case "warehouse_middle":
+						warehouse_storage.addToWarehouseMid(resource_to_add);
+						break;
+					case "warehouse_bottom":
+						warehouse_storage.addToWarehouseBot(resource_to_add);
+						break;
+					default:
+						reverseDragAndDrop();
+						return;
+				}
 			}
+		} catch (NumberFormatException e){
+			// something not allowed was trying to insert in the warehouse
+			this.updateView();
+			return;
 		}
 
 		StoreMessage message = new StoreMessage(warehouse_storage);
 		App.sendMessage(message);
-		resetWarehouse();
-		resetTurnResources();
 		this.drag_and_drop_hashmap.clear();
 	}
 
@@ -480,21 +487,24 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
 
 		// first slot
-		for (int i = this.first_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, i));
-			this.first_slot.getChildren().get(i).setOnMouseClicked(null);
+		for (int i = 0; i < this.first_slot.getChildren().size(); i++) {
+			int size = this.first_slot.getChildren().size() - 1;
+			((ImageView) this.first_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(first_column, i));
+			this.first_slot.getChildren().get(size - i).setOnMouseClicked(null);
 		}
 
 		// second slot
-		for (int i = this.second_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, i));
-			this.second_slot.getChildren().get(i).setOnMouseClicked(null);
+		for (int i = 0; i < this.second_slot.getChildren().size(); i++) {
+			int size = this.second_slot.getChildren().size() - 1;
+			((ImageView) this.second_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(second_column, i));
+			this.second_slot.getChildren().get(size - i).setOnMouseClicked(null);
 		}
 
 		// third slot
-		for (int i = this.third_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, i));
-			this.third_slot.getChildren().get(i).setOnMouseClicked(null);
+		for (int i = 0; i < this.third_slot.getChildren().size(); i++) {
+			int size = this.third_slot.getChildren().size() - 1;
+			((ImageView) this.third_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(third_column, i));
+			this.third_slot.getChildren().get(size - i).setOnMouseClicked(null);
 		}
 
 		// set methods to activate the DevelopmentCards
