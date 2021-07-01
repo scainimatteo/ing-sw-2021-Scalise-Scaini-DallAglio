@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.net.URL;
 
+import it.polimi.ingsw.model.card.ExtraSpaceAbility;
 import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 
@@ -215,12 +216,46 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	private void setLeaderCards(ArrayList<LeaderCard> leader_cards){
 		int i = 0;
 		for (Node node: this.leader_card_array.getChildren()) {
-			VBox leader_card = (VBox) node;
-			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
-			if (leader_cards.get(i).isActive()) {
-				leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			if (i < leader_cards.size()) {
+				VBox leader_card = (VBox) node;
+				ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
+				// only show the active LeaderCards of the other Players
+				if (leader_cards.get(i).isActive()) {
+					leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			
+					setLeaderCardAbility(leader_card, leader_cards.get(i));
+				}
+
+				showNode(node);
+				i++;
+			} else {
+				hideNode(node);
 			}
-			i++;
+		}
+	}
+
+	private void setLeaderCardAbility(VBox leader_card, LeaderCard player_leader_card) {
+		// if the LeaderCard has an ExtraSpaceAbility
+		if (player_leader_card.getAbility().checkAbility(new ExtraSpaceAbility(null))) {
+			setExtraSpaceAbility(leader_card, player_leader_card);
+		} else {
+			// hide every LeaderCard modifier
+			hideNode(leader_card.getChildren().get(1));
+			hideNode(leader_card.getChildren().get(2));
+		}
+	}
+
+	private void setExtraSpaceAbility(VBox leader_card, LeaderCard player_leader_card) {
+		Resource extra_space_resource = ((ExtraSpaceAbility) player_leader_card.getAbility()).getResourceType();
+		int number_of_resources = ((ExtraSpaceAbility) player_leader_card.getAbility()).peekResources();
+
+		// set the images of the Resources contained in the LeaderCard
+		int j = 1;
+		for (int i = 0; i < number_of_resources; i++) {
+			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(j);
+			leader_card_image.setImage(new Image(extra_space_resource.getPath()));
+			showNode(leader_card_image);
+			j++;
 		}
 	}
 

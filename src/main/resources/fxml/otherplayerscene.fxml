@@ -132,6 +132,8 @@
                                     <Image url="@../images/leadercards/back/leader_card_back.png" />
                                  </image>
                               </ImageView>
+							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-100.0" />
+                              <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
@@ -141,6 +143,8 @@
                                     <Image url="@../images/leadercards/back/leader_card_back.png" />
                                  </image>
                               </ImageView>
+							  <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-110.0" />
+							  <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0" />
                            </children>
                         </VBox>
                      </children>

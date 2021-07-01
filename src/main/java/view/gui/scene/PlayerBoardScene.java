@@ -477,13 +477,18 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	private void setLeaderCards(ArrayList<LeaderCard> leader_cards){
 		int i = 0;
 		for (Node node: this.leader_card_array.getChildren()) {
-			VBox leader_card = (VBox) node;
-			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
-			leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
+			if (i < leader_cards.size()) {
+				VBox leader_card = (VBox) node;
+				ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
+				leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
 
-			setLeaderCardButtons(leader_card, leader_cards.get(i), i);
-			setLeaderCardAbility(leader_card, i);
-			i++;
+				setLeaderCardButtons(leader_card, leader_cards.get(i), i);
+				setLeaderCardAbility(leader_card, i);
+				showNode(node);
+				i++;
+			} else {
+				hideNode(node);
+			}
 		}
 	}
 
@@ -508,10 +513,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} else if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ProductionAbility(null, null))) {
 			setProductionAbility(leader_card, player_leader_card, index);
 		} else {
-			// disable every LeaderCard modifier
-			leader_card.getChildren().get(3).setDisable(true);
-			leader_card.getChildren().get(4).setDisable(true);
-			leader_card.getChildren().get(5).setDisable(true);
+			// hide every LeaderCard modifier
+			hideNode(leader_card.getChildren().get(3));
+			hideNode(leader_card.getChildren().get(4));
+			hideNode(leader_card.getChildren().get(5));
 		}
 	}
 
@@ -524,20 +529,22 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (int i = 0; i < number_of_resources; i++) {
 			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(j);
 			leader_card_image.setImage(new Image(extra_space_resource.getPath()));
+			showNode(leader_card_image);
 			j++;
 		}
 
-		// disable the ProductionAbility modifier
-		leader_card.getChildren().get(5).setDisable(true);
+		// hide the ProductionAbility modifier
+		hideNode(leader_card.getChildren().get(5));
 	}
 
 	private void setProductionAbility(VBox leader_card, LeaderCard player_leader_card, int index) {
 		ImageView production_resource_image = (ImageView) leader_card.getChildren().get(5);
 		production_resource_image.setOnMouseClicked(click -> chooseProductionAbilityResource(production_resource_image, index));
+		showNode(production_resource_image);
 
-		// disable the ExtraSpaceAbility modifiers
-		leader_card.getChildren().get(3).setDisable(true);
-		leader_card.getChildren().get(4).setDisable(true);
+		// hide the ExtraSpaceAbility modifiers
+		hideNode(leader_card.getChildren().get(3));
+		hideNode(leader_card.getChildren().get(4));
 	}
 
 	private void setFaithMarker(int faith_marker){
@@ -820,14 +827,12 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
 		ActivateLeaderMessage message = new ActivateLeaderMessage(player_leader_cards.get(index));
 		App.sendMessage(message);
-		//TODO: updateView();
 	}
 
 	public void handleDiscardLeaderCard(int index){
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
 		DiscardLeaderMessage message = new DiscardLeaderMessage(player_leader_cards.get(index));
 		App.sendMessage(message);
-		//TODO: updateView();
 	}
 
 	/**
