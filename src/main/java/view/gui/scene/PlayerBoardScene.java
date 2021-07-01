@@ -17,6 +17,7 @@ import it.polimi.ingsw.controller.message.DiscardResourcesMessage;
 import it.polimi.ingsw.controller.message.ActivateLeaderMessage;
 import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.ProductionMessage;
+import it.polimi.ingsw.controller.message.RearrangeMessage;
 import it.polimi.ingsw.controller.message.EndTurnMessage;
 import it.polimi.ingsw.controller.message.StoreMessage;
 import it.polimi.ingsw.controller.message.PayMessage;
@@ -908,6 +909,21 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	public void handleDiscardLeaderCard(int index){
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
 		DiscardLeaderMessage message = new DiscardLeaderMessage(player_leader_cards.get(index));
+		App.sendMessage(message);
+	}
+
+	public void handleSwapFirstSecond(){
+		RearrangeMessage message = new RearrangeMessage(1, 2);
+		App.sendMessage(message);
+	}
+
+	public void handleSwapSecondThird(){
+		RearrangeMessage message = new RearrangeMessage(2, 3);
+		App.sendMessage(message);
+	}
+
+	public void handleSwapFirstThird(){
+		RearrangeMessage message = new RearrangeMessage(1, 3);
 		App.sendMessage(message);
 	}
 
