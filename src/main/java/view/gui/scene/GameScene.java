@@ -190,8 +190,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		this.chosen_card_column = column;
 		// show the buttons for the slot
 		StackPane pane = (StackPane)((ImageView) e.getSource()).getParent();
-		pane.getChildren().get(1).setVisible(true);
-		pane.getChildren().get(1).setDisable(false);
+		showNode(pane.getChildren().get(1));
 	}
 
 	/**
@@ -203,8 +202,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		App.sendMessage(message);
 		// hide the slot buttons
 		HBox hbox = (HBox)((Node) e.getSource()).getParent();
-		hbox.setVisible(false);
-		hbox.setDisable(true);
+		hideNode(hbox);
 	}
 
 	/**
@@ -216,8 +214,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		App.sendMessage(message);
 		// hide the slot buttons
 		HBox hbox = (HBox)((Node) e.getSource()).getParent();
-		hbox.setVisible(false);
-		hbox.setDisable(true);
+		hideNode(hbox);
 	}
 
 	/**
@@ -229,8 +226,7 @@ public class GameScene extends SceneController implements ViewUpdateObserver, In
 		App.sendMessage(message);
 		// hide the slot buttons
 		HBox hbox = (HBox)((Node) e.getSource()).getParent();
-		hbox.setVisible(false);
-		hbox.setDisable(true);
+		hideNode(hbox);
 	}
 
 	/**
