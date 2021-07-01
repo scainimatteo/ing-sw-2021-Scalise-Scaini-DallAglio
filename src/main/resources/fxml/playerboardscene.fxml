@@ -443,7 +443,7 @@
 			  <DropShadow blurType="GAUSSIAN" height="50.0" radius="24.5" width="50.0" />
 		   </effect>
 		</ImageView>
-            <ImageView id="Output1" fx:id="swap12" fitHeight="20.0" fitWidth="50.0" layoutX="220.0" layoutY="340.0" pickOnBounds="true" rotate="90.0">
+            <ImageView id="Output1" fx:id="swap12" fitHeight="20.0" fitWidth="50.0" layoutX="220.0" layoutY="340.0" onMouseClicked="#handleSwapFirstSecond" pickOnBounds="true" rotate="90.0">
                <image>
                   <Image url="@../images/tokens/swap_arrow.png" />
                </image>
@@ -451,7 +451,7 @@
                   <DropShadow />
                </effect>
             </ImageView>
-            <ImageView id="Output1" fx:id="swap23" fitHeight="20.0" fitWidth="50.0" layoutX="220.0" layoutY="410.0" pickOnBounds="true" rotate="90.0">
+            <ImageView id="Output1" fx:id="swap23" fitHeight="20.0" fitWidth="50.0" layoutX="220.0" layoutY="410.0" onMouseClicked="#handleSwapSecondThird" pickOnBounds="true" rotate="90.0">
                <image>
                   <Image url="@../images/tokens/swap_arrow.png" />
                </image>
@@ -459,7 +459,7 @@
                   <DropShadow />
                </effect>
             </ImageView>
-            <ImageView id="Output1" fx:id="swap13" fitHeight="20.0" fitWidth="100.0" layoutX="-20.0" layoutY="375.0" pickOnBounds="true" rotate="270.0">
+            <ImageView id="Output1" fx:id="swap13" fitHeight="20.0" fitWidth="100.0" layoutX="-20.0" layoutY="375.0" onMouseClicked="#handleSwapFirstThird" pickOnBounds="true" rotate="270.0">
                <image>
                   <Image url="@../images/tokens/swap_arrow.png" />
                </image>
