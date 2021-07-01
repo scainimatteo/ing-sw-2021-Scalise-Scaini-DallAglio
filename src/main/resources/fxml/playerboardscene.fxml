@@ -405,16 +405,16 @@
                   </HBox>
                   <HBox fx:id="gain_box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="761.0">
                      <children>
-						 <ImageView fx:id="gain1" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="1" />
-                        <ImageView fx:id="gain2" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="2" />
-                        <ImageView fx:id="gain3" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="3" />
-                        <ImageView fx:id="gain4" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="4" />
-                        <ImageView fx:id="gain5" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="5" />
-                        <ImageView fx:id="gain6" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="6" />
-                        <ImageView fx:id="gain7" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="7" />
-                        <ImageView fx:id="gain8" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="8" />
-                        <ImageView fx:id="gain9" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="9" />
-						<ImageView fx:id="gain10" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="10" />
+						 <ImageView fx:id="gain1" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="0" />
+                        <ImageView fx:id="gain2" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="1" />
+                        <ImageView fx:id="gain3" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="2" />
+                        <ImageView fx:id="gain4" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="3" />
+                        <ImageView fx:id="gain5" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="4" />
+                        <ImageView fx:id="gain6" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="5" />
+                        <ImageView fx:id="gain7" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="6" />
+                        <ImageView fx:id="gain8" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="7" />
+                        <ImageView fx:id="gain9" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="8" />
+						<ImageView fx:id="gain10" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="9" />
                      </children>
                      <StackPane.margin>
                         <Insets top="25.0" />
