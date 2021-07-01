@@ -134,9 +134,9 @@
                               </ImageView>
 							  <Button fx:id="activate_leader_1" mnemonicParsing="false" text="Activate" />
                               <Button fx:id="discard_leader_1" mnemonicParsing="false" text="Discard" />
-                              <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-150.0" />
-                              <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-207.0" />
-                              <ImageView fx:id="prod_ability_1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-267.0" />
+							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-100.0" />
+                              <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0" />
+							  <ImageView fx:id="prod_ability_1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-225.0" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
@@ -148,9 +148,9 @@
                               </ImageView>
 							  <Button fx:id="activate_leader_2" mnemonicParsing="false" text="Activate" />
                               <Button fx:id="discard_leader_2" mnemonicParsing="false" text="Discard" />
-                              <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-150.0" />
-                              <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-207.0" />
-                              <ImageView fx:id="prod_ability_2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-267.0" />
+							  <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-110.0" />
+							  <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0" />
+							  <ImageView fx:id="prod_ability_2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-200.0" />
                            </children>
                         </VBox>
                      </children>
@@ -332,12 +332,12 @@
                         <Insets left="27.0" top="34.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <ImageView id="Output1" fx:id="input1" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Output1" fx:id="output" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <StackPane.margin>
                         <Insets left="85.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <ImageView id="Input1" fx:id="output1" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
+                  <ImageView id="Input1" fx:id="input1" fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
                      <StackPane.margin>
                         <Insets bottom="35.0" left="28.0" />
                      </StackPane.margin>
@@ -367,7 +367,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" text="Show Leader" />
+            <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" onMouseClicked="#showOrHideLeaderCards" text="Show Leader" />
         	<Button fx:id="end_turn_button" layoutX="974.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleEndTurn" text="End your turn" />
             <StackPane fx:id="cost_resources_pane" prefHeight="190.0" prefWidth="1080.0">
                <children>
@@ -391,16 +391,16 @@
                   </HBox>
                   <HBox fx:id="gain_box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="761.0">
                      <children>
-						 <ImageView fx:id="gain1" userData="1" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain2" userData="2" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain3" userData="3" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain4" userData="4" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain5" userData="5" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain6" userData="6" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain7" userData="7" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain8" userData="8" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView  fx:id="gain9" userData="9" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
-						<ImageView  fx:id="gain10" userData="10" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+						 <ImageView fx:id="gain1" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="1" />
+                        <ImageView fx:id="gain2" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="2" />
+                        <ImageView fx:id="gain3" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="3" />
+                        <ImageView fx:id="gain4" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="4" />
+                        <ImageView fx:id="gain5" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="5" />
+                        <ImageView fx:id="gain6" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="6" />
+                        <ImageView fx:id="gain7" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="7" />
+                        <ImageView fx:id="gain8" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="8" />
+                        <ImageView fx:id="gain9" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="9" />
+						<ImageView fx:id="gain10" fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="10" />
                      </children>
                      <StackPane.margin>
                         <Insets top="25.0" />
@@ -414,7 +414,7 @@
                         <Insets bottom="85.0" />
                      </StackPane.margin>
                   </Text>
-                  <Button fx:id="discard_button" mnemonicParsing="false" onMouseClicked="#handleDiscardButton" text="DISCARD" translateX="335.0" translateY="50.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#handleDiscardResources" text="DISCARD" translateX="335.0" translateY="50.0" />
                </children>
             </StackPane>
       	  <Text fx:id="last_turn_text" fill="#ee1e1e" layoutX="30.0" layoutY="699.0" stroke="BLACK" strokeType="OUTSIDE" text="Last turn!">

@@ -28,12 +28,7 @@ import it.polimi.ingsw.view.gui.scene.SceneController;
 import it.polimi.ingsw.view.gui.scene.GameScene;
 import it.polimi.ingsw.view.gui.App;
 
-import it.polimi.ingsw.view.simplemodel.SimpleDevelopmentCardSlot;
-import it.polimi.ingsw.view.simplemodel.SimpleSoloPlayer;
-import it.polimi.ingsw.view.simplemodel.SimpleWarehouse;
-import it.polimi.ingsw.view.simplemodel.SimpleSoloGame;
-import it.polimi.ingsw.view.simplemodel.SimplePlayer;
-import it.polimi.ingsw.view.simplemodel.SimpleGame;
+import it.polimi.ingsw.view.simplemodel.*;
 
 import it.polimi.ingsw.util.observer.ViewUpdateObserver;
 
@@ -60,9 +55,12 @@ import java.util.List;
 import java.net.URL;
 
 public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, Initializable {
-	ArrayList<Integer> development_card_productions;
 	ArrayList<Resource> all_resources;
+	// contains the list of all the DevelopmentCardSlots activated
+	ArrayList<Integer> development_card_productions;
+	// contains the Resources for the Production base
 	ArrayList<Resource> set_resources; 
+	// contains the Resources decided by the ProductionAbilities of the LeaderCards
 	ArrayList<Resource> leader_card_output;
 	Storage warehouse_storage;
 
@@ -83,7 +81,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane base_production;
 	@FXML private ImageView input1;
 	@FXML private ImageView input2;
-	@FXML private ImageView output1;
+	@FXML private ImageView output;
 
 	@FXML private Button activate_prod_button;
 
@@ -115,21 +113,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane second_slot;
 	@FXML private StackPane third_slot;
 
-	@FXML private ImageView prod_ability_1;
-	@FXML private ImageView extra_space_11;
-	@FXML private ImageView extra_space_12;
-	@FXML private ImageView prod_ability_2;
-	@FXML private ImageView extra_space_21;
-	@FXML private ImageView extra_space_22;
-	@FXML private Button activate_leader_1;
-	@FXML private Button discard_leader_1;
-	@FXML private Button activate_leader_2;
-	@FXML private Button discard_leader_2;
-
 	public PlayerBoardScene() {
 		this.development_card_productions = new ArrayList<Integer>();
 		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
-		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null, null));
+		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
 		this.leader_card_output = new ArrayList<Resource>(Arrays.asList(null, null));
 	}
 
@@ -143,8 +130,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
-
-		leaders_button.setOnMouseClicked(click -> handleToggleLeaderButton(leaders_button));
 
 		initializeBaseProduction();
 
@@ -165,13 +150,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Set the onMouseClicked methods for the BaseProduction
 	 */
 	private void initializeBaseProduction() {
-		input1.setOnMouseClicked(click -> handleBaseProductionResource(input1, 0));
-		input2.setOnMouseClicked(click -> handleBaseProductionResource(input2, 1));
-		output1.setOnMouseClicked(click -> handleBaseProductionResource(output1, 2));
+		input1.setOnMouseClicked(click -> chooseBaseProductionResource(input1, 0));
+		input2.setOnMouseClicked(click -> chooseBaseProductionResource(input2, 1));
+		output.setOnMouseClicked(click -> chooseBaseProductionResource(output, 2));
 	}
 
 	/**
-	 * Set the methods to drag and drop the resources in and out of the Warehouse
+	 * Set the methods to drag and drop the Resources in and out of the Warehouse
 	 */
 	private void initializeWarehouseDragAndDrop() {
 		// DRAG
@@ -206,7 +191,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Set the methods to drag and drop the resources in and out of the StrongBox
+	 * Set the methods to drag and drop the Resources in and out of the StrongBox
 	 */
 	private void initializeStrongBoxDragAndDrop() {
 		// DRAG
@@ -380,51 +365,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Initialize the leader cards imageview
-	 */
-	private void initializeLeaderCards(){
-		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
-		int counter = 0;
-
-		activate_leader_1.setOnMouseClicked(click -> handleLeaderAction(true, 0));
-		discard_leader_1.setOnMouseClicked(click -> handleLeaderAction(false, 1));
-		activate_leader_2.setOnMouseClicked(click -> handleLeaderAction(true, 2));
-		discard_leader_2.setOnMouseClicked(click -> handleLeaderAction(false, 3));
-
-		for (LeaderCard card : player_leader_cards){
-			if (card.getAbility().checkAbility(new ExtraSpaceAbility(null))){
-				if (counter == 0){
-					prod_ability_1.setDisable(true);
-				} else {
-					prod_ability_2.setDisable(true);
-				}
-			} else if (card.getAbility().checkAbility(new ProductionAbility(null, null))){
-				if (counter == 0){
-					extra_space_11.setDisable(true);
-					extra_space_12.setDisable(true);
-					prod_ability_1.setOnMouseClicked(click -> handleLeaderCardProductionResource(prod_ability_1, 0));
-				} else {
-					extra_space_21.setDisable(true);
-					extra_space_22.setDisable(true);
-					prod_ability_2.setOnMouseClicked(click -> handleLeaderCardProductionResource(prod_ability_2, 1));
-				}
-			} else {
-				if (counter == 0){
-					prod_ability_1.setDisable(true);
-					extra_space_11.setDisable(true);
-					extra_space_12.setDisable(true);
-				} else {
-					prod_ability_2.setDisable(true);
-					extra_space_21.setDisable(true);
-					extra_space_22.setDisable(true);
-				}
-			}
-
-			counter += 1;
-		}
-	}
-
-	/**
 	 * @return an array of all the other Players
 	 */
 	private ArrayList<SimplePlayer> getOtherPlayers(ArrayList<SimplePlayer> players) {
@@ -454,16 +394,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
 		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
 		boolean is_last_turn = App.getTurn().isFinal();
-		resetFaithTrack();
 
-		// PLAYER
-		setWarehouse(warehouse);
-		setStrongbox(strongbox);
-		setDevelopmentCardSlot(development_card_slot);
-		setLeaderCards(leader_cards);
-		setFaithMarker(marker_position);
-		setTiles(tiles);
-		setTurnResources(to_pay, to_store);
+		resetFaithTrack();
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -604,32 +536,64 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			VBox leader_card = (VBox) node;
 			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
 			leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
-			if (leader_cards.get(i).getAbility().checkAbility(new ExtraSpaceAbility(null))){
-				setExtraSpace(leader_cards.get(i), i);
-			} 
+
+			setLeaderCardButtons(leader_card, leader_cards.get(i), i);
+			setLeaderCardAbility(leader_card, i);
 			i++;
 		}
 	}
 
-	public void setExtraSpace(LeaderCard card, int index){
-		Resource extra_space_resource = ((ExtraSpaceAbility) card.getAbility()).getResourceType();
-		int num_resources = ((ExtraSpaceAbility) card.getAbility()).peekResources();
+	private void setLeaderCardButtons(VBox leader_card, LeaderCard player_leader_card, int index) {
+		// set the activate and discard buttons under each card
+		leader_card.getChildren().get(1).setOnMouseClicked(click -> handleActivateLeaderCard(index));
+		leader_card.getChildren().get(2).setOnMouseClicked(click -> handleDiscardLeaderCard(index));
 
-		if (index == 0){
-			if (num_resources >= 2){
-				extra_space_12.setImage(new Image(extra_space_resource.getPath()));
-			} 
-			if (num_resources >= 1){
-				extra_space_11.setImage(new Image(extra_space_resource.getPath()));
-			} 
-		} else if (index == 1){
-			if (num_resources >= 2){
-				extra_space_22.setImage(new Image(extra_space_resource.getPath()));
-			} 
-			if (num_resources >= 1){
-				extra_space_21.setImage(new Image(extra_space_resource.getPath()));
-			} 
+		// remove the Activate button if the card is activated
+		if (player_leader_card.isActive()) {
+			hideNode(leader_card.getChildren().get(1));
 		}
+	}
+
+	private void setLeaderCardAbility(VBox leader_card, int index) {
+		LeaderCard player_leader_card = App.getMyPlayer().getLeaderCards().get(index);
+
+		// if the LeaderCard has an ExtraSpaceAbility
+		if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ExtraSpaceAbility(null))) {
+			setExtraSpaceAbility(leader_card, player_leader_card);
+		// if the LeaderCard has a ProductionAbility
+		} else if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ProductionAbility(null, null))) {
+			setProductionAbility(leader_card, player_leader_card, index);
+		} else {
+			// disable every LeaderCard modifier
+			leader_card.getChildren().get(3).setDisable(true);
+			leader_card.getChildren().get(4).setDisable(true);
+			leader_card.getChildren().get(5).setDisable(true);
+		}
+	}
+
+	private void setExtraSpaceAbility(VBox leader_card, LeaderCard player_leader_card) {
+		Resource extra_space_resource = ((ExtraSpaceAbility) player_leader_card.getAbility()).getResourceType();
+		int number_of_resources = ((ExtraSpaceAbility) player_leader_card.getAbility()).peekResources();
+
+		// set the images of the Resources contained in the LeaderCard
+		int j = 3;
+		for (int i = 0; i < number_of_resources; i++) {
+			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(j);
+			leader_card_image.setImage(new Image(extra_space_resource.getPath()));
+			j++;
+		}
+
+		// disable the ProductionAbility modifier
+		leader_card.getChildren().get(5).setDisable(true);
+	}
+
+	private void setProductionAbility(VBox leader_card, LeaderCard player_leader_card, int index) {
+		ImageView production_resource_image = (ImageView) leader_card.getChildren().get(5);
+		production_resource_image.setOnMouseClicked(click -> chooseProductionAbilityResource(production_resource_image, index));
+
+		// disable the ExtraSpaceAbility modifiers
+		leader_card.getChildren().get(3).setDisable(true);
+		leader_card.getChildren().get(4).setDisable(true);
 	}
 
 	private void setFaithMarker(int faith_marker){
@@ -782,12 +746,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Method which toggle the sight of the leader card pane
-	 *
-	 * @param button is the button that toggle the sight of the leader card pane
+	 * Toggle the appeareance of the LeaderCard pane
 	 */
-	public void handleToggleLeaderButton(ToggleButton button){
-		if (!button.isSelected()){
+	public void showOrHideLeaderCards(){
+		if (!this.leaders_button.isSelected()){
 			showNode(leader_card_pane);
 			hideNode(development_card_slot);
 		} else {
@@ -797,47 +759,53 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Method that set the image of the resources in the source
+	 * Set the Resource images in the base Production, looping between all the possible choices
 	 *
-	 * @param source is the imageview of the production base that has to be set
-	 * @param pos is the identifier for the imageviews
+	 * @param source the ImageView of the Production
+	 * @param index the index of the source in the set_resources array
 	 */
-	public void handleBaseProductionResource(ImageView source, int pos){
+	public void chooseBaseProductionResource(ImageView source, int index){
+		// if there's no Resource set, use the first one
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
-			set_resources.set(pos, all_resources.get(0));
+			this.set_resources.set(index, all_resources.get(0));
 		} else {
-			int resource_pos = all_resources.indexOf(set_resources.get(pos));
+			int resource_pos = all_resources.indexOf(this.set_resources.get(index));
 
-			if (resource_pos != 3){
+			// if the Resource set is not the last one, use the consecutive one
+			if (resource_pos != this.all_resources.size() - 1){
 				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
-				set_resources.set(pos, all_resources.get(resource_pos + 1));
+				this.set_resources.set(index, all_resources.get(resource_pos + 1));
+			// if the Resource set is the last one, loop back to null
 			} else {
 				source.setImage(null);
-				set_resources.set(pos, null);
+				this.set_resources.set(index, null);
 			}
 		}
 	}
 
 	/**
-	 * Method that set the image of the resources in the source
+	 * Set the Resource images in the ProductionAbility, looping between all the possible choices
 	 *
-	 * @param source is the imageview of the leader card that has to be set
-	 * @param pos is the identifier for the imageviews
+	 * @param source the ImageView of the Production
+	 * @param index the index of the LeaderCard in the leader_card_output array
 	 */
-	public void handleLeaderCardProductionResource(ImageView source, int pos){
+	public void chooseProductionAbilityResource(ImageView source, int index){
+		// if there's no Resource set, use the first one
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
-			leader_card_output.set(pos, all_resources.get(0));
+			this.leader_card_output.set(index, all_resources.get(0));
 		} else {
-			int resource_pos = all_resources.indexOf(set_resources.get(pos));
+			int resource_pos = all_resources.indexOf(this.leader_card_output.get(index));
 
-			if (resource_pos != 3){
+			// if the Resource set is not the last one, use the consecutive one
+			if (resource_pos != all_resources.size() - 1){
 				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
-				leader_card_output.set(pos, all_resources.get(resource_pos + 1));
+				this.leader_card_output.set(index, all_resources.get(resource_pos + 1));
+			// if the Resource set is the last one, loop back to null
 			} else {
 				source.setImage(null);
-				leader_card_output.set(pos, null);
+				this.leader_card_output.set(index, null);
 			}
 		}
 	}
@@ -858,15 +826,36 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} 
 
 		// activate every DevelopmentCard selected
-		for (Integer slot: development_card_productions){
+		for (Integer slot: this.development_card_productions){
 			productions.add(this.getDevelopmentCard(slot));
 		}
 
-		// TODO: LeaderCard Productions
+		// activate every ProductionAbility selected
+		for (int i = 0; i < this.leader_card_output.size(); i++){
+			if (leader_card_output.get(i) != null) {
+				productions.add(createProductionAbility(i));
+			}
+		}
 
 		ProductionMessage message = new ProductionMessage(productions);
 		App.sendMessage(message);
-		updateView();
+		// TODO: updateView();
+	}
+
+	/**
+	 * @param index the index of the LeaderCard and of the Resource in the leader_card_output array
+	 * @return the ProductionAbility of the LeaderCard with the Resource set
+	 */
+	private ProductionAbility createProductionAbility(int index) {
+		// create an ArrayList from the chosen Resource
+		Resource required_resource = this.leader_card_output.get(index);
+		ArrayList<Resource> new_resource = new ArrayList<Resource>();
+		new_resource.add(leader_card_output.get(index));
+
+		// get the ProductionAbility of the LeaderCard and set the chosen Resource
+		ProductionAbility production_ability = (ProductionAbility) App.getMyPlayer().getLeaderCards().get(index).getAbility();
+		production_ability.setProducedResources(new_resource);
+		return production_ability;
 	}
 	
 	/**
@@ -881,30 +870,30 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * @return true if the production base is set
 	 */
 	private boolean checkBaseProductionSet(){
-		return input1.getImage() != null && input2.getImage() != null && output1.getImage() != null;
+		return input1.getImage() != null && input2.getImage() != null && output.getImage() != null;
 	}
 
 	/**
 	 * Method that handles the discard resources button
 	 */
-	public void handleDiscardButton(){
+	public void handleDiscardResources(){
 		DiscardResourcesMessage message = new DiscardResourcesMessage();
 		App.sendMessage(message);
-		updateView();
+		//TODO: updateView();
 	}
 
-	public void handleLeaderAction(boolean activate_or_discard, int index){
+	public void handleActivateLeaderCard(int index){
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
-		Message message;
-
-		if (activate_or_discard){
-			message = new ActivateLeaderMessage(player_leader_cards.get(index));
-		} else {
-			message = new DiscardLeaderMessage(player_leader_cards.get(index));
-		}
-
+		ActivateLeaderMessage message = new ActivateLeaderMessage(player_leader_cards.get(index));
 		App.sendMessage(message);
-		updateView();
+		//TODO: updateView();
+	}
+
+	public void handleDiscardLeaderCard(int index){
+		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
+		DiscardLeaderMessage message = new DiscardLeaderMessage(player_leader_cards.get(index));
+		App.sendMessage(message);
+		//TODO: updateView();
 	}
 
 	/**
