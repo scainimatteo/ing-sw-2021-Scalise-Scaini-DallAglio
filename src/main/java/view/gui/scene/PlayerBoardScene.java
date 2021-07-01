@@ -19,6 +19,7 @@ import it.polimi.ingsw.controller.message.DiscardLeaderMessage;
 import it.polimi.ingsw.controller.message.ProductionMessage;
 import it.polimi.ingsw.controller.message.EndTurnMessage;
 import it.polimi.ingsw.controller.message.StoreMessage;
+import it.polimi.ingsw.controller.message.PayMessage;
 import it.polimi.ingsw.controller.message.Storage;
 import it.polimi.ingsw.controller.message.Message;
 
@@ -210,18 +211,16 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	/**
 	 * Set the methods to drag and drop the resources in and out of the cost box
 	 */
-	// TODO: does this need the drag?
 	private void initializeCostBoxDragAndDrop() {
 		for (Node node: this.cost_box.getChildren()) {
 			node.setOnDragOver(over -> handleDragOver(over, (ImageView) node));
-			node.setOnDragDropped(dropped -> handleDragDropped(dropped, (ImageView) node));
+			node.setOnDragDropped(dropped -> handleCostBoxDragDropped(dropped, (ImageView) node));
 		}
 	}
 
 	/**
 	 * Set the methods to drag and drop the resources in and out of the gain box
 	 */
-	// TODO: does this need the drop?
 	private void initializeGainBoxDragAndDrop(){
 		for (Node node : this.gain_box.getChildren()){
 			node.setOnDragDetected(detected -> handleDragDetected(detected, (ImageView) node));
@@ -229,6 +228,59 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
+	/**
+	 * Method that handle the drop on a cost box image view and send a PayMessage to the server
+	 *
+	 * @param event is the drop event
+	 * @param target is the imageview on which the image of the resource is dropped
+	 */
+	private void handleCostBoxDragDropped(DragEvent event, ImageView target){
+		SimplePlayer my_player = App.getMyPlayer();
+		Storage storage = new Storage();
+		Resource dropped_resource;
+
+		handleDragDropped(event, target);
+
+		for (ImageView key : drag_and_drop_hashmap.keySet()){
+			switch (key.getParent().getId()){
+				case "warehouse_top":
+					dropped_resource = my_player.getTopResource().get(0);
+					storage.addToWarehouseTop(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
+					break;
+				case "warehouse_middle":
+					dropped_resource = my_player.getMiddleResources().get(0);
+					storage.addToWarehouseMid(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
+					break;
+				case "warehouse_bottom":
+					dropped_resource = my_player.getBottomResources().get(0);
+					storage.addToWarehouseBot(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
+					break;
+				case "strongbox":
+					dropped_resource = Resource.valueOf((String) key.getUserData());
+					storage.addToStrongbox(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
+					break;
+				case "leader_card_1":
+					dropped_resource = ((ExtraSpaceAbility) my_player.getLeaderCards().get(0).getAbility()).getResourceType();
+					storage.addToExtraspace(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
+					break;
+				case "leader_card_2":
+					dropped_resource = ((ExtraSpaceAbility) my_player.getLeaderCards().get(1).getAbility()).getResourceType();
+					storage.addToExtraspace(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
+					break;
+			}
+		}
+
+		PayMessage message = new PayMessage(storage);
+		App.sendMessage(message);
+		this.drag_and_drop_hashmap.clear();
+	}
+
+	/**
+	 * Method that handle the drop on a warehouse image view and send a StoreMessage to the server
+	 *
+	 * @param event is the drop event
+	 * @param target is the imageview on which the image of the resource is dropped
+	 */
 	private void handleWarehouseDragDropped(DragEvent event, ImageView target){
 		handleDragDropped(event, target);
 
@@ -260,9 +312,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			StoreMessage message = new StoreMessage(warehouse_storage);
 			App.sendMessage(message);
 			warehouse_storage = null;
+			this.drag_and_drop_hashmap.clear();
 		} 
 	}
 
+	/**
+	 * @return true if all the imageview in the gain box are empty
+	 */
 	private boolean checkGainBox(){
 		for (Node node : this.gain_box.getChildren()){
 			if (((ImageView) node).getImage() != null){
@@ -594,7 +650,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store){
 		String active_player = App.getTurn().getNickname();
 
-		if (!to_pay.isEmpty() && !App.getMyPlayer().getNickname().equals(active_player)){
+		if (!to_pay.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)){
 			showNode(cost_resources_pane);
 			showNode(cost_box);
 			hideNode(gain_box);
@@ -609,7 +665,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 					break;
 				}
 			}
-		} else if (!to_store.isEmpty()) {
+		} else if (!to_store.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)) {
 			showNode(cost_resources_pane);
 			showNode(gain_box);
 			hideNode(cost_box);
@@ -762,7 +818,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Send a ProductionMessage with all the ProductionInterfaces selected
+	 * Method that collect all the production selected by the player and send a ProductionMessage
 	 */
 	public void activateProductions(){
 		ArrayList<ProductionInterface> productions = new ArrayList<ProductionInterface>();
@@ -809,14 +865,24 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		return production_ability;
 	}
 	
+	/**
+	 * @param index is the index of the slot selected for the production
+	 * @return the selected developmentcard based on the slot index
+	 */
 	private ProductionInterface getDevelopmentCard(int index){
 		return App.getMyPlayer().getDevelopmentCardsSlots().getTopCards().get(index);
 	}
 
+	/**
+	 * @return true if the production base is set
+	 */
 	private boolean checkBaseProductionSet(){
 		return input1.getImage() != null && input2.getImage() != null && output.getImage() != null;
 	}
 
+	/**
+	 * Method that handles the discard resources button
+	 */
 	public void handleDiscardResources(){
 		DiscardResourcesMessage message = new DiscardResourcesMessage();
 		App.sendMessage(message);

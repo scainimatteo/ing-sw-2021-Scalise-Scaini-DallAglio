@@ -42,22 +42,22 @@
                   <Insets bottom="60.0" left="40.0" />
                </padding>
                <children>
-                  <ImageView id="Servant" fx:id="servant_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ImageView fx:id="servant_sprite" userData="SERVANT" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="Coin" fx:id="coin_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				  <ImageView fx:id="coin_sprite" userData="COIN" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="Shield" fx:id="shield_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+				  <ImageView fx:id="shield_sprite" userData="SHIELD" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
-                  <ImageView id="Stone" fx:id="stone_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				  <ImageView fx:id="stone_sprite" userData="STONE" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
