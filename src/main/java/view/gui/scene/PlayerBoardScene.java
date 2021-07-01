@@ -209,7 +209,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Set the methods to drag and drop the resources in and out of the cost box
+	 * Set the methods to drag and drop the Resources in and out of the cost box
 	 */
 	private void initializeCostBoxDragAndDrop() {
 		for (Node node: this.cost_box.getChildren()) {
@@ -219,7 +219,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Set the methods to drag and drop the resources in and out of the gain box
+	 * Set the methods to drag and drop the Resources in and out of the gain box
 	 */
 	private void initializeGainBoxDragAndDrop(){
 		for (Node node : this.gain_box.getChildren()){
@@ -229,10 +229,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Method that handle the drop on a cost box image view and send a PayMessage to the server
+	 * Handle the drop on a cost box ImageView and send a PayMessage to the Server
 	 *
-	 * @param event is the drop event
-	 * @param target is the imageview on which the image of the resource is dropped
+	 * @param event the DragEvent raised
+	 * @param target the ImageView on which the Image of the Resource is dropped
 	 */
 	private void handleCostBoxDragDropped(DragEvent event, ImageView target){
 		SimplePlayer my_player = App.getMyPlayer();
@@ -276,10 +276,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Method that handle the drop on a warehouse image view and send a StoreMessage to the server
+	 * Handle the drop on a Warehouse ImageView and send a StoreMessage to the Server
 	 *
-	 * @param event is the drop event
-	 * @param target is the imageview on which the image of the resource is dropped
+	 * @param event the DragEvent raised
+	 * @param target the ImageView on which the Image of the Resource is dropped
 	 */
 	private void handleWarehouseDragDropped(DragEvent event, ImageView target){
 		handleDragDropped(event, target);
@@ -818,7 +818,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * Method that collect all the production selected by the player and send a ProductionMessage
+	 * Send a ProductionMessage with all the ProductionInterfaces selected by the Player
 	 */
 	public void activateProductions(){
 		ArrayList<ProductionInterface> productions = new ArrayList<ProductionInterface>();
@@ -866,22 +866,22 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 	
 	/**
-	 * @param index is the index of the slot selected for the production
-	 * @return the selected developmentcard based on the slot index
+	 * @param index the index of the slot selected for the Production
+	 * @return the selected DevelopmentCard based on the slot index
 	 */
 	private ProductionInterface getDevelopmentCard(int index){
 		return App.getMyPlayer().getDevelopmentCardsSlots().getTopCards().get(index);
 	}
 
 	/**
-	 * @return true if the production base is set
+	 * @return true if the Production base is set
 	 */
 	private boolean checkBaseProductionSet(){
 		return input1.getImage() != null && input2.getImage() != null && output.getImage() != null;
 	}
 
 	/**
-	 * Method that handles the discard resources button
+	 * Send a DiscardResourcesMessage
 	 */
 	public void handleDiscardResources(){
 		DiscardResourcesMessage message = new DiscardResourcesMessage();
@@ -889,12 +889,22 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		//TODO: updateView();
 	}
 
+	/**
+	 * Send an ActivateLeaderMessage
+	 *
+	 * @param index the index of the LeaderCard to activate
+	 */
 	public void handleActivateLeaderCard(int index){
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
 		ActivateLeaderMessage message = new ActivateLeaderMessage(player_leader_cards.get(index));
 		App.sendMessage(message);
 	}
 
+	/**
+	 * Send a DiscardLeaderMessage
+	 *
+	 * @param index the index of the LeaderCard to discard
+	 */
 	public void handleDiscardLeaderCard(int index){
 		ArrayList<LeaderCard> player_leader_cards = App.getMyPlayer().getLeaderCards();
 		DiscardLeaderMessage message = new DiscardLeaderMessage(player_leader_cards.get(index));
