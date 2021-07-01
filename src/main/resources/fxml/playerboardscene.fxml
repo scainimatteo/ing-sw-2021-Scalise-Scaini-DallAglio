@@ -42,22 +42,22 @@
                   <Insets bottom="60.0" left="40.0" />
                </padding>
                <children>
-                  <ImageView fx:id="servant_sprite" userData="SERVANT" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ImageView fx:id="servant_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="SERVANT" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/servant.png" />
                      </image>
                   </ImageView>
-				  <ImageView fx:id="coin_sprite" userData="COIN" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				  <ImageView fx:id="coin_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="COIN" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/coin.png" />
                      </image>
                   </ImageView>
-				  <ImageView fx:id="shield_sprite" userData="SHIELD" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+				  <ImageView fx:id="shield_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="SHIELD" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/shield.png" />
                      </image>
                   </ImageView>
-				  <ImageView fx:id="stone_sprite" userData="STONE" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				  <ImageView fx:id="stone_sprite" fitHeight="59.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" userData="STONE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
                         <Image url="@../images/tokens/resources/stone.png" />
                      </image>
@@ -120,37 +120,53 @@
             </ImageView>
                </children>
             </HBox>
-            <Pane fx:id="leader_card_pane" layoutX="2.0" prefHeight="720.0" prefWidth="1080.0">
+            <Pane fx:id="leader_card_pane" layoutX="420.0" layoutY="257.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="614.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" layoutX="412.0" layoutY="256.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
-                  <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="436.0" layoutY="312.0" prefHeight="331.0" prefWidth="570.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="427.0" opacity="0.49" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="618.0" />
+                  <HBox fx:id="leader_card_array" alignment="TOP_CENTER" layoutX="18.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="570.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                        <VBox fx:id="leader_card_vbox1" alignment="TOP_CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
                            <children>
-                              <ImageView fx:id="leader_card_1" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/leadercards/back/leader_card_back.png" />
-                                 </image>
-                              </ImageView>
+                              <StackPane fx:id="leader_card_pane1" alignment="BOTTOM_CENTER">
+                                 <children>
+                                    <ImageView fx:id="leader_card_1" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox fx:id="extra_space_ability1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
+                                       <children>
+            							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+      							  <ImageView fx:id="prod_ability_1" fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                       <StackPane.margin>
+                                          <Insets bottom="27.0" left="33.0" />
+                                       </StackPane.margin>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
 							  <Button fx:id="activate_leader_1" mnemonicParsing="false" text="Activate" />
                               <Button fx:id="discard_leader_1" mnemonicParsing="false" text="Discard" />
-							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-100.0" />
-                              <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0" />
-							  <ImageView fx:id="prod_ability_1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-225.0" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
+                        <VBox fx:id="leader_card_vbox2" alignment="TOP_CENTER" prefHeight="331.0" prefWidth="243.0" spacing="10.0">
                            <children>
-                              <ImageView fx:id="leader_card_2" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/leadercards/back/leader_card_back.png" />
-                                 </image>
-                              </ImageView>
+                              <StackPane fx:id="leader_card_pane2" alignment="BOTTOM_CENTER">
+                                 <children>
+                                    <ImageView fx:id="leader_card_2" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
+                                    <HBox fx:id="extra_space_storage11" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
+                                       <children>
+                                          <ImageView fx:id="extra_space_111" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                          <ImageView fx:id="extra_space_121" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </HBox>
+                                    <ImageView fx:id="prod_ability_11" fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                       <StackPane.margin>
+                                          <Insets bottom="27.0" left="33.0" />
+                                       </StackPane.margin>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
 							  <Button fx:id="activate_leader_2" mnemonicParsing="false" text="Activate" />
                               <Button fx:id="discard_leader_2" mnemonicParsing="false" text="Discard" />
-							  <ImageView fx:id="extra_space_21" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="40.0" translateY="-110.0" />
-							  <ImageView fx:id="extra_space_22" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="-37.0" translateY="-170.0" />
-							  <ImageView fx:id="prod_ability_2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" translateX="19.0" translateY="-200.0" />
                            </children>
                         </VBox>
                      </children>
@@ -240,7 +256,7 @@
             </ImageView>
                </children>
             </GridPane>
-            <HBox fx:id="development_card_slot" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" StackPane.alignment="CENTER_LEFT">
+            <HBox fx:id="development_card_slot" alignment="CENTER_LEFT" layoutX="417.0" layoutY="236.0" prefHeight="427.0" prefWidth="643.0" spacing="15.0" visible="false" StackPane.alignment="CENTER_LEFT">
                <children>
                   <StackPane fx:id="first_slot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="191.0">
                      <children>
@@ -367,11 +383,9 @@
                   </ImageView>
                </children>
             </Pane>
-            <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" onMouseClicked="#showOrHideLeaderCards" text="Show Leader" />
-        	<Button fx:id="end_turn_button" layoutX="974.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleEndTurn" text="End your turn" />
             <StackPane fx:id="cost_resources_pane" prefHeight="190.0" prefWidth="1080.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d0d0d" height="115.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" width="778.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d0d0d" height="153.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" width="778.0" />
                   <HBox fx:id="cost_box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="765.0">
                      <children>
                         <ImageView fitHeight="65.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
@@ -406,7 +420,7 @@
                         <Insets top="25.0" />
                      </StackPane.margin>
                   </HBox>
-                  <Text fx:id="pay_or_store_text" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="Drag here the highlighted resources to pay" x="-70.0">
+                  <Text fx:id="pay_or_store_text" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="Drag here the highlighted resources to pay" translateY="-20.0">
                      <font>
                         <Font name="Lato Black" size="30.0" />
                      </font>
@@ -414,7 +428,7 @@
                         <Insets bottom="85.0" />
                      </StackPane.margin>
                   </Text>
-                  <Button mnemonicParsing="false" onMouseClicked="#handleDiscardResources" text="DISCARD" translateX="335.0" translateY="50.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#handleDiscardResources" text="Discard " translateX="-170.0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
                </children>
             </StackPane>
       	  <Text fx:id="last_turn_text" fill="#ee1e1e" layoutX="30.0" layoutY="699.0" stroke="BLACK" strokeType="OUTSIDE" text="Last turn!">
@@ -422,11 +436,37 @@
       	    	<Font name="Lato Black" size="30.0" />
       	     </font>
       	</Text>
+            <ToggleButton fx:id="leaders_button" layoutX="673.0" layoutY="694.0" mnemonicParsing="false" onMouseClicked="#showOrHideLeaderCards" text="Show Leader" />
+        	<Button fx:id="end_turn_button" layoutX="974.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleEndTurn" text="End your turn" />
 		<ImageView fx:id="last_token" fitHeight="147.0" fitWidth="141.0" layoutX="271.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
 		   <effect>
 			  <DropShadow blurType="GAUSSIAN" height="50.0" radius="24.5" width="50.0" />
 		   </effect>
 		</ImageView>
+            <ImageView id="Output1" fx:id="swap12" fitHeight="20.0" fitWidth="50.0" layoutX="220.0" layoutY="340.0" pickOnBounds="true" rotate="90.0">
+               <image>
+                  <Image url="@../images/tokens/swap_arrow.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView id="Output1" fx:id="swap23" fitHeight="20.0" fitWidth="50.0" layoutX="220.0" layoutY="410.0" pickOnBounds="true" rotate="90.0">
+               <image>
+                  <Image url="@../images/tokens/swap_arrow.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView id="Output1" fx:id="swap13" fitHeight="20.0" fitWidth="100.0" layoutX="-20.0" layoutY="375.0" pickOnBounds="true" rotate="270.0">
+               <image>
+                  <Image url="@../images/tokens/swap_arrow.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
          </children>
       </Pane>
       <Button fx:id="game_button" mnemonicParsing="false" onAction="#changeSceneToGame" rotate="90.0" text="Game board" translateX="-60.0" StackPane.alignment="CENTER_LEFT">
