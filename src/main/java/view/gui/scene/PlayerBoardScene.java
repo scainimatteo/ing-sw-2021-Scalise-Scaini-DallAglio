@@ -62,7 +62,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	ArrayList<Resource> set_resources; 
 	// contains the Resources decided by the ProductionAbilities of the LeaderCards
 	ArrayList<Resource> leader_card_output;
-	Storage warehouse_storage;
 
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
@@ -91,6 +90,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private ImageView bottom1;
 	@FXML private ImageView bottom2;
 	@FXML private ImageView bottom3;
+	@FXML private HBox warehouse_top;
+	@FXML private HBox warehouse_middle;
+	@FXML private HBox warehouse_bottom;
 
 	@FXML private ImageView coin_sprite;
 	@FXML private ImageView shield_sprite;
@@ -140,8 +142,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		initializeGainBoxDragAndDrop();
 
 		hideNode(leader_card_pane);
-		hideNode(cost_resources_pane);
-		hideNode(last_turn_text);
 
 		initializeOtherPlayersButton();
 	}
@@ -182,12 +182,12 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		bottom2.setOnDragOver(over -> handleDragOver(over, bottom2));
 		bottom3.setOnDragOver(over -> handleDragOver(over, bottom3));
 
-		top1.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, top1));
-		middle1.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, middle1));
-		middle2.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, middle2));
-		bottom1.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, bottom1));
-		bottom2.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, bottom2));
-		bottom3.setOnDragDropped(dropped -> handleWarehouseDragDropped(dropped, bottom3));
+		top1.setOnDragDropped(dropped -> handleStoreInWarehouse(dropped, top1));
+		middle1.setOnDragDropped(dropped -> handleStoreInWarehouse(dropped, middle1));
+		middle2.setOnDragDropped(dropped -> handleStoreInWarehouse(dropped, middle2));
+		bottom1.setOnDragDropped(dropped -> handleStoreInWarehouse(dropped, bottom1));
+		bottom2.setOnDragDropped(dropped -> handleStoreInWarehouse(dropped, bottom2));
+		bottom3.setOnDragDropped(dropped -> handleStoreInWarehouse(dropped, bottom3));
 	}
 
 	/**
@@ -214,7 +214,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	private void initializeCostBoxDragAndDrop() {
 		for (Node node: this.cost_box.getChildren()) {
 			node.setOnDragOver(over -> handleDragOver(over, (ImageView) node));
-			node.setOnDragDropped(dropped -> handleCostBoxDragDropped(dropped, (ImageView) node));
+			node.setOnDragDropped(dropped -> handlePay(dropped, (ImageView) node));
 		}
 	}
 
@@ -234,25 +234,25 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * @param event the DragEvent raised
 	 * @param target the ImageView on which the Image of the Resource is dropped
 	 */
-	private void handleCostBoxDragDropped(DragEvent event, ImageView target){
-		SimplePlayer my_player = App.getMyPlayer();
+	private void handlePay(DragEvent event, ImageView target){
+		handleDragDropped(event, target);
+
+		SimplePlayer player = App.getMyPlayer();
 		Storage storage = new Storage();
 		Resource dropped_resource;
 
-		handleDragDropped(event, target);
-
-		for (ImageView key : drag_and_drop_hashmap.keySet()){
+		for (ImageView key: drag_and_drop_hashmap.keySet()){
 			switch (key.getParent().getId()){
 				case "warehouse_top":
-					dropped_resource = my_player.getTopResource().get(0);
+					dropped_resource = player.getTopResource().get(0);
 					storage.addToWarehouseTop(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
 				case "warehouse_middle":
-					dropped_resource = my_player.getMiddleResources().get(0);
+					dropped_resource = player.getMiddleResources().get(0);
 					storage.addToWarehouseMid(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
 				case "warehouse_bottom":
-					dropped_resource = my_player.getBottomResources().get(0);
+					dropped_resource = player.getBottomResources().get(0);
 					storage.addToWarehouseBot(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
 				case "strongbox":
@@ -260,18 +260,22 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 					storage.addToStrongbox(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
 				case "leader_card_1":
-					dropped_resource = ((ExtraSpaceAbility) my_player.getLeaderCards().get(0).getAbility()).getResourceType();
+					dropped_resource = ((ExtraSpaceAbility) player.getLeaderCards().get(0).getAbility()).getResourceType();
 					storage.addToExtraspace(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
 				case "leader_card_2":
-					dropped_resource = ((ExtraSpaceAbility) my_player.getLeaderCards().get(1).getAbility()).getResourceType();
+					dropped_resource = ((ExtraSpaceAbility) player.getLeaderCards().get(1).getAbility()).getResourceType();
 					storage.addToExtraspace(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
+				default:
+					System.out.println(key.getParent().getId());
 			}
 		}
 
 		PayMessage message = new PayMessage(storage);
 		App.sendMessage(message);
+		resetWarehouse();
+		resetTurnResources();
 		this.drag_and_drop_hashmap.clear();
 	}
 
@@ -281,12 +285,10 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * @param event the DragEvent raised
 	 * @param target the ImageView on which the Image of the Resource is dropped
 	 */
-	private void handleWarehouseDragDropped(DragEvent event, ImageView target){
+	private void handleStoreInWarehouse(DragEvent event, ImageView target){
 		handleDragDropped(event, target);
 
-		if (warehouse_storage == null){
-			warehouse_storage = new Storage();
-		} 
+		Storage warehouse_storage = new Storage();
 
 		for (ImageView key: this.drag_and_drop_hashmap.keySet()){
 			ArrayList<Resource> resource_to_add = new ArrayList<Resource>();
@@ -308,16 +310,15 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			}
 		}
 
-		if (checkGainBox()){
-			StoreMessage message = new StoreMessage(warehouse_storage);
-			App.sendMessage(message);
-			warehouse_storage = null;
-			this.drag_and_drop_hashmap.clear();
-		} 
+		StoreMessage message = new StoreMessage(warehouse_storage);
+		App.sendMessage(message);
+		resetWarehouse();
+		resetTurnResources();
+		this.drag_and_drop_hashmap.clear();
 	}
 
 	/**
-	 * @return true if all the imageview in the gain box are empty
+	 * @return true if all the Imageview in the gain box are empty
 	 */
 	private boolean checkGainBox(){
 		for (Node node : this.gain_box.getChildren()){
@@ -422,50 +423,24 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<Resource> top = warehouse.getTopResource();
 		ArrayList<Resource> mid = warehouse.getMiddleResources();
 		ArrayList<Resource> bot = warehouse.getBottomResources();
-		int counter = 0;
 
 		for (Resource res : top){
-			if (res != null){
-				top1.setImage(new Image(res.getPath()));
-			} else {
-				top1.setImage(null);
+			this.top1.setImage(getImageFromResource(res));
+		}
+
+		for (int i = 0; i < this.warehouse_middle.getChildren().size(); i++){
+			ImageView middle_image = (ImageView) this.warehouse_middle.getChildren().get(i);
+			try {
+				middle_image.setImage(getImageFromResource(mid.get(i)));
+			} catch (IndexOutOfBoundsException e) {
 			}
 		}
 
-		for (Resource res : mid){
-			if (res != null){
-				if (counter == 0){
-					middle1.setImage(new Image(res.getPath()));
-				} else if (counter == 1){
-					middle2.setImage(new Image(res.getPath()));
-				}
-			} else {
-				if (counter == 0){
-					middle1.setImage(null);
-				} else if (counter == 1){
-					middle2.setImage(null);
-				}
-			}
-			counter += 1;
-		}
-
-		for (Resource res : bot){
-			if (res != null){
-				if (counter == 0){
-					bottom1.setImage(new Image(res.getPath()));
-				} else if (counter == 1){
-					bottom2.setImage(new Image(res.getPath()));
-				} else if (counter == 2){
-					bottom3.setImage(new Image(res.getPath()));
-				}
-			} else {
-				if (counter == 0){
-					bottom1.setImage(null);
-				} else if (counter == 1){
-					bottom2.setImage(null);
-				} else if (counter == 2){
-					bottom3.setImage(null);
-				}
+		for (int i = 0; i < this.warehouse_bottom.getChildren().size(); i++){
+			ImageView bottom_image = (ImageView) this.warehouse_bottom.getChildren().get(i);
+			try {
+				bottom_image.setImage(getImageFromResource(bot.get(i)));
+			} catch (IndexOutOfBoundsException e) {
 			}
 		}
 	}
@@ -497,19 +472,19 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
 
 		// first slot
-		for (int i = 0; i < this.first_slot.getChildren().size(); i++) {
+		for (int i = this.first_slot.getChildren().size() - 1; i >= 0; i--) {
 			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, i));
 			this.first_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// second slot
-		for (int i = 0; i < this.second_slot.getChildren().size(); i++) {
+		for (int i = this.second_slot.getChildren().size() - 1; i >= 0; i--) {
 			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, i));
 			this.second_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// third slot
-		for (int i = 0; i < this.third_slot.getChildren().size(); i++) {
+		for (int i = this.third_slot.getChildren().size() - 1; i >= 0; i--) {
 			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, i));
 			this.third_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
@@ -535,11 +510,12 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (Node node: this.leader_card_array.getChildren()) {
 			if (i < leader_cards.size()) {
 				VBox leader_card = (VBox) node;
-				ImageView leader_card_image = (ImageView) leader_card.getChildren().get(0);
+				StackPane leader_card_stackpane = (StackPane) leader_card.getChildren().get(0);
+				ImageView leader_card_image = (ImageView) leader_card_stackpane.getChildren().get(0);
 				leader_card_image.setImage(new Image(leader_cards.get(i).getFrontPath()));
 
 				setLeaderCardButtons(leader_card, leader_cards.get(i), i);
-				setLeaderCardAbility(leader_card, i);
+				setLeaderCardAbility(leader_card_stackpane, i);
 				showNode(node);
 				i++;
 			} else {
@@ -559,48 +535,43 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
-	private void setLeaderCardAbility(VBox leader_card, int index) {
+	private void setLeaderCardAbility(StackPane leader_card, int index) {
 		LeaderCard player_leader_card = App.getMyPlayer().getLeaderCards().get(index);
 
 		// if the LeaderCard has an ExtraSpaceAbility
 		if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ExtraSpaceAbility(null))) {
-			setExtraSpaceAbility(leader_card, player_leader_card);
+			// hide the ProductionAbility modifier
+			hideNode(leader_card.getChildren().get(2));
+
+			setExtraSpaceAbility((HBox) leader_card.getChildren().get(1), player_leader_card);
 		// if the LeaderCard has a ProductionAbility
 		} else if (player_leader_card.isActive() && player_leader_card.getAbility().checkAbility(new ProductionAbility(null, null))) {
-			setProductionAbility(leader_card, player_leader_card, index);
+			// hide the ProductionAbility modifier
+			hideNode(leader_card.getChildren().get(1));
+
+			setProductionAbility((ImageView) leader_card.getChildren().get(2), player_leader_card, index);
 		} else {
 			// hide every LeaderCard modifier
-			hideNode(leader_card.getChildren().get(3));
-			hideNode(leader_card.getChildren().get(4));
-			hideNode(leader_card.getChildren().get(5));
+			hideNode(leader_card.getChildren().get(1));
+			hideNode(leader_card.getChildren().get(2));
 		}
 	}
 
-	private void setExtraSpaceAbility(VBox leader_card, LeaderCard player_leader_card) {
+	private void setExtraSpaceAbility(HBox extra_space, LeaderCard player_leader_card) {
 		Resource extra_space_resource = ((ExtraSpaceAbility) player_leader_card.getAbility()).getResourceType();
 		int number_of_resources = ((ExtraSpaceAbility) player_leader_card.getAbility()).peekResources();
 
 		// set the images of the Resources contained in the LeaderCard
-		int j = 3;
 		for (int i = 0; i < number_of_resources; i++) {
-			ImageView leader_card_image = (ImageView) leader_card.getChildren().get(j);
-			leader_card_image.setImage(new Image(extra_space_resource.getPath()));
-			showNode(leader_card_image);
-			j++;
+			ImageView extra_space_image = (ImageView) extra_space.getChildren().get(i);
+			extra_space_image.setImage(new Image(extra_space_resource.getPath()));
+			showNode(extra_space);
 		}
-
-		// hide the ProductionAbility modifier
-		hideNode(leader_card.getChildren().get(5));
 	}
 
-	private void setProductionAbility(VBox leader_card, LeaderCard player_leader_card, int index) {
-		ImageView production_resource_image = (ImageView) leader_card.getChildren().get(5);
-		production_resource_image.setOnMouseClicked(click -> chooseProductionAbilityResource(production_resource_image, index));
-		showNode(production_resource_image);
-
-		// hide the ExtraSpaceAbility modifiers
-		hideNode(leader_card.getChildren().get(3));
-		hideNode(leader_card.getChildren().get(4));
+	private void setProductionAbility(ImageView production_image, LeaderCard player_leader_card, int index) {
+		production_image.setOnMouseClicked(click -> chooseProductionAbilityResource(production_image, index));
+		showNode(production_image);
 	}
 
 	private void setFaithMarker(int faith_marker){
@@ -647,41 +618,52 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 	}
 
-	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store){
+	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store) {
 		String active_player = App.getTurn().getNickname();
 
-		if (!to_pay.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)){
-			showNode(cost_resources_pane);
-			showNode(cost_box);
-			hideNode(gain_box);
-			pay_or_store_text.setText("Drop these resources here to pay the cost");
-			List<Node> hbox_nodes = this.cost_box.getChildren();
-			ImageView res_view;
-			for (int i = 0; i < 10; i++){
-				try{
-					res_view = (ImageView) hbox_nodes.get(i);
-					res_view.setImage(new Image(to_pay.get(i).getPath()));
-				} catch (IndexOutOfBoundsException e){
-					break;
-				}
-			}
+		resetTurnResources();
+		if (!to_pay.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)) {
+			setPayResources(to_pay);
 		} else if (!to_store.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)) {
-			showNode(cost_resources_pane);
-			showNode(gain_box);
-			hideNode(cost_box);
-			pay_or_store_text.setText("Drag these resources away to store your gains");
-			List<Node> hbox_nodes = this.gain_box.getChildren();
-			ImageView res_view;
-			for (int i = 0; i < 10; i++){
-				try{
-					res_view = (ImageView) hbox_nodes.get(i);
-					res_view.setImage(new Image(to_store.get(i).getPath()));
-				} catch (IndexOutOfBoundsException e){
-					break;
-				}
-			}
+			setStoreResources(to_store);
 		} else {
 			hideNode(cost_resources_pane);
+		}
+	}
+
+	private void setPayResources(ArrayList<Resource> to_pay) {
+		showNode(cost_resources_pane);
+		showNode(cost_box);
+		hideNode(gain_box);
+
+		pay_or_store_text.setText("Drop these resources here to pay the cost");
+
+		List<Node> hbox_nodes = this.cost_box.getChildren();
+		for (int i = 0; i < hbox_nodes.size(); i++){
+			try{
+				ImageView res_view = (ImageView) hbox_nodes.get(i);
+				res_view.setImage(new Image(to_pay.get(i).getPath()));
+			} catch (IndexOutOfBoundsException e){
+				break;
+			}
+		}
+	}
+
+	private void setStoreResources(ArrayList<Resource> to_store) {
+		showNode(cost_resources_pane);
+		showNode(gain_box);
+		hideNode(cost_box);
+
+		pay_or_store_text.setText("Drag these resources away to store your gains");
+
+		List<Node> hbox_nodes = this.gain_box.getChildren();
+		for (int i = 0; i < hbox_nodes.size(); i++){
+			try{
+				ImageView res_view = (ImageView) hbox_nodes.get(i);
+				res_view.setImage(new Image(to_store.get(i).getPath()));
+			} catch (IndexOutOfBoundsException e){
+				break;
+			}
 		}
 	}
 
@@ -694,11 +676,55 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
+	 *
+	 */
+	private Image getImageFromResource(Resource res) {
+		if (res == null) {
+			return null;
+		}
+		
+		return new Image(res.getPath());
+	}
+
+	/**
 	 * Set all the ImageViews of the FaithTrack as null
 	 */
 	private void resetFaithTrack() {
 		for (Node cell: faith_track.getChildren()) {
 			((ImageView) cell).setImage(null);
+		}
+	}
+
+	/**
+	 *
+	 */
+	private void resetTurnResources() {
+		for (int i = 0; i < this.cost_box.getChildren().size(); i++) {
+			((ImageView) this.cost_box.getChildren().get(i)).setImage(null);
+		}
+
+		for (int i = 0; i < this.gain_box.getChildren().size(); i++) {
+			((ImageView) this.gain_box.getChildren().get(i)).setImage(null);
+		}
+	}
+
+	/**
+	 *
+	 */
+	private void resetWarehouse(){
+		for (int i = 0; i < this.warehouse_top.getChildren().size(); i++){
+			ImageView top_image = (ImageView) this.warehouse_top.getChildren().get(i);
+			top_image.setImage(null);
+		}
+
+		for (int i = 0; i < this.warehouse_middle.getChildren().size(); i++){
+			ImageView middle_image = (ImageView) this.warehouse_middle.getChildren().get(i);
+			middle_image.setImage(null);
+		}
+
+		for (int i = 0; i < this.warehouse_bottom.getChildren().size(); i++){
+			ImageView bottom_image = (ImageView) this.warehouse_bottom.getChildren().get(i);
+			bottom_image.setImage(null);
 		}
 	}
 
