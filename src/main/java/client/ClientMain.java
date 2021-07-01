@@ -19,7 +19,7 @@ public class ClientMain {
 	private static View view;
 	private static final int default_port = 1234;
 	private static final String default_address = "127.0.0.1";
-	private static final View default_view = new CLI();
+	private static final View default_view = new GUI();
 
 	public static void main(String[] args) {
 		parseArguments(args);
