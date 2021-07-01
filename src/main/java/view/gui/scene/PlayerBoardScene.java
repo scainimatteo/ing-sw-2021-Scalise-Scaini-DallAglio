@@ -285,8 +285,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 		PayMessage message = new PayMessage(storage);
 		App.sendMessage(message);
-		resetWarehouse();
-		resetTurnResources();
 		this.drag_and_drop_hashmap.clear();
 	}
 
@@ -415,6 +413,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		boolean is_last_turn = App.getTurn().isFinal();
 
 		resetFaithTrack();
+		resetTurnResources();
 		resetWarehouse();
 
 		// SOLOGAME
@@ -658,7 +657,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	private void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store) {
 		String active_player = App.getTurn().getNickname();
 
-		resetTurnResources();
 		if (!to_pay.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)) {
 			setPayResources(to_pay);
 		} else if (!to_store.isEmpty() && App.getMyPlayer().getNickname().equals(active_player)) {
@@ -710,18 +708,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} else {
 			hideNode(this.last_turn_text);
 		}
-	}
-
-	/**
-	 * @param res the Resource to get the Image of
-	 * @return the Image representing res, null if res was null
-	 */
-	private Image getImageFromResource(Resource res) {
-		if (res == null) {
-			return null;
-		}
-		
-		return new Image(res.getPath());
 	}
 
 	/**
@@ -779,6 +765,18 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
+	}
+
+	/**
+	 * @param res the Resource to get the Image of
+	 * @return the Image representing res, null if res was null
+	 */
+	private Image getImageFromResource(Resource res) {
+		if (res == null) {
+			return null;
+		}
+		
+		return new Image(res.getPath());
 	}
 
 	/**
