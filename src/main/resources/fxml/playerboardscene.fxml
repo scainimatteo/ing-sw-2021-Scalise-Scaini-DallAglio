@@ -129,7 +129,10 @@
                            <children>
                               <StackPane fx:id="leader_card_pane1" alignment="BOTTOM_CENTER">
                                  <children>
-                                    <ImageView fx:id="leader_card_1" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="leader_card_1" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/leadercards/front/leader_card_9.png" />
+                                       </image></ImageView>
                                     <HBox fx:id="extra_space_ability1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
                                        <children>
             							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
@@ -141,6 +144,11 @@
                                           <Insets bottom="27.0" left="33.0" />
                                        </StackPane.margin>
                                     </ImageView>
+                                    <Text id="ShieldNum" fx:id="bonus_amount1" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="+0" textAlignment="CENTER" translateX="40.0" translateY="-25.0" StackPane.alignment="BOTTOM_CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="27.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                               </StackPane>
 							  <Button fx:id="activate_leader_1" mnemonicParsing="false" text="Activate" />
@@ -151,7 +159,10 @@
                            <children>
                               <StackPane fx:id="leader_card_pane2" alignment="BOTTOM_CENTER">
                                  <children>
-                                    <ImageView fx:id="leader_card_2" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="leader_card_2" fitHeight="316.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/leadercards/front/leader_card_12.png" />
+                                       </image></ImageView>
                                     <HBox fx:id="extra_space_storage11" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
                                        <children>
                                           <ImageView fx:id="extra_space_111" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
@@ -163,6 +174,11 @@
                                           <Insets bottom="27.0" left="33.0" />
                                        </StackPane.margin>
                                     </ImageView>
+                                    <Text id="ShieldNum" fx:id="bonus_amount2" fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" text="+0" textAlignment="CENTER" translateX="40.0" translateY="-25.0">
+                                       <font>
+                                          <Font name="System Bold" size="27.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                               </StackPane>
 							  <Button fx:id="activate_leader_2" mnemonicParsing="false" text="Activate" />
