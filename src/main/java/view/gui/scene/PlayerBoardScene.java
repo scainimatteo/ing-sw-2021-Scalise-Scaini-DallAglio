@@ -952,11 +952,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Select a DevelopmentCard as a Production
 	 */
 	public void setDevelopmentCardProduction(ImageView production, int slot){
-		if (!development_card_productions.contains(slot)){
-			development_card_productions.add(slot);
+		if (!this.development_card_productions.contains(slot)){
+			this.development_card_productions.add(slot);
 			production.setOpacity(0.50);
 		} else {
-			development_card_productions.remove(slot);
+			this.development_card_productions.remove(Integer.valueOf(slot));
 			production.setOpacity(1);
 		}
 	}
