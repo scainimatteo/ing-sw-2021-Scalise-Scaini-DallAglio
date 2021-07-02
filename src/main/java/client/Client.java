@@ -76,8 +76,11 @@ public class Client {
 			this.out.reset();
 			this.out.writeObject(message);
 			this.out.flush();
+		} catch (SocketException e) {
+			this.view.setUninitialized();
+			this.view.handleError(new ErrorMessage("The connection was closed by the server", this.view.getNickname()));
 		} catch (IOException e) {
-			e.printStackTrace();
+			this.view.handleError(new ErrorMessage("Error while sending message to the Server", this.view.getNickname()));
 		}
 	}
 }
