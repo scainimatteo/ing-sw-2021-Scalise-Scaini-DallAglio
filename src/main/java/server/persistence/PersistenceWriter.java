@@ -155,6 +155,10 @@ public class PersistenceWriter {
 	}
 
 	private static JSONObject populateJSONTile(Tile tile) {
+		if (tile == null) {
+			return null;
+		}
+
 		JSONObject tile_object = new JSONObject();
 		tile_object.put("activated", tile.isActive());
 		tile_object.put("victory_points", tile.getVictoryPoints());

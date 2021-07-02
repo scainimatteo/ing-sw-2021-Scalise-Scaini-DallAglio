@@ -104,7 +104,7 @@ public class GameController implements Controller {
 	}
 
 	/**
-	 * If a VaticanReports was activated by a Player, activate it on other Players
+	 * If a VaticanReports was activated by a Player, activate it or remove it on other Players
 	 *
 	 * @param player the Player that activated the VaticanReport
 	 * @param report the VaticanReport activated
@@ -116,8 +116,12 @@ public class GameController implements Controller {
 
 		for (Player p: this.game.getPlayers()) {
 			if (!p.equals(player)) {
+				// activate the VaticanReport if the Player is in the right area
 				if (p.whichVaticanReport() != null && p.whichVaticanReport().equals(report)) {
 					p.activateVaticanReport();
+				// remove the VaticanReport otherwise
+				} else {
+					p.removeVaticanReport(report);
 				}
 			}
 		}

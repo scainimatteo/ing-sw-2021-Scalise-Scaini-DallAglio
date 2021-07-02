@@ -68,6 +68,15 @@ public class FaithTrack {
 
 	}
 
+	/**
+	 * Set a VaticanReport null if the Player missed the opportunity to activate it
+	 *
+	 * @param vatican_report the VaticanReport to remove
+	 */
+	public void removeVaticanReport(VaticanReports vatican_report) {
+		this.vatican_report_tiles[vatican_report.getIndex()] = null;
+	}
+
 	public Cell[] getCellTrack(){
 		return this.track;
 	}
@@ -103,7 +112,7 @@ public class FaithTrack {
 		int i = 0;
 
 		for (Tile t: this.vatican_report_tiles) {
-			if (t.isActive()) {
+			if (t != null && t.isActive()) {
 				i += t.getVictoryPoints();
 			}
 		}

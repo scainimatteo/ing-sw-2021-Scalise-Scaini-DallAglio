@@ -351,4 +351,14 @@ public class Player extends ModelObservable {
 		this.track.activateVaticanReport(vatican_report);
 		this.notifyPlayer();
 	}
+
+	/**
+	 * Remove the VaticanReport that was activated by another Player
+	 *
+	 * @param vatican_report the VaticanReport of an area different that the one the Player is on
+	 */
+	public void removeVaticanReport(VaticanReports vatican_report) {
+		this.track.removeVaticanReport(vatican_report);
+		this.notifyPlayer();
+	}
 }

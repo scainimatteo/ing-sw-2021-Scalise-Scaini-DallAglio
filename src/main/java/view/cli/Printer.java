@@ -288,7 +288,9 @@ public class Printer {
 		String mid_v_r = "|";
 
 		for (int i = 0; i < 3; i ++){
-			if (vatican_reports[i].isActive()){
+			if (vatican_reports[i] == null){
+				mid_v_r += "   ";
+			} else if (vatican_reports[i].isActive()){
 				mid_v_r += " " + String.valueOf(vatican_reports[i].getVictoryPoints()) + " ";
 			} else {
 				mid_v_r += " X ";
