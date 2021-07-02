@@ -67,7 +67,7 @@ class LeaderCardResourcesCost {
 	+ boolean isActivable()
 }
 
-interface LeaderAbility{
+abstract class LeaderAbility{
 	+ boolean checkAbility(WhiteMarblesAbility target)
 	+ boolean checkAbility(ExtraSpaceAbility target)
 	+ boolean checkAbility(ProductionAbility target)
@@ -277,38 +277,41 @@ class SoloPlayer {
 	+ SimpleSoloPlayer simplify()
 }
 
+interface ProductionInterface {
+}
+
 /' RELATIONS DEFINITION '/
 
 /' Cards relations '/
 CardLevel -- DevelopmentCardsColor
-Card <|-- LeaderCard
-java.util.AbstractCollection <|.. Deck
-Card <|-- DevelopmentCard
-ProductionInterface <|-- DevelopmentCard
+Card <-- LeaderCard
+java.util.AbstractCollection <-- Deck
+Card <-- DevelopmentCard
+ProductionInterface <.. DevelopmentCard
 DevelopmentCard -- Resource
 DevelopmentCard -- CardLevel
 DevelopmentCard -- Production
 DevelopmentCardsOnTable -- Table
-java.util.AbstractCollection <|.. Table
+java.util.AbstractCollection <-- Table
 Table -- Deck
 
 /' Production relations '/
-ProductionInterface <|.. ProductionAbility
-ProductionInterface <|-- Production
+ProductionInterface <-- ProductionAbility
+ProductionInterface <-- Production
 Production -- Resource
 
 /' LeaderCard relations '/
 LeaderCard -- LeaderAbility
-LeaderCard <|-- Card
-LeaderCard <|-- LeaderCardLevelCost
+Card <-- LeaderCard
+LeaderCard <-- LeaderCardLevelCost
 LeaderCardLevelCost -- CardLevel
-LeaderCard <|-- LeaderCardResourcesCost
+LeaderCard <-- LeaderCardResourcesCost
 LeaderCardResourcesCost -- Resource
-LeaderAbility <|.. ProductionAbility
-ProductionInterface <|.. ProductionAbility
-LeaderAbility <|.. DiscountAbility
-LeaderAbility <|.. ExtraSpaceAbility
-LeaderAbility <|.. WhiteMarblesAbility
+LeaderAbility <-- ProductionAbility
+ProductionInterface <-- ProductionAbility
+LeaderAbility <-- DiscountAbility
+LeaderAbility <-- ExtraSpaceAbility
+LeaderAbility <-- WhiteMarblesAbility
 DiscountAbility -- Resource
 ExtraSpaceAbility -- Resource
 WhiteMarblesAbility -- Resource
@@ -321,7 +324,7 @@ Cell -- VaticanReports
 Tile -- VaticanReports
 FaithTrack -- Cell
 FaithTrack -- Tile
-FaithTrack <|-- SoloFaithTrack
+FaithTrack <-- SoloFaithTrack
 
 /' Personal board relations '/
 Warehouse -- Resource
@@ -336,7 +339,7 @@ Player -- StrongBox
 Player -- DevelopmentCardsSlots
 Player -- ProductionBase
 Player -- Deck
-Player <|-- SoloPlayer
+Player <-- SoloPlayer
 
 /' Game '/
 Game -- Player
@@ -349,9 +352,9 @@ Turn -- Resource
 Game <|-- SoloGame
 SoloGame -- SoloActionToken
 SoloGame -- SoloPlayer
-SoloActionTokenAbility <|.. DiscardDevelopmentCards
+SoloActionTokenAbility <.. DiscardDevelopmentCards
 DiscardDevelopmentCards -- DevelopmentCardsColor
-SoloActionTokenAbility <|.. MoveBlackCrossTwoSpaces
-SoloActionTokenAbility <|.. MoveBlackCrossOneSpace
+SoloActionTokenAbility <.. MoveBlackCrossTwoSpaces
+SoloActionTokenAbility <.. MoveBlackCrossOneSpace
 DiscardDevelopmentCards -- DevelopmentCardsColor
 @enduml

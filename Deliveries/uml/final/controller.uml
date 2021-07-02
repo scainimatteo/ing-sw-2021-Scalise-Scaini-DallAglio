@@ -1,7 +1,7 @@
 @startuml
 
 /' CLASSES DEFINITION '/
-interface Controller{
+interface Controller {
 	+ void handleMessage(Message message)
 	+ void handleActivateLeader(Player player, LeaderCard leader_card)
 	+ void handleBuyCard(Player player, int row, int column, int slot)
@@ -110,7 +110,7 @@ class ProductionMessage {
 	+ void useMessage(GameController controller)
 }
 
-interface ResourceMessage {
+abstract class ResourceMessage {
 	- Storage storage
 }
 
@@ -126,12 +126,12 @@ class DiscardResourceMessage {
 	+ void useMessage(GameController controller)
 }
 
-class RearrangeWarehouseMessage {
+class RearrangeMessage {
 	- int swap1, swap2
 	+ void useMessage(GameController controller)
 }
 
-interface LeaderCardMessage {
+abstract class LeaderCardMessage {
 	- LeaderCard leader_card
 }
 
@@ -174,7 +174,7 @@ class Storage {
 
 /' SERVERMESSAGE PACKAGE '/
 
-interface ServerMessage {
+abstract class ServerMessage {
 	- boolean error
 	- boolean initializing
 	- boolean end_game
@@ -211,32 +211,59 @@ class ViewUpdate {
 }
 
 /' RELATIONS DEFINITION '/
+Controller <.. GameController
+Controller <.. InitialController
+
+ClientHandler -- GameController
+ClientHandler -- RemoteView
+
+SetupManager -- Player
+SetupManager -- RemoteView
+
 Message -- GameController
 
-ServerMessage <.. ErrorMessage
-ServerMessage <.. ViewUpdate
+ModelObserver <-up- RemoteView
 
-Initializer -- GameController
-Initializer -- RemoteView
-Observer <-up- RemoteView
+GameController <-- SoloGameController
 
-Runnable <.. GameController
+GameController <-- StubGameController
+SetupManager <-- StubSetupManager
+SoloGameController <-- StubSoloGameController
 
-Message <.. TurnMessage
-Message <.. ResourceMessage
-Message <.. LeaderCardMessage
+ /' MESSAGE '/
+Storage -- Resource
 
-TurnMessage <.. BuyCardMessage
-TurnMessage <.. MarketMessage
-TurnMessage <.. ProductionMessage
+Message <-- TurnMessage
+Message <-- ResourceMessage
+Message <-- LeaderCardMessage
+Message <-- InitialitingMessage
+Message <-- PersistenceMessage
+Message <-- RearrangeMessage
+Message <-- TurnMessage
+Message <-- EndTurnMessage
 
-ResourceMessage <.. PayMessage
-ResourceMessage <.. StoreMessage
-ResourceMessage <.. DiscardResourceMessage
+TurnMessage <-- BuyCardMessage
+TurnMessage <-- MarketMessage
+TurnMessage <-- ProductionMessage
 
-LeaderCardMessage <.. ActivateLeaderMessage
-LeaderCardMessage <.. DiscardLeaderMessage
+ResourceMessage <-- PayMessage
+ResourceMessage <-- StoreMessage
+ResourceMessage <-- DiscardResourceMessage
+ResourceMessage <-- ChooseResourcesMessage
 
-Message <.. EndTurnMessage
+LeaderCardMessage <-- ActivateLeaderMessage
+LeaderCardMessage <-- DiscardLeaderMessage
+
+ /' SERVER MESSAGE '/
+ServerMessage <-- EndGameMessage
+ServerMessage <-- ErrorMessage
+ServerMessage <-- InitializingServerMessage
+ServerMessage <-- ViewUpdate
+
+InitializingServerMessage -- InitializingMessageType
+
+ViewUpdate -- SimpleGame
+ViewUpdate -- SimplePlayer
+ViewUpdate -- Turn
 
 @enduml
