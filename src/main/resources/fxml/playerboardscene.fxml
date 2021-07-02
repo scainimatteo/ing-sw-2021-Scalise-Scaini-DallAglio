@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -21,6 +22,11 @@
    <children>
       <Pane maxHeight="720.0" maxWidth="1080.0" minHeight="720.0" minWidth="1080.0" prefHeight="720.0" prefWidth="1080.0">
          <children>
+            <Rectangle fx:id="active_player_highlight" arcHeight="5.0" arcWidth="5.0" fill="#0bda51" height="750.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1110.0" x="-15.0" y="-15.0">
+               <effect>
+                  <GaussianBlur radius="25.0" />
+               </effect>
+            </Rectangle>
             <ImageView fitHeight="720.0" fitWidth="1080.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true">
                <image>
                   <Image url="@../images/board/main_board.png" />

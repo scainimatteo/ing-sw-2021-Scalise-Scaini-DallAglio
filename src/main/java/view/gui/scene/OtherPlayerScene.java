@@ -179,18 +179,21 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
 
 		// first slot
-		for (int i = this.first_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, i));
+		int size = this.first_slot.getChildren().size();
+		for (int i = 0; i < size; i++) {
+			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, first_column.size() - 1 - i));
 		}
 
 		// second slot
-		for (int i = this.second_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, i));
+		size = this.second_slot.getChildren().size();
+		for (int i = 0; i < size; i++) {
+			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, second_column.size() - 1 - i));
 		}
 
 		// third slot
-		for (int i = this.third_slot.getChildren().size() - 1; i >= 0; i--) {
-			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, i));
+		size = this.third_slot.getChildren().size();
+		for (int i = 0; i < size; i++) {
+			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, third_column.size() - 1 - i));
 		}
 	}
 
