@@ -21,7 +21,7 @@ public class ServerMain {
 	 *
 	 * @param args the arguments
 	 */
-	public static void parseArguments(String[] args) {
+	private static void parseArguments(String[] args) {
 		port = default_port;
 
 		if (args.length < 2) {
@@ -36,14 +36,6 @@ public class ServerMain {
 		}
 	}
 
-	public static void startServer() {
-		try {
-			new Server(port).startServer();
-		} catch (IOException e) {
-			System.out.printf("Can't run server. Try checking if the port %d is already in use\n", port);
-		}
-	}
-
 	/**
 	 * @param arglist a List with all the command line arguments
 	 * @return the port specified by command line
@@ -55,5 +47,13 @@ public class ServerMain {
 		}
 
 		return Integer.parseInt(arglist.get(index + 1));
+	}
+
+	private static void startServer() {
+		try {
+			new Server(port).startServer();
+		} catch (IOException e) {
+			System.out.printf("Can't run server. Try checking if the port %d is already in use\n", port);
+		}
 	}
 }

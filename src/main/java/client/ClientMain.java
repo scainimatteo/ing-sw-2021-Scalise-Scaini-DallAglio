@@ -31,7 +31,7 @@ public class ClientMain {
 	 *
 	 * @param args the arguments
 	 */
-	public static void parseArguments(String[] args) {
+	private static void parseArguments(String[] args) {
 		port = default_port;
 		address = default_address;
 		view = default_view;
@@ -55,15 +55,6 @@ public class ClientMain {
 		// VIEW
 		if (arglist.contains("-v") || arglist.contains("--view")) {
 			view = parseView(arglist);
-		}
-	}
-
-	public static void startClient() {
-		try {
-			new Client(address, port, view).startClient();
-		} catch (IOException e) {
-			System.out.println("The connection was closed by the server");
-			// the handleError will close the program
 		}
 	}
 
@@ -108,6 +99,15 @@ public class ClientMain {
 			return new CLI();
 		} else {
 			return new GUI();
+		}
+	}
+
+	private static void startClient() {
+		try {
+			new Client(address, port, view).startClient();
+		} catch (IOException e) {
+			System.out.println("The connection was closed by the server");
+			// the handleError will close the program
 		}
 	}
 }
