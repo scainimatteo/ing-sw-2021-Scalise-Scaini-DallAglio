@@ -246,7 +246,7 @@ public class PersistenceParser {
 			int slot_number = (int)(long) slot_object.get("slot_number");
 
 			JSONArray slot_array = (JSONArray) slot_object.get("cards");
-			for (int j = 0; j < slot_array.size(); j++) {
+			for (int j = slot_array.size() - 1; j >= 0; j--) {
 				int id = (int)(long) slot_array.get(j);
 				switch (slot_number) {
 					case 1:
@@ -263,6 +263,7 @@ public class PersistenceParser {
 				}
 			}
 		}
+
 		slots.addDeck(new Deck<DevelopmentCard>(3, first_slot), 0, 0);
 		slots.addDeck(new Deck<DevelopmentCard>(3, second_slot), 0, 1);
 		slots.addDeck(new Deck<DevelopmentCard>(3, third_slot), 0, 2);
