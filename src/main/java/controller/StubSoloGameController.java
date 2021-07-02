@@ -11,7 +11,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.server.ClientHandler;
 
 public class StubSoloGameController extends SoloGameController{
-	String error;
+	private String error;
 
 	public StubSoloGameController(ArrayList<ClientHandler> clients){
 		super(clients);

@@ -10,7 +10,7 @@ import it.polimi.ingsw.model.game.Game;
 import it.polimi.ingsw.server.ClientHandler;
 
 public class StubGameController extends GameController{
-	String error;
+	private String error;
 
 	public StubGameController(ArrayList<ClientHandler> clients){
 		super(clients);

@@ -1,0 +1,224 @@
+@startuml
+
+/' CLASSES DEFINITION '/
+abstract class View {
+# SimpleGame simple_game
+# ArrayList<SimplePlayer> simple_players
+# Turn turn
+# boolean initializing
+# boolean nickname_flag
+# String nickname
+
++ void startView()
++ void handleError()
++ void handleInitializing()
++ void updateView(SimpleGame simple_game, SimplePlayer simple_player, Turn turn)
++ void updateSimplePlayer(SimplePlayer simple_player)
++ SimplePlayer getMyPlayer()
+} 
+
+class CLI {
+	+ void startView(Client client)
+	+ void parseInput(Client client, String inputLine)
+	+ void handleError(ErrorMessage error_message)
+	+ void handleInitializing(InitializingServerMessage initializing_message)
+}
+
+class MessageParser {
+	+ {static} Message parseInput(String input, boolean initializing, SimplePlayer player)
+	- {static} Message parseBuyCardMessage(String[] inputs)
+	- {static} Message parseMarketMessage(String[] inputs)
+	- {static} ProductionInterface parseBaseProduction(String[] inputs, int i, boolean production_base)
+	- {static} ProductionInterface parseDevelopmentCardProduction(String[] inputs, int i, SimplePlayer player, HashSet<Integer> slots_used)
+	- {static} ProductionInterface parseLeaderCardProduction(String[] inputs, int i, SimplePlayer player, HashSet<Integer> leader_used)
+	- {static} Message parseProductionMessage(String[] inputs, SimplePlayer player)
+	- {static} Message parsePayMessage(String[] inputs)
+	- {static} Message parseStoreMessage(String[] inputs)
+	- {static} Message parseEndTurnMessage(String[] inputs)
+	- {static} Message parseDiscardMessage(String[] inputs, SimplePlayer player)
+	- {static} Message parseDiscardResourcesMessage(String[] inputs)
+	- {static} Message parseDiscardLeaderCardMessage(String[] inputs, SimplePlayer player)
+	- {static} Message parseActivateLeaderCardMessage(String[] inputs, SimplePlayer player)
+	- {static} Message parseRearrangeMessage(String[] inputs)
+	- {static} Message parseChooseResourcesMessage(String[] inputs, SimplePlayer player)
+	- {static} void addToStorage(String input, ArrayList<Resource> resources_to_add, Storage storage)
+}
+
+class Printer {
+	+ {static} String printDevelopmentCardsMatrix(DevelopmentCard[][] cards_matrix)
+	+ {static} String printResource(Resource res)
+	+ {static} String printMarket(SimpleGame game)
+	+ {static} String printDevelopmentCard(DevelopmentCard card)
+	+ {static} String printDevelopmentCardsOnTable(SimpleGame game)
+	+ {static} String printTrack(SimplePlayer player)
+	+ {static} String printWarehouse(SimplePlayer player)
+	+ {static} String printStrongbox(SimplePlayer player)
+	+ {static} String printLeader(LeaderCard card, boolean print_deactivated)
+	+ {static} String printLeaderCards(SimplePlayer player, boolean print_deactivated)
+	+ {static} String printDevelopmentCardsSlots(SimplePlayer player)
+	+ {static} String printDevelopmentCardsSlots(SimplePlayer player, int slot)
+	+ {static} String printTurn(Turn turn)
+	+ {static} String printNullCard()
+	- static HashMap<Resource, Integer> numFromArraylist(ArrayList<Resource> arraylist)
+}
+
+class ViewParser {
+	+ {static} SimplePlayer getPlayerFromNickname(ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseMarket(SimpleGame game)
+	+ {static} String parseDevelopmentCardsOnTable(SimpleGame game)
+	+ {static} String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseWarehouse(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseStrongbox(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseLeaderCards(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseDevelopmentCardsSlots(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseTurn(String[] inputs, Turn turn)
+}
+
+class GUI {
+	+ void startView(Client client)
+	+ void handleError(ErrorMessage error_message)
+	+ void handleInitializing(InitializingServerMessage initializing_message)
+	+ SimpleGame getSimpleGame()
+	+ ArrayList<SimplePlayer> getSimplePlayers()
+	+ Turn getTurn()
+	+ void sendMessage(Message message)
+	+ void setApp(App app)
+	+ void finishedInitialization()
+}
+
+class App{
+	+ void start(Stage stage)
+	+ InitialScene getInitialScene()
+	+ static void setModel(GUI view)
+	+ static SimplePlayer getMyPlayer()
+	+ void showError(String error)
+	+ static boolean isInitialized()
+	+ static void sendMessage(Message message)
+	+ static void finishedInitialization()
+}
+
+class InitialScene {
+	- Label nicknameLabel
+	- TextField nicknameText
+	- ToggleGroup numPlayersGroup
+	- RadioButton rb4
+	- TextField matchText
+	- VBox startLayout
+	- VBox createLayout
+	- VBox joinLayout
+	- VBox matchLayout
+	- Button cancelButton
+	- Label matchNameLabel
+
+	- String nickname
+	- int num_players
+	- String match_name
+	- boolean finishedInitialization
+
+	+ void setMatchName(String match_name)
+	+ boolean isInitialized()
+	+ void initialize(URL location, ResourceBundle resources)
+	+ void selectCreateHandler()
+	+ void selectJoinHandler()
+	+ void createHandler()
+	+ void joinHandler()
+	+ void cancelHandler()
+	- void startWaiting()
+}
+
+class LeaderCardSelectorScene {
+	- ArrayList<LeaderCard> to_delete
+	- double opacity_percent
+	- SimplePlayer player
+
+	- StackPane leader_card_scene
+
+	- ImageView leader_card_1
+	- ImageView leader_card_2
+	- ImageView leader_card_3
+	- ImageView leader_card_4
+
+	- Image leader_card_image_1
+	- Image leader_card_image_2
+	- Image leader_card_image_3
+	- Image leader_card_image_4
+
+	+ void initialize(URL location, ResourceBundle resources)
+	+ void leaderCard1Click()
+	+ void leaderCard2Click()
+	+ void leaderCard3Click()
+	+ void leaderCard4Click()
+	- boolean checkLeader()
+	- void endLeaderScene()
+}
+
+class MarketandDevelopmentScene{
+}
+
+class MainBoardScene{
+}
+
+class FinalScene{
+}
+
+class SceneController {
+	- {static} Stage stage
+
+	public void hideNode(Node node) 
+	public void showNode(Node node) 
+	public void changeScene(String layout_fxml)
+}
+
+class SimpleGame {
+	- ArrayList<String> order
+	- Resource[][] market
+	- Resource free_marble
+	- DevelopmentCard[][] development_cards_on_table
+}
+
+class SimplePlayer {
+	- String nickname
+	- Cell[] faith_track
+	- Cell faith_marker
+	- Tile[] vatican_reports
+	- SimpleWarehouse warehouse
+	- HashMap<Resource, Integer> strongbox
+	- LeaderCard[] leader_cards
+	- SimpleDevelopmentCardSlots development_card_slots
+}
+
+class SimpleWarehouse {
+	- Resource top_resource
+	- Resource[] middle_resources
+	- Resource[] bottom_resources
+}
+
+class SimpleDevelopmentCardSlots {
+	- DevelopmentCards[] first_column
+	- DevelopmentCards[] second_column
+	- DevelopmentCards[] third_column
+}
+
+/' RELATIONS DEFINITION '/
+View <-- CLI
+View <-- GUI
+View -up- SimpleGame
+View -up- SimplePlayer
+
+CLI -- MessageParser
+CLI -- Printer
+CLI -- ViewParser
+
+javafx.Application --> App
+App -- GUI
+App -- SceneController
+SceneController <-- LeaderCardSelectorScene
+SceneController <-- InitialScene
+SceneController <-- MarketandDevelopmentScene
+SceneController <-- MainBoardScene
+SceneController <-- FinalScene
+
+SimplePlayer -- SimpleWarehouse
+SimplePlayer -- SimpleDevelopmentCardSlots
+
+@enduml
