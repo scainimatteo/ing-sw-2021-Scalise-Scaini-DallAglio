@@ -187,7 +187,11 @@ public class PersistenceParser {
 		JSONArray tiles_array = (JSONArray) player_object.get("tiles");
 		Tile[] tiles = new Tile[tiles_array.size()];
 		for (int i = 0; i < tiles_array.size(); i++) {
-			tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
+			if (tiles_array.get(i) == null) {
+				tiles[i] = null;
+			} else {
+				tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
+			}
 		}
 
 		return new FaithTrack(Factory.getInstance().getAllCells(), tiles, marker_position);
@@ -370,7 +374,11 @@ public class PersistenceParser {
 		JSONArray tiles_array = (JSONArray) player_object.get("tiles");
 		Tile[] tiles = new Tile[tiles_array.size()];
 		for (int i = 0; i < tiles_array.size(); i++) {
-			tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
+			if (tiles_array.get(i) == null) {
+				tiles[i] = null;
+			} else {
+				tiles[i] = createTile((JSONObject) jsonParser.parse(tiles_array.get(i).toString()));
+			}
 		}
 
 		return new SoloFaithTrack(Factory.getInstance().getAllCells(), tiles, marker_position, black_marker_position);

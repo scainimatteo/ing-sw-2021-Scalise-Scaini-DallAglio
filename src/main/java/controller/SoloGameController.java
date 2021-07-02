@@ -141,7 +141,7 @@ public class SoloGameController extends GameController {
 	}
 
 	/**
-	 * If a VaticanReports was activated by the Black Cross, activate it on the Player
+	 * If a VaticanReports was activated by the Black Cross, activate it or remove it on the Player
 	 *
 	 * @param report the VaticanReport activated
 	 */
@@ -151,8 +151,13 @@ public class SoloGameController extends GameController {
 		}
 	
 		Player player = super.game.getPlayers().get(0);
+
+		// activate the VaticanReport if the Player is in the right area
 		if (player.whichVaticanReport() != null && player.whichVaticanReport().equals(report)) {
 			player.activateVaticanReport();
+		// remove the VaticanReport otherwise
+		} else {
+			player.removeVaticanReport(report);
 		}
 	}
 

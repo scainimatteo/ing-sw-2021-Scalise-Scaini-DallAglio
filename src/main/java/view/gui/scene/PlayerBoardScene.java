@@ -693,15 +693,21 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	private void setTiles(Tile[] tiles){
-		if (tiles[0].isActive()) {
+		if (tiles[0] == null) {
+			this.tile1.setImage(null);
+		} else if (tiles[0].isActive()) {
 			this.tile1.setImage(new Image("/images/tokens/faithtrack/pope_favor1_front.png"));
 		}
 
-		if (tiles[1].isActive()) {
+		if (tiles[1] == null) {
+			this.tile2.setImage(null);
+		} else if (tiles[1].isActive()) {
 			this.tile2.setImage(new Image("/images/tokens/faithtrack/pope_favor2_front.png"));
 		}
 
-		if (tiles[2].isActive()) {
+		if (tiles[2] == null) {
+			this.tile3.setImage(null);
+		} else if (tiles[2].isActive()) {
 			this.tile3.setImage(new Image("/images/tokens/faithtrack/pope_favor3_front.png"));
 		}
 	}
