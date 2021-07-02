@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.card.DevelopmentCard;
 import it.polimi.ingsw.model.card.LeaderCard;
 
 import it.polimi.ingsw.model.game.sologame.SoloActionToken;
+import it.polimi.ingsw.model.game.Turn;
 
 import it.polimi.ingsw.model.player.track.Tile;
 
@@ -463,16 +464,19 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * This method gets called once at the start and everytime there's a ViewUpdate (when the Model is changed)
 	 */
 	public void updateView(){
-		SimpleWarehouse warehouse = App.getMyPlayer().getWarehouse();
-		HashMap<Resource, Integer> strongbox = App.getMyPlayer().getStrongbox();
-		SimpleDevelopmentCardSlot development_card_slot = App.getMyPlayer().getDevelopmentCardsSlots();
-		ArrayList<LeaderCard> leader_cards = App.getMyPlayer().getLeaderCards();
-		int marker_position = App.getMyPlayer().getMarker().getPosition();
-		Tile[] tiles = App.getMyPlayer().getReports();
-		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
-		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
-		boolean is_last_turn = App.getTurn().isFinal();
-		String active_player = App.getTurn().getNickname();
+		SimplePlayer player = App.getMyPlayer();
+		SimpleWarehouse warehouse = player.getWarehouse();
+		HashMap<Resource, Integer> strongbox = player.getStrongbox();
+		SimpleDevelopmentCardSlot development_card_slot = player.getDevelopmentCardsSlots();
+		ArrayList<LeaderCard> leader_cards = player.getLeaderCards();
+		int marker_position = player.getMarker().getPosition();
+		Tile[] tiles = player.getReports();
+
+		Turn turn = App.getTurn();
+		ArrayList<Resource> to_pay = turn.getRequiredResources();
+		ArrayList<Resource> to_store = turn.getProducedResources();
+		boolean is_last_turn = turn.isFinal();
+		String active_player = turn.getNickname();
 
 		resetFaithTrack();
 		resetTurnResources();
@@ -483,9 +487,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		// SOLOGAME
 		if (App.isSoloGame()) {
 			SimpleSoloGame game = (SimpleSoloGame) App.getSimpleGame();
-			SimpleSoloPlayer player = (SimpleSoloPlayer) App.getMyPlayer();
+			SimpleSoloPlayer soloplayer = (SimpleSoloPlayer) player;
 			setLastToken(game.getLastToken());
-			setBlackMarker(player.getBlackMarkerPosition());
+			setBlackMarker(soloplayer.getBlackMarkerPosition());
 		}
 
 		// PLAYER
@@ -666,7 +670,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (int i = 0; i < number_of_resources; i++) {
 			ImageView extra_space_image = (ImageView) extra_space.getChildren().get(i);
 			extra_space_image.setImage(new Image(extra_space_resource.getPath()));
-
 			showNode(extra_space);
 		}
 	}
