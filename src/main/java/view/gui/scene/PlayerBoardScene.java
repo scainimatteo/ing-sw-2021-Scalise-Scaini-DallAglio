@@ -782,7 +782,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 	private void setActivePlayer(String active_player) {
 		// if it's the Turn of the Player, highlight the board
-		if (active_player.equals(App.getMyPlayer().getNickname())) {
+		if (!App.isSoloGame() && active_player.equals(App.getMyPlayer().getNickname())) {
 			showNode(active_player_highlight);
 			return;
 		}
