@@ -159,7 +159,8 @@ public class Game extends ModelObservable {
 
 		// create a new Hashmap using the nicknames instead of the Players
 		HashMap<String, Integer> rank = new HashMap<String, Integer>();
-		for (Player p: this.victory_points.keySet()) {
+		Collections.sort(players, (p1, p2) -> victory_points.get(p1) - victory_points.get(p2));
+		for (Player p: players) {
 			rank.put(p.getNickname(), this.victory_points.get(p));
 		}
 		notifyModel(new EndGameMessage(rank));

@@ -32,17 +32,23 @@ public class LeaderCardLevelCost extends LeaderCard implements Serializable {
 	 */
 	@Override
 	public boolean isActivable(Player player){
-		ArrayList<CardLevel> req = (ArrayList<CardLevel>) this.requirements.clone();
+		ArrayList<CardLevel> req_levels = (ArrayList<CardLevel>) this.requirements.clone();
+		ArrayList<CardLevel> total_levels = new ArrayList<CardLevel>();
 		Iterator<DevelopmentCard> iterator = player.getDevCardIterator();
-		boolean to_return = true;
-
-		ArrayList<CardLevel> player_card_levels = new ArrayList<CardLevel>();
 		while (iterator.hasNext()){
-			player_card_levels.add(iterator.next().getCardLevel());
+			total_levels.add(iterator.next().getCardLevel());
 		}
-		List<CardLevel> diff = req.stream().filter(e -> !player_card_levels.contains(e)).collect(Collectors.toList());
-		return diff.isEmpty();
+
+		for (CardLevel req_lvl : this.requirements){
+			int required = (int) req_levels.stream().filter(e -> e.equals(req_lvl)).count();
+			int available = (int) total_levels.stream().filter(e -> e.equals(req_lvl)).count();
+			if (required > available){
+				return false;
+			}
+		}
+		return true;
 	}
+		
 
 	@Override
 	protected String printTop() {

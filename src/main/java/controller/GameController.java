@@ -452,15 +452,17 @@ public class GameController implements Controller {
 	public void handleProduction(Player player, ArrayList<ProductionInterface> productions) {
 		if (checkPlayer(player)){
 			if (!game.getTurn().hasDoneAction()){
-				ArrayList<Resource> required = totalProductionCost(productions);
-				ArrayList<Resource> produced = totalProductionGain(productions);
-				if(player.hasEnoughResources(required)){
-					game.getTurn().addRequiredResources(required);
-					int number_of_faith = (int)produced.stream().filter(x->x.equals(Resource.FAITH)).count();
-					handleVaticanReports(player, player.moveForward(number_of_faith));
-					game.getTurn().addProducedResources((ArrayList<Resource>)produced.stream().filter(x->!x.equals(Resource.FAITH)).collect(Collectors.toList()));
-					game.getTurn().setDoneAction(true);
-				} else {handleError("You don't have enough resources to activate these production powers", player);}
+				if(!productions.isEmpty()){
+					ArrayList<Resource> required = totalProductionCost(productions);
+					ArrayList<Resource> produced = totalProductionGain(productions);
+					if(player.hasEnoughResources(required)){
+						game.getTurn().addRequiredResources(required);
+						int number_of_faith = (int)produced.stream().filter(x->x.equals(Resource.FAITH)).count();
+						handleVaticanReports(player, player.moveForward(number_of_faith));
+						game.getTurn().addProducedResources((ArrayList<Resource>)produced.stream().filter(x->!x.equals(Resource.FAITH)).collect(Collectors.toList()));
+						game.getTurn().setDoneAction(true);
+					} else {handleError("You don't have enough resources to activate these production powers", player);}
+				}
 			} else {handleError("You already played your main action", player);}
 		} else {handleError("It is not your turn", player);}
 	}
@@ -768,8 +770,14 @@ public class GameController implements Controller {
 			iterator.next();
 			count++;
 		}
-		if (player.endOfTrack() || count >= 7){
+		if (count >= 7) { 
 			game.getTurn().setFinal(true);
+		} else { 
+			for (Player p : game.getPlayers()){
+				if (p.endOfTrack()){
+					game.getTurn().setFinal(true);
+				}
+			}
 		}
 	}
 
