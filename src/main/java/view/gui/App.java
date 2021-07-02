@@ -98,18 +98,6 @@ public class App extends Application {
 	}
 
 	/**
-	 * Show an error alert
-	 *
-	 * @param error the error String to display
-	 */
-	public void showError(String error) {
-		Platform.runLater(() -> {
-			Alert alert = new Alert(AlertType.ERROR, error, ButtonType.OK);
-			alert.show();
-		});
-	}
-
-	/**
 	 * @return true if the gui has finished the initialization phase
 	 */
 	public static boolean isInitialized() {

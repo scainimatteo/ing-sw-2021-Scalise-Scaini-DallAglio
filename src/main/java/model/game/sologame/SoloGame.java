@@ -82,7 +82,7 @@ public class SoloGame extends Game {
 	private SimpleSoloGame simplify() {
 		ArrayList<String> order = new ArrayList<String>();
 		order.add(this.player.getNickname());
-		return new SimpleSoloGame(order, super.market.peekMarket(), super.market.getFreeMarble(), super.development_cards_on_table.getTopCards(), this.last_token, this.active_tokens.size());
+		return new SimpleSoloGame(order, super.market.peekMarket(), super.market.getFreeMarble(), super.development_cards_on_table.getTopCards(), this.last_token);
 	}
 
 	/**

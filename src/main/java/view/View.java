@@ -27,7 +27,6 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 
 	protected boolean initialized = false;
 	protected boolean setup_done = false;
-	protected boolean nickname_flag = true;
 	protected String nickname;
 
 	private ArrayList<ViewUpdateObserver> view_update_observers = new ArrayList<ViewUpdateObserver>();

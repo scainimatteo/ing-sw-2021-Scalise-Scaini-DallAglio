@@ -26,6 +26,8 @@ import it.polimi.ingsw.view.cli.ViewParser;
 import it.polimi.ingsw.view.View;
 
 public class CLI extends View {
+	private boolean nickname_flag = true;
+
 	public CLI() {
 		this.simple_players = new ArrayList<SimplePlayer>();
 	}

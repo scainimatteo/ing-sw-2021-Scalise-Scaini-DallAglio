@@ -13,19 +13,13 @@ import java.io.Serializable;
 public class SimpleSoloGame extends SimpleGame implements Serializable {
 	private static final long serialVersionUID = 6646460L;
 	private SoloActionToken last_token;
-	private int active_tokens_size;
 
-	public SimpleSoloGame(ArrayList<String> order, Resource[][] market, Resource free_marble, DevelopmentCard[][] development_cards_on_table, SoloActionToken last_token, int active_tokens_size) {
+	public SimpleSoloGame(ArrayList<String> order, Resource[][] market, Resource free_marble, DevelopmentCard[][] development_cards_on_table, SoloActionToken last_token) {
 		super(order, market, free_marble, development_cards_on_table);
 		this.last_token = last_token;
-		this.active_tokens_size = active_tokens_size;
 	}
 
 	public SoloActionToken getLastToken() {
 		return this.last_token;
-	}
-
-	public int getActiveTokensSize() {
-		return this.active_tokens_size;
 	}
 }

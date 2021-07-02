@@ -37,7 +37,7 @@ public class Printer {
 	 * @param cards_array the array of DevelopmentCard to combine
 	 * @return the String with all the DevelopmentCard text
 	 */
-	public static String printDevelopmentCardsArray(DevelopmentCard[] cards_array) {
+	private static String printDevelopmentCardsArray(DevelopmentCard[] cards_array) {
 		String total = "";
 		int dim = printDevelopmentCard(cards_array[0]).split("\n").length;
 		String[] strings = new String[dim];
@@ -73,7 +73,7 @@ public class Printer {
 	 * @param cards_array the array of LeaderCard to combine
 	 * @return the String with all the LeaderCard text
 	 */
-	public static String printLeaderCardArray(LeaderCard[] cards_array, boolean print_deactivated) {
+	private static String printLeaderCardArray(LeaderCard[] cards_array, boolean print_deactivated) {
 		String total = "";
 		int dim = printLeader(cards_array[0], print_deactivated).split("\n").length;
 		String[] strings = new String[dim];
@@ -109,7 +109,7 @@ public class Printer {
 	 * @param viewables the array of DevelopmentCard to combine
 	 * @return the String with all the DevelopmentCard text
 	 */
-	public static String printDevelopmentCardsMatrix(DevelopmentCard[][] cards_matrix) {
+	private static String printDevelopmentCardsMatrix(DevelopmentCard[][] cards_matrix) {
 		String total = "";
 
 		for (int i = 0; i < cards_matrix.length; i++) {

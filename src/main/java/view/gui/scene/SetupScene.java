@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Arrays;
 import java.net.URL;
 
-public class SetupScene extends SceneController implements Initializable, ErrorMessageObserver {
+public class SetupScene extends SceneController implements ErrorMessageObserver, Initializable {
 	ArrayList<LeaderCard> to_delete = new ArrayList<LeaderCard>();
 	ArrayList<String> order;
 	double opacity_percent = 0.5;
@@ -174,6 +174,7 @@ public class SetupScene extends SceneController implements Initializable, ErrorM
 	/**
 	 * Reverse the drag and drop if an ErrorMessage is received while choosing the Resources
 	 */
+	@Override
 	public void receivedErrorMessage() {
 		reverseDragAndDrop();
 		this.drag_and_drop_hashmap.clear();

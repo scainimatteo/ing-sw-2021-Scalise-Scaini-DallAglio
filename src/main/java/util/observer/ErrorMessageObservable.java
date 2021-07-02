@@ -7,4 +7,5 @@ import it.polimi.ingsw.util.observer.ErrorMessageObserver;
 public interface ErrorMessageObservable {
 	public void notifyReceivedErrorMessage();
 	public void addErrorMessageObserver(ErrorMessageObserver observer);
+	public void removeErrorMessageObserver(ErrorMessageObserver observer);
 }
