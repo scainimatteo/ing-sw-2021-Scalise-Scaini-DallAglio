@@ -209,14 +209,17 @@ public class Player extends ModelObservable {
 
 	public void getFromTop(ArrayList<Resource> res){
 		this.warehouse.getFromTop(res);
+		this.notifyPlayer();
 	}
 
 	public void getFromMiddle(ArrayList<Resource> res){
 		this.warehouse.getFromMiddle(res);
+		this.notifyPlayer();
 	}
 
 	public void getFromBottom(ArrayList<Resource> res){
 		this.warehouse.getFromBottom(res);
+		this.notifyPlayer();
 	}
 
 	/**

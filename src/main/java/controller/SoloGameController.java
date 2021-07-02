@@ -185,14 +185,17 @@ public class SoloGameController extends GameController {
 	private void discardOneCard(int order) {
 		for (int j = 2; j >= 0; j--) {
 			DevelopmentCard[][] development_cards_on_table = super.game.getTopCards();
-			if (development_cards_on_table[j][order] == null) {
-				// if this card is null and we've reached the row 0, it means we've discarded all the cards of a color
-				this.last_card_discarded = (j == 0) ? true : false;
-			} else {
+			if (development_cards_on_table[j][order] != null) {
 				// remove the card from the DevelopmentCardsOnTable
 				super.game.getFromDeck(development_cards_on_table[j][order]);
 				break;
 			}
+		}
+
+		// if we've reached the row 0, it means we've discarded all the cards of a color
+		DevelopmentCard[][] development_cards_on_table = super.game.getTopCards();
+		if (development_cards_on_table[0][order] == null) {
+			this.last_card_discarded = true;
 		}
 	}
 
