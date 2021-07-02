@@ -129,6 +129,15 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 		});
 	}
 
+	/**
+	 * Set the GUI to uninitialized to exit after an ErrorMessage is delivered
+	 */
+	@Override
+	public void setUninitialized() {
+		this.initialized = false;
+		this.game_started = false;
+	}
+
 	public SimpleGame getSimpleGame() {
 		return this.simple_game;
 	}

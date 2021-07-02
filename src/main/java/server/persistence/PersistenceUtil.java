@@ -10,38 +10,36 @@ public class PersistenceUtil {
 	/**
 	 * Get the directory for the persistence files
 	 *
-	 * @return a Path object representing the directory
+	 * Linux: $XDG_DATA_HOME/.local/share/GC02/ or $HOME/.local/share/GC02/
 	 *
-	 * Source: <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
+	 * Windows: $APPDATA/Local/GC02/ or $HOME/Appdata/Local/GC02/
+	 *
+	 * MacOs: $HOME/Library/Application Support/GC02/
+	 *
+	 * @return a Path object representing the directory
+	 * @see https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder
 	 */
 	public static Path getPersistenceDirectory() {
 		String os = System.getProperty("os.name");
 		String home = System.getProperty("user.home");
 
 		if (os.contains("Mac")) {
-			return Paths.get(home, "Library", "Application Support");
+			return Paths.get(home, "Library", "Application Support", "GC02");
 		} else if (os.contains("Windows")) {
-			String version = System.getProperty("os.version");
-			if (version.startsWith("5.")) {
-				return getFromEnv("APPDATA", false, Paths.get(home, "Application Data"));
-			} else {
-				return getFromEnv("APPDATA", false, Paths.get(home, "AppData", "Roaming"));
-			}
+			return getFromEnv("APPDATA", false, Paths.get(home, "AppData", "Local", "GC02"));
 		} else {
 			return getFromEnv("XDG_DATA_HOME", true, Paths.get(home, ".local", "share", "GC02"));
 		}
 	}
 
 	/**
-	* Retrieves a path from an environment variable, substituting a default
-	* if the value is absent or invalid.
+	* Retrieves a path from an environment variable, substituting a default if the value is absent or invalid.
 	*
 	* @param envVar name of environment variable to read
 	* @param mustBeAbsolute whether enviroment variable's value should be considered invalid if it's not an absolute path
 	* @param defaultPath default to use if environment variable is absent or invalid
 	* @return environment variable's value as a Path, or de defaultPath
-	*
-	 * Source: <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
+	* @see https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder
 	*/
 	private static Path getFromEnv(String envVar, boolean mustBeAbsolute, Path defaultPath) {
 		Path dir;
