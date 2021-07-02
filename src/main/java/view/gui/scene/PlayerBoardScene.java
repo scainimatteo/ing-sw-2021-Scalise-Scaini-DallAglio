@@ -119,6 +119,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private HBox cost_box;
 	@FXML private HBox gain_box;
 	@FXML private Text pay_or_store_text;
+	@FXML private Button discard_resources_button;
 
 	@FXML private ImageView tile1;
 	@FXML private ImageView tile2;
@@ -740,6 +741,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		showNode(cost_resources_pane);
 		showNode(cost_box);
 		hideNode(gain_box);
+		hideNode(discard_resources_button);
 
 		pay_or_store_text.setText("Drop these resources here to pay the cost");
 
