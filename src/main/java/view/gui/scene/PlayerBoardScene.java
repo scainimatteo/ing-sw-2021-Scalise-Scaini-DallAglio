@@ -314,7 +314,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		PayMessage message = new PayMessage(storage);
 		App.sendMessage(message);
 		this.drag_and_drop_hashmap.clear();
-		this.updateView();
 	}
 
 	/**
@@ -357,6 +356,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			return;
 		}
 
+		this.resetWarehouse();
 		StoreMessage message = new StoreMessage(warehouse_storage);
 		App.sendMessage(message);
 		this.drag_and_drop_hashmap.clear();
@@ -403,6 +403,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			return;
 		}
 
+		this.resetExtraSpace();
 		StoreMessage message = new StoreMessage(extra_space_storage);
 		App.sendMessage(message);
 		this.drag_and_drop_hashmap.clear();
