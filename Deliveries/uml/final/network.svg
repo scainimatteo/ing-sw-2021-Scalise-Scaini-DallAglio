@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1161px" preserveAspectRatio="none" style="width:1277px;height:1161px;" version="1.1" viewBox="0 0 1277 1161" width="1277px" zoomAndPan="magnify"><defs><filter height="300%" id="fpx79pm7m2vqb" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[c60af77fe5573b84a4aa4bce89659574]
+class Server--><rect codeLine="3" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="265.6797" id="Server" style="stroke:#A80036;stroke-width:1.5;" width="646" x="326" y="230"/><ellipse cx="624.75" cy="246" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M627.7188,251.6406 Q627.1406,251.9375 626.5,252.0781 Q625.8594,252.2344 625.1563,252.2344 Q622.6563,252.2344 621.3281,250.5938 Q620.0156,248.9375 620.0156,245.8125 Q620.0156,242.6875 621.3281,241.0313 Q622.6563,239.375 625.1563,239.375 Q625.8594,239.375 626.5,239.5313 Q627.1563,239.6875 627.7188,239.9844 L627.7188,242.7031 Q627.0938,242.125 626.5,241.8594 Q625.9063,241.5781 625.2813,241.5781 Q623.9375,241.5781 623.25,242.6563 Q622.5625,243.7188 622.5625,245.8125 Q622.5625,247.9063 623.25,248.9844 Q623.9375,250.0469 625.2813,250.0469 Q625.9063,250.0469 626.5,249.7813 Q627.0938,249.5 627.7188,248.9219 L627.7188,251.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="40" x="645.25" y="250.1543">Server</text><line style="stroke:#A80036;stroke-width:1.5;" x1="327" x2="971" y1="262" y2="262"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="270"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="41" x="346" y="276.2104">int port</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="282.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="346" y="289.0151">ServerSocket server_socket</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="295.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="290" x="346" y="301.8198">HashMap&lt;String, ArrayList&lt;ClientHandler&gt;&gt; lobby</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="308.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="229" x="346" y="314.6245">HashMap&lt;String, Integer&gt; num_players</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="321.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="165" x="346" y="327.4292">HashSet&lt;String&gt; nicknames</text><line style="stroke:#A80036;stroke-width:1.5;" x1="327" x2="971" y1="334.0234" y2="334.0234"/><ellipse cx="337" cy="345.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="346" y="348.2339">void startServer()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="354.8281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="232" x="346" y="361.0386">void insertIntoLobby(ClientHandler client)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="367.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="344" x="346" y="373.8433">GameController chooseGameController(String match_name)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="380.4375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="223" x="346" y="386.6479">void manageClient(ClientHandler client)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="393.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="248" x="346" y="399.4526">void manageFirstClient(ClientHandler client)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="406.0469"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="346" y="412.2573">void manageOtherClient(ClientHandler client)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="418.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="535" x="346" y="425.062">void createOrJoinPersistenceGame(ClientHandler client, String match_name, String nickname)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="431.6563"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="346" y="437.8667">String newMatchName()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="334" y="444.4609"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="306" x="346" y="450.6714">boolean checkIfAllPlayersPresent(String match_name)</text><ellipse cx="337" cy="460.2656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="501" x="346" y="463.4761">void sendStringToClient(ClientHandler client, String string, InitializingMessageType type)</text><ellipse cx="337" cy="473.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="620" x="346" y="476.2808">void sendStringToClient(ClientHandler client, String string, InitializingMessageType type, String match_name)</text><ellipse cx="337" cy="485.875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="292" x="346" y="489.0854">String receiveStringFromClient(ClientHandler client)</text><!--MD5=[5011627591ee4f7a3d58490c0e7112ca]
+class ClientHandler--><rect codeLine="24" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="176.0469" id="ClientHandler" style="stroke:#A80036;stroke-width:1.5;" width="281" x="104.5" y="556"/><ellipse cx="198.75" cy="572" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M201.7188,577.6406 Q201.1406,577.9375 200.5,578.0781 Q199.8594,578.2344 199.1563,578.2344 Q196.6563,578.2344 195.3281,576.5938 Q194.0156,574.9375 194.0156,571.8125 Q194.0156,568.6875 195.3281,567.0313 Q196.6563,565.375 199.1563,565.375 Q199.8594,565.375 200.5,565.5313 Q201.1563,565.6875 201.7188,565.9844 L201.7188,568.7031 Q201.0938,568.125 200.5,567.8594 Q199.9063,567.5781 199.2813,567.5781 Q197.9375,567.5781 197.25,568.6563 Q196.5625,569.7188 196.5625,571.8125 Q196.5625,573.9063 197.25,574.9844 Q197.9375,576.0469 199.2813,576.0469 Q199.9063,576.0469 200.5,575.7813 Q201.0938,575.5 201.7188,574.9219 L201.7188,577.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="219.25" y="576.1543">ClientHandler</text><line style="stroke:#A80036;stroke-width:1.5;" x1="105.5" x2="384.5" y1="588" y2="588"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="596"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="124.5" y="602.2104">Server server</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="608.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="72" x="124.5" y="615.0151">Socket client</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="621.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="120" x="124.5" y="627.8198">ObjectInputStream in</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="634.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="124.5" y="640.6245">ObjectOutputStream out</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="647.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="124.5" y="653.4292">String nickname</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="660.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="114" x="124.5" y="666.2339">Controller controller</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="112.5" y="672.8281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="124.5" y="679.0386">Player player</text><line style="stroke:#A80036;stroke-width:1.5;" x1="105.5" x2="384.5" y1="685.6328" y2="685.6328"/><ellipse cx="115.5" cy="696.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="124.5" y="699.8433">void sendToClient(ServerMessage message)</text><ellipse cx="115.5" cy="709.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="65" x="124.5" y="712.6479">void close()</text><ellipse cx="115.5" cy="722.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="191" x="124.5" y="725.4526">void close(String error_message)</text><!--MD5=[ed6624c6556d5e7b1bd23032162d20b7]
+class Client--><rect codeLine="38" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="150.4375" id="Client" style="stroke:#A80036;stroke-width:1.5;" width="248" x="1007" y="288"/><ellipse cx="1109.25" cy="304" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1112.2188,309.6406 Q1111.6406,309.9375 1111,310.0781 Q1110.3594,310.2344 1109.6563,310.2344 Q1107.1563,310.2344 1105.8281,308.5938 Q1104.5156,306.9375 1104.5156,303.8125 Q1104.5156,300.6875 1105.8281,299.0313 Q1107.1563,297.375 1109.6563,297.375 Q1110.3594,297.375 1111,297.5313 Q1111.6563,297.6875 1112.2188,297.9844 L1112.2188,300.7031 Q1111.5938,300.125 1111,299.8594 Q1110.4063,299.5781 1109.7813,299.5781 Q1108.4375,299.5781 1107.75,300.6563 Q1107.0625,301.7188 1107.0625,303.8125 Q1107.0625,305.9063 1107.75,306.9844 Q1108.4375,308.0469 1109.7813,308.0469 Q1110.4063,308.0469 1111,307.7813 Q1111.5938,307.5 1112.2188,306.9219 L1112.2188,309.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="35" x="1129.75" y="308.1543">Client</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1008" x2="1254" y1="320" y2="320"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="41" x="1027" y="334.2104">int port</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="340.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="85" x="1027" y="347.0151">String address</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="353.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="79" x="1027" y="359.8198">Socket server</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="366.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="120" x="1027" y="372.6245">ObjectInputStream in</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="379.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="1027" y="385.4292">ObjectOutputStream out</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="392.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="1027" y="398.2339">View view</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1008" x2="1254" y1="404.8281" y2="404.8281"/><ellipse cx="1018" cy="415.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="94" x="1027" y="419.0386">void startClient()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1015" y="425.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="222" x="1027" y="431.8433">void sendMessage(Message message)</text><!--MD5=[20a4ae9118b5bb7f5780e25831f40d68]
+class ServerMain--><rect codeLine="50" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="112.0234" id="ServerMain" style="stroke:#A80036;stroke-width:1.5;" width="228" x="535" y="32.5"/><ellipse cx="610.25" cy="48.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M613.2188,54.1406 Q612.6406,54.4375 612,54.5781 Q611.3594,54.7344 610.6563,54.7344 Q608.1563,54.7344 606.8281,53.0938 Q605.5156,51.4375 605.5156,48.3125 Q605.5156,45.1875 606.8281,43.5313 Q608.1563,41.875 610.6563,41.875 Q611.3594,41.875 612,42.0313 Q612.6563,42.1875 613.2188,42.4844 L613.2188,45.2031 Q612.5938,44.625 612,44.3594 Q611.4063,44.0781 610.7813,44.0781 Q609.4375,44.0781 608.75,45.1563 Q608.0625,46.2188 608.0625,48.3125 Q608.0625,50.4063 608.75,51.4844 Q609.4375,52.5469 610.7813,52.5469 Q611.4063,52.5469 612,52.2813 Q612.5938,52 613.2188,51.4219 L613.2188,54.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="630.75" y="52.6543">ServerMain</text><line style="stroke:#A80036;stroke-width:1.5;" x1="536" x2="762" y1="64.5" y2="64.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="543" y="72.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="41" x="555" y="78.7104">int port</text><line style="stroke:#A80036;stroke-width:1.5;" x1="536" x2="762" y1="85.3047" y2="85.3047"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="543" y="93.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="63" x="555" y="99.5151">void main()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="543" y="106.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="202" x="555" y="112.3198">void parseArguments(String[] args)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="543" y="118.9141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="194" x="555" y="125.1245">int parsePort(List&lt;String&gt; arglist)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="543" y="131.7188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="100" x="555" y="137.9292">void startServer()</text><!--MD5=[a2ccf484e00b81f2384af8099ff73402]
+class ClientMain--><rect codeLine="59" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="163.2422" id="ClientMain" style="stroke:#A80036;stroke-width:1.5;" width="264" x="999" y="7"/><ellipse cx="1094.75" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1097.7188,28.6406 Q1097.1406,28.9375 1096.5,29.0781 Q1095.8594,29.2344 1095.1563,29.2344 Q1092.6563,29.2344 1091.3281,27.5938 Q1090.0156,25.9375 1090.0156,22.8125 Q1090.0156,19.6875 1091.3281,18.0313 Q1092.6563,16.375 1095.1563,16.375 Q1095.8594,16.375 1096.5,16.5313 Q1097.1563,16.6875 1097.7188,16.9844 L1097.7188,19.7031 Q1097.0938,19.125 1096.5,18.8594 Q1095.9063,18.5781 1095.2813,18.5781 Q1093.9375,18.5781 1093.25,19.6563 Q1092.5625,20.7188 1092.5625,22.8125 Q1092.5625,24.9063 1093.25,25.9844 Q1093.9375,27.0469 1095.2813,27.0469 Q1095.9063,27.0469 1096.5,26.7813 Q1097.0938,26.5 1097.7188,25.9219 L1097.7188,28.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="64" x="1115.25" y="27.1543">ClientMain</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1000" x2="1262" y1="39" y2="39"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="47"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="41" x="1019" y="53.2104">int port</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="59.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="85" x="1019" y="66.0151">String address</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="72.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="55" x="1019" y="78.8198">View view</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1000" x2="1262" y1="85.4141" y2="85.4141"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="93.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="63" x="1019" y="99.6245">void main()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="106.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="202" x="1019" y="112.4292">void parseArguments(String[] args)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="119.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="194" x="1019" y="125.2339">int parsePort(List&lt;String&gt; arglist)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="131.8281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="238" x="1019" y="138.0386">String parseAddress(List&lt;String&gt; arglist)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="144.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="217" x="1019" y="150.8433">String parseView(List&lt;String&gt; arglist)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1007" y="157.4375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="94" x="1019" y="163.6479">void startClient()</text><!--MD5=[448ab9244d6c33949345d32ece6524a5]
+class PersistenceUtil--><rect codeLine="72" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="99.2188" id="PersistenceUtil" style="stroke:#A80036;stroke-width:1.5;" width="458" x="421" y="594.5"/><ellipse cx="598.75" cy="610.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M601.7188,616.1406 Q601.1406,616.4375 600.5,616.5781 Q599.8594,616.7344 599.1563,616.7344 Q596.6563,616.7344 595.3281,615.0938 Q594.0156,613.4375 594.0156,610.3125 Q594.0156,607.1875 595.3281,605.5313 Q596.6563,603.875 599.1563,603.875 Q599.8594,603.875 600.5,604.0313 Q601.1563,604.1875 601.7188,604.4844 L601.7188,607.2031 Q601.0938,606.625 600.5,606.3594 Q599.9063,606.0781 599.2813,606.0781 Q597.9375,606.0781 597.25,607.1563 Q596.5625,608.2188 596.5625,610.3125 Q596.5625,612.4063 597.25,613.4844 Q597.9375,614.5469 599.2813,614.5469 Q599.9063,614.5469 600.5,614.2813 Q601.0938,614 601.7188,613.4219 L601.7188,616.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="94" x="619.25" y="614.6543">PersistenceUtil</text><line style="stroke:#A80036;stroke-width:1.5;" x1="422" x2="878" y1="626.5" y2="626.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="422" x2="878" y1="634.5" y2="634.5"/><ellipse cx="432" cy="645.5" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="173" x="441" y="648.7104">Path getPersistenceDirectory()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="429" y="655.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="432" x="441" y="661.5151">Path getFromEnv(String envVar, boolean mustBeAbsolute, Path defaultPath)</text><ellipse cx="432" cy="671.1094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="267" x="441" y="674.3198">boolean checkPersistence(String match_name)</text><ellipse cx="432" cy="683.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="356" x="441" y="687.1245">String getPersistenceFileFromMatchName(String match_name)</text><!--MD5=[71cb0c93c4ed592738ad96265a479c0f]
+class PersistenceWriter--><rect codeLine="79" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="342.5078" id="PersistenceWriter" style="stroke:#A80036;stroke-width:1.5;" width="652" x="7" y="798"/><ellipse cx="273.25" cy="814" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M276.2188,819.6406 Q275.6406,819.9375 275,820.0781 Q274.3594,820.2344 273.6563,820.2344 Q271.1563,820.2344 269.8281,818.5938 Q268.5156,816.9375 268.5156,813.8125 Q268.5156,810.6875 269.8281,809.0313 Q271.1563,807.375 273.6563,807.375 Q274.3594,807.375 275,807.5313 Q275.6563,807.6875 276.2188,807.9844 L276.2188,810.7031 Q275.5938,810.125 275,809.8594 Q274.4063,809.5781 273.7813,809.5781 Q272.4375,809.5781 271.75,810.6563 Q271.0625,811.7188 271.0625,813.8125 Q271.0625,815.9063 271.75,816.9844 Q272.4375,818.0469 273.7813,818.0469 Q274.4063,818.0469 275,817.7813 Q275.5938,817.5 276.2188,816.9219 L276.2188,819.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="111" x="293.75" y="818.1543">PersistenceWriter</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="658" y1="830" y2="830"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="658" y1="838" y2="838"/><ellipse cx="18" cy="849" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="338" x="27" y="852.2104">void writePersistenceFile(String match_name, Game game)</text><ellipse cx="18" cy="861.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="412" x="27" y="865.0151">void writeSoloPersistenceFile(String match_name, SoloGame sologame)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="871.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="333" x="27" y="877.8198">void populateJSON(JSONObject match_object, Game game)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="884.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="382" x="27" y="890.6245">void populateJSON(JSONObject match_object, SoloGame sologame)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="31" y="903.4292"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="910.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="444" x="27" y="916.2339">void populateJSONClient(JSONObject match_object, ArrayList&lt;Player&gt; players)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="922.8281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="454" x="27" y="929.0386">void populateJSONPlayers(JSONObject match_object, ArrayList&lt;Player&gt; players)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="935.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="262" x="27" y="941.8433">JSONObject populateJSONPlayer(Player player)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="948.4375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="411" x="27" y="954.6479">void populateJSONFaithTrack(JSONObject player_object, FaithTrack track)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="961.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="214" x="27" y="967.4526">JSONObject populateJSONTile(Tile tile)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="974.0469"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="340" x="27" y="980.2573">JSONArray populateJSONWarehouse(Warehouse warehouse)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="986.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="326" x="27" y="993.062">JSONArray populateJSONStrongBox(StrongBox strongbox)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="999.6563"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="570" x="27" y="1005.8667">JSONArray populateJSONDevelopmentCardsSlots(DevelopmentCardsSlots development_cards_slots)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1012.4609"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="432" x="27" y="1018.6714">JSONArray populateJSONLeaderCards(ArrayList&lt;LeaderCard&gt; leader_cards)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1025.2656"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="342" x="27" y="1031.4761">void populateJSONTurn(JSONObject match_object, Turn turn)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1038.0703"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="367" x="27" y="1044.2808">void populateJSONGame(JSONObject match_object, Game game)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1050.875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="380" x="27" y="1057.0854">void populateJSONMarket(JSONObject game_object, Market market)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1063.6797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="626" x="27" y="1069.8901">JSONArray populateJSONDevelopmentCardsOnTable(DevelopmentCardsOnTable development_cards_on_table)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1076.4844"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="422" x="27" y="1082.6948">void populateJSONSoloPlayer(JSONObject match_object, SoloPlayer player)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1089.2891"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="461" x="27" y="1095.4995">void populateJSONSoloFaithTrack(JSONObject player_object, SoloFaithTrack track)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1102.0938"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="441" x="27" y="1108.3042">void populateJSONSoloGame(JSONObject match_object, SoloGame sologame)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1114.8984"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="479" x="27" y="1121.1089">JSONArray populateJSONActiveTokens(ArrayDeque&lt;SoloActionToken&gt; active_tokens)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="1127.7031"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="374" x="27" y="1133.9136">JSONObject populateJSONSoloActionToken(SoloActionToken token)</text><!--MD5=[da873f7f7138a3f10994934b1f23e9b1]
+class PersistenceParser--><rect codeLine="105" fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="355.3125" id="PersistenceParser" style="stroke:#A80036;stroke-width:1.5;" width="547" x="694.5" y="792"/><ellipse cx="906.25" cy="808" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M909.2188,813.6406 Q908.6406,813.9375 908,814.0781 Q907.3594,814.2344 906.6563,814.2344 Q904.1563,814.2344 902.8281,812.5938 Q901.5156,810.9375 901.5156,807.8125 Q901.5156,804.6875 902.8281,803.0313 Q904.1563,801.375 906.6563,801.375 Q907.3594,801.375 908,801.5313 Q908.6563,801.6875 909.2188,801.9844 L909.2188,804.7031 Q908.5938,804.125 908,803.8594 Q907.4063,803.5781 906.7813,803.5781 Q905.4375,803.5781 904.75,804.6563 Q904.0625,805.7188 904.0625,807.8125 Q904.0625,809.9063 904.75,810.9844 Q905.4375,812.0469 906.7813,812.0469 Q907.4063,812.0469 908,811.7813 Q908.5938,811.5 909.2188,810.9219 L909.2188,813.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="115" x="926.75" y="812.1543">PersistenceParser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="695.5" x2="1240.5" y1="824" y2="824"/><line style="stroke:#A80036;stroke-width:1.5;" x1="695.5" x2="1240.5" y1="832" y2="832"/><ellipse cx="705.5" cy="843" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="239" x="714.5" y="846.2104">int getClientsNumber(String match_name)</text><ellipse cx="705.5" cy="855.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="350" x="714.5" y="859.0151">ArrayList&lt;String&gt; getAllClientsNickname(String match_name)</text><ellipse cx="705.5" cy="868.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="223" x="714.5" y="871.8198">Game parseMatch(String match_name)</text><ellipse cx="705.5" cy="881.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="273" x="714.5" y="884.6245">SoloGame parseSoloMatch(String match_name)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="891.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="385" x="714.5" y="897.4292">Turn parseTurn(JSONObject turn_object, ArrayList&lt;Player&gt; players)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="904.0234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="349" x="714.5" y="910.2339">Turn createTurn(ArrayList&lt;Player&gt; players, String nickname)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="916.8281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="330" x="714.5" y="923.0386">ArrayList&lt;Player&gt; parsePlayers(JSONArray players_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="929.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="258" x="714.5" y="935.8433">Player parsePlayer(JSONObject player_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="942.4375"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="213" x="714.5" y="948.6479">Tile createTile(JSONObject tile_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="955.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="307" x="714.5" y="961.4526">FaithTrack createFaithTrack(JSONObject player_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="968.0469"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="335" x="714.5" y="974.2573">Warehouse createWarehouse(JSONArray warehouse_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="980.8516"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="321" x="714.5" y="987.062">StrongBox createStrongBox(JSONArray strongbox_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="993.6563"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="440" x="714.5" y="999.8667">DevelopmentCardsSlots createDevelopmentCardsSlots(JSONArray dcs_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1006.4609"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="427" x="714.5" y="1012.6714">ArrayList&lt;LeaderCard&gt; createLeaderCards(JSONArray leader_cards_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1019.2656"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="501" x="714.5" y="1025.4761">void addExtraSpaceResources(ExtraSpaceAbility extra_space, int number_of_resources)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1032.0703"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="471" x="714.5" y="1038.2808">Game parseGame(JSONObject game_object, Turn turn, ArrayList&lt;Player&gt; players)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1044.875"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="419" x="714.5" y="1051.0854">Market createMarket(JSONArray market_array, Object free_marble_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1057.6797"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="313" x="714.5" y="1063.8901">Resource createFreeMarble(Object free_marble_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1070.4844"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="480" x="714.5" y="1076.6948">DevelopmentCardsOnTable createDevelopmentCardsOnTable(JSONArray dcot_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1083.2891"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="308" x="714.5" y="1089.4995">SoloPlayer parseSoloPlayer(JSONObject player_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1096.0938"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="357" x="714.5" y="1102.3042">SoloFaithTrack createSoloFaithTrack(JSONObject player_object)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1108.8984"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="521" x="714.5" y="1115.1089">SoloGame parseSoloGame(JSONObject game_object, Turn turn, ArrayList&lt;Player&gt; players)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1121.7031"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="474" x="714.5" y="1127.9136">ArrayDeque&lt;SoloActionToken&gt; createActiveTokens(JSONArray active_tokens_array)</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="702.5" y="1134.5078"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="373" x="714.5" y="1140.7183">SoloActionToken createSoloActionToken(JSONObject token_object)</text><!--MD5=[53ae8b34bebe44116eb8626f99f3fe78]
+class Runnable--><rect fill="#FEFECE" filter="url(#fpx79pm7m2vqb)" height="48" id="Runnable" style="stroke:#A80036;stroke-width:1.5;" width="91" x="199.5" y="339"/><ellipse cx="214.5" cy="355" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M217.4688,360.6406 Q216.8906,360.9375 216.25,361.0781 Q215.6094,361.2344 214.9063,361.2344 Q212.4063,361.2344 211.0781,359.5938 Q209.7656,357.9375 209.7656,354.8125 Q209.7656,351.6875 211.0781,350.0313 Q212.4063,348.375 214.9063,348.375 Q215.6094,348.375 216.25,348.5313 Q216.9063,348.6875 217.4688,348.9844 L217.4688,351.7031 Q216.8438,351.125 216.25,350.8594 Q215.6563,350.5781 215.0313,350.5781 Q213.6875,350.5781 213,351.6563 Q212.3125,352.7188 212.3125,354.8125 Q212.3125,356.9063 213,357.9844 Q213.6875,359.0469 215.0313,359.0469 Q215.6563,359.0469 216.25,358.7813 Q216.8438,358.5 217.4688,357.9219 L217.4688,360.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="59" x="228.5" y="359.1543">Runnable</text><line style="stroke:#A80036;stroke-width:1.5;" x1="200.5" x2="289.5" y1="371" y2="371"/><line style="stroke:#A80036;stroke-width:1.5;" x1="200.5" x2="289.5" y1="379" y2="379"/><!--MD5=[61e707e6d43f689d7b4ece52fb851d1d]
+link Runnable to ClientHandler--><path codeLine="133" d="M245,387.4453 C245,423.543 245,493.0467 245,550.6153 " fill="none" id="Runnable-to-ClientHandler" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="245,555.7939,249,546.7939,245,550.7939,241,546.7939,245,555.7939" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8bb2b1d63001207dbd9fa67c9a0401be]
+link Server to ClientHandler--><path codeLine="134" d="M457.648,496.0939 C428.4833,516.3792 399.0219,536.8709 371.7045,555.8714 " fill="none" id="Server-ClientHandler" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[12c569b13109240eee676e2f6cc7dd88]
+link Server to Client--><path codeLine="136" d="M972.373,363 C983.8363,363 995.2996,363 1006.7629,363 " fill="none" id="Server-Client" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[cd4e6248bd540c608b4efa207ba6e793]
+link ClientMain to Client--><path codeLine="138" d="M1131,170.1158 C1131,207.4127 1131,251.3073 1131,287.7932 " fill="none" id="ClientMain-Client" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9d52f5b45bbc7ed68c0f42460dc5cdaf]
+link ServerMain to Server--><path codeLine="139" d="M649,144.7116 C649,169.4943 649,199.7691 649,229.7862 " fill="none" id="ServerMain-Server" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5fece2cdb6b5edb2a2775d2bfe1842c1]
+link PersistenceUtil to PersistenceWriter--><path codeLine="141" d="M601.5095,693.7908 C573.8458,722.1962 537.3599,759.6604 500.2331,797.7827 " fill="none" id="PersistenceUtil-PersistenceWriter" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e861474cfedb7833df6f3ab5603a318b]
+link PersistenceUtil to PersistenceParser--><path codeLine="142" d="M698.6435,693.7908 C724.9155,720.6824 759.1195,755.6931 794.2917,791.6948 " fill="none" id="PersistenceUtil-PersistenceParser" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[974d45168169870a3119d772e4269c1d]
+link Server to PersistenceUtil--><path codeLine="144" d="M649.4736,496.0939 C649.5983,531.1321 649.7252,566.7862 649.8232,594.3075 " fill="none" id="Server-PersistenceUtil" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b2bc87025dd326123e7b20d51e2278c5]
+@startuml
+
+/' CLASSES DEFINITION '/
+class Server {
+	- int port
+	- ServerSocket server_socket
+	- HashMap<String, ArrayList<ClientHandler>> lobby
+	- HashMap<String, Integer> num_players
+	- HashSet<String> nicknames
+
+	+ void startServer()
+	- void insertIntoLobby(ClientHandler client)
+	- GameController chooseGameController(String match_name)
+	- void manageClient(ClientHandler client)
+	- void manageFirstClient(ClientHandler client)
+	- void manageOtherClient(ClientHandler client)
+	- void createOrJoinPersistenceGame(ClientHandler client, String match_name, String nickname)
+	- String newMatchName()
+	- boolean checkIfAllPlayersPresent(String match_name)
+	+ void sendStringToClient(ClientHandler client, String string, InitializingMessageType type)
+	+ void sendStringToClient(ClientHandler client, String string, InitializingMessageType type, String match_name)
+	+ String receiveStringFromClient(ClientHandler client)
+}
+
+class ClientHandler {
+	- Server server
+	- Socket client
+	- ObjectInputStream in
+	- ObjectOutputStream out
+	- String nickname
+	- Controller controller
+	- Player player
+
+	+ void sendToClient(ServerMessage message)
+	+ void close()
+	+ void close(String error_message)
+}
+
+class Client {
+	- int port
+	- String address
+	- Socket server
+	- ObjectInputStream in
+	- ObjectOutputStream out
+	- View view
+
+	+ void startClient()
+	- void sendMessage(Message message)
+}
+
+class ServerMain {
+	- {static} int port
+
+	- {static} void main()
+	- {static} void parseArguments(String[] args)
+	- {static} int parsePort(List<String> arglist)
+	- {static} void startServer()
+}
+
+class ClientMain {
+	- {static} int port
+	- {static} String address
+	- {static} View view
+
+	- {static} void main()
+	- {static} void parseArguments(String[] args)
+	- {static} int parsePort(List<String> arglist)
+	- {static} String parseAddress(List<String> arglist)
+	- {static} String parseView(List<String> arglist)
+	- {static} void startClient()
+}
+
+class PersistenceUtil {
+	+ {static} Path getPersistenceDirectory()
+	- {static} Path getFromEnv(String envVar, boolean mustBeAbsolute, Path defaultPath)
+	+ {static} boolean checkPersistence(String match_name)
+	+ {static} String getPersistenceFileFromMatchName(String match_name)
+}
+
+class PersistenceWriter {
+	+ {static} void writePersistenceFile(String match_name, Game game)
+	+ {static} void writeSoloPersistenceFile(String match_name, SoloGame sologame)
+	- {static} void populateJSON(JSONObject match_object, Game game)
+	- {static} void populateJSON(JSONObject match_object, SoloGame sologame)
+
+	- {static} void populateJSONClient(JSONObject match_object, ArrayList<Player> players) 
+	- {static} void populateJSONPlayers(JSONObject match_object, ArrayList<Player> players) 
+	- {static} JSONObject populateJSONPlayer(Player player) 
+	- {static} void populateJSONFaithTrack(JSONObject player_object, FaithTrack track) 
+	- {static} JSONObject populateJSONTile(Tile tile) 
+	- {static} JSONArray populateJSONWarehouse(Warehouse warehouse) 
+	- {static} JSONArray populateJSONStrongBox(StrongBox strongbox) 
+	- {static} JSONArray populateJSONDevelopmentCardsSlots(DevelopmentCardsSlots development_cards_slots) 
+	- {static} JSONArray populateJSONLeaderCards(ArrayList<LeaderCard> leader_cards) 
+	- {static} void populateJSONTurn(JSONObject match_object, Turn turn) 
+	- {static} void populateJSONGame(JSONObject match_object, Game game) 
+	- {static} void populateJSONMarket(JSONObject game_object, Market market) 
+	- {static} JSONArray populateJSONDevelopmentCardsOnTable(DevelopmentCardsOnTable development_cards_on_table) 
+	- {static} void populateJSONSoloPlayer(JSONObject match_object, SoloPlayer player) 
+	- {static} void populateJSONSoloFaithTrack(JSONObject player_object, SoloFaithTrack track) 
+	- {static} void populateJSONSoloGame(JSONObject match_object, SoloGame sologame) 
+	- {static} JSONArray populateJSONActiveTokens(ArrayDeque<SoloActionToken> active_tokens) 
+	- {static} JSONObject populateJSONSoloActionToken(SoloActionToken token) 
+}
+
+class PersistenceParser {
+	+ {static} int getClientsNumber(String match_name)
+	+ {static} ArrayList<String> getAllClientsNickname(String match_name)
+	+ {static} Game parseMatch(String match_name)
+	+ {static} SoloGame parseSoloMatch(String match_name)
+	- {static} Turn parseTurn(JSONObject turn_object, ArrayList<Player> players)
+	- {static} Turn createTurn(ArrayList<Player> players, String nickname)
+	- {static} ArrayList<Player> parsePlayers(JSONArray players_array)
+	- {static} Player parsePlayer(JSONObject player_object)
+	- {static} Tile createTile(JSONObject tile_object)
+	- {static} FaithTrack createFaithTrack(JSONObject player_object)
+	- {static} Warehouse createWarehouse(JSONArray warehouse_array)
+	- {static} StrongBox createStrongBox(JSONArray strongbox_array)
+	- {static} DevelopmentCardsSlots createDevelopmentCardsSlots(JSONArray dcs_array)
+	- {static} ArrayList<LeaderCard> createLeaderCards(JSONArray leader_cards_array)
+	- {static} void addExtraSpaceResources(ExtraSpaceAbility extra_space, int number_of_resources)
+	- {static} Game parseGame(JSONObject game_object, Turn turn, ArrayList<Player> players)
+	- {static} Market createMarket(JSONArray market_array, Object free_marble_object)
+	- {static} Resource createFreeMarble(Object free_marble_object)
+	- {static} DevelopmentCardsOnTable createDevelopmentCardsOnTable(JSONArray dcot_array)
+	- {static} SoloPlayer parseSoloPlayer(JSONObject player_object)
+	- {static} SoloFaithTrack createSoloFaithTrack(JSONObject player_object)
+	- {static} SoloGame parseSoloGame(JSONObject game_object, Turn turn, ArrayList<Player> players)
+	- {static} ArrayDeque<SoloActionToken> createActiveTokens(JSONArray active_tokens_array)
+	- {static} SoloActionToken createSoloActionToken(JSONObject token_object)
+}
+
+/' RELATIONS DEFINITION '/
+ClientHandler <.up. Runnable
+Server - - ClientHandler
+
+Server -right- Client
+
+ClientMain - - Client
+ServerMain - - Server
+
+PersistenceUtil - - PersistenceWriter
+PersistenceUtil - - PersistenceParser
+
+Server -down- PersistenceUtil
+
+@enduml
+
+@startuml
+
+class Server {
+	- int port
+	- ServerSocket server_socket
+	- HashMap<String, ArrayList<ClientHandler>> lobby
+	- HashMap<String, Integer> num_players
+	- HashSet<String> nicknames
+
+	+ void startServer()
+	- void insertIntoLobby(ClientHandler client)
+	- GameController chooseGameController(String match_name)
+	- void manageClient(ClientHandler client)
+	- void manageFirstClient(ClientHandler client)
+	- void manageOtherClient(ClientHandler client)
+	- void createOrJoinPersistenceGame(ClientHandler client, String match_name, String nickname)
+	- String newMatchName()
+	- boolean checkIfAllPlayersPresent(String match_name)
+	+ void sendStringToClient(ClientHandler client, String string, InitializingMessageType type)
+	+ void sendStringToClient(ClientHandler client, String string, InitializingMessageType type, String match_name)
+	+ String receiveStringFromClient(ClientHandler client)
+}
+
+class ClientHandler {
+	- Server server
+	- Socket client
+	- ObjectInputStream in
+	- ObjectOutputStream out
+	- String nickname
+	- Controller controller
+	- Player player
+
+	+ void sendToClient(ServerMessage message)
+	+ void close()
+	+ void close(String error_message)
+}
+
+class Client {
+	- int port
+	- String address
+	- Socket server
+	- ObjectInputStream in
+	- ObjectOutputStream out
+	- View view
+
+	+ void startClient()
+	- void sendMessage(Message message)
+}
+
+class ServerMain {
+	- {static} int port
+
+	- {static} void main()
+	- {static} void parseArguments(String[] args)
+	- {static} int parsePort(List<String> arglist)
+	- {static} void startServer()
+}
+
+class ClientMain {
+	- {static} int port
+	- {static} String address
+	- {static} View view
+
+	- {static} void main()
+	- {static} void parseArguments(String[] args)
+	- {static} int parsePort(List<String> arglist)
+	- {static} String parseAddress(List<String> arglist)
+	- {static} String parseView(List<String> arglist)
+	- {static} void startClient()
+}
+
+class PersistenceUtil {
+	+ {static} Path getPersistenceDirectory()
+	- {static} Path getFromEnv(String envVar, boolean mustBeAbsolute, Path defaultPath)
+	+ {static} boolean checkPersistence(String match_name)
+	+ {static} String getPersistenceFileFromMatchName(String match_name)
+}
+
+class PersistenceWriter {
+	+ {static} void writePersistenceFile(String match_name, Game game)
+	+ {static} void writeSoloPersistenceFile(String match_name, SoloGame sologame)
+	- {static} void populateJSON(JSONObject match_object, Game game)
+	- {static} void populateJSON(JSONObject match_object, SoloGame sologame)
+
+	- {static} void populateJSONClient(JSONObject match_object, ArrayList<Player> players) 
+	- {static} void populateJSONPlayers(JSONObject match_object, ArrayList<Player> players) 
+	- {static} JSONObject populateJSONPlayer(Player player) 
+	- {static} void populateJSONFaithTrack(JSONObject player_object, FaithTrack track) 
+	- {static} JSONObject populateJSONTile(Tile tile) 
+	- {static} JSONArray populateJSONWarehouse(Warehouse warehouse) 
+	- {static} JSONArray populateJSONStrongBox(StrongBox strongbox) 
+	- {static} JSONArray populateJSONDevelopmentCardsSlots(DevelopmentCardsSlots development_cards_slots) 
+	- {static} JSONArray populateJSONLeaderCards(ArrayList<LeaderCard> leader_cards) 
+	- {static} void populateJSONTurn(JSONObject match_object, Turn turn) 
+	- {static} void populateJSONGame(JSONObject match_object, Game game) 
+	- {static} void populateJSONMarket(JSONObject game_object, Market market) 
+	- {static} JSONArray populateJSONDevelopmentCardsOnTable(DevelopmentCardsOnTable development_cards_on_table) 
+	- {static} void populateJSONSoloPlayer(JSONObject match_object, SoloPlayer player) 
+	- {static} void populateJSONSoloFaithTrack(JSONObject player_object, SoloFaithTrack track) 
+	- {static} void populateJSONSoloGame(JSONObject match_object, SoloGame sologame) 
+	- {static} JSONArray populateJSONActiveTokens(ArrayDeque<SoloActionToken> active_tokens) 
+	- {static} JSONObject populateJSONSoloActionToken(SoloActionToken token) 
+}
+
+class PersistenceParser {
+	+ {static} int getClientsNumber(String match_name)
+	+ {static} ArrayList<String> getAllClientsNickname(String match_name)
+	+ {static} Game parseMatch(String match_name)
+	+ {static} SoloGame parseSoloMatch(String match_name)
+	- {static} Turn parseTurn(JSONObject turn_object, ArrayList<Player> players)
+	- {static} Turn createTurn(ArrayList<Player> players, String nickname)
+	- {static} ArrayList<Player> parsePlayers(JSONArray players_array)
+	- {static} Player parsePlayer(JSONObject player_object)
+	- {static} Tile createTile(JSONObject tile_object)
+	- {static} FaithTrack createFaithTrack(JSONObject player_object)
+	- {static} Warehouse createWarehouse(JSONArray warehouse_array)
+	- {static} StrongBox createStrongBox(JSONArray strongbox_array)
+	- {static} DevelopmentCardsSlots createDevelopmentCardsSlots(JSONArray dcs_array)
+	- {static} ArrayList<LeaderCard> createLeaderCards(JSONArray leader_cards_array)
+	- {static} void addExtraSpaceResources(ExtraSpaceAbility extra_space, int number_of_resources)
+	- {static} Game parseGame(JSONObject game_object, Turn turn, ArrayList<Player> players)
+	- {static} Market createMarket(JSONArray market_array, Object free_marble_object)
+	- {static} Resource createFreeMarble(Object free_marble_object)
+	- {static} DevelopmentCardsOnTable createDevelopmentCardsOnTable(JSONArray dcot_array)
+	- {static} SoloPlayer parseSoloPlayer(JSONObject player_object)
+	- {static} SoloFaithTrack createSoloFaithTrack(JSONObject player_object)
+	- {static} SoloGame parseSoloGame(JSONObject game_object, Turn turn, ArrayList<Player> players)
+	- {static} ArrayDeque<SoloActionToken> createActiveTokens(JSONArray active_tokens_array)
+	- {static} SoloActionToken createSoloActionToken(JSONObject token_object)
+}
+
+ClientHandler <.up. Runnable
+Server - - ClientHandler
+
+Server -right- Client
+
+ClientMain - - Client
+ServerMain - - Server
+
+PersistenceUtil - - PersistenceWriter
+PersistenceUtil - - PersistenceParser
+
+Server -down- PersistenceUtil
+
+@enduml
+
+PlantUML version 1.2020.22(Sun Dec 06 10:36:27 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: it
+Country: IT
+--></g></svg>
