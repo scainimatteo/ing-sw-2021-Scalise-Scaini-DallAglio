@@ -2,19 +2,19 @@
 
 /' CLASSES DEFINITION '/
 abstract class View {
-# SimpleGame simple_game
-# ArrayList<SimplePlayer> simple_players
-# Turn turn
-# boolean initializing
-# boolean nickname_flag
-# String nickname
+	# SimpleGame simple_game
+	# ArrayList<SimplePlayer> simple_players
+	# Turn turn
+	# boolean initializing
+	# boolean nickname_flag
+	# String nickname
 
-+ void startView()
-+ void handleError()
-+ void handleInitializing()
-+ void updateView(SimpleGame simple_game, SimplePlayer simple_player, Turn turn)
-+ void updateSimplePlayer(SimplePlayer simple_player)
-+ SimplePlayer getMyPlayer()
+	+ void startView()
+	+ void handleError()
+	+ void handleInitializing()
+	+ void updateView(SimpleGame simple_game, SimplePlayer simple_player, Turn turn)
+	+ void updateSimplePlayer(SimplePlayer simple_player)
+	+ SimplePlayer getMyPlayer()
 } 
 
 class CLI {

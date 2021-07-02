@@ -1,0 +1,131 @@
+@startuml
+
+/' PACKAGES DEFINITION '/
+package server {
+	class Server {
+	}
+
+	class ClientHandler {
+	}
+}
+
+package model {
+	class Game{
+	}
+
+	class Player{
+	}
+
+	class Turn {
+	}
+}
+
+package model.sologame {
+	class SoloGame {
+	}
+
+	class SoloPlayer {
+	}
+}
+
+package controller {
+	class GameController {
+	}
+
+	class InitialController {
+	}
+
+	class SetupManager {
+	}
+
+	class Message {
+	}
+
+	class ServerMessage {
+	}
+}
+
+package observer {
+	class ModelObserver {
+	}
+
+	interface ModelObservable {
+	}
+}
+
+package client {
+	class Client {
+	}
+}
+
+package view {
+	abstract class View {
+	}
+}
+
+package view.cli {
+	class CLI {
+	}
+
+	class MessageParser {
+	}
+
+	class ViewParser {
+	}
+
+	class Printer {
+	}
+}
+
+package view.gui {
+	class GUI {
+	}
+
+	class SceneController {
+	}
+}
+
+package persistence {
+	class PersistenceWriter {
+	}
+
+	class PersistenceParser {
+	}
+}
+
+/' RELATIONS DEFINITION '/
+ClientHandler -- Message
+ClientHandler -- ServerMessage
+
+ClientHandler -- GameController
+ClientHandler -- InitialController
+
+GameController -- SetupManager
+GameController -- Game
+
+Game .up.> ModelObservable
+Player .up.> ModelObservable
+Turn .up.> ModelObservable
+
+ClientHandler --> ModelObserver
+
+Player <-- SoloPlayer
+Game <-- SoloGame
+
+Client -- View
+Client -- Message
+Client -- ServerMessage
+
+View <-- CLI
+View <-- GUI
+
+CLI *-- MessageParser
+CLI *-- ViewParser
+CLI *-- Printer
+
+GUI *-- SceneController
+
+PersistenceWriter -- Server
+PersistenceParser -- Server
+
+@enduml
