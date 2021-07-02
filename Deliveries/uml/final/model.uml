@@ -263,6 +263,7 @@ class Game {
 	- SimpleGame simplify()
 	+ void endTurn()
 	- void countVictoryPoints()
+	- void playerSort()
 }
 
 interface SoloActionToken {
