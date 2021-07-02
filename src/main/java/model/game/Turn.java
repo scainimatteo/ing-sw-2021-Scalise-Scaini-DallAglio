@@ -14,13 +14,13 @@ import it.polimi.ingsw.util.observer.ModelObservable;
 public class Turn extends ModelObservable implements Serializable {
 	private static final long serialVersionUID = 8008L;
 	transient Player active_player;
-	ArrayList<Resource> required_resources;
-	ArrayList<Resource> produced_resources;
-	boolean action_done;
-	boolean must_discard;
-	boolean final_round;
-	boolean setup_done;
-	String nickname;
+	private ArrayList<Resource> required_resources;
+	private ArrayList<Resource> produced_resources;
+	private boolean action_done;
+	private boolean must_discard;
+	private boolean final_round;
+	private boolean setup_done;
+	private String nickname;
 
 	public Turn(Player player){
 		this.active_player = player;
