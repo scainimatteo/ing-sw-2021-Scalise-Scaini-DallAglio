@@ -159,11 +159,15 @@ public class Game extends ModelObservable {
 
 		// create a new Hashmap using the nicknames instead of the Players
 		HashMap<String, Integer> rank = new HashMap<String, Integer>();
-		Collections.sort(players, (p1, p2) -> victory_points.get(p1) - victory_points.get(p2));
+		playerSort(victory_points);
 		for (Player p: players) {
 			rank.put(p.getNickname(), this.victory_points.get(p));
 		}
 		notifyModel(new EndGameMessage(rank));
+	}
+
+	private void playerSort(HashMap<Player, Integer> map){
+		Collections.sort(players, (p1, p2) -> map.get(p1) - map.get(p2));
 	}
 
 	/**
@@ -188,7 +192,9 @@ public class Game extends ModelObservable {
 
 			// LEADERCARDS
 			for (LeaderCard c: p.getLeaderCards()) {
-				addPoints(p, c.getPoints());
+				if (c.isActive()){
+					addPoints(p, c.getPoints());
+				}
 			}
 
 			// RESOURCES
