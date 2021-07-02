@@ -25,6 +25,13 @@ public class SoloFaithTrack extends FaithTrack {
 	}
 
 	/**
+	 * @return the position of the Cell the Black Cross is on
+	 */
+	public int getBlackMarkerPosition(){
+		return this.black_marker.getPosition();
+	}
+
+	/**
 	 * Move the Black Cross marker forward
 	 *
 	 * @param number_of_times how many Cells to go forward
@@ -44,12 +51,5 @@ public class SoloFaithTrack extends FaithTrack {
 		}
 
 		return null;
-	}
-
-	/**
-	 * @return the position of the Cell the Black Cross is on
-	 */
-	public int getBlackMarkerPosition(){
-		return this.black_marker.getPosition();
 	}
 }

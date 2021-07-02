@@ -85,7 +85,7 @@ public class Warehouse {
 	}
 
 	/**
-	 * Checks whether the given resource is already present in the Strongbox
+	 * Checks whether the given resource is already present in the Warehouse
 	 *
 	 * @param resource is the resource to be checked
 	 */
@@ -110,6 +110,9 @@ public class Warehouse {
 		return true;
 	}
 
+	/**
+	 * Testing only
+	 */
 	public void clearWarehouse(){
 		this.top_resource.clear();
 		this.middle_resources.clear();

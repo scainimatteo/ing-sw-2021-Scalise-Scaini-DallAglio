@@ -13,7 +13,7 @@ import it.polimi.ingsw.util.observer.ModelObservable;
 
 public class Turn extends ModelObservable implements Serializable {
 	private static final long serialVersionUID = 8008L;
-	transient Player active_player;
+	private transient Player active_player;
 	private ArrayList<Resource> required_resources;
 	private ArrayList<Resource> produced_resources;
 	private boolean action_done;

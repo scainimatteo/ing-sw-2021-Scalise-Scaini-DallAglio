@@ -26,6 +26,34 @@ public class FaithTrack {
 		}
 	}
 
+	public Cell[] getCellTrack(){
+		return this.track;
+	}
+
+	public Cell getMarker(){
+		return this.faith_marker;
+	}
+
+	public Tile[] getTiles(){
+		return this.vatican_report_tiles;
+	}
+
+	public int getMarkerPosition(){
+		return this.faith_marker.getPosition();
+	}
+
+	public int getMarkerVictoryPoints() {
+		return this.faith_marker.getVictoryPoints();
+	}
+
+	public int getLastPosition() {
+		return this.track[this.track.length - 1].getPosition();
+	}
+
+	public boolean checkIfTileIsActive(int index){
+		return this.vatican_report_tiles[index].isActive();
+	}
+
 	/**
 	 * @param number_of_times represent how many cells the marker has to move
 	 * @return the vatican report activated if the marker reaches or overcomes a pope space
@@ -57,12 +85,12 @@ public class FaithTrack {
 	}
 
 	/**
-	 * @param vr_param is the vatican report to be activated
+	 * @param vatican_report is the vatican report to be activated
 	 */
-	public void activateVaticanReport(VaticanReports vr_param){
-		if (this.checkCell(vr_param.getIndex())){
-			if (faith_marker.whichVaticanReport() != null && faith_marker.whichVaticanReport().equals(vr_param)){
-				this.vatican_report_tiles[vr_param.getIndex()].activateVaticanReport();
+	public void activateVaticanReport(VaticanReports vatican_report){
+		if (this.checkCell(vatican_report.getIndex())){
+			if (faith_marker.whichVaticanReport() != null && faith_marker.whichVaticanReport().equals(vatican_report)){
+				this.vatican_report_tiles[vatican_report.getIndex()].activateVaticanReport();
 			} 
 		} 
 
@@ -75,34 +103,6 @@ public class FaithTrack {
 	 */
 	public void removeVaticanReport(VaticanReports vatican_report) {
 		this.vatican_report_tiles[vatican_report.getIndex()] = null;
-	}
-
-	public Cell[] getCellTrack(){
-		return this.track;
-	}
-
-	public Cell getMarker(){
-		return this.faith_marker;
-	}
-
-	public Tile[] getTiles(){
-		return this.vatican_report_tiles;
-	}
-
-	public int getMarkerPosition(){
-		return this.faith_marker.getPosition();
-	}
-
-	public int getMarkerVictoryPoints() {
-		return this.faith_marker.getVictoryPoints();
-	}
-
-	public int getLastPosition() {
-		return this.track[this.track.length - 1].getPosition();
-	}
-
-	public boolean checkIfTileIsActive(int index){
-		return this.vatican_report_tiles[index].isActive();
 	}
 
 	/**
