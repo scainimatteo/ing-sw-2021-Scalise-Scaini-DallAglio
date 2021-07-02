@@ -552,24 +552,24 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<DevelopmentCard> third_column = development_card_slot.getThirdColumn();
 
 		// first slot
-		for (int i = 0; i < this.first_slot.getChildren().size(); i++) {
-			int size = this.first_slot.getChildren().size() - 1;
-			((ImageView) this.first_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(first_column, i));
-			this.first_slot.getChildren().get(size - i).setOnMouseClicked(null);
+		int size = this.first_slot.getChildren().size();
+		for (int i = 0; i < size; i++) {
+			((ImageView) this.first_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(first_column, first_column.size() - 1 - i));
+			this.first_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// second slot
-		for (int i = 0; i < this.second_slot.getChildren().size(); i++) {
-			int size = this.second_slot.getChildren().size() - 1;
-			((ImageView) this.second_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(second_column, i));
-			this.second_slot.getChildren().get(size - i).setOnMouseClicked(null);
+		size = this.second_slot.getChildren().size();
+		for (int i = 0; i < size; i++) {
+			((ImageView) this.second_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(second_column, second_column.size() - 1 - i));
+			this.second_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// third slot
-		for (int i = 0; i < this.third_slot.getChildren().size(); i++) {
-			int size = this.third_slot.getChildren().size() - 1;
-			((ImageView) this.third_slot.getChildren().get(size - i)).setImage(getDevelopmentCardPath(third_column, i));
-			this.third_slot.getChildren().get(size - i).setOnMouseClicked(null);
+		size = this.third_slot.getChildren().size();
+		for (int i = 0; i < size; i++) {
+			((ImageView) this.third_slot.getChildren().get(i)).setImage(getDevelopmentCardPath(third_column, third_column.size() - 1 - i));
+			this.third_slot.getChildren().get(i).setOnMouseClicked(null);
 		}
 
 		// set methods to activate the DevelopmentCards
