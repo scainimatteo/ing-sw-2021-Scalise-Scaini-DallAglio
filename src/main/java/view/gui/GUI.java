@@ -101,6 +101,9 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 			case NUM_PLAYERS:
 				this.client.sendMessage(new InitializingMessage(String.valueOf(this.initial_scene.getNumPlayers())));
 				break;
+			case JOINED_MATCH:
+				System.out.println("Joined match");
+				break;
 			case START_MATCH:
 				System.out.println("Start");
 		}

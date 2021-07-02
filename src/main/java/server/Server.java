@@ -206,6 +206,7 @@ public class Server {
 				// if the match isn't already full, add it to the match
 				if (this.lobby.get(match_name).size() < this.num_players.get(match_name)) {
 					this.lobby.get(match_name).add(client);
+					sendStringToClient(client, "Joined match with match name " + match_name + "\n\nSend this match name to the other players to start playing\n\n", InitializingMessageType.JOINED_MATCH);
 				} else {
 					client.close("Sorry but the match " + match_name + " is already at full capacity");
 					throw new IllegalAccessError();
