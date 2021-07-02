@@ -148,10 +148,15 @@ public class Server {
 		String nickname = receiveStringFromClient(client);
 
 		synchronized (this.nicknames) {
-			//TODO: refute null nicknames
 			// try to put the username, throw exception if it's already in the Set
 			if (!this.nicknames.add(nickname)) {
 				client.close("Sorry but the nickname " + nickname + " is already taken");
+				throw new IllegalAccessError();
+			} else if (nickname.equals("")) {
+				client.close("Sorry but the nickname can't be null");
+				throw new IllegalAccessError();
+			} else if (nickname.length() > 10) {
+				client.close("Sorry but the nickname can't be longer than 10 letters");
 				throw new IllegalAccessError();
 			}
 		}

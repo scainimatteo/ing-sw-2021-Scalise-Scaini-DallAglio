@@ -63,7 +63,7 @@ public class ClientMain {
 			new Client(address, port, view).startClient();
 		} catch (IOException e) {
 			System.out.println("The connection was closed by the server");
-			System.exit(1);
+			// the handleError will close the program
 		}
 	}
 
