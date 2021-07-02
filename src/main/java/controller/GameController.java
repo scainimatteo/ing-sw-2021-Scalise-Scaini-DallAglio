@@ -766,8 +766,14 @@ public class GameController implements Controller {
 			iterator.next();
 			count++;
 		}
-		if (player.endOfTrack() || count >= 7){
+		if (count >= 7) { 
 			game.getTurn().setFinal(true);
+		} else { 
+			for (Player p : game.getPlayers()){
+				if (p.endOfTrack()){
+					game.getTurn().setFinal(true);
+				}
+			}
 		}
 	}
 
