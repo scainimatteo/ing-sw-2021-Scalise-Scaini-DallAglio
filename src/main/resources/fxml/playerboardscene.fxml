@@ -139,7 +139,7 @@
                                        <image>
                                           <Image url="@../images/leadercards/front/leader_card_9.png" />
                                        </image></ImageView>
-                                    <HBox fx:id="extra_space_ability1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
+                                    <HBox fx:id="extra_space_ability_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
                                        <children>
             							  <ImageView fx:id="extra_space_11" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                                           <ImageView fx:id="extra_space_12" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
@@ -169,7 +169,7 @@
                                        <image>
                                           <Image url="@../images/leadercards/front/leader_card_12.png" />
                                        </image></ImageView>
-                                    <HBox fx:id="extra_space_storage11" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
+                                    <HBox fx:id="extra_space_ability_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="144.0" spacing="25.0">
                                        <children>
                                           <ImageView fx:id="extra_space_111" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                                           <ImageView fx:id="extra_space_121" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />

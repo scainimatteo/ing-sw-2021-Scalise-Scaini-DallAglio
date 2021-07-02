@@ -110,6 +110,9 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Text stone_amount;
 	@FXML private Text servant_amount;
 
+	@FXML private HBox extra_space_ability_1;
+	@FXML private HBox extra_space_ability_2;
+
 	@FXML private HBox cost_box;
 	@FXML private HBox gain_box;
 	@FXML private Text pay_or_store_text;
@@ -149,6 +152,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		// set the Drag and Drop
 		initializeWarehouseDragAndDrop();
 		initializeStrongBoxDragAndDrop();
+		initializeExtraSpaceDragAndDrop();
 		initializeCostBoxDragAndDrop();
 		initializeGainBoxDragAndDrop();
 
@@ -178,12 +182,12 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		bottom2.setOnDragDetected(detected -> handleDragDetected(detected, bottom2));
 		bottom3.setOnDragDetected(detected -> handleDragDetected(detected, bottom3));
 
-		top1.setOnDragDone(done -> handleDragDone(done, top1, true));
-		middle1.setOnDragDone(done -> handleDragDone(done, middle1, true));
-		middle2.setOnDragDone(done -> handleDragDone(done, middle2, true));
-		bottom1.setOnDragDone(done -> handleDragDone(done, bottom1, true));
-		bottom2.setOnDragDone(done -> handleDragDone(done, bottom2, true));
-		bottom3.setOnDragDone(done -> handleDragDone(done, bottom3, true));
+		top1.setOnDragDone(done -> handleDragDone(done, top1, false));
+		middle1.setOnDragDone(done -> handleDragDone(done, middle1, false));
+		middle2.setOnDragDone(done -> handleDragDone(done, middle2, false));
+		bottom1.setOnDragDone(done -> handleDragDone(done, bottom1, false));
+		bottom2.setOnDragDone(done -> handleDragDone(done, bottom2, false));
+		bottom3.setOnDragDone(done -> handleDragDone(done, bottom3, false));
 
 		// DROP
 		top1.setOnDragOver(over -> handleDragOver(over, top1));
@@ -217,6 +221,27 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		servant_sprite.setOnDragDone(done -> handleDragDone(done, servant_sprite, false));
 		stone_sprite.setOnDragDone(done -> handleDragDone(done, stone_sprite, false));
 
+	}
+
+	/**
+	 * Set the methods to drag and drop the Resources in and out of the ExtraSpaceAbility
+	 */
+	private void initializeExtraSpaceDragAndDrop() {
+		for (Node node: this.extra_space_ability_1.getChildren()) {
+			ImageView extra_space_image_1 = (ImageView) node;
+			extra_space_image_1.setOnDragDetected(detected -> handleDragDetected(detected, extra_space_image_1));
+			extra_space_image_1.setOnDragDone(done -> handleDragDone(done, extra_space_image_1, false));
+			extra_space_image_1.setOnDragOver(over -> handleDragOver(over, extra_space_image_1));
+			extra_space_image_1.setOnDragDropped(dropped -> handleStoreInExtraSpace(dropped, extra_space_image_1, 0));
+		}
+
+		for (Node node: this.extra_space_ability_2.getChildren()) {
+			ImageView extra_space_image_2 = (ImageView) node;
+			extra_space_image_2.setOnDragDetected(detected -> handleDragDetected(detected, extra_space_image_2));
+			extra_space_image_2.setOnDragDone(done -> handleDragDone(done, extra_space_image_2, false));
+			extra_space_image_2.setOnDragOver(over -> handleDragOver(over, extra_space_image_2));
+			extra_space_image_2.setOnDragDropped(dropped -> handleStoreInExtraSpace(dropped, extra_space_image_2, 1));
+		}
 	}
 
 	/**
@@ -270,22 +295,21 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 					dropped_resource = Resource.valueOf((String) key.getUserData());
 					storage.addToStrongbox(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
-				case "leader_card_1":
+				case "extra_space_ability_1":
 					dropped_resource = ((ExtraSpaceAbility) player.getLeaderCards().get(0).getAbility()).getResourceType();
 					storage.addToExtraspace(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
-				case "leader_card_2":
+				case "extra_space_ability_2":
 					dropped_resource = ((ExtraSpaceAbility) player.getLeaderCards().get(1).getAbility()).getResourceType();
 					storage.addToExtraspace(new ArrayList<Resource>(Arrays.asList(dropped_resource)));
 					break;
-				default:
-					System.out.println(key.getParent().getId());
 			}
 		}
 
 		PayMessage message = new PayMessage(storage);
 		App.sendMessage(message);
 		this.drag_and_drop_hashmap.clear();
+		this.updateView();
 	}
 
 	/**
@@ -344,6 +368,39 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 
 		return true;
+	}
+
+	/**
+	 * Handle the drop on a ExtraSpaceAbility ImageView and send a StoreMessage to the Server
+	 *
+	 * @param event the DragEvent raised
+	 * @param target the ImageView on which the Image of the Resource is dropped
+	 * @param index the index of the LeaderCard in the LeaderCard array of the Player
+	 */
+	private void handleStoreInExtraSpace(DragEvent event, ImageView target, int index){
+		handleDragDropped(event, target);
+
+		Storage extra_space_storage = new Storage();
+
+		try {
+			for (ImageView key: this.drag_and_drop_hashmap.keySet()){
+				ArrayList<Resource> resources_to_add = new ArrayList<Resource>();
+
+				// get the name of the Resource from the userdata in the FXML
+				Resource new_resource = App.getTurn().getProducedResources().get(Integer.parseInt((String) key.getUserData()));
+
+				resources_to_add.add(new_resource);
+				extra_space_storage.addToExtraspace(resources_to_add);
+			}
+		} catch (NumberFormatException e){
+			// something not allowed was trying to insert in the ExtraSpaceAbility
+			this.updateView();
+			return;
+		}
+
+		StoreMessage message = new StoreMessage(extra_space_storage);
+		App.sendMessage(message);
+		this.drag_and_drop_hashmap.clear();
 	}
 
 	/**
@@ -415,6 +472,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		resetFaithTrack();
 		resetTurnResources();
 		resetWarehouse();
+		resetExtraSpace();
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -596,6 +654,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (int i = 0; i < number_of_resources; i++) {
 			ImageView extra_space_image = (ImageView) extra_space.getChildren().get(i);
 			extra_space_image.setImage(new Image(extra_space_resource.getPath()));
+
 			showNode(extra_space);
 		}
 	}
@@ -749,6 +808,21 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (int i = 0; i < this.warehouse_bottom.getChildren().size(); i++){
 			ImageView bottom_image = (ImageView) this.warehouse_bottom.getChildren().get(i);
 			bottom_image.setImage(null);
+		}
+	}
+
+	/**
+	 * Set all the ImageViews of the ExtraSpaceAbilities as null
+	 */
+	private void resetExtraSpace(){
+		for (Node node: this.extra_space_ability_1.getChildren()) {
+			ImageView extra_space_image_1 = (ImageView) node;
+			extra_space_image_1.setImage(null);
+		}
+
+		for (Node node: this.extra_space_ability_2.getChildren()) {
+			ImageView extra_space_image_2 = (ImageView) node;
+			extra_space_image_2.setImage(null);
 		}
 	}
 

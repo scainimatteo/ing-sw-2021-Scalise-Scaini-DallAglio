@@ -73,6 +73,10 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 	public abstract void handleEndGame(EndGameMessage end_game_message);
 
 	/**
+	 * SIMPLEMODEL
+	 */
+
+	/**
 	 * Update the simple model after a ViewUpdate
 	 */
 	public void updateView(ViewUpdate view_update) {
@@ -132,6 +136,10 @@ public abstract class View extends GameStartObservable implements ViewUpdateObse
 		// unreachable
 		return null;
 	}
+
+	/**
+	 * OBSERVERS
+	 */
 
 	/**
 	 * Add a ViewUpdateObserver to the view_update_observers array
