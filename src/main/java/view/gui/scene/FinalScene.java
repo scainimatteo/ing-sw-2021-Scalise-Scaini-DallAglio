@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import java.util.ResourceBundle;
 import java.util.Iterator;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.net.URL;
 
 import it.polimi.ingsw.view.gui.scene.SceneController;
@@ -18,6 +19,7 @@ import it.polimi.ingsw.view.gui.App;
 public class FinalScene extends SceneController implements Initializable {
 	// Players and their points in order
 	private HashMap<String, Integer> rank;
+	private ArrayList<String> nicknames;
 
 	@FXML private VBox endgame_pane;
 	@FXML private VBox rank_pane;
@@ -25,8 +27,9 @@ public class FinalScene extends SceneController implements Initializable {
 	@FXML private VBox won_pane;
 	@FXML private Text score;
 
-	public FinalScene(HashMap<String, Integer> rank) {
+	public FinalScene(ArrayList<String> nicknames, HashMap<String, Integer> rank) {
 		this.rank = rank;
+		this.nicknames = nicknames;
 	}
 
 	@Override
@@ -61,9 +64,9 @@ public class FinalScene extends SceneController implements Initializable {
 		hideNode(lost_pane);
 		showNode(won_pane);
 
-		Iterator<String> iterator = this.rank.keySet().iterator();
-		String nickname = iterator.next();
-		score.setText("Your score is " + this.rank.get(nickname));
+		for (String nick : nicknames){
+			score.setText("Your score is " + this.rank.get(nick));
+		}
 	}
 
 	/**
@@ -75,11 +78,11 @@ public class FinalScene extends SceneController implements Initializable {
 		showNode(endgame_pane);
 
 		int i = 1;
-		Iterator<String> iterator = this.rank.keySet().iterator();
+		Iterator<String> iterator = this.nicknames.iterator();
 		for (Node node: rank_pane.getChildren()) {
 			if (iterator.hasNext()) {
-				String nickname = iterator.next();
-				((Text) node).setText(nickname + ": " + this.rank.get(nickname) + " points");
+				String nick = iterator.next();
+				((Text) node).setText(nick + ": " + this.rank.get(nick) + " points");
 				i++;
 			} else {
 				hideNode(node);

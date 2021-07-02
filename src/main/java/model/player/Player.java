@@ -284,6 +284,10 @@ public class Player extends ModelObservable {
 	public StrongBox getStrongBox(){
 		return this.strongbox;
 	}
+
+	public int strongboxSize(){
+		return this.strongbox.size();
+	}
 	
 	/**
 	 * DEVCARDSSLOTS METHODS

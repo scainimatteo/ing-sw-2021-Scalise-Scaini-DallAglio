@@ -100,10 +100,11 @@ public class CLI extends View {
 
 	@Override
 	public void handleEndGame(EndGameMessage end_game_message) {
+		ArrayList<String> nicknames = end_game_message.nicknames;
 		HashMap<String, Integer> rank = end_game_message.rank;
-		if (rank.keySet().size() > 1) {
+		if (nicknames.size() > 1) {
 			// if there were more than 1 player
-			handleEndMultipleGame(rank);
+			handleEndMultipleGame(nicknames, rank);
 		} else {
 			// if it was a SoloGame
 			handleEndSoloGame(rank.get(this.nickname));
@@ -117,10 +118,10 @@ public class CLI extends View {
 	 *
 	 * @param rank an HashMap containing the nickname of the Players and their points
 	 */
-	private void handleEndMultipleGame(HashMap<String, Integer> rank){
+	private void handleEndMultipleGame(ArrayList<String> nicknames, HashMap<String, Integer> rank){
 		System.out.println("The game has ended! These are the rankings:");
-		for (String nickname: rank.keySet()) {
-			System.out.println(nickname + ": " + rank.get(nickname) + " points");
+		for (String nick: nicknames) {
+			System.out.println(nick + ": " + rank.get(nick) + " points");
 		}
 	}
 

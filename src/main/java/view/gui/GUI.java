@@ -113,7 +113,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	@Override
 	public void handleEndGame(EndGameMessage end_game_message) {
 		Platform.runLater(() -> {
-			FinalScene final_scene = new FinalScene(end_game_message.rank);
+			FinalScene final_scene = new FinalScene(end_game_message.nicknames, end_game_message.rank);
 			final_scene.changeScene("/fxml/finalscene.fxml");
 		});
 	}

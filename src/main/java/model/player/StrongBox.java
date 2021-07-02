@@ -32,6 +32,14 @@ public class StrongBox {
 		this.storage = storage;
 	}
 
+	public int size(){
+		int tot = 0;
+		for (Resource res : storage.keySet()){
+			tot = tot + storage.get(res);
+		}
+		return tot;
+	}
+
 	public int get(Resource res){
 		return storage.get(res);
 	}
