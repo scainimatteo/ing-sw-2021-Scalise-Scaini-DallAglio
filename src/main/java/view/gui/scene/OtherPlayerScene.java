@@ -286,18 +286,6 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * @param res the Resource to get the Image of
-	 * @return the Image representing res, null if res was null
-	 */
-	private Image getImageFromResource(Resource res) {
-		if (res == null) {
-			return null;
-		}
-		
-		return new Image(res.getPath());
-	}
-
-	/**
 	 * Set all the ImageViews of the FaithTrack as null
 	 */
 	private void resetFaithTrack() {
@@ -342,6 +330,18 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
+	 * @param res the Resource to get the Image of
+	 * @return the Image representing res, null if res was null
+	 */
+	private Image getImageFromResource(Resource res) {
+		if (res == null) {
+			return null;
+		}
+		
+		return new Image(res.getPath());
+	}
+
+	/**
 	 * BUTTON HANDLERS
 	 */
 
@@ -354,6 +354,9 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 	}
 
+	/**
+	 * Toggle the appeareance of the LeaderCard pane
+	 */
 	public void showOrHideLeaderCards(){
 		if (!this.leaders_button.isSelected()){
 			showNode(leader_card_pane);

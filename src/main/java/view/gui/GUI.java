@@ -39,6 +39,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	private App app;
 	private InitialScene initial_scene;
 	private Client client;
+	private boolean game_started = false;
 	private ArrayList<InitializingServerMessage> messages_queued;
 	private ArrayList<ErrorMessageObserver> error_message_observers = new ArrayList<ErrorMessageObserver>();
 
@@ -62,7 +63,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	public void handleError(ErrorMessage error_message) {
 		Platform.runLater(() -> {
 			Alert alert = new Alert(AlertType.ERROR, error_message.error_string, ButtonType.OK);
-			if (!App.isInitialized()) {
+			if (!this.game_started) {
 				alert.showAndWait().ifPresent(response -> {
 					 if (response == ButtonType.OK) {
 						 System.exit(1);
@@ -122,6 +123,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	 */
 	@Override
 	public void gameStarted() {
+		this.game_started = true;
 		Platform.runLater(() -> {
 			new SetupScene().changeScene("/fxml/setupscene.fxml");
 		});
