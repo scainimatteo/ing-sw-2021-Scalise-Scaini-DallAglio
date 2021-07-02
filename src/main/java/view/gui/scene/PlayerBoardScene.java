@@ -42,6 +42,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -70,16 +71,17 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	// contains the number of Resources decided by the WhiteMarblesAbilities of the LeaderCards
 	ArrayList<Integer> white_marbles_numbers;
 
+	@FXML private Rectangle active_player_highlight;
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
 	@FXML private Pane cost_resources_pane;
 	@FXML private Pane leader_card_pane;
 	@FXML private HBox leader_card_array;
 
+	@FXML private VBox other_players;
 	@FXML private Button view_player2_button;
 	@FXML private Button view_player3_button;
 	@FXML private Button view_player4_button;
-	@FXML private ToggleButton leaders_button;
 
 	@FXML private Text last_turn_text;
 	@FXML private ImageView last_token;
@@ -110,12 +112,14 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	@FXML private Text stone_amount;
 	@FXML private Text servant_amount;
 
+	@FXML private ToggleButton leaders_button;
 	@FXML private HBox extra_space_ability_1;
 	@FXML private HBox extra_space_ability_2;
 
 	@FXML private HBox cost_box;
 	@FXML private HBox gain_box;
 	@FXML private Text pay_or_store_text;
+	@FXML private Button discard_resources_button;
 
 	@FXML private ImageView tile1;
 	@FXML private ImageView tile2;
@@ -139,8 +143,6 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 
 	@Override
 	public void initialize(URL location, ResourceBundle resouces){
-		this.updateView();
-
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
 
@@ -159,6 +161,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		hideNode(leader_card_pane);
 
 		initializeOtherPlayersButton();
+
+		this.updateView();
 	}
 
 	/**
@@ -468,11 +472,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		ArrayList<Resource> to_pay = App.getTurn().getRequiredResources();
 		ArrayList<Resource> to_store = App.getTurn().getProducedResources();
 		boolean is_last_turn = App.getTurn().isFinal();
+		String active_player = App.getTurn().getNickname();
 
 		resetFaithTrack();
 		resetTurnResources();
 		resetWarehouse();
 		resetExtraSpace();
+		resetOtherPlayersButton();
 
 		// SOLOGAME
 		if (App.isSoloGame()) {
@@ -493,6 +499,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		// TURN
 		setTurnResources(to_pay, to_store);
 		setLastTurn(is_last_turn);
+		setActivePlayer(active_player);
 	}
 
 	private void setWarehouse(SimpleWarehouse warehouse){
@@ -577,8 +584,13 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			if (((ImageView) nodes.get(2)).getImage() != null) {
 				nodes.get(2).setOnMouseClicked(click -> setDevelopmentCardProduction((ImageView) nodes.get(2), slot));
 			} else if (((ImageView) nodes.get(1)).getImage() != null) {
+				hideNode(nodes.get(2));
+
 				nodes.get(1).setOnMouseClicked(click -> setDevelopmentCardProduction((ImageView) nodes.get(1), slot));
 			} else if (((ImageView) nodes.get(0)).getImage() != null) {
+				hideNode(nodes.get(1));
+				hideNode(nodes.get(2));
+
 				nodes.get(0).setOnMouseClicked(click -> setDevelopmentCardProduction((ImageView) nodes.get(0), slot));
 			}
 		}
@@ -729,6 +741,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		showNode(cost_resources_pane);
 		showNode(cost_box);
 		hideNode(gain_box);
+		hideNode(discard_resources_button);
 
 		pay_or_store_text.setText("Drop these resources here to pay the cost");
 
@@ -766,6 +779,25 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 			showNode(this.last_turn_text);
 		} else {
 			hideNode(this.last_turn_text);
+		}
+	}
+
+	private void setActivePlayer(String active_player) {
+		// if it's the Turn of the Player, highlight the board
+		if (!App.isSoloGame() && active_player.equals(App.getMyPlayer().getNickname())) {
+			showNode(active_player_highlight);
+			return;
+		}
+
+		hideNode(active_player_highlight);
+
+		// color the button of the active player
+		for (Node node: other_players.getChildren()) {
+			Button other_player_button = (Button) node;
+
+			if (other_player_button.getText().equals(active_player)) {
+				other_player_button.setStyle("-fx-background-color: #0bda51;");
+			}
 		}
 	}
 
@@ -823,6 +855,16 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		for (Node node: this.extra_space_ability_2.getChildren()) {
 			ImageView extra_space_image_2 = (ImageView) node;
 			extra_space_image_2.setImage(null);
+		}
+	}
+
+	/**
+	 * Set all the style of the Buttons of the other Players as null
+	 */
+	private void resetOtherPlayersButton(){
+		for (Node node: other_players.getChildren()) {
+			Button other_player_button = (Button) node;
+			other_player_button.setStyle("");
 		}
 	}
 
@@ -912,11 +954,11 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Select a DevelopmentCard as a Production
 	 */
 	public void setDevelopmentCardProduction(ImageView production, int slot){
-		if (!development_card_productions.contains(slot)){
-			development_card_productions.add(slot);
+		if (!this.development_card_productions.contains(slot)){
+			this.development_card_productions.add(slot);
 			production.setOpacity(0.50);
 		} else {
-			development_card_productions.remove(slot);
+			this.development_card_productions.remove(Integer.valueOf(slot));
 			production.setOpacity(1);
 		}
 	}

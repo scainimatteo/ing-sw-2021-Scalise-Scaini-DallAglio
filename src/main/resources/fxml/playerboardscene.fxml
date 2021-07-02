@@ -450,7 +450,7 @@
                         <Insets bottom="85.0" />
                      </StackPane.margin>
                   </Text>
-                  <Button mnemonicParsing="false" onMouseClicked="#handleDiscardResources" text="Discard " translateX="-170.0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
+                  <Button fx:id="discard_resources_button" mnemonicParsing="false" onMouseClicked="#handleDiscardResources" text="Discard " translateX="-170.0" translateY="-20.0" StackPane.alignment="BOTTOM_RIGHT" />
                </children>
             </StackPane>
       	  <Text fx:id="last_turn_text" fill="#ee1e1e" layoutX="30.0" layoutY="699.0" stroke="BLACK" strokeType="OUTSIDE" text="Last turn!">
@@ -499,7 +499,7 @@
             <Insets />
          </StackPane.margin>
       </Button>
-      <VBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="648.0" prefWidth="147.0" spacing="80.0" translateX="35.0" StackPane.alignment="CENTER_RIGHT">
+      <VBox fx:id="other_players" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="648.0" prefWidth="147.0" spacing="80.0" translateX="35.0" StackPane.alignment="CENTER_RIGHT">
          <children>
             <Button fx:id="view_player2_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" rotate="270.0" text="Player 2" translateX="40.0">
                <VBox.margin>
