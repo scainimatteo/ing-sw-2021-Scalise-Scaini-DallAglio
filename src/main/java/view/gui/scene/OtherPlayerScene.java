@@ -7,6 +7,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -66,6 +67,7 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	@FXML private StackPane second_slot;
 	@FXML private StackPane third_slot;
 
+	@FXML private Rectangle active_player_highlight;
 	@FXML private Text nickname_text;
 
 	public OtherPlayerScene(String other_player_nickname) {
@@ -269,9 +271,11 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 	private void setActivePlayer() {
 		String active_player = App.getTurn().getNickname();
 
-		// if it's the Turn of the Player
+		// if it's the Turn of the other Player, highlight the board
 		if (active_player.equals(this.other_player_nickname)) {
-			//TODO
+			showNode(active_player_highlight);
+		} else {
+			hideNode(active_player_highlight);
 		}
 	}
 

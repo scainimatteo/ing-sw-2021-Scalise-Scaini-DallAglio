@@ -42,6 +42,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.input.DragEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -70,6 +71,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	// contains the number of Resources decided by the WhiteMarblesAbilities of the LeaderCards
 	ArrayList<Integer> white_marbles_numbers;
 
+	@FXML private Rectangle active_player_highlight;
 	@FXML private GridPane faith_track;
 	@FXML private HBox development_card_slot;
 	@FXML private Pane cost_resources_pane;
@@ -779,12 +781,15 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	private void setActivePlayer(String active_player) {
-		// if it's the Turn of the Player
+		// if it's the Turn of the Player, highlight the board
 		if (active_player.equals(App.getMyPlayer().getNickname())) {
-			//TODO
+			showNode(active_player_highlight);
 			return;
 		}
 
+		hideNode(active_player_highlight);
+
+		// color the button of the active player
 		for (Node node: other_players.getChildren()) {
 			Button other_player_button = (Button) node;
 
