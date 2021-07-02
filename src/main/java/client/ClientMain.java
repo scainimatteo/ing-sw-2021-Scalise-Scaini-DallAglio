@@ -62,8 +62,8 @@ public class ClientMain {
 		try {
 			new Client(address, port, view).startClient();
 		} catch (IOException e) {
-			view.setUninitialized();
-			view.handleError(new ErrorMessage("The connection was closed by the server", view.getNickname()));
+			System.out.println("The connection was closed by the server");
+			System.exit(1);
 		}
 	}
 
