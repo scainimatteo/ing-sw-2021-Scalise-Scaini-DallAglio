@@ -1,6 +1,6 @@
 # ing-sw-2021-Scalise-Scaini-DallAglio
 
-## FUNZIONALITÀ IMPLEMENTATE
+## IMPLEMENTATION
 
 The project includes the MVC implementation of Masters of Reinassance rulebook. It features singleplayer and multiplayer games,
 both a Command Line Interface and a Graphic User Interface and includes simultaneous games and server persistence as
@@ -30,19 +30,19 @@ GameController class has been partly tested manually for more complex and fringe
 model.card and model.resources mainly consist in CLI related methods and setters, hence lesser coverage. 
 
 
-## AVVIO
+## LAUNCH
 
 The project contains a client-side .jar and a server-side .jar.
 
 Server args include server port number. 
 In case of empty args, the server runs with default value 1234.
 
-`java -jar GC02Server.jar [--port portnumber]`
+`java -jar GC02_server.jar [--port portnumber]`
 
 Client args include server port number and address, desired graphic interface. In case of empty args,
 the client runs with default values 127.0.0.1, 1234, gui.
 
-`java -jar GC02.jar [--address serveraddress] [--port portnumber] [--view gui/cli]`
+`java -jar GC02_client.jar [--address serveraddress] [--port portnumber] [--view gui/cli]`
 
 
 ## NOTES ON OS COMPATIBILITY
