@@ -3,12 +3,12 @@
 ## IMPLEMENTATION
 
 The project includes the MVC implementation of Masters of Reinassance rulebook. It features singleplayer and multiplayer games,
-both a Command Line Interface and a Graphic User Interface and includes simultaneous games and server persistence as
+both a Command Line Interface and a Graphic User Interface and includes support for multiple matches and server persistence as
 added features.
 
 ## TESTING
 
-Model and controller components have been tested thoroughly with JUnit. Network and graphic interface
+Model and controller components have been tested thoroughly with JUnit. Network and both user interface
 components have only been tested manually.
 
 **Overall testing report**
