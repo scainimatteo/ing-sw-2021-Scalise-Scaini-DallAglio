@@ -189,6 +189,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	 */
 	@Override
 	public void gameHasDoneSetup(){
+		this.game_started = true;
 		Platform.runLater(() -> {
 			new PlayerBoardScene().changeScene("/fxml/playerboardscene.fxml");
 		});
