@@ -18,8 +18,8 @@ abstract class View {
 	+ void updateView(ViewUpdate view_update)
 	+ void updateSimplePlayer(SimplePlayer simple_player)
 	+ SimplePlayer getMyPlayer()
-	+ void notifyViewUpdate();
-	+ void notifySetupDone();
+	+ void notifyViewUpdate()
+	+ void notifySetupDone()
 } 
 
 class CLI {
@@ -81,12 +81,9 @@ class Printer {
 }
 
 class GUI {
-	- App app
-	- Client client
 	+ void startView(Client client)
 	+ void handleError(ErrorMessage error_message)
 	+ void handleInitializing(InitializingServerMessage initializing_message)
-	+ void handleEndGame(EndGameMessage end_game_message)
 	+ SimpleGame getSimpleGame()
 	+ ArrayList<SimplePlayer> getSimplePlayers()
 	+ Turn getTurn()
@@ -94,8 +91,8 @@ class GUI {
 	+ void finishedInitialization()
 }
 
-class App{
-	+ {static} void main(String[] args) {
+class App {
+	+ {static} void main(String[] args)
 	+ void start(Stage stage)
 	+ InitialScene getInitialScene()
 	+ {static} void setModel(GUI view)
@@ -107,7 +104,7 @@ class App{
 class SceneController {
 	- {static} Stage stage
 	- HashMap<ImageView, ImageView> drag_and_drop_hashmap
-	- ImageView last_image_dragged;
+	- ImageView last_image_dragged
 
 	+ void hideNode(Node node) 
 	+ void showNode(Node node) 
@@ -199,7 +196,7 @@ class PlayerBoardScene{
 	+ void showOrHideLeaderCards()
 	+ void chooseBaseProductionResource(ImageView source, int index)
 	+ void chooseProductionAbilityResource(ImageView source, int index)
-	+ void activateProductions(){
+	+ void activateProductions()
 	+ void chooseWhiteMarblesNumber(Text source, int index)
 	+ void handleDiscardResources()
 	+ void handleActivateLeaderCard()
@@ -210,7 +207,7 @@ class PlayerBoardScene{
 	+ void handleEndTurn()
 }
 
-class OtherPlayerScene{
+class OtherPlayerScene {
 	- void setWarehouse(SimpleWarehouse warehouse)
 	- void setStrongbox(HashMap<Resource, Integer> strongbox)
 	- void setDevelopmentCardSlot(SimpleDevelopmentCardSlot development_card_slot)
@@ -224,7 +221,7 @@ class OtherPlayerScene{
 	+ void showOrHideLeaderCards()
 }
 
-class FinalScene{
+class FinalScene {
 	- HashMap<String, Integer> rank
 	+ void lostSoloGame()
 	+ void wonSoloGame()

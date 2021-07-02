@@ -1,0 +1,357 @@
+@startuml
+/' CLASSES DEFINITION '/
+
+abstract class Card {
+	- int victory_points
+	- int id
+}
+
+class Deck {
+	- int max_dimension
+	- ArrayList<E> structure
+	+ boolean isEmpty()
+	+ Iterator<E> iterator()
+	+ int size()
+	+ int get_max()
+	+ E peekTopCard()
+	+ E draw()
+	+ void shuffle()
+	+ ArrayList<E> toArrayList()
+}
+
+class DevelopmentCard {
+	- Production production
+	- ArrayList<Resource> cost
+	- CardLevel level
+	- string front_path
+}
+
+class CardLevel {
+	- int level
+	- DevelopmentCardsColor color
+	+ int compareLevel(CardLevel target)
+	+ boolean compareColor(CardLevel target)
+	+ boolean isPlacable(CardLevel target) 
+	+ boolean equals(Object o)
+	+ int hashCode()
+}
+
+class DevelopmentCardsOnTable {
+	- Table development_card_decks
+	+ {static} dim_rows
+	+ {static} dim_column
+	+ DevelopmentCard[][] getTopCards()
+	+ void getFromDeck(DevelopmentCard chosen_card)
+}
+
+class Production {
+	- ArrayList<Resource> required_resources
+	- ArrayList<Resource> produced_resources
+}
+
+abstract class LeaderCard {
+	- LeaderAbility ability
+	- boolean activated
+	+ boolean isActive()
+	+ void activateLeaderCard()
+	+ {abstract} boolean isActivable()
+}
+
+class LeaderCardLevelCost {
+	- ArrayList<CardLevel> requirements
+	+ boolean isActivable()
+}
+
+class LeaderCardResourcesCost {
+	- ArrayList<Resource> requirements
+	+ boolean isActivable()
+}
+
+interface LeaderAbility{
+	+ boolean checkAbility(WhiteMarblesAbility target)
+	+ boolean checkAbility(ExtraSpaceAbility target)
+	+ boolean checkAbility(ProductionAbility target)
+	+ boolean checkAbility(DiscountAbility target)
+}
+
+class ProductionAbility {
+	- Production production
+	+ void setProducts(Resource new_product)
+	+ boolean checkAbility(ProductionAbility target)
+}
+
+class DiscountAbility {
+	- Resource discounted_resource
+	+ boolean checkAbility(DiscountAbility target)
+}
+
+class ExtraSpaceAbility {
+	- Resource resource_type
+	- ArrayList<Resource> storage
+	+ void storeExtra(Resource new_resource)
+	+ boolean canBeStoredExtra(ArrayList<Resource> res)
+	+ boolean isStoredExtra(ArrayList<Resource> res)
+	+ ArrayList<Resource> getFromExtra()
+	+ boolean checkAbility(ExtraSpaceAbility target)
+}
+
+class WhiteMarblesAbility {
+	- Resource resource_type
+	+ boolean checkAbility(WhiteMarblesAbility target)
+}
+
+enum Resource {
+	COIN
+	STONE
+	SERVANT
+	SHIELD
+	FAITH
+}
+
+enum DevelopmentCardsColor {
+	YELLOW
+	GREEN
+	PURPLE
+	BLUE
+}
+
+class Market {
+	- Resource[][] market_board
+	- Resource free_marble
+	+ void shiftRow(int index)
+	+ void shiftColumn(int index)
+	+ ArrayList<Resource> getColumn(int index)
+	+ ArrayList<Resource> getRow(int index)
+}
+
+enum VaticanReports {
+	REPORT1
+	REPORT2
+	REPORT3
+}
+
+class Cell {
+	- int position
+	- int victory_points
+	- VaticanReports report
+	- boolean pope_space
+	- boolean is_last_cell
+}
+
+class Tile {
+	- VaticanReports report
+	- int victory_points
+	- boolean is_active
+	+ void activateVaticanReport()
+}
+
+class FaithTrack {
+	- Cell[] track
+	- Tile[] vatican_report_tiles
+	- Cell faith_marker
+	+ void moveForward(int number_of_times)
+	+ void activateVaticanReport(VaticanReports vr_param)
+	+ void removeVaticanReport(VaticanReports vatican_report)
+}
+
+class SoloFaithTrack {
+	- Cell black_marker
+	+ void moveForwardBlackMarker(int number_of_times)
+}
+
+class Warehouse {
+	- ArrayList<Resource> top_resource
+	- ArrayList<Resource> middle_resources
+	- ArrayList<Resource> bottom_resources
+	+ void swapRows(int i, int j)
+	+ boolean canBeStoredTop(ArrayList<Resource> res)
+	+ boolean canBeStoredMiddle(ArrayList<Resource> res)
+	+ boolean canBeStoredBottom(ArrayList<Resource> res)
+	+ void storeTop(ArrayList<Resource> res)
+	+ void storeMiddle(ArrayList<Resource> res)
+	+ void storeBottom(ArrayList<Resource> res)
+	+ boolean isContainedTop(ArrayList<Resource> res)
+	+ boolean isContainedMiddle(ArrayList<Resource> res)
+	+ boolean isContainedBottom(ArrayList<Resource> res)
+	+ void getFromTop(ArrayList<Resource> res)
+	+ void getFromMiddle(ArrayList<Resource> res)
+	+ void getFromBottom(ArrayList<Resource> res)
+}
+
+class StrongBox {
+	- HashMap<Resource, Integer> storage
+	+ void insertResources(Resource[] new_resources)
+	+ void removeResources(ArrayList<Resource> to_remove)
+	+ boolean areContainedInStrongbox(ArrayList<Resource> cost)
+}
+
+class DevelopmentCardsSlots {
+	- Table<DevelopmentCard> slots
+	+ boolean fitsInSlot(DevelopmentCard card, int pos)
+	+ void buyCard(DevelopmentCard card, int position)
+	+ DevelopmentCard[] getTopCards()
+	+ DevelopmentCard[] getCard(int pos)
+}
+
+class Player {
+	- String nickname
+	- FaithTrack track
+	- Warehouse warehouse
+	- StrongBox strongbox
+	- DevelopmentCardsSlots development_card_slots
+	- ProductionBase base_production
+	- ArrayList<LeaderCard> leader_cards_deck
+	+ void activateLeaderCard(LeaderCard card)
+	+ void discardLeader(int leader_card_id)
+	+ HashMap<Resource, Integer> totaleResources()
+	+ boolean hasEnoughResources(ArrayList<Resource> cost)
+}
+
+class Game {
+	- ArrayList<Player> players
+	- Market market
+	- DevelopmentCardsOnTable development_cards_on_table
+	- HashMap<Player, Integer> victory_points
+	- Turn turn
+	+ SimpleGame simply(
+}
+
+interface SoloActionTokenAbility {
+	+ void useAbility()
+}
+
+class DiscardDevelopmentCards {
+	- DevelopmentCardsColor color
+	+ void useToken()
+}
+
+class MoveBlackCrossTwoSpaces {
+	+ void useToken()
+}
+
+class MoveBlackCrossOneSpace {
+	+ void useToken()
+}
+
+class SoloActionToken {
+	+ {abstract} void useToken(SoloGameController controller)
+}
+
+class SoloGame {
+	- SoloActionToken[] solo_action_tokens
+	- ArrayDeque<SoloActionToken> active_tokens
+	- SoloActionToken last_token
+	- SoloPlayer player
+	+ SimpleSoloGame simplify()
+	+ void shuffleSoloActionTokens()
+}
+
+enum DevelopmentCardsColor {
+	GREEN
+	BLUE
+	YELLOW
+	PURPLE
+}
+
+class Table {
+	- int max_size
+	- int row_size
+	- ArrayList<Deck<E>> structure
+	+ void addDeck(Deck<E> deck, int row, int column)
+	+ void addElement(E elem, int row, int column)
+	+ E peekTop(int row, int column)
+	+ E draw(int row, int column)
+}
+
+class Turn {
+	- ArrayList<Resource> required_resources
+	- ArrayList<Resource> produced_resources
+	- boolean action_done
+	- boolean must_discard
+	- boolean final_round
+	- boolean setup_done
+	- String nickname
+}
+
+class SoloPlayer {
+	+ SimpleSoloPlayer simplify()
+}
+
+/' RELATIONS DEFINITION '/
+
+/' Cards relations '/
+CardLevel -- DevelopmentCardsColor
+Card <|-- LeaderCard
+java.util.AbstractCollection <|.. Deck
+Card <|-- DevelopmentCard
+ProductionInterface <|-- DevelopmentCard
+DevelopmentCard -- Resource
+DevelopmentCard -- CardLevel
+DevelopmentCard -- Production
+DevelopmentCardsOnTable -- Table
+java.util.AbstractCollection <|.. Table
+Table -- Deck
+
+/' Production relations '/
+ProductionInterface <|.. ProductionAbility
+ProductionInterface <|-- Production
+Production -- Resource
+
+/' LeaderCard relations '/
+LeaderCard -- LeaderAbility
+LeaderCard <|-- Card
+LeaderCard <|-- LeaderCardLevelCost
+LeaderCardLevelCost -- CardLevel
+LeaderCard <|-- LeaderCardResourcesCost
+LeaderCardResourcesCost -- Resource
+LeaderAbility <|.. ProductionAbility
+ProductionInterface <|.. ProductionAbility
+LeaderAbility <|.. DiscountAbility
+LeaderAbility <|.. ExtraSpaceAbility
+LeaderAbility <|.. WhiteMarblesAbility
+DiscountAbility -- Resource
+ExtraSpaceAbility -- Resource
+WhiteMarblesAbility -- Resource
+
+/' Market relations '/
+Market -- Resource
+
+/' FaithTrack relations '/
+Cell -- VaticanReports
+Tile -- VaticanReports
+FaithTrack -- Cell
+FaithTrack -- Tile
+FaithTrack <|-- SoloFaithTrack
+
+/' Personal board relations '/
+Warehouse -- Resource
+StrongBox -- Resource
+DevelopmentCardsSlots -- DevelopmentCard
+DevelopmentCardsSlots -- Table
+
+/' Player '/
+Player -- FaithTrack 
+Player -- Warehouse
+Player -- StrongBox
+Player -- DevelopmentCardsSlots
+Player -- ProductionBase
+Player -- Deck
+Player <|-- SoloPlayer
+
+/' Game '/
+Game -- Player
+Game -- Market
+Game -- DevelopmentCardsOnTable
+Game -- Turn
+Turn -- Resource
+
+/' Solo game '/
+Game <|-- SoloGame
+SoloGame -- SoloActionToken
+SoloGame -- SoloPlayer
+SoloActionTokenAbility <|.. DiscardDevelopmentCards
+DiscardDevelopmentCards -- DevelopmentCardsColor
+SoloActionTokenAbility <|.. MoveBlackCrossTwoSpaces
+SoloActionTokenAbility <|.. MoveBlackCrossOneSpace
+DiscardDevelopmentCards -- DevelopmentCardsColor
+@enduml
