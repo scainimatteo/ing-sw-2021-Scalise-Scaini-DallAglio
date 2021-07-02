@@ -14,7 +14,6 @@ public class PersistenceUtil {
 	 *
 	 * Source: <https://stackoverflow.com/questions/35388882/find-place-for-dedicated-application-folder>
 	 */
-	// TODO: test on other OSes
 	public static Path getPersistenceDirectory() {
 		String os = System.getProperty("os.name");
 		String home = System.getProperty("user.home");

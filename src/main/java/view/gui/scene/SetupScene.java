@@ -129,13 +129,12 @@ public class SetupScene extends SceneController implements Initializable, ErrorM
 
 	/**
 	 * Show the Player four or three LeaderCards to discard
-	 *
-	 *TODO: test with three
 	 */
 	private void setLeaderCards() {
-		for (int i = 0; i < this.leader_card_array.getChildren().size(); i++) {
+		ArrayList<LeaderCard> leader_cards = this.player.getLeaderCards();
+		for (int i = 0; i < leader_cards.size(); i++) {
 			ImageView leader_card_imageview = (ImageView) this.leader_card_array.getChildren().get(i);
-			leader_card_imageview.setImage(new Image(this.player.getLeaderCards().get(i).getFrontPath()));
+			leader_card_imageview.setImage(new Image(leader_cards.get(i).getFrontPath()));
 
 			// set the method to discard them
 			final int index = i;
