@@ -139,7 +139,9 @@ public class SoloGame extends Game {
 	public void lostGame() {
 		// send a ranking containing 0 points for them
 		HashMap<String, Integer> rank = new HashMap<String, Integer>();
+		ArrayList<String> nickname = new ArrayList<String>();
+		nickname.add(player.getNickname());
 		rank.put(this.player.getNickname(), 0);
-		notifyModel(new EndGameMessage(rank));
+		notifyModel(new EndGameMessage(nickname, rank));
 	}
 }
