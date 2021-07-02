@@ -34,7 +34,6 @@ public class Deck<E> extends AbstractCollection <E> implements Serializable {
 		return structure.isEmpty();
 	}
 
-
 	/**
 	* @return collection iterator
 	*/

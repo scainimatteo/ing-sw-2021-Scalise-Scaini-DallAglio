@@ -21,6 +21,7 @@ class GameController {
 	- ArrayList<ClientHandler> clients
 	- Game game
 	- Game setupGame()
+
 	+ void handleMessage(Message message)
 	+ void handleChooseResources(Player player, Storage storage)
 	+ void handleActivateLeader(Player player, LeaderCard card) {
@@ -47,12 +48,14 @@ class InitialController {
 
 class RemoteView {
 	- ClientHandler client_handler
+
 	+ void updateModel(ServerMessage servermessage)
 }
 
 class SetupManager {
 	- ArrayList<Player> players
 	- RemoteView[] remote_views
+
 	+ Game setupGame(ArrayList<ClientHandler> clients)
 	+ SoloGame setupSoloGame(ArrayList<ClientHandler> clients)
 	+ void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game)
@@ -60,7 +63,8 @@ class SetupManager {
 }
 
 class SoloGameController {
-	- boolean last_card_discarded = false;
+	- boolean last_card_discarded
+
 	+ void setupGame()
 	+ void handleEndTurn(Player player)
 	+ void handleDiscardResources(Player player)
@@ -70,23 +74,10 @@ class SoloGameController {
 	+ void handlePersistence(Player player)
 }
 
-class StubGameController {
-	- String error
-	+ void setupGame()
-}
-
-class StubSetupManager {
-	+ SoloGame setupSoloGame()
-}
-
-class StubSoloGameController {
-	- String error
-	+ void setupGame()
-}
-
 /' MESSAGE PACKAGE '/
 abstract class Message {
 	- Player player
+
 	+ void useMessage(GameController controller)
 }
 
@@ -97,17 +88,14 @@ abstract class TurnMessage {
 
 class BuyCardMessage {
 	- int slot
-	+ void useMessage(GameController controller)
 }
 
 class MarketMessage {
 	- boolean row_or_column
-	+ void useMessage(GameController controller)
 }
 
 class ProductionMessage {
 	- ProductionInterface production
-	+ void useMessage(GameController controller)
 }
 
 abstract class ResourceMessage {
@@ -115,20 +103,16 @@ abstract class ResourceMessage {
 }
 
 class PayMessage {
-	+ void useMessage(GameController controller)
 }
 
 class StoreMessage {
-	+ void useMessage(GameController controller)
 }
 
 class DiscardResourceMessage {
-	+ void useMessage(GameController controller)
 }
 
 class RearrangeMessage {
 	- int swap1, swap2
-	+ void useMessage(GameController controller)
 }
 
 abstract class LeaderCardMessage {
@@ -136,27 +120,21 @@ abstract class LeaderCardMessage {
 }
 
 class ActivateLeaderMessage {
-	+ void useMessage(GameController controller)
 }
 
 class DiscardLeaderMessage {
-	+ void useMessage(GameController controller)
 }
 
 class EndTurnMessage {
-	+ void useMessage(GameController controller)
 }
 
 class ChooseResourcesMessage {
-	+ void useMessage(GameController controller)
 }
 
-class InitialitingMessage {
-	+ void useMessage(GameController controller)
+class InitializingMessage {
 }
 
 class PersistenceMessage {
-	+ void useMessage(GameController controller)
 }
 
 class Storage {
@@ -182,7 +160,7 @@ abstract class ServerMessage {
 
 class ErrorMessage {
 	+ Player player
-	+ String error
+	+ String error_string
 }
 
 class EndGameMessage {
@@ -214,10 +192,7 @@ class ViewUpdate {
 Controller <.. GameController
 Controller <.. InitialController
 
-ClientHandler -- GameController
-ClientHandler -- RemoteView
-
-SetupManager -- Player
+SetupManager -- GameController
 SetupManager -- RemoteView
 
 Message -- GameController
@@ -226,17 +201,12 @@ ModelObserver <-up- RemoteView
 
 GameController <-- SoloGameController
 
-GameController <-- StubGameController
-SetupManager <-- StubSetupManager
-SoloGameController <-- StubSoloGameController
-
  /' MESSAGE '/
-Storage -- Resource
+Storage -- ResourceMessage
 
-Message <-- TurnMessage
 Message <-- ResourceMessage
 Message <-- LeaderCardMessage
-Message <-- InitialitingMessage
+Message <-- InitializingMessage
 Message <-- PersistenceMessage
 Message <-- RearrangeMessage
 Message <-- TurnMessage
@@ -261,9 +231,5 @@ ServerMessage <-- InitializingServerMessage
 ServerMessage <-- ViewUpdate
 
 InitializingServerMessage -- InitializingMessageType
-
-ViewUpdate -- SimpleGame
-ViewUpdate -- SimplePlayer
-ViewUpdate -- Turn
 
 @enduml

@@ -65,7 +65,7 @@ public class StrongBox {
 	/**
 	 * @param to_remove is the list containing the resource to be removed
 	 */
-	public void removeResources (ArrayList<Resource> to_remove) {
+	public void removeResources(ArrayList<Resource> to_remove) {
 		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};
 		for (Resource res : check){
 			this.storage.put(res, this.storage.get(res) -  (int) to_remove.stream().filter(x->x.equals(res)).count());
@@ -88,7 +88,7 @@ public class StrongBox {
 	}
 
 	/**
-	 * sets all resource values to zero
+	 * Sets all resource values to zero
 	 */
 	public void clear(){
 		Resource[] check = {Resource.COIN, Resource.SHIELD, Resource.STONE, Resource.SERVANT};

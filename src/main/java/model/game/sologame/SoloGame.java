@@ -109,8 +109,9 @@ public class SoloGame extends Game {
 	}
 
 	/**
+	 * Testing only
+	 *
 	 * @return the size of the token queue
-	 * testing only
 	 */
 	public int getTokenAmount(){
 		return active_tokens.size();

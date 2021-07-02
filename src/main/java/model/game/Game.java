@@ -158,7 +158,7 @@ public class Game extends ModelObservable {
 		countVictoryPoints();
 
 		// create a new Hashmap using the nicknames instead of the Players
-		ArrayList<Player> sorted = playerSort(victory_points);
+		ArrayList<Player> sorted = playerSort();
 		HashMap<String, Integer> rank = new HashMap<String, Integer>();
 		ArrayList<String> nicknames = new ArrayList<String>();
 		for (Player p: sorted) {
@@ -169,7 +169,12 @@ public class Game extends ModelObservable {
 	}
 	
 
-	private ArrayList<Player> playerSort(HashMap<Player, Integer> map){
+	/**
+	 * Create an array of Players sorted by their victory points
+	 *
+	 * @return the sorted Players
+	 */
+	private ArrayList<Player> playerSort(){
 		ArrayList<Player> sorted = new ArrayList<Player>(); 
 		int index_max;
 		for (int i = 0; i < players.size(); i++){
@@ -179,9 +184,9 @@ public class Game extends ModelObservable {
 					if(index_max == -1){
 						index_max = j;
 					}
-					if(map.get(players.get(j)) > map.get(players.get(index_max))){
+					if(this.victory_points.get(players.get(j)) > this.victory_points.get(players.get(index_max))){
 						index_max = j;
-					} else if (map.get(players.get(j)) == map.get(players.get(index_max))){
+					} else if (this.victory_points.get(players.get(j)) == this.victory_points.get(players.get(index_max))){
 						if(players.get(j).strongboxSize() > players.get(index_max).strongboxSize()){
 							index_max = j;
 						}
