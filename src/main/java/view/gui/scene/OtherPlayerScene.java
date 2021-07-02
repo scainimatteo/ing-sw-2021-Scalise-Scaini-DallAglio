@@ -78,14 +78,14 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 
 	@Override
 	public void initialize(URL location, ResourceBundle resouces){
-		this.updateView();
-
 		// get updated everytime the View gets updated
 		App.setViewUpdateObserver(this);
 
 		hideNode(leader_card_pane);
 
 		this.nickname_text.setText(this.other_player_nickname);
+
+		this.updateView();
 	}
 
 	/**
@@ -114,6 +114,7 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 		setLeaderCards(leader_cards);
 		setFaithMarker(marker_position);
 		setTiles(tiles);
+		setActivePlayer();
 	}
 
 	private SimplePlayer getOtherPlayer() {
@@ -259,6 +260,15 @@ public class OtherPlayerScene extends SceneController implements ViewUpdateObser
 
 		if (tiles[2].isActive()) {
 			this.tile3.setImage(new Image("/images/tokens/faithtrack/pope_favor3_front.png"));
+		}
+	}
+
+	private void setActivePlayer() {
+		String active_player = App.getTurn().getNickname();
+
+		// if it's the Turn of the Player
+		if (active_player.equals(this.other_player_nickname)) {
+			//TODO
 		}
 	}
 
