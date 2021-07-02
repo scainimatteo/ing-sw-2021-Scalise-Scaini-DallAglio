@@ -36,10 +36,12 @@ The project contains a client-side .jar and a server-side .jar.
 
 Server args include server port number. 
 In case of empty args, the server runs with default value 1234.
+
 `java -jar GC02Server.jar [--port portnumber]`
 
 Client args include server port number and address, desired graphic interface. In case of empty args,
 the client runs with default values 127.0.0.1, 1234, gui.
+
 `java -jar GC02.jar [--address serveraddress] [--port portnumber] [--view gui/cli]`
 
 
