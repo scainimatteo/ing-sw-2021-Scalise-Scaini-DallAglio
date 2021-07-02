@@ -158,16 +158,40 @@ public class Game extends ModelObservable {
 		countVictoryPoints();
 
 		// create a new Hashmap using the nicknames instead of the Players
+		ArrayList<Player> sorted = playerSort(victory_points);
 		HashMap<String, Integer> rank = new HashMap<String, Integer>();
-		playerSort(victory_points);
-		for (Player p: players) {
+		ArrayList<String> nicknames = new ArrayList<String>();
+		for (Player p: sorted) {
 			rank.put(p.getNickname(), this.victory_points.get(p));
+			nicknames.add(p.getNickname());
 		}
-		notifyModel(new EndGameMessage(rank));
+		notifyModel(new EndGameMessage(nicknames, rank));
 	}
+	
 
-	private void playerSort(HashMap<Player, Integer> map){
-		Collections.sort(players, (p1, p2) -> map.get(p1) - map.get(p2));
+	private ArrayList<Player> playerSort(HashMap<Player, Integer> map){
+		ArrayList<Player> sorted = new ArrayList<Player>(); 
+		int index_max;
+		for (int i = 0; i < players.size(); i++){
+			index_max = -1;
+			for (int j = 0; j < players.size(); j++){
+				if (!sorted.contains(players.get(j))){
+					if(index_max == -1){
+						index_max = j;
+					}
+					if(map.get(players.get(j)) > map.get(players.get(index_max))){
+						index_max = j;
+					} else if (map.get(players.get(j)) == map.get(players.get(index_max))){
+						if(players.get(j).strongboxSize() > players.get(index_max).strongboxSize()){
+							index_max = j;
+						}
+					}
+				}
+			}
+			sorted.add(players.get(index_max));
+		}
+		
+		return sorted;
 	}
 
 	/**
