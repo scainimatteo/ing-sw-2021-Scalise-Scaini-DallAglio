@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1683px" preserveAspectRatio="none" style="width:4180px;height:1683px;" version="1.1" viewBox="0 0 4180 1683" width="4180px" zoomAndPan="magnify"><defs><filter height="300%" id="f1139wxbf8t14f" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[7db3c59d38ae5b37b484eb2df9368145]
+cluster java.util--><polygon fill="#FFFFFF" filter="url(#f1139wxbf8t14f)" points="2281.7529,873.5,2347.7529,873.5,2354.7529,895.7969,2443.7529,895.7969,2443.7529,956.5,2281.7529,956.5,2281.7529,873.5" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="2281.7529" x2="2354.7529" y1="895.7969" y2="895.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="60" x="2285.7529" y="888.4951">java.util</text><!--MD5=[05ad062e313fa8581761b6d861c21b68]
+class java.util.AbstractCollection--><rect fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="48" id="java.util.AbstractCollection" style="stroke:#A80036;stroke-width:1.5;" width="146" x="2289.7529" y="900.5"/><ellipse cx="2304.7529" cy="916.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2307.7217,922.1406 Q2307.1435,922.4375 2306.5029,922.5781 Q2305.8623,922.7344 2305.1592,922.7344 Q2302.6592,922.7344 2301.331,921.0938 Q2300.0185,919.4375 2300.0185,916.3125 Q2300.0185,913.1875 2301.331,911.5313 Q2302.6592,909.875 2305.1592,909.875 Q2305.8623,909.875 2306.5029,910.0313 Q2307.1592,910.1875 2307.7217,910.4844 L2307.7217,913.2031 Q2307.0967,912.625 2306.5029,912.3594 Q2305.9092,912.0781 2305.2842,912.0781 Q2303.9404,912.0781 2303.2529,913.1563 Q2302.5654,914.2188 2302.5654,916.3125 Q2302.5654,918.4063 2303.2529,919.4844 Q2303.9404,920.5469 2305.2842,920.5469 Q2305.9092,920.5469 2306.5029,920.2813 Q2307.0967,920 2307.7217,919.4219 L2307.7217,922.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="114" x="2318.7529" y="920.6543">AbstractCollection</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2290.7529" x2="2434.7529" y1="932.5" y2="932.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2290.7529" x2="2434.7529" y1="940.5" y2="940.5"/><!--MD5=[5e305716458bbdabbd2d7f572ed2bae2]
+class Card--><rect codeLine="3" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="Card" style="stroke:#A80036;stroke-width:1.5;" width="122" x="1226.7529" y="587.5"/><ellipse cx="1269.2029" cy="603.5" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1269.3123,598.8438 L1268.156,603.9219 L1270.4842,603.9219 L1269.3123,598.8438 Z M1267.8279,596.6094 L1270.8123,596.6094 L1274.1717,609 L1271.7185,609 L1270.9529,605.9375 L1267.6717,605.9375 L1266.9217,609 L1264.4842,609 L1267.8279,596.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="29" x="1289.3029" y="607.6543">Card</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1227.7529" x2="1347.7529" y1="619.5" y2="619.5"/><polygon fill="none" points="1237.7529,625.5,1241.7529,629.5,1237.7529,633.5,1233.7529,629.5" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="96" x="1246.7529" y="633.7104">int victory_points</text><polygon fill="none" points="1237.7529,638.3047,1241.7529,642.3047,1237.7529,646.3047,1233.7529,642.3047" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="28" x="1246.7529" y="646.5151">int id</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1227.7529" x2="1347.7529" y1="653.1094" y2="653.1094"/><!--MD5=[30299a58ba6b78debaaed5ddbb42f29a]
+class Deck--><rect codeLine="8" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="176.0469" id="Deck" style="stroke:#A80036;stroke-width:1.5;" width="174" x="2287.7529" y="1321"/><ellipse cx="2355.0029" cy="1337" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2357.9717,1342.6406 Q2357.3935,1342.9375 2356.7529,1343.0781 Q2356.1123,1343.2344 2355.4092,1343.2344 Q2352.9092,1343.2344 2351.581,1341.5938 Q2350.2685,1339.9375 2350.2685,1336.8125 Q2350.2685,1333.6875 2351.581,1332.0313 Q2352.9092,1330.375 2355.4092,1330.375 Q2356.1123,1330.375 2356.7529,1330.5313 Q2357.4092,1330.6875 2357.9717,1330.9844 L2357.9717,1333.7031 Q2357.3467,1333.125 2356.7529,1332.8594 Q2356.1592,1332.5781 2355.5342,1332.5781 Q2354.1904,1332.5781 2353.5029,1333.6563 Q2352.8154,1334.7188 2352.8154,1336.8125 Q2352.8154,1338.9063 2353.5029,1339.9844 Q2354.1904,1341.0469 2355.5342,1341.0469 Q2356.1592,1341.0469 2356.7529,1340.7813 Q2357.3467,1340.5 2357.9717,1339.9219 L2357.9717,1342.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="31" x="2375.5029" y="1341.1543">Deck</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2288.7529" x2="2460.7529" y1="1353" y2="1353"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2295.7529" y="1361"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="2307.7529" y="1367.2104">int max_size</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2295.7529" y="1373.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="2307.7529" y="1380.0151">ArrayList&lt;E&gt; structure</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2288.7529" x2="2460.7529" y1="1386.6094" y2="1386.6094"/><ellipse cx="2298.7529" cy="1397.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="102" x="2307.7529" y="1400.8198">boolean isEmpty()</text><ellipse cx="2298.7529" cy="1410.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="121" x="2307.7529" y="1413.6245">Iterator&lt;E&gt; iterator()</text><ellipse cx="2298.7529" cy="1423.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="48" x="2307.7529" y="1426.4292">int size()</text><ellipse cx="2298.7529" cy="1436.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="2307.7529" y="1439.2339">int get_max()</text><ellipse cx="2298.7529" cy="1448.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="94" x="2307.7529" y="1452.0386">E peekTopCard()</text><ellipse cx="2298.7529" cy="1461.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="47" x="2307.7529" y="1464.8433">E draw()</text><ellipse cx="2298.7529" cy="1474.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="2307.7529" y="1477.6479">void shuffle()</text><ellipse cx="2298.7529" cy="1487.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="148" x="2307.7529" y="1490.4526">ArrayList&lt;E&gt; toArrayList()</text><!--MD5=[c0b936abb008b3271898d4186b5531e4]
+class Table--><rect codeLine="22" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="150.4375" id="Table" style="stroke:#A80036;stroke-width:1.5;" width="305" x="1976.2529" y="1111"/><ellipse cx="2107.5029" cy="1127" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2110.4717,1132.6406 Q2109.8935,1132.9375 2109.2529,1133.0781 Q2108.6123,1133.2344 2107.9092,1133.2344 Q2105.4092,1133.2344 2104.081,1131.5938 Q2102.7685,1129.9375 2102.7685,1126.8125 Q2102.7685,1123.6875 2104.081,1122.0313 Q2105.4092,1120.375 2107.9092,1120.375 Q2108.6123,1120.375 2109.2529,1120.5313 Q2109.9092,1120.6875 2110.4717,1120.9844 L2110.4717,1123.7031 Q2109.8467,1123.125 2109.2529,1122.8594 Q2108.6592,1122.5781 2108.0342,1122.5781 Q2106.6904,1122.5781 2106.0029,1123.6563 Q2105.3154,1124.7188 2105.3154,1126.8125 Q2105.3154,1128.9063 2106.0029,1129.9844 Q2106.6904,1131.0469 2108.0342,1131.0469 Q2108.6592,1131.0469 2109.2529,1130.7813 Q2109.8467,1130.5 2110.4717,1129.9219 L2110.4717,1132.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="34" x="2128.0029" y="1131.1543">Table</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1977.2529" x2="2280.2529" y1="1143" y2="1143"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1984.2529" y="1151"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="1996.2529" y="1157.2104">int max_size</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1984.2529" y="1163.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="67" x="1996.2529" y="1170.0151">int row_size</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1984.2529" y="1176.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="176" x="1996.2529" y="1182.8198">ArrayList&lt;Deck&lt;E&gt;&gt; structure</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1977.2529" x2="2280.2529" y1="1189.4141" y2="1189.4141"/><ellipse cx="1987.2529" cy="1200.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="279" x="1996.2529" y="1203.6245">void addDeck(Deck&lt;E&gt; deck, int row, int column)</text><ellipse cx="1987.2529" cy="1213.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="1996.2529" y="1216.4292">void addElement(E elem, int row, int column)</text><ellipse cx="1987.2529" cy="1226.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="173" x="1996.2529" y="1229.2339">E peekTop(int row, int column)</text><ellipse cx="1987.2529" cy="1238.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="153" x="1996.2529" y="1242.0386">E draw(int row, int column)</text><ellipse cx="1987.2529" cy="1251.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="121" x="1996.2529" y="1254.8433">void shuffleAllDecks()</text><!--MD5=[07fa2ae9911b977fba229b2b2348e95a]
+class DevelopmentCard--><rect codeLine="34" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="99.2188" id="DevelopmentCard" style="stroke:#A80036;stroke-width:1.5;" width="175" x="1666.2529" y="1136.5"/><ellipse cx="1695.6529" cy="1152.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1698.6217,1158.1406 Q1698.0435,1158.4375 1697.4029,1158.5781 Q1696.7623,1158.7344 1696.0592,1158.7344 Q1693.5592,1158.7344 1692.231,1157.0938 Q1690.9185,1155.4375 1690.9185,1152.3125 Q1690.9185,1149.1875 1692.231,1147.5313 Q1693.5592,1145.875 1696.0592,1145.875 Q1696.7623,1145.875 1697.4029,1146.0313 Q1698.0592,1146.1875 1698.6217,1146.4844 L1698.6217,1149.2031 Q1697.9967,1148.625 1697.4029,1148.3594 Q1696.8092,1148.0781 1696.1842,1148.0781 Q1694.8404,1148.0781 1694.1529,1149.1563 Q1693.4654,1150.2188 1693.4654,1152.3125 Q1693.4654,1154.4063 1694.1529,1155.4844 Q1694.8404,1156.5469 1696.1842,1156.5469 Q1696.8092,1156.5469 1697.4029,1156.2813 Q1697.9967,1156 1698.6217,1155.4219 L1698.6217,1158.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="111" x="1712.8529" y="1156.6543">DevelopmentCard</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1667.2529" x2="1840.2529" y1="1168.5" y2="1168.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1674.2529" y="1176.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="1686.2529" y="1182.7104">Production production</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1674.2529" y="1189.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="149" x="1686.2529" y="1195.5151">ArrayList&lt;Resource&gt; cost</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1674.2529" y="1202.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="86" x="1686.2529" y="1208.3198">CardLevel level</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1674.2529" y="1214.9141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="96" x="1686.2529" y="1221.1245">String front_path</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1667.2529" x2="1840.2529" y1="1227.7188" y2="1227.7188"/><!--MD5=[fdd17f5c2b408f0db6427506249ae29d]
+class CardLevel--><rect codeLine="41" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="124.8281" id="CardLevel" style="stroke:#A80036;stroke-width:1.5;" width="257" x="1621.2529" y="1346.5"/><ellipse cx="1715.5029" cy="1362.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1718.4717,1368.1406 Q1717.8935,1368.4375 1717.2529,1368.5781 Q1716.6123,1368.7344 1715.9092,1368.7344 Q1713.4092,1368.7344 1712.081,1367.0938 Q1710.7685,1365.4375 1710.7685,1362.3125 Q1710.7685,1359.1875 1712.081,1357.5313 Q1713.4092,1355.875 1715.9092,1355.875 Q1716.6123,1355.875 1717.2529,1356.0313 Q1717.9092,1356.1875 1718.4717,1356.4844 L1718.4717,1359.2031 Q1717.8467,1358.625 1717.2529,1358.3594 Q1716.6592,1358.0781 1716.0342,1358.0781 Q1714.6904,1358.0781 1714.0029,1359.1563 Q1713.3154,1360.2188 1713.3154,1362.3125 Q1713.3154,1364.4063 1714.0029,1365.4844 Q1714.6904,1366.5469 1716.0342,1366.5469 Q1716.6592,1366.5469 1717.2529,1366.2813 Q1717.8467,1366 1718.4717,1365.4219 L1718.4717,1368.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="1736.0029" y="1366.6543">CardLevel</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1622.2529" x2="1877.2529" y1="1378.5" y2="1378.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1629.2529" y="1386.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="1641.2529" y="1392.7104">int level</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1629.2529" y="1399.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="170" x="1641.2529" y="1405.5151">DevelopmentCardsColor color</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1622.2529" x2="1877.2529" y1="1412.1094" y2="1412.1094"/><ellipse cx="1632.2529" cy="1423.1094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="199" x="1641.2529" y="1426.3198">int compareLevel(CardLevel target)</text><ellipse cx="1632.2529" cy="1435.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="231" x="1641.2529" y="1439.1245">boolean compareColor(CardLevel target)</text><ellipse cx="1632.2529" cy="1448.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="215" x="1641.2529" y="1451.9292">boolean isPlaceable(CardLevel target)</text><ellipse cx="1632.2529" cy="1461.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="142" x="1641.2529" y="1464.7339">boolean equals(Object o)</text><!--MD5=[7efe5d9138c02a3656a86b041babc255]
+class DevelopmentCardsOnTable--><rect codeLine="51" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="112.0234" id="DevelopmentCardsOnTable" style="stroke:#A80036;stroke-width:1.5;" width="312" x="1597.7529" y="868.5"/><ellipse cx="1665.0029" cy="884.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1667.9717,890.1406 Q1667.3935,890.4375 1666.7529,890.5781 Q1666.1123,890.7344 1665.4092,890.7344 Q1662.9092,890.7344 1661.581,889.0938 Q1660.2685,887.4375 1660.2685,884.3125 Q1660.2685,881.1875 1661.581,879.5313 Q1662.9092,877.875 1665.4092,877.875 Q1666.1123,877.875 1666.7529,878.0313 Q1667.4092,878.1875 1667.9717,878.4844 L1667.9717,881.2031 Q1667.3467,880.625 1666.7529,880.3594 Q1666.1592,880.0781 1665.5342,880.0781 Q1664.1904,880.0781 1663.5029,881.1563 Q1662.8154,882.2188 1662.8154,884.3125 Q1662.8154,886.4063 1663.5029,887.4844 Q1664.1904,888.5469 1665.5342,888.5469 Q1666.1592,888.5469 1666.7529,888.2813 Q1667.3467,888 1667.9717,887.4219 L1667.9717,890.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="169" x="1685.5029" y="888.6543">DevelopmentCardsOnTable</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1598.7529" x2="1908.7529" y1="900.5" y2="900.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1605.7529" y="908.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="178" x="1617.7529" y="914.7104">Table development_card_decks</text><ellipse cx="1608.7529" cy="924.3047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="55" x="1617.7529" y="927.5151">dim_rows</text><ellipse cx="1608.7529" cy="937.1094" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" text-decoration="underline" textLength="68" x="1617.7529" y="940.3198">dim_column</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1598.7529" x2="1908.7529" y1="946.9141" y2="946.9141"/><ellipse cx="1608.7529" cy="957.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="202" x="1617.7529" y="961.1245">DevelopmentCard[][] getTopCards()</text><ellipse cx="1608.7529" cy="970.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="286" x="1617.7529" y="973.9292">void getFromDeck(DevelopmentCard chosen_card)</text><!--MD5=[36ca76460e4ea50ab07663d02e3767b7]
+class ProductionInterface--><rect codeLine="60" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="99.2188" id="ProductionInterface" style="stroke:#A80036;stroke-width:1.5;" width="341" x="1150.2529" y="875"/><ellipse cx="1254.5029" cy="891" fill="#B4A7E5" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1250.4248,886.7656 L1250.4248,884.6094 L1257.8154,884.6094 L1257.8154,886.7656 L1255.3467,886.7656 L1255.3467,894.8438 L1257.8154,894.8438 L1257.8154,897 L1250.4248,897 L1250.4248,894.8438 L1252.8935,894.8438 L1252.8935,886.7656 L1250.4248,886.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="124" x="1275.0029" y="895.1543">ProductionInterface</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1151.2529" x2="1490.2529" y1="907" y2="907"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1151.2529" x2="1490.2529" y1="915" y2="915"/><ellipse cx="1161.2529" cy="926" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="261" x="1170.2529" y="929.2104">ArrayList&lt;Resource&gt; getRequiredResources()</text><ellipse cx="1161.2529" cy="938.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="264" x="1170.2529" y="942.0151">ArrayList&lt;Resource&gt; getProducedResources()</text><ellipse cx="1161.2529" cy="951.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="312" x="1170.2529" y="954.8198">void setRequiredResources(ArrayList&lt;Resource&gt; cost)</text><ellipse cx="1161.2529" cy="964.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="315" x="1170.2529" y="967.6245">void setProducedResources(ArrayList&lt;Resource&gt; cost)</text><!--MD5=[4070ca5927d9b725dd0d376aec46acd6]
+class Production--><rect codeLine="67" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="Production" style="stroke:#A80036;stroke-width:1.5;" width="268" x="1913.7529" y="1372"/><ellipse cx="2009.5029" cy="1388" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2012.4717,1393.6406 Q2011.8935,1393.9375 2011.2529,1394.0781 Q2010.6123,1394.2344 2009.9092,1394.2344 Q2007.4092,1394.2344 2006.081,1392.5938 Q2004.7685,1390.9375 2004.7685,1387.8125 Q2004.7685,1384.6875 2006.081,1383.0313 Q2007.4092,1381.375 2009.9092,1381.375 Q2010.6123,1381.375 2011.2529,1381.5313 Q2011.9092,1381.6875 2012.4717,1381.9844 L2012.4717,1384.7031 Q2011.8467,1384.125 2011.2529,1383.8594 Q2010.6592,1383.5781 2010.0342,1383.5781 Q2008.6904,1383.5781 2008.0029,1384.6563 Q2007.3154,1385.7188 2007.3154,1387.8125 Q2007.3154,1389.9063 2008.0029,1390.9844 Q2008.6904,1392.0469 2010.0342,1392.0469 Q2010.6592,1392.0469 2011.2529,1391.7813 Q2011.8467,1391.5 2012.4717,1390.9219 L2012.4717,1393.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="2030.0029" y="1392.1543">Production</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1914.7529" x2="2180.7529" y1="1404" y2="1404"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1921.7529" y="1412"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="237" x="1933.7529" y="1418.2104">ArrayList&lt;Resource&gt; required_resources</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1921.7529" y="1424.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="242" x="1933.7529" y="1431.0151">ArrayList&lt;Resource&gt; produced_resources</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1914.7529" x2="2180.7529" y1="1437.6094" y2="1437.6094"/><!--MD5=[0530c8a1a84c6f03912a4461f3afc320]
+class LeaderCard--><rect codeLine="72" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="99.2188" id="LeaderCard" style="stroke:#A80036;stroke-width:1.5;" width="171" x="944.2529" y="875"/><ellipse cx="989.0029" cy="891" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M989.1123,886.3438 L987.956,891.4219 L990.2842,891.4219 L989.1123,886.3438 Z M987.6279,884.1094 L990.6123,884.1094 L993.9717,896.5 L991.5185,896.5 L990.7529,893.4375 L987.4717,893.4375 L986.7217,896.5 L984.2842,896.5 L987.6279,884.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="73" x="1009.5029" y="895.1543">LeaderCard</text><line style="stroke:#A80036;stroke-width:1.5;" x1="945.2529" x2="1114.2529" y1="907" y2="907"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="952.2529" y="915"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="109" x="964.2529" y="921.2104">LeaderAbility ability</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="952.2529" y="927.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="964.2529" y="934.0151">boolean activated</text><line style="stroke:#A80036;stroke-width:1.5;" x1="945.2529" x2="1114.2529" y1="940.6094" y2="940.6094"/><ellipse cx="955.2529" cy="951.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="145" x="964.2529" y="954.8198">void activateLeaderCard()</text><ellipse cx="955.2529" cy="964.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="118" x="964.2529" y="967.6245">boolean isActivable()</text><!--MD5=[c2b4360b5537f329f03acb5411da8407]
+class LeaderCardLevelCost--><rect codeLine="80" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="LeaderCardLevelCost" style="stroke:#A80036;stroke-width:1.5;" width="231" x="1162.2529" y="1149"/><ellipse cx="1208.0029" cy="1165" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1210.9717,1170.6406 Q1210.3935,1170.9375 1209.7529,1171.0781 Q1209.1123,1171.2344 1208.4092,1171.2344 Q1205.9092,1171.2344 1204.581,1169.5938 Q1203.2685,1167.9375 1203.2685,1164.8125 Q1203.2685,1161.6875 1204.581,1160.0313 Q1205.9092,1158.375 1208.4092,1158.375 Q1209.1123,1158.375 1209.7529,1158.5313 Q1210.4092,1158.6875 1210.9717,1158.9844 L1210.9717,1161.7031 Q1210.3467,1161.125 1209.7529,1160.8594 Q1209.1592,1160.5781 1208.5342,1160.5781 Q1207.1904,1160.5781 1206.5029,1161.6563 Q1205.8154,1162.7188 1205.8154,1164.8125 Q1205.8154,1166.9063 1206.5029,1167.9844 Q1207.1904,1169.0469 1208.5342,1169.0469 Q1209.1592,1169.0469 1209.7529,1168.7813 Q1210.3467,1168.5 1210.9717,1167.9219 L1210.9717,1170.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="131" x="1228.5029" y="1169.1543">LeaderCardLevelCost</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1163.2529" x2="1392.2529" y1="1181" y2="1181"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1170.2529" y="1189"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="205" x="1182.2529" y="1195.2104">ArrayList&lt;CardLevel&gt; requirements</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1163.2529" x2="1392.2529" y1="1201.8047" y2="1201.8047"/><ellipse cx="1173.2529" cy="1212.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="1182.2529" y="1216.0151">boolean isActivable()</text><!--MD5=[302bb25c21601fe616b038fec93d0156]
+class LeaderCardResourcesCost--><rect codeLine="86" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="LeaderCardResourcesCost" style="stroke:#A80036;stroke-width:1.5;" width="228" x="404.7529" y="1149"/><ellipse cx="433.2529" cy="1165" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M436.2217,1170.6406 Q435.6435,1170.9375 435.0029,1171.0781 Q434.3623,1171.2344 433.6592,1171.2344 Q431.1592,1171.2344 429.831,1169.5938 Q428.5185,1167.9375 428.5185,1164.8125 Q428.5185,1161.6875 429.831,1160.0313 Q431.1592,1158.375 433.6592,1158.375 Q434.3623,1158.375 435.0029,1158.5313 Q435.6592,1158.6875 436.2217,1158.9844 L436.2217,1161.7031 Q435.5967,1161.125 435.0029,1160.8594 Q434.4092,1160.5781 433.7842,1160.5781 Q432.4404,1160.5781 431.7529,1161.6563 Q431.0654,1162.7188 431.0654,1164.8125 Q431.0654,1166.9063 431.7529,1167.9844 Q432.4404,1169.0469 433.7842,1169.0469 Q434.4092,1169.0469 435.0029,1168.7813 Q435.5967,1168.5 436.2217,1167.9219 L436.2217,1170.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="166" x="450.2529" y="1169.1543">LeaderCardResourcesCost</text><line style="stroke:#A80036;stroke-width:1.5;" x1="405.7529" x2="631.7529" y1="1181" y2="1181"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="412.7529" y="1189"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="202" x="424.7529" y="1195.2104">ArrayList&lt;Resource&gt; requirements</text><line style="stroke:#A80036;stroke-width:1.5;" x1="405.7529" x2="631.7529" y1="1201.8047" y2="1201.8047"/><ellipse cx="415.7529" cy="1212.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="424.7529" y="1216.0151">boolean isActivable()</text><!--MD5=[9096fe151f530b5280a96ce0905a6a78]
+class LeaderAbility--><rect codeLine="92" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="99.2188" id="LeaderAbility" style="stroke:#A80036;stroke-width:1.5;" width="294" x="832.7529" y="1136.5"/><ellipse cx="935.0029" cy="1152.5" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M935.1123,1147.8438 L933.956,1152.9219 L936.2842,1152.9219 L935.1123,1147.8438 Z M933.6279,1145.6094 L936.6123,1145.6094 L939.9717,1158 L937.5185,1158 L936.7529,1154.9375 L933.4717,1154.9375 L932.7217,1158 L930.2842,1158 L933.6279,1145.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="81" x="955.5029" y="1156.6543">LeaderAbility</text><line style="stroke:#A80036;stroke-width:1.5;" x1="833.7529" x2="1125.7529" y1="1168.5" y2="1168.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="833.7529" x2="1125.7529" y1="1176.5" y2="1176.5"/><ellipse cx="843.7529" cy="1187.5" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="268" x="852.7529" y="1190.7104">boolean checkAbility(WhiteMarblesAbility target)</text><ellipse cx="843.7529" cy="1200.3047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="257" x="852.7529" y="1203.5151">boolean checkAbility(ExtraSpaceAbility target)</text><ellipse cx="843.7529" cy="1213.1094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="253" x="852.7529" y="1216.3198">boolean checkAbility(ProductionAbility target)</text><ellipse cx="843.7529" cy="1225.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="242" x="852.7529" y="1229.1245">boolean checkAbility(DiscountAbility target)</text><!--MD5=[6490ca64db9c610fdb549b84af03a258]
+class ProductionAbility--><rect codeLine="99" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="ProductionAbility" style="stroke:#A80036;stroke-width:1.5;" width="279" x="1307.2529" y="1372"/><ellipse cx="1390.5029" cy="1388" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1393.4717,1393.6406 Q1392.8935,1393.9375 1392.2529,1394.0781 Q1391.6123,1394.2344 1390.9092,1394.2344 Q1388.4092,1394.2344 1387.081,1392.5938 Q1385.7685,1390.9375 1385.7685,1387.8125 Q1385.7685,1384.6875 1387.081,1383.0313 Q1388.4092,1381.375 1390.9092,1381.375 Q1391.6123,1381.375 1392.2529,1381.5313 Q1392.9092,1381.6875 1393.4717,1381.9844 L1393.4717,1384.7031 Q1392.8467,1384.125 1392.2529,1383.8594 Q1391.6592,1383.5781 1391.0342,1383.5781 Q1389.6904,1383.5781 1389.0029,1384.6563 Q1388.3154,1385.7188 1388.3154,1387.8125 Q1388.3154,1389.9063 1389.0029,1390.9844 Q1389.6904,1392.0469 1391.0342,1392.0469 Q1391.6592,1392.0469 1392.2529,1391.7813 Q1392.8467,1391.5 1393.4717,1390.9219 L1393.4717,1393.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="104" x="1411.0029" y="1392.1543">ProductionAbility</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1308.2529" x2="1585.2529" y1="1404" y2="1404"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1315.2529" y="1412"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="1327.2529" y="1418.2104">Production production</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1308.2529" x2="1585.2529" y1="1424.8047" y2="1424.8047"/><ellipse cx="1318.2529" cy="1435.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="253" x="1327.2529" y="1439.0151">boolean checkAbility(ProductionAbility target)</text><!--MD5=[c6798397d0556d9dff7c8bac89cb4210]
+class DiscountAbility--><rect codeLine="105" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="DiscountAbility" style="stroke:#A80036;stroke-width:1.5;" width="268" x="309.7529" y="1372"/><ellipse cx="394.0029" cy="1388" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M396.9717,1393.6406 Q396.3935,1393.9375 395.7529,1394.0781 Q395.1123,1394.2344 394.4092,1394.2344 Q391.9092,1394.2344 390.581,1392.5938 Q389.2685,1390.9375 389.2685,1387.8125 Q389.2685,1384.6875 390.581,1383.0313 Q391.9092,1381.375 394.4092,1381.375 Q395.1123,1381.375 395.7529,1381.5313 Q396.4092,1381.6875 396.9717,1381.9844 L396.9717,1384.7031 Q396.3467,1384.125 395.7529,1383.8594 Q395.1592,1383.5781 394.5342,1383.5781 Q393.1904,1383.5781 392.5029,1384.6563 Q391.8154,1385.7188 391.8154,1387.8125 Q391.8154,1389.9063 392.5029,1390.9844 Q393.1904,1392.0469 394.5342,1392.0469 Q395.1592,1392.0469 395.7529,1391.7813 Q396.3467,1391.5 396.9717,1390.9219 L396.9717,1393.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="91" x="414.5029" y="1392.1543">DiscountAbility</text><line style="stroke:#A80036;stroke-width:1.5;" x1="310.7529" x2="576.7529" y1="1404" y2="1404"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="317.7529" y="1412"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="176" x="329.7529" y="1418.2104">Resource discounted_resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="310.7529" x2="576.7529" y1="1424.8047" y2="1424.8047"/><ellipse cx="320.7529" cy="1435.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="242" x="329.7529" y="1439.0151">boolean checkAbility(DiscountAbility target)</text><!--MD5=[c1c4128e1469ca18d47a64a3aede4016]
+class ExtraSpaceAbility--><rect codeLine="111" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="137.6328" id="ExtraSpaceAbility" style="stroke:#A80036;stroke-width:1.5;" width="329" x="613.2529" y="1340"/><ellipse cx="720.0029" cy="1356" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M722.9717,1361.6406 Q722.3935,1361.9375 721.7529,1362.0781 Q721.1123,1362.2344 720.4092,1362.2344 Q717.9092,1362.2344 716.581,1360.5938 Q715.2685,1358.9375 715.2685,1355.8125 Q715.2685,1352.6875 716.581,1351.0313 Q717.9092,1349.375 720.4092,1349.375 Q721.1123,1349.375 721.7529,1349.5313 Q722.4092,1349.6875 722.9717,1349.9844 L722.9717,1352.7031 Q722.3467,1352.125 721.7529,1351.8594 Q721.1592,1351.5781 720.5342,1351.5781 Q719.1904,1351.5781 718.5029,1352.6563 Q717.8154,1353.7188 717.8154,1355.8125 Q717.8154,1357.9063 718.5029,1358.9844 Q719.1904,1360.0469 720.5342,1360.0469 Q721.1592,1360.0469 721.7529,1359.7813 Q722.3467,1359.5 722.9717,1358.9219 L722.9717,1361.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="740.5029" y="1360.1543">ExtraSpaceAbility</text><line style="stroke:#A80036;stroke-width:1.5;" x1="614.2529" x2="941.2529" y1="1372" y2="1372"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="621.2529" y="1380"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="633.2529" y="1386.2104">Resource resource_type</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="621.2529" y="1392.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="169" x="633.2529" y="1399.0151">ArrayList&lt;Resource&gt; storage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="614.2529" x2="941.2529" y1="1405.6094" y2="1405.6094"/><ellipse cx="624.2529" cy="1416.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="303" x="633.2529" y="1419.8198">boolean canBeStoredExtra(ArrayList&lt;Resource&gt; res)</text><ellipse cx="624.2529" cy="1429.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="297" x="633.2529" y="1432.6245">boolean isContainedExtra(ArrayList&lt;Resource&gt; res)</text><ellipse cx="624.2529" cy="1442.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="238" x="633.2529" y="1445.4292">void storeExtra(ArrayList&lt;Resource&gt; res)</text><ellipse cx="624.2529" cy="1455.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="633.2529" y="1458.2339">void getFromExtra(ArrayList&lt;Resource&gt; res)</text><ellipse cx="624.2529" cy="1467.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="257" x="633.2529" y="1471.0386">boolean checkAbility(ExtraSpaceAbility target)</text><!--MD5=[f8f072e4c3ec2fa22ecc0bd0941ffb7e]
+class WhiteMarblesAbility--><rect codeLine="122" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="WhiteMarblesAbility" style="stroke:#A80036;stroke-width:1.5;" width="294" x="977.7529" y="1372"/><ellipse cx="1060.5029" cy="1388" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1063.4717,1393.6406 Q1062.8935,1393.9375 1062.2529,1394.0781 Q1061.6123,1394.2344 1060.9092,1394.2344 Q1058.4092,1394.2344 1057.081,1392.5938 Q1055.7685,1390.9375 1055.7685,1387.8125 Q1055.7685,1384.6875 1057.081,1383.0313 Q1058.4092,1381.375 1060.9092,1381.375 Q1061.6123,1381.375 1062.2529,1381.5313 Q1062.9092,1381.6875 1063.4717,1381.9844 L1063.4717,1384.7031 Q1062.8467,1384.125 1062.2529,1383.8594 Q1061.6592,1383.5781 1061.0342,1383.5781 Q1059.6904,1383.5781 1059.0029,1384.6563 Q1058.3154,1385.7188 1058.3154,1387.8125 Q1058.3154,1389.9063 1059.0029,1390.9844 Q1059.6904,1392.0469 1061.0342,1392.0469 Q1061.6592,1392.0469 1062.2529,1391.7813 Q1062.8467,1391.5 1063.4717,1390.9219 L1063.4717,1393.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="120" x="1081.0029" y="1392.1543">WhiteMarblesAbility</text><line style="stroke:#A80036;stroke-width:1.5;" x1="978.7529" x2="1270.7529" y1="1404" y2="1404"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="985.7529" y="1412"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="997.7529" y="1418.2104">Resource resource_type</text><line style="stroke:#A80036;stroke-width:1.5;" x1="978.7529" x2="1270.7529" y1="1424.8047" y2="1424.8047"/><ellipse cx="988.7529" cy="1435.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="268" x="997.7529" y="1439.0151">boolean checkAbility(WhiteMarblesAbility target)</text><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="128" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="112.0234" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="91" x="906.2529" y="1557"/><ellipse cx="921.2529" cy="1573" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M925.3623,1579 L917.6435,1579 L917.6435,1566.6094 L925.3623,1566.6094 L925.3623,1568.7656 L920.0967,1568.7656 L920.0967,1571.4375 L924.8623,1571.4375 L924.8623,1573.5938 L920.0967,1573.5938 L920.0967,1576.8438 L925.3623,1576.8438 L925.3623,1579 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="59" x="935.2529" y="1577.1543">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="907.2529" x2="996.2529" y1="1589" y2="1589"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="28" x="912.2529" y="1603.2104">COIN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="39" x="912.2529" y="1616.0151">STONE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="912.2529" y="1628.8198">SERVANT</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="40" x="912.2529" y="1641.6245">SHIELD</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="31" x="912.2529" y="1654.4292">FAITH</text><line style="stroke:#A80036;stroke-width:1.5;" x1="907.2529" x2="996.2529" y1="1661.0234" y2="1661.0234"/><!--MD5=[4a89f1da6ee1eb9c1982aea6b0ac6f83]
+class DevelopmentCardsColor--><rect codeLine="136" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="99.2188" id="DevelopmentCardsColor" style="stroke:#A80036;stroke-width:1.5;" width="182" x="2040.7529" y="1563.5"/><ellipse cx="2055.7529" cy="1579.5" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2059.8623,1585.5 L2052.1435,1585.5 L2052.1435,1573.1094 L2059.8623,1573.1094 L2059.8623,1575.2656 L2054.5967,1575.2656 L2054.5967,1577.9375 L2059.3623,1577.9375 L2059.3623,1580.0938 L2054.5967,1580.0938 L2054.5967,1583.3438 L2059.8623,1583.3438 L2059.8623,1585.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="150" x="2069.7529" y="1583.6543">DevelopmentCardsColor</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2041.7529" x2="2221.7529" y1="1595.5" y2="1595.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="2046.7529" y="1609.7104">YELLOW</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="38" x="2046.7529" y="1622.5151">GREEN</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="42" x="2046.7529" y="1635.3198">PURPLE</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="29" x="2046.7529" y="1648.1245">BLUE</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2041.7529" x2="2221.7529" y1="1654.7188" y2="1654.7188"/><!--MD5=[1ce0a7e1392d5a444359c2d45841708d]
+class Market--><rect codeLine="143" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="137.6328" id="Market" style="stroke:#A80036;stroke-width:1.5;" width="268" x="923.7529" y="555.5"/><ellipse cx="1032.0029" cy="571.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1034.9717,577.1406 Q1034.3935,577.4375 1033.7529,577.5781 Q1033.1123,577.7344 1032.4092,577.7344 Q1029.9092,577.7344 1028.581,576.0938 Q1027.2685,574.4375 1027.2685,571.3125 Q1027.2685,568.1875 1028.581,566.5313 Q1029.9092,564.875 1032.4092,564.875 Q1033.1123,564.875 1033.7529,565.0313 Q1034.4092,565.1875 1034.9717,565.4844 L1034.9717,568.2031 Q1034.3467,567.625 1033.7529,567.3594 Q1033.1592,567.0781 1032.5342,567.0781 Q1031.1904,567.0781 1030.5029,568.1563 Q1029.8154,569.2188 1029.8154,571.3125 Q1029.8154,573.4063 1030.5029,574.4844 Q1031.1904,575.5469 1032.5342,575.5469 Q1033.1592,575.5469 1033.7529,575.2813 Q1034.3467,575 1034.9717,574.4219 L1034.9717,577.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="43" x="1052.5029" y="575.6543">Market</text><line style="stroke:#A80036;stroke-width:1.5;" x1="924.7529" x2="1190.7529" y1="587.5" y2="587.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="931.7529" y="595.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="152" x="943.7529" y="601.7104">Resource[][] market_board</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="931.7529" y="608.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="126" x="943.7529" y="614.5151">Resource free_marble</text><line style="stroke:#A80036;stroke-width:1.5;" x1="924.7529" x2="1190.7529" y1="621.1094" y2="621.1094"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="931.7529" y="629.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="132" x="943.7529" y="635.3198">void randomizeMarket()</text><ellipse cx="934.7529" cy="644.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="131" x="943.7529" y="648.1245">void shiftRow(int index)</text><ellipse cx="934.7529" cy="657.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="151" x="943.7529" y="660.9292">void shiftColumn(int index)</text><ellipse cx="934.7529" cy="670.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="222" x="943.7529" y="673.7339">ArrayList&lt;Resource&gt; getRow(int index)</text><ellipse cx="934.7529" cy="683.3281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="242" x="943.7529" y="686.5386">ArrayList&lt;Resource&gt; getColumn(int index)</text><!--MD5=[289737541fe3abd9a5097908fbe4ff1f]
+class VaticanReports--><rect codeLine="154" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="86.4141" id="VaticanReports" style="stroke:#A80036;stroke-width:1.5;" width="128" x="3909.7529" y="1366"/><ellipse cx="3924.7529" cy="1382" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3928.8623,1388 L3921.1435,1388 L3921.1435,1375.6094 L3928.8623,1375.6094 L3928.8623,1377.7656 L3923.5967,1377.7656 L3923.5967,1380.4375 L3928.3623,1380.4375 L3928.3623,1382.5938 L3923.5967,1382.5938 L3923.5967,1385.8438 L3928.8623,1385.8438 L3928.8623,1388 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="3938.7529" y="1386.1543">VaticanReports</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3910.7529" x2="4036.7529" y1="1398" y2="1398"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="3915.7529" y="1412.2104">REPORT1</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="3915.7529" y="1425.0151">REPORT2</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="51" x="3915.7529" y="1437.8198">REPORT3</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3910.7529" x2="4036.7529" y1="1444.4141" y2="1444.4141"/><!--MD5=[fea3dc74c7473bae0133d22265a91e2f]
+class Cell--><rect codeLine="160" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="112.0234" id="Cell" style="stroke:#A80036;stroke-width:1.5;" width="150" x="3797.7529" y="1130"/><ellipse cx="3857.5029" cy="1146" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3860.4717,1151.6406 Q3859.8935,1151.9375 3859.2529,1152.0781 Q3858.6123,1152.2344 3857.9092,1152.2344 Q3855.4092,1152.2344 3854.081,1150.5938 Q3852.7685,1148.9375 3852.7685,1145.8125 Q3852.7685,1142.6875 3854.081,1141.0313 Q3855.4092,1139.375 3857.9092,1139.375 Q3858.6123,1139.375 3859.2529,1139.5313 Q3859.9092,1139.6875 3860.4717,1139.9844 L3860.4717,1142.7031 Q3859.8467,1142.125 3859.2529,1141.8594 Q3858.6592,1141.5781 3858.0342,1141.5781 Q3856.6904,1141.5781 3856.0029,1142.6563 Q3855.3154,1143.7188 3855.3154,1145.8125 Q3855.3154,1147.9063 3856.0029,1148.9844 Q3856.6904,1150.0469 3858.0342,1150.0469 Q3858.6592,1150.0469 3859.2529,1149.7813 Q3859.8467,1149.5 3860.4717,1148.9219 L3860.4717,1151.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="22" x="3878.0029" y="1150.1543">Cell</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3798.7529" x2="3946.7529" y1="1162" y2="1162"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3805.7529" y="1170"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="3817.7529" y="1176.2104">int position</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3805.7529" y="1182.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="96" x="3817.7529" y="1189.0151">int victory_points</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3805.7529" y="1195.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="3817.7529" y="1201.8198">VaticanReports report</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3805.7529" y="1208.4141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="3817.7529" y="1214.6245">boolean pope_space</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3805.7529" y="1221.2188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="111" x="3817.7529" y="1227.4292">boolean is_last_cell</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3798.7529" x2="3946.7529" y1="1234.0234" y2="1234.0234"/><!--MD5=[18e4d9ca2a6cdced7b66e5fef94ef6f6]
+class Tile--><rect codeLine="168" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="99.2188" id="Tile" style="stroke:#A80036;stroke-width:1.5;" width="183" x="3983.2529" y="1136.5"/><ellipse cx="4060.0029" cy="1152.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M4062.9717,1158.1406 Q4062.3935,1158.4375 4061.7529,1158.5781 Q4061.1123,1158.7344 4060.4092,1158.7344 Q4057.9092,1158.7344 4056.581,1157.0938 Q4055.2685,1155.4375 4055.2685,1152.3125 Q4055.2685,1149.1875 4056.581,1147.5313 Q4057.9092,1145.875 4060.4092,1145.875 Q4061.1123,1145.875 4061.7529,1146.0313 Q4062.4092,1146.1875 4062.9717,1146.4844 L4062.9717,1149.2031 Q4062.3467,1148.625 4061.7529,1148.3594 Q4061.1592,1148.0781 4060.5342,1148.0781 Q4059.1904,1148.0781 4058.5029,1149.1563 Q4057.8154,1150.2188 4057.8154,1152.3125 Q4057.8154,1154.4063 4058.5029,1155.4844 Q4059.1904,1156.5469 4060.5342,1156.5469 Q4061.1592,1156.5469 4061.7529,1156.2813 Q4062.3467,1156 4062.9717,1155.4219 L4062.9717,1158.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="21" x="4080.5029" y="1156.6543">Tile</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3984.2529" x2="4165.2529" y1="1168.5" y2="1168.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3991.2529" y="1176.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="124" x="4003.2529" y="1182.7104">VaticanReports report</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3991.2529" y="1189.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="96" x="4003.2529" y="1195.5151">int victory_points</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3991.2529" y="1202.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="98" x="4003.2529" y="1208.3198">boolean is_active</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3984.2529" x2="4165.2529" y1="1214.9141" y2="1214.9141"/><ellipse cx="3994.2529" cy="1225.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="157" x="4003.2529" y="1229.1245">void activateVaticanReport()</text><!--MD5=[589633f992c8f9dd1a723b51b204a62e]
+class FaithTrack--><rect codeLine="176" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="163.2422" id="FaithTrack" style="stroke:#A80036;stroke-width:1.5;" width="352" x="3797.7529" y="843"/><ellipse cx="3937.0029" cy="859" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3939.9717,864.6406 Q3939.3935,864.9375 3938.7529,865.0781 Q3938.1123,865.2344 3937.4092,865.2344 Q3934.9092,865.2344 3933.581,863.5938 Q3932.2685,861.9375 3932.2685,858.8125 Q3932.2685,855.6875 3933.581,854.0313 Q3934.9092,852.375 3937.4092,852.375 Q3938.1123,852.375 3938.7529,852.5313 Q3939.4092,852.6875 3939.9717,852.9844 L3939.9717,855.7031 Q3939.3467,855.125 3938.7529,854.8594 Q3938.1592,854.5781 3937.5342,854.5781 Q3936.1904,854.5781 3935.5029,855.6563 Q3934.8154,856.7188 3934.8154,858.8125 Q3934.8154,860.9063 3935.5029,861.9844 Q3936.1904,863.0469 3937.5342,863.0469 Q3938.1592,863.0469 3938.7529,862.7813 Q3939.3467,862.5 3939.9717,861.9219 L3939.9717,864.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="65" x="3957.5029" y="863.1543">FaithTrack</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3798.7529" x2="4148.7529" y1="875" y2="875"/><polygon fill="none" points="3808.7529,881,3812.7529,885,3808.7529,889,3804.7529,885" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="3817.7529" y="889.2104">Cell[] track</text><polygon fill="none" points="3808.7529,893.8047,3812.7529,897.8047,3808.7529,901.8047,3804.7529,897.8047" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="143" x="3817.7529" y="902.0151">Tile[] vatican_report_tiles</text><polygon fill="none" points="3808.7529,906.6094,3812.7529,910.6094,3808.7529,914.6094,3804.7529,910.6094" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="3817.7529" y="914.8198">Cell faith_marker</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3798.7529" x2="4148.7529" y1="921.4141" y2="921.4141"/><ellipse cx="3808.7529" cy="932.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="229" x="3817.7529" y="935.6245">void moveForward(int number_of_times)</text><ellipse cx="3808.7529" cy="945.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="300" x="3817.7529" y="948.4292">void activateVaticanReport(VaticanReports vr_param)</text><ellipse cx="3808.7529" cy="958.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="326" x="3817.7529" y="961.2339">void removeVaticanReport(VaticanReports vatican_report)</text><ellipse cx="3808.7529" cy="970.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="214" x="3817.7529" y="974.0386">boolean checkIfTileIsActive(int index){</text><ellipse cx="3808.7529" cy="983.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="165" x="3817.7529" y="986.8433">void getMarkerVictoryPoints()</text><ellipse cx="3808.7529" cy="996.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="173" x="3817.7529" y="999.6479">void getVaticanReportsPoints()</text><!--MD5=[7d4e3c1fa1119f9dcbacac5372703fc4]
+class SoloFaithTrack--><rect codeLine="189" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="SoloFaithTrack" style="stroke:#A80036;stroke-width:1.5;" width="324" x="3194.7529" y="1149"/><ellipse cx="3306.5029" cy="1165" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3309.4717,1170.6406 Q3308.8935,1170.9375 3308.2529,1171.0781 Q3307.6123,1171.2344 3306.9092,1171.2344 Q3304.4092,1171.2344 3303.081,1169.5938 Q3301.7685,1167.9375 3301.7685,1164.8125 Q3301.7685,1161.6875 3303.081,1160.0313 Q3304.4092,1158.375 3306.9092,1158.375 Q3307.6123,1158.375 3308.2529,1158.5313 Q3308.9092,1158.6875 3309.4717,1158.9844 L3309.4717,1161.7031 Q3308.8467,1161.125 3308.2529,1160.8594 Q3307.6592,1160.5781 3307.0342,1160.5781 Q3305.6904,1160.5781 3305.0029,1161.6563 Q3304.3154,1162.7188 3304.3154,1164.8125 Q3304.3154,1166.9063 3305.0029,1167.9844 Q3305.6904,1169.0469 3307.0342,1169.0469 Q3307.6592,1169.0469 3308.2529,1168.7813 Q3308.8467,1168.5 3309.4717,1167.9219 L3309.4717,1170.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="92" x="3327.0029" y="1169.1543">SoloFaithTrack</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3195.7529" x2="3517.7529" y1="1181" y2="1181"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3202.7529" y="1189"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="3214.7529" y="1195.2104">Cell black_marker</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3195.7529" x2="3517.7529" y1="1201.8047" y2="1201.8047"/><ellipse cx="3205.7529" cy="1212.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="298" x="3214.7529" y="1216.0151">void moveForwardBlackMarker(int number_of_times)</text><!--MD5=[c5149b4909ffd2688ff51a939867f774]
+class Warehouse--><rect codeLine="195" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="252.875" id="Warehouse" style="stroke:#A80036;stroke-width:1.5;" width="341" x="3010.2529" y="798"/><ellipse cx="3141.0029" cy="814" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3143.9717,819.6406 Q3143.3935,819.9375 3142.7529,820.0781 Q3142.1123,820.2344 3141.4092,820.2344 Q3138.9092,820.2344 3137.581,818.5938 Q3136.2685,816.9375 3136.2685,813.8125 Q3136.2685,810.6875 3137.581,809.0313 Q3138.9092,807.375 3141.4092,807.375 Q3142.1123,807.375 3142.7529,807.5313 Q3143.4092,807.6875 3143.9717,807.9844 L3143.9717,810.7031 Q3143.3467,810.125 3142.7529,809.8594 Q3142.1592,809.5781 3141.5342,809.5781 Q3140.1904,809.5781 3139.5029,810.6563 Q3138.8154,811.7188 3138.8154,813.8125 Q3138.8154,815.9063 3139.5029,816.9844 Q3140.1904,818.0469 3141.5342,818.0469 Q3142.1592,818.0469 3142.7529,817.7813 Q3143.3467,817.5 3143.9717,816.9219 L3143.9717,819.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="3161.5029" y="818.1543">Warehouse</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3011.2529" x2="3350.2529" y1="830" y2="830"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3018.2529" y="838"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="200" x="3030.2529" y="844.2104">ArrayList&lt;Resource&gt; top_resource</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3018.2529" y="850.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="227" x="3030.2529" y="857.0151">ArrayList&lt;Resource&gt; middle_resources</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3018.2529" y="863.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="229" x="3030.2529" y="869.8198">ArrayList&lt;Resource&gt; bottom_resources</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3011.2529" x2="3350.2529" y1="876.4141" y2="876.4141"/><ellipse cx="3021.2529" cy="887.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="145" x="3030.2529" y="890.6245">void swapRows(int i, int j)</text><ellipse cx="3021.2529" cy="900.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="295" x="3030.2529" y="903.4292">boolean canBeStoredTop(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="913.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="310" x="3030.2529" y="916.2339">boolean canBeStoredMiddle(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="925.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="315" x="3030.2529" y="929.0386">boolean canBeStoredBottom(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="938.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="230" x="3030.2529" y="941.8433">void storeTop(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="951.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="245" x="3030.2529" y="954.6479">void storeMiddle(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="964.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="250" x="3030.2529" y="967.4526">void storeBottom(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="977.0469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="289" x="3030.2529" y="980.2573">boolean isContainedTop(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="989.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="304" x="3030.2529" y="993.062">boolean isContainedMiddle(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="1002.6563" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="309" x="3030.2529" y="1005.8667">boolean isContainedBottom(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="1015.4609" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="247" x="3030.2529" y="1018.6714">void getFromTop(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="1028.2656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="262" x="3030.2529" y="1031.4761">void getFromMiddle(ArrayList&lt;Resource&gt; res)</text><ellipse cx="3021.2529" cy="1041.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="267" x="3030.2529" y="1044.2808">void getFromBottom(ArrayList&lt;Resource&gt; res)</text><!--MD5=[7c6527b956ac676bde5a81368d62505b]
+class StrongBox--><rect codeLine="215" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="137.6328" id="StrongBox" style="stroke:#A80036;stroke-width:1.5;" width="376" x="3386.7529" y="855.5"/><ellipse cx="3538.5029" cy="871.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3541.4717,877.1406 Q3540.8935,877.4375 3540.2529,877.5781 Q3539.6123,877.7344 3538.9092,877.7344 Q3536.4092,877.7344 3535.081,876.0938 Q3533.7685,874.4375 3533.7685,871.3125 Q3533.7685,868.1875 3535.081,866.5313 Q3536.4092,864.875 3538.9092,864.875 Q3539.6123,864.875 3540.2529,865.0313 Q3540.9092,865.1875 3541.4717,865.4844 L3541.4717,868.2031 Q3540.8467,867.625 3540.2529,867.3594 Q3539.6592,867.0781 3539.0342,867.0781 Q3537.6904,867.0781 3537.0029,868.1563 Q3536.3154,869.2188 3536.3154,871.3125 Q3536.3154,873.4063 3537.0029,874.4844 Q3537.6904,875.5469 3539.0342,875.5469 Q3539.6592,875.5469 3540.2529,875.2813 Q3540.8467,875 3541.4717,874.4219 L3541.4717,877.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="64" x="3559.0029" y="875.6543">StrongBox</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3387.7529" x2="3761.7529" y1="887.5" y2="887.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3394.7529" y="895.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="219" x="3406.7529" y="901.7104">HashMap&lt;Resource, Integer&gt; storage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3387.7529" x2="3761.7529" y1="908.3047" y2="908.3047"/><ellipse cx="3397.7529" cy="919.3047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="120" x="3406.7529" y="922.5151">int get(Resource res)</text><ellipse cx="3397.7529" cy="932.1094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="340" x="3406.7529" y="935.3198">void insertResources(ArrayList&lt;Resource&gt; new_resources)</text><ellipse cx="3397.7529" cy="944.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="323" x="3406.7529" y="948.1245">void removeResources(ArrayList&lt;Resource&gt; to_remove)</text><ellipse cx="3397.7529" cy="957.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="350" x="3406.7529" y="960.9292">boolean areContainedInStrongbox(ArrayList&lt;Resource&gt; cost)</text><ellipse cx="3397.7529" cy="970.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="3406.7529" y="973.7339">void clear()</text><ellipse cx="3397.7529" cy="983.3281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="102" x="3406.7529" y="986.5386">boolean isEmpty()</text><!--MD5=[6df8b0780d95e948c3410ff170300251]
+class DevelopmentCardsSlots--><rect codeLine="226" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="112.0234" id="DevelopmentCardsSlots" style="stroke:#A80036;stroke-width:1.5;" width="310" x="1944.7529" y="868.5"/><ellipse cx="2021.0029" cy="884.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2023.9717,890.1406 Q2023.3935,890.4375 2022.7529,890.5781 Q2022.1123,890.7344 2021.4092,890.7344 Q2018.9092,890.7344 2017.581,889.0938 Q2016.2685,887.4375 2016.2685,884.3125 Q2016.2685,881.1875 2017.581,879.5313 Q2018.9092,877.875 2021.4092,877.875 Q2022.1123,877.875 2022.7529,878.0313 Q2023.4092,878.1875 2023.9717,878.4844 L2023.9717,881.2031 Q2023.3467,880.625 2022.7529,880.3594 Q2022.1592,880.0781 2021.5342,880.0781 Q2020.1904,880.0781 2019.5029,881.1563 Q2018.8154,882.2188 2018.8154,884.3125 Q2018.8154,886.4063 2019.5029,887.4844 Q2020.1904,888.5469 2021.5342,888.5469 Q2022.1592,888.5469 2022.7529,888.2813 Q2023.3467,888 2023.9717,887.4219 L2023.9717,890.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="149" x="2041.5029" y="888.6543">DevelopmentCardsSlots</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1945.7529" x2="2253.7529" y1="900.5" y2="900.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1952.7529" y="908.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="182" x="1964.7529" y="914.7104">Table&lt;DevelopmentCard&gt; slots</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1945.7529" x2="2253.7529" y1="921.3047" y2="921.3047"/><ellipse cx="1955.7529" cy="932.3047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="284" x="1964.7529" y="935.5151">boolean fitsInSlot(DevelopmentCard card, int pos)</text><ellipse cx="1955.7529" cy="945.1094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="283" x="1964.7529" y="948.3198">void buyCard(DevelopmentCard card, int position)</text><ellipse cx="1955.7529" cy="957.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="194" x="1964.7529" y="961.1245">DevelopmentCard[] getTopCards()</text><ellipse cx="1955.7529" cy="970.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="205" x="1964.7529" y="973.9292">DevelopmentCard[] getCard(int pos)</text><!--MD5=[2cb47ba637a0d19583e6199456f6ad0b]
+class Player--><rect codeLine="235" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="227.2656" id="Player" style="stroke:#A80036;stroke-width:1.5;" width="355" x="2749.2529" y="511"/><ellipse cx="2903.5029" cy="527" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2906.4717,532.6406 Q2905.8935,532.9375 2905.2529,533.0781 Q2904.6123,533.2344 2903.9092,533.2344 Q2901.4092,533.2344 2900.081,531.5938 Q2898.7685,529.9375 2898.7685,526.8125 Q2898.7685,523.6875 2900.081,522.0313 Q2901.4092,520.375 2903.9092,520.375 Q2904.6123,520.375 2905.2529,520.5313 Q2905.9092,520.6875 2906.4717,520.9844 L2906.4717,523.7031 Q2905.8467,523.125 2905.2529,522.8594 Q2904.6592,522.5781 2904.0342,522.5781 Q2902.6904,522.5781 2902.0029,523.6563 Q2901.3154,524.7188 2901.3154,526.8125 Q2901.3154,528.9063 2902.0029,529.9844 Q2902.6904,531.0469 2904.0342,531.0469 Q2904.6592,531.0469 2905.2529,530.7813 Q2905.8467,530.5 2906.4717,529.9219 L2906.4717,532.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="38" x="2924.0029" y="531.1543">Player</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2750.2529" x2="3103.2529" y1="543" y2="543"/><polygon fill="none" points="2760.2529,549,2764.2529,553,2760.2529,557,2756.2529,553" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="2769.2529" y="557.2104">String nickname</text><polygon fill="none" points="2760.2529,561.8047,2764.2529,565.8047,2760.2529,569.8047,2756.2529,565.8047" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="2769.2529" y="570.0151">FaithTrack track</text><polygon fill="none" points="2760.2529,574.6094,2764.2529,578.6094,2760.2529,582.6094,2756.2529,578.6094" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="2769.2529" y="582.8198">Warehouse warehouse</text><polygon fill="none" points="2760.2529,587.4141,2764.2529,591.4141,2760.2529,595.4141,2756.2529,591.4141" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="120" x="2769.2529" y="595.6245">StrongBox strongbox</text><polygon fill="none" points="2760.2529,600.2188,2764.2529,604.2188,2760.2529,608.2188,2756.2529,604.2188" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="279" x="2769.2529" y="608.4292">DevelopmentCardsSlots development_card_slots</text><polygon fill="none" points="2760.2529,613.0234,2764.2529,617.0234,2760.2529,621.0234,2756.2529,617.0234" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="244" x="2769.2529" y="621.2339">ArrayList&lt;LeaderCard&gt; leader_cards_deck</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2750.2529" x2="3103.2529" y1="627.8281" y2="627.8281"/><ellipse cx="2760.2529" cy="638.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="2769.2529" y="642.0386">void notifyPlayer()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2757.2529" y="648.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="2769.2529" y="654.8433">SimplePlayer simplify()</text><ellipse cx="2760.2529" cy="664.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="240" x="2769.2529" y="667.6479">void activateLeaderCard(LeaderCard card)</text><ellipse cx="2760.2529" cy="677.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="217" x="2769.2529" y="680.4526">void discardLeader(int leader_card_id)</text><ellipse cx="2760.2529" cy="690.0469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="238" x="2769.2529" y="693.2573">void storeExtra(ArrayList&lt;Resource&gt; res)</text><ellipse cx="2760.2529" cy="702.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="2769.2529" y="706.062">void getFromExtra(ArrayList&lt;Resource&gt; res)</text><ellipse cx="2760.2529" cy="715.6563" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="268" x="2769.2529" y="718.8667">HashMap&lt;Resource, Integer&gt; totalResources()</text><ellipse cx="2760.2529" cy="728.4609" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="329" x="2769.2529" y="731.6714">boolean hasEnoughResources(ArrayList&lt;Resource&gt; cost)</text><!--MD5=[b6dcce5e5ef3c84b0b048d11301373dd]
+class Game--><rect codeLine="253" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="188.8516" id="Game" style="stroke:#A80036;stroke-width:1.5;" width="350" x="1578.7529" y="262"/><ellipse cx="1731.5029" cy="278" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1734.4717,283.6406 Q1733.8935,283.9375 1733.2529,284.0781 Q1732.6123,284.2344 1731.9092,284.2344 Q1729.4092,284.2344 1728.081,282.5938 Q1726.7685,280.9375 1726.7685,277.8125 Q1726.7685,274.6875 1728.081,273.0313 Q1729.4092,271.375 1731.9092,271.375 Q1732.6123,271.375 1733.2529,271.5313 Q1733.9092,271.6875 1734.4717,271.9844 L1734.4717,274.7031 Q1733.8467,274.125 1733.2529,273.8594 Q1732.6592,273.5781 1732.0342,273.5781 Q1730.6904,273.5781 1730.0029,274.6563 Q1729.3154,275.7188 1729.3154,277.8125 Q1729.3154,279.9063 1730.0029,280.9844 Q1730.6904,282.0469 1732.0342,282.0469 Q1732.6592,282.0469 1733.2529,281.7813 Q1733.8467,281.5 1734.4717,280.9219 L1734.4717,283.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="36" x="1752.0029" y="282.1543">Game</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1579.7529" x2="1927.7529" y1="294" y2="294"/><polygon fill="none" points="1589.7529,300,1593.7529,304,1589.7529,308,1585.7529,304" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="149" x="1598.7529" y="308.2104">ArrayList&lt;Player&gt; players</text><polygon fill="none" points="1589.7529,312.8047,1593.7529,316.8047,1589.7529,320.8047,1585.7529,316.8047" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="1598.7529" y="321.0151">Turn turn</text><polygon fill="none" points="1589.7529,325.6094,1593.7529,329.6094,1589.7529,333.6094,1585.7529,329.6094" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="1598.7529" y="333.8198">Market market</text><polygon fill="none" points="1589.7529,338.4141,1593.7529,342.4141,1589.7529,346.4141,1585.7529,342.4141" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="324" x="1598.7529" y="346.6245">DevelopmentCardsOnTable development_cards_on_table</text><polygon fill="none" points="1589.7529,351.2188,1593.7529,355.2188,1589.7529,359.2188,1585.7529,355.2188" style="stroke:#B38D22;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="235" x="1598.7529" y="359.4292">HashMap&lt;Player, Integer&gt; victory_points</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1579.7529" x2="1927.7529" y1="366.0234" y2="366.0234"/><ellipse cx="1589.7529" cy="377.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="290" x="1598.7529" y="380.2339">void handleError(String error_string, Player player)</text><ellipse cx="1589.7529" cy="389.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="1598.7529" y="393.0386">void notifyGame()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1586.7529" y="399.6328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="129" x="1598.7529" y="405.8433">SimpleGame simplify()</text><ellipse cx="1589.7529" cy="415.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="82" x="1598.7529" y="418.6479">void endTurn()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1586.7529" y="425.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="139" x="1598.7529" y="431.4526">void countVictoryPoints()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1586.7529" y="438.0469"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="94" x="1598.7529" y="444.2573">void playerSort()</text><!--MD5=[8466b07ac8dc51921afb8a3a472a6d1c]
+class SoloActionToken--><rect codeLine="268" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="60.8047" id="SoloActionToken" style="stroke:#A80036;stroke-width:1.5;" width="288" x="2470.7529" y="894"/><ellipse cx="2558.5029" cy="910" fill="#B4A7E5" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2554.4248,905.7656 L2554.4248,903.6094 L2561.8154,903.6094 L2561.8154,905.7656 L2559.3467,905.7656 L2559.3467,913.8438 L2561.8154,913.8438 L2561.8154,916 L2554.4248,916 L2554.4248,913.8438 L2556.8935,913.8438 L2556.8935,905.7656 L2554.4248,905.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="104" x="2579.0029" y="914.1543">SoloActionToken</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2471.7529" x2="2757.7529" y1="926" y2="926"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2471.7529" x2="2757.7529" y1="934" y2="934"/><ellipse cx="2481.7529" cy="945" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="262" x="2490.7529" y="948.2104">void useToken(SoloGameController controller)</text><!--MD5=[82c66efe05fa48544ee295a1e8e64bcc]
+class MoveBlackCrossTwoSpaces--><rect codeLine="272" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="60.8047" id="MoveBlackCrossTwoSpaces" style="stroke:#A80036;stroke-width:1.5;" width="202" x="2879.7529" y="1155.5"/><ellipse cx="2894.7529" cy="1171.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2897.7217,1177.1406 Q2897.1435,1177.4375 2896.5029,1177.5781 Q2895.8623,1177.7344 2895.1592,1177.7344 Q2892.6592,1177.7344 2891.331,1176.0938 Q2890.0185,1174.4375 2890.0185,1171.3125 Q2890.0185,1168.1875 2891.331,1166.5313 Q2892.6592,1164.875 2895.1592,1164.875 Q2895.8623,1164.875 2896.5029,1165.0313 Q2897.1592,1165.1875 2897.7217,1165.4844 L2897.7217,1168.2031 Q2897.0967,1167.625 2896.5029,1167.3594 Q2895.9092,1167.0781 2895.2842,1167.0781 Q2893.9404,1167.0781 2893.2529,1168.1563 Q2892.5654,1169.2188 2892.5654,1171.3125 Q2892.5654,1173.4063 2893.2529,1174.4844 Q2893.9404,1175.5469 2895.2842,1175.5469 Q2895.9092,1175.5469 2896.5029,1175.2813 Q2897.0967,1175 2897.7217,1174.4219 L2897.7217,1177.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="170" x="2908.7529" y="1175.6543">MoveBlackCrossTwoSpaces</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2880.7529" x2="3080.7529" y1="1187.5" y2="1187.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2880.7529" x2="3080.7529" y1="1195.5" y2="1195.5"/><ellipse cx="2890.7529" cy="1206.5" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="2899.7529" y="1209.7104">void useToken()</text><!--MD5=[c5595a0736f95ce4a8c7213755ee3f8b]
+class MoveBlackCrossOneSpace--><rect codeLine="276" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="60.8047" id="MoveBlackCrossOneSpace" style="stroke:#A80036;stroke-width:1.5;" width="196" x="2648.7529" y="1155.5"/><ellipse cx="2663.7529" cy="1171.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2666.7217,1177.1406 Q2666.1435,1177.4375 2665.5029,1177.5781 Q2664.8623,1177.7344 2664.1592,1177.7344 Q2661.6592,1177.7344 2660.331,1176.0938 Q2659.0185,1174.4375 2659.0185,1171.3125 Q2659.0185,1168.1875 2660.331,1166.5313 Q2661.6592,1164.875 2664.1592,1164.875 Q2664.8623,1164.875 2665.5029,1165.0313 Q2666.1592,1165.1875 2666.7217,1165.4844 L2666.7217,1168.2031 Q2666.0967,1167.625 2665.5029,1167.3594 Q2664.9092,1167.0781 2664.2842,1167.0781 Q2662.9404,1167.0781 2662.2529,1168.1563 Q2661.5654,1169.2188 2661.5654,1171.3125 Q2661.5654,1173.4063 2662.2529,1174.4844 Q2662.9404,1175.5469 2664.2842,1175.5469 Q2664.9092,1175.5469 2665.5029,1175.2813 Q2666.0967,1175 2666.7217,1174.4219 L2666.7217,1177.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="164" x="2677.7529" y="1175.6543">MoveBlackCrossOneSpace</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2649.7529" x2="2843.7529" y1="1187.5" y2="1187.5"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2649.7529" x2="2843.7529" y1="1195.5" y2="1195.5"/><ellipse cx="2659.7529" cy="1206.5" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="2668.7529" y="1209.7104">void useToken()</text><!--MD5=[571dd586d793dbc272769d90cd9da297]
+class DiscardDevelopmentCards--><rect codeLine="280" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="DiscardDevelopmentCards" style="stroke:#A80036;stroke-width:1.5;" width="197" x="2416.2529" y="1149"/><ellipse cx="2431.2529" cy="1165" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2434.2217,1170.6406 Q2433.6435,1170.9375 2433.0029,1171.0781 Q2432.3623,1171.2344 2431.6592,1171.2344 Q2429.1592,1171.2344 2427.831,1169.5938 Q2426.5185,1167.9375 2426.5185,1164.8125 Q2426.5185,1161.6875 2427.831,1160.0313 Q2429.1592,1158.375 2431.6592,1158.375 Q2432.3623,1158.375 2433.0029,1158.5313 Q2433.6592,1158.6875 2434.2217,1158.9844 L2434.2217,1161.7031 Q2433.5967,1161.125 2433.0029,1160.8594 Q2432.4092,1160.5781 2431.7842,1160.5781 Q2430.4404,1160.5781 2429.7529,1161.6563 Q2429.0654,1162.7188 2429.0654,1164.8125 Q2429.0654,1166.9063 2429.7529,1167.9844 Q2430.4404,1169.0469 2431.7842,1169.0469 Q2432.4092,1169.0469 2433.0029,1168.7813 Q2433.5967,1168.5 2434.2217,1167.9219 L2434.2217,1170.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="165" x="2445.2529" y="1169.1543">DiscardDevelopmentCards</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2417.2529" x2="2612.2529" y1="1181" y2="1181"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2424.2529" y="1189"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="170" x="2436.2529" y="1195.2104">DevelopmentCardsColor color</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2417.2529" x2="2612.2529" y1="1201.8047" y2="1201.8047"/><ellipse cx="2427.2529" cy="1212.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="2436.2529" y="1216.0151">void useToken()</text><!--MD5=[552356b84835b7215b1fe0afaa5d4440]
+class SoloGame--><rect codeLine="286" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="150.4375" id="SoloGame" style="stroke:#A80036;stroke-width:1.5;" width="284" x="2429.7529" y="549.5"/><ellipse cx="2536.0029" cy="565.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2538.9717,571.1406 Q2538.3935,571.4375 2537.7529,571.5781 Q2537.1123,571.7344 2536.4092,571.7344 Q2533.9092,571.7344 2532.581,570.0938 Q2531.2685,568.4375 2531.2685,565.3125 Q2531.2685,562.1875 2532.581,560.5313 Q2533.9092,558.875 2536.4092,558.875 Q2537.1123,558.875 2537.7529,559.0313 Q2538.4092,559.1875 2538.9717,559.4844 L2538.9717,562.2031 Q2538.3467,561.625 2537.7529,561.3594 Q2537.1592,561.0781 2536.5342,561.0781 Q2535.1904,561.0781 2534.5029,562.1563 Q2533.8154,563.2188 2533.8154,565.3125 Q2533.8154,567.4063 2534.5029,568.4844 Q2535.1904,569.5469 2536.5342,569.5469 Q2537.1592,569.5469 2537.7529,569.2813 Q2538.3467,569 2538.9717,568.4219 L2538.9717,571.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="63" x="2556.5029" y="569.6543">SoloGame</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2430.7529" x2="2712.7529" y1="581.5" y2="581.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2437.7529" y="589.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="213" x="2449.7529" y="595.7104">SoloActionToken[] solo_action_tokens</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2437.7529" y="602.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="258" x="2449.7529" y="608.5151">ArrayDeque&lt;SoloActionToken&gt; active_tokens</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2437.7529" y="615.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="155" x="2449.7529" y="621.3198">SoloActionToken last_token</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2437.7529" y="627.9141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="99" x="2449.7529" y="634.1245">SoloPlayer player</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2430.7529" x2="2712.7529" y1="640.7188" y2="640.7188"/><ellipse cx="2440.7529" cy="651.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="2449.7529" y="654.9292">void notifyGame()</text><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2437.7529" y="661.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="2449.7529" y="667.7339">SimpleSoloGame simplify()</text><ellipse cx="2440.7529" cy="677.3281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="174" x="2449.7529" y="680.5386">void shuffleSoloActionTokens()</text><ellipse cx="2440.7529" cy="690.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="90" x="2449.7529" y="693.3433">void lostGame()</text><!--MD5=[07d5b063c8ef1aac213af3d5e582cb76]
+class SoloPlayer--><rect codeLine="298" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="60.8047" id="SoloPlayer" style="stroke:#A80036;stroke-width:1.5;" width="181" x="2794.2529" y="894"/><ellipse cx="2848.0029" cy="910" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2850.9717,915.6406 Q2850.3935,915.9375 2849.7529,916.0781 Q2849.1123,916.2344 2848.4092,916.2344 Q2845.9092,916.2344 2844.581,914.5938 Q2843.2685,912.9375 2843.2685,909.8125 Q2843.2685,906.6875 2844.581,905.0313 Q2845.9092,903.375 2848.4092,903.375 Q2849.1123,903.375 2849.7529,903.5313 Q2850.4092,903.6875 2850.9717,903.9844 L2850.9717,906.7031 Q2850.3467,906.125 2849.7529,905.8594 Q2849.1592,905.5781 2848.5342,905.5781 Q2847.1904,905.5781 2846.5029,906.6563 Q2845.8154,907.7188 2845.8154,909.8125 Q2845.8154,911.9063 2846.5029,912.9844 Q2847.1904,914.0469 2848.5342,914.0469 Q2849.1592,914.0469 2849.7529,913.7813 Q2850.3467,913.5 2850.9717,912.9219 L2850.9717,915.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="65" x="2868.5029" y="914.1543">SoloPlayer</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2795.2529" x2="2974.2529" y1="926" y2="926"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2795.2529" x2="2974.2529" y1="934" y2="934"/><ellipse cx="2805.2529" cy="945" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="155" x="2814.2529" y="948.2104">SimpleSoloPlayer simplify()</text><!--MD5=[dd91eae41778c45e12552e5329e240e8]
+class Turn--><rect codeLine="302" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="150.4375" id="Turn" style="stroke:#A80036;stroke-width:1.5;" width="268" x="620.7529" y="549.5"/><ellipse cx="736.5029" cy="565.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M739.4717,571.1406 Q738.8935,571.4375 738.2529,571.5781 Q737.6123,571.7344 736.9092,571.7344 Q734.4092,571.7344 733.081,570.0938 Q731.7685,568.4375 731.7685,565.3125 Q731.7685,562.1875 733.081,560.5313 Q734.4092,558.875 736.9092,558.875 Q737.6123,558.875 738.2529,559.0313 Q738.9092,559.1875 739.4717,559.4844 L739.4717,562.2031 Q738.8467,561.625 738.2529,561.3594 Q737.6592,561.0781 737.0342,561.0781 Q735.6904,561.0781 735.0029,562.1563 Q734.3154,563.2188 734.3154,565.3125 Q734.3154,567.4063 735.0029,568.4844 Q735.6904,569.5469 737.0342,569.5469 Q737.6592,569.5469 738.2529,569.2813 Q738.8467,569 739.4717,568.4219 L739.4717,571.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="28" x="757.0029" y="569.6543">Turn</text><line style="stroke:#A80036;stroke-width:1.5;" x1="621.7529" x2="887.7529" y1="581.5" y2="581.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="589.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="182" x="640.7529" y="595.7104">{transient} Player active_player</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="602.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="237" x="640.7529" y="608.5151">ArrayList&lt;Resource&gt; required_resources</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="615.1094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="242" x="640.7529" y="621.3198">ArrayList&lt;Resource&gt; produced_resources</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="627.9141"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="640.7529" y="634.1245">boolean action_done</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="640.7188"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="126" x="640.7529" y="646.9292">boolean must_discard</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="653.5234"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="112" x="640.7529" y="659.7339">boolean final_round</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="666.3281"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="640.7529" y="672.5386">boolean setup_done</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="628.7529" y="679.1328"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="92" x="640.7529" y="685.3433">String nickname</text><line style="stroke:#A80036;stroke-width:1.5;" x1="621.7529" x2="887.7529" y1="691.9375" y2="691.9375"/><!--MD5=[5173d415dd65bd1c2fe56563732198bc]
+class ModelObservable--><rect codeLine="313" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="73.6094" id="ModelObservable" style="stroke:#A80036;stroke-width:1.5;" width="309" x="1599.2529" y="128"/><ellipse cx="1696.0029" cy="144" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1698.9717,149.6406 Q1698.3935,149.9375 1697.7529,150.0781 Q1697.1123,150.2344 1696.4092,150.2344 Q1693.9092,150.2344 1692.581,148.5938 Q1691.2685,146.9375 1691.2685,143.8125 Q1691.2685,140.6875 1692.581,139.0313 Q1693.9092,137.375 1696.4092,137.375 Q1697.1123,137.375 1697.7529,137.5313 Q1698.4092,137.6875 1698.9717,137.9844 L1698.9717,140.7031 Q1698.3467,140.125 1697.7529,139.8594 Q1697.1592,139.5781 1696.5342,139.5781 Q1695.1904,139.5781 1694.5029,140.6563 Q1693.8154,141.7188 1693.8154,143.8125 Q1693.8154,145.9063 1694.5029,146.9844 Q1695.1904,148.0469 1696.5342,148.0469 Q1697.1592,148.0469 1697.7529,147.7813 Q1698.3467,147.5 1698.9717,146.9219 L1698.9717,149.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="1716.5029" y="148.1543">ModelObservable</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1600.2529" x2="1907.2529" y1="160" y2="160"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1600.2529" x2="1907.2529" y1="168" y2="168"/><ellipse cx="1610.2529" cy="179" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="283" x="1619.2529" y="182.2104">void addModelObserver(ModelObserver observer)</text><ellipse cx="1610.2529" cy="191.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="245" x="1619.2529" y="195.0151">void notifyModel(ServerMessage message)</text><!--MD5=[4de66e5d3add5d77b00177f9d55a2a0c]
+class ModelObserver--><rect codeLine="318" fill="#FEFECE" filter="url(#f1139wxbf8t14f)" height="60.8047" id="ModelObserver" style="stroke:#A80036;stroke-width:1.5;" width="279" x="1614.2529" y="7"/><ellipse cx="1704.0029" cy="23" fill="#B4A7E5" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1699.9248,18.7656 L1699.9248,16.6094 L1707.3154,16.6094 L1707.3154,18.7656 L1704.8467,18.7656 L1704.8467,26.8438 L1707.3154,26.8438 L1707.3154,29 L1699.9248,29 L1699.9248,26.8438 L1702.3935,26.8438 L1702.3935,18.7656 L1699.9248,18.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="91" x="1724.5029" y="27.1543">ModelObserver</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1615.2529" x2="1892.2529" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1615.2529" x2="1892.2529" y1="47" y2="47"/><ellipse cx="1625.2529" cy="58" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="253" x="1634.2529" y="61.2104">void updateModel(ServerMessage message)</text><!--MD5=[0ca78ed1de9b75d48e192f8c93c586f3]
+reverse link Card to LeaderCard--><path codeLine="325" d="M1248.27,665.7148 C1231.8513,688.2785 1212.4362,716.0318 1191.7529,738 C1162.2523,769.3331 1146.4119,767.7995 1115.7529,798 C1091.743,821.6508 1067.7986,850.6478 1050.7544,874.9103 " fill="none" id="Card-backto-LeaderCard" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1251.3004,661.5646,1242.7625,666.4742,1248.3518,665.6026,1249.2234,671.192,1251.3004,661.5646" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0ca78ed1de9b75d48e192f8c93c586f3]
+reverse link Card to LeaderCard--><path codeLine="345" d="M1278.9756,665.996 C1266.6902,688.5087 1247.3504,716.123 1226.7529,738 C1197.2523,769.3331 1181.4119,767.7995 1150.7529,798 C1126.743,821.6508 1102.7986,850.6478 1082.2389,874.9103 " fill="none" id="Card-backto-LeaderCard-1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1281.3369,661.5646,1273.5743,667.6261,1278.9855,665.9772,1280.6344,671.3884,1281.3369,661.5646" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e98de1665a7845d049c9f850f09d5593]
+reverse link Card to DevelopmentCard--><path codeLine="326" d="M1353.5735,660.5276 C1403.2086,690.9522 1469.272,738.959 1508.7529,798 C1573.6721,895.0824 1514.5561,954.1037 1579.7529,1051 C1602.4844,1084.7839 1636.4166,1113.8229 1668.296,1136.2179 " fill="none" id="Card-backto-DevelopmentCard" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1349.1255,657.8211,1354.7347,665.9166,1353.3969,660.4202,1358.8933,659.0824,1349.1255,657.8211" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6c8809e2bb92061e4d7b00c8cd5707e4]
+link CardLevel to DevelopmentCardsColor--><path codeLine="327" d="M1851.2132,1471.67 C1866.0361,1480.3821 1881.2054,1489.0595 1895.7529,1497 C1942.8388,1522.7011 1996.4187,1549.2467 2040.6118,1570.4472 " fill="none" id="CardLevel-DevelopmentCardsColor" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d9dff9823df2c02ba16567ef0126fc45]
+link DevelopmentCard to Resource--><path codeLine="328" d="M1841.3516,1220.3627 C1877.421,1233.9043 1919.807,1249.0442 1958.7529,1261 C2063.8611,1293.2667 2131.0886,1234.3372 2198.7529,1321 C2246.8918,1382.6552 2251.4405,1439.1837 2198.7529,1497 C2116.2366,1587.5484 1212.5188,1608.5706 997.4781,1612.3045 " fill="none" id="DevelopmentCard-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[241684131c1344d2acccc82b5a4f57b9]
+link DevelopmentCard to CardLevel--><path codeLine="329" d="M1752.8602,1235.768 C1752.2753,1268.3728 1751.506,1311.2615 1750.8792,1346.2062 " fill="none" id="DevelopmentCard-CardLevel" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[733cbb908e58a9b11027a0a756bb65cf]
+link DevelopmentCard to Production--><path codeLine="330" d="M1819.3663,1235.768 C1873.6908,1276.9733 1949.6694,1334.6034 1998.7966,1371.8665 " fill="none" id="DevelopmentCard-Production" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[82db566e7f35929e95af8b00308bf53c]
+link DevelopmentCardsOnTable to DevelopmentCard--><path codeLine="331" d="M1753.7529,980.5983 C1753.7529,1026.8208 1753.7529,1091.7621 1753.7529,1136.1742 " fill="none" id="DevelopmentCardsOnTable-DevelopmentCard" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b24070362d6cab2de25b6b5bb84d211c]
+link DevelopmentCardsOnTable to Table--><path codeLine="332" d="M1829.0443,980.6165 C1859.216,1002.8249 1894.4317,1028.3978 1926.7529,1051 C1955.0113,1070.7611 1985.8208,1091.6681 2014.6706,1110.9739 " fill="none" id="DevelopmentCardsOnTable-Table" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0104bb8f241402751a59ead714239600]
+reverse link java.util.AbstractCollection to Deck--><path codeLine="333" d="M2363.4803,953.869 C2365.2476,1025.2235 2369.8235,1209.9772 2372.5713,1320.9205 " fill="none" id="java.util.AbstractCollection-backto-Deck" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2363.3479,948.5264,2359.5723,957.6228,2363.4719,953.5249,2367.5699,957.4244,2363.3479,948.5264" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[56d745172d73fe08966196bb6464a3d7]
+reverse link java.util.AbstractCollection to Table--><path codeLine="334" d="M2344.6247,953.326 C2327.4442,979.7838 2300.243,1019.5307 2272.7529,1051 C2254.9425,1071.3883 2234.4114,1092.0493 2214.5348,1110.873 " fill="none" id="java.util.AbstractCollection-backto-Table" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2347.504,948.8718,2339.259,954.2588,2344.7897,953.0709,2345.9776,958.6017,2347.504,948.8718" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[cda86848d685c60f7fc13b41671ebac8]
+link Table to Deck--><path codeLine="335" d="M2211.6943,1261.1867 C2236.1042,1283.3144 2262.877,1307.5841 2287.5457,1329.9464 " fill="none" id="Table-Deck" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4464abd5924bc90547b42fa8ded7d424]
+reverse link ProductionInterface to DevelopmentCard--><path codeLine="338" d="M1400.7228,976.8009 C1436.5741,999.9341 1479.5346,1027.2251 1518.7529,1051 C1567.0355,1080.2698 1621.6889,1111.7623 1666.1315,1136.9623 " fill="none" id="ProductionInterface-backto-DevelopmentCard" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1396.3867,974.0009,1401.7776,982.2433,1400.5871,976.7132,1406.1173,975.5227,1396.3867,974.0009" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4e628d29acac2c32c3e0b2bedee0ca44]
+reverse link ProductionInterface to ProductionAbility--><path codeLine="339" d="M1352.9481,978.9384 C1372.8498,1015.1482 1397.1169,1064.4424 1410.7529,1111 C1437.4847,1202.2707 1444.3984,1314.8569 1446.1649,1371.9823 " fill="none" id="ProductionInterface-backto-ProductionAbility" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1350.2952,974.1417,1351.1508,983.9533,1352.7152,978.5171,1358.1514,980.0814,1350.2952,974.1417" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7c8eb1b6fc2da10c3dfd3df3faed8fb1]
+reverse link ProductionInterface to Production--><path codeLine="340" d="M1358.0033,978.5823 C1412.7604,1053.8077 1522.29,1188.8867 1648.7529,1261 C1746.889,1316.9604 1790.9064,1278.9347 1895.7529,1321 C1929.4294,1334.5113 1964.6414,1354.4763 1992.6846,1371.9756 " fill="none" id="ProductionInterface-backto-Production" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="1354.7964,974.159,1356.8406,983.7934,1357.7312,978.2071,1363.3175,979.0977,1354.7964,974.159" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9ed2863502172cdad6195d3e63b5f93b]
+link Production to Resource--><path codeLine="341" d="M1995.7505,1446.1459 C1967.4943,1464.4645 1931.1681,1485.1248 1895.7529,1497 C1725.3038,1554.154 1161.8372,1598.0048 997.2628,1609.8327 " fill="none" id="Production-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[06b900f0fc64cae727d4e7c763e64f19]
+link LeaderCard to LeaderAbility--><path codeLine="344" d="M1020.2306,974.3017 C1011.3337,1020.8324 998.1251,1089.913 989.2397,1136.3837 " fill="none" id="LeaderCard-LeaderAbility" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[dd986954ac105edc2e91c366230776b5]
+reverse link LeaderCard to LeaderCardLevelCost--><path codeLine="346" d="M1070.7428,978.1384 C1089.0266,1001.1792 1111.259,1028.0308 1132.7529,1051 C1165.3018,1085.7833 1205.073,1122.4442 1234.7247,1148.7701 " fill="none" id="LeaderCard-backto-LeaderCardLevelCost" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1067.6101,974.1793,1070.0579,983.7191,1070.7127,978.1003,1076.3315,978.755,1067.6101,974.1793" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[61116ee54427d7a8551619210062b8f4]
+link LeaderCardLevelCost to CardLevel--><path codeLine="347" d="M1378.2809,1223.1298 C1443.6291,1248.3572 1530.0656,1283.7989 1603.7529,1321 C1619.0762,1328.736 1634.9504,1337.4837 1650.3393,1346.3876 " fill="none" id="LeaderCardLevelCost-CardLevel" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9bd7f90de0caabc93b8f6e70f79f7253]
+reverse link LeaderCard to LeaderCardResourcesCost--><path codeLine="348" d="M939.5432,970.664 C840.334,1021.4335 682.8722,1102.0133 591.314,1148.8675 " fill="none" id="LeaderCard-backto-LeaderCardResourcesCost" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="944.2229,968.2692,934.3888,968.8083,939.7718,970.5469,938.0332,975.93,944.2229,968.2692" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[adaea2d482cc1f7ef2ff812d517c0a65]
+link LeaderCardResourcesCost to Resource--><path codeLine="349" d="M409.6689,1223.0109 C364.8085,1244.2411 317.4256,1275.8623 291.7529,1321 C253.0803,1388.9938 241.456,1437.0922 291.7529,1497 C370.8605,1591.224 769.7447,1608.9345 906.029,1612.2446 " fill="none" id="LeaderCardResourcesCost-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[47c75b58cf40ba5dc0aaa5e16a6849e3]
+reverse link LeaderAbility to ProductionAbility--><path codeLine="350" d="M1092.2998,1237.7342 C1109.8182,1245.6199 1127.7441,1253.5931 1144.7529,1261 C1208.3203,1288.682 1226.3666,1290.7499 1288.7529,1321 C1320.6778,1336.4799 1355.2036,1355.4398 1383.814,1371.7915 " fill="none" id="LeaderAbility-backto-ProductionAbility" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1087.3706,1235.5129,1093.9325,1242.8574,1091.9291,1237.5672,1097.2193,1235.5638,1087.3706,1235.5129" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6b6b6b50409b754ca85b741e9bc20545]
+reverse link LeaderAbility to DiscountAbility--><path codeLine="351" d="M827.5789,1232.2291 C755.9901,1255.8067 670.1934,1286.731 595.7529,1321 C563.7613,1335.7274 529.6966,1355.0786 501.9416,1371.8834 " fill="none" id="LeaderAbility-backto-DiscountAbility" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="832.7084,1230.5443,822.9096,1229.5528,827.9581,1232.1047,825.4063,1237.1533,832.7084,1230.5443" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[073a89ccec7c048ddba67c061eba3346]
+reverse link LeaderAbility to ExtraSpaceAbility--><path codeLine="352" d="M931.0446,1239.772 C903.7944,1269.8551 869.5315,1307.68 840.3132,1339.9359 " fill="none" id="LeaderAbility-backto-ExtraSpaceAbility" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="934.6715,1235.768,925.6648,1239.7529,931.3148,1239.4737,931.594,1245.1237,934.6715,1235.768" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c8718743524336aff282550a3bc5292d]
+reverse link LeaderAbility to WhiteMarblesAbility--><path codeLine="353" d="M1014.9776,1240.1732 C1041.5243,1281.0003 1077.2302,1335.9134 1100.6078,1371.8665 " fill="none" id="LeaderAbility-backto-WhiteMarblesAbility" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1012.1132,1235.768,1013.666,1245.4937,1014.8388,1239.9598,1020.3728,1241.1326,1012.1132,1235.768" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d89905ee66e05b5408d3161c5082bef9]
+link DiscountAbility to Resource--><path codeLine="354" d="M501.0713,1446.0131 C528.9222,1462.9927 563.3151,1482.5183 595.7529,1497 C703.486,1545.0971 837.4035,1583.3024 906.2237,1601.4658 " fill="none" id="DiscountAbility-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a3550ff484d2ba37948c5bb46526d0d7]
+link ExtraSpaceAbility to Resource--><path codeLine="355" d="M836.6613,1478.0651 C859.3373,1504.6507 884.8655,1534.5804 906.1075,1559.4847 " fill="none" id="ExtraSpaceAbility-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[480c883513a3b8fcb5d1a859942a9f4f]
+link WhiteMarblesAbility to Resource--><path codeLine="356" d="M1093.022,1446.4167 C1066.1968,1478.0488 1027.4335,1523.7581 997.2949,1559.2972 " fill="none" id="WhiteMarblesAbility-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[aaee45f9742c0afac6df16461db05007]
+link Market to Resource--><path codeLine="359" d="M965.5146,693.7946 C945.8403,708.4574 925.1471,723.7917 905.7529,738 C591.3691,968.3196 361.205,947.256 250.7529,1321 C228.5838,1396.015 200.1575,1437.3441 250.7529,1497 C293.5646,1547.4783 757.3097,1594.8507 906.0934,1608.8449 " fill="none" id="Market-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1d69c68c883ef8e44426b310c3633edb]
+link Cell to VaticanReports--><path codeLine="362" d="M3898.2394,1242.2723 C3915.5956,1280.5934 3938.2255,1330.5583 3954.1705,1365.7638 " fill="none" id="Cell-VaticanReports" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[407287fcbbc10a4ab907c2c93580cff4]
+link Tile to VaticanReports--><path codeLine="363" d="M4052.2122,1235.768 C4034.538,1274.7911 4010.192,1328.5453 3993.3277,1365.7803 " fill="none" id="Tile-VaticanReports" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[abd6940fa5376f3cbe2855bb12631e24]
+link FaithTrack to Cell--><path codeLine="364" d="M3942.2113,1006.1646 C3926.6994,1046.3264 3908.3959,1093.7164 3894.4732,1129.7637 " fill="none" id="FaithTrack-Cell" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f29d7a284993a094f7844e576eda693c]
+link FaithTrack to Tile--><path codeLine="365" d="M4005.2944,1006.1646 C4021.7902,1048.874 4041.4432,1099.7576 4055.6273,1136.4818 " fill="none" id="FaithTrack-Tile" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7b11299776de011762534185711bac3c]
+reverse link FaithTrack to SoloFaithTrack--><path codeLine="366" d="M3855.9048,1008.932 C3831.7309,1024.1719 3805.9536,1039.0058 3780.7529,1051 C3693.3851,1092.5822 3590.0139,1125.791 3507.2122,1148.8661 " fill="none" id="FaithTrack-backto-SoloFaithTrack" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3860.3994,1006.0822,3850.6565,1007.5233,3856.1766,1008.7596,3854.9403,1014.2797,3860.3994,1006.0822" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7e26cb1eb188df7a970b3887a3177f2c]
+link Warehouse to Resource--><path codeLine="368" d="M3178.182,1051.0808 C3170.4958,1120.4476 3150.1671,1203.7108 3099.7529,1261 C2904.9717,1482.3433 2767.5063,1432.7311 2479.7529,1497 C2186.193,1562.5658 1219.0599,1602.8085 997.3304,1611.3082 " fill="none" id="Warehouse-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[71ff854371f9c8b43d155c0f1db10699]
+link StrongBox to Resource--><path codeLine="369" d="M3587.2095,993.8073 C3596.4414,1068.3779 3598.4038,1186.2951 3536.7529,1261 C3313.2498,1531.8275 3128.0128,1432.9942 2782.7529,1497 C2602.2811,1530.4566 1262.4018,1597.7068 997.2634,1610.7723 " fill="none" id="StrongBox-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[443ed406c9fa70ea7b61bc3c626dcd96]
+link DevelopmentCardsSlots to DevelopmentCard--><path codeLine="370" d="M2025.5272,980.5983 C1964.2693,1026.8958 1878.1634,1091.973 1819.3931,1136.3904 " fill="none" id="DevelopmentCardsSlots-DevelopmentCard" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[755ff8d180f336b645c5d910f7d090bd]
+link DevelopmentCardsSlots to Table--><path codeLine="371" d="M2105.9741,980.5983 C2110.1847,1018.5667 2115.7961,1069.1656 2120.3957,1110.6416 " fill="none" id="DevelopmentCardsSlots-Table" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0b44219e96c6a3928f7aa9cf937c73f0]
+link Player to FaithTrack--><path codeLine="374" d="M3104.5976,640.7838 C3281.4304,661.5008 3557.7648,706.2583 3780.7529,798 C3809.4664,809.8133 3838.4829,826.0675 3864.9874,842.9912 " fill="none" id="Player-FaithTrack" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[63e1c56521583789cdc04083317e4f31]
+link Player to Warehouse--><path codeLine="375" d="M3023.1415,738.3449 C3039.6316,757.8214 3056.8539,778.1626 3073.6038,797.946 " fill="none" id="Player-Warehouse" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[bb85cff6ebb0fac01f341c2a4db49540]
+link Player to StrongBox--><path codeLine="376" d="M3104.3551,686.0333 C3186.3068,716.4895 3283.9982,755.7569 3368.7529,798 C3402.7463,814.9429 3438.4498,835.7157 3470.406,855.4932 " fill="none" id="Player-StrongBox" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9fd798b505caebf7eeeb427d8611106d]
+link Player to DevelopmentCardsSlots--><path codeLine="377" d="M2749.026,731.6128 C2743.2649,733.9014 2737.4994,736.0401 2731.7529,738 C2537.4483,804.2699 2464.4452,721.958 2273.7529,798 C2232.6436,814.3931 2192.3099,842.7146 2160.8422,868.409 " fill="none" id="Player-DevelopmentCardsSlots" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[433071cceed078dcbb8864208b0aae96]
+reverse link Player to SoloPlayer--><path codeLine="378" d="M2910.0786,743.6016 C2902.4467,798.1151 2894.018,858.3201 2889.0647,893.7014 " fill="none" id="Player-backto-SoloPlayer" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2910.8146,738.3449,2905.6051,746.7032,2910.1212,743.2966,2913.5278,747.8127,2910.8146,738.3449" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e82d292351476b0e5e3c774e28eaba60]
+link SoloPlayer to SoloFaithTrack--><path codeLine="379" d="M2904.2242,955.2476 C2923.5893,983.6096 2955.7015,1025.124 2992.7529,1051 C3056.5767,1095.5735 3136.9039,1127.4064 3205.8511,1148.922 " fill="none" id="SoloPlayer-SoloFaithTrack" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6b6b9e8ceff4e9e58f06e15491e15318]
+link Game to Player--><path codeLine="382" d="M1928.7904,382.4438 C2199.9027,422.8719 2694.2898,497.6678 2731.7529,511 C2737.5652,513.0685 2743.4005,515.3121 2749.2339,517.7013 " fill="none" id="Game-Player" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d3f966d744ff08356f2337cf045e8b7e]
+link Game to Market--><path codeLine="383" d="M1578.6753,388.909 C1468.7271,413.3789 1326.0443,452.8298 1208.7529,511 C1184.5141,523.0211 1160.2158,539.0818 1138.4137,555.33 " fill="none" id="Game-Market" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ee792f0f5daa2ee81dc8a3d1d7bde80f]
+link Game to DevelopmentCardsOnTable--><path codeLine="384" d="M1753.7529,451.2506 C1753.7529,570.4026 1753.7529,771.1189 1753.7529,868.3509 " fill="none" id="Game-DevelopmentCardsOnTable" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b9f1e39ad85d50fe6f3a071a4341c320]
+link Game to Turn--><path codeLine="385" d="M1578.6928,394.6845 C1493.2523,412.7729 1388.8384,434.0697 1294.7529,451 C1122.5847,481.9809 1066.9589,443.0715 905.7529,511 C882.7844,520.6784 860.1451,534.6135 839.6639,549.425 " fill="none" id="Game-Turn" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3959084c455ca96306079f2fca76f92f]
+link Turn to Resource--><path codeLine="386" d="M620.4047,663.9709 C546.8786,691.405 458.7947,734.6003 398.7529,798 C177.8559,1031.2507 6,1252.8205 214.7529,1497 C260.1511,1550.1026 752.4953,1596.0893 906.1922,1609.2372 " fill="none" id="Turn-Resource" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[43397ffc40029fc23622a985064ad388]
+reverse link Game to SoloGame--><path codeLine="389" d="M1948.1234,420.1813 C2096.0435,468.6441 2296.2244,534.2291 2429.4563,577.8796 " fill="none" id="Game-backto-SoloGame" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="none" points="1945.8099,426.7895,1928.9834,413.9105,1950.1688,413.4854,1945.8099,426.7895" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[24c68033eb2d1d7447a9a8e9243b360d]
+link SoloGame to SoloActionToken--><path codeLine="390" d="M2582.5481,699.8154 C2591.529,762.4728 2603.8555,848.4721 2610.3451,893.7484 " fill="none" id="SoloGame-SoloActionToken" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[62fc601178c4ba318689b05ab917fd3a]
+link SoloGame to SoloPlayer--><path codeLine="391" d="M2666.9168,699.6035 C2702.5021,729.0731 2742.5561,763.9501 2776.7529,798 C2807.7544,828.8684 2839.8868,867.5044 2860.9542,893.9035 " fill="none" id="SoloGame-SoloPlayer" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2c3dbc17925949f578784a1d1a7854f9]
+reverse link SoloActionToken to DiscardDevelopmentCards--><path codeLine="392" d="M2601.1923,959.9608 C2582.279,1009.4192 2548.1433,1098.6841 2528.9138,1148.9692 " fill="none" id="SoloActionToken-backto-DiscardDevelopmentCards" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="2603.0859,955.0092,2596.1351,961.9867,2601.2999,959.6794,2603.6073,964.8442,2603.0859,955.0092" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a935ccc82f1a2d20191d263eefb01e4f]
+reverse link SoloActionToken to MoveBlackCrossTwoSpaces--><path codeLine="393" d="M2656.3512,958.4409 C2688.6735,984.4542 2734.8969,1020.879 2776.7529,1051 C2828.8047,1088.4583 2890.4264,1128.6961 2932.2189,1155.4022 " fill="none" id="SoloActionToken-backto-MoveBlackCrossTwoSpaces" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="2652.0833,955.0015,2656.5812,963.7633,2655.9765,958.1389,2661.6009,957.5342,2652.0833,955.0015" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d5d60d2e253539082a5a79159da350d3]
+reverse link SoloActionToken to MoveBlackCrossOneSpace--><path codeLine="394" d="M2632.4457,959.5506 C2658.4456,1011.0581 2706.5555,1106.3665 2731.2465,1155.2809 " fill="none" id="SoloActionToken-backto-MoveBlackCrossOneSpace" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="2630.1533,955.0092,2630.6381,964.8461,2632.4064,959.4728,2637.7798,961.2411,2630.1533,955.0092" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[03335784516cac59c2ecf4586425f0df]
+link DiscardDevelopmentCards to DevelopmentCardsColor--><path codeLine="395" d="M2522.2193,1223.1134 C2532.7441,1286.7517 2544.1124,1417.5029 2479.7529,1497 C2447.044,1537.4021 2314.5357,1573.4478 2222.8124,1594.2634 " fill="none" id="DiscardDevelopmentCards-DevelopmentCardsColor" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4a27febc18fb0b1b42ca6ec1da21e895]
+reverse link ModelObservable to Game--><path codeLine="397" d="M1753.7529,207.7044 C1753.7529,223.7523 1753.7529,242.7047 1753.7529,261.6124 " fill="none" id="ModelObservable-backto-Game" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1753.7529,202.3777,1749.7529,211.3777,1753.7529,207.3777,1757.7529,211.3777,1753.7529,202.3777" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[0cff490d5a6db4338f382c707eb45a7a]
+reverse link ModelObservable to Turn--><path codeLine="398" d="M1631.6322,203.7205 C1462.6712,259.7328 1150.729,372.0407 905.7529,511 C885.9276,522.2456 865.7376,535.7506 846.842,549.4593 " fill="none" id="ModelObservable-backto-Turn" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1636.5891,202.0798,1626.7881,201.1105,1631.8424,203.6509,1629.3019,208.7053,1636.5891,202.0798" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[05093de3fdcf39dab6c366e4f8b145b8]
+reverse link ModelObservable to Player--><path codeLine="399" d="M1887.2365,203.5182 C2078.4612,260.6324 2439.5411,375.7176 2731.7529,511 C2737.5292,513.6742 2743.3579,516.4662 2749.2091,519.3504 " fill="none" id="ModelObservable-backto-Player" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1882.19,202.0126,1889.6708,208.4186,1886.9813,203.442,1891.9579,200.7525,1882.19,202.0126" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[bf1a4c674fb21e181f6b4253054b98d0]
+link ModelObserver to ModelObservable--><path codeLine="400" d="M1753.7529,68.0394 C1753.7529,86.0152 1753.7529,108.8788 1753.7529,127.8888 " fill="none" id="ModelObserver-ModelObservable" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[07a98058270c2ab164b244bb4ae65478]
+@startuml
+/' CLASSES DEFINITION '/
+
+abstract class Card {
+	# int victory_points
+	# int id
+}
+
+class Deck {
+	- int max_size
+	- ArrayList<E> structure
+
+	+ boolean isEmpty()
+	+ Iterator<E> iterator()
+	+ int size()
+	+ int get_max()
+	+ E peekTopCard()
+	+ E draw()
+	+ void shuffle()
+	+ ArrayList<E> toArrayList()
+}
+
+class Table {
+	- int max_size
+	- int row_size
+	- ArrayList<Deck<E>> structure
+
+	+ void addDeck(Deck<E> deck, int row, int column)
+	+ void addElement(E elem, int row, int column)
+	+ E peekTop(int row, int column)
+	+ E draw(int row, int column)
+	+ void shuffleAllDecks()
+}
+
+class DevelopmentCard {
+	- Production production
+	- ArrayList<Resource> cost
+	- CardLevel level
+	- String front_path
+}
+
+class CardLevel {
+	- int level
+	- DevelopmentCardsColor color
+
+	+ int compareLevel(CardLevel target)
+	+ boolean compareColor(CardLevel target)
+	+ boolean isPlaceable(CardLevel target) 
+	+ boolean equals(Object o)
+}
+
+class DevelopmentCardsOnTable {
+	- Table development_card_decks
+	+ {static} dim_rows
+	+ {static} dim_column
+
+	+ DevelopmentCard[][] getTopCards()
+	+ void getFromDeck(DevelopmentCard chosen_card)
+}
+
+interface ProductionInterface {
+	+ ArrayList<Resource> getRequiredResources()
+	+ ArrayList<Resource> getProducedResources()
+	+ void setRequiredResources(ArrayList<Resource> cost)
+	+ void setProducedResources(ArrayList<Resource> cost)
+}
+
+class Production {
+	- ArrayList<Resource> required_resources
+	- ArrayList<Resource> produced_resources
+}
+
+abstract class LeaderCard {
+	- LeaderAbility ability
+	- boolean activated
+
+	+ void activateLeaderCard()
+	+ {abstract} boolean isActivable()
+}
+
+class LeaderCardLevelCost {
+	- ArrayList<CardLevel> requirements
+
+	+ boolean isActivable()
+}
+
+class LeaderCardResourcesCost {
+	- ArrayList<Resource> requirements
+
+	+ boolean isActivable()
+}
+
+abstract class LeaderAbility{
+	+ boolean checkAbility(WhiteMarblesAbility target)
+	+ boolean checkAbility(ExtraSpaceAbility target)
+	+ boolean checkAbility(ProductionAbility target)
+	+ boolean checkAbility(DiscountAbility target)
+}
+
+class ProductionAbility {
+	- Production production
+
+	+ boolean checkAbility(ProductionAbility target)
+}
+
+class DiscountAbility {
+	- Resource discounted_resource
+
+	+ boolean checkAbility(DiscountAbility target)
+}
+
+class ExtraSpaceAbility {
+	- Resource resource_type
+	- ArrayList<Resource> storage
+
+	+ boolean canBeStoredExtra(ArrayList<Resource> res)
+	+ boolean isContainedExtra(ArrayList<Resource> res)
+	+ void storeExtra(ArrayList<Resource> res)
+	+ void getFromExtra(ArrayList<Resource> res)
+	+ boolean checkAbility(ExtraSpaceAbility target)
+}
+
+class WhiteMarblesAbility {
+	- Resource resource_type
+
+	+ boolean checkAbility(WhiteMarblesAbility target)
+}
+
+enum Resource {
+	COIN
+	STONE
+	SERVANT
+	SHIELD
+	FAITH
+}
+
+enum DevelopmentCardsColor {
+	YELLOW
+	GREEN
+	PURPLE
+	BLUE
+}
+
+class Market {
+	- Resource[][] market_board
+	- Resource free_marble
+
+	- void randomizeMarket()
+	+ void shiftRow(int index)
+	+ void shiftColumn(int index)
+	+ ArrayList<Resource> getRow(int index)
+	+ ArrayList<Resource> getColumn(int index)
+}
+
+enum VaticanReports {
+	REPORT1
+	REPORT2
+	REPORT3
+}
+
+class Cell {
+	- int position
+	- int victory_points
+	- VaticanReports report
+	- boolean pope_space
+	- boolean is_last_cell
+}
+
+class Tile {
+	- VaticanReports report
+	- int victory_points
+	- boolean is_active
+
+	+ void activateVaticanReport()
+}
+
+class FaithTrack {
+	# Cell[] track
+	# Tile[] vatican_report_tiles
+	# Cell faith_marker
+
+	+ void moveForward(int number_of_times)
+	+ void activateVaticanReport(VaticanReports vr_param)
+	+ void removeVaticanReport(VaticanReports vatican_report)
+	+ boolean checkIfTileIsActive(int index){
+	+ void getMarkerVictoryPoints()
+	+ void getVaticanReportsPoints()
+}
+
+class SoloFaithTrack {
+	- Cell black_marker
+
+	+ void moveForwardBlackMarker(int number_of_times)
+}
+
+class Warehouse {
+	- ArrayList<Resource> top_resource
+	- ArrayList<Resource> middle_resources
+	- ArrayList<Resource> bottom_resources
+
+	+ void swapRows(int i, int j)
+	+ boolean canBeStoredTop(ArrayList<Resource> res)
+	+ boolean canBeStoredMiddle(ArrayList<Resource> res)
+	+ boolean canBeStoredBottom(ArrayList<Resource> res)
+	+ void storeTop(ArrayList<Resource> res)
+	+ void storeMiddle(ArrayList<Resource> res)
+	+ void storeBottom(ArrayList<Resource> res)
+	+ boolean isContainedTop(ArrayList<Resource> res)
+	+ boolean isContainedMiddle(ArrayList<Resource> res)
+	+ boolean isContainedBottom(ArrayList<Resource> res)
+	+ void getFromTop(ArrayList<Resource> res)
+	+ void getFromMiddle(ArrayList<Resource> res)
+	+ void getFromBottom(ArrayList<Resource> res)
+}
+
+class StrongBox {
+	- HashMap<Resource, Integer> storage
+
+	+ int get(Resource res)
+	+ void insertResources(ArrayList<Resource> new_resources)
+	+ void removeResources(ArrayList<Resource> to_remove)
+	+ boolean areContainedInStrongbox(ArrayList<Resource> cost)
+	+ void clear()
+	+ boolean isEmpty()
+}
+
+class DevelopmentCardsSlots {
+	- Table<DevelopmentCard> slots
+
+	+ boolean fitsInSlot(DevelopmentCard card, int pos)
+	+ void buyCard(DevelopmentCard card, int position)
+	+ DevelopmentCard[] getTopCards()
+	+ DevelopmentCard[] getCard(int pos)
+}
+
+class Player {
+	# String nickname
+	# FaithTrack track
+	# Warehouse warehouse
+	# StrongBox strongbox
+	# DevelopmentCardsSlots development_card_slots
+	# ArrayList<LeaderCard> leader_cards_deck
+
+	+ void notifyPlayer()
+	- SimplePlayer simplify()
+	+ void activateLeaderCard(LeaderCard card)
+	+ void discardLeader(int leader_card_id)
+	+ void storeExtra(ArrayList<Resource> res)
+	+ void getFromExtra(ArrayList<Resource> res)
+	+ HashMap<Resource, Integer> totalResources()
+	+ boolean hasEnoughResources(ArrayList<Resource> cost)
+}
+
+class Game {
+	# ArrayList<Player> players
+	# Turn turn
+	# Market market
+	# DevelopmentCardsOnTable development_cards_on_table
+	# HashMap<Player, Integer> victory_points
+
+	+ void handleError(String error_string, Player player)
+	+ void notifyGame()
+	- SimpleGame simplify()
+	+ void endTurn()
+	- void countVictoryPoints()
+	- void playerSort()
+}
+
+interface SoloActionToken {
+	+ {abstract} void useToken(SoloGameController controller)
+}
+
+class MoveBlackCrossTwoSpaces {
+	+ void useToken()
+}
+
+class MoveBlackCrossOneSpace {
+	+ void useToken()
+}
+
+class DiscardDevelopmentCards {
+	- DevelopmentCardsColor color
+
+	+ void useToken()
+}
+
+class SoloGame {
+	- SoloActionToken[] solo_action_tokens
+	- ArrayDeque<SoloActionToken> active_tokens
+	- SoloActionToken last_token
+	- SoloPlayer player
+
+	+ void notifyGame()
+	- SimpleSoloGame simplify()
+	+ void shuffleSoloActionTokens()
+	+ void lostGame()
+}
+
+class SoloPlayer {
+	+ SimpleSoloPlayer simplify()
+}
+
+class Turn {
+	- {transient} Player active_player
+	- ArrayList<Resource> required_resources
+	- ArrayList<Resource> produced_resources
+	- boolean action_done
+	- boolean must_discard
+	- boolean final_round
+	- boolean setup_done
+	- String nickname
+}
+
+class ModelObservable {
+	+ void addModelObserver(ModelObserver observer)
+	+ void notifyModel(ServerMessage message)
+}
+
+interface ModelObserver {
+    + void updateModel(ServerMessage message)
+}
+
+/' RELATIONS DEFINITION '/
+
+/' Cards relations '/
+Card <- - LeaderCard
+Card <- - DevelopmentCard
+CardLevel - - DevelopmentCardsColor
+DevelopmentCard - - Resource
+DevelopmentCard - - CardLevel
+DevelopmentCard - - Production
+DevelopmentCardsOnTable - - DevelopmentCard
+DevelopmentCardsOnTable - - Table
+java.util.AbstractCollection <- - Deck
+java.util.AbstractCollection <- - Table
+Table - - Deck
+
+/' Production relations '/
+ProductionInterface <.. DevelopmentCard
+ProductionInterface <.. ProductionAbility
+ProductionInterface <.. Production
+Production - - Resource
+
+/' LeaderCard relations '/
+LeaderCard - - LeaderAbility
+Card <- - LeaderCard
+LeaderCard <- - LeaderCardLevelCost
+LeaderCardLevelCost - - CardLevel
+LeaderCard <- - LeaderCardResourcesCost
+LeaderCardResourcesCost - - Resource
+LeaderAbility <- - ProductionAbility
+LeaderAbility <- - DiscountAbility
+LeaderAbility <- - ExtraSpaceAbility
+LeaderAbility <- - WhiteMarblesAbility
+DiscountAbility - - Resource
+ExtraSpaceAbility - - Resource
+WhiteMarblesAbility - - Resource
+
+/' Market relations '/
+Market - - Resource
+
+/' FaithTrack relations '/
+Cell - - VaticanReports
+Tile - - VaticanReports
+FaithTrack - - Cell
+FaithTrack - - Tile
+FaithTrack <- - SoloFaithTrack
+
+Warehouse - - Resource
+StrongBox - - Resource
+DevelopmentCardsSlots - - DevelopmentCard
+DevelopmentCardsSlots - - Table
+
+/' Player '/
+Player - - FaithTrack 
+Player - - Warehouse
+Player - - StrongBox
+Player - - DevelopmentCardsSlots
+Player <- - SoloPlayer
+SoloPlayer - - SoloFaithTrack
+
+/' Game '/
+Game - - Player
+Game - - Market
+Game - - DevelopmentCardsOnTable
+Game - - Turn
+Turn - - Resource
+
+/' Solo game '/
+Game <|- - SoloGame
+SoloGame - - SoloActionToken
+SoloGame - - SoloPlayer
+SoloActionToken <.. DiscardDevelopmentCards
+SoloActionToken <.. MoveBlackCrossTwoSpaces
+SoloActionToken <.. MoveBlackCrossOneSpace
+DiscardDevelopmentCards - - DevelopmentCardsColor
+
+Game -up-> ModelObservable
+Turn -up-> ModelObservable
+Player -up-> ModelObservable
+ModelObserver - - ModelObservable
+@enduml
+
+@startuml
+
+abstract class Card {
+	# int victory_points
+	# int id
+}
+
+class Deck {
+	- int max_size
+	- ArrayList<E> structure
+
+	+ boolean isEmpty()
+	+ Iterator<E> iterator()
+	+ int size()
+	+ int get_max()
+	+ E peekTopCard()
+	+ E draw()
+	+ void shuffle()
+	+ ArrayList<E> toArrayList()
+}
+
+class Table {
+	- int max_size
+	- int row_size
+	- ArrayList<Deck<E>> structure
+
+	+ void addDeck(Deck<E> deck, int row, int column)
+	+ void addElement(E elem, int row, int column)
+	+ E peekTop(int row, int column)
+	+ E draw(int row, int column)
+	+ void shuffleAllDecks()
+}
+
+class DevelopmentCard {
+	- Production production
+	- ArrayList<Resource> cost
+	- CardLevel level
+	- String front_path
+}
+
+class CardLevel {
+	- int level
+	- DevelopmentCardsColor color
+
+	+ int compareLevel(CardLevel target)
+	+ boolean compareColor(CardLevel target)
+	+ boolean isPlaceable(CardLevel target) 
+	+ boolean equals(Object o)
+}
+
+class DevelopmentCardsOnTable {
+	- Table development_card_decks
+	+ {static} dim_rows
+	+ {static} dim_column
+
+	+ DevelopmentCard[][] getTopCards()
+	+ void getFromDeck(DevelopmentCard chosen_card)
+}
+
+interface ProductionInterface {
+	+ ArrayList<Resource> getRequiredResources()
+	+ ArrayList<Resource> getProducedResources()
+	+ void setRequiredResources(ArrayList<Resource> cost)
+	+ void setProducedResources(ArrayList<Resource> cost)
+}
+
+class Production {
+	- ArrayList<Resource> required_resources
+	- ArrayList<Resource> produced_resources
+}
+
+abstract class LeaderCard {
+	- LeaderAbility ability
+	- boolean activated
+
+	+ void activateLeaderCard()
+	+ {abstract} boolean isActivable()
+}
+
+class LeaderCardLevelCost {
+	- ArrayList<CardLevel> requirements
+
+	+ boolean isActivable()
+}
+
+class LeaderCardResourcesCost {
+	- ArrayList<Resource> requirements
+
+	+ boolean isActivable()
+}
+
+abstract class LeaderAbility{
+	+ boolean checkAbility(WhiteMarblesAbility target)
+	+ boolean checkAbility(ExtraSpaceAbility target)
+	+ boolean checkAbility(ProductionAbility target)
+	+ boolean checkAbility(DiscountAbility target)
+}
+
+class ProductionAbility {
+	- Production production
+
+	+ boolean checkAbility(ProductionAbility target)
+}
+
+class DiscountAbility {
+	- Resource discounted_resource
+
+	+ boolean checkAbility(DiscountAbility target)
+}
+
+class ExtraSpaceAbility {
+	- Resource resource_type
+	- ArrayList<Resource> storage
+
+	+ boolean canBeStoredExtra(ArrayList<Resource> res)
+	+ boolean isContainedExtra(ArrayList<Resource> res)
+	+ void storeExtra(ArrayList<Resource> res)
+	+ void getFromExtra(ArrayList<Resource> res)
+	+ boolean checkAbility(ExtraSpaceAbility target)
+}
+
+class WhiteMarblesAbility {
+	- Resource resource_type
+
+	+ boolean checkAbility(WhiteMarblesAbility target)
+}
+
+enum Resource {
+	COIN
+	STONE
+	SERVANT
+	SHIELD
+	FAITH
+}
+
+enum DevelopmentCardsColor {
+	YELLOW
+	GREEN
+	PURPLE
+	BLUE
+}
+
+class Market {
+	- Resource[][] market_board
+	- Resource free_marble
+
+	- void randomizeMarket()
+	+ void shiftRow(int index)
+	+ void shiftColumn(int index)
+	+ ArrayList<Resource> getRow(int index)
+	+ ArrayList<Resource> getColumn(int index)
+}
+
+enum VaticanReports {
+	REPORT1
+	REPORT2
+	REPORT3
+}
+
+class Cell {
+	- int position
+	- int victory_points
+	- VaticanReports report
+	- boolean pope_space
+	- boolean is_last_cell
+}
+
+class Tile {
+	- VaticanReports report
+	- int victory_points
+	- boolean is_active
+
+	+ void activateVaticanReport()
+}
+
+class FaithTrack {
+	# Cell[] track
+	# Tile[] vatican_report_tiles
+	# Cell faith_marker
+
+	+ void moveForward(int number_of_times)
+	+ void activateVaticanReport(VaticanReports vr_param)
+	+ void removeVaticanReport(VaticanReports vatican_report)
+	+ boolean checkIfTileIsActive(int index){
+	+ void getMarkerVictoryPoints()
+	+ void getVaticanReportsPoints()
+}
+
+class SoloFaithTrack {
+	- Cell black_marker
+
+	+ void moveForwardBlackMarker(int number_of_times)
+}
+
+class Warehouse {
+	- ArrayList<Resource> top_resource
+	- ArrayList<Resource> middle_resources
+	- ArrayList<Resource> bottom_resources
+
+	+ void swapRows(int i, int j)
+	+ boolean canBeStoredTop(ArrayList<Resource> res)
+	+ boolean canBeStoredMiddle(ArrayList<Resource> res)
+	+ boolean canBeStoredBottom(ArrayList<Resource> res)
+	+ void storeTop(ArrayList<Resource> res)
+	+ void storeMiddle(ArrayList<Resource> res)
+	+ void storeBottom(ArrayList<Resource> res)
+	+ boolean isContainedTop(ArrayList<Resource> res)
+	+ boolean isContainedMiddle(ArrayList<Resource> res)
+	+ boolean isContainedBottom(ArrayList<Resource> res)
+	+ void getFromTop(ArrayList<Resource> res)
+	+ void getFromMiddle(ArrayList<Resource> res)
+	+ void getFromBottom(ArrayList<Resource> res)
+}
+
+class StrongBox {
+	- HashMap<Resource, Integer> storage
+
+	+ int get(Resource res)
+	+ void insertResources(ArrayList<Resource> new_resources)
+	+ void removeResources(ArrayList<Resource> to_remove)
+	+ boolean areContainedInStrongbox(ArrayList<Resource> cost)
+	+ void clear()
+	+ boolean isEmpty()
+}
+
+class DevelopmentCardsSlots {
+	- Table<DevelopmentCard> slots
+
+	+ boolean fitsInSlot(DevelopmentCard card, int pos)
+	+ void buyCard(DevelopmentCard card, int position)
+	+ DevelopmentCard[] getTopCards()
+	+ DevelopmentCard[] getCard(int pos)
+}
+
+class Player {
+	# String nickname
+	# FaithTrack track
+	# Warehouse warehouse
+	# StrongBox strongbox
+	# DevelopmentCardsSlots development_card_slots
+	# ArrayList<LeaderCard> leader_cards_deck
+
+	+ void notifyPlayer()
+	- SimplePlayer simplify()
+	+ void activateLeaderCard(LeaderCard card)
+	+ void discardLeader(int leader_card_id)
+	+ void storeExtra(ArrayList<Resource> res)
+	+ void getFromExtra(ArrayList<Resource> res)
+	+ HashMap<Resource, Integer> totalResources()
+	+ boolean hasEnoughResources(ArrayList<Resource> cost)
+}
+
+class Game {
+	# ArrayList<Player> players
+	# Turn turn
+	# Market market
+	# DevelopmentCardsOnTable development_cards_on_table
+	# HashMap<Player, Integer> victory_points
+
+	+ void handleError(String error_string, Player player)
+	+ void notifyGame()
+	- SimpleGame simplify()
+	+ void endTurn()
+	- void countVictoryPoints()
+	- void playerSort()
+}
+
+interface SoloActionToken {
+	+ {abstract} void useToken(SoloGameController controller)
+}
+
+class MoveBlackCrossTwoSpaces {
+	+ void useToken()
+}
+
+class MoveBlackCrossOneSpace {
+	+ void useToken()
+}
+
+class DiscardDevelopmentCards {
+	- DevelopmentCardsColor color
+
+	+ void useToken()
+}
+
+class SoloGame {
+	- SoloActionToken[] solo_action_tokens
+	- ArrayDeque<SoloActionToken> active_tokens
+	- SoloActionToken last_token
+	- SoloPlayer player
+
+	+ void notifyGame()
+	- SimpleSoloGame simplify()
+	+ void shuffleSoloActionTokens()
+	+ void lostGame()
+}
+
+class SoloPlayer {
+	+ SimpleSoloPlayer simplify()
+}
+
+class Turn {
+	- {transient} Player active_player
+	- ArrayList<Resource> required_resources
+	- ArrayList<Resource> produced_resources
+	- boolean action_done
+	- boolean must_discard
+	- boolean final_round
+	- boolean setup_done
+	- String nickname
+}
+
+class ModelObservable {
+	+ void addModelObserver(ModelObserver observer)
+	+ void notifyModel(ServerMessage message)
+}
+
+interface ModelObserver {
+    + void updateModel(ServerMessage message)
+}
+
+
+Card <- - LeaderCard
+Card <- - DevelopmentCard
+CardLevel - - DevelopmentCardsColor
+DevelopmentCard - - Resource
+DevelopmentCard - - CardLevel
+DevelopmentCard - - Production
+DevelopmentCardsOnTable - - DevelopmentCard
+DevelopmentCardsOnTable - - Table
+java.util.AbstractCollection <- - Deck
+java.util.AbstractCollection <- - Table
+Table - - Deck
+
+ProductionInterface <.. DevelopmentCard
+ProductionInterface <.. ProductionAbility
+ProductionInterface <.. Production
+Production - - Resource
+
+LeaderCard - - LeaderAbility
+Card <- - LeaderCard
+LeaderCard <- - LeaderCardLevelCost
+LeaderCardLevelCost - - CardLevel
+LeaderCard <- - LeaderCardResourcesCost
+LeaderCardResourcesCost - - Resource
+LeaderAbility <- - ProductionAbility
+LeaderAbility <- - DiscountAbility
+LeaderAbility <- - ExtraSpaceAbility
+LeaderAbility <- - WhiteMarblesAbility
+DiscountAbility - - Resource
+ExtraSpaceAbility - - Resource
+WhiteMarblesAbility - - Resource
+
+Market - - Resource
+
+Cell - - VaticanReports
+Tile - - VaticanReports
+FaithTrack - - Cell
+FaithTrack - - Tile
+FaithTrack <- - SoloFaithTrack
+
+Warehouse - - Resource
+StrongBox - - Resource
+DevelopmentCardsSlots - - DevelopmentCard
+DevelopmentCardsSlots - - Table
+
+Player - - FaithTrack 
+Player - - Warehouse
+Player - - StrongBox
+Player - - DevelopmentCardsSlots
+Player <- - SoloPlayer
+SoloPlayer - - SoloFaithTrack
+
+Game - - Player
+Game - - Market
+Game - - DevelopmentCardsOnTable
+Game - - Turn
+Turn - - Resource
+
+Game <|- - SoloGame
+SoloGame - - SoloActionToken
+SoloGame - - SoloPlayer
+SoloActionToken <.. DiscardDevelopmentCards
+SoloActionToken <.. MoveBlackCrossTwoSpaces
+SoloActionToken <.. MoveBlackCrossOneSpace
+DiscardDevelopmentCards - - DevelopmentCardsColor
+
+Game -up-> ModelObservable
+Turn -up-> ModelObservable
+Player -up-> ModelObservable
+ModelObserver - - ModelObservable
+@enduml
+
+PlantUML version 1.2020.22(Sun Dec 06 10:36:27 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: it
+Country: IT
+--></g></svg>

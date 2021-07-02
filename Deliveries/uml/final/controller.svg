@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="809px" preserveAspectRatio="none" style="width:3841px;height:809px;" version="1.1" viewBox="0 0 3841 809" width="3841px" zoomAndPan="magnify"><defs><filter height="300%" id="fwie9ynqnkrd5" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[1d7ba1c7002d54515419844fbd155368]
+class Controller--><rect codeLine="3" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="214.4609" id="Controller" style="stroke:#A80036;stroke-width:1.5;" width="684" x="550.5" y="7"/><ellipse cx="857.75" cy="23" fill="#B4A7E5" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M853.6719,18.7656 L853.6719,16.6094 L861.0625,16.6094 L861.0625,18.7656 L858.5938,18.7656 L858.5938,26.8438 L861.0625,26.8438 L861.0625,29 L853.6719,29 L853.6719,26.8438 L856.1406,26.8438 L856.1406,18.7656 L853.6719,18.7656 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="61" x="878.25" y="27.1543">Controller</text><line style="stroke:#A80036;stroke-width:1.5;" x1="551.5" x2="1233.5" y1="39" y2="39"/><line style="stroke:#A80036;stroke-width:1.5;" x1="551.5" x2="1233.5" y1="47" y2="47"/><ellipse cx="561.5" cy="58" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="232" x="570.5" y="61.2104">void handleMessage(Message message)</text><ellipse cx="561.5" cy="70.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="375" x="570.5" y="74.0151">void handleActivateLeader(Player player, LeaderCard leader_card)</text><ellipse cx="561.5" cy="83.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="356" x="570.5" y="86.8198">void handleBuyCard(Player player, int row, int column, int slot)</text><ellipse cx="561.5" cy="96.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="351" x="570.5" y="99.6245">void handleChooseResources(Player player, Storage storage)</text><ellipse cx="561.5" cy="109.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="332" x="570.5" y="112.4292">void handleDiscardLeader(Player player, LeaderCard card)</text><ellipse cx="561.5" cy="122.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="250" x="570.5" y="125.2339">void handleDiscardResources(Player player)</text><ellipse cx="561.5" cy="134.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="194" x="570.5" y="138.0386">void handleEndTurn(Player player)</text><ellipse cx="561.5" cy="147.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="658" x="570.5" y="150.8433">void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList&lt;Resource&gt; white_marbles)</text><ellipse cx="561.5" cy="160.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="268" x="570.5" y="163.6479">void handlePay(Player player, Storage storage)</text><ellipse cx="561.5" cy="173.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="214" x="570.5" y="176.4526">void handlePersistence(Player player)</text><ellipse cx="561.5" cy="186.0469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="464" x="570.5" y="189.2573">void handleProduction(Player player, ArrayList&lt;ProductionInterface&gt; productions)</text><ellipse cx="561.5" cy="198.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="332" x="570.5" y="202.062">void handleRearrange(Player player, int swap1, int swap2)</text><ellipse cx="561.5" cy="211.6563" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="279" x="570.5" y="214.8667">void handleStore(Player player, Storage storage)</text><!--MD5=[82d9c97a467af7c0b2c072e754b85475]
+class GameController--><rect codeLine="19" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="304.0938" id="GameController" style="stroke:#A80036;stroke-width:1.5;" width="468" x="452.5" y="281"/><ellipse cx="633.75" cy="297" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M636.7188,302.6406 Q636.1406,302.9375 635.5,303.0781 Q634.8594,303.2344 634.1563,303.2344 Q631.6563,303.2344 630.3281,301.5938 Q629.0156,299.9375 629.0156,296.8125 Q629.0156,293.6875 630.3281,292.0313 Q631.6563,290.375 634.1563,290.375 Q634.8594,290.375 635.5,290.5313 Q636.1563,290.6875 636.7188,290.9844 L636.7188,293.7031 Q636.0938,293.125 635.5,292.8594 Q634.9063,292.5781 634.2813,292.5781 Q632.9375,292.5781 632.25,293.6563 Q631.5625,294.7188 631.5625,296.8125 Q631.5625,298.9063 632.25,299.9844 Q632.9375,301.0469 634.2813,301.0469 Q634.9063,301.0469 635.5,300.7813 Q636.0938,300.5 636.7188,299.9219 L636.7188,302.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="97" x="654.25" y="301.1543">GameController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="453.5" x2="919.5" y1="313" y2="313"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="460.5" y="321"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="185" x="472.5" y="327.2104">ArrayList&lt;ClientHandler&gt; clients</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="460.5" y="333.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="70" x="472.5" y="340.0151">Game game</text><line style="stroke:#A80036;stroke-width:1.5;" x1="453.5" x2="919.5" y1="346.6094" y2="346.6094"/><rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="460.5" y="354.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="112" x="472.5" y="360.8198">Game setupGame()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="0" x="476.5" y="373.6245"/><ellipse cx="463.5" cy="383.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="232" x="472.5" y="386.4292">void handleMessage(Message message)</text><ellipse cx="463.5" cy="396.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="351" x="472.5" y="399.2339">void handleChooseResources(Player player, Storage storage)</text><ellipse cx="463.5" cy="408.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="344" x="472.5" y="412.0386">void handleActivateLeader(Player player, LeaderCard card) {</text><ellipse cx="463.5" cy="421.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="356" x="472.5" y="424.8433">void handleBuyCard(Player player, int row, int column, int slot)</text><ellipse cx="463.5" cy="434.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="442" x="472.5" y="437.6479">void handleMarket(Player player, int row, int column, boolean row_or_column)</text><ellipse cx="463.5" cy="447.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="389" x="472.5" y="450.4526">void handleProduction(Player player, ProductionInterface production)</text><ellipse cx="463.5" cy="460.0469" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="194" x="472.5" y="463.2573">void handleEndTurn(Player player)</text><ellipse cx="463.5" cy="472.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="268" x="472.5" y="476.062">void handlePay(Player player, Storage storage)</text><ellipse cx="463.5" cy="485.6563" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="279" x="472.5" y="488.8667">void handleStore(Player player, Storage storage)</text><ellipse cx="463.5" cy="498.4609" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="241" x="472.5" y="501.6714">void handleDiscardResources(Player playe</text><ellipse cx="463.5" cy="511.2656" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="332" x="472.5" y="514.4761">void handleDiscardLeader(Player player, LeaderCard card)</text><ellipse cx="463.5" cy="524.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="371" x="472.5" y="527.2808">void handleActivateLeader(Player player, LeaderCard leader_card</text><ellipse cx="463.5" cy="536.875" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="363" x="472.5" y="540.0854">void handleDiscardLeader(Player player, LeaderCard leader_car</text><ellipse cx="463.5" cy="549.6797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="332" x="472.5" y="552.8901">void handleRearrange(Player player, int swap1, int swap2)</text><ellipse cx="463.5" cy="562.4844" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="194" x="472.5" y="565.6948">void handleEndTurn(Player player)</text><ellipse cx="463.5" cy="575.2891" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="214" x="472.5" y="578.4995">void handlePersistence(Player player)</text><!--MD5=[812757eea9e6597e380ac812ab4dfe41]
+class InitialController--><rect codeLine="42" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="86.4141" id="InitialController" style="stroke:#A80036;stroke-width:1.5;" width="349" x="956" y="390"/><ellipse cx="1079.25" cy="406" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1082.2188,411.6406 Q1081.6406,411.9375 1081,412.0781 Q1080.3594,412.2344 1079.6563,412.2344 Q1077.1563,412.2344 1075.8281,410.5938 Q1074.5156,408.9375 1074.5156,405.8125 Q1074.5156,402.6875 1075.8281,401.0313 Q1077.1563,399.375 1079.6563,399.375 Q1080.3594,399.375 1081,399.5313 Q1081.6563,399.6875 1082.2188,399.9844 L1082.2188,402.7031 Q1081.5938,402.125 1081,401.8594 Q1080.4063,401.5781 1079.7813,401.5781 Q1078.4375,401.5781 1077.75,402.6563 Q1077.0625,403.7188 1077.0625,405.8125 Q1077.0625,407.9063 1077.75,408.9844 Q1078.4375,410.0469 1079.7813,410.0469 Q1080.4063,410.0469 1081,409.7813 Q1081.5938,409.5 1082.2188,408.9219 L1082.2188,411.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="94" x="1099.75" y="410.1543">InitialController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="957" x2="1304" y1="422" y2="422"/><line style="stroke:#A80036;stroke-width:1.5;" x1="957" x2="1304" y1="430" y2="430"/><ellipse cx="967" cy="441" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="232" x="976" y="444.2104">void handleMessage(Message message)</text><ellipse cx="967" cy="453.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="323" x="976" y="457.0151">synchronized void setReceivedMessage(String message)</text><ellipse cx="967" cy="466.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="216" x="976" y="469.8198">synchronized String receiveMessage()</text><!--MD5=[10a817f2a1194600977cc0f4938c6507]
+class RemoteView--><rect codeLine="48" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="73.6094" id="RemoteView" style="stroke:#A80036;stroke-width:1.5;" width="316" x="101.5" y="396"/><ellipse cx="217.25" cy="412" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M220.2188,417.6406 Q219.6406,417.9375 219,418.0781 Q218.3594,418.2344 217.6563,418.2344 Q215.1563,418.2344 213.8281,416.5938 Q212.5156,414.9375 212.5156,411.8125 Q212.5156,408.6875 213.8281,407.0313 Q215.1563,405.375 217.6563,405.375 Q218.3594,405.375 219,405.5313 Q219.6563,405.6875 220.2188,405.9844 L220.2188,408.7031 Q219.5938,408.125 219,407.8594 Q218.4063,407.5781 217.7813,407.5781 Q216.4375,407.5781 215.75,408.6563 Q215.0625,409.7188 215.0625,411.8125 Q215.0625,413.9063 215.75,414.9844 Q216.4375,416.0469 217.7813,416.0469 Q218.4063,416.0469 219,415.7813 Q219.5938,415.5 220.2188,414.9219 L220.2188,417.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="76" x="237.75" y="416.1543">RemoteView</text><line style="stroke:#A80036;stroke-width:1.5;" x1="102.5" x2="416.5" y1="428" y2="428"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="109.5" y="436"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="159" x="121.5" y="442.2104">ClientHandler client_handler</text><line style="stroke:#A80036;stroke-width:1.5;" x1="102.5" x2="416.5" y1="448.8047" y2="448.8047"/><ellipse cx="112.5" cy="459.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="290" x="121.5" y="463.0151">void updateModel(ServerMessage servermessage)</text><!--MD5=[f2433eb5ac1a7dd7283fa980b727ba1e]
+class SetupManager--><rect codeLine="54" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="124.8281" id="SetupManager" style="stroke:#A80036;stroke-width:1.5;" width="507" x="7" y="51.5"/><ellipse cx="210.25" cy="67.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M213.2188,73.1406 Q212.6406,73.4375 212,73.5781 Q211.3594,73.7344 210.6563,73.7344 Q208.1563,73.7344 206.8281,72.0938 Q205.5156,70.4375 205.5156,67.3125 Q205.5156,64.1875 206.8281,62.5313 Q208.1563,60.875 210.6563,60.875 Q211.3594,60.875 212,61.0313 Q212.6563,61.1875 213.2188,61.4844 L213.2188,64.2031 Q212.5938,63.625 212,63.3594 Q211.4063,63.0781 210.7813,63.0781 Q209.4375,63.0781 208.75,64.1563 Q208.0625,65.2188 208.0625,67.3125 Q208.0625,69.4063 208.75,70.4844 Q209.4375,71.5469 210.7813,71.5469 Q211.4063,71.5469 212,71.2813 Q212.5938,71 213.2188,70.4219 L213.2188,73.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="92" x="230.75" y="71.6543">SetupManager</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="513" y1="83.5" y2="83.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="91.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="149" x="27" y="97.7104">ArrayList&lt;Player&gt; players</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="15" y="104.3047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="27" y="110.5151">RemoteView[] remote_views</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="513" y1="117.1094" y2="117.1094"/><ellipse cx="18" cy="128.1094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="297" x="27" y="131.3198">Game setupGame(ArrayList&lt;ClientHandler&gt; clients)</text><ellipse cx="18" cy="140.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="347" x="27" y="144.1245">SoloGame setupSoloGame(ArrayList&lt;ClientHandler&gt; clients)</text><ellipse cx="18" cy="153.7188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="431" x="27" y="156.9292">void setupPersistenceGame(ArrayList&lt;ClientHandler&gt; clients, Game game)</text><ellipse cx="18" cy="166.5234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="481" x="27" y="169.7339">void setupPersistenceSoloGame(ArrayList&lt;ClientHandler&gt; clients, SoloGame game)</text><!--MD5=[210f9c098d88ae8eefef6e153a0aaecb]
+class SoloGameController--><rect codeLine="64" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="150.4375" id="SoloGameController" style="stroke:#A80036;stroke-width:1.5;" width="381" x="495" y="645"/><ellipse cx="619.25" cy="661" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M622.2188,666.6406 Q621.6406,666.9375 621,667.0781 Q620.3594,667.2344 619.6563,667.2344 Q617.1563,667.2344 615.8281,665.5938 Q614.5156,663.9375 614.5156,660.8125 Q614.5156,657.6875 615.8281,656.0313 Q617.1563,654.375 619.6563,654.375 Q620.3594,654.375 621,654.5313 Q621.6563,654.6875 622.2188,654.9844 L622.2188,657.7031 Q621.5938,657.125 621,656.8594 Q620.4063,656.5781 619.7813,656.5781 Q618.4375,656.5781 617.75,657.6563 Q617.0625,658.7188 617.0625,660.8125 Q617.0625,662.9063 617.75,663.9844 Q618.4375,665.0469 619.7813,665.0469 Q620.4063,665.0469 621,664.7813 Q621.5938,664.5 622.2188,663.9219 L622.2188,666.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="124" x="639.75" y="665.1543">SoloGameController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="496" x2="875" y1="677" y2="677"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="503" y="685"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="515" y="691.2104">boolean last_card_discarded</text><line style="stroke:#A80036;stroke-width:1.5;" x1="496" x2="875" y1="697.8047" y2="697.8047"/><ellipse cx="506" cy="708.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="101" x="515" y="712.0151">void setupGame()</text><ellipse cx="506" cy="721.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="194" x="515" y="724.8198">void handleEndTurn(Player player)</text><ellipse cx="506" cy="734.4141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="250" x="515" y="737.6245">void handleDiscardResources(Player player)</text><ellipse cx="506" cy="747.2188" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="195" x="515" y="750.4292">void moveBlackCrossTwoSpaces()</text><ellipse cx="506" cy="760.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="188" x="515" y="763.2339">void moveBlackCrossOneSpace()</text><ellipse cx="506" cy="772.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="355" x="515" y="776.0386">void discardDevelopmentCards(DevelopmentCardsColor color)</text><ellipse cx="506" cy="785.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="214" x="515" y="788.8433">void handlePersistence(Player player)</text><!--MD5=[bea5b0d46523efab5ea1c1d339f396f0]
+class Message--><rect codeLine="77" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="73.6094" id="Message" style="stroke:#A80036;stroke-width:1.5;" width="281" x="2101" y="77"/><ellipse cx="2210.25" cy="93" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2210.3594,88.3438 L2209.2031,93.4219 L2211.5313,93.4219 L2210.3594,88.3438 Z M2208.875,86.1094 L2211.8594,86.1094 L2215.2188,98.5 L2212.7656,98.5 L2212,95.4375 L2208.7188,95.4375 L2207.9688,98.5 L2205.5313,98.5 L2208.875,86.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="54" x="2230.75" y="97.1543">Message</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2102" x2="2381" y1="109" y2="109"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2109" y="117"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="2121" y="123.2104">Player player</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2102" x2="2381" y1="129.8047" y2="129.8047"/><ellipse cx="2112" cy="140.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="255" x="2121" y="144.0151">void useMessage(GameController controller)</text><!--MD5=[180c269b4f05ea3c7daabafae18f8ee5]
+class TurnMessage--><rect codeLine="83" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="73.6094" id="TurnMessage" style="stroke:#A80036;stroke-width:1.5;" width="114" x="1918.5" y="396"/><ellipse cx="1933.5" cy="412" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1933.6094,407.3438 L1932.4531,412.4219 L1934.7813,412.4219 L1933.6094,407.3438 Z M1932.125,405.1094 L1935.1094,405.1094 L1938.4688,417.5 L1936.0156,417.5 L1935.25,414.4375 L1931.9688,414.4375 L1931.2188,417.5 L1928.7813,417.5 L1932.125,405.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="82" x="1947.5" y="416.1543">TurnMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1919.5" x2="2031.5" y1="428" y2="428"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1926.5" y="436"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="39" x="1938.5" y="442.2104">int row</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1926.5" y="448.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="59" x="1938.5" y="455.0151">int column</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1919.5" x2="2031.5" y1="461.6094" y2="461.6094"/><!--MD5=[04616b69272113c21f5c06f9f0dc66fe]
+class BuyCardMessage--><rect codeLine="88" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="BuyCardMessage" style="stroke:#A80036;stroke-width:1.5;" width="139" x="2111" y="689.5"/><ellipse cx="2126" cy="705.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2128.9688,711.1406 Q2128.3906,711.4375 2127.75,711.5781 Q2127.1094,711.7344 2126.4063,711.7344 Q2123.9063,711.7344 2122.5781,710.0938 Q2121.2656,708.4375 2121.2656,705.3125 Q2121.2656,702.1875 2122.5781,700.5313 Q2123.9063,698.875 2126.4063,698.875 Q2127.1094,698.875 2127.75,699.0313 Q2128.4063,699.1875 2128.9688,699.4844 L2128.9688,702.2031 Q2128.3438,701.625 2127.75,701.3594 Q2127.1563,701.0781 2126.5313,701.0781 Q2125.1875,701.0781 2124.5,702.1563 Q2123.8125,703.2188 2123.8125,705.3125 Q2123.8125,707.4063 2124.5,708.4844 Q2125.1875,709.5469 2126.5313,709.5469 Q2127.1563,709.5469 2127.75,709.2813 Q2128.3438,709 2128.9688,708.4219 L2128.9688,711.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="2140" y="709.6543">BuyCardMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2112" x2="2249" y1="721.5" y2="721.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2119" y="729.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="39" x="2131" y="735.7104">int slot</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2112" x2="2249" y1="742.3047" y2="742.3047"/><!--MD5=[ce0cd61e3edb0717e16090819a9bd36d]
+class MarketMessage--><rect codeLine="92" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="MarketMessage" style="stroke:#A80036;stroke-width:1.5;" width="161" x="1679" y="689.5"/><ellipse cx="1707.5" cy="705.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1710.4688,711.1406 Q1709.8906,711.4375 1709.25,711.5781 Q1708.6094,711.7344 1707.9063,711.7344 Q1705.4063,711.7344 1704.0781,710.0938 Q1702.7656,708.4375 1702.7656,705.3125 Q1702.7656,702.1875 1704.0781,700.5313 Q1705.4063,698.875 1707.9063,698.875 Q1708.6094,698.875 1709.25,699.0313 Q1709.9063,699.1875 1710.4688,699.4844 L1710.4688,702.2031 Q1709.8438,701.625 1709.25,701.3594 Q1708.6563,701.0781 1708.0313,701.0781 Q1706.6875,701.0781 1706,702.1563 Q1705.3125,703.2188 1705.3125,705.3125 Q1705.3125,707.4063 1706,708.4844 Q1706.6875,709.5469 1708.0313,709.5469 Q1708.6563,709.5469 1709.25,709.2813 Q1709.8438,709 1710.4688,708.4219 L1710.4688,711.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="99" x="1724.5" y="709.6543">MarketMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1680" x2="1839" y1="721.5" y2="721.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1687" y="729.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="1699" y="735.7104">boolean row_or_column</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1680" x2="1839" y1="742.3047" y2="742.3047"/><!--MD5=[0e99a6397b3d1963ded19f9721bf1a1d]
+class ProductionMessage--><rect codeLine="96" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="ProductionMessage" style="stroke:#A80036;stroke-width:1.5;" width="200" x="1875.5" y="689.5"/><ellipse cx="1910.3" cy="705.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1913.2688,711.1406 Q1912.6906,711.4375 1912.05,711.5781 Q1911.4094,711.7344 1910.7063,711.7344 Q1908.2063,711.7344 1906.8781,710.0938 Q1905.5656,708.4375 1905.5656,705.3125 Q1905.5656,702.1875 1906.8781,700.5313 Q1908.2063,698.875 1910.7063,698.875 Q1911.4094,698.875 1912.05,699.0313 Q1912.7063,699.1875 1913.2688,699.4844 L1913.2688,702.2031 Q1912.6438,701.625 1912.05,701.3594 Q1911.4563,701.0781 1910.8313,701.0781 Q1909.4875,701.0781 1908.8,702.1563 Q1908.1125,703.2188 1908.1125,705.3125 Q1908.1125,707.4063 1908.8,708.4844 Q1909.4875,709.5469 1910.8313,709.5469 Q1911.4563,709.5469 1912.05,709.2813 Q1912.6438,709 1913.2688,708.4219 L1913.2688,711.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="124" x="1928.7" y="709.6543">ProductionMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1876.5" x2="2074.5" y1="721.5" y2="721.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1883.5" y="729.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="174" x="1895.5" y="735.7104">ProductionInterface production</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1876.5" x2="2074.5" y1="742.3047" y2="742.3047"/><!--MD5=[9ec1f3dfebcd803fd03bab47f96d49b9]
+class ResourceMessage--><rect codeLine="100" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="ResourceMessage" style="stroke:#A80036;stroke-width:1.5;" width="144" x="1359.5" y="402.5"/><ellipse cx="1374.5" cy="418.5" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1374.6094,413.8438 L1373.4531,418.9219 L1375.7813,418.9219 L1374.6094,413.8438 Z M1373.125,411.6094 L1376.1094,411.6094 L1379.4688,424 L1377.0156,424 L1376.25,420.9375 L1372.9688,420.9375 L1372.2188,424 L1369.7813,424 L1373.125,411.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="112" x="1388.5" y="422.6543">ResourceMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1360.5" x2="1502.5" y1="434.5" y2="434.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="1367.5" y="442.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="1379.5" y="448.7104">Storage storage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1360.5" x2="1502.5" y1="455.3047" y2="455.3047"/><!--MD5=[2641e94aa5fcf1bc7cf56e9e04896ec8]
+class PayMessage--><rect codeLine="104" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="PayMessage" style="stroke:#A80036;stroke-width:1.5;" width="110" x="1376.5" y="696"/><ellipse cx="1391.5" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1394.4688,717.6406 Q1393.8906,717.9375 1393.25,718.0781 Q1392.6094,718.2344 1391.9063,718.2344 Q1389.4063,718.2344 1388.0781,716.5938 Q1386.7656,714.9375 1386.7656,711.8125 Q1386.7656,708.6875 1388.0781,707.0313 Q1389.4063,705.375 1391.9063,705.375 Q1392.6094,705.375 1393.25,705.5313 Q1393.9063,705.6875 1394.4688,705.9844 L1394.4688,708.7031 Q1393.8438,708.125 1393.25,707.8594 Q1392.6563,707.5781 1392.0313,707.5781 Q1390.6875,707.5781 1390,708.6563 Q1389.3125,709.7188 1389.3125,711.8125 Q1389.3125,713.9063 1390,714.9844 Q1390.6875,716.0469 1392.0313,716.0469 Q1392.6563,716.0469 1393.25,715.7813 Q1393.8438,715.5 1394.4688,714.9219 L1394.4688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="78" x="1405.5" y="716.1543">PayMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1377.5" x2="1485.5" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1377.5" x2="1485.5" y1="736" y2="736"/><!--MD5=[80db9005c891793a30ac405d1a78c091]
+class StoreMessage--><rect codeLine="107" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="StoreMessage" style="stroke:#A80036;stroke-width:1.5;" width="122" x="1521.5" y="696"/><ellipse cx="1536.5" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1539.4688,717.6406 Q1538.8906,717.9375 1538.25,718.0781 Q1537.6094,718.2344 1536.9063,718.2344 Q1534.4063,718.2344 1533.0781,716.5938 Q1531.7656,714.9375 1531.7656,711.8125 Q1531.7656,708.6875 1533.0781,707.0313 Q1534.4063,705.375 1536.9063,705.375 Q1537.6094,705.375 1538.25,705.5313 Q1538.9063,705.6875 1539.4688,705.9844 L1539.4688,708.7031 Q1538.8438,708.125 1538.25,707.8594 Q1537.6563,707.5781 1537.0313,707.5781 Q1535.6875,707.5781 1535,708.6563 Q1534.3125,709.7188 1534.3125,711.8125 Q1534.3125,713.9063 1535,714.9844 Q1535.6875,716.0469 1537.0313,716.0469 Q1537.6563,716.0469 1538.25,715.7813 Q1538.8438,715.5 1539.4688,714.9219 L1539.4688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="90" x="1550.5" y="716.1543">StoreMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1522.5" x2="1642.5" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1522.5" x2="1642.5" y1="736" y2="736"/><!--MD5=[290741a2e997231db0f368e6c65cf9c8]
+class DiscardResourceMessage--><rect codeLine="110" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="DiscardResourceMessage" style="stroke:#A80036;stroke-width:1.5;" width="194" x="910.5" y="696"/><ellipse cx="925.5" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M928.4688,717.6406 Q927.8906,717.9375 927.25,718.0781 Q926.6094,718.2344 925.9063,718.2344 Q923.4063,718.2344 922.0781,716.5938 Q920.7656,714.9375 920.7656,711.8125 Q920.7656,708.6875 922.0781,707.0313 Q923.4063,705.375 925.9063,705.375 Q926.6094,705.375 927.25,705.5313 Q927.9063,705.6875 928.4688,705.9844 L928.4688,708.7031 Q927.8438,708.125 927.25,707.8594 Q926.6563,707.5781 926.0313,707.5781 Q924.6875,707.5781 924,708.6563 Q923.3125,709.7188 923.3125,711.8125 Q923.3125,713.9063 924,714.9844 Q924.6875,716.0469 926.0313,716.0469 Q926.6563,716.0469 927.25,715.7813 Q927.8438,715.5 928.4688,714.9219 L928.4688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="162" x="939.5" y="716.1543">DiscardResourceMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="911.5" x2="1103.5" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="911.5" x2="1103.5" y1="736" y2="736"/><!--MD5=[5c1258a8d6a68c6e9b24976c58c323ad]
+class RearrangeMessage--><rect codeLine="113" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="RearrangeMessage" style="stroke:#A80036;stroke-width:1.5;" width="154" x="2067.5" y="402.5"/><ellipse cx="2082.5" cy="418.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2085.4688,424.1406 Q2084.8906,424.4375 2084.25,424.5781 Q2083.6094,424.7344 2082.9063,424.7344 Q2080.4063,424.7344 2079.0781,423.0938 Q2077.7656,421.4375 2077.7656,418.3125 Q2077.7656,415.1875 2079.0781,413.5313 Q2080.4063,411.875 2082.9063,411.875 Q2083.6094,411.875 2084.25,412.0313 Q2084.9063,412.1875 2085.4688,412.4844 L2085.4688,415.2031 Q2084.8438,414.625 2084.25,414.3594 Q2083.6563,414.0781 2083.0313,414.0781 Q2081.6875,414.0781 2081,415.1563 Q2080.3125,416.2188 2080.3125,418.3125 Q2080.3125,420.4063 2081,421.4844 Q2081.6875,422.5469 2083.0313,422.5469 Q2083.6563,422.5469 2084.25,422.2813 Q2084.8438,422 2085.4688,421.4219 L2085.4688,424.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="122" x="2096.5" y="422.6543">RearrangeMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2068.5" x2="2220.5" y1="434.5" y2="434.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2075.5" y="442.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="2087.5" y="448.7104">int swap1, swap2</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2068.5" x2="2220.5" y1="455.3047" y2="455.3047"/><!--MD5=[4bce2e59fc5962a5ef83f93fe8fe47fd]
+class LeaderCardMessage--><rect codeLine="117" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="LeaderCardMessage" style="stroke:#A80036;stroke-width:1.5;" width="163" x="2257" y="402.5"/><ellipse cx="2273.8" cy="418.5" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2273.9094,413.8438 L2272.7531,418.9219 L2275.0813,418.9219 L2273.9094,413.8438 Z M2272.425,411.6094 L2275.4094,411.6094 L2278.7688,424 L2276.3156,424 L2275.55,420.9375 L2272.2688,420.9375 L2271.5188,424 L2269.0813,424 L2272.425,411.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="127" x="2288.2" y="422.6543">LeaderCardMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2258" x2="2419" y1="434.5" y2="434.5"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="2265" y="442.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="2277" y="448.7104">LeaderCard leader_card</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2258" x2="2419" y1="455.3047" y2="455.3047"/><!--MD5=[46871273cbbae761ea7d90192e258044]
+class ActivateLeaderMessage--><rect codeLine="121" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="ActivateLeaderMessage" style="stroke:#A80036;stroke-width:1.5;" width="181" x="2285" y="696"/><ellipse cx="2300" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2302.9688,717.6406 Q2302.3906,717.9375 2301.75,718.0781 Q2301.1094,718.2344 2300.4063,718.2344 Q2297.9063,718.2344 2296.5781,716.5938 Q2295.2656,714.9375 2295.2656,711.8125 Q2295.2656,708.6875 2296.5781,707.0313 Q2297.9063,705.375 2300.4063,705.375 Q2301.1094,705.375 2301.75,705.5313 Q2302.4063,705.6875 2302.9688,705.9844 L2302.9688,708.7031 Q2302.3438,708.125 2301.75,707.8594 Q2301.1563,707.5781 2300.5313,707.5781 Q2299.1875,707.5781 2298.5,708.6563 Q2297.8125,709.7188 2297.8125,711.8125 Q2297.8125,713.9063 2298.5,714.9844 Q2299.1875,716.0469 2300.5313,716.0469 Q2301.1563,716.0469 2301.75,715.7813 Q2302.3438,715.5 2302.9688,714.9219 L2302.9688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="149" x="2314" y="716.1543">ActivateLeaderMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2286" x2="2465" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2286" x2="2465" y1="736" y2="736"/><!--MD5=[f698419f9368f85188edc50e9080ad60]
+class DiscardLeaderMessage--><rect codeLine="124" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="DiscardLeaderMessage" style="stroke:#A80036;stroke-width:1.5;" width="178" x="2501.5" y="696"/><ellipse cx="2516.5" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2519.4688,717.6406 Q2518.8906,717.9375 2518.25,718.0781 Q2517.6094,718.2344 2516.9063,718.2344 Q2514.4063,718.2344 2513.0781,716.5938 Q2511.7656,714.9375 2511.7656,711.8125 Q2511.7656,708.6875 2513.0781,707.0313 Q2514.4063,705.375 2516.9063,705.375 Q2517.6094,705.375 2518.25,705.5313 Q2518.9063,705.6875 2519.4688,705.9844 L2519.4688,708.7031 Q2518.8438,708.125 2518.25,707.8594 Q2517.6563,707.5781 2517.0313,707.5781 Q2515.6875,707.5781 2515,708.6563 Q2514.3125,709.7188 2514.3125,711.8125 Q2514.3125,713.9063 2515,714.9844 Q2515.6875,716.0469 2517.0313,716.0469 Q2517.6563,716.0469 2518.25,715.7813 Q2518.8438,715.5 2519.4688,714.9219 L2519.4688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="146" x="2530.5" y="716.1543">DiscardLeaderMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2502.5" x2="2678.5" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2502.5" x2="2678.5" y1="736" y2="736"/><!--MD5=[dac747421f4bb5cdea3112850a9198c3]
+class EndTurnMessage--><rect codeLine="127" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="EndTurnMessage" style="stroke:#A80036;stroke-width:1.5;" width="140" x="2455.5" y="409"/><ellipse cx="2470.5" cy="425" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2473.4688,430.6406 Q2472.8906,430.9375 2472.25,431.0781 Q2471.6094,431.2344 2470.9063,431.2344 Q2468.4063,431.2344 2467.0781,429.5938 Q2465.7656,427.9375 2465.7656,424.8125 Q2465.7656,421.6875 2467.0781,420.0313 Q2468.4063,418.375 2470.9063,418.375 Q2471.6094,418.375 2472.25,418.5313 Q2472.9063,418.6875 2473.4688,418.9844 L2473.4688,421.7031 Q2472.8438,421.125 2472.25,420.8594 Q2471.6563,420.5781 2471.0313,420.5781 Q2469.6875,420.5781 2469,421.6563 Q2468.3125,422.7188 2468.3125,424.8125 Q2468.3125,426.9063 2469,427.9844 Q2469.6875,429.0469 2471.0313,429.0469 Q2471.6563,429.0469 2472.25,428.7813 Q2472.8438,428.5 2473.4688,427.9219 L2473.4688,430.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="108" x="2484.5" y="429.1543">EndTurnMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2456.5" x2="2594.5" y1="441" y2="441"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2456.5" x2="2594.5" y1="449" y2="449"/><!--MD5=[c2c1bfd03c83b39f70b0a5f8f1faa334]
+class ChooseResourcesMessage--><rect codeLine="130" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="ChooseResourcesMessage" style="stroke:#A80036;stroke-width:1.5;" width="201" x="1140" y="696"/><ellipse cx="1155" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1157.9688,717.6406 Q1157.3906,717.9375 1156.75,718.0781 Q1156.1094,718.2344 1155.4063,718.2344 Q1152.9063,718.2344 1151.5781,716.5938 Q1150.2656,714.9375 1150.2656,711.8125 Q1150.2656,708.6875 1151.5781,707.0313 Q1152.9063,705.375 1155.4063,705.375 Q1156.1094,705.375 1156.75,705.5313 Q1157.4063,705.6875 1157.9688,705.9844 L1157.9688,708.7031 Q1157.3438,708.125 1156.75,707.8594 Q1156.1563,707.5781 1155.5313,707.5781 Q1154.1875,707.5781 1153.5,708.6563 Q1152.8125,709.7188 1152.8125,711.8125 Q1152.8125,713.9063 1153.5,714.9844 Q1154.1875,716.0469 1155.5313,716.0469 Q1156.1563,716.0469 1156.75,715.7813 Q1157.3438,715.5 1157.9688,714.9219 L1157.9688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="169" x="1169" y="716.1543">ChooseResourcesMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1141" x2="1340" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1141" x2="1340" y1="736" y2="736"/><!--MD5=[9eb6a8bf2731e6128205e7685bf01cab]
+class InitializingMessage--><rect codeLine="133" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="InitializingMessage" style="stroke:#A80036;stroke-width:1.5;" width="148" x="2630.5" y="409"/><ellipse cx="2645.5" cy="425" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2648.4688,430.6406 Q2647.8906,430.9375 2647.25,431.0781 Q2646.6094,431.2344 2645.9063,431.2344 Q2643.4063,431.2344 2642.0781,429.5938 Q2640.7656,427.9375 2640.7656,424.8125 Q2640.7656,421.6875 2642.0781,420.0313 Q2643.4063,418.375 2645.9063,418.375 Q2646.6094,418.375 2647.25,418.5313 Q2647.9063,418.6875 2648.4688,418.9844 L2648.4688,421.7031 Q2647.8438,421.125 2647.25,420.8594 Q2646.6563,420.5781 2646.0313,420.5781 Q2644.6875,420.5781 2644,421.6563 Q2643.3125,422.7188 2643.3125,424.8125 Q2643.3125,426.9063 2644,427.9844 Q2644.6875,429.0469 2646.0313,429.0469 Q2646.6563,429.0469 2647.25,428.7813 Q2647.8438,428.5 2648.4688,427.9219 L2648.4688,430.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="116" x="2659.5" y="429.1543">InitializingMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2631.5" x2="2777.5" y1="441" y2="441"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2631.5" x2="2777.5" y1="449" y2="449"/><!--MD5=[cf3e586083927f2624be10c8911980ed]
+class PersistenceMessage--><rect codeLine="136" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="PersistenceMessage" style="stroke:#A80036;stroke-width:1.5;" width="162" x="2813.5" y="409"/><ellipse cx="2828.5" cy="425" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M2831.4688,430.6406 Q2830.8906,430.9375 2830.25,431.0781 Q2829.6094,431.2344 2828.9063,431.2344 Q2826.4063,431.2344 2825.0781,429.5938 Q2823.7656,427.9375 2823.7656,424.8125 Q2823.7656,421.6875 2825.0781,420.0313 Q2826.4063,418.375 2828.9063,418.375 Q2829.6094,418.375 2830.25,418.5313 Q2830.9063,418.6875 2831.4688,418.9844 L2831.4688,421.7031 Q2830.8438,421.125 2830.25,420.8594 Q2829.6563,420.5781 2829.0313,420.5781 Q2827.6875,420.5781 2827,421.6563 Q2826.3125,422.7188 2826.3125,424.8125 Q2826.3125,426.9063 2827,427.9844 Q2827.6875,429.0469 2829.0313,429.0469 Q2829.6563,429.0469 2830.25,428.7813 Q2830.8438,428.5 2831.4688,427.9219 L2831.4688,430.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="130" x="2842.5" y="429.1543">PersistenceMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="2814.5" x2="2974.5" y1="441" y2="441"/><line style="stroke:#A80036;stroke-width:1.5;" x1="2814.5" x2="2974.5" y1="449" y2="449"/><!--MD5=[11b747870319a085bc745183e08c5f76]
+class Storage--><rect codeLine="139" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="176.0469" id="Storage" style="stroke:#A80036;stroke-width:1.5;" width="324" x="1269.5" y="26"/><ellipse cx="1402.25" cy="42" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M1405.2188,47.6406 Q1404.6406,47.9375 1404,48.0781 Q1403.3594,48.2344 1402.6563,48.2344 Q1400.1563,48.2344 1398.8281,46.5938 Q1397.5156,44.9375 1397.5156,41.8125 Q1397.5156,38.6875 1398.8281,37.0313 Q1400.1563,35.375 1402.6563,35.375 Q1403.3594,35.375 1404,35.5313 Q1404.6563,35.6875 1405.2188,35.9844 L1405.2188,38.7031 Q1404.5938,38.125 1404,37.8594 Q1403.4063,37.5781 1402.7813,37.5781 Q1401.4375,37.5781 1400.75,38.6563 Q1400.0625,39.7188 1400.0625,41.8125 Q1400.0625,43.9063 1400.75,44.9844 Q1401.4375,46.0469 1402.7813,46.0469 Q1403.4063,46.0469 1404,45.7813 Q1404.5938,45.5 1405.2188,44.9219 L1405.2188,47.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="50" x="1422.75" y="46.1543">Storage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1270.5" x2="1592.5" y1="58" y2="58"/><ellipse cx="1280.5" cy="69" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="212" x="1289.5" y="72.2104">ArrayList&lt;Resource&gt; warehouse_top</text><ellipse cx="1280.5" cy="81.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="215" x="1289.5" y="85.0151">ArrayList&lt;Resource&gt; warehouse_mid</text><ellipse cx="1280.5" cy="94.6094" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="212" x="1289.5" y="97.8198">ArrayList&lt;Resource&gt; warehouse_bot</text><ellipse cx="1280.5" cy="107.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="182" x="1289.5" y="110.6245">ArrayList&lt;Resource&gt; strongbox</text><ellipse cx="1280.5" cy="120.2188" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="188" x="1289.5" y="123.4292">ArrayList&lt;Resource&gt; extraspace</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1270.5" x2="1592.5" y1="130.0234" y2="130.0234"/><ellipse cx="1280.5" cy="141.0234" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="298" x="1289.5" y="144.2339">void addToWarehouseTop(ArrayList&lt;Resource&gt; res)</text><ellipse cx="1280.5" cy="153.8281" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="296" x="1289.5" y="157.0386">void addToWarehouseMid(ArrayList&lt;Resource&gt; res)</text><ellipse cx="1280.5" cy="166.6328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="296" x="1289.5" y="169.8433">void addToWarehouseBot(ArrayList&lt;Resource&gt; res)</text><ellipse cx="1280.5" cy="179.4375" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="272" x="1289.5" y="182.6479">void addToStrongbox(ArrayList&lt;Resource&gt; res)</text><ellipse cx="1280.5" cy="192.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="277" x="1289.5" y="195.4526">void addToExtraspace(ArrayList&lt;Resource&gt; res)</text><!--MD5=[e53abe0d4775e124e2ce83204cb759b4]
+class ServerMessage--><rect codeLine="154" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="86.4141" id="ServerMessage" style="stroke:#A80036;stroke-width:1.5;" width="134" x="3330.5" y="71"/><ellipse cx="3349.1" cy="87" fill="#A9DCDF" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3349.2094,82.3438 L3348.0531,87.4219 L3350.3813,87.4219 L3349.2094,82.3438 Z M3347.725,80.1094 L3350.7094,80.1094 L3354.0688,92.5 L3351.6156,92.5 L3350.85,89.4375 L3347.5688,89.4375 L3346.8188,92.5 L3344.3813,92.5 L3347.725,80.1094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="94" x="3363.9" y="91.1543">ServerMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3331.5" x2="3463.5" y1="103" y2="103"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3338.5" y="111"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="78" x="3350.5" y="117.2104">boolean error</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3338.5" y="123.8047"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="104" x="3350.5" y="130.0151">boolean initializing</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="3338.5" y="136.6094"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="3350.5" y="142.8198">boolean end_game</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3331.5" x2="3463.5" y1="149.4141" y2="149.4141"/><!--MD5=[838ac959de5e1ba4664740f6291c93a0]
+class ErrorMessage--><rect codeLine="160" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="73.6094" id="ErrorMessage" style="stroke:#A80036;stroke-width:1.5;" width="132" x="3010.5" y="396"/><ellipse cx="3031.35" cy="412" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3034.3188,417.6406 Q3033.7406,417.9375 3033.1,418.0781 Q3032.4594,418.2344 3031.7563,418.2344 Q3029.2563,418.2344 3027.9281,416.5938 Q3026.6156,414.9375 3026.6156,411.8125 Q3026.6156,408.6875 3027.9281,407.0313 Q3029.2563,405.375 3031.7563,405.375 Q3032.4594,405.375 3033.1,405.5313 Q3033.7563,405.6875 3034.3188,405.9844 L3034.3188,408.7031 Q3033.6938,408.125 3033.1,407.8594 Q3032.5063,407.5781 3031.8813,407.5781 Q3030.5375,407.5781 3029.85,408.6563 Q3029.1625,409.7188 3029.1625,411.8125 Q3029.1625,413.9063 3029.85,414.9844 Q3030.5375,416.0469 3031.8813,416.0469 Q3032.5063,416.0469 3033.1,415.7813 Q3033.6938,415.5 3034.3188,414.9219 L3034.3188,417.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="87" x="3046.65" y="416.1543">ErrorMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3011.5" x2="3141.5" y1="428" y2="428"/><ellipse cx="3021.5" cy="439" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="74" x="3030.5" y="442.2104">Player player</text><ellipse cx="3021.5" cy="451.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="106" x="3030.5" y="455.0151">String error_string</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3011.5" x2="3141.5" y1="461.6094" y2="461.6094"/><!--MD5=[3bb71c28921710e5ee1724e9644811cc]
+class EndGameMessage--><rect codeLine="165" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="60.8047" id="EndGameMessage" style="stroke:#A80036;stroke-width:1.5;" width="207" x="3178" y="402.5"/><ellipse cx="3219.55" cy="418.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3222.5188,424.1406 Q3221.9406,424.4375 3221.3,424.5781 Q3220.6594,424.7344 3219.9563,424.7344 Q3217.4563,424.7344 3216.1281,423.0938 Q3214.8156,421.4375 3214.8156,418.3125 Q3214.8156,415.1875 3216.1281,413.5313 Q3217.4563,411.875 3219.9563,411.875 Q3220.6594,411.875 3221.3,412.0313 Q3221.9563,412.1875 3222.5188,412.4844 L3222.5188,415.2031 Q3221.8938,414.625 3221.3,414.3594 Q3220.7063,414.0781 3220.0813,414.0781 Q3218.7375,414.0781 3218.05,415.1563 Q3217.3625,416.2188 3217.3625,418.3125 Q3217.3625,420.4063 3218.05,421.4844 Q3218.7375,422.5469 3220.0813,422.5469 Q3220.7063,422.5469 3221.3,422.2813 Q3221.8938,422 3222.5188,421.4219 L3222.5188,424.1406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="116" x="3239.45" y="422.6543">EndGameMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3179" x2="3384" y1="434.5" y2="434.5"/><ellipse cx="3189" cy="445.5" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="181" x="3198" y="448.7104">HashMap&lt;String, Integer&gt; rank</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3179" x2="3384" y1="455.3047" y2="455.3047"/><!--MD5=[1f878c1bed94d3952e7f0aca1d7a191c]
+class InitializingMessageType--><rect codeLine="169" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="124.8281" id="InitializingMessageType" style="stroke:#A80036;stroke-width:1.5;" width="177" x="3426" y="657.5"/><ellipse cx="3441" cy="673.5" fill="#EB937F" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3445.1094,679.5 L3437.3906,679.5 L3437.3906,667.1094 L3445.1094,667.1094 L3445.1094,669.2656 L3439.8438,669.2656 L3439.8438,671.9375 L3444.6094,671.9375 L3444.6094,674.0938 L3439.8438,674.0938 L3439.8438,677.3438 L3445.1094,677.3438 L3445.1094,679.5 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="145" x="3455" y="677.6543">InitializingMessageType</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3427" x2="3602" y1="689.5" y2="689.5"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="61" x="3432" y="703.7104">NICKNAME,</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="135" x="3432" y="716.5151">CHOOSE_MATCH_NAME,</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="3432" y="729.3198">STARTED_MATCH_NAME,</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="3432" y="742.1245">JOINED_MATCH,</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="84" x="3432" y="754.9292">NUM_PLAYERS,</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="81" x="3432" y="767.7339">START_MATCH</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3427" x2="3602" y1="774.3281" y2="774.3281"/><!--MD5=[69d5918698e46e1017c04c327997c3f0]
+class InitializingServerMessage--><rect codeLine="178" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="86.4141" id="InitializingServerMessage" style="stroke:#A80036;stroke-width:1.5;" width="188" x="3420.5" y="390"/><ellipse cx="3435.5" cy="406" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3438.4688,411.6406 Q3437.8906,411.9375 3437.25,412.0781 Q3436.6094,412.2344 3435.9063,412.2344 Q3433.4063,412.2344 3432.0781,410.5938 Q3430.7656,408.9375 3430.7656,405.8125 Q3430.7656,402.6875 3432.0781,401.0313 Q3433.4063,399.375 3435.9063,399.375 Q3436.6094,399.375 3437.25,399.5313 Q3437.9063,399.6875 3438.4688,399.9844 L3438.4688,402.7031 Q3437.8438,402.125 3437.25,401.8594 Q3436.6563,401.5781 3436.0313,401.5781 Q3434.6875,401.5781 3434,402.6563 Q3433.3125,403.7188 3433.3125,405.8125 Q3433.3125,407.9063 3434,408.9844 Q3434.6875,410.0469 3436.0313,410.0469 Q3436.6563,410.0469 3437.25,409.7813 Q3437.8438,409.5 3438.4688,408.9219 L3438.4688,411.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="156" x="3449.5" y="410.1543">InitializingServerMessage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3421.5" x2="3607.5" y1="422" y2="422"/><ellipse cx="3431.5" cy="433" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="91" x="3440.5" y="436.2104">String message</text><ellipse cx="3431.5" cy="445.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="161" x="3440.5" y="449.0151">InitializingMessageType type</text><ellipse cx="3431.5" cy="458.6094" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="111" x="3440.5" y="461.8198">String match_name</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3421.5" x2="3607.5" y1="468.4141" y2="468.4141"/><!--MD5=[6b0bbd6b1096feac1a633078d57d05ab]
+class ViewUpdate--><rect codeLine="184" fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="86.4141" id="ViewUpdate" style="stroke:#A80036;stroke-width:1.5;" width="183" x="3644" y="390"/><ellipse cx="3694.25" cy="406" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M3697.2188,411.6406 Q3696.6406,411.9375 3696,412.0781 Q3695.3594,412.2344 3694.6563,412.2344 Q3692.1563,412.2344 3690.8281,410.5938 Q3689.5156,408.9375 3689.5156,405.8125 Q3689.5156,402.6875 3690.8281,401.0313 Q3692.1563,399.375 3694.6563,399.375 Q3695.3594,399.375 3696,399.5313 Q3696.6563,399.6875 3697.2188,399.9844 L3697.2188,402.7031 Q3696.5938,402.125 3696,401.8594 Q3695.4063,401.5781 3694.7813,401.5781 Q3693.4375,401.5781 3692.75,402.6563 Q3692.0625,403.7188 3692.0625,405.8125 Q3692.0625,407.9063 3692.75,408.9844 Q3693.4375,410.0469 3694.7813,410.0469 Q3695.4063,410.0469 3696,409.7813 Q3696.5938,409.5 3697.2188,408.9219 L3697.2188,411.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="74" x="3714.75" y="410.1543">ViewUpdate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3645" x2="3826" y1="422" y2="422"/><ellipse cx="3655" cy="433" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="153" x="3664" y="436.2104">SimpleGame simple_game</text><ellipse cx="3655" cy="445.8047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="157" x="3664" y="449.0151">SimplePlayer simple_player</text><ellipse cx="3655" cy="458.6094" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="53" x="3664" y="461.8198">Turn turn</text><line style="stroke:#A80036;stroke-width:1.5;" x1="3645" x2="3826" y1="468.4141" y2="468.4141"/><!--MD5=[4de66e5d3add5d77b00177f9d55a2a0c]
+class ModelObserver--><rect fill="#FEFECE" filter="url(#fwie9ynqnkrd5)" height="48" id="ModelObserver" style="stroke:#A80036;stroke-width:1.5;" width="125" x="197" y="696"/><ellipse cx="212" cy="712" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M214.9688,717.6406 Q214.3906,717.9375 213.75,718.0781 Q213.1094,718.2344 212.4063,718.2344 Q209.9063,718.2344 208.5781,716.5938 Q207.2656,714.9375 207.2656,711.8125 Q207.2656,708.6875 208.5781,707.0313 Q209.9063,705.375 212.4063,705.375 Q213.1094,705.375 213.75,705.5313 Q214.4063,705.6875 214.9688,705.9844 L214.9688,708.7031 Q214.3438,708.125 213.75,707.8594 Q213.1563,707.5781 212.5313,707.5781 Q211.1875,707.5781 210.5,708.6563 Q209.8125,709.7188 209.8125,711.8125 Q209.8125,713.9063 210.5,714.9844 Q211.1875,716.0469 212.5313,716.0469 Q213.1563,716.0469 213.75,715.7813 Q214.3438,715.5 214.9688,714.9219 L214.9688,717.6406 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="93" x="226" y="716.1543">ModelObserver</text><line style="stroke:#A80036;stroke-width:1.5;" x1="198" x2="321" y1="728" y2="728"/><line style="stroke:#A80036;stroke-width:1.5;" x1="198" x2="321" y1="736" y2="736"/><!--MD5=[1f4d4c9fb57d20e6842437295b0abf30]
+reverse link Controller to GameController--><path codeLine="191" d="M820.415,225.6268 C808.892,243.4706 796.8001,262.1955 784.7936,280.7881 " fill="none" id="Controller-backto-GameController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="823.3319,221.1098,815.0893,226.5005,820.6195,225.3102,821.8099,230.8403,823.3319,221.1098" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[32183068e70a95730ccf9c5d659d834f]
+reverse link Controller to InitialController--><path codeLine="192" d="M975.4539,225.1861 C1017.8605,282.0252 1067.0108,347.9031 1098.409,389.9873 " fill="none" id="Controller-backto-InitialController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="972.4126,221.1098,974.5883,230.7153,975.4025,225.1174,981.0004,225.9316,972.4126,221.1098" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f88ac8157ea24d1c934b7cc2b3d56b34]
+link SetupManager to GameController--><path codeLine="194" d="M344.1556,176.6435 C384.2579,206.6731 434.2047,244.0746 483.4416,280.9445 " fill="none" id="SetupManager-GameController" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[10937f27bb982d279db4da54f632c9b7]
+link SetupManager to RemoteView--><path codeLine="195" d="M260.3036,176.6435 C260.0989,241.9647 259.7847,342.1667 259.6163,395.9046 " fill="none" id="SetupManager-RemoteView" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[740ceadcdfcd252c6ed8274278836248]
+link Message to GameController--><path codeLine="197" d="M2100.6957,141.1535 C1973.132,164.9708 1779.7889,199.1238 1610.5,221 C1313.1179,259.4289 1223.5171,187.8435 938.5,281 C932.5509,282.9444 926.5941,285.0508 920.644,287.2992 " fill="none" id="Message-GameController" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ea4d956b33fb4551caae121164266c0f]
+link RemoteView to ModelObserver--><path codeLine="199" d="M259.5,470.226 C259.5,527.9999 259.5,638.0601 259.5,690.6284 " fill="none" id="RemoteView-to-ModelObserver" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="259.5,695.8367,263.5,686.8367,259.5,690.8367,255.5,686.8367,259.5,695.8367" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b2e3894d67d3396c9d92e2c30baec23c]
+reverse link GameController to SoloGameController--><path codeLine="201" d="M685.9507,590.6438 C685.8851,609.4793 685.8206,627.9865 685.7618,644.8505 " fill="none" id="GameController-backto-SoloGameController" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="685.9693,585.3237,681.9377,594.3096,685.9517,590.3237,689.9376,594.3377,685.9693,585.3237" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[96753b5102b7d21a490a905f4d77c1e5]
+link Storage to ResourceMessage--><path codeLine="204" d="M1431.5,202.0126 C1431.5,268.772 1431.5,356.5984 1431.5,402.3293 " fill="none" id="Storage-ResourceMessage" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ab7995e974f5f81707f4a2ca096131db]
+reverse link Message to ResourceMessage--><path codeLine="206" d="M2142.5528,152.9681 C1977.2733,218.0597 1648.8659,347.3954 1503.5499,404.6248 " fill="none" id="Message-backto-ResourceMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2147.3948,151.0612,2137.5551,150.6373,2142.7426,152.8934,2140.4865,158.0809,2147.3948,151.0612" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[52e53d8c341792314d110c04228f34bb]
+reverse link Message to LeaderCardMessage--><path codeLine="207" d="M2254.3276,156.1858 C2274.1272,221.2998 2311.6683,344.7596 2329.1307,402.1877 " fill="none" id="Message-backto-LeaderCardMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2252.817,151.2177,2251.6082,160.9921,2254.2715,156.0015,2259.2622,158.6648,2252.817,151.2177" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4104042addd8d6a495595d0e8c86b1b4]
+reverse link Message to InitializingMessage--><path codeLine="208" d="M2377.2088,152.8914 C2452.8554,179.6702 2545.1011,221.3189 2612.5,281 C2653.3757,317.1951 2681.7079,376.0016 2695.3016,408.8494 " fill="none" id="Message-backto-InitializingMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2372.2506,151.149,2379.4154,157.9067,2376.9678,152.8067,2382.0677,150.3592,2372.2506,151.149" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f3057d962b4c21443d20116f4bca54ff]
+reverse link Message to PersistenceMessage--><path codeLine="209" d="M2387.1396,129.9249 C2506.7347,149.1497 2675.38,190.9779 2795.5,281 C2840.4836,314.7123 2870.8679,375.311 2885.142,408.912 " fill="none" id="Message-backto-PersistenceMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2382.1948,129.1384,2390.4546,134.5027,2387.1327,129.924,2391.7115,126.6021,2382.1948,129.1384" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[acbd6ff89d0ed432eae8a783d61824e9]
+reverse link Message to RearrangeMessage--><path codeLine="210" d="M2228.6724,156.1858 C2208.8728,221.2998 2171.3317,344.7596 2153.8693,402.1877 " fill="none" id="Message-backto-RearrangeMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2230.183,151.2177,2223.7378,158.6648,2228.7285,156.0015,2231.3918,160.9921,2230.183,151.2177" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[76b349c084d0ae3eca7ec054d97e4dd0]
+reverse link Message to TurnMessage--><path codeLine="211" d="M2183.9955,154.1576 C2142.6565,185.1977 2087.6964,231.1696 2049.5,281 C2022.2705,316.5233 2001.2226,363.6629 1988.6542,395.9733 " fill="none" id="Message-backto-TurnMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2188.2053,151.0128,2178.6011,153.1946,2184.1996,154.0052,2183.389,159.6037,2188.2053,151.0128" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[19a551fff2b0f0c329651a70ddaafb76]
+reverse link Message to EndTurnMessage--><path codeLine="212" d="M2298.7731,154.4506 C2340.517,185.8019 2396.6777,232.0351 2437.5,281 C2471.475,321.7519 2499.919,377.3269 2514.6552,408.7485 " fill="none" id="Message-backto-EndTurnMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2294.5245,151.2736,2299.3368,159.8667,2298.5288,154.2679,2304.1276,153.4599,2294.5245,151.2736" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[f41008f667adfecb39fb5a22f83a52b5]
+reverse link TurnMessage to BuyCardMessage--><path codeLine="214" d="M1991.7149,475.0839 C2004.9035,506.7487 2025.2616,550.4464 2049.5,585 C2077.257,624.5696 2116.7039,663.5077 2145.0471,689.3192 " fill="none" id="TurnMessage-backto-BuyCardMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1989.6603,470.1084,1989.3983,479.9538,1991.5687,474.7299,1996.7927,476.9003,1989.6603,470.1084" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b10b0f7d86741442bdd1a31974a624d9]
+reverse link TurnMessage to MarketMessage--><path codeLine="215" d="M1944.3865,474.3406 C1900.5189,532.6276 1821.5003,637.62 1782.5222,689.4103 " fill="none" id="TurnMessage-backto-MarketMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1947.4832,470.226,1938.8752,475.0116,1944.4765,474.221,1945.2671,479.8223,1947.4832,470.226" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e38d5d93cc9e47eddc5a49035c30c4e9]
+reverse link TurnMessage to ProductionMessage--><path codeLine="216" d="M1975.5,475.3948 C1975.5,533.8856 1975.5,637.9307 1975.5,689.4103 " fill="none" id="TurnMessage-backto-ProductionMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1975.5,470.226,1971.5,479.226,1975.5,475.226,1979.5,479.226,1975.5,470.226" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4afb61ab949e1ebac4d9c36d256b1f1d]
+reverse link ResourceMessage to PayMessage--><path codeLine="218" d="M1431.5,468.9238 C1431.5,528.238 1431.5,645.1169 1431.5,695.7084 " fill="none" id="ResourceMessage-backto-PayMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1431.5,463.714,1427.5,472.714,1431.5,468.714,1435.5,472.714,1431.5,463.714" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8e8c77dc621c07f627f779a9120fca72]
+reverse link ResourceMessage to StoreMessage--><path codeLine="219" d="M1450.0254,468.2106 C1481.1123,527.2962 1542.9945,644.9133 1569.7194,695.7084 " fill="none" id="ResourceMessage-backto-StoreMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1447.6596,463.714,1448.3104,473.5413,1449.9878,468.1389,1455.3902,469.8163,1447.6596,463.714" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a3e02e7d96bde33e3fbbc6c55884698f]
+reverse link ResourceMessage to DiscardResourceMessage--><path codeLine="220" d="M1414.9527,468.1604 C1396.9122,502.7853 1364.864,554.7515 1322.5,585 C1246.9736,638.9269 1206.6725,605.919 1122.5,645 C1092.6653,658.8522 1061.5785,679.5641 1039.2591,695.7148 " fill="none" id="ResourceMessage-backto-DiscardResourceMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1417.2975,463.6051,1409.622,469.7765,1415.0091,468.0507,1416.7349,473.4379,1417.2975,463.6051" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d2b4593067e388043ab8d431032ab53a]
+reverse link ResourceMessage to ChooseResourcesMessage--><path codeLine="221" d="M1408.0672,468.2106 C1368.7454,527.2962 1290.4706,644.9133 1256.6662,695.7084 " fill="none" id="ResourceMessage-backto-ChooseResourcesMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1411.0597,463.714,1402.7434,468.9903,1408.2895,467.8765,1409.4034,473.4226,1411.0597,463.714" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b5f3fe5417bd0aa5f2b3a8a87c122e70]
+reverse link LeaderCardMessage to ActivateLeaderMessage--><path codeLine="223" d="M2343.1313,468.9238 C2350.7781,528.238 2365.8461,645.1169 2372.3683,695.7084 " fill="none" id="LeaderCardMessage-backto-ActivateLeaderMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2342.4596,463.714,2339.6434,473.1516,2343.099,468.6729,2347.5777,472.1286,2342.4596,463.714" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[c676710bffbe633c49c040c624bedefa]
+reverse link LeaderCardMessage to DiscardLeaderMessage--><path codeLine="224" d="M2357.7096,468.1344 C2376.0708,500.205 2405.6112,548.0911 2437.5,585 C2474.7867,628.1565 2525.6887,670.4258 2558.3328,695.8545 " fill="none" id="LeaderCardMessage-backto-DiscardLeaderMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="2355.0828,463.5206,2356.0599,473.3209,2357.5568,467.8657,2363.012,469.3625,2355.0828,463.5206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[863d3e2bc2f70cbd63ff26df72850203]
+reverse link ServerMessage to EndGameMessage--><path codeLine="227" d="M3380.0073,162.1049 C3355.8601,228.5097 3313.0038,346.3647 3292.728,402.1231 " fill="none" id="ServerMessage-backto-EndGameMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3381.8557,157.0218,3375.0209,164.113,3380.147,161.7208,3382.5392,166.8469,3381.8557,157.0218" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d148bf5bd05e46522f404168959832ac]
+reverse link ServerMessage to ErrorMessage--><path codeLine="228" d="M3325.9283,152.6806 C3275.1876,182.7101 3207.9569,228.0678 3160.5,281 C3129.6053,315.4592 3105.5594,363.243 3091.2568,395.9832 " fill="none" id="ServerMessage-backto-ErrorMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3330.4765,150.0038,3320.6913,151.1217,3326.1675,152.54,3324.7492,158.0161,3330.4765,150.0038" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[14fc8d565ad5833ba0829517e5bee357]
+reverse link ServerMessage to InitializingServerMessage--><path codeLine="229" d="M3415.0173,161.7608 C3437.6942,223.5893 3476.8814,330.4329 3498.6909,389.8966 " fill="none" id="ServerMessage-backto-InitializingServerMessage" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3413.2791,157.0218,3412.6228,166.8488,3415.0008,161.716,3420.1335,164.0941,3413.2791,157.0218" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8d30623561554fef5fc88d8d4ffa2495]
+reverse link ServerMessage to ViewUpdate--><path codeLine="230" d="M3468.7981,157.4446 C3516.4553,188.4501 3578.9003,233.0189 3626.5,281 C3659.3183,314.0812 3689.5934,357.8356 3709.8645,389.903 " fill="none" id="ServerMessage-backto-ViewUpdate" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="3464.5242,154.6746,3469.9009,162.9263,3468.7199,157.3941,3474.2521,156.2131,3464.5242,154.6746" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[ee5cc9cead49944b42bb7b6455acc1ba]
+link InitializingServerMessage to InitializingMessageType--><path codeLine="232" d="M3514.5,476.2775 C3514.5,524.4302 3514.5,602.6547 3514.5,657.4609 " fill="none" id="InitializingServerMessage-InitializingMessageType" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[14389bc5abe29e948b24a726d53c3a62]
+@startuml
+
+/' CLASSES DEFINITION '/
+interface Controller {
+	+ void handleMessage(Message message)
+	+ void handleActivateLeader(Player player, LeaderCard leader_card)
+	+ void handleBuyCard(Player player, int row, int column, int slot)
+	+ void handleChooseResources(Player player, Storage storage)
+	+ void handleDiscardLeader(Player player, LeaderCard card)
+	+ void handleDiscardResources(Player player)
+	+ void handleEndTurn(Player player)
+	+ void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles)
+	+ void handlePay(Player player, Storage storage)
+	+ void handlePersistence(Player player)
+	+ void handleProduction(Player player, ArrayList<ProductionInterface> productions)
+	+ void handleRearrange(Player player, int swap1, int swap2)
+	+ void handleStore(Player player, Storage storage)
+}
+
+class GameController {
+	- ArrayList<ClientHandler> clients
+	- Game game
+	- Game setupGame()
+
+	+ void handleMessage(Message message)
+	+ void handleChooseResources(Player player, Storage storage)
+	+ void handleActivateLeader(Player player, LeaderCard card) {
+	+ void handleBuyCard(Player player, int row, int column, int slot)
+	+ void handleMarket(Player player, int row, int column, boolean row_or_column)
+	+ void handleProduction(Player player, ProductionInterface production)
+	+ void handleEndTurn(Player player)
+	+ void handlePay(Player player, Storage storage)
+	+ void handleStore(Player player, Storage storage)
+	+ void handleDiscardResources(Player playe
+	+ void handleDiscardLeader(Player player, LeaderCard card)
+	+ void handleActivateLeader(Player player, LeaderCard leader_card
+	+ void handleDiscardLeader(Player player, LeaderCard leader_car
+	+ void handleRearrange(Player player, int swap1, int swap2)
+	+ void handleEndTurn(Player player)
+	+ void handlePersistence(Player player)
+}
+
+class InitialController {
+	+ void handleMessage(Message message)
+	+ synchronized void setReceivedMessage(String message)
+	+ synchronized String receiveMessage()
+}
+
+class RemoteView {
+	- ClientHandler client_handler
+
+	+ void updateModel(ServerMessage servermessage)
+}
+
+class SetupManager {
+	- ArrayList<Player> players
+	- RemoteView[] remote_views
+
+	+ Game setupGame(ArrayList<ClientHandler> clients)
+	+ SoloGame setupSoloGame(ArrayList<ClientHandler> clients)
+	+ void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game)
+	+ void setupPersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game)
+}
+
+class SoloGameController {
+	- boolean last_card_discarded
+
+	+ void setupGame()
+	+ void handleEndTurn(Player player)
+	+ void handleDiscardResources(Player player)
+	+ void moveBlackCrossTwoSpaces()
+	+ void moveBlackCrossOneSpace()
+	+ void discardDevelopmentCards(DevelopmentCardsColor color)
+	+ void handlePersistence(Player player)
+}
+
+/' MESSAGE PACKAGE '/
+abstract class Message {
+	- Player player
+
+	+ void useMessage(GameController controller)
+}
+
+abstract class TurnMessage {
+	- int row
+	- int column
+}
+
+class BuyCardMessage {
+	- int slot
+}
+
+class MarketMessage {
+	- boolean row_or_column
+}
+
+class ProductionMessage {
+	- ProductionInterface production
+}
+
+abstract class ResourceMessage {
+	- Storage storage
+}
+
+class PayMessage {
+}
+
+class StoreMessage {
+}
+
+class DiscardResourceMessage {
+}
+
+class RearrangeMessage {
+	- int swap1, swap2
+}
+
+abstract class LeaderCardMessage {
+	- LeaderCard leader_card
+}
+
+class ActivateLeaderMessage {
+}
+
+class DiscardLeaderMessage {
+}
+
+class EndTurnMessage {
+}
+
+class ChooseResourcesMessage {
+}
+
+class InitializingMessage {
+}
+
+class PersistenceMessage {
+}
+
+class Storage {
+	+ ArrayList<Resource> warehouse_top
+	+ ArrayList<Resource> warehouse_mid
+	+ ArrayList<Resource> warehouse_bot
+	+ ArrayList<Resource> strongbox
+	+ ArrayList<Resource> extraspace
+	+ void addToWarehouseTop(ArrayList<Resource> res)
+	+ void addToWarehouseMid(ArrayList<Resource> res)
+	+ void addToWarehouseBot(ArrayList<Resource> res)
+	+ void addToStrongbox(ArrayList<Resource> res)
+	+ void addToExtraspace(ArrayList<Resource> res)
+}
+
+/' SERVERMESSAGE PACKAGE '/
+
+abstract class ServerMessage {
+	- boolean error
+	- boolean initializing
+	- boolean end_game
+}
+
+class ErrorMessage {
+	+ Player player
+	+ String error_string
+}
+
+class EndGameMessage {
+	+ HashMap<String, Integer> rank
+}
+
+enum InitializingMessageType {
+	NICKNAME,
+	CHOOSE_MATCH_NAME,
+	STARTED_MATCH_NAME,
+	JOINED_MATCH,
+	NUM_PLAYERS,
+	START_MATCH
+}
+
+class InitializingServerMessage {
+	+ String message
+	+ InitializingMessageType type
+	+ String match_name
+}
+
+class ViewUpdate {
+	+ SimpleGame simple_game
+	+ SimplePlayer simple_player
+	+ Turn turn
+}
+
+/' RELATIONS DEFINITION '/
+Controller <.. GameController
+Controller <.. InitialController
+
+SetupManager - - GameController
+SetupManager - - RemoteView
+
+Message - - GameController
+
+ModelObserver <-up- RemoteView
+
+GameController <- - SoloGameController
+
+ /' MESSAGE '/
+Storage - - ResourceMessage
+
+Message <- - ResourceMessage
+Message <- - LeaderCardMessage
+Message <- - InitializingMessage
+Message <- - PersistenceMessage
+Message <- - RearrangeMessage
+Message <- - TurnMessage
+Message <- - EndTurnMessage
+
+TurnMessage <- - BuyCardMessage
+TurnMessage <- - MarketMessage
+TurnMessage <- - ProductionMessage
+
+ResourceMessage <- - PayMessage
+ResourceMessage <- - StoreMessage
+ResourceMessage <- - DiscardResourceMessage
+ResourceMessage <- - ChooseResourcesMessage
+
+LeaderCardMessage <- - ActivateLeaderMessage
+LeaderCardMessage <- - DiscardLeaderMessage
+
+ /' SERVER MESSAGE '/
+ServerMessage <- - EndGameMessage
+ServerMessage <- - ErrorMessage
+ServerMessage <- - InitializingServerMessage
+ServerMessage <- - ViewUpdate
+
+InitializingServerMessage - - InitializingMessageType
+
+@enduml
+
+@startuml
+
+interface Controller {
+	+ void handleMessage(Message message)
+	+ void handleActivateLeader(Player player, LeaderCard leader_card)
+	+ void handleBuyCard(Player player, int row, int column, int slot)
+	+ void handleChooseResources(Player player, Storage storage)
+	+ void handleDiscardLeader(Player player, LeaderCard card)
+	+ void handleDiscardResources(Player player)
+	+ void handleEndTurn(Player player)
+	+ void handleMarket(Player player, int row, int column, boolean row_or_column, ArrayList<Resource> white_marbles)
+	+ void handlePay(Player player, Storage storage)
+	+ void handlePersistence(Player player)
+	+ void handleProduction(Player player, ArrayList<ProductionInterface> productions)
+	+ void handleRearrange(Player player, int swap1, int swap2)
+	+ void handleStore(Player player, Storage storage)
+}
+
+class GameController {
+	- ArrayList<ClientHandler> clients
+	- Game game
+	- Game setupGame()
+
+	+ void handleMessage(Message message)
+	+ void handleChooseResources(Player player, Storage storage)
+	+ void handleActivateLeader(Player player, LeaderCard card) {
+	+ void handleBuyCard(Player player, int row, int column, int slot)
+	+ void handleMarket(Player player, int row, int column, boolean row_or_column)
+	+ void handleProduction(Player player, ProductionInterface production)
+	+ void handleEndTurn(Player player)
+	+ void handlePay(Player player, Storage storage)
+	+ void handleStore(Player player, Storage storage)
+	+ void handleDiscardResources(Player playe
+	+ void handleDiscardLeader(Player player, LeaderCard card)
+	+ void handleActivateLeader(Player player, LeaderCard leader_card
+	+ void handleDiscardLeader(Player player, LeaderCard leader_car
+	+ void handleRearrange(Player player, int swap1, int swap2)
+	+ void handleEndTurn(Player player)
+	+ void handlePersistence(Player player)
+}
+
+class InitialController {
+	+ void handleMessage(Message message)
+	+ synchronized void setReceivedMessage(String message)
+	+ synchronized String receiveMessage()
+}
+
+class RemoteView {
+	- ClientHandler client_handler
+
+	+ void updateModel(ServerMessage servermessage)
+}
+
+class SetupManager {
+	- ArrayList<Player> players
+	- RemoteView[] remote_views
+
+	+ Game setupGame(ArrayList<ClientHandler> clients)
+	+ SoloGame setupSoloGame(ArrayList<ClientHandler> clients)
+	+ void setupPersistenceGame(ArrayList<ClientHandler> clients, Game game)
+	+ void setupPersistenceSoloGame(ArrayList<ClientHandler> clients, SoloGame game)
+}
+
+class SoloGameController {
+	- boolean last_card_discarded
+
+	+ void setupGame()
+	+ void handleEndTurn(Player player)
+	+ void handleDiscardResources(Player player)
+	+ void moveBlackCrossTwoSpaces()
+	+ void moveBlackCrossOneSpace()
+	+ void discardDevelopmentCards(DevelopmentCardsColor color)
+	+ void handlePersistence(Player player)
+}
+
+abstract class Message {
+	- Player player
+
+	+ void useMessage(GameController controller)
+}
+
+abstract class TurnMessage {
+	- int row
+	- int column
+}
+
+class BuyCardMessage {
+	- int slot
+}
+
+class MarketMessage {
+	- boolean row_or_column
+}
+
+class ProductionMessage {
+	- ProductionInterface production
+}
+
+abstract class ResourceMessage {
+	- Storage storage
+}
+
+class PayMessage {
+}
+
+class StoreMessage {
+}
+
+class DiscardResourceMessage {
+}
+
+class RearrangeMessage {
+	- int swap1, swap2
+}
+
+abstract class LeaderCardMessage {
+	- LeaderCard leader_card
+}
+
+class ActivateLeaderMessage {
+}
+
+class DiscardLeaderMessage {
+}
+
+class EndTurnMessage {
+}
+
+class ChooseResourcesMessage {
+}
+
+class InitializingMessage {
+}
+
+class PersistenceMessage {
+}
+
+class Storage {
+	+ ArrayList<Resource> warehouse_top
+	+ ArrayList<Resource> warehouse_mid
+	+ ArrayList<Resource> warehouse_bot
+	+ ArrayList<Resource> strongbox
+	+ ArrayList<Resource> extraspace
+	+ void addToWarehouseTop(ArrayList<Resource> res)
+	+ void addToWarehouseMid(ArrayList<Resource> res)
+	+ void addToWarehouseBot(ArrayList<Resource> res)
+	+ void addToStrongbox(ArrayList<Resource> res)
+	+ void addToExtraspace(ArrayList<Resource> res)
+}
+
+
+abstract class ServerMessage {
+	- boolean error
+	- boolean initializing
+	- boolean end_game
+}
+
+class ErrorMessage {
+	+ Player player
+	+ String error_string
+}
+
+class EndGameMessage {
+	+ HashMap<String, Integer> rank
+}
+
+enum InitializingMessageType {
+	NICKNAME,
+	CHOOSE_MATCH_NAME,
+	STARTED_MATCH_NAME,
+	JOINED_MATCH,
+	NUM_PLAYERS,
+	START_MATCH
+}
+
+class InitializingServerMessage {
+	+ String message
+	+ InitializingMessageType type
+	+ String match_name
+}
+
+class ViewUpdate {
+	+ SimpleGame simple_game
+	+ SimplePlayer simple_player
+	+ Turn turn
+}
+
+Controller <.. GameController
+Controller <.. InitialController
+
+SetupManager - - GameController
+SetupManager - - RemoteView
+
+Message - - GameController
+
+ModelObserver <-up- RemoteView
+
+GameController <- - SoloGameController
+
+Storage - - ResourceMessage
+
+Message <- - ResourceMessage
+Message <- - LeaderCardMessage
+Message <- - InitializingMessage
+Message <- - PersistenceMessage
+Message <- - RearrangeMessage
+Message <- - TurnMessage
+Message <- - EndTurnMessage
+
+TurnMessage <- - BuyCardMessage
+TurnMessage <- - MarketMessage
+TurnMessage <- - ProductionMessage
+
+ResourceMessage <- - PayMessage
+ResourceMessage <- - StoreMessage
+ResourceMessage <- - DiscardResourceMessage
+ResourceMessage <- - ChooseResourcesMessage
+
+LeaderCardMessage <- - ActivateLeaderMessage
+LeaderCardMessage <- - DiscardLeaderMessage
+
+ServerMessage <- - EndGameMessage
+ServerMessage <- - ErrorMessage
+ServerMessage <- - InitializingServerMessage
+ServerMessage <- - ViewUpdate
+
+InitializingServerMessage - - InitializingMessageType
+
+@enduml
+
+PlantUML version 1.2020.22(Sun Dec 06 10:36:27 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: it
+Country: IT
+--></g></svg>
