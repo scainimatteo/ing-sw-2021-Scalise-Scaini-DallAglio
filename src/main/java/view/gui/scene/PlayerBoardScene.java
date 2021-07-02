@@ -62,15 +62,15 @@ import java.util.List;
 import java.net.URL;
 
 public class PlayerBoardScene extends SceneController implements ViewUpdateObserver, ErrorMessageObserver, Initializable {
-	ArrayList<Resource> all_resources;
+	private ArrayList<Resource> all_resources;
 	// contains the list of all the DevelopmentCardSlots activated
-	ArrayList<Integer> development_card_productions;
+	private ArrayList<Integer> development_card_productions;
 	// contains the Resources for the Production base
-	ArrayList<Resource> set_resources; 
+	private ArrayList<Resource> set_resources; 
 	// contains the Resources decided by the ProductionAbilities of the LeaderCards
-	ArrayList<Resource> leader_card_output;
+	private ArrayList<Resource> leader_card_productions;
 	// contains the number of Resources decided by the WhiteMarblesAbilities of the LeaderCards
-	ArrayList<Integer> white_marbles_numbers;
+	private ArrayList<Integer> white_marbles_numbers;
 
 	@FXML private Rectangle active_player_highlight;
 	@FXML private GridPane faith_track;
@@ -134,7 +134,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		this.development_card_productions = new ArrayList<Integer>();
 		this.all_resources = new ArrayList<Resource>(Arrays.asList(Resource.COIN, Resource.SERVANT, Resource.SHIELD, Resource.STONE));
 		this.set_resources = new ArrayList<Resource>(Arrays.asList(null, null, null));
-		this.leader_card_output = new ArrayList<Resource>(Arrays.asList(null, null));
+		this.leader_card_productions = new ArrayList<Resource>(Arrays.asList(null, null));
 		this.white_marbles_numbers = new ArrayList<Integer>(Arrays.asList(0, 0));
 	}
 
@@ -1016,24 +1016,24 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Set the Resource images in the ProductionAbility, looping between all the possible choices
 	 *
 	 * @param source the ImageView of the Production
-	 * @param index the index of the LeaderCard in the leader_card_output array
+	 * @param index the index of the LeaderCard in the leader_card_productions array
 	 */
 	public void chooseProductionAbilityResource(ImageView source, int index){
 		// if there's no Resource set, use the first one
 		if (source.getImage() == null){
 			source.setImage(new Image((all_resources.get(0)).getPath()));
-			this.leader_card_output.set(index, all_resources.get(0));
+			this.leader_card_productions.set(index, all_resources.get(0));
 		} else {
-			int resource_pos = all_resources.indexOf(this.leader_card_output.get(index));
+			int resource_pos = all_resources.indexOf(this.leader_card_productions.get(index));
 
 			// if the Resource set is not the last one, use the consecutive one
 			if (resource_pos != all_resources.size() - 1){
 				source.setImage(new Image((all_resources.get(resource_pos + 1)).getPath()));
-				this.leader_card_output.set(index, all_resources.get(resource_pos + 1));
+				this.leader_card_productions.set(index, all_resources.get(resource_pos + 1));
 			// if the Resource set is the last one, loop back to null
 			} else {
 				source.setImage(null);
-				this.leader_card_output.set(index, null);
+				this.leader_card_productions.set(index, null);
 			}
 		}
 	}
@@ -1059,8 +1059,8 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 		}
 
 		// activate every ProductionAbility selected
-		for (int i = 0; i < this.leader_card_output.size(); i++){
-			if (leader_card_output.get(i) != null) {
+		for (int i = 0; i < this.leader_card_productions.size(); i++){
+			if (leader_card_productions.get(i) != null) {
 				productions.add(createProductionAbility(i));
 			}
 		}
@@ -1070,14 +1070,14 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	}
 
 	/**
-	 * @param index the index of the LeaderCard and of the Resource in the leader_card_output array
+	 * @param index the index of the LeaderCard and of the Resource in the leader_card_productions array
 	 * @return the ProductionAbility of the LeaderCard with the Resource set
 	 */
 	private ProductionAbility createProductionAbility(int index) {
 		// create an ArrayList from the chosen Resource
-		Resource required_resource = this.leader_card_output.get(index);
+		Resource required_resource = this.leader_card_productions.get(index);
 		ArrayList<Resource> new_resource = new ArrayList<Resource>();
-		new_resource.add(leader_card_output.get(index));
+		new_resource.add(leader_card_productions.get(index));
 
 		// get the ProductionAbility of the LeaderCard and set the chosen Resource
 		ProductionAbility production_ability = (ProductionAbility) App.getMyPlayer().getLeaderCards().get(index).getAbility();
@@ -1104,7 +1104,7 @@ public class PlayerBoardScene extends SceneController implements ViewUpdateObser
 	 * Set the number chosen in the WhiteMarblesAbility, looping between all the possible choices (0-4)
 	 *
 	 * @param source the text of the WhiteMarblesAbility
-	 * @param index the index of the LeaderCard in the leader_card_output array
+	 * @param index the index of the LeaderCard in the leader_card_productions array
 	 */
 	public void chooseWhiteMarblesNumber(Text source, int index){
 		int current_state = this.white_marbles_numbers.get(index);

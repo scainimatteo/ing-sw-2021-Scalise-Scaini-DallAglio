@@ -1,27 +1,33 @@
 @startuml
 
+!define ABSTRACT &#123;abstract&#125;
+
 /' CLASSES DEFINITION '/
 abstract class View {
-# SimpleGame simple_game
-# ArrayList<SimplePlayer> simple_players
-# Turn turn
-# boolean initializing
-# boolean nickname_flag
-# String nickname
+	# SimpleGame simple_game
+	# ArrayList<SimplePlayer> simple_players
+	# Turn turn
+	# boolean initialized
+	# boolean setup_done
+	# String nickname
 
-+ void startView()
-+ void handleError()
-+ void handleInitializing()
-+ void updateView(SimpleGame simple_game, SimplePlayer simple_player, Turn turn)
-+ void updateSimplePlayer(SimplePlayer simple_player)
-+ SimplePlayer getMyPlayer()
+	+ ABSTRACT void startView()
+	+ ABSTRACT void handleError(ErrorMessage error_message) 
+	+ ABSTRACT void handleInitializing(InitializingServerMessage initializing_message)
+	+ ABSTRACT void handleEndGame(EndGameMessage end_game_message)
+	+ void updateView(ViewUpdate view_update)
+	+ void updateSimplePlayer(SimplePlayer simple_player)
+	+ SimplePlayer getMyPlayer()
+	+ void notifyViewUpdate()
+	+ void notifySetupDone()
 } 
 
 class CLI {
 	+ void startView(Client client)
-	+ void parseInput(Client client, String inputLine)
+	- void parseInput(Client client, String inputLine)
 	+ void handleError(ErrorMessage error_message)
 	+ void handleInitializing(InitializingServerMessage initializing_message)
+	+ void handleEndGame(EndGameMessage end_game_message)
 }
 
 class MessageParser {
@@ -41,11 +47,23 @@ class MessageParser {
 	- {static} Message parseActivateLeaderCardMessage(String[] inputs, SimplePlayer player)
 	- {static} Message parseRearrangeMessage(String[] inputs)
 	- {static} Message parseChooseResourcesMessage(String[] inputs, SimplePlayer player)
-	- {static} void addToStorage(String input, ArrayList<Resource> resources_to_add, Storage storage)
+	- {static} Message parsePersistenceMessage(String[] inputs)
+}
+
+class ViewParser {
+	+ {static} String parseInput(String input, SimpleGame game, ArrayList<SimplePlayer> players, Turn turn, String nickname)
+	+ {static} String parseMarket(SimpleGame game)
+	+ {static} String parseDevelopmentCardsOnTable(SimpleGame game)
+	+ {static} String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname, boolean is_sologame)
+	+ {static} String parseWarehouse(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseStrongbox(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseLeaderCards(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseDevelopmentCardsSlots(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
+	+ {static} String parseTurn(String[] inputs, SimpleGame game)
+	+ {static} String parseSoloActionToken(String[] inputs, SimpleGame game)
 }
 
 class Printer {
-	+ {static} String printDevelopmentCardsMatrix(DevelopmentCard[][] cards_matrix)
 	+ {static} String printResource(Resource res)
 	+ {static} String printMarket(SimpleGame game)
 	+ {static} String printDevelopmentCard(DevelopmentCard card)
@@ -57,21 +75,9 @@ class Printer {
 	+ {static} String printLeaderCards(SimplePlayer player, boolean print_deactivated)
 	+ {static} String printDevelopmentCardsSlots(SimplePlayer player)
 	+ {static} String printDevelopmentCardsSlots(SimplePlayer player, int slot)
-	+ {static} String printTurn(Turn turn)
+	+ {static} String printTurn(Turn turn, SimpleGame game)
+	+ {static} String printSoloActionToken(SoloActionToken token)
 	+ {static} String printNullCard()
-	- static HashMap<Resource, Integer> numFromArraylist(ArrayList<Resource> arraylist)
-}
-
-class ViewParser {
-	+ {static} SimplePlayer getPlayerFromNickname(ArrayList<SimplePlayer> players, String nickname)
-	+ {static} String parseMarket(SimpleGame game)
-	+ {static} String parseDevelopmentCardsOnTable(SimpleGame game)
-	+ {static} String parseFaithTrack(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
-	+ {static} String parseWarehouse(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
-	+ {static} String parseStrongbox(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
-	+ {static} String parseLeaderCards(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
-	+ {static} String parseDevelopmentCardsSlots(String[] inputs, ArrayList<SimplePlayer> players, String nickname)
-	+ {static} String parseTurn(String[] inputs, Turn turn)
 }
 
 class GUI {
@@ -82,42 +88,40 @@ class GUI {
 	+ ArrayList<SimplePlayer> getSimplePlayers()
 	+ Turn getTurn()
 	+ void sendMessage(Message message)
-	+ void setApp(App app)
 	+ void finishedInitialization()
 }
 
-class App{
+class App {
+	+ {static} void main(String[] args)
 	+ void start(Stage stage)
 	+ InitialScene getInitialScene()
-	+ static void setModel(GUI view)
-	+ static SimplePlayer getMyPlayer()
+	+ {static} void setModel(GUI view)
 	+ void showError(String error)
-	+ static boolean isInitialized()
-	+ static void sendMessage(Message message)
-	+ static void finishedInitialization()
+	+ {static} void sendMessage(Message message)
+	+ {static} void finishedInitialization()
+}
+
+class SceneController {
+	- {static} Stage stage
+	- HashMap<ImageView, ImageView> drag_and_drop_hashmap
+	- ImageView last_image_dragged
+
+	+ void hideNode(Node node) 
+	+ void showNode(Node node) 
+	+ void changeScene(String layout_fxml)
+	+ void handleDragDetected(MouseEvent event, ImageView source)
+	+ void handleDragDone(DragEvent event, ImageView source, boolean set_null)
+	+ void handleDragOver(DragEvent event, ImageView target)
+	+ void handleDragDropped(DragEvent event, ImageView target)
+	+ void reverseDragAndDrop()
 }
 
 class InitialScene {
-	- Label nicknameLabel
-	- TextField nicknameText
-	- ToggleGroup numPlayersGroup
-	- RadioButton rb4
-	- TextField matchText
-	- VBox startLayout
-	- VBox createLayout
-	- VBox joinLayout
-	- VBox matchLayout
-	- Button cancelButton
-	- Label matchNameLabel
-
 	- String nickname
 	- int num_players
 	- String match_name
 	- boolean finishedInitialization
 
-	+ void setMatchName(String match_name)
-	+ boolean isInitialized()
-	+ void initialize(URL location, ResourceBundle resources)
 	+ void selectCreateHandler()
 	+ void selectJoinHandler()
 	+ void createHandler()
@@ -126,47 +130,102 @@ class InitialScene {
 	- void startWaiting()
 }
 
-class LeaderCardSelectorScene {
+class SetupScene {
 	- ArrayList<LeaderCard> to_delete
-	- double opacity_percent
-	- SimplePlayer player
 
-	- StackPane leader_card_scene
-
-	- ImageView leader_card_1
-	- ImageView leader_card_2
-	- ImageView leader_card_3
-	- ImageView leader_card_4
-
-	- Image leader_card_image_1
-	- Image leader_card_image_2
-	- Image leader_card_image_3
-	- Image leader_card_image_4
-
-	+ void initialize(URL location, ResourceBundle resources)
-	+ void leaderCard1Click()
-	+ void leaderCard2Click()
-	+ void leaderCard3Click()
-	+ void leaderCard4Click()
-	- boolean checkLeader()
-	- void endLeaderScene()
+	+ void chooseWhatToShowAndHide()
+	- void setOrderPane()
+	- void setLeaderCards()
+	- void setChooseResources()
+	- void setChooseResources()
+	+ void endLeaderScene()
+	+ void endResourcesScene()
+	- void checkChooseResourceDone(int number_of_chosen_resources)
 }
 
-class MarketandDevelopmentScene{
+class GameScene{
+	- void setMarket(Resource[][] market, Resource free_marble)
+	+ void chooseRow(int row)
+	+ void chooseColumn(int column)
+	- void setDevelopmentCardsOnTable(DevelopmentCard[][] development_cards_on_table)
+	+ void chooseCard(MouseEvent e, int row, int column)
+	+ void selectSlot1(MouseEvent e)
+	+ void selectSlot2(MouseEvent e)
+	+ void selectSlot3(MouseEvent e)
+	+ void changeSceneToBoard()
+	+ void saveGame()
 }
 
-class MainBoardScene{
+class PlayerBoardScene{
+	- ArrayList<Integer> development_card_productions
+	- ArrayList<Resource> set_resources
+	- ArrayList<Resource> leader_card_productions
+	- ArrayList<Integer> white_marbles_numbers
+
+	- void initializeBaseProduction()
+	- void initializeWarehouseDragAndDrop()
+	- void initializeStrongBoxDragAndDrop()
+	- void initializeExtraSpaceDragAndDrop()
+	- void initializeCostBoxDragAndDrop()
+	- void initializeGainBoxDragAndDrop()
+	- void initializeOtherPlayersButton()
+	- void handlePay(DragEvent event, ImageView target)
+	- void handleStoreInWarehouse(DragEvent event, ImageView target)
+	- void handleStoreInExtraSpace(DragEvent event, ImageView target, int index)
+	- void setWarehouse(SimpleWarehouse warehouse)
+	- void setStrongbox(HashMap<Resource, Integer> strongbox)
+	- void setDevelopmentCardSlot(SimpleDevelopmentCardSlot development_card_slot)
+	- void setLeaderCards(ArrayList<LeaderCard> leader_cards)
+	- void setLeaderCardButtons(VBox leader_card, LeaderCard player_leader_card, int index) 
+	- void setLeaderCardAbility(StackPane leader_card, int index) 
+	- void setExtraSpaceAbility(HBox extra_space, LeaderCard player_leader_card) 
+	- void setProductionAbility(ImageView production_image, int index) 
+	- void setWhiteMarbleAbility(Text white_marbles_text, int index) 
+	- void setFaithMarker(int faith_marker)
+	- void setTiles(Tile[] tiles)
+	- void setBlackMarker(int black_marker)
+	- void setLastToken(SoloActionToken last_token)
+	- void setTurnResources(ArrayList<Resource> to_pay, ArrayList<Resource> to_store) 
+	- void setPayResources(ArrayList<Resource> to_pay) 
+	- void setStoreResources(ArrayList<Resource> to_store) 
+	- void setLastTurn(boolean is_last_turn)
+	- void setActivePlayer(String active_player) 
+	+ void changeSceneToBoard()
+	+ void changeSceneToOtherPlayer()
+	+ void setDevelopmentCardProduction(ImageView production, int slot)
+	+ void showOrHideLeaderCards()
+	+ void chooseBaseProductionResource(ImageView source, int index)
+	+ void chooseProductionAbilityResource(ImageView source, int index)
+	+ void activateProductions()
+	+ void chooseWhiteMarblesNumber(Text source, int index)
+	+ void handleDiscardResources()
+	+ void handleActivateLeaderCard()
+	+ void handleDiscardLeaderCard()
+	+ void handleSwapFirstSecond()
+	+ void handleSwapSecondThird()
+	+ void handleSwapFirstThird()
+	+ void handleEndTurn()
 }
 
-class FinalScene{
+class OtherPlayerScene {
+	- void setWarehouse(SimpleWarehouse warehouse)
+	- void setStrongbox(HashMap<Resource, Integer> strongbox)
+	- void setDevelopmentCardSlot(SimpleDevelopmentCardSlot development_card_slot)
+	- void setLeaderCards(ArrayList<LeaderCard> leader_cards)
+	- void setLeaderCardAbility(StackPane leader_card, int index) 
+	- void setExtraSpaceAbility(HBox extra_space, LeaderCard player_leader_card) 
+	- void setFaithMarker(int faith_marker)
+	- void setTiles(Tile[] tiles)
+	- void setActivePlayer(String active_player) 
+	+ void changeSceneToBoard()
+	+ void showOrHideLeaderCards()
 }
 
-class SceneController {
-	- {static} Stage stage
-
-	public void hideNode(Node node) 
-	public void showNode(Node node) 
-	public void changeScene(String layout_fxml)
+class FinalScene {
+	- HashMap<String, Integer> rank
+	+ void lostSoloGame()
+	+ void wonSoloGame()
+	+ void endGame()
 }
 
 class SimpleGame {
@@ -178,7 +237,7 @@ class SimpleGame {
 
 class SimplePlayer {
 	- String nickname
-	- Cell[] faith_track
+	- Cell[] track
 	- Cell faith_marker
 	- Tile[] vatican_reports
 	- SimpleWarehouse warehouse
@@ -188,35 +247,97 @@ class SimplePlayer {
 }
 
 class SimpleWarehouse {
-	- Resource top_resource
-	- Resource[] middle_resources
-	- Resource[] bottom_resources
+	- ArrayList<Resource> top_resource
+	- ArrayList<Resource> middle_resources
+	- ArrayList<Resource> bottom_resources
 }
 
 class SimpleDevelopmentCardSlots {
-	- DevelopmentCards[] first_column
-	- DevelopmentCards[] second_column
-	- DevelopmentCards[] third_column
+	- ArrayList<DevelopmentCards> first_column
+	- ArrayList<DevelopmentCards> second_column
+	- ArrayList<DevelopmentCards> third_column
 }
 
+class SimpleSoloGame {
+	- SoloActionToken last_token
+}
+
+class SimpleSoloPlayer {
+	- int black_marker_position
+}
+
+class GameStartObservable {
+	+ void addGameStartObserver(GameStartObserver observer)
+	+ void notifyGameStarted()
+}
+
+interface GameStartObserver {
+    + void gameStarted()
+}
+
+interface SetupGameObservable {
+	+ void notifySetupDone()
+	+ void addSetupGameObserver(SetupGameObserver observer)
+} 
+
+interface SetupGameObserver {
+	+ void gameHasDoneSetup()
+} 
+
+interface ViewUpdateObservable {
+	+ void notifyViewUpdate()
+	+ void addViewUpdateObserver(ViewUpdateObserver observer)
+	+ void removeViewUpdateObserver(ViewUpdateObserver observer)
+} 
+
+interface ViewUpdateObserver {
+	+ void updateView()
+} 
+
+interface ErrorMessageObservable {
+	+ void notifyReceivedErrorMessage()
+	+ void addErrorMessageObserver(ErrorMessageObserver observer)
+	+ void removeErrorMessageObserver(ErrorMessageObserver observer)
+} 
+
+interface ErrorMessageObserver {
+	+ void receivedErrorMessage()
+} 
+
 /' RELATIONS DEFINITION '/
+View --> GameStartObservable
+View ..> ViewUpdateObservable
+View ..> SetupGameObservable
+
 View <-- CLI
 View <-- GUI
 View -up- SimpleGame
 View -up- SimplePlayer
 
 CLI -- MessageParser
-CLI -- Printer
 CLI -- ViewParser
+CLI -- Printer
+
+GUI ..> GameStartObserver
+GUI ..> SetupGameObserver
+GUI ..> ErrorMessageObservable
 
 javafx.Application --> App
 App -- GUI
 App -- SceneController
-SceneController <-- LeaderCardSelectorScene
 SceneController <-- InitialScene
-SceneController <-- MarketandDevelopmentScene
-SceneController <-- MainBoardScene
+SceneController <-- SetupScene
+SceneController <-- GameScene
+SceneController <-- PlayerBoardScene
+SceneController <-- OtherPlayerScene
 SceneController <-- FinalScene
+
+SetupScene ..> ErrorMessageObserver
+GameScene ..> ViewUpdateObserver
+GameScene ..> ErrorMessageObserver
+PlayerBoardScene ..> ViewUpdateObserver
+PlayerBoardScene ..> ErrorMessageObserver
+OtherPlayerScene ..> ViewUpdateObserver
 
 SimplePlayer -- SimpleWarehouse
 SimplePlayer -- SimpleDevelopmentCardSlots

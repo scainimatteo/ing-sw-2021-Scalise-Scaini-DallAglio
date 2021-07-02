@@ -210,6 +210,7 @@ public class GUI extends View implements GameStartObserver, SetupGameObserver, E
 	 *
 	 * @param observer the ErrorMessageObserver to remove
 	 */
+	@Override
 	public void removeErrorMessageObserver(ErrorMessageObserver observer) {
 		this.error_message_observers.remove(observer);
 	}

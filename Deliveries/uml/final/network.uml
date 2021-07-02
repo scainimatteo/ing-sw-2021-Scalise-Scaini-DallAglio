@@ -7,14 +7,19 @@ class Server {
 	- HashMap<String, ArrayList<ClientHandler>> lobby
 	- HashMap<String, Integer> num_players
 	- HashSet<String> nicknames
-	- ExecutorService executor
+
 	+ void startServer()
 	- void insertIntoLobby(ClientHandler client)
+	- GameController chooseGameController(String match_name)
 	- void manageClient(ClientHandler client)
 	- void manageFirstClient(ClientHandler client)
 	- void manageOtherClient(ClientHandler client)
+	- void createOrJoinPersistenceGame(ClientHandler client, String match_name, String nickname)
 	- String newMatchName()
 	- boolean checkIfAllPlayersPresent(String match_name)
+	+ void sendStringToClient(ClientHandler client, String string, InitializingMessageType type)
+	+ void sendStringToClient(ClientHandler client, String string, InitializingMessageType type, String match_name)
+	+ String receiveStringFromClient(ClientHandler client)
 }
 
 class ClientHandler {
@@ -23,10 +28,12 @@ class ClientHandler {
 	- ObjectInputStream in
 	- ObjectOutputStream out
 	- String nickname
-	- GameController controller
+	- Controller controller
+	- Player player
+
 	+ void sendToClient(ServerMessage message)
 	+ void close()
-	+ void handleReceivedMessage(Message message)
+	+ void close(String error_message)
 }
 
 class Client {
@@ -36,16 +43,14 @@ class Client {
 	- ObjectInputStream in
 	- ObjectOutputStream out
 	- View view
-' 	- ArrayBlockingQueue<Message> messages_to_send
-' 	- ArrayBlockingQueue<ServerMessage> messages_received
+
 	+ void startClient()
 	- void sendMessage(Message message)
-	- void updateView(ViewUpdate view_update)
-	- void handleError(ErrorMessage error_message)
 }
 
 class ServerMain {
 	- {static} int port
+
 	- {static} void main()
 	- {static} void parseArguments(String[] args)
 	- {static} int parsePort(List<String> arglist)
@@ -56,6 +61,7 @@ class ClientMain {
 	- {static} int port
 	- {static} String address
 	- {static} View view
+
 	- {static} void main()
 	- {static} void parseArguments(String[] args)
 	- {static} int parsePort(List<String> arglist)
@@ -64,11 +70,78 @@ class ClientMain {
 	- {static} void startClient()
 }
 
+class PersistenceUtil {
+	+ {static} Path getPersistenceDirectory()
+	- {static} Path getFromEnv(String envVar, boolean mustBeAbsolute, Path defaultPath)
+	+ {static} boolean checkPersistence(String match_name)
+	+ {static} String getPersistenceFileFromMatchName(String match_name)
+}
+
+class PersistenceWriter {
+	+ {static} void writePersistenceFile(String match_name, Game game)
+	+ {static} void writeSoloPersistenceFile(String match_name, SoloGame sologame)
+	- {static} void populateJSON(JSONObject match_object, Game game)
+	- {static} void populateJSON(JSONObject match_object, SoloGame sologame)
+
+	- {static} void populateJSONClient(JSONObject match_object, ArrayList<Player> players) 
+	- {static} void populateJSONPlayers(JSONObject match_object, ArrayList<Player> players) 
+	- {static} JSONObject populateJSONPlayer(Player player) 
+	- {static} void populateJSONFaithTrack(JSONObject player_object, FaithTrack track) 
+	- {static} JSONObject populateJSONTile(Tile tile) 
+	- {static} JSONArray populateJSONWarehouse(Warehouse warehouse) 
+	- {static} JSONArray populateJSONStrongBox(StrongBox strongbox) 
+	- {static} JSONArray populateJSONDevelopmentCardsSlots(DevelopmentCardsSlots development_cards_slots) 
+	- {static} JSONArray populateJSONLeaderCards(ArrayList<LeaderCard> leader_cards) 
+	- {static} void populateJSONTurn(JSONObject match_object, Turn turn) 
+	- {static} void populateJSONGame(JSONObject match_object, Game game) 
+	- {static} void populateJSONMarket(JSONObject game_object, Market market) 
+	- {static} JSONArray populateJSONDevelopmentCardsOnTable(DevelopmentCardsOnTable development_cards_on_table) 
+	- {static} void populateJSONSoloPlayer(JSONObject match_object, SoloPlayer player) 
+	- {static} void populateJSONSoloFaithTrack(JSONObject player_object, SoloFaithTrack track) 
+	- {static} void populateJSONSoloGame(JSONObject match_object, SoloGame sologame) 
+	- {static} JSONArray populateJSONActiveTokens(ArrayDeque<SoloActionToken> active_tokens) 
+	- {static} JSONObject populateJSONSoloActionToken(SoloActionToken token) 
+}
+
+class PersistenceParser {
+	+ {static} int getClientsNumber(String match_name)
+	+ {static} ArrayList<String> getAllClientsNickname(String match_name)
+	+ {static} Game parseMatch(String match_name)
+	+ {static} SoloGame parseSoloMatch(String match_name)
+	- {static} Turn parseTurn(JSONObject turn_object, ArrayList<Player> players)
+	- {static} Turn createTurn(ArrayList<Player> players, String nickname)
+	- {static} ArrayList<Player> parsePlayers(JSONArray players_array)
+	- {static} Player parsePlayer(JSONObject player_object)
+	- {static} Tile createTile(JSONObject tile_object)
+	- {static} FaithTrack createFaithTrack(JSONObject player_object)
+	- {static} Warehouse createWarehouse(JSONArray warehouse_array)
+	- {static} StrongBox createStrongBox(JSONArray strongbox_array)
+	- {static} DevelopmentCardsSlots createDevelopmentCardsSlots(JSONArray dcs_array)
+	- {static} ArrayList<LeaderCard> createLeaderCards(JSONArray leader_cards_array)
+	- {static} void addExtraSpaceResources(ExtraSpaceAbility extra_space, int number_of_resources)
+	- {static} Game parseGame(JSONObject game_object, Turn turn, ArrayList<Player> players)
+	- {static} Market createMarket(JSONArray market_array, Object free_marble_object)
+	- {static} Resource createFreeMarble(Object free_marble_object)
+	- {static} DevelopmentCardsOnTable createDevelopmentCardsOnTable(JSONArray dcot_array)
+	- {static} SoloPlayer parseSoloPlayer(JSONObject player_object)
+	- {static} SoloFaithTrack createSoloFaithTrack(JSONObject player_object)
+	- {static} SoloGame parseSoloGame(JSONObject game_object, Turn turn, ArrayList<Player> players)
+	- {static} ArrayDeque<SoloActionToken> createActiveTokens(JSONArray active_tokens_array)
+	- {static} SoloActionToken createSoloActionToken(JSONObject token_object)
+}
+
 /' RELATIONS DEFINITION '/
 ClientHandler <.up. Runnable
 Server -- ClientHandler
 
+Server -right- Client
+
 ClientMain -- Client
 ServerMain -- Server
+
+PersistenceUtil -- PersistenceWriter
+PersistenceUtil -- PersistenceParser
+
+Server -down- PersistenceUtil
 
 @enduml

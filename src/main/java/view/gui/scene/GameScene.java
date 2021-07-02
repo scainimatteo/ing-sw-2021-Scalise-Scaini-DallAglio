@@ -133,26 +133,6 @@ public class GameScene extends SceneController implements ViewUpdateObserver, Er
 	}
 
 	/**
-	 * Send a MarketMessage with the Market row chosen
-	 *
-	 * @param row the row chosen
-	 */
-	public void chooseRow(int row) {
-		MarketMessage message = new MarketMessage(false, row, this.white_marbles_resources);
-		App.sendMessage(message);
-	}
-
-	/**
-	 * Send a MarketMessage with the Market column chosen
-	 *
-	 * @param column the column chosen
-	 */
-	public void chooseColumn(int column) {
-		MarketMessage message = new MarketMessage(true, column, this.white_marbles_resources);
-		App.sendMessage(message);
-	}
-
-	/**
 	 * Set the ImageViews and the onMouseClicked methods of the DevelopmentCardsOnTable using the SimpleModel
 	 *
 	 * @param development_cards_on_table a matrix representing the DevelopmentCardsOnTable
@@ -200,6 +180,26 @@ public class GameScene extends SceneController implements ViewUpdateObserver, Er
 	/**
 	 * BUTTON HANDLERS
 	 */
+
+	/**
+	 * Send a MarketMessage with the Market row chosen
+	 *
+	 * @param row the row chosen
+	 */
+	public void chooseRow(int row) {
+		MarketMessage message = new MarketMessage(false, row, this.white_marbles_resources);
+		App.sendMessage(message);
+	}
+
+	/**
+	 * Send a MarketMessage with the Market column chosen
+	 *
+	 * @param column the column chosen
+	 */
+	public void chooseColumn(int column) {
+		MarketMessage message = new MarketMessage(true, column, this.white_marbles_resources);
+		App.sendMessage(message);
+	}
 
 	/**
 	 * Called when a DevelopmentCard is clicked on

@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 public class SimpleSoloPlayer extends SimplePlayer {
 	private static final long serialVersionUID = 418L;
-	int black_marker_position;
+	private int black_marker_position;
 
 	public SimpleSoloPlayer(String nickname, Cell[] cell_track, Cell faith_marker, Tile[] v_r_tiles, SimpleWarehouse warehouse, HashMap<Resource, Integer> strongbox, ArrayList<LeaderCard> leader_cards_deck, SimpleDevelopmentCardSlot slots, int black_marker_position){
 		super(nickname, cell_track, faith_marker, v_r_tiles, warehouse, strongbox, leader_cards_deck, slots);
